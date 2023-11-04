@@ -1,4 +1,4 @@
-import Navbar from "../common/Navbar";
+import Navigation from "../common/Navigation";
 import "../styles/Pricingpage.css";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -100,7 +100,7 @@ function PricingPage() {
 
   return (
     <div>
-      <Navbar />
+      <Navigation />
       <div className="below-navbar container-fluid d-flex pt-4 pb-3">
         <div className="container d-flex justify-content-between align-items-center">
           <p className="fs-3 fw-bold text-white">Pricing</p>

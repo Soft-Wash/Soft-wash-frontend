@@ -1,4 +1,4 @@
-import MainNavbar from "../common/Navbar";
+import Navigation from "../common/Navigation";
 import "../styles/Services.css";
 import { FaChevronRight } from "react-icons/fa";
 import { Container, Col, Row, Card } from "react-bootstrap";
@@ -27,7 +27,7 @@ function Services() {
 
   return (
     <div>
-      <MainNavbar />
+      <Navigation />
       <div>
         <div className="below-navbar container-fluid  pt-4 pb-3">
           <div className="container d-flex justify-content-between align-items-center">

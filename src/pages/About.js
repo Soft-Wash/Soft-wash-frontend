@@ -1,4 +1,4 @@
-import Navbar from "../common/Navbar";
+import Navigation from "../common/Navigation";
 import { FaChevronRight } from "react-icons/fa";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import ServicerateBanner from "../assets/aboutpage/images/services-img.png";
@@ -31,7 +31,7 @@ function About() {
 
   return (
     <div>
-      <Navbar />
+      <Navigation />
       <div>
         <div className="below-navbar container-fluid  pt-4 pb-3">
           <div className="container d-flex justify-content-between align-items-center">
