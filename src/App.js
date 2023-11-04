@@ -8,6 +8,10 @@ import NewPaswdPage from "./pages/NewPaswdPage";
 import ResetPaswdPage from "./pages/ResetPaswdPage";
 import HomePage from "./pages/user/HomePage"
 import AddressPage from "./pages/user/AddressPage";
+import PricingPage from "./pages/PricingPage";
+import Services from "./pages/Services";
+import About from "./pages/About";
+import MarketPlace from "./pages/MarketPlace/MarketPlace";
 
 
 
@@ -23,6 +27,11 @@ function App() {
         <Route path="/auth/reset-password" element={<ResetPaswdPage />} />
          <Route path="/auth/new-password" element={<NewPaswdPage />} />
          <Route path="/auth/verify" element={<AuthenticatePaswdPage />} />
+         <Route path="/pricingpage" element={<PricingPage />} />
+         <Route path="/ourservices" element={<Services/>} />
+         <Route path="/about" element={<About/>} />
+         <Route path="/marketplace" element={<MarketPlace/>} />
+
 
         
       </Routes>

@@ -1,0 +1,66 @@
+.about-sectionImg{
+  height: 550px;
+}
+
+
+.stats-container{
+  background-image: url(../assets/Services/Images/stats-section-bg.png);
+  /* height: 80vh; */
+  padding: 200px 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  
+  /* margin: 0 auto; */
+  /* align-items: center; */
+  /* text-align: center; */
+  margin-top: 50px;
+
+}
+
+.circle-border{
+  height: 100px;
+  width: 100px;
+  border: 2px solid white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  
+}
+
+.client-img{
+  width: 30px;
+  height: 30px;
+}
+
+.testimonial-container{
+  background-image: url(../assets/Services/Images/about-background.png);
+  height: 90vh;
+}
+
+
+.single-stat-div{
+text-align: center;
+}
+
+
+@media only screen and (max-width:800px){
+  .stats-container{
+    padding: 50px !important;
+
+    
+  }
+
+}
+
+@media only screen and (max-width:1000px){
+  .stats-container{
+    padding: 100px !important;
+  }
+
+  .stat-div{
+    margin: 0;
+  }
+
+}

@@ -1,0 +1,24 @@
+.search-icon{
+  font-size: 20px;
+  color: white;
+}
+
+.input-tag{
+  border-radius: 0;
+}
+
+.input-button{
+  border-radius: 0;
+}
+
+.nav-container{
+  background-color: rgb(245, 245, 245);
+  padding-bottom: 20px;
+}
+
+@media only screen and (max-width:1000px){
+  .input-tag{
+
+  }
+
+}
