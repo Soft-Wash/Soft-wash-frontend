@@ -17,10 +17,10 @@ function Navigation(){
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="#action1">Home</Nav.Link>
-            <Nav.Link href="#action2">Services</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/ourservices">Services</Nav.Link>
             <NavDropdown title="Market Place" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Shop</NavDropdown.Item>
+              <NavDropdown.Item href="marketplace">Shop</NavDropdown.Item>
               <NavDropdown.Item href="#action4">
                 Download invoice
               </NavDropdown.Item>
@@ -39,7 +39,7 @@ function Navigation(){
                 View Order History
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="#" disabled>
+            <Nav.Link href="/UserRegister">
               Sign up
             </Nav.Link>
           </Nav>
