@@ -12,6 +12,7 @@ import "../../styles/SingleProduct.css";
 import itemImg from "../../assets/MarketPlace/Images/1465908830684_spxspy1512_nittol_anti-bacterial_multi-purpose_soap_150_g_180x2x2.jpg";
 import Accordion from 'react-bootstrap/Accordion';
 import { FaFacebookSquare,FaLinkedin,FaEnvelope } from "react-icons/fa";
+import Footer from "../../common/Footer"
 import itemImg1 from "../../assets/MarketPlace/Images/1507033810106_sptows2927_so_klin_detergent_190_g_1024x1024.jpg"
 import itemImg2 from "../../assets/MarketPlace/Images/1499349122495_spxspz1244_waw_hyper-concentrated_multi-use_detergent_200_g_180x2x.jpg"
 import itemImg3 from "../../assets/MarketPlace/Images/1509621985884_sptows2785_ariel_original_perfume_detergent_powder_1_kg_1024x1024.jpg"
@@ -242,6 +243,7 @@ function SingleProduct() {
 {/* 
       </Container> */}
       </Container>
+      <Footer/>
 
     </div>
   );
