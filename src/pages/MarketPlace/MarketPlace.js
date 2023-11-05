@@ -9,6 +9,7 @@ import "../../styles/MarketPlace.css"
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { FiChevronDown } from "react-icons/fi";
+import {  FiHeart } from "react-icons/fi";
 import itemImg1 from "../../assets/MarketPlace/Images/1507033810106_sptows2927_so_klin_detergent_190_g_1024x1024.jpg"
 import itemImg2 from "../../assets/MarketPlace/Images/1499349122495_spxspz1244_waw_hyper-concentrated_multi-use_detergent_200_g_180x2x.jpg"
 import itemImg3 from "../../assets/MarketPlace/Images/1509621985884_sptows2785_ariel_original_perfume_detergent_powder_1_kg_1024x1024.jpg"
@@ -160,7 +161,7 @@ function MarketPlace() {
           <Col xs={12} sm={12} md={4} lg={4} xl={3} key={item.name}>
 
             <Card className="item-card border text-center mt-4"  style={{height:"350px"}}>
-            <FiShoppingCart className="cart-icon02"/>
+            <FiHeart className="cart-icon02"/>
             <img src={item.image} className="item-image  mt-5" alt="" />
             <h5 className="name-tag mt-1">{item.name}</h5>
             <p className="price-tag fs-4 m-0">	&#8358; 4,650</p>

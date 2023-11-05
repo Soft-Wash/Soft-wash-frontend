@@ -1,0 +1,91 @@
+.singleproduct-item{
+  margin-left: 15%;
+}
+
+.underline-price{
+  margin-left: 20px;
+  text-decoration: line-through;
+
+}
+
+.cart-inpt-div{
+  border: 1px solid #15B8D8;
+}
+
+.cart-input{
+  width: 40px;
+  padding: 9px;
+  border: none;
+}
+
+.cart-inpt-div-btn1{
+  padding-left: 15px;
+  padding-right: 15px;
+   border: none;
+}
+
+.cart-inpt-div-btn2{
+  padding-left: 15px;
+  padding-right: 15px;
+  border: none;
+}
+
+
+.cart-button2{
+  margin-left: 20px;
+  width: 260px;
+}
+
+.wishlist-icon{
+  font-size: 30px;
+}
+
+.wishlist-ptag{
+  margin-left: 20px;
+}
+
+
+.wishlist-hr-div{
+  margin-top: 20px;
+}
+
+.accordion-button:focus {
+  z-index: 3;
+   border-color: none; 
+   outline: 0;
+   box-shadow: none; 
+}
+
+.instagram-icon,
+.facebook-icon,
+.Linkedin-icon,
+.envelop-icon{
+  font-size: 30px;
+}
+
+.facebook-icon,
+.Linkedin-icon,
+.envelop-icon{
+  margin-left: 20px;
+}
+
+.customer-reviewcard{
+  height: 100px;
+  border-radius: 0;
+  display: flex;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.review-ptag{
+text-align: end;
+
+
+
+}
+
+.review-h4{
+
+  font-size: 20px;
+  margin-top: 10px;
+}

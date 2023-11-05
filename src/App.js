@@ -12,6 +12,7 @@ import PricingPage from "./pages/PricingPage";
 import Services from "./pages/Services";
 import About from "./pages/About";
 import MarketPlace from "./pages/MarketPlace/MarketPlace";
+import SingleProduct from "./pages/MarketPlace/SingleProduct";
 
 
 
@@ -31,6 +32,7 @@ function App() {
          <Route path="/ourservices" element={<Services/>} />
          <Route path="/about" element={<About/>} />
          <Route path="/marketplace" element={<MarketPlace/>} />
+         <Route path="/singleproduct" element={<SingleProduct/>} />
 
 
         
