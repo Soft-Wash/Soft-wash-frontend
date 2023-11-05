@@ -98,9 +98,14 @@
 
 
 
-@media only screen and (max-width:8000px){
+
+@media only screen and (max-width:1000px){
   .item-card{
     margin: 0 auto;
+  }
+
+  .review-inpt{
+    width: 650px;
   }
 
 }

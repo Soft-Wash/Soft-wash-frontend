@@ -79,12 +79,53 @@
 
 .review-ptag{
 text-align: end;
-
-
-
+cursor: pointer;
 }
 
 .review-h4{
   font-size: 20px;
   margin-top: 10px;
+}
+
+.review-inpt{
+  width: 1050px;
+  padding: 5px;
+  border: 1px solid rgb(220, 220, 220);
+}
+
+.label01{
+  margin-top: 20px;
+}
+
+.review-container{
+  min-height: 450px;
+  padding-bottom: 10px;
+  border: 1px solid rgb(220, 220, 220);
+  border-top: none;
+}
+
+.submit-review-btn{
+display: flex;
+justify-content: baseline;
+}
+
+.review-btn{
+  border: 0;
+  border-radius: 0;
+}
+
+.review-textarea{
+  width: 1050px;
+  border: 1px solid rgb(220, 220, 220);
+}
+
+
+@media only screen and (max-width:1000px){
+  .review-inpt{
+    width: 650px;
+  }
+
+  .review-textarea{
+    width: 650px;
+  }
 }
