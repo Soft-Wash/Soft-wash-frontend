@@ -8,7 +8,7 @@ import laundryIcon from "../assets/aboutpage/images/laundry-icon.png";
 import teamIcon from "../assets/aboutpage/images/team-icon.png";
 import pieceImage from "../assets/aboutpage/images/pieces-icon.png";
 import Testimonial from "../common/Testimonial";
-import testimonialIcon from "../assets/aboutpage/images/testimonial-icon (1).png";
+import testimonialIcon from "../assets/aboutpage/images/testimonial-icon.png";
 import clientImage from "../assets/aboutpage/images/client1.png";
 import "../styles/about.css";
 import React, { Component } from "react";
