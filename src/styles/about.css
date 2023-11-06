@@ -5,16 +5,15 @@
 
 .stats-container{
   background-image: url(../assets/aboutpage/images/stats-section-bg.png);
-  /* height: 80vh; */
   padding: 200px 0;
   background-size: cover;
   background-repeat: no-repeat;
-  
-  /* margin: 0 auto; */
-  /* align-items: center; */
-  /* text-align: center; */
   margin-top: 50px;
 
+}
+
+.greatherthan-Icon{
+  margin-top: 6px;
 }
 
 .circle-border{
@@ -27,6 +26,22 @@
   text-align: center;
   justify-content: center;
   
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(30%);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(100%);
+  }
+}
+
+.scale-out {
+  animation: scaleIn 5s ease-in-out forwards;
+  opacity: 0;
 }
 
 .client-img{
@@ -42,6 +57,25 @@
 
 .single-stat-div{
 text-align: center;
+}
+
+@media only screen and (max-width:3000px) {
+  .about-text{
+    width: 75%;
+  }
+  .about-text-0{
+    width: 75%;
+  }
+}
+
+@media only screen and (max-width:500px){
+  .about-text{
+    width: 100%;
+  }
+
+  .about-text-0{
+    width: 75%;
+  }
 }
 
 
