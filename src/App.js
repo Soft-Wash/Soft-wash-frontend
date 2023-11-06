@@ -12,6 +12,9 @@ import PricingPage from "./pages/PricingPage";
 import Services from "./pages/Services";
 import About from "./pages/About";
 import MarketPlace from "./pages/MarketPlace/MarketPlace";
+import Orders from "./pages/user/Orders";
+import OrderReceipt from "./pages/user/OrderReceipt";
+
 import SingleProduct from "./pages/MarketPlace/SingleProduct";
 import Wishlist from "./pages/MarketPlace/Wishlist"
 import Cart from "./pages/MarketPlace/Cart" 
@@ -38,17 +41,12 @@ function App() {
          <Route path="/wishlist" element={<Wishlist/>} />
          <Route path="/cart" element={<Cart/>} />
 
-
+        <Route path="/my-orders" element={<Orders/>}/>
+        <Route path="/order-receipt" element={<OrderReceipt/>}/>
         
       </Routes>
     </BrowserRouter>
-    // <div>
-    //   <BrowserRouter>
-    //    <Routes>
 
-    //    </Routes>
-    //   </BrowserRouter>
-    // </div>
   );
 }
 
