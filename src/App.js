@@ -13,6 +13,8 @@ import Services from "./pages/Services";
 import About from "./pages/About";
 import MarketPlace from "./pages/MarketPlace/MarketPlace";
 import SingleProduct from "./pages/MarketPlace/SingleProduct";
+import Wishlist from "./pages/MarketPlace/Wishlist"
+import Cart from "./pages/MarketPlace/Cart" 
 
 
 
@@ -33,6 +35,8 @@ function App() {
          <Route path="/about" element={<About/>} />
          <Route path="/marketplace" element={<MarketPlace/>} />
          <Route path="/singleproduct" element={<SingleProduct/>} />
+         <Route path="/wishlist" element={<Wishlist/>} />
+         <Route path="/cart" element={<Cart/>} />
 
 
         
