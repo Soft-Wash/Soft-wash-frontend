@@ -53,16 +53,17 @@ function Cart() {
           </div>
         </div>
         <hr className="lin02" />
-        <div className="sub-total-div d-flex row">
-          <div className="sub-total-div-inner col">
+        <div className="sub-total-div row">
+
+          <div className="sub-total-div-inner col col-12 col-md-6 col-lg-6 ">
             <p className="note-ptag">Add a note to your order</p>
             <form action="">
               <textarea className="teatarea2" name="" id="" cols="30" rows="10"></textarea>
             </form>
           </div>
-          <div className="sub-total-div-inner2 col-xs-12 ">
+          <div className="sub-total-div-inner2 col col-12 col-md-6 col-lg-6 ">
             <h4>Subtotal:&#8358; 4,650.00</h4>
-            <Button variant="secondary" className="bg-info border-0 col-xs-12">
+            <Button variant="secondary" className="checkout-button bg-info border-0">
               Checkout
             </Button>{" "}
           </div>

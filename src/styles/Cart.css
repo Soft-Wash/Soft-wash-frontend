@@ -67,9 +67,15 @@
   display: none;
 }
 
-.sub-total-div{
-  justify-content:space-between;
+.sub-total-div-inner2{
+  text-align: end;
 }
+
+.sub-total-div{
+  justify-content:space-between !important;
+}
+
+
 .note-ptag{
   font-size: 13px;
 }
@@ -87,6 +93,8 @@ color: black;
   .mobile-totalprice {
     display: none;
   }
+
+
 }
 
 @media only screen and (max-width: 1000px) {
@@ -111,6 +119,10 @@ color: black;
 
   .cart-container {
     padding-left: 10px;
+    padding-right: 10px;
+  }
+  .checkout-button{
+    width: 100%;
   }
 
   .item-name {
@@ -142,5 +154,9 @@ color: black;
 
   .remove-cart {
     display: none;
+  }
+
+  .teatarea2{
+    width: 100%;
   }
 }
