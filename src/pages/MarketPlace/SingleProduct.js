@@ -171,9 +171,9 @@ const reviewToggleFunc = () => {
 
             <div className="d-flex mt-5">
               <div className="cart-inpt-div d-flex">
-                <button className="cart-inpt-div-btn1">-</button>
+                <button className="cart-inpt-div-btn1 bg-info">-</button>
                 <input type="text" className="cart-input" />
-                <button className="cart-inpt-div-btn2">+</button>
+                <button className="cart-inpt-div-btn2 bg-info">+</button>
               </div>
               <Button
                 variant="secondary"

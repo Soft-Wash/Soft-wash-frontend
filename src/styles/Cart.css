@@ -67,6 +67,22 @@
   display: none;
 }
 
+.sub-total-div{
+  justify-content:space-between;
+}
+.note-ptag{
+  font-size: 13px;
+}
+
+.continue-shopping{
+  text-decoration: underline;
+color: black;
+}
+
+.teatarea2{
+  height: 100px;
+}
+
 @media only screen and (max-width: 3000px) {
   .mobile-totalprice {
     display: none;
