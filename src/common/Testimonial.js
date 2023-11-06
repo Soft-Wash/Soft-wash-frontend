@@ -2,7 +2,7 @@ import { Col, Row } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import testimonialIcon from "../../src/assets/HomePage/images/testimonial-icon.png";
 import Client1 from "../../src/assets/HomePage/images/client1.png";
-import Star from "../../src/assets/HomePage/images/review-star.png";
+// import Star from "../../src/assets/HomePage/images/review-star.png";
 
 export default function Testimonial(props) {
   return (

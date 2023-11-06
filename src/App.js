@@ -12,6 +12,8 @@ import PricingPage from "./pages/PricingPage";
 import Services from "./pages/Services";
 import About from "./pages/About";
 import MarketPlace from "./pages/MarketPlace/MarketPlace";
+import Orders from "./pages/user/Orders";
+import OrderReceipt from "./pages/user/OrderReceipt";
 
 
 
@@ -32,17 +34,12 @@ function App() {
          <Route path="/about" element={<About/>} />
          <Route path="/marketplace" element={<MarketPlace/>} />
 
-
+        <Route path="/my-orders" element={<Orders/>}/>
+        <Route path="/order-receipt" element={<OrderReceipt/>}/>
         
       </Routes>
     </BrowserRouter>
-    // <div>
-    //   <BrowserRouter>
-    //    <Routes>
 
-    //    </Routes>
-    //   </BrowserRouter>
-    // </div>
   );
 }
 
