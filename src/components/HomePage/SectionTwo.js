@@ -1,9 +1,9 @@
-import { useState } from "react";
+// import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
+// import Card from "react-bootstrap/Card";
+// import Button from "react-bootstrap/Button";
 import image2 from "../../assets/HomePage/images/about-img.png";
 import image3 from "../../assets/HomePage/images/services-img.png";
 

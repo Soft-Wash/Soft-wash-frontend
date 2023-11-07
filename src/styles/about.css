@@ -1,0 +1,100 @@
+.about-sectionImg{
+  height: 550px;
+}
+
+
+.stats-container{
+  background-image: url(../assets/aboutpage/images/stats-section-bg.png);
+  padding: 200px 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-top: 50px;
+
+}
+
+.greatherthan-Icon{
+  margin-top: 6px;
+}
+
+.circle-border{
+  height: 100px;
+  width: 100px;
+  border: 2px solid white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(30%);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(100%);
+  }
+}
+
+.scale-out {
+  animation: scaleIn 5s ease-in-out forwards;
+  opacity: 0;
+}
+
+.client-img{
+  width: 30px;
+  height: 30px;
+}
+
+.testimonial-container{
+  background-image: url(../assets/aboutpage/images/about-background.png);
+  height: 90vh;
+}
+
+
+.single-stat-div{
+text-align: center;
+}
+
+@media only screen and (max-width:3000px) {
+  .about-text{
+    width: 75%;
+  }
+  .about-text-0{
+    width: 75%;
+  }
+}
+
+@media only screen and (max-width:500px){
+  .about-text{
+    width: 100%;
+  }
+
+  .about-text-0{
+    width: 75%;
+  }
+}
+
+
+@media only screen and (max-width:800px){
+  .stats-container{
+    padding: 50px !important;
+
+    
+  }
+
+}
+
+@media only screen and (max-width:1000px){
+  .stats-container{
+    padding: 100px !important;
+  }
+
+  .stat-div{
+    margin: 0;
+  }
+
+}

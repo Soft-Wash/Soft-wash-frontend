@@ -1,8 +1,8 @@
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
+// import Card from "react-bootstrap/Card";
+// import Button from "react-bootstrap/Button";
 import ServicesCard from "../../common/ServicesCard";
 import image1 from "../../assets/HomePage/images/price-map.png";
 import image2 from "../../assets/HomePage/images/delivery-icon.png";

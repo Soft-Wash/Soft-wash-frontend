@@ -1,0 +1,162 @@
+.cart-description-div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-container {
+  padding-left: 150px;
+  padding-right: 150px;
+}
+
+.cart-description-div-innerd {
+  display: flex;
+}
+
+.cart-quantity {
+  margin-left: 60px;
+}
+
+.cart-total {
+  margin-left: 100px;
+}
+
+.cart-item-img {
+  width: 50px;
+}
+
+.item-name {
+  width: 40%;
+  margin-left: 50px;
+  /* border: 1px solid black; */
+}
+
+.items-div {
+  justify-content: space-between;
+  /* border: 1px solid black; */
+}
+
+.cart-inpt-div {
+  border: 1px solid #15b8d8;
+}
+
+.price-quantity-div-inner {
+  margin-left: 20px;
+}
+
+.current-price {
+  white-space: nowrap;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.total-price {
+  white-space: nowrap;
+  margin-left: 30px;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.remove-cart {
+  text-align: center;
+  text-decoration: underline;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.remove2-cart {
+  display: none;
+}
+
+.sub-total-div-inner2{
+  text-align: end;
+}
+
+.sub-total-div{
+  justify-content:space-between !important;
+}
+
+
+.note-ptag{
+  font-size: 13px;
+}
+
+.continue-shopping{
+  text-decoration: underline;
+color: black;
+}
+
+.teatarea2{
+  height: 100px;
+}
+
+@media only screen and (max-width: 3000px) {
+  .mobile-totalprice {
+    display: none;
+  }
+
+
+}
+
+@media only screen and (max-width: 1000px) {
+  .cart-container {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .mobile-totalprice {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .lin01 {
+    display: none;
+  }
+
+  .cart-description-div {
+    display: none;
+  }
+
+  .cart-container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .checkout-button{
+    width: 100%;
+  }
+
+  .item-name {
+    width: 100%;
+    /* margin-left: 50px; */
+  }
+
+  .mobile-totalprice {
+    display: block;
+  }
+
+  .current-price {
+    display: none;
+  }
+
+  .price-quantity-div {
+    margin-left: 80px;
+  }
+
+  .remove2-cart {
+    margin-left: 20px;
+    margin-top: 10px;
+    text-decoration: underline;
+  }
+
+  .total-price {
+    display: none;
+  }
+
+  .remove-cart {
+    display: none;
+  }
+
+  .teatarea2{
+    width: 100%;
+  }
+}

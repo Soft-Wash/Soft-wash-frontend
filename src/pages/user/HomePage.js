@@ -1,4 +1,4 @@
-import Navigation from "../../common/Navbar";
+import Navigation from "../../common/Navigation";
 import SectionOne from "../../components/HomePage/SectionOne";
 import SectionTwo from "../../components/HomePage/SectionTwo";
 import SectionThree from "../../components/HomePage/SectionThree";

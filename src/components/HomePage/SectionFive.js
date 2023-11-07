@@ -1,9 +1,7 @@
-import { useState } from "react";
+// import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import image1 from "../../assets/HomePage/images/shirt-icon.png";
 import image2 from "../../assets/HomePage/images/suit-icon.png";
 import image3 from "../../assets/HomePage/images/corsage-dress-icon.png";
@@ -11,7 +9,6 @@ import image4 from "../../assets/HomePage/images/towel-icon.png";
 import image5 from "../../assets/HomePage/images/winter-coat-icon.png";
 import image6 from "../../assets/HomePage/images/casual-shirt-icon.png";
 import PriceCard from "../../common/PriceCard";
-import React, { Component } from "react";
 import Slider from "react-slick";
 import SectionSix from './SectionSix'
 
