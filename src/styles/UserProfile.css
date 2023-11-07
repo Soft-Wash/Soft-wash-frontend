@@ -1,6 +1,10 @@
 
 .user-sidebar {
+<<<<<<< HEAD
     width: 250px;
+=======
+    width: 230px;
+>>>>>>> c67370096f3b7254975a7d1d8b618f7a59de02ed
     height: 1100px;
     background-color: whitesmoke; 
     display: flex;
@@ -9,10 +13,18 @@
 }
   
 .user-sidebar a {
+<<<<<<< HEAD
     width: 250px;
     padding: 15px 0;
     font-size: 20px; 
     display: flex;
+=======
+    width: 100%;
+    padding: 15px 0;
+    font-size: 20px; 
+    display: flex;
+    flex-wrap: wrap;
+>>>>>>> c67370096f3b7254975a7d1d8b618f7a59de02ed
     justify-content: center;
     text-decoration: none; 
     color: #007bff;
@@ -31,11 +43,18 @@
 }
 
 .user-sidebar-logo{
+<<<<<<< HEAD
     width: 75%;
     height: 40px;
     margin-left: 12.5%;
     display: flex;
     justify-content: center;
+=======
+    width: 60%;
+    height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+>>>>>>> c67370096f3b7254975a7d1d8b618f7a59de02ed
 }
 .user-sidebar-logo img{
     width: 100%;
@@ -45,11 +64,18 @@
 
 .user-dashboard-nav{
     width: 100%;
+<<<<<<< HEAD
     padding: 20px 10px;
     display: flex;
     justify-content: flex-end;
     background-color:white;
     box-shadow: 10px 0 10px 2px grey;
+=======
+    padding: 10px 10px;
+    display: flex;
+    justify-content: flex-end;
+    /* box-shadow: 10px 0 10px 2px grey; */
+>>>>>>> c67370096f3b7254975a7d1d8b618f7a59de02ed
 }
 
 .user-dashboard-container{
@@ -91,6 +117,7 @@
     border-radius: 35px;
     background-color: white;
 }
+<<<<<<< HEAD
 .user-body-icon-div{
     display: flex;
     justify-content: center;
@@ -98,6 +125,11 @@
 .user-body-icon{
     font-size: 150px;
     /* margin-left: 30%; */
+=======
+.user-body-icon{
+    font-size: 150px;
+    margin-left: 35%;
+>>>>>>> c67370096f3b7254975a7d1d8b618f7a59de02ed
     margin-top: 50px;
     margin-bottom: 50px;
 }
@@ -148,6 +180,7 @@
 
 
 @media (max-width: 1440px){
+<<<<<<< HEAD
     .user-body-icon{
         font-size: 120px;
     }
@@ -235,4 +268,9 @@
         border-radius: 35px;
         background-color: white;
     }
+=======
+
+    
+
+>>>>>>> c67370096f3b7254975a7d1d8b618f7a59de02ed
 }
