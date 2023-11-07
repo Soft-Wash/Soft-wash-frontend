@@ -8,13 +8,14 @@ import NewPaswdPage from "./pages/NewPaswdPage";
 import ResetPaswdPage from "./pages/ResetPaswdPage";
 import HomePage from "./pages/user/HomePage"
 import AddressPage from "./pages/user/AddressPage";
+import PaymentPage from "./pages/PaymentPage";
+import ClothesSelection from "./pages/ClothesSelection";
 import PricingPage from "./pages/PricingPage";
 import Services from "./pages/Services";
 import About from "./pages/About";
 import MarketPlace from "./pages/MarketPlace/MarketPlace";
 import Orders from "./pages/user/Orders";
 import OrderReceipt from "./pages/user/OrderReceipt";
-
 import SingleProduct from "./pages/MarketPlace/SingleProduct";
 import Wishlist from "./pages/MarketPlace/Wishlist"
 import Cart from "./pages/MarketPlace/Cart" 
@@ -33,6 +34,8 @@ function App() {
         <Route path="/auth/reset-password" element={<ResetPaswdPage />} />
          <Route path="/auth/new-password" element={<NewPaswdPage />} />
          <Route path="/auth/verify" element={<AuthenticatePaswdPage />} />
+        <Route path="/ClothesSelection" element={<ClothesSelection/>}/>
+        <Route path="/PaymentPage" element={<PaymentPage/>}/>
          <Route path="/pricing" element={<PricingPage />} />
          <Route path="/ourservices" element={<Services/>} />
          <Route path="/about" element={<About/>} />
@@ -40,7 +43,6 @@ function App() {
          <Route path="/singleproduct" element={<SingleProduct/>} />
          <Route path="/wishlist" element={<Wishlist/>} />
          <Route path="/cart" element={<Cart/>} />
-
         <Route path="/my-orders" element={<Orders/>}/>
         <Route path="/order-receipt" element={<OrderReceipt/>}/>
         
