@@ -8,6 +8,8 @@ import NewPaswdPage from "./pages/NewPaswdPage";
 import ResetPaswdPage from "./pages/ResetPaswdPage";
 import HomePage from "./pages/user/HomePage"
 import AddressPage from "./pages/user/AddressPage";
+import PaymentPage from "./pages/PaymentPage";
+import ClothesSelection from "./pages/ClothesSelection";
 
 
 
@@ -23,6 +25,8 @@ function App() {
         <Route path="/auth/reset-password" element={<ResetPaswdPage />} />
          <Route path="/auth/new-password" element={<NewPaswdPage />} />
          <Route path="/auth/verify" element={<AuthenticatePaswdPage />} />
+        <Route path="/ClothesSelection" element={<ClothesSelection/>}/>
+        <Route path="/PaymentPage" element={<PaymentPage/>}/>
 
         
       </Routes>
