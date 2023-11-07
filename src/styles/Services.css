@@ -1,34 +1,33 @@
-
-.greatherthan-Icon{
+.greatherthan-Icon {
   font-size: 20px;
   color: white;
 }
 
-.greatherthan-Icon{
+.greatherthan-Icon {
   margin-top: 6px;
 }
 
-.servicebg-container{
+.servicebg-container {
   background-image: url(../assets/Services/Images/service-bg.png);
   height: auto;
   background-size: cover;
   background-repeat: no-repeat;
-  object-fit:cover ;
+  object-fit: cover;
 }
 
-.service-title-div{
+.service-title-div {
   text-align: center;
 }
 
-.title-ptag{
+.title-ptag {
   color: var(--headercolor);
 }
 
-.service-img{
+.service-img {
   width: 300px;
 }
 
-.line-height{
+.line-height {
   line-height: 47px;
 }
 
@@ -39,8 +38,6 @@
 .OurServicesCard:hover {
   transform: translateY(-20px);
 }
-
-
 
 .animated-col-left {
   transform: translateX(-30%);
@@ -59,12 +56,15 @@
   opacity: 1;
 }
 
-
-
 @media (min-width: 768px) {
-  .md-text-align{
+  .md-text-align {
     text-align: center;
     margin: 0 auto;
   }
+}
 
+@media only screen and(max-width:500px) {
+  .schedule-pickup-btn {
+    width: 100%;
+  }
 }

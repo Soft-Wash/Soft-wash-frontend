@@ -166,7 +166,7 @@ function PricingPage() {
         <p className="fw-bold fs-5 mt-3">{item.name}</p>
         <p>{item.description}</p>
         <h2 className="cloth-price-ptag fw-bold">{item.price}</h2>
-        <Button className="pricing-order-button border-0 mt-2 fw-bold btn-md" size="lg" style={{ whiteSpace: 'nowrap' }}>
+        <Button variant="info text-white" className="pricing-order-button border-0 mt-2 fw-bold btn-md" size="lg" style={{ whiteSpace: 'nowrap' }}>
         ORDER NOW
       </Button>{' '}
       </Col>

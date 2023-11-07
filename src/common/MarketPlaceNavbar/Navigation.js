@@ -9,6 +9,7 @@ import "../../styles/MarketPlace.css";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { FiChevronDown } from "react-icons/fi";
 import Navbar from "react-bootstrap/Navbar";
+import { FiHeart } from "react-icons/fi";
 
 function Navigation(){
   return(
@@ -29,7 +30,7 @@ function Navigation(){
                 <Nav.Link href="/" className="text-dark">
                   Home
                 </Nav.Link>
-                {/* <Nav.Link href="#action2"></Nav.Link> */}
+
                 <NavDropdown
                   title={<FiUser className="fs-4 text-dark" />}
                   id="navbarScrollingDropdown"
@@ -41,9 +42,12 @@ function Navigation(){
                     Print Invoice
                   </NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link href="#">
-                  <FiShoppingCart className="fs-4 " />
+                <Nav.Link href="/cart">
+                  <FiShoppingCart className="fs-4" />
                 </Nav.Link>
+                  <Nav.Link href="/wishlist">
+                    <FiHeart className="fs-4 text-dark"/>
+                  </Nav.Link>
               </Nav>
               <Form className="d-flex">
                 <Form.Control

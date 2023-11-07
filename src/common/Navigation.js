@@ -22,6 +22,7 @@ function Navigation(){
             <Nav.Link href="/howitworks">How it works</Nav.Link>
             <Nav.Link href="/about">About</Nav.Link>
             <Nav.Link href="/pricing">Pricing</Nav.Link>
+            <Nav.Link href="/shop">Shop</Nav.Link>
             <NavDropdown title="Activities" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Submit Order</NavDropdown.Item>
               <NavDropdown.Item href="#action4">
@@ -43,7 +44,7 @@ function Navigation(){
               className="me-2"
               aria-label="Search"
             />
-            <Button variant="outline-success">Search</Button>
+            <Button variant="outline-info">Search</Button>
           </Form>
         </Navbar.Collapse>
       </Container>

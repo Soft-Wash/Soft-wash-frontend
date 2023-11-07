@@ -50,7 +50,7 @@ function Footer() {
           <div className="d-flex  align-items-center">
             <input type="text" className="w-75 p-2 border rounded " placeholder="Email adress" />
             <div className="footer-buttonn-div">
-            <Button className="footer-buttonn border-0">Send Email</Button>{' '}
+            <Button className="footer-buttonn border-0 text-nowrap">Send Email</Button>{' '}
             </div>
   
           </div>
