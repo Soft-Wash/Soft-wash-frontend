@@ -17,7 +17,7 @@ function AddressInfo() {
             <h4 className="text-primary mb-3 fw-semibold ps-2 text-capitalize">Choose your address</h4>
 
             <div className={`w-100 d-flex justify-content-between gap-3 shadow-sm rounded py-4 mx-auto mx-0 ps-4 ${clicked ? "border bg-primary-subtle  shadow-sm border border-primary border-2 " : null}`} style={{width:"90%"}}>
-            <Form.Check type="radio" aria-label="radio 1" onClick={() => setClicked(true)}/>
+            <Form.Check type="radio" aria-label="radio 1" onClick={() => setClicked(true)} />
             <Row className="w-100">
               <p className="w-100 text-black fs-5 fw-semibold my-auto ">No. 234, Whyoming Street, Solid Estate, Bay Area, Nigeria</p>
             </Row>
