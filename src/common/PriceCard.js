@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 
 export default function PriceCard(props) {
   return (
-    <Card className=" mb-5 shadow border-0" style={{height:"350px", width:"260px"}}>
+    <Card className=" mb-5 shadow border-0 mx-auto" style={{height:"350px", width:"260px"}}>
       <Card.Img variant="top" src={props.image} className="img-fluid mx-auto mt-4" style={{height:"100px", width:"100px"}}/>
       <Card.Body className="text-center">
         <Card.Title className="fs-2">{props.title}</Card.Title>

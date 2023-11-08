@@ -27,7 +27,7 @@ export default function Orders() {
         <Row>
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
       <Row>
-        <Col lg={12} sm={6}>
+        <Col lg={12} sm={117}>
           <Nav variant="pills" className="flex-row text-black">
             <Nav.Item>
               <Nav.Link eventKey="first" className="text-black">Show all</Nav.Link>

@@ -17,7 +17,7 @@ function Navigation() {
       </div>
       <div className="my-auto">
         <Dropdown className="d-inline mx-2 my-auto"
-        align={{ lg: 'end' }}>
+        align={{ lg: 'end', sm: "start"}}>
             
           <Dropdown.Toggle
             id="dropdown-autoclose-true"
@@ -30,7 +30,7 @@ function Navigation() {
               style={{ height: "36px", width: "auto" }}
             />
           </Dropdown.Toggle>
-          <Dropdown.Menu className="mt-4">
+          <Dropdown.Menu className="mt-4 me-2">
             <Dropdown.Item href="#">Profile</Dropdown.Item>
             <Dropdown.Item href="#">Logout</Dropdown.Item>
           </Dropdown.Menu>
