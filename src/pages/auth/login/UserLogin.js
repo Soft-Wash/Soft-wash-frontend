@@ -45,8 +45,10 @@ export default function Login() {
         const {data,error} = await handleLogin(payload);
         if(data){
           navigate('/')
+
         }
         console.log(data?data:error);
+    
       }
   
     return (
