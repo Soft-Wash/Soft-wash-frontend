@@ -13,6 +13,7 @@ import whyUsImg from "../assets/Services/Images/why-us-img.png";
 import Button from "react-bootstrap/Button";
 import Footer from "../common/Footer";
 import { useState,useEffect } from "react";
+import HeaderBanner from "../common/HeaderBanner";
 
 function Services() {
 
@@ -28,7 +29,10 @@ function Services() {
   return (
     <div>
       <Navigation />
-      <div>
+      <HeaderBanner
+      pageTitle="Services"
+      currentPage="Services"/>
+      {/* <div>
         <div className="below-navbar container-fluid  pt-4 pb-3">
           <div className="container d-flex justify-content-between align-items-center">
             <div className="page-navigation-title d-flex">
@@ -39,7 +43,7 @@ function Services() {
             <p className="fs-3  text-white">Services</p>
           </div>
         </div>
-      </div>
+      </div> */}
       <Container fluid className="servicebg-container">
         <Col className="service-title-div align-center pt-5 pb-5">
           <p className="title-ptag fs-5">Stay Clean And Dress Well</p>

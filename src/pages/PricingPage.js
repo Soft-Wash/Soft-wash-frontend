@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import HeaderBanner from "../common/HeaderBanner";
 
 import shirtImg1 from "../assets/pricingpage/images/1593151923.png"
 import blazerImg1 from "../assets/pricingpage/images/blazer-icon.png"
@@ -87,7 +88,7 @@ function PricingPage() {
 
   const filteredData = mockData.filter((item) => {
     if (selectedCategory === "All") {
-      return true; // Show all items
+      return true; 
     } else if (selectedCategory === "Wash & Fold") {
       return item.description === "Washed & Fold" || item.description === "Dry Clean & Iron";
     } else {
@@ -101,21 +102,15 @@ function PricingPage() {
   return (
     <div>
       <Navigation />
-      <div className="below-navbar container-fluid d-flex pt-4 pb-3">
-        <div className="container d-flex justify-content-between align-items-center">
-          <p className="fs-3 fw-bold text-white">Pricing</p>
-          <div className="d-flex">
-            <p className="fs-5 text-white">Home</p>
-            <FaChevronRight className="greatherthan-Icon" />
-            <p className="fs-5 text-white">Pricing</p>
-          </div>
-        </div>
-      </div>
+      <HeaderBanner
+      pageTitle="Pricing"
+      currentPage="Pricing"
+      />
       <div className="pricing-clothtype-header container text-center mt-5 pt-4">
         <p className="pricing-ptag fw-100 fs-4">Pricing</p>
         <h1 className="fw-bold">Check Our Affordable Prices</h1>
         <div className="cloth-title-div d-flex justify-content-center text-center mt-4">
-          <ul className="flex-wrap">
+          <ul className="cloth-title-div-ul flex-wrap">
           <li
             className={selectedCategory === "All" ? "all-ptag selected" : "all-ptag"}
             onClick={() => setSelectedCategory("All")}
@@ -163,10 +158,10 @@ function PricingPage() {
 
         </div>
       </div>
-      <Container fluid>
+      <Container fluid className="price-container-0">
       <Row className="justify-content-center gap-0 column-gap-5">
       {filteredData.map((item, index)=>(
-        <Col xs={6} md={3} className={`shadow text-center pt-5 pb-5 ${index >= 0 ? 'mt-5' : ''}`}>
+        <Col xs={6} md={3} className={`price-container shadow text-center pt-5 pb-5 ${index >= 0 ? 'mt-5' : ''}`}>
         <img src={item.image} className="w-25" alt="" />
         <p className="fw-bold fs-5 mt-3">{item.name}</p>
         <p>{item.description}</p>

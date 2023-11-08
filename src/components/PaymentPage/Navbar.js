@@ -17,11 +17,18 @@ function Navigation(){
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/ourservices">Services</Nav.Link>
-            <Nav.Link href="/howitworks">How it works</Nav.Link>
-            <Nav.Link href="/about">About</Nav.Link>
-            <Nav.Link href="/pricing">Pricing</Nav.Link>
+            <Nav.Link href="#action1">Home</Nav.Link>
+            <Nav.Link href="#action2">Services</Nav.Link>
+            <NavDropdown title="Market Place" id="navbarScrollingDropdown">
+              <NavDropdown.Item href="#action3">Shop</NavDropdown.Item>
+              <NavDropdown.Item href="#action4">
+                Download invoice
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action5">
+                Purchase History
+              </NavDropdown.Item>
+            </NavDropdown>
             <NavDropdown title="Activities" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Submit Order</NavDropdown.Item>
               <NavDropdown.Item href="#action4">
@@ -32,7 +39,7 @@ function Navigation(){
                 View Order History
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="/UserRegister">
+            <Nav.Link href="#" disabled>
               Sign up
             </Nav.Link>
           </Nav>

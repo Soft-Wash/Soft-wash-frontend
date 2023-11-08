@@ -4,8 +4,9 @@ import Accordion from "react-bootstrap/Accordion";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import mapSample from "../../assets/AddressPage/map-sample.png";
+import { Link } from "react-bootstrap-icons";
 import { useState } from "react";
-import { BsFillTrashFill } from "react-icons/bs";
+import { BsFillTrashFill } from "react-icons/bs"
 
 function AddressInfo() {
   const [clicked, setClicked] = useState(false)
@@ -133,7 +134,10 @@ function AddressInfo() {
         <Button  variant="outline-primary" className="me-auto w-75 text-center">Prev</Button>
         </Col>
         <Col lg={4} md={5} sm={5}>
-        <Button variant="primary" className="me-auto w-75 text-center">Next</Button></Col>
+          <Link to="/PaymentPage">
+          <Button variant="primary" className="me-auto w-75 text-center">Next</Button>
+          </Link>
+</Col>
       </Container>
 
     </Container>
