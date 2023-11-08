@@ -69,17 +69,14 @@ function Navigation() {
                 View Order History
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="/UserRegister">Sign up</Nav.Link>
+
           </Nav>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form>
+
+          <Button variant="info text-white" onClick={()=> navigate('/UserRegister')}>
+          <Nav.Link>
+            Get Started
+          </Nav.Link>
+          </Button>
         </Navbar.Collapse>
       </Container>
     </Navbar>
