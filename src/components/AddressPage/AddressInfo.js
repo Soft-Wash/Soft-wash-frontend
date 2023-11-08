@@ -4,6 +4,7 @@ import Accordion from "react-bootstrap/Accordion";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import mapSample from "../../assets/AddressPage/map-sample.png";
+import { Link } from "react-router-dom";
 
 function AddressInfo() {
   return (
@@ -124,10 +125,16 @@ function AddressInfo() {
 
       <Container className="d-flex justify-content-center w-100 text-center my-5">
         <Col lg={4} md={5} sm={5}>
-        <Button  variant="outline-primary" className="me-auto w-75 text-center">Prev</Button>
+          <Link to="/date">
+          <Button  variant="outline-primary" className="me-auto w-75 text-center">Prev</Button>
+          </Link>
+
         </Col>
         <Col lg={4} md={5} sm={5}>
-        <Button variant="primary" className="me-auto w-75 text-center">Next</Button></Col>
+          <Link to="/PaymentPage">
+          <Button variant="primary" className="me-auto w-75 text-center">Next</Button>
+          </Link>
+</Col>
       </Container>
 
     </Container>
