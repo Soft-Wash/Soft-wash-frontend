@@ -19,9 +19,10 @@ function Navigation(){
           >
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/ourservices">Services</Nav.Link>
-            <Nav.Link href="/howitworks">How it works</Nav.Link>
+            <Nav.Link href="/hw-it-workos">How it works</Nav.Link>
             <Nav.Link href="/about">About</Nav.Link>
             <Nav.Link href="/pricing">Pricing</Nav.Link>
+            <Nav.Link href="/marketplace" target="_blank">Shop</Nav.Link>
             <NavDropdown title="Activities" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Submit Order</NavDropdown.Item>
               <NavDropdown.Item href="#action4">
