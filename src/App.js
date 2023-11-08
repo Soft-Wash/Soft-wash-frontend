@@ -16,9 +16,9 @@ import Orders from "./pages/user/Orders";
 import OrderReceipt from "./pages/user/OrderReceipt";
 
 import SingleProduct from "./pages/MarketPlace/SingleProduct";
-import Wishlist from "./pages/MarketPlace/Wishlist"
-import Cart from "./pages/MarketPlace/Cart" 
-
+import Wishlist from "./pages/MarketPlace/Wishlist";
+import Cart from "./pages/MarketPlace/Cart"; 
+// import DatePage from "./pages/DatePage";
 
 
 function App() {
@@ -43,7 +43,7 @@ function App() {
 
         <Route path="/my-orders" element={<Orders/>}/>
         <Route path="/order-receipt" element={<OrderReceipt/>}/>
-        <Route path="/date" element={<DatePage />} />
+        {/* <Route path="/date" element={<DatePage />} /> */}
          <Route path="/user-profile" element={<UserProfilePage />} />
          <Route path="/dashboard-contact-us" element={<UserDashboardContactPage />} />
          <Route path="/order-details" element={<UserOrderDetailsPage />} />
@@ -52,5 +52,6 @@ function App() {
 
   );
 }
+
 
 export default App;
