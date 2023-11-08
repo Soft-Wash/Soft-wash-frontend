@@ -14,8 +14,17 @@ body {
     align-items: center;
 }
 
-.active-link {
-    border-bottom: 2px solid #007bff; /* You can adjust the border styles as needed */
-    /* Add any other styling you want for the active link */
-  }
+
+
+.active{
+    border-bottom: 3px solid black;
+}
   
+.howitworks-link{
+    padding-bottom: 5px;
+    text-decoration: none;
+    color: black;
+    transition: border-bottom 1.3s ease-in-out;
+}
+
+
