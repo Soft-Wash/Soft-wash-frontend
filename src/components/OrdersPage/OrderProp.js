@@ -32,7 +32,7 @@ export default function OrderProp(props) {
 
           <Col lg={2} md={4} sm={6} className="h-100">
             <Row className="mb-3"></Row>
-            <Button className="mb-1 fs-6 fw-normal my-auto bg-transparent p-0 m-0 text-secondary h-50 border-secondary px-2 " onClick={() => Navigate("/single-order")}>View</Button>
+            <Button className="mb-1 fs-6 fw-normal my-auto bg-transparent p-0 m-0 text-secondary h-50 border-secondary px-2 " onClick={() => Navigate("/order-details")}>View</Button>
           </Col>
         </Row>
       {/* </Container> */}

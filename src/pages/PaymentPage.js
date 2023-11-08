@@ -64,7 +64,10 @@ function PaymentPage() {
                                 </div>
                             </div>
                             <div className="PrevNextBtn">
-                            <button className='btn btn-outline-primary px-5 '>Prev</button>
+                                <Link to="/address">
+                                <button className='btn btn-outline-primary px-5 '>Prev</button>
+                                </Link>
+
                             <Link to="/order-receipt">
                             <button className='btn btn-info px-5'>Confirm</button>
                             </Link>
