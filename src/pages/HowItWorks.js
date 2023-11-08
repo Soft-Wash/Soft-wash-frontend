@@ -8,7 +8,7 @@ import img2 from "../assets/images/how-we-work-img2.png";
 import img3 from "../assets/images/how-we-work-img3.png";
 import img4 from "../assets/images/how-we-work-img4.png";
 import Footer from '../common/Footer';
-import Navigation from '../common/Navbar';
+import Navigation from '../common/Navigation';
 
 
 

@@ -6,6 +6,7 @@ import Native from '../../assets/images/Native.png';
 import Native2 from '../../assets/images/Native2.png';
 import suits from '../../assets/images/suits.png';
 import ClothesSelectCounter from "./ClothesSelectCounter";
+import { Link } from "react-router-dom";
 
 function SelectedCart(){
 
@@ -410,7 +411,10 @@ function SelectedCart(){
             
                 </div>
                 <div className="d-flex justify-content-center gap-3 mt-5 mb-3">
+                    <Link to="/date">
                     <button className='btn btn-primary px-5'>Next</button>
+                    </Link>
+
                 </div>
             </div>
         </Container>

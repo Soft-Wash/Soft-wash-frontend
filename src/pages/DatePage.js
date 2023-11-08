@@ -5,7 +5,8 @@ import Calender from '../components/Calender';
 import SelectedCart from '../common/SelectedCart';
 import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
-import Navigation from '../common/Navbar';
+import Navigation from '../common/Navigation';
+import { Link } from 'react-router-dom';
 
 
 
@@ -27,7 +28,10 @@ function DatePage (){
             </div>
             <div className='d-flex justify-content-center mt-4'>
                 <Button variant="light" border="primary" >Previous</Button>
+                <Link to="/address">
                 <Button className='px-4 mx-3' variant="primary">Next</Button>
+                </Link>
+
             </div>
             </Container>
             

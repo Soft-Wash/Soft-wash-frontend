@@ -1,13 +1,8 @@
-<<<<<<< HEAD
-import '../styles/Datepage.css'
-import { Container } from "react-bootstrap";
-import logo from "../assets/images/SoftWash.png";
-
-=======
 import '../styles/BookBanner.css'
 import { Container } from "react-bootstrap";
 import logo from "../assets/images/SoftWashLogo.png";
->>>>>>> 2313b30119392b7fcf56582132523b1ffc3ecd09
+import '../styles/Datepage.css'
+
 
 function BookingBanner(){
     return(
