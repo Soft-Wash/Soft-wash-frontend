@@ -419,7 +419,6 @@ function SelectedCart(){
                     <Container>
                         <div className="d-flex justify-content-between border-bottom pb-3">
                             <h3 className="date-headers">Select an Item(s)</h3>
-                            {/* <Button className="px-4 " variant="primary">Edit</Button> */}
                         </div>
                         <div>
                             <Accordion defaultActiveKey="0"className="Only Vacuum ">     
