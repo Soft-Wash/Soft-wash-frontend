@@ -11,8 +11,8 @@ function PaymentPage() {
         <div className='container'>
             {/* <EmixNav/> */}
             <div className='p-3'>
-                <div className="payOps">
-                    <div className="payOpsLeft">
+                <div className="payOps row">
+                    <div className="payOpsLeft col md-12">
                         <div>
                             <h5 class="TextColor fw-5">Choose Payment Method</h5>
                             <div className="div1 GreyBorder2 rounded-top-3">
@@ -30,9 +30,9 @@ function PaymentPage() {
                             </div>
                             <div className="div2 GreyBorder2">
                             <div className="PayOpsCash">
-                                <div style={{display:"flex", alignItems:"center", gap:"50px"}} >
+                                <div className='PaymtText' style={{display:"flex", alignItems:"center", gap:"50px"}} >
                                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
-                                    <label class="form-check-label" for="flexRadioDefault1">
+                                    <label className="form-check-label" for="flexRadioDefault1">
                                     Pay With Cash
                                     </label>
                                 </div>
@@ -56,14 +56,13 @@ function PaymentPage() {
                             <button className='btn btn-outline-primary px-5 '>Change</button>
                                 </div>
                             </div>
-                            <div className="PrevNextBtn">
-                            <button className='btn btn-outline-primary px-5 '>Prev</button>
-                            <button className='btn btn-info px-5'>Confirm</button>
+                            <div className="PrevNextBtnLeft">
+                                <button className='btn btn-outline-primary  '>Prev</button>
+                                <button className='btn btn-info '>Confirm</button>
                             </div>
                         </div>
                     </div>
-
-                    <div className="PayOpsRight">
+                    <div className="PayOpsRight col md-12">
                         <h5 class="TextColor fw-5">Price Details</h5>
                         <div className="div3 GreyBorder">
                            <div className="PriceTab1 d-flex justify-content-between p-3 GreyBorder2">
@@ -87,7 +86,10 @@ function PaymentPage() {
                                 <div><h4>Naira : 0.75</h4> </div>
                            </div>
                         </div>
-                        <div className="div4"></div>
+                        <div className="PrevNextBtnRight">
+                            <button className='btn btn-outline-primary  '>Prev</button>
+                            <button className='btn btn-info'>Confirm</button>
+                        </div>
                     </div>
                 </div>
             </div>
