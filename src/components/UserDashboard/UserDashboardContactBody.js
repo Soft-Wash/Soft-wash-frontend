@@ -1,5 +1,4 @@
-import '../../styles/DashboardContact.css'
-
+import '../../styles/DashboardContact.css';
 import { FaLocationDot, FaPhone, FaMessage } from "react-icons/fa6";
 
 
