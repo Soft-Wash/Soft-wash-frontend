@@ -18,6 +18,18 @@ function SelectedCart() {
  const [accessories,setAccessories] = useState()
  const [shoes,setShoes] = useState()
  const [homeLinen,sethomeLinen] = useState()
+ const [mensWear,setMensWear] = useState()
+ const [regular,setRegular] = useState()
+ const [onlyVacum,SetOnlyVacum] = useState()
+ const [vacum,SetVacum] = useState()
+ const [regularWash, SetRegularWash] = useState()
+ const [heavyWash, SetHeavyWash] = useState()
+ 
+ 
+
+
+
+
  useEffect(()=>{
     axiosInstance.get(`/cloth/kidswear`)
     .then((resp)=>{
@@ -54,6 +66,63 @@ function SelectedCart() {
     .catch((err)=>{
         console.log(err)
     })
+
+
+    axiosInstance.get(`/cloth/menswear`)
+    .then((resp)=>{
+        console.log(resp.data)
+        setMensWear(resp.data)
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+
+    axiosInstance.get(`/cloth/regular`)
+    .then((resp)=>{
+        console.log(resp.data)
+        setRegular(resp.data)
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+
+    axiosInstance.get(`/cloth/only-vacuum-steam-press`)
+    .then((resp)=>{
+        console.log(resp.data)
+        SetOnlyVacum(resp.data)
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+
+    axiosInstance.get(`/cloth/vacuum-steam-press`)
+    .then((resp)=>{
+        console.log(resp.data)
+        SetVacum(resp.data)
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+
+    axiosInstance.get(`/cloth/Regular:Wash-Dry-and-Fold`)
+    .then((resp)=>{
+        console.log(resp.data)
+        SetRegularWash(resp.data)
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+
+    axiosInstance.get(`/cloth/Heavy:Wash-Dry-and-Fold`)
+    .then((resp)=>{
+        console.log(resp.data)
+        SetHeavyWash(resp.data)
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+
+
  },[])
 
 
@@ -75,64 +144,30 @@ function SelectedCart() {
               <Accordion defaultActiveKey="0" className="MensWear">
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>Mens Wear</Accordion.Header>
+                  {mensWear && mensWear.map((item)=>(
                   <Accordion.Body>
-                    <div className="container">
-                      <div className="cart-item1 GreyBorderB">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={Native}
-                                alt="Native"
-                              />
-                            </div>
-                            <div className="mx-5">
-                              <h5>Native</h5>
-                              <span>2 x N2,000 / per piece</span>
-                            </div>
-                            <ClothesSelectCounter />
+                  <div className="container">
+                    <div className="cart-item1 GreyBorderB">
+                      <div className="">
+                        <div className="d-flex align-items-center ">
+                          <div>
+                            <img
+                              className="Imgselection"
+                              src={item.img}
+                              alt="Native"
+                            />
                           </div>
-                        </div>
-                      </div>
-                      <div className="cart-item2 GreyBorderB">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={suits}
-                                alt="Native"
-                              />
-                            </div>
-                            <div className="mx-5">
-                              <h5>Native</h5>
-                              <span>2 x N2,000 / per piece</span>
-                            </div>
-                            <ClothesSelectCounter />
+                          <div className="mx-5">
+                            <h5>{item.name}</h5>
+                            <span>&#8358;{`${item.price} / per piece`}</span>
                           </div>
-                        </div>
-                      </div>
-                      <div className="cart-item3 GreyBorderB">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={Native2}
-                                alt="Native"
-                              />
-                            </div>
-                            <div className="mx-5">
-                              <h5>Native</h5>
-                              <span>2 x N2,000 / per piece</span>
-                            </div>
-                            <ClothesSelectCounter />
-                          </div>
+                          <ClothesSelectCounter />
                         </div>
                       </div>
                     </div>
-                  </Accordion.Body>
+                  </div>
+                </Accordion.Body>
+                  ))}
                 </Accordion.Item>
               </Accordion>
               <Accordion defaultActiveKey="0" className="Ladies Wear">
@@ -207,64 +242,30 @@ function SelectedCart() {
               <Accordion defaultActiveKey="0" className="Regular">
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>Regular</Accordion.Header>
+                  {regular && regular.map((item)=>(
                   <Accordion.Body>
-                    <div className="container">
-                      <div className="cart-item1 GreyBorderB">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={Native}
-                                alt="Native"
-                              />
-                            </div>
-                            <div className="mx-5">
-                              <h5>Native</h5>
-                              <span>2 x N2,000 / per piece</span>
-                            </div>
-                            <ClothesSelectCounter />
+                  <div className="container">
+                    <div className="cart-item1 GreyBorderB">
+                      <div className="">
+                        <div className="d-flex align-items-center ">
+                          <div>
+                            <img
+                              className="Imgselection"
+                              src={item.img}
+                              alt="Native"
+                            />
                           </div>
-                        </div>
-                      </div>
-                      <div className="cart-item2 GreyBorderB">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={suits}
-                                alt="Native"
-                              />
-                            </div>
-                            <div className="mx-5">
-                              <h5>Native</h5>
-                              <span>2 x N2,000 / per piece</span>
-                            </div>
-                            <ClothesSelectCounter />
+                          <div className="mx-5">
+                            <h5>{item.name}</h5>
+                            <span>&#8358;{`${item.price} / per piece`}</span>
                           </div>
-                        </div>
-                      </div>
-                      <div className="cart-item3 GreyBorderB">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={Native2}
-                                alt="Native"
-                              />
-                            </div>
-                            <div className="mx-5">
-                              <h5>Native</h5>
-                              <span>2 x N2,000 / per piece</span>
-                            </div>
-                            <ClothesSelectCounter />
-                          </div>
+                          <ClothesSelectCounter />
                         </div>
                       </div>
                     </div>
-                  </Accordion.Body>
+                  </div>
+                </Accordion.Body>
+                  ))}
                 </Accordion.Item>
               </Accordion>
               <Accordion defaultActiveKey="0" className="Kids Wear">
@@ -400,133 +401,59 @@ function SelectedCart() {
               <Accordion defaultActiveKey="0" className="Only Vacuum ">
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>Only Vacuum Steam Press</Accordion.Header>
+                  {onlyVacum && onlyVacum.map((item)=>(
                   <Accordion.Body>
-                    <div className="container">
-                      <div className="cart-item1 GreyBorderB">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={Native}
-                                alt="Native"
-                              />
-                            </div>
-                            <div className="mx-5">
-                              <h5>Native</h5>
-                              <span>2 x N2,000 / per piece</span>
-                            </div>
-                            <ClothesSelectCounter />
+                  <div className="container">
+                    <div className="cart-item1 GreyBorderB">
+                      <div className="">
+                        <div className="d-flex align-items-center ">
+                          <div>
+                            <img
+                              className="Imgselection"
+                              src={item.img}
+                              alt="Native"
+                            />
                           </div>
-                        </div>
-                      </div>
-                      <div className="cart-item2 GreyBorderB">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={suits}
-                                alt="Native"
-                              />
-                            </div>
-                            <div className="mx-5">
-                              <h5>Native</h5>
-                              <span>2 x N2,000 / per piece</span>
-                            </div>
-                            <ClothesSelectCounter />
+                          <div className="mx-5">
+                            <h5>{item.name}</h5>
+                            <span>&#8358;{`${item.price} / per piece`}</span>
                           </div>
-                        </div>
-                      </div>
-                      <div className="cart-item3 GreyBorderB">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={Native2}
-                                alt="Native"
-                              />
-                            </div>
-                            <div className="mx-5">
-                              <h5>Native</h5>
-                              <span>2 x N2,000 / per piece</span>
-                            </div>
-                            <ClothesSelectCounter />
-                          </div>
+                          <ClothesSelectCounter />
                         </div>
                       </div>
                     </div>
-                  </Accordion.Body>
+                  </div>
+                </Accordion.Body>
+                  ))}
                 </Accordion.Item>
               </Accordion>
               <Accordion defaultActiveKey="0" className="Vacuum Steam Press">
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>Vacuum Steam Press</Accordion.Header>
+                  {vacum && vacum.map((item)=>(
                   <Accordion.Body>
-                    <div className="container">
-                      <div className="cart-item1 GreyBorderB">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={Native}
-                                alt="Native"
-                              />
-                            </div>
-                            <div className="mx-5">
-                              <div>
-                                <h5>Native</h5>
-                                <span>2 x N2,000 / per piece</span>
-                              </div>
-                            </div>
-                            <ClothesSelectCounter />
+                  <div className="container">
+                    <div className="cart-item1 GreyBorderB">
+                      <div className="">
+                        <div className="d-flex align-items-center ">
+                          <div>
+                            <img
+                              className="Imgselection"
+                              src={item.img}
+                              alt="Native"
+                            />
                           </div>
-                        </div>
-                      </div>
-                      <div className="cart-item2 GreyBorderB">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={Native}
-                                alt="Native"
-                              />
-                            </div>
-                            <div className="mx-5">
-                              <div>
-                                <h5>Native</h5>
-                                <span>2 x N2,000 / per piece</span>
-                              </div>
-                            </div>
-                            <ClothesSelectCounter />
+                          <div className="mx-5">
+                            <h5>{item.name}</h5>
+                            <span>&#8358;{`${item.price} / per piece`}</span>
                           </div>
-                        </div>
-                      </div>
-                      <div className="cart-item3 GreyBorderB">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={Native}
-                                alt="Native"
-                              />
-                            </div>
-                            <div className="mx-5">
-                              <div>
-                                <h5>Native</h5>
-                                <span>2 x N2,000 / per piece</span>
-                              </div>
-                            </div>
-                            <ClothesSelectCounter />
-                          </div>
+                          <ClothesSelectCounter />
                         </div>
                       </div>
                     </div>
-                  </Accordion.Body>
+                  </div>
+                </Accordion.Body>
+                  ))}
                 </Accordion.Item>
               </Accordion>
               <Accordion defaultActiveKey="0" className="Regular Wash & Fold">
@@ -534,127 +461,59 @@ function SelectedCart() {
                   <Accordion.Header>
                     Regular: Wash, Dry and Fold
                   </Accordion.Header>
+                  {regularWash && regularWash.map((item)=>(
                   <Accordion.Body>
-                    <div className="container">
-                      <div className="cart-item1 GreyBorderB">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={Native}
-                                alt="Native"
-                              />
-                            </div>
-                            <div className="mx-5">
-                              <h5>Native</h5>
-                              <span>2 x N2,000 / per piece</span>
-                            </div>
-                            <ClothesSelectCounter />
+                  <div className="container">
+                    <div className="cart-item1 GreyBorderB">
+                      <div className="">
+                        <div className="d-flex align-items-center ">
+                          <div>
+                            <img
+                              className="Imgselection"
+                              src={item.img}
+                              alt="Native"
+                            />
                           </div>
-                        </div>
-                      </div>
-                      <div className="cart-item2 GreyBorderB">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={suits}
-                                alt="Native"
-                              />
-                            </div>
-                            <div className="mx-5">
-                              <h5>Native</h5>
-                              <span>2 x N2,000 / per piece</span>
-                            </div>
-                            <ClothesSelectCounter />
+                          <div className="mx-5">
+                            <h5>{item.name}</h5>
+                            <span>&#8358;{`${item.price} / per piece`}</span>
                           </div>
-                        </div>
-                      </div>
-                      <div className="cart-item3 GreyBorderB">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={Native2}
-                                alt="Native"
-                              />
-                            </div>
-                            <div className="mx-5">
-                              <h5>Native</h5>
-                              <span>2 x N2,000 / per piece</span>
-                            </div>
-                            <ClothesSelectCounter />
-                          </div>
+                          <ClothesSelectCounter />
                         </div>
                       </div>
                     </div>
-                  </Accordion.Body>
+                  </div>
+                </Accordion.Body>
+                  ))}
                 </Accordion.Item>
               </Accordion>
               <Accordion defaultActiveKey="0" className="Heavy Wash & Fold">
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>Heavy Wash & Fold</Accordion.Header>
+                  {heavyWash && heavyWash.map((item)=>(
                   <Accordion.Body>
-                    <div className="container">
-                      <div className="cart-item1 GreyBorderB">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={Native}
-                                alt="Native"
-                              />
-                            </div>
-                            <div className="mx-5">
-                              <h5>Native</h5>
-                              <span>2 x N2,000 / per piece</span>
-                            </div>
-                            <ClothesSelectCounter />
+                  <div className="container">
+                    <div className="cart-item1 GreyBorderB">
+                      <div className="">
+                        <div className="d-flex align-items-center ">
+                          <div>
+                            <img
+                              className="Imgselection"
+                              src={item.img}
+                              alt="Native"
+                            />
                           </div>
-                        </div>
-                      </div>
-                      <div className="cart-item2 GreyBorderB">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={suits}
-                                alt="Native"
-                              />
-                            </div>
-                            <div className="mx-5">
-                              <h5>Native</h5>
-                              <span>2 x N2,000 / per piece</span>
-                            </div>
-                            <ClothesSelectCounter />
+                          <div className="mx-5">
+                            <h5>{item.name}</h5>
+                            <span>&#8358;{`${item.price} / per piece`}</span>
                           </div>
-                        </div>
-                      </div>
-                      <div className="cart-item3 GreyBorderB">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={Native2}
-                                alt="Native"
-                              />
-                            </div>
-                            <div className="mx-5">
-                              <h5>Native</h5>
-                              <span>2 x N2,000 / per piece</span>
-                            </div>
-                            <ClothesSelectCounter />
-                          </div>
+                          <ClothesSelectCounter />
                         </div>
                       </div>
                     </div>
-                  </Accordion.Body>
+                  </div>
+                </Accordion.Body>
+                  ))}
                 </Accordion.Item>
               </Accordion>
             </div>
