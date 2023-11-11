@@ -768,7 +768,7 @@ function SelectedCart({ initialQuantity }) {
               </Accordion>
             </div>
             <div className="d-flex justify-content-center gap-3 mt-5 mb-3">
-              <button className="btn btn-primary px-5" onclick={clothSelected}>
+              <button className="btn btn-primary px-5" onclick={clothSelected} >
                 Next
               </button>
             </div>
