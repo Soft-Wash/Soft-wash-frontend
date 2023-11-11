@@ -3,6 +3,7 @@ import Paymentpage from '../styles/Paymentpage.css'
 import card from "../assets/images/card.jpg";
 import cash from "../assets/images/cash.jpg"
 import BookingBanner from '../components/BookingBanner';
+import { Link } from 'react-router-dom';
 
 function PaymentPage() {
   return (
@@ -47,18 +48,26 @@ function PaymentPage() {
                             <div className='Address py-3'>
                                 <h6 className='fw-bold'>Pic-Up Address</h6>
                                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit est quibusdam velit in quam quis illum sed, possimus placeat cumque.</p>
+                                <Link to="/address">
                                 <button className='btn btn-outline-primary px-5 '>Change</button>
+                                </Link>
+
                             </div>
                                 </div>
                                 <div className='PickUpDate'>
                             <h6 className='fw-bold'>Pic-Up Date</h6>
                             <p>10 Nov 2023.</p>
+                            <Link to="/date">
                             <button className='btn btn-outline-primary px-5 '>Change</button>
+                            </Link>
+
                                 </div>
                             </div>
-                            <div className="PrevNextBtnLeft">
-                                <button className='btn btn-outline-primary  '>Prev</button>
-                                <button className='btn btn-info '>Confirm</button>
+                            <div className="PrevNextBtn">
+                            <Link to="/address">
+                                <button className='btn btn-outline-primary px-5 '>Prev</button>
+                                </Link>
+                            <button className='btn btn-info px-5'>Confirm</button>
                             </div>
                         </div>
                     </div>

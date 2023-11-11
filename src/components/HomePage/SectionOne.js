@@ -5,6 +5,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import image1 from "../../assets/HomePage/images/hero-img.png";
 import "../../styles/HomePage.css"
+import { Link } from "react-router-dom";
 // import { useState } from "react";
 
 function SectionOne() {
@@ -24,9 +25,12 @@ function SectionOne() {
                   Our professional and experienced cleaning <br />
                   staff does the job right the first time.
                 </p>
+                <Link to="/ClothesSelection">
                 <Button variant="outline-info" className="textwhite-hover mt-4" size="lg">
                   SCHEDULE PICKUP
                 </Button>{" "}
+                </Link>
+
               </div>
             </Card>
           </Col>

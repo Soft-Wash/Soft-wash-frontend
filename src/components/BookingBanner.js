@@ -1,6 +1,8 @@
 import '../styles/BookBanner.css'
 import { Container } from "react-bootstrap";
 import logo from "../assets/images/SoftWashLogo.png";
+import '../styles/Datepage.css'
+
 
 function BookingBanner(){
     return(
