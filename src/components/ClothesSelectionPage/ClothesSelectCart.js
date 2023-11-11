@@ -11,6 +11,7 @@ import Tabs from "react-bootstrap/Tabs";
 import ClothesSelectcart from "../../styles/ClothesSelectcart.css";
 import { axiosInstance } from "../../services/AxiosInstance";
 import { useState } from "react";
+import {variableManager} from "../../context/VariablesContext"
 
 function SelectedCart() {
 
@@ -24,12 +25,8 @@ function SelectedCart() {
  const [vacum,SetVacum] = useState()
  const [regularWash, SetRegularWash] = useState()
  const [heavyWash, SetHeavyWash] = useState()
+
  
- 
-
-
-
-
  useEffect(()=>{
     axiosInstance.get(`/cloth/kidswear`)
     .then((resp)=>{
@@ -125,7 +122,16 @@ function SelectedCart() {
 
  },[])
 
-
+ const clothSelected=(clothId)=>{
+    axiosInstance.put(`/cloth/${clothId}/updatequantity`)
+    .then((resp)=>{
+        console.log(resp.data)
+        setkidsWear(resp.data)
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+ }
 
   return (
     <div>

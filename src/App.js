@@ -23,12 +23,14 @@ import DatePage from "./pages/DatePage";
 import UserProfilePage from "./pages/UserProfilePage";
 import UserDashboardContactPage from "./pages/UserDashboardContactPage";
 import UserOrderDetailsPage from "./pages/UserOrderDetailsPage";
+import VariablesContext from "./context/VariablesContext";
  
 
 
 function App() {
   return (
-    <BrowserRouter>
+<VariablesContext>
+<BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage/>} />
         <Route path="/address" element={<AddressPage/>} />
@@ -42,7 +44,7 @@ function App() {
          <Route path="/user-profile" element={<UserProfilePage />} />
          <Route path="/dashboard-contact-us" element={<UserDashboardContactPage />} />
          <Route path="/order-details" element={<UserOrderDetailsPage />} />
-        <Route path="/ClothesSelection" element={<ClothesSelection/>}/>
+         <Route path="/ClothesSelection" element={<ClothesSelection/>}/>
         <Route path="/PaymentPage" element={<PaymentPage/>}/>
          <Route path="/pricing" element={<PricingPage />} />
          <Route path="/ourservices" element={<Services/>} />
@@ -55,6 +57,8 @@ function App() {
         <Route path="/order-receipt" element={<OrderReceipt/>}/>
       </Routes>
     </BrowserRouter>
+</VariablesContext>
+
 
 
   );
