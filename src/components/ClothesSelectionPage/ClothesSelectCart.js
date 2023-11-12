@@ -3,8 +3,6 @@ import React, { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Accordion from "react-bootstrap/Accordion";
 import Native from "../../assets/images/Native.png";
-import Native2 from "../../assets/images/Native2.png";
-import suits from "../../assets/images/suits.png";
 import ClothesSelectCounter from "./ClothesSelectCounter";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
@@ -13,6 +11,8 @@ import { axiosInstance } from "../../services/AxiosInstance";
 import { useState } from "react";
 import { variableManager } from "../../context/VariablesContext";
 import ClothAccordian from "./ClothAccordian";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function SelectedCart({ initialQuantity }) {
   const [kidsWear, setkidsWear] = useState();
@@ -26,6 +26,7 @@ function SelectedCart({ initialQuantity }) {
   const [regularWash, SetRegularWash] = useState();
   const [heavyWash, SetHeavyWash] = useState();
   const [clothItems, setClothItem] = useState();
+  const navigate = useNavigate()
 
   const [clothQuantity, setClothQuantity] = useState(
     isNaN(initialQuantity) ? 0 : initialQuantity
@@ -553,9 +554,9 @@ function SelectedCart({ initialQuantity }) {
                 </Accordion.Item>
               </Accordion>
             </div>
-            <div className="d-flex justify-content-center gap-3 mt-5 mb-3">
+            {/* <div className="d-flex justify-content-center gap-3 mt-5 mb-3">
               <button className="btn btn-primary px-5">Next</button>
-            </div>
+            </div> */}
           </Container>
         </Tab>
         <Tab eventKey="profile" title="Laundry" className="custom-tab">
@@ -767,14 +768,18 @@ function SelectedCart({ initialQuantity }) {
                 </Accordion.Item>
               </Accordion>
             </div>
-            <div className="d-flex justify-content-center gap-3 mt-5 mb-3">
-              <button className="btn btn-primary px-5" onclick={clothSelected} >
-                Next
-              </button>
-            </div>
+
           </Container>
         </Tab>
       </Tabs>
+      <div className="d-flex justify-content-center gap-3 mt-5 mb-3">
+        <Link to="/date">
+        <button className="btn btn-primary px-5" onclick={clothSelected}>
+                Next
+              </button>
+        </Link>
+
+            </div>
     </div>
   );
 }
