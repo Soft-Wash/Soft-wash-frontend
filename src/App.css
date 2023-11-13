@@ -30,4 +30,7 @@ body {
     transition: border-bottom 1.3s ease-in-out;
 }
 
+.color-red{
+    color: red;
+}
 

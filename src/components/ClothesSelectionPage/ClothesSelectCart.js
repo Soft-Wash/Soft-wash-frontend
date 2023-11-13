@@ -3,8 +3,6 @@ import React, { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Accordion from "react-bootstrap/Accordion";
 import Native from "../../assets/images/Native.png";
-import Native2 from "../../assets/images/Native2.png";
-import suits from "../../assets/images/suits.png";
 import ClothesSelectCounter from "./ClothesSelectCounter";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
@@ -13,6 +11,8 @@ import { axiosInstance } from "../../services/AxiosInstance";
 import { useState } from "react";
 import { variableManager } from "../../context/VariablesContext";
 import ClothAccordian from "./ClothAccordian";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function SelectedCart({ initialQuantity }) {
   const [kidsWear, setkidsWear] = useState();
@@ -26,6 +26,7 @@ function SelectedCart({ initialQuantity }) {
   const [regularWash, SetRegularWash] = useState();
   const [heavyWash, SetHeavyWash] = useState();
   const [clothItems, setClothItem] = useState();
+  const navigate = useNavigate()
 
   const [clothQuantity, setClothQuantity] = useState(
     isNaN(initialQuantity) ? 0 : initialQuantity
@@ -34,8 +35,8 @@ function SelectedCart({ initialQuantity }) {
   const increment = (clothId) => {
     setClothQuantity((prevQuantities) => {
       const newQuantity = (prevQuantities[clothId] || 0) + 1;
-      sessionStorage.setItem("clothQuantity", JSON.stringify(newQuantity));
-      sessionStorage.setItem("clothItems", JSON.stringify(clothId));
+      localStorage.setItem("clothQuantity", JSON.stringify(newQuantity));
+      localStorage.setItem("clothItems", JSON.stringify(clothId));
       return { ...prevQuantities, [clothId]: newQuantity };
     });
   };
@@ -43,18 +44,22 @@ function SelectedCart({ initialQuantity }) {
   const decrement = (clothId) => {
     setClothQuantity((prevQuantities) => {
       const newQuantity = Math.max((prevQuantities[clothId] || 0) - 1, 0);
-      sessionStorage.setItem("clothQuantity", JSON.stringify(newQuantity));
+      localStorage.setItem("clothQuantity", JSON.stringify(newQuantity));
       return { ...prevQuantities, [clothId]: newQuantity };
     });
   };
 
-  useEffect(() => {
+  const HandleLocalSave=()=>{
     sessionStorage.setItem("clothQuantity", JSON.stringify(clothQuantity));
+  }
+
+  useEffect(() => {
+    localStorage.setItem("clothQuantity", JSON.stringify(clothQuantity));
   }, [clothQuantity]);
 
   useEffect(() => {
     axiosInstance
-      .get(`/cloth/kidswear`)
+      .get(`/cloth/kidswear/category`)
       .then((resp) => {
         console.log(resp.data);
         setkidsWear(resp.data);
@@ -64,7 +69,7 @@ function SelectedCart({ initialQuantity }) {
       });
 
     axiosInstance
-      .get(`/cloth/acccessories`)
+      .get(`/cloth/acccessories/category`)
       .then((resp) => {
         console.log(resp.data);
         setAccessories(resp.data);
@@ -74,7 +79,7 @@ function SelectedCart({ initialQuantity }) {
       });
 
     axiosInstance
-      .get(`/cloth/shoes`)
+      .get(`/cloth/shoes/category`)
       .then((resp) => {
         console.log(resp.data);
         setShoes(resp.data);
@@ -84,7 +89,7 @@ function SelectedCart({ initialQuantity }) {
       });
 
     axiosInstance
-      .get(`/cloth/homelinen`)
+      .get(`/cloth/homelinen/category`)
       .then((resp) => {
         console.log(resp.data);
         sethomeLinen(resp.data);
@@ -94,7 +99,7 @@ function SelectedCart({ initialQuantity }) {
       });
 
     axiosInstance
-      .get(`/cloth/menswear`)
+      .get(`/cloth/menswear/category`)
       .then((resp) => {
         console.log(resp.data);
         setMensWear(resp.data);
@@ -104,7 +109,7 @@ function SelectedCart({ initialQuantity }) {
       });
 
     axiosInstance
-      .get(`/cloth/regular`)
+      .get(`/cloth/regular/category`)
       .then((resp) => {
         console.log(resp.data);
         setRegular(resp.data);
@@ -114,7 +119,7 @@ function SelectedCart({ initialQuantity }) {
       });
 
     axiosInstance
-      .get(`/cloth/only-vacuum-steam-press`)
+      .get(`/cloth/only-vacuum-steam-press/category`)
       .then((resp) => {
         console.log(resp.data);
         SetOnlyVacum(resp.data);
@@ -124,7 +129,7 @@ function SelectedCart({ initialQuantity }) {
       });
 
     axiosInstance
-      .get(`/cloth/vacuum-steam-press`)
+      .get(`/cloth/vacuum-steam-press/category`)
       .then((resp) => {
         console.log(resp.data);
         SetVacum(resp.data);
@@ -134,7 +139,7 @@ function SelectedCart({ initialQuantity }) {
       });
 
     axiosInstance
-      .get(`/cloth/Regular:Wash-Dry-and-Fold`)
+      .get(`/cloth/Regular:Wash-Dry-and-Fold/category`)
       .then((resp) => {
         console.log(resp.data);
         SetRegularWash(resp.data);
@@ -144,7 +149,7 @@ function SelectedCart({ initialQuantity }) {
       });
 
     axiosInstance
-      .get(`/cloth/Heavy:Wash-Dry-and-Fold`)
+      .get(`/cloth/Heavy:Wash-Dry-and-Fold/category`)
       .then((resp) => {
         console.log(resp.data);
         SetHeavyWash(resp.data);
@@ -154,19 +159,6 @@ function SelectedCart({ initialQuantity }) {
       });
   }, []);
 
-  const clothSelected = (clothId) => {
-    const selectedQuantity = sessionStorage.getItem("clothQuantity");
-    const Quantity = JSON.parse(selectedQuantity);
-
-    // axiosInstance.put(`/cloth/${clothId}/updatequantity`,{Quantity})
-    // .then((resp)=>{
-    //     console.log(resp.data)
-
-    // })
-    // .catch((err)=>{
-    //     console.log(err)
-    // })
-  };
 
 
   return (
@@ -553,9 +545,9 @@ function SelectedCart({ initialQuantity }) {
                 </Accordion.Item>
               </Accordion>
             </div>
-            <div className="d-flex justify-content-center gap-3 mt-5 mb-3">
+            {/* <div className="d-flex justify-content-center gap-3 mt-5 mb-3">
               <button className="btn btn-primary px-5">Next</button>
-            </div>
+            </div> */}
           </Container>
         </Tab>
         <Tab eventKey="profile" title="Laundry" className="custom-tab">
@@ -767,14 +759,18 @@ function SelectedCart({ initialQuantity }) {
                 </Accordion.Item>
               </Accordion>
             </div>
-            <div className="d-flex justify-content-center gap-3 mt-5 mb-3">
-              <button className="btn btn-primary px-5" onclick={clothSelected}>
-                Next
-              </button>
-            </div>
+
           </Container>
         </Tab>
       </Tabs>
+      <div className="d-flex justify-content-center gap-3 mt-5 mb-3">
+        <Link to="/date">
+        <button className="btn btn-primary px-5" onclick={HandleLocalSave}>
+                Next
+              </button>
+        </Link>
+
+            </div>
     </div>
   );
 }
