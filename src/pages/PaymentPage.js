@@ -6,6 +6,10 @@ import BookingBanner from '../components/BookingBanner';
 import { Link } from 'react-router-dom';
 
 function PaymentPage() {
+
+    
+
+
   return (
     <div>
         <BookingBanner/>

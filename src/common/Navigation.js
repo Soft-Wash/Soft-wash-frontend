@@ -20,7 +20,6 @@ function Navigation() {
     setUserLoggedIn(userData);
   }, []);
   const navigate = useNavigate();
-  console.log(userLoggedIn);
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
