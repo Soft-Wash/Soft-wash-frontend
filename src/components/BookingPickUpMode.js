@@ -7,7 +7,10 @@ import Form from 'react-bootstrap/Form';
 function BookingPickUpMode() {
 
   const [empty, setEmpty] = useState(false);
-  const [deliveryType, setDeliveryType] = useState('')
+  const [deliveryType, setDeliveryType] = useState(()=>{
+    const storedItem = localStorage.getItem('deliveryType')
+    return storedItem? JSON.parse(storedItem):storedItem
+  })
   
   const handleChange =(e)=>{
     const value =
@@ -23,7 +26,6 @@ function BookingPickUpMode() {
 
   useEffect(() => {
     localStorage.setItem("deliveryType", JSON.stringify(deliveryType));
-    console.log(deliveryType)
   }, [deliveryType]);
 
 

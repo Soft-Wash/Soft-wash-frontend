@@ -7,31 +7,28 @@ import { Container } from "react-bootstrap";
 import { useEffect } from "react";
 
 function Calender() {
-  const [startDate, setStartDate] = useState(new Date());
-  const [selectedTime, setSelectedTime] = useState("");
+  const [startDate, setStartDate] = useState(() => {
+    const storedDate = localStorage.getItem("calenderStartDate");
+    return storedDate ? new Date(storedDate) : new Date();
+  });
+
+  const [selectedTime, setSelectedTime] = useState(() => {
+    const storedTime = localStorage.getItem("calenderSelectedTime");
+    return storedTime ? JSON.parse(storedTime) : "";
+  });
 
   useEffect(() => {
-    const storedDate = localStorage.getItem("storedDate");
-    const StoredSelectedTime = localStorage.getItem("selectedTime");
+    localStorage.setItem("calenderStartDate", startDate);
+    localStorage.setItem("calenderSelectedTime", JSON.stringify(selectedTime));
+  }, [startDate, selectedTime]);
 
-    setStartDate(storedDate ? new Date(storedDate) : new Date());
-    if (StoredSelectedTime !== null) {
-      setSelectedTime(StoredSelectedTime);
-    } else {
-      setSelectedTime(new Date());
-    }
-  }, []);
+
 
   const handleTimeChange = (event) => {
     setSelectedTime(event.target.value);
   };
 
-  const handleSaveToLocalStorage = () => {
-    localStorage.setItem("startDate", startDate);
-    localStorage.setItem("selectedTime", selectedTime);
-  };
 
-  handleSaveToLocalStorage();
   
   return (
     <Container>

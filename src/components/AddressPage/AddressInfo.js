@@ -12,30 +12,39 @@ import { BsFillTrashFill } from "react-icons/bs";
 function AddressInfo() {
   const [clicked, setClicked] = useState(false);
 
-  const [selectedAddress, setSelectedAddress] = useState({
-    contactNumber: "",
-    FullAddress: "",
-    SearchedAddress: "",
-    AddressTypeHome: "",
-    AddressTypeWork: "",
-    AddressTypeOther: "",
-  });
+const [selectedAddress, setSelectedAddress] = useState({
+  contactNumber:"",
+  FullAddress:"",
+  SearchedAddress:"",
+  AddressTypeHome:false,
+  AddressTypeWork:false,
+  AddressTypeOther:false
 
-  const handleChange = (e) => {
-    const value =
-      e.target.type === "checkbox"
-        ? e.target.checked
-        : e.target.type === "file"
-        ? e.target.file[0]
-        : e.target.value;
+})
 
-    setSelectedAddress({ ...selectedAddress, [e.target.name]: value });
-  };
+const handleChange =(e)=>{
+  const value =
+  e.target.type === "checkbox"
+  ? e.target.checked
+  : e.target.value
 
-  const handleAddress = () => {
-    localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
-    console.log(selectedAddress);
-  };
+  setSelectedAddress({...selectedAddress, [e.target.name]:value })
+  
+}
+
+const handleAddress=()=>{
+  localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
+  console.log(selectedAddress)
+}
+
+useEffect(() => {
+  const storedAddress = localStorage.getItem("selectedAddress");
+
+  if (storedAddress) {
+    setSelectedAddress(JSON.parse(storedAddress));
+  }
+}, []);
+
   return (
     <Container>
       <Row className="justify-content-between">
