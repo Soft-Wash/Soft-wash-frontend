@@ -33,8 +33,6 @@ export default function VariablesContext({ children }) {
     handleLogout,
   }; 
 
-  console.log(clothQuantity)
-
   useEffect(() => { 
     const localUser = localStorage.getItem("primeUser");
     setUser(JSON.parse(localUser));
