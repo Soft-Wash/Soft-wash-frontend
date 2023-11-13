@@ -7,7 +7,6 @@ import { axiosInstance } from "../services/AxiosInstance";
 
 function SelectedCart() {
   const [cartItems, setCartItems] = useState();
-  const [selectedClothIds, setselectedClothIds] = useState();
   let arrayObj=[]
 
   useEffect(() => {
