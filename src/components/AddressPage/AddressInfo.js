@@ -7,10 +7,44 @@ import mapSample from "../../assets/AddressPage/map-sample.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
+import { axiosInstance } from "../../services/AxiosInstance";
 import { BsFillTrashFill } from "react-icons/bs";
 
 function AddressInfo() {
   const [clicked, setClicked] = useState(false);
+
+  const [cartItems, setCartItems] = useState();
+  let arrayObj=[]
+
+  useEffect(() => {
+    const clothQuantity = localStorage.getItem("clothQuantity");
+    const clothQuantities = JSON.parse(clothQuantity);
+    const keys = Object.keys(clothQuantities);
+    const values = Object.values(clothQuantities);
+    arrayObj=keys
+  }, []);
+
+
+
+
+
+  const handleSubmit = () => {
+        let data = {ids:arrayObj}
+    if(arrayObj?.length){
+        axiosInstance
+        .post(`/cloth/clothtypes/ids`, data)
+        .then((resp) => {
+        //   console.log(arrayObj);
+          console.log(resp.data);
+          setCartItems(resp.data);
+        });
+    }
+
+  };
+
+  useEffect(()=>{
+ handleSubmit();
+  },[]) 
 
 const [selectedAddress, setSelectedAddress] = useState({
   contactNumber:"",
@@ -188,26 +222,21 @@ useEffect(() => {
           <hr />
           <h5 className="text-capitalize ms-1">dry wash</h5>
           <Accordion defaultActiveKey="0">
-            <Accordion.Item eventKey="0">
-              <Accordion.Header>Mens Wear</Accordion.Header>
-              <Accordion.Body>
-                <div className="cart-item">
-                  <div className="d-flex justify-content-between">
-                    <h6>Tie</h6>
-                    <h5>N4,000</h5>
-                  </div>
-                  <p>2 x N2,000 / per piece</p>
-                </div>
-                <div className="cart-item">
-                  <div className="d-flex justify-content-between">
-                    <h5>T-Shirt</h5>
-                    <h5>N12,500</h5>
-                  </div>
-                  <p>5 x N2,500 / per piece</p>
-                </div>
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
+                    <Accordion.Item eventKey="0">
+                        <Accordion.Header>Mens Wear</Accordion.Header>
+                        <Accordion.Body>
+                        {cartItems && cartItems.map((item)=>(
+                                  <div className="cart-item" key={item._id}>
+                                  <div className="d-flex justify-content-between">
+                                    <h5>{item.name}</h5>
+                                    <h5>{item.price}</h5>
+                                  </div>
+                                  <p>2 x N2,000 / per piece</p>
+                                </div>  
+                ))}
+                        </Accordion.Body>
+                    </Accordion.Item>      
+                </Accordion>
         </Col>
       </Row>
 
