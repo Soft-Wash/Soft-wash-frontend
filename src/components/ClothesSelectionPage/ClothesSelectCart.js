@@ -28,15 +28,14 @@ function SelectedCart({ initialQuantity }) {
   const [clothItems, setClothItem] = useState();
   const navigate = useNavigate()
 
-  const [clothQuantity, setClothQuantity] = useState(
-    isNaN(initialQuantity) ? 0 : initialQuantity
-  );
+  const [clothQuantity, setClothQuantity] = useState(() => {
+    const storedQuantity = localStorage.getItem('clothQuantity');
+    return storedQuantity ? JSON.parse(storedQuantity) : initialQuantity || 0;
+  });
 
   const increment = (clothId) => {
     setClothQuantity((prevQuantities) => {
       const newQuantity = (prevQuantities[clothId] || 0) + 1;
-      localStorage.setItem("clothQuantity", JSON.stringify(newQuantity));
-      localStorage.setItem("clothItems", JSON.stringify(clothId));
       return { ...prevQuantities, [clothId]: newQuantity };
     });
   };
@@ -44,17 +43,18 @@ function SelectedCart({ initialQuantity }) {
   const decrement = (clothId) => {
     setClothQuantity((prevQuantities) => {
       const newQuantity = Math.max((prevQuantities[clothId] || 0) - 1, 0);
-      localStorage.setItem("clothQuantity", JSON.stringify(newQuantity));
       return { ...prevQuantities, [clothId]: newQuantity };
     });
   };
 
   const HandleLocalSave=()=>{
-    sessionStorage.setItem("clothQuantity", JSON.stringify(clothQuantity));
+    if(clothQuantity){
+      localStorage.setItem("clothQuantity", JSON.stringify(clothQuantity));
+    }
   }
 
   useEffect(() => {
-    localStorage.setItem("clothQuantity", JSON.stringify(clothQuantity));
+    HandleLocalSave()
   }, [clothQuantity]);
 
   useEffect(() => {

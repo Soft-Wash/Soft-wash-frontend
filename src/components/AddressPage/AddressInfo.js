@@ -14,9 +14,9 @@ const [selectedAddress, setSelectedAddress] = useState({
   contactNumber:"",
   FullAddress:"",
   SearchedAddress:"",
-  AddressTypeHome:"",
-  AddressTypeWork:"",
-  AddressTypeOther:""
+  AddressTypeHome:false,
+  AddressTypeWork:false,
+  AddressTypeOther:false
 
 })
 
@@ -24,8 +24,6 @@ const handleChange =(e)=>{
   const value =
   e.target.type === "checkbox"
   ? e.target.checked
-  : e.target.type === "file" 
-  ? e.target.file[0]
   : e.target.value
 
   setSelectedAddress({...selectedAddress, [e.target.name]:value })
@@ -37,6 +35,13 @@ const handleAddress=()=>{
   console.log(selectedAddress)
 }
 
+useEffect(() => {
+  const storedAddress = localStorage.getItem("selectedAddress");
+
+  if (storedAddress) {
+    setSelectedAddress(JSON.parse(storedAddress));
+  }
+}, []);
 
 
   return (
