@@ -1,8 +1,19 @@
 import { Container } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion';
+import { useState } from "react";
+import { useEffect } from "react";
+import { axiosInstance } from "../services/AxiosInstance";
 
 function SelectedCart(){
+
+    const [cartItems, setCartItems]= useState()
+    const clothId = localStorage.getItem('clothQuantity').split('')[1]
+    console.log(clothId)
+
+    // useEffect(()=>{
+    //     axiosInstance.get(`/cloth/${clothId}`)
+    // },[])
 
     return(
         <Container>

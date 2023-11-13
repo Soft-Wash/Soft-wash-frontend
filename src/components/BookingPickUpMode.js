@@ -22,7 +22,7 @@ function BookingPickUpMode() {
   }
 
   useEffect(() => {
-    sessionStorage.setItem("deliveryType", JSON.stringify(deliveryType));
+    localStorage.setItem("deliveryType", JSON.stringify(deliveryType));
     console.log(deliveryType)
   }, [deliveryType]);
 

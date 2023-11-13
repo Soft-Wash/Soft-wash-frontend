@@ -5,8 +5,40 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import mapSample from "../../assets/AddressPage/map-sample.png";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
 
 function AddressInfo() {
+
+const [selectedAddress, setSelectedAddress] = useState({
+  contactNumber:"",
+  FullAddress:"",
+  SearchedAddress:"",
+  AddressTypeHome:"",
+  AddressTypeWork:"",
+  AddressTypeOther:""
+
+})
+
+const handleChange =(e)=>{
+  const value =
+  e.target.type === "checkbox"
+  ? e.target.checked
+  : e.target.type === "file" 
+  ? e.target.file[0]
+  : e.target.value
+
+  setSelectedAddress({...selectedAddress, [e.target.name]:value })
+  
+}
+
+const handleAddress=()=>{
+  localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
+  console.log(selectedAddress)
+}
+
+
+
   return (
     <Container>
       <Row className="justify-content-between">
@@ -29,6 +61,9 @@ function AddressInfo() {
                         placeholder="Enter Contact Number"
                         aria-label="Enter Contact Number"
                         aria-describedby="basic-addon1"
+                        name="contactNumber"
+                        onChange={handleChange}
+                        value={selectedAddress.contactNumber}
                       />
                     </InputGroup>
                   </Row>
@@ -39,6 +74,9 @@ function AddressInfo() {
                         placeholder="Enter Full Address"
                         aria-label="Enter Full Address"
                         aria-describedby="basic-addon1"
+                        name="FullAddress"
+                        onChange={handleChange}
+                        value={selectedAddress.FullAddress}
                       />
                     </InputGroup>
                   </Row>
@@ -57,6 +95,9 @@ function AddressInfo() {
                         placeholder="Search Address or Landmark location"
                         aria-label="Search Address or Landmark location"
                         aria-describedby="basic-addon1"
+                        name="SearchedAddress"
+                        onChange={handleChange}
+                        value={selectedAddress.SearchedAddress}
                       />
                     </InputGroup>
                   </Row>
@@ -67,15 +108,15 @@ function AddressInfo() {
                     <h5>Address Type</h5>
                     <Row>
                     <Form.Group className="d-flex gap-2">
-                      <Form.Check type="radio" aria-label="radio 1" />
+                      <Form.Check type="radio" aria-label="radio 1" onChange={handleChange} name="AddressTypeHome"/>
                       <Form.Label>Home</Form.Label>
                     </Form.Group>
                     <Form.Group className="d-flex gap-2">
-                      <Form.Check type="radio" aria-label="radio 1" />
+                      <Form.Check type="radio" aria-label="radio 1"     onChange={handleChange} name="AddressTypeWork"/>
                       <Form.Label>Work</Form.Label>
                     </Form.Group>
                     <Form.Group className="d-flex gap-2">
-                      <Form.Check type="radio" aria-label="radio 1" />
+                      <Form.Check type="radio" aria-label="radio 1"     onChange={handleChange} name="AddressTypeOther"/>
                       <Form.Label>Other</Form.Label>
                     </Form.Group>
                     </Row>
@@ -132,7 +173,7 @@ function AddressInfo() {
         </Col>
         <Col lg={4} md={5} sm={5}>
           <Link to="/PaymentPage">
-          <Button variant="primary" className="me-auto w-75 text-center">Next</Button>
+          <Button variant="primary" className="me-auto w-75 text-center" onClick={handleAddress}>Next</Button>
           </Link>
 </Col>
       </Container>
