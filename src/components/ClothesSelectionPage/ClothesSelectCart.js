@@ -5,7 +5,7 @@ import Accordion from "react-bootstrap/Accordion";
 import Native from "../../assets/images/Native.png";
 import Native2 from "../../assets/images/Native2.png";
 import suits from "../../assets/images/suits.png";
-import ClothesSelectCounter from "./ClothesSelectCounter";
+// import ClothesSelectCounter from "./ClothesSelectCounter";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import ClothesSelectcart from "../../styles/ClothesSelectcart.css";
@@ -254,7 +254,7 @@ function SelectedCart({ initialQuantity }) {
                                 <span>2 x N2,000 / per piece</span>
                               </div>
                             </div>
-                            <ClothesSelectCounter />
+                            {/* <ClothesSelectCounter /> */}
                           </div>
                         </div>
                       </div>
@@ -274,7 +274,7 @@ function SelectedCart({ initialQuantity }) {
                                 <span>2 x N2,000 / per piece</span>
                               </div>
                             </div>
-                            <ClothesSelectCounter />
+                            {/* <ClothesSelectCounter /> */}
                           </div>
                         </div>
                       </div>
@@ -294,7 +294,7 @@ function SelectedCart({ initialQuantity }) {
                                 <span>2 x N2,000 / per piece</span>
                               </div>
                             </div>
-                            <ClothesSelectCounter />
+                            {/* <ClothesSelectCounter /> */}
                           </div>
                         </div>
                       </div>

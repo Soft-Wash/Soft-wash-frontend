@@ -24,6 +24,7 @@ import UserProfilePage from "./pages/UserProfilePage";
 import UserDashboardContactPage from "./pages/UserDashboardContactPage";
 import UserOrderDetailsPage from "./pages/UserOrderDetailsPage";
 import VariablesContext from "./context/VariablesContext";
+import SupervisorPage from "./pages/SupervisorPage";
  
 
 
@@ -55,6 +56,7 @@ function App() {
          <Route path="/cart" element={<Cart/>} />
         <Route path="/my-orders" element={<Orders/>}/>
         <Route path="/order-receipt" element={<OrderReceipt/>}/>
+        <Route path ="/SupervisorPage" element={<SupervisorPage/>}/>
       </Routes>
     </BrowserRouter>
 </VariablesContext>

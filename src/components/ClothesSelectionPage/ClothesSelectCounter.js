@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import ReactDOM from 'react-dom';
 // import ButtonIncDec from './ButtonIncDec';
 
@@ -17,7 +17,7 @@ setQuantity((prevquantity=>prevquantity+1))
 
   return (
     <div>
-      {initialQuantities.map((quantity, index) => (
+      {initialQuantity.map((quantity, index) => (
         <div key={index}>
             {/* <ButtonIncDec initialQuantity={quantity} /> */}
         </div>
