@@ -4,16 +4,23 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
+import { Dropdown } from "react-bootstrap";
+import { BsBell } from "react-icons/bs";
+import img from "../assets/icons/linkedin.png";
 
 function Navigation() {
-
-  const navigate = useNavigate()
-
+  const [userLoggedIn, setUserLoggedIn] = useState();
+  useEffect(() => {
+    const userDetails = localStorage.getItem("softwashLoginUser");
+    const userData = JSON.parse(userDetails);
+    setUserLoggedIn(userData);
+  }, []);
+  const navigate = useNavigate();
+  console.log(userLoggedIn);
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -28,58 +35,105 @@ function Navigation() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link
-            >
+            <Nav.Link>
               <NavLink className="howitworks-link" to="/">
                 Home
               </NavLink>
             </Nav.Link>
 
-            <Nav.Link >
-            <NavLink className="howitworks-link" to="/ourservices">
+            <Nav.Link>
+              <NavLink className="howitworks-link" to="/ourservices">
                 Services
               </NavLink>
             </Nav.Link>
             <Nav.Link>
               <NavLink className="howitworks-link" to="/how-it-works">
-              How it works
-              </NavLink>
-
-            </Nav.Link>
-            <Nav.Link>
-            <NavLink className="howitworks-link" to="/about">
-              About
+                How it works
               </NavLink>
             </Nav.Link>
             <Nav.Link>
-            <NavLink className="howitworks-link" to="/pricing">
-              Pricing
+              <NavLink className="howitworks-link" to="/about">
+                About
+              </NavLink>
+            </Nav.Link>
+            <Nav.Link>
+              <NavLink className="howitworks-link" to="/pricing">
+                Pricing
               </NavLink>
             </Nav.Link>
             <Nav.Link target="_blank">
-            <NavLink className="howitworks-link" to="/marketplace" target="_blank">
-              Shop
+              <NavLink
+                className="howitworks-link"
+                to="/marketplace"
+                target="_blank"
+              >
+                Shop
               </NavLink>
             </Nav.Link>
-            <NavDropdown title="Activities" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Submit Order</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">Track Order</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
-                View Order History
-              </NavDropdown.Item>
-            </NavDropdown>
-            <Nav.Link href="/UserRegister">Sign up</Nav.Link>
+            {userLoggedIn ? (
+              <NavDropdown title="Activities" id="navbarScrollingDropdown">
+                <NavDropdown.Item href="#action3">
+                  Submit Order
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#action4">Track Order</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action5">
+                  View Order History
+                </NavDropdown.Item>
+              </NavDropdown>
+            ) : (
+              ""
+            )}
           </Nav>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form>
+          {userLoggedIn ? (
+            <div className="my-auto">
+              <div className="d-flex">
+              <div
+                className="my-auto position-relative fs-6"
+                style={{
+                  top: "0px",
+                  right: "30px",
+                  height: "20px",
+                  width: "40px",
+                }}
+              >
+                <small
+                  className=" d-flex align-items-center p-1 position-absolute bg-danger text-white fs-6 rounded-circle border border-white"
+                  style={{ top: "-4px", right: "9px", height: "20px" }}
+                >
+                  3
+                </small>
+
+                <BsBell className=" fs-4 mr-0" />
+              </div>
+              <Dropdown className="d-inline mx-2 my-auto" align={{ lg: "end" }}>
+                <Dropdown.Toggle
+                  id="dropdown-autoclose-true"
+                  className="bg-transparent text-black border-0 p-0"
+                >
+                  <img
+                    src={img}
+                    alt="profile"
+                    className="img-fluid "
+                    style={{ height: "36px", width: "auto" }}
+                  />
+                </Dropdown.Toggle>
+                <Dropdown.Menu className="mt-4">
+                  <Dropdown.Item href="#">Profile</Dropdown.Item>
+                  <Dropdown.Item href="#">Logout</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+              </div>
+
+            </div>
+          ) : (
+            <Button
+              variant="info text-white"
+              onClick={() => navigate("/UserRegister")}
+            >
+              <Nav.Link>Get Started</Nav.Link>
+            </Button>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>

@@ -1,14 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
-import ButtonIncDec from './ButtonIncDec';
+// import ButtonIncDec from './ButtonIncDec';
+
 function ClothesSelectCounter() {
-    const initialQuantities = [0]; // Initial quantities for different items
+    const initialQuantities = [0]; 
 
   return (
     <div>
       {initialQuantities.map((quantity, index) => (
         <div key={index}>
-            <ButtonIncDec initialQuantity={quantity} />
+            {/* <ButtonIncDec initialQuantity={quantity} /> */}
         </div>
       ))}
     </div>

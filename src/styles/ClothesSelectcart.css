@@ -1,0 +1,15 @@
+.BannPix{
+    width: 400px;
+    height:600px;
+}
+
+
+
+.nav-tabs .nav-link.active {
+  background-color: #007bff; /* Set your desired background color */
+  color: #fff; /* Set the text color for better visibility */
+}
+
+.nav-tabs .nav-item:not(.active) .nav-link {
+  border-color: #007bff; /* Set your desired border color */
+}
