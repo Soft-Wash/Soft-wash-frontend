@@ -25,6 +25,9 @@ import DatePage from "./pages/DatePage";
 import UserProfilePage from "./pages/UserProfilePage";
 import UserDashboardContactPage from "./pages/UserDashboardContactPage";
 import UserOrderDetailsPage from "./pages/UserOrderDetailsPage";
+
+
+import WashmanProfilePage from "./pages/Washman Pages/WashmanProfilePage";
  
 
 
@@ -57,6 +60,9 @@ function App() {
 
         <Route path="/my-orders" element={<Orders/>}/>
         <Route path="/order-receipt" element={<OrderReceipt/>}/>
+
+        {/* Washman */}
+        <Route path="/washman-profile" element={<WashmanProfilePage/>}/>
       </Routes>
     </BrowserRouter>
 
