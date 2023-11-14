@@ -28,6 +28,7 @@ function Navigation() {
               alt="profile"
               className="img-fluid "
               style={{ height: "36px", width: "auto" }}
+              
             />
           </Dropdown.Toggle>
           <Dropdown.Menu className="mt-4 me-2">

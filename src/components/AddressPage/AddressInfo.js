@@ -14,70 +14,82 @@ function AddressInfo() {
   const [clicked, setClicked] = useState(false);
 
   const [cartItems, setCartItems] = useState();
-  let arrayObj=[]
+  let arrayObj = [];
 
-  useEffect(() => {
+  const getQuantity = () => {
     const clothQuantity = localStorage.getItem("clothQuantity");
     const clothQuantities = JSON.parse(clothQuantity);
     const keys = Object.keys(clothQuantities);
     const values = Object.values(clothQuantities);
-    arrayObj=keys
-  }, []);
+    arrayObj = keys;
 
-
-
-
-
-  const handleSubmit = () => {
-        let data = {ids:arrayObj}
-    if(arrayObj?.length){
-        axiosInstance
-        .post(`/cloth/clothtypes/ids`, data)
-        .then((resp) => {
-        //   console.log(arrayObj);
-          console.log(resp.data);
-          setCartItems(resp.data);
-        });
+    let mainArr = []
+    let arr = [];
+    for(let i=0; i<arrayObj.length; i++){
+      arr.push(keys[i]);
+      arr.push(values[i])
+      mainArr.push(arr)
+       arr = [];
     }
+    setQuantity(mainArr)
 
   };
 
-  useEffect(()=>{
- handleSubmit();
-  },[]) 
-
-const [selectedAddress, setSelectedAddress] = useState({
-  contactNumber:"",
-  FullAddress:"",
-  SearchedAddress:"",
-  AddressTypeHome:false,
-  AddressTypeWork:false,
-  AddressTypeOther:false
-
-})
-
-const handleChange =(e)=>{
-  const value =
-  e.target.type === "checkbox"
-  ? e.target.checked
-  : e.target.value
-
-  setSelectedAddress({...selectedAddress, [e.target.name]:value })
-  
-}
-
-const handleAddress=()=>{
-  localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
-  console.log(selectedAddress)
-}
-
-useEffect(() => {
-  const storedAddress = localStorage.getItem("selectedAddress");
-
-  if (storedAddress) {
-    setSelectedAddress(JSON.parse(storedAddress));
+  function setQuantity (arr){
+    // for(let i =0; i<arr.length; i++){
+     axiosInstance.put("/updatequantity", arr).then((resp) => {
+      console.log(resp)
+     })
+    // }
   }
-}, []);
+
+  useEffect(() => {
+    getQuantity();
+  }, []);
+
+  const handleSubmit = () => {
+    let data = { ids: arrayObj };
+    if (arrayObj?.length) {
+      axiosInstance.post(`/cloth/clothtypes/ids`, data).then((resp) => {
+        //   console.log(arrayObj);
+        console.log(resp.data);
+        setCartItems(resp.data);
+      });
+    }
+  };
+
+  useEffect(() => {
+    handleSubmit();
+  }, []);
+
+  const [selectedAddress, setSelectedAddress] = useState({
+    contactNumber: "",
+    FullAddress: "",
+    SearchedAddress: "",
+    AddressTypeHome: false,
+    AddressTypeWork: false,
+    AddressTypeOther: false,
+  });
+
+  const handleChange = (e) => {
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+
+    setSelectedAddress({ ...selectedAddress, [e.target.name]: value });
+  };
+
+  const handleAddress = () => {
+    localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
+    console.log(selectedAddress);
+  };
+
+  useEffect(() => {
+    const storedAddress = localStorage.getItem("selectedAddress");
+
+    if (storedAddress) {
+      setSelectedAddress(JSON.parse(storedAddress));
+    }
+  }, []);
 
   return (
     <Container>
@@ -222,21 +234,22 @@ useEffect(() => {
           <hr />
           <h5 className="text-capitalize ms-1">dry wash</h5>
           <Accordion defaultActiveKey="0">
-                    <Accordion.Item eventKey="0">
-                        <Accordion.Header>Mens Wear</Accordion.Header>
-                        <Accordion.Body>
-                        {cartItems && cartItems.map((item)=>(
-                                  <div className="cart-item" key={item._id}>
-                                  <div className="d-flex justify-content-between">
-                                    <h5>{item.name}</h5>
-                                    <h5>{item.price}</h5>
-                                  </div>
-                                  <p>2 x N2,000 / per piece</p>
-                                </div>  
-                ))}
-                        </Accordion.Body>
-                    </Accordion.Item>      
-                </Accordion>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>Mens Wear</Accordion.Header>
+              <Accordion.Body>
+                {cartItems &&
+                  cartItems.map((item) => (
+                    <div className="cart-item" key={item._id}>
+                      <div className="d-flex justify-content-between">
+                        <h5>{item.name}</h5>
+                        <h5>{item.price}</h5>
+                      </div>
+                      <p>2 x N2,000 / per piece</p>
+                    </div>
+                  ))}
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
         </Col>
       </Row>
 
