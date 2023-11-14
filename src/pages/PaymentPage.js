@@ -4,10 +4,44 @@ import card from "../assets/images/card.jpg";
 import cash from "../assets/images/cash.jpg"
 import BookingBanner from '../components/BookingBanner';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 function PaymentPage() {
+    const [selectedTime,setSelectedTime] = useState()
+    const [selectedDate,setSelectedDate] = useState()
+    const [selectedQuantity,setSelectedQuantity] = useState()
+    const [selectedDeliveryType,setSelectedDeliveryType] = useState()
+    const [selectedAddressInfo,setSelectedAddressInfo] = useState()
 
+    const GetOrderData=()=>{
+
+    }
+
+    useEffect(() => {
+        const calenderSelectedTime = localStorage.getItem('calenderSelectedTime');
+        const calenderSetDate = localStorage.getItem('calenderStartDate');
+        const storedDate = new Date(parseInt(calenderSetDate, 10));
+        const clothQuantity = localStorage.getItem('clothQuantity');
+        const deliveryType = localStorage.getItem('deliveryType');
+        const selectedAddress = localStorage.getItem('selectedAddress');
+
+        const parsedCalenderSelectedTime = calenderSelectedTime ? JSON.parse(calenderSelectedTime) : null;
+        const parsedCalenderSetDate = storedDate ? JSON.parse(calenderSetDate) : null;
+        const parsedClothQuantity = clothQuantity ? JSON.parse(clothQuantity) : null;
+        const parsedDeliveryType = deliveryType ? JSON.parse(deliveryType) : null;
+        const parsedSelectedAddress = selectedAddress ? JSON.parse(selectedAddress) : null;
     
+        setSelectedTime(parsedCalenderSelectedTime)
+        console.log(selectedTime);
+        console.log(storedDate);
+        console.log(parsedClothQuantity);
+        console.log(parsedDeliveryType);
+        console.log(parsedSelectedAddress);
+    }, []);
+    
+
+
 
 
   return (

@@ -9,8 +9,12 @@ import { useEffect } from "react";
 function Calender() {
   const [startDate, setStartDate] = useState(() => {
     const storedDate = localStorage.getItem("calenderStartDate");
-    return storedDate ? new Date(storedDate) : new Date();
+    return storedDate ? new Date(storedDate) : new Date(Date.now());
+
+
   });
+
+  const startDateTimestamp = startDate.getTime()
 
   const [selectedTime, setSelectedTime] = useState(() => {
     const storedTime = localStorage.getItem("calenderSelectedTime");
@@ -18,7 +22,7 @@ function Calender() {
   });
 
   useEffect(() => {
-    localStorage.setItem("calenderStartDate", startDate);
+    localStorage.setItem("calenderStartDate", startDateTimestamp);
     localStorage.setItem("calenderSelectedTime", JSON.stringify(selectedTime));
   }, [startDate, selectedTime]);
 
