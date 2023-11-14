@@ -8,13 +8,14 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { axiosInstance } from "../../services/AxiosInstance";
-import { BsFillTrashFill } from "react-icons/bs";
+import axios from "axios";
+import {BsFillTrashFill} from "react-icons/bs";
 
 function AddressInfo() {
   const [clicked, setClicked] = useState(false);
 
-  const [cartItems, setCartItems] = useState();
-  let arrayObj = [];
+  const [selectedItems,setSelectedItems]= useState()
+  let arrayObj=[]
 
   const getQuantity = () => {
     const clothQuantity = localStorage.getItem("clothQuantity");
@@ -22,45 +23,24 @@ function AddressInfo() {
     const keys = Object.keys(clothQuantities);
     const values = Object.values(clothQuantities);
     arrayObj = keys;
-
-    let mainArr = []
-    let arr = [];
-    for(let i=0; i<arrayObj.length; i++){
-      arr.push(keys[i]);
-      arr.push(values[i])
-      mainArr.push(arr)
-       arr = [];
-    }
-    setQuantity(mainArr)
-
-  };
-
-  function setQuantity (arr){
-    // for(let i =0; i<arr.length; i++){
-     axiosInstance.put("/updatequantity", arr).then((resp) => {
-      console.log(resp)
+    let mainArr = keys.map((key, index) => ({ id: key, quantity: values[index] }));
+    console.log(mainArr)
+    axios.put("http://localhost:8003/cloth/updatequantity", mainArr)
+    .then((resp) => {
+      setSelectedItems(resp.data)
      })
-    // }
-  }
 
-  useEffect(() => {
-    getQuantity();
-  }, []);
-
-  const handleSubmit = () => {
-    let data = { ids: arrayObj };
-    if (arrayObj?.length) {
-      axiosInstance.post(`/cloth/clothtypes/ids`, data).then((resp) => {
-        //   console.log(arrayObj);
-        console.log(resp.data);
-        setCartItems(resp.data);
-      });
-    }
   };
 
   useEffect(() => {
-    handleSubmit();
+    getQuantity()
   }, []);
+
+
+
+
+
+ 
 
   const [selectedAddress, setSelectedAddress] = useState({
     contactNumber: "",
@@ -234,22 +214,21 @@ function AddressInfo() {
           <hr />
           <h5 className="text-capitalize ms-1">dry wash</h5>
           <Accordion defaultActiveKey="0">
-            <Accordion.Item eventKey="0">
-              <Accordion.Header>Mens Wear</Accordion.Header>
-              <Accordion.Body>
-                {cartItems &&
-                  cartItems.map((item) => (
-                    <div className="cart-item" key={item._id}>
-                      <div className="d-flex justify-content-between">
-                        <h5>{item.name}</h5>
-                        <h5>{item.price}</h5>
-                      </div>
-                      <p>2 x N2,000 / per piece</p>
-                    </div>
-                  ))}
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
+                    <Accordion.Item eventKey="0">
+                        <Accordion.Header>Mens Wear</Accordion.Header>
+                        <Accordion.Body>
+                        {selectedItems && selectedItems.map((item)=>(
+                                  <div className="cart-item" key={item._id}>
+                                  <div className="d-flex justify-content-between">
+                                    <h5>{item.name}</h5>
+                                    <h5>{item.price}</h5>
+                                  </div>
+                                  <p>{`${item.quantity} x ${item.price} / per piece`}</p>
+                                </div>  
+                ))}
+                        </Accordion.Body>
+                    </Accordion.Item>      
+                </Accordion>
         </Col>
       </Row>
 

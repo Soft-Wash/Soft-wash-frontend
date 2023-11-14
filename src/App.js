@@ -29,7 +29,7 @@ import VariablesContext from "./context/VariablesContext";
 
 function App() {
   return (
-<VariablesContext>
+<>
 <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage/>} />
@@ -57,7 +57,7 @@ function App() {
         <Route path="/order-receipt" element={<OrderReceipt/>}/>
       </Routes>
     </BrowserRouter>
-</VariablesContext>
+</>
 
 
 
