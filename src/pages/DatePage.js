@@ -27,7 +27,10 @@ function DatePage (){
                 </div>
             </div>
             <div className='d-flex justify-content-center mt-4'>
+                <Link to="/ClothesSelection">
                 <Button variant="light" border="primary" >Previous</Button>
+                </Link>
+
                 <Link to="/address">
                 <Button className='px-4 mx-3' variant="primary">Next</Button>
                 </Link>

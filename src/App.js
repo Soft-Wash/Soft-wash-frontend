@@ -25,16 +25,25 @@ import DatePage from "./pages/DatePage";
 import UserProfilePage from "./pages/UserProfilePage";
 import UserDashboardContactPage from "./pages/UserDashboardContactPage";
 import UserOrderDetailsPage from "./pages/UserOrderDetailsPage";
+<<<<<<< HEAD
 
 
 import WashmanProfilePage from "./pages/Washman Pages/WashmanProfilePage";
+=======
+import VariablesContext from "./context/VariablesContext";
+>>>>>>> 45b64cd06c949de5448a03ba2be8229c75638a50
  
 
 
 function App() {
   return (
+<<<<<<< HEAD
     <BrowserRouter>
       {/* <ScrollToTop /> */}
+=======
+<>
+<BrowserRouter>
+>>>>>>> 45b64cd06c949de5448a03ba2be8229c75638a50
       <Routes>
         <Route path="/" element={<HomePage/>} />
         <Route path="/address" element={<AddressPage/>} />
@@ -48,7 +57,7 @@ function App() {
          <Route path="/user-profile" element={<UserProfilePage />} />
          <Route path="/dashboard-contact-us" element={<UserDashboardContactPage />} />
          <Route path="/order-details" element={<UserOrderDetailsPage />} />
-        <Route path="/ClothesSelection" element={<ClothesSelection/>}/>
+         <Route path="/ClothesSelection" element={<ClothesSelection/>}/>
         <Route path="/PaymentPage" element={<PaymentPage/>}/>
          <Route path="/pricing" element={<PricingPage />} />
          <Route path="/ourservices" element={<Services/>} />
@@ -65,6 +74,8 @@ function App() {
         <Route path="/washman-profile" element={<WashmanProfilePage/>}/>
       </Routes>
     </BrowserRouter>
+</>
+
 
 
   );

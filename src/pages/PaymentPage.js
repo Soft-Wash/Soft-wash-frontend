@@ -4,16 +4,90 @@ import card from "../assets/images/card.jpg";
 import cash from "../assets/images/cash.jpg"
 import BookingBanner from '../components/BookingBanner';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { axiosInstance } from '../services/AxiosInstance';
 
 function PaymentPage() {
+    const [selectedTime,setSelectedTime] = useState()
+    const [selectedDate,setSelectedDate] = useState()
+    const [selectedQuantity,setSelectedQuantity] = useState()
+    const [selectedDeliveryType,setSelectedDeliveryType] = useState()
+    const [selectedAddressInfo,setSelectedAddressInfo] = useState()
+    const [customerId, setCustomerId]= useState()
+    const [clothIds,setClothIds] = useState()
+    let orderDetails = {}
+    let arrayId=[]
+
+
+
+    useEffect(() => {
+        const calenderSelectedTime = localStorage.getItem('calenderSelectedTime');
+        const calenderSetDate = localStorage.getItem('calenderStartDate');
+        const storedDate = new Date(parseInt(calenderSetDate, 10));
+        const clothQuantity = localStorage.getItem('clothQuantity');
+        const deliveryType = localStorage.getItem('deliveryType');
+        const selectedAddress = localStorage.getItem('selectedAddress');
+        const customer_id = localStorage.getItem('softwashUser')
+
+        const parsedCalenderSelectedTime = calenderSelectedTime ? JSON.parse(calenderSelectedTime) : null;
+        const parsedCalenderSetDate = storedDate 
+        const parsedClothQuantity = clothQuantity ? JSON.parse(clothQuantity) : null;
+            if (parsedClothQuantity){
+        let keys = Object.keys(parsedClothQuantity);
+        const values = Object.values(parsedClothQuantity);
+        setClothIds(keys)
+
+    }
+        const parsedDeliveryType = deliveryType ? JSON.parse(deliveryType) : null;
+        const parsedSelectedAddress = selectedAddress ? JSON.parse(selectedAddress) : null;
+        const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
+        setSelectedTime(parsedCalenderSelectedTime);
+        setSelectedDate(parsedCalenderSetDate);
+        setSelectedQuantity(parsedClothQuantity);
+        setSelectedDeliveryType(parsedDeliveryType);
+        setSelectedAddressInfo(parsedSelectedAddress);
+        setCustomerId(parsedCustomerData)
+
+    }, []);
+    console.log(clothIds)
+    console.log(selectedDate)
+
+    
+
+
+    orderDetails={
+        customer_id:customerId?.noPasswordUser?._id,
+        clothtype_id:clothIds,
+        subtotal:"20000",
+        shedule_date:selectedDate,
+        delivery_type:2
+    }
+
+    console.log(orderDetails)
+
+ const postOrder =()=>{
+    console.log('here')
+    axiosInstance.post('/order/create',orderDetails)
+    .then((resp)=>{
+        console.log(resp.data)
+    })
+}
+
+
+    
+
+
+
+
   return (
     <div>
         <BookingBanner/>
         <div className='container'>
             {/* <EmixNav/> */}
             <div className='p-3'>
-                <div className="payOps">
-                    <div className="payOpsLeft">
+                <div className="payOps row">
+                    <div className="payOpsLeft col md-12">
                         <div>
                             <h5 class="TextColor fw-5">Choose Payment Method</h5>
                             <div className="div1 GreyBorder2 rounded-top-3">
@@ -31,9 +105,9 @@ function PaymentPage() {
                             </div>
                             <div className="div2 GreyBorder2">
                             <div className="PayOpsCash">
-                                <div style={{display:"flex", alignItems:"center", gap:"50px"}} >
+                                <div className='PaymtText' style={{display:"flex", alignItems:"center", gap:"50px"}} >
                                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
-                                    <label class="form-check-label" for="flexRadioDefault1">
+                                    <label className="form-check-label" for="flexRadioDefault1">
                                     Pay With Cash
                                     </label>
                                 </div>
@@ -64,16 +138,14 @@ function PaymentPage() {
                                 </div>
                             </div>
                             <div className="PrevNextBtn">
-                            <button className='btn btn-outline-primary px-5 '>Prev</button>
-                            <Link to="/order-receipt">
+                            <Link to="/address">
+                                <button className='btn btn-outline-primary px-5 '>Prev</button>
+                                </Link>
                             <button className='btn btn-info px-5'>Confirm</button>
-                            </Link>
-
                             </div>
                         </div>
                     </div>
-
-                    <div className="PayOpsRight">
+                    <div className="PayOpsRight col md-12">
                         <h5 class="TextColor fw-5">Price Details</h5>
                         <div className="div3 GreyBorder">
                            <div className="PriceTab1 d-flex justify-content-between p-3 GreyBorder2">
@@ -97,10 +169,15 @@ function PaymentPage() {
                                 <div><h4>Naira : 0.75</h4> </div>
                            </div>
                         </div>
-                        <div className="div4"></div>
+                        <div className="PrevNextBtnRight">
+
+                            <button className='btn btn-outline-primary  '>Prev</button>
+                            <button className='btn btn-info' onClick={postOrder}>Confirm</button>
+                        </div>
                     </div>
                 </div>
             </div>
+        
         </div>
     </div>
   )
