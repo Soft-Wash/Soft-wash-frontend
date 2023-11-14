@@ -5,8 +5,71 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import mapSample from "../../assets/AddressPage/map-sample.png";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import { axiosInstance } from "../../services/AxiosInstance";
+import axios from "axios";
 
 function AddressInfo() {
+
+  const [selectedItems,setSelectedItems]= useState()
+  let arrayObj=[]
+
+  const getQuantity = () => {
+    const clothQuantity = localStorage.getItem("clothQuantity");
+    const clothQuantities = JSON.parse(clothQuantity);
+    const keys = Object.keys(clothQuantities);
+    const values = Object.values(clothQuantities);
+    arrayObj = keys;
+    let mainArr = keys.map((key, index) => ({ id: key, quantity: values[index] }));
+    axios.put("http://localhost:8003/cloth/updatequantity", mainArr)
+    .then((resp) => {
+      setSelectedItems(resp.data)
+     })
+
+  };
+
+  useEffect(() => {
+    getQuantity()
+  }, []);
+
+
+
+
+
+const [selectedAddress, setSelectedAddress] = useState({
+  contactNumber:"",
+  FullAddress:"",
+  SearchedAddress:"",
+  AddressTypeHome:false,
+  AddressTypeWork:false,
+  AddressTypeOther:false
+
+})
+
+const handleChange =(e)=>{
+  const value =
+  e.target.type === "checkbox"
+  ? e.target.checked
+  : e.target.value
+
+  setSelectedAddress({...selectedAddress, [e.target.name]:value })
+  
+}
+
+const handleAddress=()=>{
+  localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
+}
+
+useEffect(() => {
+  const storedAddress = localStorage.getItem("selectedAddress");
+
+  if (storedAddress) {
+    setSelectedAddress(JSON.parse(storedAddress));
+  }
+}, []);
+
+
   return (
     <Container>
       <Row className="justify-content-between">
@@ -29,6 +92,9 @@ function AddressInfo() {
                         placeholder="Enter Contact Number"
                         aria-label="Enter Contact Number"
                         aria-describedby="basic-addon1"
+                        name="contactNumber"
+                        onChange={handleChange}
+                        value={selectedAddress.contactNumber}
                       />
                     </InputGroup>
                   </Row>
@@ -39,6 +105,9 @@ function AddressInfo() {
                         placeholder="Enter Full Address"
                         aria-label="Enter Full Address"
                         aria-describedby="basic-addon1"
+                        name="FullAddress"
+                        onChange={handleChange}
+                        value={selectedAddress.FullAddress}
                       />
                     </InputGroup>
                   </Row>
@@ -57,6 +126,9 @@ function AddressInfo() {
                         placeholder="Search Address or Landmark location"
                         aria-label="Search Address or Landmark location"
                         aria-describedby="basic-addon1"
+                        name="SearchedAddress"
+                        onChange={handleChange}
+                        value={selectedAddress.SearchedAddress}
                       />
                     </InputGroup>
                   </Row>
@@ -67,15 +139,15 @@ function AddressInfo() {
                     <h5>Address Type</h5>
                     <Row>
                     <Form.Group className="d-flex gap-2">
-                      <Form.Check type="radio" aria-label="radio 1" />
+                      <Form.Check type="radio" aria-label="radio 1" onChange={handleChange} name="AddressTypeHome"/>
                       <Form.Label>Home</Form.Label>
                     </Form.Group>
                     <Form.Group className="d-flex gap-2">
-                      <Form.Check type="radio" aria-label="radio 1" />
+                      <Form.Check type="radio" aria-label="radio 1"     onChange={handleChange} name="AddressTypeWork"/>
                       <Form.Label>Work</Form.Label>
                     </Form.Group>
                     <Form.Group className="d-flex gap-2">
-                      <Form.Check type="radio" aria-label="radio 1" />
+                      <Form.Check type="radio" aria-label="radio 1"     onChange={handleChange} name="AddressTypeOther"/>
                       <Form.Label>Other</Form.Label>
                     </Form.Group>
                     </Row>
@@ -103,20 +175,15 @@ function AddressInfo() {
                     <Accordion.Item eventKey="0">
                         <Accordion.Header>Mens Wear</Accordion.Header>
                         <Accordion.Body>
-                            <div className="cart-item">
-                                <div className="d-flex justify-content-between">
-                                    <h5>Tie</h5>
-                                    <h5>N4,000</h5>
-                                </div>
-                                <p>2 x N2,000 / per piece</p>
-                            </div>
-                            <div className="cart-item">
-                                <div className="d-flex justify-content-between">
-                                    <h5>T-Shirt</h5>
-                                    <h5>N12,500</h5>
-                                </div>
-                                <p>5 x N2,500 / per piece</p>
-                            </div>
+                        {selectedItems && selectedItems.map((item)=>(
+                                  <div className="cart-item" key={item._id}>
+                                  <div className="d-flex justify-content-between">
+                                    <h5>{item.name}</h5>
+                                    <h5>{item.price}</h5>
+                                  </div>
+                                  <p>{`${item.quantity} x ${item.price} / per piece`}</p>
+                                </div>  
+                ))}
                         </Accordion.Body>
                     </Accordion.Item>      
                 </Accordion>
@@ -125,11 +192,14 @@ function AddressInfo() {
 
       <Container className="d-flex justify-content-center w-100 text-center my-5">
         <Col lg={4} md={5} sm={5}>
-        <Button  variant="outline-primary" className="me-auto w-75 text-center">Prev</Button>
+          <Link to="/date">
+          <Button  variant="outline-primary" className="me-auto w-75 text-center">Prev</Button>
+          </Link>
+
         </Col>
         <Col lg={4} md={5} sm={5}>
           <Link to="/PaymentPage">
-          <Button variant="primary" className="me-auto w-75 text-center">Next</Button>
+          <Button variant="primary" className="me-auto w-75 text-center" onClick={handleAddress}>Next</Button>
           </Link>
 </Col>
       </Container>

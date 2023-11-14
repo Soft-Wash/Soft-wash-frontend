@@ -13,6 +13,8 @@ export default function VariablesContext({ children }) {
 
   const [code, setCode] = useState(""); 
   const [user, setUser] = useState("");
+  const [clothSelected,setClothSelected] = useState(null)
+  const [clothQuantity,setClothQuantity] = useState(0)
 
   const exportData = {
     operation,
@@ -20,8 +22,11 @@ export default function VariablesContext({ children }) {
     code,
     setCode,
     user,
+    clothSelected,
+    clothQuantity,
     setUser,
     handleSendCode,
+    setClothQuantity,
 
 
     //user
