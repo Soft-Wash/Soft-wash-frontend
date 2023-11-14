@@ -13,6 +13,7 @@ import { variableManager } from "../../context/VariablesContext";
 import ClothAccordian from "./ClothAccordian";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function SelectedCart({ initialQuantity }) {
   const [kidsWear, setkidsWear] = useState();
@@ -27,6 +28,8 @@ function SelectedCart({ initialQuantity }) {
   const [heavyWash, SetHeavyWash] = useState();
   const [clothItems, setClothItem] = useState();
   const navigate = useNavigate()
+  const [selectedItems,setSelectedItems]= useState()
+  let arrayObj=[]
 
   const [clothQuantity, setClothQuantity] = useState(() => {
     const storedQuantity = localStorage.getItem('clothQuantity');
@@ -61,7 +64,6 @@ function SelectedCart({ initialQuantity }) {
     axiosInstance
       .get(`/cloth/kidswear/category`)
       .then((resp) => {
-        console.log(resp.data);
         setkidsWear(resp.data);
       })
       .catch((err) => {
@@ -71,7 +73,6 @@ function SelectedCart({ initialQuantity }) {
     axiosInstance
       .get(`/cloth/acccessories/category`)
       .then((resp) => {
-        console.log(resp.data);
         setAccessories(resp.data);
       })
       .catch((err) => {
@@ -81,7 +82,6 @@ function SelectedCart({ initialQuantity }) {
     axiosInstance
       .get(`/cloth/shoes/category`)
       .then((resp) => {
-        console.log(resp.data);
         setShoes(resp.data);
       })
       .catch((err) => {
@@ -91,7 +91,6 @@ function SelectedCart({ initialQuantity }) {
     axiosInstance
       .get(`/cloth/homelinen/category`)
       .then((resp) => {
-        console.log(resp.data);
         sethomeLinen(resp.data);
       })
       .catch((err) => {
@@ -101,7 +100,6 @@ function SelectedCart({ initialQuantity }) {
     axiosInstance
       .get(`/cloth/menswear/category`)
       .then((resp) => {
-        console.log(resp.data);
         setMensWear(resp.data);
       })
       .catch((err) => {
@@ -111,7 +109,6 @@ function SelectedCart({ initialQuantity }) {
     axiosInstance
       .get(`/cloth/regular/category`)
       .then((resp) => {
-        console.log(resp.data);
         setRegular(resp.data);
       })
       .catch((err) => {
@@ -121,7 +118,6 @@ function SelectedCart({ initialQuantity }) {
     axiosInstance
       .get(`/cloth/only-vacuum-steam-press/category`)
       .then((resp) => {
-        console.log(resp.data);
         SetOnlyVacum(resp.data);
       })
       .catch((err) => {
@@ -131,7 +127,6 @@ function SelectedCart({ initialQuantity }) {
     axiosInstance
       .get(`/cloth/vacuum-steam-press/category`)
       .then((resp) => {
-        console.log(resp.data);
         SetVacum(resp.data);
       })
       .catch((err) => {
@@ -141,7 +136,6 @@ function SelectedCart({ initialQuantity }) {
     axiosInstance
       .get(`/cloth/Regular:Wash-Dry-and-Fold/category`)
       .then((resp) => {
-        console.log(resp.data);
         SetRegularWash(resp.data);
       })
       .catch((err) => {
@@ -151,13 +145,15 @@ function SelectedCart({ initialQuantity }) {
     axiosInstance
       .get(`/cloth/Heavy:Wash-Dry-and-Fold/category`)
       .then((resp) => {
-        console.log(resp.data);
         SetHeavyWash(resp.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
+
+
 
 
 
@@ -765,7 +761,7 @@ function SelectedCart({ initialQuantity }) {
       </Tabs>
       <div className="d-flex justify-content-center gap-3 mt-5 mb-3">
         <Link to="/date">
-        <button className="btn btn-primary px-5" onclick={HandleLocalSave}>
+        <button className="btn btn-primary px-5">
                 Next
               </button>
         </Link>
