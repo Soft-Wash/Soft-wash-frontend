@@ -4,10 +4,80 @@ import card from "../assets/images/card.jpg";
 import cash from "../assets/images/cash.jpg"
 import BookingBanner from '../components/BookingBanner';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { axiosInstance } from '../services/AxiosInstance';
 
 function PaymentPage() {
+    const [selectedTime,setSelectedTime] = useState()
+    const [selectedDate,setSelectedDate] = useState()
+    const [selectedQuantity,setSelectedQuantity] = useState()
+    const [selectedDeliveryType,setSelectedDeliveryType] = useState()
+    const [selectedAddressInfo,setSelectedAddressInfo] = useState()
+    const [customerId, setCustomerId]= useState()
+    const [clothIds,setClothIds] = useState()
+    let orderDetails = {}
+    let arrayId=[]
+
+
+
+    useEffect(() => {
+        const calenderSelectedTime = localStorage.getItem('calenderSelectedTime');
+        const calenderSetDate = localStorage.getItem('calenderStartDate');
+        const storedDate = new Date(parseInt(calenderSetDate, 10));
+        const clothQuantity = localStorage.getItem('clothQuantity');
+        const deliveryType = localStorage.getItem('deliveryType');
+        const selectedAddress = localStorage.getItem('selectedAddress');
+        const customer_id = localStorage.getItem('softwashUser')
+
+        const parsedCalenderSelectedTime = calenderSelectedTime ? JSON.parse(calenderSelectedTime) : null;
+        const parsedCalenderSetDate = storedDate 
+        const parsedClothQuantity = clothQuantity ? JSON.parse(clothQuantity) : null;
+            if (parsedClothQuantity){
+        let keys = Object.keys(parsedClothQuantity);
+        const values = Object.values(parsedClothQuantity);
+        setClothIds(keys)
+
+    }
+        const parsedDeliveryType = deliveryType ? JSON.parse(deliveryType) : null;
+        const parsedSelectedAddress = selectedAddress ? JSON.parse(selectedAddress) : null;
+        const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
+        setSelectedTime(parsedCalenderSelectedTime);
+        setSelectedDate(parsedCalenderSetDate);
+        setSelectedQuantity(parsedClothQuantity);
+        setSelectedDeliveryType(parsedDeliveryType);
+        setSelectedAddressInfo(parsedSelectedAddress);
+        setCustomerId(parsedCustomerData)
+
+    }, []);
+    console.log(clothIds)
+    console.log(selectedDate)
 
     
+
+
+    orderDetails={
+        customer_id:customerId?.noPasswordUser?._id,
+        clothtype_id:clothIds,
+        subtotal:"20000",
+        shedule_date:selectedDate,
+        delivery_type:2
+    }
+
+    console.log(orderDetails)
+
+ const postOrder =()=>{
+    console.log('here')
+    axiosInstance.post('/order/create',orderDetails)
+    .then((resp)=>{
+        console.log(resp.data)
+    })
+}
+
+
+    
+
+
 
 
   return (
@@ -100,12 +170,14 @@ function PaymentPage() {
                            </div>
                         </div>
                         <div className="PrevNextBtnRight">
+
                             <button className='btn btn-outline-primary  '>Prev</button>
-                            <button className='btn btn-info'>Confirm</button>
+                            <button className='btn btn-info' onClick={postOrder}>Confirm</button>
                         </div>
                     </div>
                 </div>
             </div>
+        
         </div>
     </div>
   )

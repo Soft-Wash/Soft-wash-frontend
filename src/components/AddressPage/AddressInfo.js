@@ -22,7 +22,6 @@ function AddressInfo() {
     const values = Object.values(clothQuantities);
     arrayObj = keys;
     let mainArr = keys.map((key, index) => ({ id: key, quantity: values[index] }));
-    console.log(mainArr)
     axios.put("http://localhost:8003/cloth/updatequantity", mainArr)
     .then((resp) => {
       setSelectedItems(resp.data)
@@ -60,7 +59,6 @@ const handleChange =(e)=>{
 
 const handleAddress=()=>{
   localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
-  console.log(selectedAddress)
 }
 
 useEffect(() => {
