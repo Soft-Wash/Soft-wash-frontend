@@ -7,7 +7,6 @@ import { axiosInstance } from "../services/AxiosInstance";
 import axios from "axios";
 
 function SelectedCart() {
-  const [cartItems, setCartItems] = useState();
   const [selectedItems,setSelectedItems]= useState()
   let arrayObj=[]
   
@@ -21,12 +20,10 @@ function SelectedCart() {
     console.log(mainArr)
     axios.put("http://localhost:8003/cloth/updatequantity", mainArr)
     .then((resp) => {
-      console.log(resp.data)
       setSelectedItems(resp.data)
      })
 
   };
-
 
   useEffect(() => {
     getQuantity()
@@ -34,24 +31,6 @@ function SelectedCart() {
 
 
 
-
-
-  const handleSubmit = () => {
-        let data = {ids:arrayObj}
-    if(arrayObj?.length){
-        axiosInstance
-        .post(`/cloth/clothtypes/ids`, data)
-        .then((resp) => {
-          console.log(resp.data);
-          setCartItems(resp.data);
-        });
-    }
-
-  };
-
-  useEffect(()=>{
- handleSubmit();
-  },[])
 
 
 

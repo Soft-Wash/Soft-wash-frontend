@@ -13,7 +13,6 @@ import { variableManager } from "../../context/VariablesContext";
 import ClothAccordian from "./ClothAccordian";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 function SelectedCart({ initialQuantity }) {
   const [kidsWear, setkidsWear] = useState();
