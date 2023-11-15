@@ -5,7 +5,8 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import image1 from "../../assets/HomePage/images/hero-img.png";
 import "../../styles/HomePage.css"
-import { useState } from "react";
+import { Link } from "react-router-dom";
+// import { useState } from "react";
 
 function SectionOne() {
 
@@ -16,7 +17,7 @@ function SectionOne() {
           <Col sm={12} md={6} className="left-right ">
             <Card className="border border-0">
               <div className="card-div1">
-                <h1 className="text-info fs-2 fw-normal">We Clean,A lot.</h1>
+                <h1 className="text-info fs-2 fw-normal">We Clean, A lot.</h1>
                 <h1 className="cloth_theme fw-bold fs-1 mt-4">
                   Washing Clothes Was <br /> Never So Easy
                 </h1>
@@ -24,9 +25,12 @@ function SectionOne() {
                   Our professional and experienced cleaning <br />
                   staff does the job right the first time.
                 </p>
+                <Link to="/ClothesSelection">
                 <Button variant="outline-info" className="textwhite-hover mt-4" size="lg">
                   SCHEDULE PICKUP
                 </Button>{" "}
+                </Link>
+
               </div>
             </Card>
           </Col>

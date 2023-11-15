@@ -4,10 +4,9 @@
   color: white;
 }
 
-/* .page-navigation-title{
-  display: flex;
-  align-items: center;
-} */
+.greatherthan-Icon{
+  margin-top: 6px;
+}
 
 .servicebg-container{
   background-image: url(../assets/Services/Images/service-bg.png);

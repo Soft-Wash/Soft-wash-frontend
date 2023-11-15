@@ -17,6 +17,7 @@ import SectionSeven from "../components/HomePage/SectionSeven"
 import Footer from "../common/Footer";
 import "../styles/Services.css"
 import { useState,useEffect } from "react";
+import HeaderBanner from "../common/HeaderBanner";
 
 
 
@@ -32,29 +33,20 @@ function About() {
   return (
     <div>
       <Navigation />
-      <div>
-        <div className="below-navbar container-fluid  pt-4 pb-3">
-          <div className="container d-flex justify-content-between align-items-center">
-            <div className="page-navigation-title d-flex">
-              <p className="fs-5 text-white">Home</p>
-              <FaChevronRight className="greatherthan-Icon" />
-              <p className="text-white fs-4">  </p>
-              <p className="fs-5 text-white">Pricing</p>
-            </div>
-            <p className="fs-3  text-white">About</p>
-          </div>
-        </div>
-      </div>
+      <HeaderBanner
+      pageTitle="About"
+      currentPage="About"
+      />
       <Container>
         <Row className="mt-5">
           <Col sm={12} md={6} lg={6}>
             <Card className={`animated-col-left border-0 ${animate? 'slide-in':''}`}>
-              <p className="w-100 w-md-75 fs-2 line-height nowrap md-w-100">
+              <p className="about-text-0 w-md-75 fs-2 ">
                 We Provide <span className="fw-bold">Professional Care</span>{" "}
                 That Is Reliable At{" "}
                 <span className="fw-bold">Affordable Price</span>
               </p>
-              <p className=" md-w-100">
+              <p className="about-text">
                 Softwash Laundry is your trusted partner for all your laundry
                 needs. With a commitment to quality and care, we take the hassle
                 out of keeping your garments fresh and looking their best. Our
@@ -74,7 +66,7 @@ function About() {
             </Card>
           </Col>
           <Col sm={12} md={6} lg={6}>
-            <Card className="border-0">
+            <Card className="border-0 scale-out">
               <img
                 src={aboutsectionImg}
                 className="img-fluid about-sectionImg OurServicesCard"

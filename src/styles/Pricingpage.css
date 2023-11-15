@@ -1,45 +1,44 @@
-:root{
-  --primary-color: #6651D1;
+:root {
+  --primary-color: #6651d1;
   --primary-opacity: 102, 81, 209;
-  --secondary-color: #FB8E0B;
+  --secondary-color: #fb8e0b;
   --bg-dark: #474958;
-  --bg-grey: #E8E9ED; 
-  --bg-light: #F8F8FA;  
-  --text-grey: #6B7280; 
-  --text-dark: #222843; 
-  --success:#00CC73;
-  --headercolor:#15B8D8;
-
+  --bg-grey: #e8e9ed;
+  --bg-light: #f8f8fa;
+  --text-grey: #6b7280;
+  --text-dark: #222843;
+  --success: #00cc73;
+  --headercolor: #15b8d8;
 }
 
-.below-navbar{
+.below-navbar {
   background-color: var(--headercolor);
   height: auto;
   width: 100%;
 }
 
-.pricing-ptag{
+.pricing-ptag {
   color: var(--headercolor);
 }
 
-.all-ptag{
+.all-ptag {
   color: var(--headercolor);
 }
 
-.cloth-price-ptag{
+.cloth-price-ptag {
   color: var(--headercolor);
 }
 
-.pricing-order-button{
+.pricing-order-button {
   background-color: var(--headercolor);
   color: white;
 }
 
-.cloth-title-div ul{
+.cloth-title-div ul {
   display: flex;
 }
 
-.cloth-title-div ul li{
+.cloth-title-div ul li {
   display: inline-block;
   margin: 0;
   list-style: none;
@@ -47,7 +46,7 @@
   cursor: pointer;
 }
 
-.footer-line{
+.footer-line {
   width: 100%;
   margin-top: 150px;
 }
@@ -56,40 +55,42 @@
     text-align: left !important;
 } */
 
-.services-col  li{
+.services-col li {
   list-style: none;
   font-size: 15px;
   color: #111111;
   margin-top: 10px;
   /* text-align: left !important; */
-
 }
 
 .services-col ul {
-margin-top: 30px;
+  margin-top: 30px;
 }
 
-.footer-buttonn{
+.footer-buttonn {
   background-color: var(--headercolor);
   color: white;
 }
 
-
-.footer-buttonn-div{
+.footer-buttonn-div {
   margin-left: 10px;
 }
 
-.footer-bottom-line{
+.footer-bottom-line {
   margin-top: 30px;
 }
 
-.social-icons{
+.social-icons {
   font-size: 25px;
   margin-right: 20px;
 }
 
+.greatherthan-Icon{
+  margin-top: 6px;
+}
+
 @media (min-width: 768px) {
-  .cloth-title-div p{
+  .cloth-title-div p {
     white-space: normal;
     width: 90%;
   }
@@ -97,12 +98,24 @@ margin-top: 30px;
 
 @media (max-width: 768px) {
   .mobile-margin-top {
-    margin-top: 30px; 
+    margin-top: 30px;
   }
 
-  .mobile-flex-row{
+  .mobile-flex-row {
     flex-direction: column;
   }
 }
 
+@media only screen and (max-width: 500px) {
+  .price-container {
+    width: 90%;
+  }
 
+  .cloth-title-div{
+    text-align: center;
+  }
+
+  .cloth-title-div-ul{
+    text-align: center;
+  }
+}
