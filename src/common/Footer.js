@@ -13,7 +13,7 @@ function Footer() {
         <Row className="justify-content-between column-gap-5">
           <Col className="">
           <Container >
-            <Row fluid>
+            <Row >
             <Col xs={6} md={4} className="services-col text-start">
               <div className="" >
               <h4 className="fw-bold fs-5">Services</h4>
