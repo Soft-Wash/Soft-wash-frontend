@@ -81,10 +81,7 @@ function WashmanDashboardBody(){
                                 <th>15</th>
                                 <th>Pending</th>
                                 <th>16/12/23</th>
-                            </tr>
-                            
-                            
-                            
+                            </tr>                           
                         </tbody>
                     </table>
                 </div> 
