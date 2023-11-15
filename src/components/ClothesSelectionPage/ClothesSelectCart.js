@@ -45,15 +45,26 @@ function SelectedCart({ initialQuantity }) {
   const decrement = (clothId) => {
     setClothQuantity((prevQuantities) => {
       const newQuantity = Math.max((prevQuantities[clothId] || 0) - 1, 0);
+      if (newQuantity < 1) {
+        const { [clothId]: _, ...updatedQuantities } = prevQuantities;
+        localStorage.setItem("clothQuantity", JSON.stringify(updatedQuantities));
+        return updatedQuantities;
+      }
+  
+      // Return the updated state with the new quantity
       return { ...prevQuantities, [clothId]: newQuantity };
     });
   };
 
-  const HandleLocalSave=()=>{
-    if(clothQuantity){
-      localStorage.setItem("clothQuantity", JSON.stringify(clothQuantity));
+  const HandleLocalSave = () => {
+    if (clothQuantity) {
+      const filteredQuantities = Object.fromEntries(
+        Object.entries(clothQuantity).filter(([key, value]) => value >= 1)
+      );
+      localStorage.setItem("clothQuantity", JSON.stringify(filteredQuantities));
     }
-  }
+  };
+  
 
   useEffect(() => {
     HandleLocalSave()
