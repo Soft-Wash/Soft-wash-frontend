@@ -17,7 +17,6 @@ function PaymentPage() {
     const [customerId, setCustomerId]= useState()
     const [clothIds,setClothIds] = useState()
     let orderDetails = {}
-    let arrayId=[]
 
 
 
@@ -141,7 +140,7 @@ function PaymentPage() {
                             <Link to="/address">
                                 <button className='btn btn-outline-primary px-5 '>Prev</button>
                                 </Link>
-                            <button className='btn btn-info px-5'>Confirm</button>
+                            <button className='btn btn-info px-5' onClick={postOrder}>Confirm</button>
                             </div>
                         </div>
                     </div>
@@ -172,7 +171,7 @@ function PaymentPage() {
                         <div className="PrevNextBtnRight">
 
                             <button className='btn btn-outline-primary  '>Prev</button>
-                            <button className='btn btn-info' onClick={postOrder}>Confirm</button>
+                            <button className='btn btn-info' >Confirm</button>
                         </div>
                     </div>
                 </div>
