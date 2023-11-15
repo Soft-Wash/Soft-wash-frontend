@@ -21,7 +21,8 @@ function SelectedCart() {
     axios.put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
     .then((resp) => {
       setSelectedItems(resp.data)
-      console.log(selectedItems)
+      selectedItems && console.log(selectedItems)
+      selectedItems && sessionStorage.setItem('softCart', JSON.stringify(selectedItems))
      })
 
   };

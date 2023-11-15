@@ -28,7 +28,8 @@ function AddressInfo() {
     axios.put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
     .then((resp) => {
       setSelectedItems(resp.data)
-      sessionStorage.setItem('cart', selectedItems)
+      selectedItems && console.log(selectedItems)
+      selectedItems && sessionStorage.setItem('cart', selectedItems)
      })
 
   };
