@@ -50,7 +50,7 @@ export default function SectionThree() {
             </Card>
           </Col>
           <Col sm={12} md={12} lg={7} className="mt-4 d-flex align-items-center d-md-flex">
-            <Col md={1} sm={1} classname="d-flex align-items-center relative">
+            <Col md={1} sm={1} className="d-flex align-items-center relative">
               <Button
                 variant="info text-white"
                 className=""
@@ -68,7 +68,7 @@ export default function SectionThree() {
               {/* <Col sm={2}> */}
               <img src={arr[count]} alt="process" className=" img-fluid w-md-75 w-sm-25 sec-sm-img" />
               {/* </Col> */}
-              <Row classname="w-500px">
+              <Row className="w-500px">
               <Container className=" d-flex gap-5 mt-1 position-relative">
               <Col
                   className={`duration-500 border border-4 ${ "border-info"}  text-center rounded-circle bg-white size-sm-30px`}
