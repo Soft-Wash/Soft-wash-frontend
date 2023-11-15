@@ -61,7 +61,6 @@ function AddressInfo() {
 
   const handleAddress = () => {
     localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
-    console.log(selectedAddress);
   };
 
   useEffect(() => {
