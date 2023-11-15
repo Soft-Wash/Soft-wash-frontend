@@ -3,7 +3,7 @@ import Paymentpage from '../styles/Paymentpage.css'
 import card from "../assets/images/card.jpg";
 import cash from "../assets/images/cash.jpg"
 import BookingBanner from '../components/BookingBanner';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { axiosInstance } from '../services/AxiosInstance';
@@ -16,15 +16,16 @@ function PaymentPage() {
     const [selectedAddressInfo,setSelectedAddressInfo] = useState()
     const [customerId, setCustomerId]= useState()
     const [clothIds,setClothIds] = useState()
+    const [userOrder, setuserOrder]= useState()
     let orderDetails = {}
-    let arrayId=[]
+    const navigate = useNavigate()
 
 
 
     useEffect(() => {
         const calenderSelectedTime = localStorage.getItem('calenderSelectedTime');
         const calenderSetDate = localStorage.getItem('calenderStartDate');
-        const storedDate = new Date(parseInt(calenderSetDate, 10));
+        const storedDate = new Date(JSON.parse((calenderSetDate)));
         const clothQuantity = localStorage.getItem('clothQuantity');
         const deliveryType = localStorage.getItem('deliveryType');
         const selectedAddress = localStorage.getItem('selectedAddress');
@@ -53,32 +54,38 @@ function PaymentPage() {
     console.log(clothIds)
     console.log(selectedDate)
 
-    
-
 
     orderDetails={
         customer_id:customerId?.noPasswordUser?._id,
-        clothtype_id:clothIds,
-        subtotal:"20000",
-        shedule_date:selectedDate,
+        clothtype_ids:clothIds,
+        subtotal:20000,
+        schedule_date:selectedDate,
         delivery_type:2
     }
 
     console.log(orderDetails)
 
  const postOrder =()=>{
-    console.log('here')
     axiosInstance.post('/order/create',orderDetails)
     .then((resp)=>{
+        console.log(orderDetails)
         console.log(resp.data)
+        setuserOrder(resp.data)
+        
+        userOrder && localStorage.setItem("orderDetails", JSON.stringify(userOrder));
+       
+        navigate('/order-receipt')
     })
+
+
+
+
+
+
+
+
+
 }
-
-
-    
-
-
-
 
   return (
     <div>
@@ -141,7 +148,7 @@ function PaymentPage() {
                             <Link to="/address">
                                 <button className='btn btn-outline-primary px-5 '>Prev</button>
                                 </Link>
-                            <button className='btn btn-info px-5'>Confirm</button>
+                            <button className='btn btn-info px-5' onClick={postOrder}>Confirm</button>
                             </div>
                         </div>
                     </div>
@@ -172,7 +179,7 @@ function PaymentPage() {
                         <div className="PrevNextBtnRight">
 
                             <button className='btn btn-outline-primary  '>Prev</button>
-                            <button className='btn btn-info' onClick={postOrder}>Confirm</button>
+                            <button className='btn btn-info' >Confirm</button>
                         </div>
                     </div>
                 </div>

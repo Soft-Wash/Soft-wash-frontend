@@ -9,12 +9,12 @@ import { useEffect } from "react";
 function Calender() {
   const [startDate, setStartDate] = useState(() => {
     const storedDate = localStorage.getItem("calenderStartDate");
-    return storedDate ? new Date(storedDate) : new Date(Date.now());
+    return storedDate ? new Date(JSON.parse(storedDate)) : new Date();
 
 
   });
 
-  const startDateTimestamp = startDate.getTime()
+  // const startDateTimestamp = startDate.getTime()
 
   const [selectedTime, setSelectedTime] = useState(() => {
     const storedTime = localStorage.getItem("calenderSelectedTime");
@@ -22,7 +22,7 @@ function Calender() {
   });
 
   useEffect(() => {
-    localStorage.setItem("calenderStartDate", startDateTimestamp);
+    localStorage.setItem("calenderStartDate", JSON.stringify(startDate));
     localStorage.setItem("calenderSelectedTime", JSON.stringify(selectedTime));
   }, [startDate, selectedTime]);
 
