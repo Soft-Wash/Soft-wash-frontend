@@ -1,5 +1,5 @@
 import WashmanProfileBody from "../../components/Washman Components/WashmanProfileBody";
-import WashmanSidebar from "../../components/Washman Components/WashmanSidebar";
+import WashmanSidebar from "../../components/Washman Components/WashmaSidebar";
 
 
 

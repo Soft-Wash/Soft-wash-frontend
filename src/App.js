@@ -26,6 +26,9 @@ import UserProfilePage from "./pages/UserProfilePage";
 import UserDashboardContactPage from "./pages/UserDashboardContactPage";
 import UserOrderDetailsPage from "./pages/UserOrderDetailsPage";
 import VariablesContext from "./context/VariablesContext";
+import WashmanProfilePage from "./pages/Washman Pages/WashmanProfilePage";
+import WashmanOrdersPage from "./pages/Washman Pages/WashmanOrdersPage";
+import WashmanDashboardPage from "./pages/Washman Pages/WashmanDashboardPage";
  
 
 
@@ -58,6 +61,12 @@ function App() {
 
         <Route path="/my-orders" element={<Orders/>}/>
         <Route path="/order-receipt" element={<OrderReceipt/>}/>
+
+        {/* WASHMAN ROUTES */}
+        <Route path="/washman-profile" element={<WashmanProfilePage/>}/>
+        <Route path="/washman-orders" element={<WashmanOrdersPage/>}/>
+        <Route path="/washman-dashboard" element={<WashmanDashboardPage/>}/>
+
       </Routes>
     </BrowserRouter>
 </>
