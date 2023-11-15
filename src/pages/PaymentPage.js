@@ -3,7 +3,7 @@ import Paymentpage from '../styles/Paymentpage.css'
 import card from "../assets/images/card.jpg";
 import cash from "../assets/images/cash.jpg"
 import BookingBanner from '../components/BookingBanner';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { axiosInstance } from '../services/AxiosInstance';
@@ -16,7 +16,9 @@ function PaymentPage() {
     const [selectedAddressInfo,setSelectedAddressInfo] = useState()
     const [customerId, setCustomerId]= useState()
     const [clothIds,setClothIds] = useState()
+    const [userOrder, setuserOrder]= useState()
     let orderDetails = {}
+    const navigate = useNavigate()
 
 
 
@@ -52,8 +54,6 @@ function PaymentPage() {
     console.log(clothIds)
     console.log(selectedDate)
 
-    
-
 
     orderDetails={
         customer_id:customerId?.noPasswordUser?._id,
@@ -66,20 +66,26 @@ function PaymentPage() {
     console.log(orderDetails)
 
  const postOrder =()=>{
-    console.log('here')
-    console.log(orderDetails)
     axiosInstance.post('/order/create',orderDetails)
     .then((resp)=>{
         console.log(orderDetails)
         console.log(resp.data)
+        setuserOrder(resp.data)
+        
+        userOrder && localStorage.setItem("orderDetails", JSON.stringify(userOrder));
+       
+        navigate('/order-receipt')
     })
+
+
+
+
+
+
+
+
+
 }
-
-
-    
-
-
-
 
   return (
     <div>
