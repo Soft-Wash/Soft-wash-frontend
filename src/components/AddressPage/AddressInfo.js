@@ -25,9 +25,10 @@ function AddressInfo() {
     arrayObj = keys;
     let mainArr = keys.map((key, index) => ({ id: key, quantity: values[index] }));
     console.log(mainArr)
-    axios.put("http://localhost:8003/cloth/updatequantity", mainArr)
+    axios.put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
     .then((resp) => {
       setSelectedItems(resp.data)
+      sessionStorage.setItem('cart', selectedItems)
      })
 
   };
@@ -221,7 +222,7 @@ function AddressInfo() {
                                   <div className="cart-item" key={item._id}>
                                   <div className="d-flex justify-content-between">
                                     <h5>{item.name}</h5>
-                                    <h5>{item.price}</h5>
+                                    <h5>{item.price * item.quantity}</h5>
                                   </div>
                                   <p>{`${item.quantity} x ${item.price} / per piece`}</p>
                                 </div>  
