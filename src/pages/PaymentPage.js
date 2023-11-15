@@ -23,7 +23,7 @@ function PaymentPage() {
     useEffect(() => {
         const calenderSelectedTime = localStorage.getItem('calenderSelectedTime');
         const calenderSetDate = localStorage.getItem('calenderStartDate');
-        const storedDate = new Date(parseInt(calenderSetDate, 10));
+        const storedDate = new Date(JSON.parse((calenderSetDate)));
         const clothQuantity = localStorage.getItem('clothQuantity');
         const deliveryType = localStorage.getItem('deliveryType');
         const selectedAddress = localStorage.getItem('selectedAddress');
@@ -57,9 +57,9 @@ function PaymentPage() {
 
     orderDetails={
         customer_id:customerId?.noPasswordUser?._id,
-        clothtype_id:clothIds,
-        subtotal:"20000",
-        shedule_date:selectedDate,
+        clothtype_ids:clothIds,
+        subtotal:20000,
+        schedule_date:selectedDate,
         delivery_type:2
     }
 
@@ -67,8 +67,10 @@ function PaymentPage() {
 
  const postOrder =()=>{
     console.log('here')
+    console.log(orderDetails)
     axiosInstance.post('/order/create',orderDetails)
     .then((resp)=>{
+        console.log(orderDetails)
         console.log(resp.data)
     })
 }
