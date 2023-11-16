@@ -32,6 +32,8 @@ const orderId = JSON.parse(localStorage.getItem('orderDetails'))
     getOrderDetails()
   },[])
 
+  console.log(userData)
+
 
 
   return (

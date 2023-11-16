@@ -1,28 +1,23 @@
 import '../../styles/UserProfile.css';
 import Nav from 'react-bootstrap/Nav';
-import logo from '../../assets/images/SoftWash.png'
-
-
+import logo from '../../assets/Orders/SoftWash.png'
+import { FaHome, FaClipboardList, FaPhoneAlt } from "react-icons/fa";
+import React from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 function UserSidebar(){
 
 
 
     return(
-        <div className='user-sidebar'>
-            <div className='user-sidebar-logo mt-4'>
+        <div className='user-sidebar-profile '>
+            <div className='user-sidebar-logo mt-4 mb-4'>
                 <img src={logo} alt="" />
             </div>
             <Nav variant="pills" defaultActiveKey="/home">                
-                <Nav.Item>
-                    <Nav.Link className='navigate-home' href="/">Home</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link href="/link-1">My Orders</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link href="/link-2">Contact Us</Nav.Link>
-                </Nav.Item>
+                <Link to='/'><FaHome className='sidebar-icon'/>Home</Link>
+                <Link to='/order-details'><FaClipboardList className='sidebar-icon'/>My Orders</Link>
+                <Link to='/dashboard-contact-us'><FaPhoneAlt className='sidebar-icon'/>Contact Us</Link>
             </Nav>
         </div>
     )

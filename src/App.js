@@ -1,4 +1,5 @@
 import "./App.css";
+// import ScrollToTop from "./utils/ScrollToTop";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UserLogin from "./pages/auth/login/UserLogin";
 import UserRegister from "./pages/auth/register/UserRegister";
@@ -15,6 +16,7 @@ import About from "./pages/About";
 import MarketPlace from "./pages/MarketPlace/MarketPlace";
 import Orders from "./pages/user/Orders";
 import OrderReceipt from "./pages/user/OrderReceipt";
+
 import SingleProduct from "./pages/MarketPlace/SingleProduct";
 import Wishlist from "./pages/MarketPlace/Wishlist"
 import Cart from "./pages/MarketPlace/Cart" 
@@ -53,8 +55,12 @@ function App() {
          <Route path="/singleproduct" element={<SingleProduct/>} />
          <Route path="/wishlist" element={<Wishlist/>} />
          <Route path="/cart" element={<Cart/>} />
+         
         <Route path="/my-orders" element={<Orders/>}/>
         <Route path="/order-receipt" element={<OrderReceipt/>}/>
+
+        {/* Washman */}
+        <Route path="/washman-profile" element={<WashmanProfilePage/>}/>
       </Routes>
     </BrowserRouter>
 </>
@@ -63,5 +69,6 @@ function App() {
 
   );
 }
+
 
 export default App;
