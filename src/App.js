@@ -55,7 +55,7 @@ function App() {
          <Route path="/singleproduct" element={<SingleProduct/>} />
          <Route path="/wishlist" element={<Wishlist/>} />
          <Route path="/cart" element={<Cart/>} />
-
+         
         <Route path="/my-orders" element={<Orders/>}/>
         <Route path="/order-receipt" element={<OrderReceipt/>}/>
       </Routes>
