@@ -17,7 +17,10 @@ function PaymentPage() {
     const [customerId, setCustomerId]= useState()
     const [clothIds,setClothIds] = useState()
     const [userOrder, setuserOrder]= useState()
+    const [newlocaldate,setnewlocaldate]=useState(selectedDate)
+    const options = { day: 'numeric', month: 'long' };
     let orderDetails = {}
+
     const navigate = useNavigate()
 
 
@@ -30,6 +33,7 @@ function PaymentPage() {
         const deliveryType = localStorage.getItem('deliveryType');
         const selectedAddress = localStorage.getItem('selectedAddress');
         const customer_id = localStorage.getItem('softwashUser')
+        const options = { day: 'numeric', month: 'long' };
 
         const parsedCalenderSelectedTime = calenderSelectedTime ? JSON.parse(calenderSelectedTime) : null;
         const parsedCalenderSetDate = storedDate 
@@ -38,6 +42,7 @@ function PaymentPage() {
         let keys = Object.keys(parsedClothQuantity);
         const values = Object.values(parsedClothQuantity);
         setClothIds(keys)
+
 
     }
         const parsedDeliveryType = deliveryType ? JSON.parse(deliveryType) : null;
@@ -49,10 +54,17 @@ function PaymentPage() {
         setSelectedDeliveryType(parsedDeliveryType);
         setSelectedAddressInfo(parsedSelectedAddress);
         setCustomerId(parsedCustomerData)
+        setnewlocaldate(selectedDate)
+
+
 
     }, []);
-    console.log(clothIds)
-    console.log(selectedDate)
+//     console.log(clothIds)
+//     console.log(selectedDate)
+//    console.log(newlocaldate)
+   const pickUpDateValue = newlocaldate.toDateString('en-US', options);
+
+
 
 
     orderDetails={
@@ -128,7 +140,7 @@ function PaymentPage() {
                             <h5 class="TextColor pt-3 fw-5">Pick Up Information</h5>
                             <div className='Address py-3'>
                                 <h6 className='fw-bold'>Pic-Up Address</h6>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit est quibusdam velit in quam quis illum sed, possimus placeat cumque.</p>
+                                <p>{selectedAddressInfo?.FullAddress}</p>
                                 <Link to="/address">
                                 <button className='btn btn-outline-primary px-5 '>Change</button>
                                 </Link>
@@ -137,7 +149,7 @@ function PaymentPage() {
                                 </div>
                                 <div className='PickUpDate'>
                             <h6 className='fw-bold'>Pic-Up Date</h6>
-                            <p>10 Nov 2023.</p>
+                            <p>{pickUpDateValue}</p>
                             <Link to="/date">
                             <button className='btn btn-outline-primary px-5 '>Change</button>
                             </Link>
