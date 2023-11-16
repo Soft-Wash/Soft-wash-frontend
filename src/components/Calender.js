@@ -9,7 +9,7 @@ import { useEffect } from "react";
 function Calender() {
   const [startDate, setStartDate] = useState(() => {
     const storedDate = localStorage.getItem("calenderStartDate");
-    return storedDate ? new Date(storedDate) : new Date(Date.now());
+    // return storedDate ? new Date(storedDate) : new Date(Date.now());
 
 
   });

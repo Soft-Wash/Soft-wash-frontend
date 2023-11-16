@@ -1,6 +1,8 @@
 import "../../styles/Washman Styles/WashmanProfile.css";
 import "../../styles/Washman Styles/WashmanDashboard.css";
 import { FaClipboardList, FaListAlt} from "react-icons/fa";
+import { Link } from 'react-router-dom';
+
 
 
 function WashmanDashboardBody(){
@@ -52,7 +54,15 @@ function WashmanDashboardBody(){
                         <tbody>
                             <tr>
                                 <th>1</th>
-                                <th>2345673456723456</th>
+                                <th><Link to={'/washman-single-order'} className="washman-table-link">2345673456723456</Link></th>
+                                <th>Stacy Peter</th>
+                                <th>15</th>
+                                <th>Pending</th>
+                                <th>16/12/23</th>
+                            </tr>       
+                            <tr>
+                                <th>1</th>
+                                <th><Link to={'/washman-single-order'} className="washman-table-link">2345673456723456</Link></th>
                                 <th>Stacy Peter</th>
                                 <th>15</th>
                                 <th>Pending</th>
@@ -60,7 +70,7 @@ function WashmanDashboardBody(){
                             </tr>
                             <tr>
                                 <th>1</th>
-                                <th>2345673456723456</th>
+                                <th><Link to={'/washman-single-order'} className="washman-table-link">2345673456723456</Link></th>
                                 <th>Stacy Peter</th>
                                 <th>15</th>
                                 <th>Pending</th>
@@ -68,20 +78,12 @@ function WashmanDashboardBody(){
                             </tr>
                             <tr>
                                 <th>1</th>
-                                <th>2345673456723456</th>
+                                <th><Link to={'/washman-single-order'} className="washman-table-link">2345673456723456</Link></th>
                                 <th>Stacy Peter</th>
                                 <th>15</th>
                                 <th>Pending</th>
                                 <th>16/12/23</th>
-                            </tr>
-                            <tr>
-                                <th>1</th>
-                                <th>2345673456723456</th>
-                                <th>Stacy Peter</th>
-                                <th>15</th>
-                                <th>Pending</th>
-                                <th>16/12/23</th>
-                            </tr>                           
+                            </tr>                
                         </tbody>
                     </table>
                 </div> 

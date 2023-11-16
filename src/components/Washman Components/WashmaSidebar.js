@@ -1,6 +1,6 @@
 import React from 'react';
 import { CDBSidebar, CDBSidebarContent, CDBSidebarFooter, CDBSidebarHeader, CDBSidebarMenu, CDBSidebarMenuItem,} from 'cdbreact';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 
 function WashmaSidebar (){
@@ -8,29 +8,29 @@ function WashmaSidebar (){
         <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
           <CDBSidebar textColor="rgb(13,202,240)" backgroundColor="rgb(11,9,9)">
             <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-              <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
+              <Link to="/" className="text-decoration-none" style={{ color: 'inherit' }}>
                 SOFTWASH 
-              </a>
+              </Link>
             </CDBSidebarHeader>
 
             <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink exact to="/" activeClassName="activeClicked">
+            <Link exact to="/washman-dashboard" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/tables" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Tables</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/profile" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
-            </NavLink>
-            <NavLink exact to="/analytics" activeClassName="activeClicked">
+            </Link>
+            <Link exact to="/washman-orders" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="table">View All Orders</CDBSidebarMenuItem>
+            </Link>
+            <Link exact to="/washman-profile" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="user">My Profile</CDBSidebarMenuItem>
+            </Link>
+            <Link exact to="/analytics" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">Analytics</CDBSidebarMenuItem>
-            </NavLink>
+            </Link>
 
-            <NavLink exact to="/hero404" target="_blank" activeClassName="activeClicked">
+            <Link exact to="/hero404" target="_blank" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="exclamation-circle">404 page</CDBSidebarMenuItem>
-            </NavLink>
+            </Link>
           </CDBSidebarMenu>
         </CDBSidebarContent>
     
