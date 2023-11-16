@@ -8,8 +8,27 @@ import { Form } from "react-router-dom";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import OrderProp from "../../components/OrdersPage/OrderProp";
+import { useEffect } from "react";
+import { axiosInstance } from "../../services/AxiosInstance";
+import { useState } from "react";
 
 export default function Orders() {
+
+  const [userOrders,setuserOrders] = useState()
+
+  useEffect(()=>{
+    const customer_id = localStorage.getItem('softwashUser')
+    const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
+   const userId = parsedCustomerData?.noPasswordUser?._id
+
+    axiosInstance.get(`/order/${userId}/allorders`)
+    .then((resp)=> {
+      console.log(resp.data)
+      setuserOrders(resp.data)
+    })
+
+  },[])
+
   return (
     <>
       <Navigation />
@@ -56,7 +75,13 @@ export default function Orders() {
 
       <Row>
       <Tab.Content>
-            <Tab.Pane eventKey="first"><OrderProp /><OrderProp /></Tab.Pane>
+            <Tab.Pane eventKey="first">
+              {userOrders && userOrders.map((item)=>(
+              <OrderProp 
+              />
+              ))}
+
+            </Tab.Pane>
             <Tab.Pane eventKey="second"><OrderProp /></Tab.Pane>
             <Tab.Pane eventKey="third"><OrderProp /></Tab.Pane>
             <Tab.Pane eventKey="fourth"></Tab.Pane>
