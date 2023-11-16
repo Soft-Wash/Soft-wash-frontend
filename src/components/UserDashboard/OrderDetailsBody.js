@@ -1,37 +1,12 @@
 import '../../styles/UserOrderDetails.css';
 import { FaCircleInfo, FaHotTubPerson, FaMoneyCheckDollar } from "react-icons/fa6";
 import Accordion from 'react-bootstrap/Accordion';
-import axios from 'axios';
-import { useEffect } from 'react';
-import { useState } from 'react';
+
 
 
 
 
 function OrderDetailsBody(){
-    const options = { day: 'numeric', month: 'long' };
-    const [userData,setUserData] = useState()
-    const [pickUpDate, setpickUpDate]=useState()
-
-    function getOrderDetails(){
-        const orderId = JSON.parse(localStorage.getItem('orderDetails'))
-          const pickUpDate = orderId?.schedule_date
-           const latestDate = new Date(pickUpDate)
-             const pickUpDateValue = latestDate.toLocaleDateString('en-US', options);
-           setpickUpDate(pickUpDateValue)
-        
-            axios
-            .get(`${process.env.REACT_APP_BASE_URL}/order/${orderId._id}/order`)
-            .then((resp) => {
-              console.log(resp.data);
-              setUserData(resp.data)
-            });
-          }
-
-          useEffect(()=>{
-            getOrderDetails()
-          },[])
-
     return(
         <div className="dashboard-bg">
             <h1>Order Details</h1>
