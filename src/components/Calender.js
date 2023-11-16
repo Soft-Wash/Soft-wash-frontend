@@ -10,8 +10,6 @@ function Calender() {
   const [startDate, setStartDate] = useState(() => {
     const storedDate = localStorage.getItem("calenderStartDate");
     return storedDate ? new Date(JSON.parse(storedDate)) : new Date();
-
-
   });
 
   // const startDateTimestamp = startDate.getTime()
