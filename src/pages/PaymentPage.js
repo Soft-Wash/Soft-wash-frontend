@@ -3,7 +3,7 @@ import Paymentpage from '../styles/Paymentpage.css'
 import card from "../assets/images/card.jpg";
 import cash from "../assets/images/cash.jpg"
 import BookingBanner from '../components/BookingBanner';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { axiosInstance } from '../services/AxiosInstance';
@@ -16,19 +16,24 @@ function PaymentPage() {
     const [selectedAddressInfo,setSelectedAddressInfo] = useState()
     const [customerId, setCustomerId]= useState()
     const [clothIds,setClothIds] = useState()
+    const [userOrder, setuserOrder]= useState()
+    const [newlocaldate,setnewlocaldate]=useState(selectedDate)
+    const options = { day: 'numeric', month: 'long' };
     let orderDetails = {}
-    let arrayId=[]
+
+    const navigate = useNavigate()
 
 
 
     useEffect(() => {
         const calenderSelectedTime = localStorage.getItem('calenderSelectedTime');
         const calenderSetDate = localStorage.getItem('calenderStartDate');
-        const storedDate = new Date(parseInt(calenderSetDate, 10));
+        const storedDate = new Date(JSON.parse((calenderSetDate)));
         const clothQuantity = localStorage.getItem('clothQuantity');
         const deliveryType = localStorage.getItem('deliveryType');
         const selectedAddress = localStorage.getItem('selectedAddress');
         const customer_id = localStorage.getItem('softwashUser')
+        const options = { day: 'numeric', month: 'long' };
 
         const parsedCalenderSelectedTime = calenderSelectedTime ? JSON.parse(calenderSelectedTime) : null;
         const parsedCalenderSetDate = storedDate 
@@ -37,6 +42,7 @@ function PaymentPage() {
         let keys = Object.keys(parsedClothQuantity);
         const values = Object.values(parsedClothQuantity);
         setClothIds(keys)
+
 
     }
         const parsedDeliveryType = deliveryType ? JSON.parse(deliveryType) : null;
@@ -48,37 +54,51 @@ function PaymentPage() {
         setSelectedDeliveryType(parsedDeliveryType);
         setSelectedAddressInfo(parsedSelectedAddress);
         setCustomerId(parsedCustomerData)
+        setnewlocaldate(selectedDate)
+
+
 
     }, []);
-    console.log(clothIds)
-    console.log(selectedDate)
+//     console.log(clothIds)
+//     console.log(selectedDate)
+   console.log(newlocaldate)
+   const pickUpDateValue = newlocaldate?.toDateString('en-US', options);
 
-    
+
 
 
     orderDetails={
         customer_id:customerId?.noPasswordUser?._id,
-        clothtype_id:clothIds,
-        subtotal:"20000",
-        shedule_date:selectedDate,
+        clothtype_ids:clothIds,
+        subtotal:20000,
+        schedule_date:selectedDate,
+        pickuptime:selectedTime,
         delivery_type:2
     }
 
     console.log(orderDetails)
 
  const postOrder =()=>{
-    console.log('here')
     axiosInstance.post('/order/create',orderDetails)
     .then((resp)=>{
+        console.log(orderDetails)
         console.log(resp.data)
+        setuserOrder(resp.data)
+        
+        userOrder && localStorage.setItem("orderDetails", JSON.stringify(userOrder));
+       
+        navigate('/order-receipt')
     })
+
+
+
+
+
+
+
+
+
 }
-
-
-    
-
-
-
 
   return (
     <div>
@@ -121,7 +141,7 @@ function PaymentPage() {
                             <h5 class="TextColor pt-3 fw-5">Pick Up Information</h5>
                             <div className='Address py-3'>
                                 <h6 className='fw-bold'>Pic-Up Address</h6>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit est quibusdam velit in quam quis illum sed, possimus placeat cumque.</p>
+                                <p>{selectedAddressInfo?.FullAddress}</p>
                                 <Link to="/address">
                                 <button className='btn btn-outline-primary px-5 '>Change</button>
                                 </Link>
@@ -130,7 +150,7 @@ function PaymentPage() {
                                 </div>
                                 <div className='PickUpDate'>
                             <h6 className='fw-bold'>Pic-Up Date</h6>
-                            <p>10 Nov 2023.</p>
+                            <p>{pickUpDateValue}</p>
                             <Link to="/date">
                             <button className='btn btn-outline-primary px-5 '>Change</button>
                             </Link>
@@ -141,7 +161,7 @@ function PaymentPage() {
                             <Link to="/address">
                                 <button className='btn btn-outline-primary px-5 '>Prev</button>
                                 </Link>
-                            <button className='btn btn-info px-5'>Confirm</button>
+                            <button className='btn btn-info px-5' onClick={postOrder}>Confirm</button>
                             </div>
                         </div>
                     </div>
@@ -172,7 +192,7 @@ function PaymentPage() {
                         <div className="PrevNextBtnRight">
 
                             <button className='btn btn-outline-primary  '>Prev</button>
-                            <button className='btn btn-info' onClick={postOrder}>Confirm</button>
+                            <button className='btn btn-info' >Confirm</button>
                         </div>
                     </div>
                 </div>

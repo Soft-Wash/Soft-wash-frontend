@@ -11,7 +11,6 @@ import { axiosInstance } from "../../services/AxiosInstance";
 import axios from "axios";
 
 function AddressInfo() {
-
   const [selectedItems,setSelectedItems]= useState()
   let arrayObj=[]
 
@@ -22,7 +21,7 @@ function AddressInfo() {
     const values = Object.values(clothQuantities);
     arrayObj = keys;
     let mainArr = keys.map((key, index) => ({ id: key, quantity: values[index] }));
-    axios.put("http://localhost:8003/cloth/updatequantity", mainArr)
+    axios.put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
     .then((resp) => {
       setSelectedItems(resp.data)
      })

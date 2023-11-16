@@ -25,25 +25,14 @@ import DatePage from "./pages/DatePage";
 import UserProfilePage from "./pages/UserProfilePage";
 import UserDashboardContactPage from "./pages/UserDashboardContactPage";
 import UserOrderDetailsPage from "./pages/UserOrderDetailsPage";
-<<<<<<< HEAD
-
-
-import WashmanProfilePage from "./pages/Washman Pages/WashmanProfilePage";
-=======
 import VariablesContext from "./context/VariablesContext";
->>>>>>> 45b64cd06c949de5448a03ba2be8229c75638a50
  
 
 
 function App() {
   return (
-<<<<<<< HEAD
-    <BrowserRouter>
-      {/* <ScrollToTop /> */}
-=======
 <>
 <BrowserRouter>
->>>>>>> 45b64cd06c949de5448a03ba2be8229c75638a50
       <Routes>
         <Route path="/" element={<HomePage/>} />
         <Route path="/address" element={<AddressPage/>} />
@@ -66,7 +55,7 @@ function App() {
          <Route path="/singleproduct" element={<SingleProduct/>} />
          <Route path="/wishlist" element={<Wishlist/>} />
          <Route path="/cart" element={<Cart/>} />
-
+         
         <Route path="/my-orders" element={<Orders/>}/>
         <Route path="/order-receipt" element={<OrderReceipt/>}/>
 

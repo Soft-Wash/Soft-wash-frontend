@@ -23,7 +23,7 @@ function ResetPaswdForm() {
 
     try {
       const resp = await axios.post(
-        "http://localhost:8003/auth/reset-email",
+        `${process.env.REACT_APP_BASE_URL}/auth/reset-email`,
         body
       );
       console.log(resp.data);
