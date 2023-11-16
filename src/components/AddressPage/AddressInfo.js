@@ -11,7 +11,6 @@ import { axiosInstance } from "../../services/AxiosInstance";
 import axios from "axios";
 
 function AddressInfo() {
-
   const [selectedItems,setSelectedItems]= useState()
   let arrayObj=[]
 
