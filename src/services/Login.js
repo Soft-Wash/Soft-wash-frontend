@@ -4,7 +4,7 @@ export async function handleLogin(payload){
   let data,error;
   try {
     const response = await axiosInstance.post(`/auth/user/login`, payload);
-    data = response.data;
+    data = response.data.noPasswordUser;
     localStorage.setItem("softwashLoginUser", JSON.stringify(data));
 
   } catch (err) {

@@ -26,9 +26,10 @@ function SelectedCart({ initialQuantity }) {
   const [regularWash, SetRegularWash] = useState();
   const [heavyWash, SetHeavyWash] = useState();
   const [clothItems, setClothItem] = useState();
+  const [customerId, setCustomerId]= useState()
   const navigate = useNavigate()
   const [selectedItems,setSelectedItems]= useState()
-  let arrayObj=[]
+const [clothId,setclothId]=useState()
 
   const [clothQuantity, setClothQuantity] = useState(() => {
     const storedQuantity = localStorage.getItem('clothQuantity');
@@ -40,6 +41,7 @@ function SelectedCart({ initialQuantity }) {
       const newQuantity = (prevQuantities[clothId] || 0) + 1;
       return { ...prevQuantities, [clothId]: newQuantity };
     });
+    // setclothId(clothId)
   };
 
   const decrement = (clothId) => {
@@ -63,8 +65,11 @@ function SelectedCart({ initialQuantity }) {
       );
       localStorage.setItem("clothQuantity", JSON.stringify(filteredQuantities));
     }
+
   };
-  
+
+
+
 
   useEffect(() => {
     HandleLocalSave()

@@ -4,6 +4,7 @@ import image from '../../assets/Orders/thanks-icon.png'
 import { Row,  } from "react-bootstrap";
 import { useState } from "react";
 import { useEffect } from "react";
+import axios from "axios";
 
 
 
@@ -12,14 +13,25 @@ export default function Receipt() {
   const [userData,setUserData] = useState()
   const [pickUpDate, setpickUpDate]=useState()
 
+  function getOrderDetails(){
+const orderId = JSON.parse(localStorage.getItem('orderDetails'))
+  const pickUpDate = orderId?.schedule_date
+   const latestDate = new Date(pickUpDate)
+     const pickUpDateValue = latestDate.toLocaleDateString('en-US', options);
+   setpickUpDate(pickUpDateValue)
+
+    axios
+    .get(`${process.env.REACT_APP_BASE_URL}/order/${orderId._id}/order`)
+    .then((resp) => {
+      console.log(resp.data);
+      setUserData(resp.data)
+    });
+  }
+
   useEffect(()=>{
-    const orderDetails = JSON.parse(localStorage.getItem('orderDetails'))
-    setUserData(orderDetails)
-    const pickUpDate = orderDetails?.schedule_date
-    const latestDate = new Date(pickUpDate)
-    const pickUpDateValue = latestDate.toLocaleDateString('en-US', options);
-    setpickUpDate(pickUpDateValue)
+    getOrderDetails()
   },[])
+
 
 
   return (
@@ -46,7 +58,7 @@ export default function Receipt() {
         <h5>Pickup time</h5>
         </div>
         <div lg={3} >
-        <p>18:00 - 21:00</p>
+        <p>{userData?.pickuptime}</p>
         </div>
     </div>
     <div className="d-flex justify-content-between gap-3 ">
@@ -54,7 +66,7 @@ export default function Receipt() {
         <h5>Final Amount</h5>
         </div>
         <div lg={3} >
-        <p>₦5,000</p>
+        <p>₦{userData?.subtotal}</p>
         </div>
     </div>
     </Container>
