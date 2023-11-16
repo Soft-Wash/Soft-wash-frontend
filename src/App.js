@@ -24,13 +24,15 @@ import UserProfilePage from "./pages/UserProfilePage";
 import UserDashboardContactPage from "./pages/UserDashboardContactPage";
 import UserOrderDetailsPage from "./pages/UserOrderDetailsPage";
 import VariablesContext from "./context/VariablesContext";
+import Dashboard from "./pages/FrontDesk/Dashboard";
+import Login from "./pages/FrontDesk/Login";
  
 
 
 function App() {
   return (
-<>
-<BrowserRouter>
+<>  
+  <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage/>} />
         <Route path="/address" element={<AddressPage/>} />
@@ -39,6 +41,7 @@ function App() {
         <Route path="/auth/reset-password" element={<ResetPaswdPage />} />
          <Route path="/auth/new-password" element={<NewPaswdPage />} />
          <Route path="/auth/verify" element={<AuthenticatePaswdPage />} />
+
          <Route path="/how-it-works" element={<HowItWorks />} />
          <Route path="/date" element={<DatePage />} />
          <Route path="/user-profile" element={<UserProfilePage />} />
@@ -55,6 +58,9 @@ function App() {
          <Route path="/cart" element={<Cart/>} />
         <Route path="/my-orders" element={<Orders/>}/>
         <Route path="/order-receipt" element={<OrderReceipt/>}/>
+
+        <Route path="/frontdesk/login" element={<Login/>} />
+        <Route path="/frontdesk/dash" element={<Dashboard/>} />
       </Routes>
     </BrowserRouter>
 </>
