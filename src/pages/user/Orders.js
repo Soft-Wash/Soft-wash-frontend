@@ -8,8 +8,51 @@ import { Form } from "react-router-dom";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import OrderProp from "../../components/OrdersPage/OrderProp";
+import { useEffect } from "react";
+import { axiosInstance } from "../../services/AxiosInstance";
+import { useState } from "react";
 
 export default function Orders() {
+
+  const [userOrders,setuserOrders] = useState()
+  const [selectedAddressInfo,setSelectedAddressInfo] = useState()
+  const[userID,setuserId]=useState()
+  const [orderplaced,setorderplaced] = useState()
+
+  useEffect(()=>{
+    const customer_id = localStorage.getItem('softwashLoginUser')
+    const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
+   const userId = parsedCustomerData?._id
+   setuserId(userId)
+   const selectedAddress = localStorage.getItem('selectedAddress');
+   const parsedSelectedAddress = selectedAddress ? JSON.parse(selectedAddress) : null;
+   setSelectedAddressInfo(parsedSelectedAddress);
+
+
+
+    axiosInstance.get(`/order/${userId}/allorders`)
+    .then((resp)=> {
+      console.log(resp.data)
+      setuserOrders(resp.data)
+    })
+
+  },[])
+
+  const getPLacedOrder=()=>{
+    axiosInstance.get(`/order/${userID}/orderplaced`)
+    .then((resp)=> {
+      console.log(resp.data)
+      setorderplaced(resp.data)
+    })
+  }
+
+  
+
+
+
+
+
+
   return (
     <>
       <Navigation />
@@ -33,7 +76,7 @@ export default function Orders() {
               <Nav.Link eventKey="first" className="text-black">Show all</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="second" className="text-black">Order Placed</Nav.Link>
+              <Nav.Link eventKey="second" className="text-black" onClick={getPLacedOrder}>Order Placed</Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="third" className="text-black">Confirmed</Nav.Link>
@@ -56,8 +99,30 @@ export default function Orders() {
 
       <Row>
       <Tab.Content>
-            <Tab.Pane eventKey="first"><OrderProp /><OrderProp /></Tab.Pane>
-            <Tab.Pane eventKey="second"><OrderProp /></Tab.Pane>
+            <Tab.Pane eventKey="first">
+              {userOrders && userOrders.map((item)=>(
+              <OrderProp 
+              id={item._id.substring(0,item._id.length/2)}
+              pickup={item.pickuptime}
+              address={selectedAddressInfo.FullAddress}
+              price={item.subtotal}
+              status={item.status}
+              />
+              ))}
+
+            </Tab.Pane>
+            <Tab.Pane eventKey="second">
+              {userOrders&&userOrders.map((item)=>(
+              <OrderProp
+              id={item._id.substring(0,item._id.length/2)}
+              pickup={item.pickuptime}
+              address={selectedAddressInfo.FullAddress}
+              price={item.subtotal}
+              status={item.status}
+ />
+              ))}
+
+            </Tab.Pane>
             <Tab.Pane eventKey="third"><OrderProp /></Tab.Pane>
             <Tab.Pane eventKey="fourth"></Tab.Pane>
             <Tab.Pane eventKey="fifth"></Tab.Pane>
