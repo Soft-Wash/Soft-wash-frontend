@@ -21,6 +21,8 @@ export default function Receipt() {
     setpickUpDate(pickUpDateValue)
   },[])
 
+  console.log(userData)
+
 
   return (
     <>
@@ -46,7 +48,7 @@ export default function Receipt() {
         <h5>Pickup time</h5>
         </div>
         <div lg={3} >
-        <p>18:00 - 21:00</p>
+        <p>{userData?.pickuptime}</p>
         </div>
     </div>
     <div className="d-flex justify-content-between gap-3 ">
@@ -54,7 +56,7 @@ export default function Receipt() {
         <h5>Final Amount</h5>
         </div>
         <div lg={3} >
-        <p>₦5,000</p>
+        <p>₦{userData?.subtotal}</p>
         </div>
     </div>
     </Container>
