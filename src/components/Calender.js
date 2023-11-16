@@ -47,14 +47,14 @@ function Calender() {
           minDate={new Date()}
         />
 
-        <label htmlFor="timePicker"></label>
+        {/* <label htmlFor="timePicker"></label>
         <input
           type="time"
           id="timePicker"
           name="timePicker"
           value={selectedTime}
           onChange={handleTimeChange}
-        />
+        /> */}
         {!startDate || !selectedTime ? <div className="color-red">please select date or time</div> : "" }
       </div>
     </Container>
