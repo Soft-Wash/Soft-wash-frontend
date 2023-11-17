@@ -4,6 +4,7 @@ import image from '../../assets/Orders/thanks-icon.png'
 import { Row,  } from "react-bootstrap";
 import { useState } from "react";
 import { useEffect } from "react";
+import axios from "axios";
 
 
 
@@ -12,16 +13,27 @@ export default function Receipt() {
   const [userData,setUserData] = useState()
   const [pickUpDate, setpickUpDate]=useState()
 
+  function getOrderDetails(){
+const orderId = JSON.parse(localStorage.getItem('orderDetails'))
+  const pickUpDate = orderId?.schedule_date
+   const latestDate = new Date(pickUpDate)
+     const pickUpDateValue = latestDate.toLocaleDateString('en-US', options);
+   setpickUpDate(pickUpDateValue)
+
+    axios
+    .get(`${process.env.REACT_APP_BASE_URL}/order/${orderId._id}/order`)
+    .then((resp) => {
+      console.log(resp.data);
+      setUserData(resp.data)
+    });
+  }
+
   useEffect(()=>{
-    const orderDetails = JSON.parse(localStorage.getItem('orderDetails'))
-    setUserData(orderDetails)
-    const pickUpDate = orderDetails?.schedule_date
-    const latestDate = new Date(pickUpDate)
-    const pickUpDateValue = latestDate.toLocaleDateString('en-US', options);
-    setpickUpDate(pickUpDateValue)
+    getOrderDetails()
   },[])
 
   console.log(userData)
+
 
 
   return (
