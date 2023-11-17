@@ -5,6 +5,11 @@ import { useNavigate } from "react-router-dom";
 export default function OrderProp(props) {
     const Navigate = useNavigate()
 
+    function handleSingleOrder(orderId){
+localStorage.setItem("OrderDetailsId",JSON.stringify(orderId))
+Navigate(`/order-details`)
+    }
+
   return (
     <>
       {/* <Container className="mt-4 px-4 py-2 shadow border rounded-4"> */}
@@ -32,7 +37,7 @@ export default function OrderProp(props) {
 
           <Col lg={2} md={4} sm={6} className="h-100">
             <Row className="mb-3"></Row>
-            <Button className="mb-1 fs-6 fw-normal my-auto bg-transparent p-0 m-0 text-secondary h-50 border-secondary px-2 " onClick={() => Navigate("/order-details")}>View</Button>
+            <Button className="mb-1 fs-6 fw-normal my-auto bg-transparent p-0 m-0 text-secondary h-50 border-secondary px-2 " onClick={()=>handleSingleOrder(props.id)}>View</Button>
           </Col>
         </Row>
       {/* </Container> */}

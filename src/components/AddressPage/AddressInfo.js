@@ -75,6 +75,8 @@ function AddressInfo() {
     setSelectedAddress({ ...selectedAddress, [e.target.name]: value });
   };
 
+
+
   let orderPostObj = {
     customer_id: customerId?._id,
     deliveryAddress: selectedAddress.FullAddress,
@@ -90,6 +92,7 @@ function AddressInfo() {
       console.log(resp.data);
       const orderId = resp.data._id
       localStorage.setItem("RecentOrder", JSON.stringify(resp.data));
+      localStorage.setItem('selectedAddress',JSON.stringify(selectedAddress))
       navigate(`/paymentpage/${orderId}`)
     });
 

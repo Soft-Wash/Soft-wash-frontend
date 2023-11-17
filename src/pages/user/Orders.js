@@ -97,7 +97,7 @@ export default function Orders() {
             <Tab.Pane eventKey="first">
               {userOrders && userOrders.map((item)=>(
               <OrderProp 
-              id={item._id.substring(0,item._id.length/2)}
+              id={item._id}
               pickup={item.pickuptime}
               address={pickUpDateValue}
               price={item.subtotal}
