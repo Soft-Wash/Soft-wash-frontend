@@ -61,7 +61,7 @@ function App() {
          <Route path="/wishlist" element={<Wishlist/>} />
          <Route path="/cart" element={<Cart/>} />
          
-        <Route path="/my-orders/:orderId" element={<Orders/>}/>
+        <Route path="/my-orders/" element={<Orders/>}/>
         <Route path="/order-receipt/:orderId" element={<OrderReceipt/>}/>
 
         {/* WASHMAN ROUTES */}

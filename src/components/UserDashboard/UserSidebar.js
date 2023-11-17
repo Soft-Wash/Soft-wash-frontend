@@ -7,16 +7,6 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import {useEffect,useState} from "react"
 
 function UserSidebar(){
-    const [orderId,setorderId]=useState()
-
-    useEffect(()=>{
-        const OrderId = JSON.parse(localStorage.getItem("OrderDetailsId"))
-        if(OrderId){
-            setorderId(OrderId)
-        }
-
-},[])
-
 
     return(
         <div className='user-sidebar-profile '>
@@ -25,7 +15,7 @@ function UserSidebar(){
             </div>
             <Nav variant="pills" defaultActiveKey="/home">                
                 <Link to='/'><FaHome className='sidebar-icon'/>Home</Link>
-                <Link to={`/my-orders/${orderId}`}><FaClipboardList className='sidebar-icon'/>My Orders</Link>
+                <Link to={`/my-orders`}><FaClipboardList className='sidebar-icon'/>My Orders</Link>
                 <Link to='/dashboard-contact-us'><FaPhoneAlt className='sidebar-icon'/>Contact Us</Link>
             </Nav>
         </div>
