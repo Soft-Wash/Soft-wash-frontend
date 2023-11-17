@@ -9,13 +9,18 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { axiosInstance } from "../../services/AxiosInstance";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import {BsFillTrashFill} from "react-icons/bs";
 
-function AddressInfo() {
-  const [clicked, setClicked] = useState(false);
-
+  function AddressInfo() {
+    const [selectedTime, setSelectedTime] = useState();
+    const [customerId, setCustomerId] = useState();
+    const [clothIds,setClothIds] = useState()
+    let arrayObj = [];
+    const navigate = useNavigate();
   const [selectedItems,setSelectedItems]= useState()
-  let arrayObj=[]
+  const [selectedDate, setSelectedDate] = useState();
+  const [clicked, setClicked] = useState(false);
 
   const getQuantity = () => {
     const clothQuantity = localStorage.getItem("clothQuantity");
@@ -23,26 +28,39 @@ function AddressInfo() {
     const keys = Object.keys(clothQuantities);
     const values = Object.values(clothQuantities);
     arrayObj = keys;
-    let mainArr = keys.map((key, index) => ({ id: key, quantity: values[index] }));
-    console.log(mainArr)
-    axios.put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
-    .then((resp) => {
-      setSelectedItems(resp.data)
-      selectedItems && console.log(selectedItems)
-      selectedItems && sessionStorage.setItem('cart', selectedItems)
-     })
-
+    let mainArr = keys.map((key, index) => ({
+      id: key,
+      quantity: values[index],
+    }));
+    axios
+      .put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
+      .then((resp) => {
+        setSelectedItems(resp.data);
+      });
   };
 
   useEffect(() => {
-    getQuantity()
+    getQuantity();
+    const calenderSelectedTime = localStorage.getItem("calenderSelectedTime");
+    const parsedCalenderSelectedTime = calenderSelectedTime
+      ? JSON.parse(calenderSelectedTime)
+      : null;
+    setSelectedTime(parsedCalenderSelectedTime);
+    const calenderSetDate = localStorage.getItem("calenderStartDate");
+    const storedDate = new Date(JSON.parse(calenderSetDate));
+    const parsedCalenderSetDate = storedDate;
+    setSelectedDate(parsedCalenderSetDate);
+    const customer_id = localStorage.getItem("softwashLoginUser");
+    const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
+    setCustomerId(parsedCustomerData);
+    const clothQuantity = localStorage.getItem("clothQuantity");
+    const parsedClothQuantity = clothQuantity ? JSON.parse(clothQuantity) : null;
+    if (parsedClothQuantity) {
+      let keys = Object.keys(parsedClothQuantity);
+      const values = Object.values(parsedClothQuantity);
+      setClothIds(keys);
+    }
   }, []);
-
-
-
-
-
- 
 
   const [selectedAddress, setSelectedAddress] = useState({
     contactNumber: "",
@@ -56,17 +74,35 @@ function AddressInfo() {
   const handleChange = (e) => {
     const value =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
-
     setSelectedAddress({ ...selectedAddress, [e.target.name]: value });
   };
 
-  const handleAddress = () => {
-    localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
+
+
+  let orderPostObj = {
+    customer_id: customerId?._id,
+    deliveryAddress: selectedAddress.FullAddress,
+    pickuptime: selectedTime,
+    schedule_date: selectedDate,
+    clothtype_ids:clothIds
   };
+
+
+  function postOrderAddress() {
+    console.log(orderPostObj);
+    axiosInstance.post("/order/create", orderPostObj).then((resp) => {
+      console.log(resp.data);
+      const orderId = resp.data._id
+      localStorage.setItem("RecentOrder", JSON.stringify(resp.data));
+      localStorage.setItem('selectedAddress',JSON.stringify(selectedAddress))
+      navigate(`/paymentpage/${orderId}`)
+    });
+
+
+  }
 
   useEffect(() => {
     const storedAddress = localStorage.getItem("selectedAddress");
-
     if (storedAddress) {
       setSelectedAddress(JSON.parse(storedAddress));
     }
@@ -215,21 +251,22 @@ function AddressInfo() {
           <hr />
           <h5 className="text-capitalize ms-1">dry wash</h5>
           <Accordion defaultActiveKey="0">
-                    <Accordion.Item eventKey="0">
-                        <Accordion.Header>Mens Wear</Accordion.Header>
-                        <Accordion.Body>
-                        {selectedItems && selectedItems.map((item)=>(
-                                  <div className="cart-item" key={item._id}>
-                                  <div className="d-flex justify-content-between">
-                                    <h5>{item.name}</h5>
-                                    <h5>{item.price * item.quantity}</h5>
-                                  </div>
-                                  <p>{`${item.quantity} x ${item.price} / per piece`}</p>
-                                </div>  
-                ))}
-                        </Accordion.Body>
-                    </Accordion.Item>      
-                </Accordion>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>Mens Wear</Accordion.Header>
+              <Accordion.Body>
+                {selectedItems &&
+                  selectedItems.map((item) => (
+                    <div className="cart-item" key={item._id}>
+                      <div className="d-flex justify-content-between">
+                        <h5>{item.name}</h5>
+                        <h5>{item.price}</h5>
+                      </div>
+                      <p>{`${item.quantity} x ${item.price} / per piece`}</p>
+                    </div>
+                  ))}
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
         </Col>
       </Row>
 
@@ -245,15 +282,15 @@ function AddressInfo() {
           </Link>
         </Col>
         <Col lg={4} md={5} sm={5}>
-          <Link to="/PaymentPage">
-            <Button
-              variant="primary"
-              className="me-auto w-75 text-center"
-              onClick={handleAddress}
-            >
-              Next
-            </Button>
-          </Link>
+          {/* <Link to="/PaymentPage"> */}
+          <Button
+            variant="primary"
+            className="me-auto w-75 text-center"
+            onClick={postOrderAddress}
+          >
+            Next
+          </Button>
+          {/* </Link> */}
         </Col>
       </Container>
     </Container>

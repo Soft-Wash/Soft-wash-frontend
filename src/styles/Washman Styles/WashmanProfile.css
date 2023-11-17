@@ -1,0 +1,111 @@
+.washman-bg{
+    width: 100vw;
+    background-color: whitesmoke;
+}
+.washman-page-content{
+    width: 70%;
+    margin: auto;
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+}
+.washman-header{
+    border-bottom: 2px solid grey;
+}
+.washman-header h2{
+    font-size: 17px;
+}
+.washman-profilePic-sec{
+    width: 100%;
+    padding: 20px 0;
+}
+.washman-profilePic{
+    width: 120px;
+    height: 120px;
+    border-radius: 70px;
+}
+.washman-profilePic img{
+    width: 100%;
+    height: 100%;
+    border-radius: 70px;
+}
+.washman-dp-btn{
+    height: 35px;
+    margin-top: 75px;
+    margin-left: 15px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(13,202,240);
+    border: none;
+}
+.washman-dp-btn:hover{
+    background-color: rgb(14, 149, 176);
+}
+
+
+.washman-profile-field{
+    width: 100%;
+    padding: 5px 40px 5px 10px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    border: 1px solid grey;
+    background-color: whitesmoke;
+}
+.washman-profile-field h4{
+    font-size: 13px;
+}
+.edit-washman-profile-btn{
+    width: 100%;
+    height: 35px;
+    margin-top: 25px;
+    /* margin-left: 15px; */
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(13,202,240);
+    border: none;
+}
+.edit-washman-profile-btn:hover{
+    background-color: rgb(14, 149, 176);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

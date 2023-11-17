@@ -1,0 +1,7 @@
+.washman-single-order-content select{
+    width: 150px;
+    font-size: 13px;
+    border: 1px solid grey;
+    color: red;
+    background-color: white;
+}
