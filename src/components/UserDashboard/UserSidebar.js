@@ -4,9 +4,18 @@ import logo from '../../assets/Orders/SoftWash.png'
 import { FaHome, FaClipboardList, FaPhoneAlt } from "react-icons/fa";
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import {useEffect,useState} from "react"
 
 function UserSidebar(){
+    const [orderId,setorderId]=useState()
 
+    useEffect(()=>{
+        const OrderId = JSON.parse(localStorage.getItem("OrderDetailsId"))
+        if(OrderId){
+            setorderId(OrderId)
+        }
+
+},[])
 
 
     return(
@@ -16,7 +25,7 @@ function UserSidebar(){
             </div>
             <Nav variant="pills" defaultActiveKey="/home">                
                 <Link to='/'><FaHome className='sidebar-icon'/>Home</Link>
-                <Link to='/order-details'><FaClipboardList className='sidebar-icon'/>My Orders</Link>
+                <Link to={`/my-orders/${orderId}`}><FaClipboardList className='sidebar-icon'/>My Orders</Link>
                 <Link to='/dashboard-contact-us'><FaPhoneAlt className='sidebar-icon'/>Contact Us</Link>
             </Nav>
         </div>
@@ -26,33 +35,3 @@ function UserSidebar(){
 export default UserSidebar;
 
 
-
-
-
-
-
-
-
-// import React from 'react';
-// import Nav from 'react-bootstrap/Nav';
-// import "../styles/UserProfile.css"
-
-// function UserSidebar() {
-//   return (
-//     <div className="user-sidebar">
-//       <Nav variant="pills" defaultActiveKey="/home">
-//         <Nav.Item>
-//           <Nav.Link href="/home">Home</Nav.Link>
-//         </Nav.Item>
-//         <Nav.Item>
-//           <Nav.Link href="/link-1">Link 1</Nav.Link>
-//         </Nav.Item>
-//         <Nav.Item>
-//           <Nav.Link href="/link-2">Link 2</Nav.Link>
-//         </Nav.Item>
-//       </Nav>
-//     </div>
-//   );
-// }
-
-// export default UserSidebar;
