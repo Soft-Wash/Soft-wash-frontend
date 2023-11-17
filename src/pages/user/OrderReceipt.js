@@ -42,7 +42,7 @@ const orderDetails = JSON.parse(localStorage.getItem('orderDetails'))
    const userId = resp.data.customer_id._id
    console.log(userId)
    localStorage.setItem("UserId",JSON.stringify(userId))
-   navigate(`/my-orders/${userId}`)
+   navigate(`/my-orders`)
     });
 
   }
