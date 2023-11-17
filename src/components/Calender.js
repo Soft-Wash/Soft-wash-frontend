@@ -28,15 +28,18 @@ function Calender() {
 
 
 
-  const handleTimeChange = (event) => {
-    setSelectedTime(event.target.value);
+  const handleTimeChange = (time) => {
+    setSelectedTime(time);
   };
 
   const[activeBtn, setActiveBtn] = useState(1);
 
-  const handleBtnClick = (btnNo) => {
+  const handleBtnClick = (btnNo,time) => {
       setActiveBtn(btnNo)
+      handleTimeChange(time)
   }
+
+  console.log(selectedTime)
 
   
   return (
@@ -56,13 +59,13 @@ function Calender() {
           <div className="mx-5" style={{display: "flex", flexDirection: "column"}}>
             <Button className="booking-time-btn px-5" 
             variant={activeBtn === 1 ? 'primary' : 'light'}
-            onClick={() => handleBtnClick(1)}
+            onClick={() => handleBtnClick(1,"08:00 - 10:00 AM")}
             >
               08:00 - 10:00 AM
             </Button>
             <Button className="booking-time-btn px-5 my-3" 
             variant={activeBtn === 2 ? 'primary' : 'light'}
-            onClick={() => handleBtnClick(2)}
+            onClick={() => handleBtnClick(2,"04:00 - 07:00 PM")}
             >
               04:00 - 07:00 PM
             </Button>

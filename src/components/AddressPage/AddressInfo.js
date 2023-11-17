@@ -12,13 +12,13 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function AddressInfo() {
-  const [selectedItems, setSelectedItems] = useState();
   const [selectedTime, setSelectedTime] = useState();
   const [customerId, setCustomerId] = useState();
   const [clothIds,setClothIds] = useState()
   let arrayObj = [];
   const navigate = useNavigate();
   const [selectedItems,setSelectedItems]= useState()
+  const [selectedDate, setSelectedDate] = useState();
 
   const getQuantity = () => {
     const clothQuantity = localStorage.getItem("clothQuantity");
@@ -44,6 +44,10 @@ function AddressInfo() {
       ? JSON.parse(calenderSelectedTime)
       : null;
     setSelectedTime(parsedCalenderSelectedTime);
+    const calenderSetDate = localStorage.getItem("calenderStartDate");
+    const storedDate = new Date(JSON.parse(calenderSetDate));
+    const parsedCalenderSetDate = storedDate;
+    setSelectedDate(parsedCalenderSetDate);
     const customer_id = localStorage.getItem("softwashLoginUser");
     const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
     setCustomerId(parsedCustomerData);
@@ -75,6 +79,7 @@ function AddressInfo() {
     customer_id: customerId?._id,
     deliveryAddress: selectedAddress.FullAddress,
     pickuptime: selectedTime,
+    schedule_date: selectedDate,
     clothtype_ids:clothIds
   };
 
@@ -83,10 +88,12 @@ function AddressInfo() {
     console.log(orderPostObj);
     axiosInstance.post("/order/create", orderPostObj).then((resp) => {
       console.log(resp.data);
+      const orderId = resp.data._id
       localStorage.setItem("RecentOrder", JSON.stringify(resp.data));
+      navigate(`/paymentpage/${orderId}`)
     });
 
-    navigate('/paymentpage')
+
   }
 
   useEffect(() => {
