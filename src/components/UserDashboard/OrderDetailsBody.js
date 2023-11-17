@@ -1,15 +1,36 @@
 import '../../styles/UserOrderDetails.css';
 import { FaCircleInfo, FaHotTubPerson, FaMoneyCheckDollar } from "react-icons/fa6";
 import Accordion from 'react-bootstrap/Accordion';
-
+import {useEffect,useState} from "react"
+import { axiosInstance } from "../../services/AxiosInstance";
 
 
 
 
 function OrderDetailsBody(){
+
+    const [orderdetails,setorderDetails] = useState()
+    const [pickUpDateValue, setpickUpDate]=useState()
+
+useEffect(()=>{
+const orderId = JSON.parse(localStorage.getItem('OrderDetailsId'))
+axiosInstance.get(`/order/${orderId}/order`)
+.then((resp)=> {
+  console.log(resp.data)
+  setorderDetails(resp.data)
+  const pickUpDate = resp.data.schedule_date;
+  const latestDate = new Date(pickUpDate);
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const pickUpDateValue = latestDate.toLocaleDateString('en-US', options);
+  setpickUpDate(pickUpDateValue);
+})
+},[])
+
+    
     return(
         <div className="dashboard-bg">
             <h1>Order Details</h1>
+
             <div className="user-dashboard-contact-body">
                 <div className='order-header'>
                     <FaCircleInfo className='green-icon'/>
@@ -17,15 +38,15 @@ function OrderDetailsBody(){
                 </div>   
                 <div className='order-field'>
                     <h3>Order Id </h3>
-                    <p>ORD29384</p>
+                    <p>{orderdetails?._id.substring(0, orderdetails?._id.length / 2)}</p>
                 </div>
                 <div className='order-field'>
                     <h3>Pickup Date & Time </h3>
-                    <p>2nd December 2023 5pm</p>
+                    <p>{`${pickUpDateValue} ${orderdetails?.pickuptime}`}</p>
                 </div>
                 <div className='order-field'>
                     <h3>Status</h3>
-                    <p>Placed Order</p>
+                    <p>{orderdetails?.status}</p>
                 </div>
                 <div className='order-header'>
                     <FaHotTubPerson className='green-icon'/>
@@ -35,20 +56,16 @@ function OrderDetailsBody(){
                     <Accordion.Item eventKey="0">
                         <Accordion.Header>Mens Wear</Accordion.Header>
                         <Accordion.Body>
+                            {orderdetails?.clothtype_ids&&orderdetails?.clothtype_ids.map((item)=>(
                             <div className="cart-item">
-                                <div className="d-flex justify-content-between">
-                                    <h5>Tie</h5>
-                                    <h5>N4,000</h5>
-                                </div>
-                                <p>2 x N2,000 / per piece</p>
+                            <div className="d-flex justify-content-between">
+                                <h5>{item.name}</h5>
+                                <h5>N{orderdetails.subtotal}</h5>
                             </div>
-                            <div className="cart-item">
-                                <div className="d-flex justify-content-between">
-                                    <h5>T-Shirt</h5>
-                                    <h5>N12,500</h5>
-                                </div>
-                                <p>5 x N2,500 / per piece</p>
-                            </div>
+                            <p>{`2 x N${item.price} / per piece`}</p>
+                        </div>
+                            ))}
+
                         </Accordion.Body>
                     </Accordion.Item>      
                 </Accordion>
@@ -58,7 +75,7 @@ function OrderDetailsBody(){
                 </div>   
                 <div className='order-field'>
                     <h3>Sub-total Price</h3>
-                    <p>N5,000</p>
+                    <p>N{orderdetails?.subtotal}</p>
                 </div>
                 <div className='order-field'>
                     <h3>VAT</h3>

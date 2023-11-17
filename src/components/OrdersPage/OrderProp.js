@@ -4,6 +4,11 @@ import { useNavigate } from "react-router-dom";
 export default function OrderProp(props) {
   const Navigate = useNavigate();
 
+    function handleSingleOrder(orderId){
+localStorage.setItem("OrderDetailsId",JSON.stringify(orderId))
+Navigate(`/order-details`)
+    }
+
   return (
     <>
       <Row className="mt-4 px-5 py-4 shadow-sm rounded-4">
@@ -38,16 +43,12 @@ export default function OrderProp(props) {
           </Row>
         </Col>
 
-        <Col lg={2} md={4} sm={6} className="h-100">
-          <Row className="mb-3"></Row>
-          <Button
-            className="mb-1 fs-6 fw-normal my-auto bg-transparent p-0 m-0 text-secondary h-50 border-secondary px-2 "
-            onClick={() => Navigate("/order-details")}
-          >
-            View
-          </Button>
-        </Col>
-      </Row>
+          <Col lg={2} md={4} sm={6} className="h-100">
+            <Row className="mb-3"></Row>
+            <Button className="mb-1 fs-6 fw-normal my-auto bg-transparent p-0 m-0 text-secondary h-50 border-secondary px-2 " onClick={()=>handleSingleOrder(props.id)}>View</Button>
+          </Col>
+        </Row>
+      {/* </Container> */}
     </>
   );
 }

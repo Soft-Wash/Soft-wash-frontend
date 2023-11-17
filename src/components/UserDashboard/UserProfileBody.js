@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 
 function UserProfileBody(){
     return(
-        <div className="user-dashboard-body">
+        <div className="user-dashboard-body"  >
             <h2>User Profile</h2>
             <div className="user-body-cols">
                 <div className='user-profile-col1'>
@@ -17,7 +17,7 @@ function UserProfileBody(){
                 <div className='user-profile-col2'>
                     <div className='desc'>
                         <h3>Personal Information</h3>
-                        <Button variant="primary">Primary</Button>
+                        <Button style={{background: "rgb(13,202,240)", width: "110px"}}>Edit</Button>
                     </div>
                     <div className='user-profile-details'>
                         <p>Name</p>

@@ -8,7 +8,9 @@ import UserProfileBody from '../components/UserDashboard/UserProfileBody';
 function UserProfilePage(){
     return(
         <div className='user-dashboard-container'>
-            <UserSidebar />
+            <div className='user-sidebar-profile'>
+                <UserSidebar />
+            </div>
             <div className='user-dashboard-content'>
                 <UserDashboardNav />
                 <UserProfileBody />
