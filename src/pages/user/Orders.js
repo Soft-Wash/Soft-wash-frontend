@@ -11,35 +11,36 @@ import OrderProp from "../../components/OrdersPage/OrderProp";
 import { useEffect } from "react";
 import { axiosInstance } from "../../services/AxiosInstance";
 import { useState } from "react";
+import {useParams} from "react-router-dom"
 
 export default function Orders() {
-
   const [userOrders,setuserOrders] = useState()
-  const [selectedAddressInfo,setSelectedAddressInfo] = useState()
-  const[userID,setuserId]=useState()
   const [orderplaced,setorderplaced] = useState()
+  const [UserId,setUserId]= useState()
+  // const { userId } = useParams();
+  // console.log(userId)
+  const [pickUpDateValue, setpickUpDate]=useState()
+
 
   useEffect(()=>{
-    const customer_id = localStorage.getItem('softwashLoginUser')
-    const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
-   const userId = parsedCustomerData?._id
-   setuserId(userId)
-   const selectedAddress = localStorage.getItem('selectedAddress');
-   const parsedSelectedAddress = selectedAddress ? JSON.parse(selectedAddress) : null;
-   setSelectedAddressInfo(parsedSelectedAddress);
-
-
+    const userId = JSON.parse(localStorage.getItem("UserId"))
+    setUserId(userId)
 
     axiosInstance.get(`/order/${userId}/allorders`)
     .then((resp)=> {
       console.log(resp.data)
       setuserOrders(resp.data)
+      const pickUpDate = resp.data.schedule_date;
+      const latestDate = new Date(pickUpDate);
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const pickUpDateValue = latestDate.toLocaleDateString('en-US', options);
+      setpickUpDate(pickUpDateValue);
     })
 
   },[])
 
   const getPLacedOrder=()=>{
-    axiosInstance.get(`/order/${userID}/orderplaced`)
+    axiosInstance.get(`/order/${UserId}/orderplaced`)
     .then((resp)=> {
       console.log(resp.data)
       setorderplaced(resp.data)
@@ -47,12 +48,6 @@ export default function Orders() {
   }
 
   
-
-
-
-
-
-
   return (
     <>
       <Navigation />
@@ -104,7 +99,7 @@ export default function Orders() {
               <OrderProp 
               id={item._id.substring(0,item._id.length/2)}
               pickup={item.pickuptime}
-              address={selectedAddressInfo.FullAddress}
+              address={pickUpDateValue}
               price={item.subtotal}
               status={item.status}
               />
@@ -116,7 +111,7 @@ export default function Orders() {
               <OrderProp
               id={item._id.substring(0,item._id.length/2)}
               pickup={item.pickuptime}
-              address={selectedAddressInfo.FullAddress}
+              address={pickUpDateValue}
               price={item.subtotal}
               status={item.status}
  />

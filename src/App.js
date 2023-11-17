@@ -26,6 +26,7 @@ import UserProfilePage from "./pages/UserProfilePage";
 import UserDashboardContactPage from "./pages/UserDashboardContactPage";
 import UserOrderDetailsPage from "./pages/UserOrderDetailsPage";
 import VariablesContext from "./context/VariablesContext";
+import WashmanProfilePage from "./components/Washman Components/WashmanProfileBody"
 import WashmanProfilePage from "./pages/Washman Pages/WashmanProfilePage";
 import WashmanOrdersPage from "./pages/Washman Pages/WashmanOrdersPage";
 import WashmanDashboardPage from "./pages/Washman Pages/WashmanDashboardPage";
@@ -52,7 +53,7 @@ function App() {
          <Route path="/dashboard-contact-us" element={<UserDashboardContactPage />} />
          <Route path="/order-details" element={<UserOrderDetailsPage />} />
          <Route path="/ClothesSelection" element={<ClothesSelection/>}/>
-        <Route path="/PaymentPage" element={<PaymentPage/>}/>
+        <Route path="/PaymentPage/:orderId" element={<PaymentPage/>}/>
          <Route path="/pricing" element={<PricingPage />} />
          <Route path="/ourservices" element={<Services/>} />
          <Route path="/about" element={<About/>} />
@@ -61,8 +62,8 @@ function App() {
          <Route path="/wishlist" element={<Wishlist/>} />
          <Route path="/cart" element={<Cart/>} />
          
-        <Route path="/my-orders" element={<Orders/>}/>
-        <Route path="/order-receipt" element={<OrderReceipt/>}/>
+        <Route path="/my-orders/:orderId" element={<Orders/>}/>
+        <Route path="/order-receipt/:orderId" element={<OrderReceipt/>}/>
 
         {/* WASHMAN ROUTES */}
         <Route path="/washman-profile" element={<WashmanProfilePage/>}/>

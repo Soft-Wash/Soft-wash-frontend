@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { axiosInstance } from "../services/AxiosInstance";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 function PaymentPage() {
   const [selectedTime, setSelectedTime] = useState();
@@ -20,26 +21,18 @@ function PaymentPage() {
   const [userOrder, setuserOrder] = useState();
   const [newlocaldate, setnewlocaldate] = useState(selectedDate);
   const [selectedAddress, setSelectedAddress] = useState();
+
   
   const options = { day: "numeric", month: "long" };
-  let orderId = "order";
   let orderDetails = {};
   const navigate = useNavigate();
+  const { orderId } = useParams();
+  const [pickUpDateValue, setpickUpDate]=useState()
 
   function getLocalStorageData() {
-    const calenderSetDate = localStorage.getItem("calenderStartDate");
-    const storedDate = new Date(JSON.parse(calenderSetDate));
     const deliveryType = localStorage.getItem("deliveryType");
-    const getOrderId = JSON.parse(localStorage.getItem("RecentOrder"));
-    orderId = getOrderId._id;
-    setorderId(getOrderId);
-    console.log(orderId);
-
-    const parsedCalenderSetDate = storedDate;
     const parsedDeliveryType = deliveryType ? JSON.parse(deliveryType) : null;
-    setSelectedDate(parsedCalenderSetDate);
     setSelectedDeliveryType(parsedDeliveryType);
-    setnewlocaldate(selectedDate);
   }
 
   function GetUserDetails() {
@@ -49,6 +42,11 @@ function PaymentPage() {
       .then((resp) => {
         console.log(resp.data);
         setorderData(resp.data);
+        const pickUpDate = resp.data.schedule_date;
+        const latestDate = new Date(pickUpDate);
+        const options = { day: "numeric", month: "long" };
+        const pickUpDateValue = latestDate?.toDateString("en-US", options);
+        setpickUpDate(pickUpDateValue);
       });
 
   }
@@ -58,33 +56,28 @@ function PaymentPage() {
     GetUserDetails();
   }, []);
 
-  console.log(newlocaldate);
-  const pickUpDateValue = newlocaldate?.toDateString("en-US", options);
+
 
   orderDetails = {
     subtotal: 20000,
-    schedule_date: selectedDate,
     delivery_type: 2,
   };
 
   console.log(orderDetails);
-  console.log(customerId);
   
 
   const postOrder = () => {
     axios
-      .put(`${process.env.REACT_APP_BASE_URL}/order/${customerId._id}/update`, orderDetails)
+      .put(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/update`, orderDetails)
       .then((resp) => {
         console.log(orderDetails);
         console.log(resp.data);
         setuserOrder(resp.data);
-        console.log(userOrder);
         localStorage.setItem("orderDetails", JSON.stringify(resp.data));
-              navigate("/order-receipt");
+              navigate(`/order-receipt/${orderId}`);
       });
   };
 
-  console.log(orderData);
 
   return (
     <div>
@@ -164,7 +157,7 @@ function PaymentPage() {
                   <div className="PickUpDate">
                     <h6 className="fw-bold">Pic-Up Date</h6>
                       <div>
-                        <p>{orderData?.pickuptime}</p>
+                        <p>{pickUpDateValue}</p>
                       </div>
 
                     <Link to="/date">
