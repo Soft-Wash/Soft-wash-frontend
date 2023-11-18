@@ -1,5 +1,4 @@
 import '../../styles/UserProfile.css';
-
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { CDBSidebar, CDBSidebarContent, CDBSidebarFooter, CDBSidebarHeader, CDBSidebarMenu, CDBSidebarMenuItem,} from 'cdbreact';

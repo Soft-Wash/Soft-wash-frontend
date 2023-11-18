@@ -10,22 +10,15 @@ import { useEffect } from "react";
 import { axiosInstance } from "../../services/AxiosInstance";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import {BsFillTrashFill} from "react-icons/bs";
+import { BsFillTrashFill } from "react-icons/bs";
 
 function AddressInfo() {
-  const [selectedItems, setSelectedItems] = useState();
   const [selectedTime, setSelectedTime] = useState();
   const [customerId, setCustomerId] = useState();
-  const [clothIds,setClothIds] = useState()
+  const [clothIds, setClothIds] = useState();
   let arrayObj = [];
   const navigate = useNavigate();
-  function AddressInfo() {
-    const [selectedTime, setSelectedTime] = useState();
-    const [customerId, setCustomerId] = useState();
-    const [clothIds,setClothIds] = useState()
-    let arrayObj = [];
-    const navigate = useNavigate();
-  const [selectedItems,setSelectedItems]= useState()
+  const [selectedItems, setSelectedItems] = useState();
   const [selectedDate, setSelectedDate] = useState();
   const [clicked, setClicked] = useState(false);
 
@@ -61,7 +54,9 @@ function AddressInfo() {
     const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
     setCustomerId(parsedCustomerData);
     const clothQuantity = localStorage.getItem("clothQuantity");
-    const parsedClothQuantity = clothQuantity ? JSON.parse(clothQuantity) : null;
+    const parsedClothQuantity = clothQuantity
+      ? JSON.parse(clothQuantity)
+      : null;
     if (parsedClothQuantity) {
       let keys = Object.keys(parsedClothQuantity);
       const values = Object.values(parsedClothQuantity);
@@ -73,39 +68,42 @@ function AddressInfo() {
     contactNumber: "",
     FullAddress: "",
     SearchedAddress: "",
-    AddressTypeHome: false,
-    AddressTypeWork: false,
-    AddressTypeOther: false,
+    AddressType: ""
   });
+
+  console.log(selectedAddress)
 
   const handleChange = (e) => {
     const value =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
-    setSelectedAddress({ ...selectedAddress, [e.target.name]: value });
+  
+
+    if (e.target.name.startsWith("AddressType")) {
+      setSelectedAddress({ ...selectedAddress, AddressType: e.target.name });
+    } else {
+      setSelectedAddress({ ...selectedAddress, [e.target.name]: value });
+    }
   };
 
 
 
   let orderPostObj = {
     customer_id: customerId?._id,
-    deliveryAddress: selectedAddress.FullAddress,
+    deliveryAddress: selectedAddress,
     pickuptime: selectedTime,
     schedule_date: selectedDate,
-    clothtype_ids:clothIds
+    clothtype_ids: clothIds,
   };
-
 
   function postOrderAddress() {
     console.log(orderPostObj);
     axiosInstance.post("/order/create", orderPostObj).then((resp) => {
       console.log(resp.data);
-      const orderId = resp.data._id
+      const orderId = resp.data._id;
       localStorage.setItem("RecentOrder", JSON.stringify(resp.data));
-      localStorage.setItem('selectedAddress',JSON.stringify(selectedAddress))
-      navigate(`/paymentpage/${orderId}`)
+      localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
+      navigate(`/paymentpage/${orderId}`);
     });
-
-
   }
 
   useEffect(() => {
@@ -123,8 +121,8 @@ function AddressInfo() {
             <h4 className="text-primary mb-3 fw-semibold ps-2 text-capitalize">
               Choose your address
             </h4>
-
-            <div
+            {selectedAddress.FullAddress.length ?(
+             <div
               className={`w-100 d-flex justify-content-between gap-3 shadow-sm rounded py-4 mx-auto mx-0 ps-4 ${
                 clicked
                   ? "border bg-primary-subtle  shadow-sm border border-primary border-2 "
@@ -139,14 +137,19 @@ function AddressInfo() {
               />
               <Row className="w-100">
                 <p className="w-100 text-black fs-5 fw-semibold my-auto ">
-                  No. 234, Whyoming Street, Solid Estate, Bay Area, Nigeria
+              {selectedAddress?.FullAddress}
                 </p>
               </Row>
               <BsFillTrashFill
                 className="me-2 p-1 h-100 my-auto  border border-info rounded-circle text-info"
                 style={{ width: "30px", heigth: "auto" }}
               />
-            </div>
+            </div> 
+            ):(
+              <p style={{margin:"10px"}}>No Address Added Yet!</p>
+            )}
+
+
           </div>
           <Row className="w-100 text-center my-4">
             <h3>Or</h3>
@@ -213,6 +216,7 @@ function AddressInfo() {
                           aria-label="radio 1"
                           onChange={handleChange}
                           name="AddressTypeHome"
+                          checked={selectedAddress.AddressTypeHome === 'AddressTypeHome'}
                         />
                         <Form.Label>Home</Form.Label>
                       </Form.Group>
@@ -222,6 +226,7 @@ function AddressInfo() {
                           aria-label="radio 1"
                           onChange={handleChange}
                           name="AddressTypeWork"
+                          checked={selectedAddress.AddressTypeWork === 'AddressTypeWork'}
                         />
                         <Form.Label>Work</Form.Label>
                       </Form.Group>
@@ -231,6 +236,7 @@ function AddressInfo() {
                           aria-label="radio 1"
                           onChange={handleChange}
                           name="AddressTypeOther"
+                          checked={selectedAddress.AddressTypeOther === 'AddressTypeOther'}
                         />
                         <Form.Label>Other</Form.Label>
                       </Form.Group>
@@ -303,6 +309,6 @@ function AddressInfo() {
     </Container>
   );
 }
-}
+
 
 export default AddressInfo;
