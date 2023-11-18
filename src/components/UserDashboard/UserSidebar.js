@@ -50,16 +50,6 @@ function UserSidebar(){
               </div>
             </CDBSidebarFooter>
           </CDBSidebar>
-        <div className='user-sidebar-profile '>
-            <div className='user-sidebar-logo mt-4 mb-4'>
-                <img src={logo} alt="" />
-            </div>
-            <Nav variant="pills" defaultActiveKey="/home">                
-                <Link to='/'><FaHome className='sidebar-icon'/>Home</Link>
-                <Link to={`/my-orders`}><FaClipboardList className='sidebar-icon'/>My Orders</Link>
-                <Link to='/dashboard-contact-us'><FaPhoneAlt className='sidebar-icon'/>Contact Us</Link>
-            </Nav>
-        </div>
       </div>
 
     )

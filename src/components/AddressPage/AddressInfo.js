@@ -303,5 +303,6 @@ function AddressInfo() {
     </Container>
   );
 }
+}
 
 export default AddressInfo;
