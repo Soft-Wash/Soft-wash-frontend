@@ -34,6 +34,7 @@ export default function Orders() {
       const latestDate = new Date(pickUpDate);
       const options = { year: 'numeric', month: 'long', day: 'numeric' };
       const pickUpDateValue = latestDate.toLocaleDateString('en-US', options);
+      console.log(pickUpDateValue)
       setpickUpDate(pickUpDateValue);
     })
 
@@ -46,6 +47,8 @@ export default function Orders() {
       setorderplaced(resp.data)
     })
   }
+
+  console.log(pickUpDateValue)
 
   
   return (

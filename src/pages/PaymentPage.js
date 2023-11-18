@@ -21,6 +21,11 @@ function PaymentPage() {
   const [userOrder, setuserOrder] = useState();
   const [newlocaldate, setnewlocaldate] = useState(selectedDate);
   const [selectedAddress, setSelectedAddress] = useState();
+  const [paymentMethod,setpaymentMethod]= useState(()=>{
+    const storedPayment = localStorage.getItem('paymentType')
+    return storedPayment?JSON.parse(storedPayment): ""
+
+  });
 
   
   const options = { day: "numeric", month: "long" };
@@ -75,16 +80,38 @@ function PaymentPage() {
   }, []);
 
 
+function handlePaymentPage(e){
+  const value =
+  e.target.type === "checkbox"
+  ? e.target.checked
+  : e.target.type === "file" 
+  ? e.target.file[0]
+  : e.target.value
 
-  orderDetails = {
-    subtotal: 20000,
-    delivery_type: 2,
-  };
+  setpaymentMethod({[e.target.name]:value })
+}
 
-  console.log(orderDetails);
-  
+useEffect(()=>{
+  localStorage.setItem("paymentType", JSON.stringify(paymentMethod));
+},[paymentMethod])
+
+  console.log(paymentMethod)
 
   const postOrder = () => {
+    const deliveryType = JSON.parse(localStorage.getItem('deliveryType'))
+    const key = Object.keys(deliveryType)
+    const stringDeliveryType = key.join("");
+    const paymentType = JSON.parse(localStorage.getItem('paymentType'))
+    const paymentkey = Object.keys(paymentType)
+    const stringPaymenType = paymentkey.join("");
+    orderDetails = {
+      subtotal: 20000,
+      delivery_type: stringDeliveryType,
+      payment_method:stringPaymenType
+    };
+  
+    console.log(orderDetails);
+
     axios
       .put(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/update`, orderDetails)
       .then((resp) => {
@@ -119,8 +146,10 @@ function PaymentPage() {
                       <input
                         class="form-check-input"
                         type="radio"
-                        name="flexRadioDefault"
+                        name="payWithCard"
                         id="flexRadioDefault1"
+                        onChange={(e)=>handlePaymentPage(e)}
+                        checked={paymentMethod === "payWithCard"}
                       />
                       <label class="form-check-label" for="flexRadioDefault1">
                         Pay With Card
@@ -144,8 +173,10 @@ function PaymentPage() {
                       <input
                         class="form-check-input"
                         type="radio"
-                        name="flexRadioDefault"
+                        name="payWithCash"
                         id="flexRadioDefault1"
+                        onChange={(e)=>handlePaymentPage(e)}
+                        checked={paymentMethod === "payWithCash"}
                       />
                       <label
                         className="form-check-label"

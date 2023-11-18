@@ -9,7 +9,7 @@ import { useState,useContext } from 'react';
 import { registerUser } from '../../../services/register';
 import { variableManager } from '../../../context/VariablesContext';
 import {Loader} from "../../../common/Loader"
-// import { async } from 'q';
+
 
 
 
@@ -17,7 +17,7 @@ export default function Signup() {
     const navigate = useNavigate();
     const [empty, setEmpty] = useState(false);
     const { operation, setUser } = useContext(variableManager);
-    // const [handleSubmit, sethandleSubmit] =useState();
+    const [loading, setLoading] = useState(false); 
     const [userDetails, setUserDetails] = useState({
       fullName: "",
       email: "",
@@ -37,23 +37,26 @@ export default function Signup() {
     }
   
     function handleValidation() {
+
       const { fullName, email, phone, password } = userDetails;
       if (fullName && email && phone && password) {
         handleSubmit(userDetails);
         console.log(userDetails)
       } else {
         setEmpty(true);
-      }
+      } 
     }
 
     async function handleSubmit(payload) {
+      setLoading(true);
       const {data,error} = await registerUser(payload);
+      setLoading(false);
       if(data){
         setUser(data);
         navigate('/UserLogin')
       }
       console.log(data?data:error);
-    }
+    } 
 
 
   
@@ -187,14 +190,16 @@ export default function Signup() {
               
   
               <div className="button-section">
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleValidation();
-                  }}
-                >Sign up</button>
-              </div>
-  
+              <button
+                disabled={loading} // Disable the button while loading
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleValidation();
+                }}
+              >
+                Sign up
+              </button>
+            </div>  
               <p className="note">
                 By clicking "Sign Up" you agree to our Terms of Service and
                 Privacy Policy
@@ -202,6 +207,7 @@ export default function Signup() {
             </form>
           </div>
         </div>
+        <Loader color="primary" size="lg" show={loading} /> 
       </div>
     );
   }

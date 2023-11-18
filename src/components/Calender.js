@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import TimePicker from "react-time-picker";
 import { Button, Container } from "react-bootstrap";
 import { useEffect } from "react";
@@ -10,12 +9,7 @@ function Calender() {
   const [startDate, setStartDate] = useState(() => {
     const storedDate = localStorage.getItem("calenderStartDate");
     return storedDate ? new Date(JSON.parse(storedDate)) : new Date();
-    // return storedDate ? new Date(storedDate) : new Date(Date.now());
-
-
   });
-
-  // const startDateTimestamp = startDate.getTime()
 
   const [selectedTime, setSelectedTime] = useState(() => {
     const storedTime = localStorage.getItem("calenderSelectedTime");
