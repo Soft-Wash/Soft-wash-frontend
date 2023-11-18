@@ -1,10 +1,8 @@
 import { Button } from "react-bootstrap";
-import "../../styles/Washman Styles/WashmanProfile.css"
-<<<<<<< HEAD
-import profilePic from "../../assets/washman-pic.jpg"
-=======
-import profilePic from "../../assets/washman/kevin2.jpg"
->>>>>>> c9a798097d3a475ba761233510a0b5a5ac7d73f1
+import "../../styles/Washman Styles/WashmanProfile.css";
+import profilePic from "../../assets/washman/kevin2.jpg";
+import { Link } from 'react-router-dom';
+
 
 function WashmanProfileBody(){
     return(
@@ -68,8 +66,10 @@ function WashmanProfileBody(){
                         <h4>Email</h4>
                         <h4>peterscott@gmail.com</h4>
                     </div>
-                </div>        
+                </div>      
+                <Link to={"/washman-edit-profile"} className="washman-form-link">
                 <Button className="edit-washman-profile-btn">Edit Profile</Button>     
+                </Link>  
             </div>
         </div>
     )
