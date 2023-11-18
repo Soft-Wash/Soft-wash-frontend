@@ -185,12 +185,12 @@ const [clothId,setclothId]=useState()
 
 
   return (
-    <div className="scale">
-      <Tabs
+    
     <div>
       {loading?(
                 <Loader color="primary" size="lg" show={loading} />
       ):(
+    
 <>
 <Tabs
         defaultActiveKey="profile"

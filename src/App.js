@@ -55,13 +55,8 @@ function App() {
          <Route path="/dashboard-contact-us" element={<UserDashboardContactPage />} />
          <Route path="/order-details/" element={<UserOrderDetailsPage />} />
          <Route path="/ClothesSelection" element={<ClothesSelection/>}/>
-<<<<<<< HEAD
-        <Route path="/PaymentPage" element={<PaymentPage/>}/>
-         <Route path="/pricing" element={<PricingPage />} />co
-=======
         <Route path="/PaymentPage/:orderId" element={<PaymentPage/>}/>
          <Route path="/pricing" element={<PricingPage />} />
->>>>>>> 37706f9451dc1000777a600f99970a2d91bb1113
          <Route path="/ourservices" element={<Services/>} />
          <Route path="/about" element={<About/>} />
          <Route path="/marketplace" element={<MarketPlace/>} />
