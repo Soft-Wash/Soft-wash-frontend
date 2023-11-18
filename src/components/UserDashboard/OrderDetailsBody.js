@@ -20,7 +20,6 @@ function OrderDetailsBody(){
     // const progress = 20;
     const [progress, setProgress] = useState(0);
 
-      return(
 
     const [orderdetails,setorderDetails] = useState()
     const [pickUpDateValue, setpickUpDate]=useState()
