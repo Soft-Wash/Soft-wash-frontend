@@ -72,7 +72,7 @@ function UserProfileBody(){
                 <Link to={"/user-edit-profile"} className="user-form-link">
                 <Button className="edit-user-profile-btn">Edit Profile</Button>     
                 </Link>  
-            </div> */}
+            </div>
         </div>
     )
 }
