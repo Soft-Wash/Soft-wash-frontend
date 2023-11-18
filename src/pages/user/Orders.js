@@ -1,12 +1,12 @@
 import Navigation from "../../components/OrdersPage/Navigation";
-import UserSidebar from "../../components/OrdersPage/UserSidebar";
+import Sidebar from "../../components/OrdersPage/Sidebar";
 import { Container, Row, Col, Nav } from "react-bootstrap";
 import InputGroup from "react-bootstrap/InputGroup";
 
 import "../../styles/UserProfile.css";
 import { Form } from "react-router-dom";
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
 import OrderProp from "../../components/OrdersPage/OrderProp";
 import { useEffect } from "react";
 import { axiosInstance } from "../../services/AxiosInstance";
@@ -54,18 +54,25 @@ export default function Orders() {
   return (
     <>
       <Navigation />
-      {/* <UserSidebar /> */}
 
-      <Container className="m-5 ms-5">
-        <div className="mx-0 mb-4 w-100 d-flex justify-content-between">
-          <div>
-            <h4>My Orders</h4>
-          </div>
-          <div className="h-100 my-auto">
-            <input type="text" placeholder="Search" className="p-1 rounded-1 border border-secondary"/>
-          </div>
+      <div className="d-flex">
+        <div>
+          <Sidebar />
         </div>
-        <Row>
+        <Container className="m-5 ms-5">
+          <div className="mx-0 mb-4 w-75 d-flex justify-content-between">
+            <div>
+              <h4>My Orders</h4>
+            </div>
+            <div className="h-100 my-auto">
+              <input
+                type="text"
+                placeholder="Search"
+                className="p-1 rounded-1 border border-secondary"
+              />
+            </div>
+          </div>
+          <Row>
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
       <Row>
         <Col lg={12} sm={6}>
@@ -131,6 +138,7 @@ export default function Orders() {
     </Tab.Container>
         </Row>
       </Container>
+      </div>
     </>
   );
 }

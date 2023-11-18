@@ -1,5 +1,4 @@
 import '../styles/Datepage.css'
-import BookingBanner from "../components/BookingBanner";
 import BookingPickUpMode from '../components/BookingPickUpMode';
 import Calender from '../components/Calender';
 import SelectedCart from '../common/SelectedCart';
@@ -7,6 +6,7 @@ import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Navigation from '../common/Navigation';
 import { Link } from 'react-router-dom';
+import BookingBanner from '../components/BookingBanner';
 
 
 

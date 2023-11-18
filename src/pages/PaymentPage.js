@@ -56,9 +56,27 @@ function PaymentPage() {
 
   }
 
+      // Calculate Sob Total
+      const [subTotal, setSubtotal] = useState()
+      const [deliveryFee, setDeliveryFee] = useState()
+      const [discount, setDiscount] = useState()
+      const [tax, setTax] = useState()
+      const [total, setTotal] = useState()
+      function calcSubTotal(arr){
+          let sub_total = 0;
+          arr.map((item) => {
+              let item_price = parseInt(item.price) * item.quantity
+              sub_total += item_price
+          })
+          setSubtotal(sub_total)
+          console.log(sub_total)
+      }
+
   useEffect(() => {
     getLocalStorageData();
     GetUserDetails();
+     // Calculate sub total
+     calcSubTotal(JSON.parse(sessionStorage.getItem('softCart')))
   }, []);
 
 
@@ -211,33 +229,28 @@ useEffect(()=>{
               </div>
             </div>
             <div className="PayOpsRight col md-12">
-              <h5 class="TextColor fw-5">Price Details</h5>
-              <div className="div3 GreyBorder">
-                <div className="PriceTab1 d-flex justify-content-between p-3 GreyBorder2">
-                  <div>Subtotal</div>
-                  <div>Naira : 1500 </div>
-                </div>
-                <div className="PriceTab2 d-flex justify-content-between p-3 GreyBorder2">
-                  <div>Delivery Fees</div>
-                  <div>Naira : 1500 </div>
-                </div>
-                <div className="PriceTab1 d-flex justify-content-between p-3 GreyBorder2">
-                  <div>Discount</div>
-                  <div>Naira : 0.00 </div>
-                </div>
-                <div className="PriceTab1 d-flex justify-content-between p-3 GreyBorder2 ">
-                  <div>Tax</div>
-                  <div>Naira : 0.75 </div>
-                </div>
-                <div className="PriceTab1 d-flex justify-content-between p-3 ">
-                  <div>
-                    <h4>Total</h4>
-                  </div>
-                  <div>
-                    <h4>Naira : 0.75</h4>{" "}
-                  </div>
-                </div>
-              </div>
+            <div className="div3 GreyBorder">
+                           <div className="PriceTab1 d-flex justify-content-between p-3 GreyBorder2">
+                                <div>Subtotal</div> 
+                                <div>₦{subTotal}</div>
+                           </div>
+                           <div className="PriceTab2 d-flex justify-content-between p-3 GreyBorder2">
+                                <div>Delivery Fees</div> 
+                                <div>₦{deliveryFee || "1500"} </div>
+                           </div>
+                           <div className="PriceTab1 d-flex justify-content-between p-3 GreyBorder2">
+                                <div>Discount</div> 
+                                <div>₦{discount || "0.00"} </div>
+                           </div>
+                           <div className="PriceTab1 d-flex justify-content-between p-3 GreyBorder2 ">
+                                <div>Tax</div> 
+                                <div>₦{tax || "0.75"} </div>
+                           </div>
+                           <div className="PriceTab1 d-flex justify-content-between p-3 ">
+                                <div><h4>Total</h4></div> 
+                                <div><h4>₦{total || "0.00"}</h4> </div>
+                           </div>
+                        </div>
               <div className="PrevNextBtnRight">
                 <button className="btn btn-outline-primary  ">Prev</button>
                 <button className="btn btn-info">Confirm</button>
@@ -251,4 +264,3 @@ useEffect(()=>{
 }
 
 export default PaymentPage;
-

@@ -51,7 +51,7 @@ export default function SectionFour() {
             <HomeInfoProp top={"Testimonials"} title={"What Our Customers Say About Us"} desc={"Heres a carousel of our lovely customers and their reviews on our services"} css={"text-center pt-5"}/>
         </Row>
         <Container >
-        <Slider {...settings} className="me-5 d-flex ">
+        <Slider {...settings} className="  ">
             <div className="col-sm-12">
               <Testimonial
                 review={"My clothes were extra pampered! Got them picked up and delivered!"}
@@ -68,7 +68,7 @@ export default function SectionFour() {
                 className="shadow"
               />
             </div>
-            <div className="col-sm-12">
+           {/* <div className="col-sm-12">
               <Testimonial
                 review={"I was impressed in the quality of the work done, I recommend."}
                 name={"Nathaniel"}
@@ -83,7 +83,7 @@ export default function SectionFour() {
                 rating={5}
                 className="shadow"
               />
-            </div>
+            </div> */}
           </Slider>
         </Container>
       </Container>

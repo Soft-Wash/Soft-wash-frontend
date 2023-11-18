@@ -10,15 +10,17 @@ import { useEffect } from "react";
 import { axiosInstance } from "../../services/AxiosInstance";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {BsFillTrashFill} from "react-icons/bs";
 
-function AddressInfo() {
-  const [selectedTime, setSelectedTime] = useState();
-  const [customerId, setCustomerId] = useState();
-  const [clothIds,setClothIds] = useState()
-  let arrayObj = [];
-  const navigate = useNavigate();
+  function AddressInfo() {
+    const [selectedTime, setSelectedTime] = useState();
+    const [customerId, setCustomerId] = useState();
+    const [clothIds,setClothIds] = useState()
+    let arrayObj = [];
+    const navigate = useNavigate();
   const [selectedItems,setSelectedItems]= useState()
   const [selectedDate, setSelectedDate] = useState();
+  const [clicked, setClicked] = useState(false);
 
   const getQuantity = () => {
     const clothQuantity = localStorage.getItem("clothQuantity");
@@ -110,18 +112,45 @@ function AddressInfo() {
     <Container>
       <Row className="justify-content-between">
         <Col lg={7} md={12} sm={12}>
-          <Row className="border border-2 shadow rounded py-4"></Row>
+          <div className="w-100 border border-2 shadow-sm rounded py-4 px-3">
+            <h4 className="text-primary mb-3 fw-semibold ps-2 text-capitalize">
+              Choose your address
+            </h4>
+
+            <div
+              className={`w-100 d-flex justify-content-between gap-3 shadow-sm rounded py-4 mx-auto mx-0 ps-4 ${
+                clicked
+                  ? "border bg-primary-subtle  shadow-sm border border-primary border-2 "
+                  : null
+              }`}
+              style={{ width: "90%" }}
+            >
+              <Form.Check
+                type="radio"
+                aria-label="radio 1"
+                onClick={() => setClicked(true)}
+              />
+              <Row className="w-100">
+                <p className="w-100 text-black fs-5 fw-semibold my-auto ">
+                  No. 234, Whyoming Street, Solid Estate, Bay Area, Nigeria
+                </p>
+              </Row>
+              <BsFillTrashFill
+                className="me-2 p-1 h-100 my-auto  border border-info rounded-circle text-info"
+                style={{ width: "30px", heigth: "auto" }}
+              />
+            </div>
+          </div>
           <Row className="w-100 text-center my-4">
             <h3>Or</h3>
           </Row>
-          <Row className="border border-2 shadow rounded py-4">
+          <Row className="border border-2 shadow-sm rounded py-4">
             <Accordion defaultActiveKey="0">
               <Accordion.Item eventKey="1">
                 <Accordion.Header>Add Address</Accordion.Header>
                 <Accordion.Body>
                   <Row>
                     <InputGroup className="mb-3">
-                      {/* <InputGroup.Text id="basic-addon1">@</InputGroup.Text> */}
                       <Form.Control
                         placeholder="Enter Contact Number"
                         aria-label="Enter Contact Number"
@@ -134,7 +163,6 @@ function AddressInfo() {
                   </Row>
                   <Row>
                     <InputGroup className="mb-3">
-                      {/* <InputGroup.Text id="basic-addon1">@</InputGroup.Text> */}
                       <Form.Control
                         placeholder="Enter Full Address"
                         aria-label="Enter Full Address"
@@ -211,20 +239,17 @@ function AddressInfo() {
           lg={4}
           md={12}
           sm={12}
-          className="border border-2 shadow pb-3 mt-3"
+          className="border border-2 shadow-sm pb-3 mt-3"
         >
-          <Row className="d-flex justify-content-between  mt-3 mx-auto">
-            {/* <Col lg={7} md={6} sm={6}> */}
-            <h4 className="text-primary my-auto">Selected Items</h4>
-            {/* </Col> */}
-            {/* <Col lg={5} md={5} sm={6} className="text-end"> */}
-            <Button variant="primary" className="w-50 my-auto">
+          <div className="d-flex justify-content-between  mt-3 mx-auto">
+            <h4 className="text-primary my-auto col-lg-6">Selected Items</h4>
+            <Button variant="primary" className="w-25 my-auto  col-lg-3">
               Edit
             </Button>
             {/* </Col> */}
-          </Row>
+          </div>
           <hr />
-          <h4 className="text-capitalize ms-1">dry wash</h4>
+          <h5 className="text-capitalize ms-1">dry wash</h5>
           <Accordion defaultActiveKey="0">
             <Accordion.Item eventKey="0">
               <Accordion.Header>Mens Wear</Accordion.Header>
