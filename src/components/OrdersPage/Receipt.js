@@ -5,27 +5,36 @@ import { Row,  } from "react-bootstrap";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import {useParams} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 
 
 export default function Receipt() {
   const options = { day: 'numeric', month: 'long' };
   const [userData,setUserData] = useState()
-  const [pickUpDate, setpickUpDate]=useState()
+  const [pickUpDateValue, setpickUpDate]=useState()
+  const { orderId } = useParams();
+  const navigate = useNavigate()
 
   function getOrderDetails(){
-const orderId = JSON.parse(localStorage.getItem('orderDetails'))
-  const pickUpDate = orderId?.schedule_date
-   const latestDate = new Date(pickUpDate)
-     const pickUpDateValue = latestDate.toLocaleDateString('en-US', options);
-   setpickUpDate(pickUpDateValue)
-
+const orderDetails = JSON.parse(localStorage.getItem('orderDetails'))
     axios
-    .get(`${process.env.REACT_APP_BASE_URL}/order/${orderId._id}/order`)
+    .get(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/order`)
     .then((resp) => {
       console.log(resp.data);
       setUserData(resp.data)
+      const pickUpDate = resp.data.schedule_date;
+      const latestDate = new Date(pickUpDate);
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const pickUpDateValue = latestDate.toLocaleDateString('en-US', options);
+      setpickUpDate(pickUpDateValue);
+
     });
+  }
+
+  function Tonavigate(){
+    navigate(`/my-orders/${orderId}`)
   }
 
   useEffect(()=>{
@@ -52,7 +61,7 @@ const orderId = JSON.parse(localStorage.getItem('orderDetails'))
         <h5>Pickup Date</h5>
         </div>
         <div lg={3} >
-        <p>{pickUpDate}</p>
+        <p>{pickUpDateValue}</p>
         </div>
     </div>
     <div className="d-flex justify-content-between gap-3 mb-2">

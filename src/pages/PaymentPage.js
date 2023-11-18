@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { axiosInstance } from "../services/AxiosInstance";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 function PaymentPage() {
   const [selectedTime, setSelectedTime] = useState();
@@ -20,26 +21,23 @@ function PaymentPage() {
   const [userOrder, setuserOrder] = useState();
   const [newlocaldate, setnewlocaldate] = useState(selectedDate);
   const [selectedAddress, setSelectedAddress] = useState();
+  const [paymentMethod,setpaymentMethod]= useState(()=>{
+    const storedPayment = localStorage.getItem('paymentType')
+    return storedPayment?JSON.parse(storedPayment): ""
+
+  });
+
   
   const options = { day: "numeric", month: "long" };
-  let orderId = "order";
   let orderDetails = {};
   const navigate = useNavigate();
+  const { orderId } = useParams();
+  const [pickUpDateValue, setpickUpDate]=useState()
 
   function getLocalStorageData() {
-    const calenderSetDate = localStorage.getItem("calenderStartDate");
-    const storedDate = new Date(JSON.parse(calenderSetDate));
     const deliveryType = localStorage.getItem("deliveryType");
-    const getOrderId = JSON.parse(localStorage.getItem("RecentOrder"));
-    orderId = getOrderId._id;
-    setorderId(getOrderId);
-    console.log(orderId);
-
-    const parsedCalenderSetDate = storedDate;
     const parsedDeliveryType = deliveryType ? JSON.parse(deliveryType) : null;
-    setSelectedDate(parsedCalenderSetDate);
     setSelectedDeliveryType(parsedDeliveryType);
-    setnewlocaldate(selectedDate);
   }
 
   function GetUserDetails() {
@@ -49,42 +47,82 @@ function PaymentPage() {
       .then((resp) => {
         console.log(resp.data);
         setorderData(resp.data);
+        const pickUpDate = resp.data.schedule_date;
+        const latestDate = new Date(pickUpDate);
+        const options = { day: "numeric", month: "long" };
+        const pickUpDateValue = latestDate?.toDateString("en-US", options);
+        setpickUpDate(pickUpDateValue);
       });
 
   }
 
+      // Calculate Sob Total
+      const [subTotal, setSubtotal] = useState()
+      const [deliveryFee, setDeliveryFee] = useState()
+      const [discount, setDiscount] = useState()
+      const [tax, setTax] = useState()
+      const [total, setTotal] = useState()
+      function calcSubTotal(arr){
+          let sub_total = 0;
+          arr.map((item) => {
+              let item_price = parseInt(item.price) * item.quantity
+              sub_total += item_price
+          })
+          setSubtotal(sub_total)
+          console.log(sub_total)
+      }
+
   useEffect(() => {
     getLocalStorageData();
     GetUserDetails();
+     // Calculate sub total
+     calcSubTotal(JSON.parse(sessionStorage.getItem('softCart')))
   }, []);
 
-  console.log(newlocaldate);
-  const pickUpDateValue = newlocaldate?.toDateString("en-US", options);
 
-  orderDetails = {
-    subtotal: 20000,
-    schedule_date: selectedDate,
-    delivery_type: 2,
-  };
+function handlePaymentPage(e){
+  const value =
+  e.target.type === "checkbox"
+  ? e.target.checked
+  : e.target.type === "file" 
+  ? e.target.file[0]
+  : e.target.value
 
-  console.log(orderDetails);
-  console.log(customerId);
-  
+  setpaymentMethod({[e.target.name]:value })
+}
+
+useEffect(()=>{
+  localStorage.setItem("paymentType", JSON.stringify(paymentMethod));
+},[paymentMethod])
+
+  console.log(paymentMethod)
 
   const postOrder = () => {
+    const deliveryType = JSON.parse(localStorage.getItem('deliveryType'))
+    const key = Object.keys(deliveryType)
+    const stringDeliveryType = key.join("");
+    const paymentType = JSON.parse(localStorage.getItem('paymentType'))
+    const paymentkey = Object.keys(paymentType)
+    const stringPaymenType = paymentkey.join("");
+    orderDetails = {
+      subtotal: 20000,
+      delivery_type: stringDeliveryType,
+      payment_method:stringPaymenType
+    };
+  
+    console.log(orderDetails);
+
     axios
-      .put(`${process.env.REACT_APP_BASE_URL}/order/${customerId._id}/update`, orderDetails)
+      .put(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/update`, orderDetails)
       .then((resp) => {
         console.log(orderDetails);
         console.log(resp.data);
         setuserOrder(resp.data);
-        console.log(userOrder);
         localStorage.setItem("orderDetails", JSON.stringify(resp.data));
-              navigate("/order-receipt");
+              navigate(`/order-receipt/${orderId}`);
       });
   };
 
-  console.log(orderData);
 
   return (
     <div>
@@ -108,8 +146,10 @@ function PaymentPage() {
                       <input
                         class="form-check-input"
                         type="radio"
-                        name="flexRadioDefault"
+                        name="payWithCard"
                         id="flexRadioDefault1"
+                        onChange={(e)=>handlePaymentPage(e)}
+                        checked={paymentMethod === "payWithCard"}
                       />
                       <label class="form-check-label" for="flexRadioDefault1">
                         Pay With Card
@@ -133,8 +173,10 @@ function PaymentPage() {
                       <input
                         class="form-check-input"
                         type="radio"
-                        name="flexRadioDefault"
+                        name="payWithCash"
                         id="flexRadioDefault1"
+                        onChange={(e)=>handlePaymentPage(e)}
+                        checked={paymentMethod === "payWithCash"}
                       />
                       <label
                         className="form-check-label"
@@ -164,7 +206,7 @@ function PaymentPage() {
                   <div className="PickUpDate">
                     <h6 className="fw-bold">Pic-Up Date</h6>
                       <div>
-                        <p>{orderData?.pickuptime}</p>
+                        <p>{pickUpDateValue}</p>
                       </div>
 
                     <Link to="/date">
@@ -187,33 +229,28 @@ function PaymentPage() {
               </div>
             </div>
             <div className="PayOpsRight col md-12">
-              <h5 class="TextColor fw-5">Price Details</h5>
-              <div className="div3 GreyBorder">
-                <div className="PriceTab1 d-flex justify-content-between p-3 GreyBorder2">
-                  <div>Subtotal</div>
-                  <div>Naira : 1500 </div>
-                </div>
-                <div className="PriceTab2 d-flex justify-content-between p-3 GreyBorder2">
-                  <div>Delivery Fees</div>
-                  <div>Naira : 1500 </div>
-                </div>
-                <div className="PriceTab1 d-flex justify-content-between p-3 GreyBorder2">
-                  <div>Discount</div>
-                  <div>Naira : 0.00 </div>
-                </div>
-                <div className="PriceTab1 d-flex justify-content-between p-3 GreyBorder2 ">
-                  <div>Tax</div>
-                  <div>Naira : 0.75 </div>
-                </div>
-                <div className="PriceTab1 d-flex justify-content-between p-3 ">
-                  <div>
-                    <h4>Total</h4>
-                  </div>
-                  <div>
-                    <h4>Naira : 0.75</h4>{" "}
-                  </div>
-                </div>
-              </div>
+            <div className="div3 GreyBorder">
+                           <div className="PriceTab1 d-flex justify-content-between p-3 GreyBorder2">
+                                <div>Subtotal</div> 
+                                <div>₦{subTotal}</div>
+                           </div>
+                           <div className="PriceTab2 d-flex justify-content-between p-3 GreyBorder2">
+                                <div>Delivery Fees</div> 
+                                <div>₦{deliveryFee || "1500"} </div>
+                           </div>
+                           <div className="PriceTab1 d-flex justify-content-between p-3 GreyBorder2">
+                                <div>Discount</div> 
+                                <div>₦{discount || "0.00"} </div>
+                           </div>
+                           <div className="PriceTab1 d-flex justify-content-between p-3 GreyBorder2 ">
+                                <div>Tax</div> 
+                                <div>₦{tax || "0.75"} </div>
+                           </div>
+                           <div className="PriceTab1 d-flex justify-content-between p-3 ">
+                                <div><h4>Total</h4></div> 
+                                <div><h4>₦{total || "0.00"}</h4> </div>
+                           </div>
+                        </div>
               <div className="PrevNextBtnRight">
                 <button className="btn btn-outline-primary  ">Prev</button>
                 <button className="btn btn-info">Confirm</button>
@@ -227,4 +264,3 @@ function PaymentPage() {
 }
 
 export default PaymentPage;
-
