@@ -185,7 +185,8 @@ const [clothId,setclothId]=useState()
 
 
   return (
-    
+   
+ 
     <div>
       {loading?(
                 <Loader color="primary" size="lg" show={loading} />
@@ -782,7 +783,7 @@ const [clothId,setclothId]=useState()
       </div>
 
             </div>
-</>
+
       )}
 
 
