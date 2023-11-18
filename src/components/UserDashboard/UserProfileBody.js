@@ -41,7 +41,7 @@ function UserProfileBody(){
         //     </div>
         // </div>
         <div className="user-dashboard-bg">
-            <div className="washman-page-content">
+            {/* <div className="washman-page-content">
                 <div className="washman-header">
                     <h2>USER PROFILE</h2>
                 </div>
@@ -72,7 +72,7 @@ function UserProfileBody(){
                 <Link to={"/washman-edit-profile"} className="washman-form-link">
                 <Button className="edit-washman-profile-btn">Edit Profile</Button>     
                 </Link>  
-            </div>
+            </div> */}
         </div>
     )
 }

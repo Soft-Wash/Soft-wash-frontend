@@ -18,7 +18,6 @@ function AddressInfo() {
   const [clothIds,setClothIds] = useState()
   let arrayObj = [];
   const navigate = useNavigate();
-  const [selectedItems,setSelectedItems]= useState()
 
   const getQuantity = () => {
     const clothQuantity = localStorage.getItem("clothQuantity");
