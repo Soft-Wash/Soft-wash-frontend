@@ -13,6 +13,7 @@ export default function Login() {
     const navigate = useNavigate();
       const [empty, setEmpty] = useState(false);
       const { operation } = useContext(variableManager);
+      const [loading, setLoading] = useState(false); 
       const [loginDetails, setLoginDetails] = useState({
         email: "",
         password: "",
@@ -42,7 +43,9 @@ export default function Login() {
 
 
       async function handleLoginSubmit(payload){
+        setLoading(true)
         const {data,error} = await handleLogin(payload);
+        setLoading(false);
         if(data){
           navigate('/')
         }
@@ -122,7 +125,7 @@ export default function Login() {
                   e.preventDefault();
                   handleValidation();
                 }}>
-                {operation.pending ? Loader("info", "sm") : "Sign In"}
+                 Sign In
                   </button>
               </div>
   
@@ -153,6 +156,7 @@ export default function Login() {
           </div>
             <center className="copyright">Copyright © 2023</center>
         </div>
+        <Loader color="primary" size="lg" show={loading} /> 
       </div>
     );
   }

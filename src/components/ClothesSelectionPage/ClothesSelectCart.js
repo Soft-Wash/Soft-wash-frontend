@@ -13,8 +13,10 @@ import { variableManager } from "../../context/VariablesContext";
 import ClothAccordian from "./ClothAccordian";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import {Loader} from "../../common/Loader"
 
 function SelectedCart({ initialQuantity }) {
+  const [loading, setLoading] = useState(false); 
   const [kidsWear, setkidsWear] = useState();
   const [accessories, setAccessories] = useState();
   const [shoes, setShoes] = useState();
@@ -26,7 +28,11 @@ function SelectedCart({ initialQuantity }) {
   const [regularWash, SetRegularWash] = useState();
   const [heavyWash, SetHeavyWash] = useState();
   const [clothItems, setClothItem] = useState();
+  const [customerId, setCustomerId]= useState()
   const navigate = useNavigate()
+  const [selectedItems,setSelectedItems]= useState()
+const [clothId,setclothId]=useState()
+
 
   const [clothQuantity, setClothQuantity] = useState(() => {
     const storedQuantity = localStorage.getItem('clothQuantity');
@@ -38,30 +44,47 @@ function SelectedCart({ initialQuantity }) {
       const newQuantity = (prevQuantities[clothId] || 0) + 1;
       return { ...prevQuantities, [clothId]: newQuantity };
     });
+    // setclothId(clothId)
   };
 
   const decrement = (clothId) => {
     setClothQuantity((prevQuantities) => {
       const newQuantity = Math.max((prevQuantities[clothId] || 0) - 1, 0);
+      if (newQuantity < 1) {
+        const { [clothId]: _, ...updatedQuantities } = prevQuantities;
+        localStorage.setItem("clothQuantity", JSON.stringify(updatedQuantities));
+        return updatedQuantities;
+      }
+  
+      // Return the updated state with the new quantity
       return { ...prevQuantities, [clothId]: newQuantity };
     });
   };
 
-  const HandleLocalSave=()=>{
-    if(clothQuantity){
-      localStorage.setItem("clothQuantity", JSON.stringify(clothQuantity));
+  const HandleLocalSave = () => {
+    if (clothQuantity) {
+      const filteredQuantities = Object.fromEntries(
+        Object.entries(clothQuantity).filter(([key, value]) => value >= 1)
+      );
+      localStorage.setItem("clothQuantity", JSON.stringify(filteredQuantities));
     }
-  }
+
+  };
+
+
+
 
   useEffect(() => {
     HandleLocalSave()
   }, [clothQuantity]);
 
   useEffect(() => {
+
+    setLoading(true)
+
     axiosInstance
       .get(`/cloth/kidswear/category`)
       .then((resp) => {
-        console.log(resp.data);
         setkidsWear(resp.data);
       })
       .catch((err) => {
@@ -71,7 +94,6 @@ function SelectedCart({ initialQuantity }) {
     axiosInstance
       .get(`/cloth/acccessories/category`)
       .then((resp) => {
-        console.log(resp.data);
         setAccessories(resp.data);
       })
       .catch((err) => {
@@ -81,7 +103,6 @@ function SelectedCart({ initialQuantity }) {
     axiosInstance
       .get(`/cloth/shoes/category`)
       .then((resp) => {
-        console.log(resp.data);
         setShoes(resp.data);
       })
       .catch((err) => {
@@ -91,7 +112,6 @@ function SelectedCart({ initialQuantity }) {
     axiosInstance
       .get(`/cloth/homelinen/category`)
       .then((resp) => {
-        console.log(resp.data);
         sethomeLinen(resp.data);
       })
       .catch((err) => {
@@ -101,7 +121,6 @@ function SelectedCart({ initialQuantity }) {
     axiosInstance
       .get(`/cloth/menswear/category`)
       .then((resp) => {
-        console.log(resp.data);
         setMensWear(resp.data);
       })
       .catch((err) => {
@@ -111,7 +130,6 @@ function SelectedCart({ initialQuantity }) {
     axiosInstance
       .get(`/cloth/regular/category`)
       .then((resp) => {
-        console.log(resp.data);
         setRegular(resp.data);
       })
       .catch((err) => {
@@ -121,7 +139,6 @@ function SelectedCart({ initialQuantity }) {
     axiosInstance
       .get(`/cloth/only-vacuum-steam-press/category`)
       .then((resp) => {
-        console.log(resp.data);
         SetOnlyVacum(resp.data);
       })
       .catch((err) => {
@@ -131,7 +148,6 @@ function SelectedCart({ initialQuantity }) {
     axiosInstance
       .get(`/cloth/vacuum-steam-press/category`)
       .then((resp) => {
-        console.log(resp.data);
         SetVacum(resp.data);
       })
       .catch((err) => {
@@ -141,7 +157,6 @@ function SelectedCart({ initialQuantity }) {
     axiosInstance
       .get(`/cloth/Regular:Wash-Dry-and-Fold/category`)
       .then((resp) => {
-        console.log(resp.data);
         SetRegularWash(resp.data);
       })
       .catch((err) => {
@@ -151,19 +166,33 @@ function SelectedCart({ initialQuantity }) {
     axiosInstance
       .get(`/cloth/Heavy:Wash-Dry-and-Fold/category`)
       .then((resp) => {
-        console.log(resp.data);
         SetHeavyWash(resp.data);
       })
       .catch((err) => {
         console.log(err);
       });
+
+      setLoading(false)
   }, []);
 
+
+
+// if (loading){
+//   return(
+ 
+//   )
+// }
 
 
   return (
     <div className="scale">
       <Tabs
+    <div>
+      {loading?(
+                <Loader color="primary" size="lg" show={loading} />
+      ):(
+<>
+<Tabs
         defaultActiveKey="profile"
         id="justify-tab-example"
         className="mb-3 gap-3"
@@ -744,12 +773,19 @@ function SelectedCart({ initialQuantity }) {
       </Tabs>
       <div className="d-flex justify-content-center gap-3 mt-5 mb-3">
         <Link to="/date">
-        <button className="btn btn-primary px-5" onclick={HandleLocalSave}>
+        <button className="btn btn-primary px-5">
                 Next
               </button>
         </Link>
 
+
       </div>
+
+            </div>
+</>
+      )}
+
+
     </div>
   );
 }

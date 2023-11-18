@@ -84,7 +84,7 @@ export default function SectionFive() {
                 title={"Suit"}
                 text={"Dry Clean & Iron"}
                 price={"₦8,000"}
-                className="shadow ml-sm"
+                className="shadow ml-sm col-sm-12 mx-auto"
               />
               <PriceCard
                 image={image3}
