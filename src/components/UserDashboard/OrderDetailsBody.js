@@ -184,38 +184,6 @@ function OrderDetailsBody(){
                         
                     </Row>
                 </Col>
-
-
-
-                                {/* Inside the Container */}
-                {/* <Container className="d-flex gap-5 mt-1 position-relative">
-                    <Col className={`duration-500 border border-4 ${progress > 0 ? "border-info"  : null} text-center rounded-circle bg-white size-sm-30px`} style={{ height: "50px", width: "80px" }}>
-                        <p className="mt-1 fw-semibold fs-4 text-secondary mt-sm">1</p>
-                    </Col>
-                    
-                    <div className={`progress-line ${progress > 20 ? "line-info" : null}`} />
-                    <Col className={`duration-500 border border-4 ${progress > 20 ? "border-info" : null} text-center rounded-circle bg-white size-sm-30px`} style={{ height: "50px", width: "80px" }}>
-                        <p className="mt-1 fw-semibold fs-4 text-secondary mt-sm">2</p>
-                    </Col>
-
-                    <div className={`progress-line ${progress > 40 ? "line-info" : null}`} />
-                    <Col className={`duration-500 border border-4 ${progress > 20 ? "border-info" : null} text-center rounded-circle bg-white size-sm-30px`} style={{ height: "50px", width: "80px" }}>
-                    </Col>
-                    <div className={`progress-line ${progress > 40 ? "line-info" : null}`} />
-                    <Col className={`duration-500 border border-4 ${progress > 20 ? "border-info" : null} text-center rounded-circle bg-white size-sm-30px`} style={{ height: "50px", width: "80px" }}>
-                    </Col>
-                    <div className={`progress-line ${progress > 40 ? "line-info" : null}`} />
-                    <Col className={`duration-500 border border-4 ${progress > 20 ? "border-info" : null} text-center rounded-circle bg-white size-sm-30px`} style={{ height: "50px", width: "80px" }}>
-                    </Col>
-                    <div className={`progress-line ${progress > 40 ? "line-info" : null}`} />
-                    <Col className={`duration-500 border border-4 ${progress > 20 ? "border-info" : null} text-center rounded-circle bg-white size-sm-30px`} style={{ height: "50px", width: "80px" }}>
-                    </Col>
-                    <div className={`progress-line ${progress > 40 ? "line-info" : null}`} />
-                </Container> */}
-                {/* <div className="tick-icon" style={{ left: `${progress}%` }}> */}
-                {/* Insert your tick icon component here */}
-                {/* </div> */}
-
             </div>
         </div>
     )
