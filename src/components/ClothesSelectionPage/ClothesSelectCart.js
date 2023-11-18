@@ -13,8 +13,10 @@ import { variableManager } from "../../context/VariablesContext";
 import ClothAccordian from "./ClothAccordian";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import {Loader} from "../../common/Loader"
 
 function SelectedCart({ initialQuantity }) {
+  const [loading, setLoading] = useState(false); 
   const [kidsWear, setkidsWear] = useState();
   const [accessories, setAccessories] = useState();
   const [shoes, setShoes] = useState();
@@ -30,6 +32,7 @@ function SelectedCart({ initialQuantity }) {
   const navigate = useNavigate()
   const [selectedItems,setSelectedItems]= useState()
 const [clothId,setclothId]=useState()
+
 
   const [clothQuantity, setClothQuantity] = useState(() => {
     const storedQuantity = localStorage.getItem('clothQuantity');
@@ -76,6 +79,9 @@ const [clothId,setclothId]=useState()
   }, [clothQuantity]);
 
   useEffect(() => {
+
+    setLoading(true)
+
     axiosInstance
       .get(`/cloth/kidswear/category`)
       .then((resp) => {
@@ -165,16 +171,26 @@ const [clothId,setclothId]=useState()
       .catch((err) => {
         console.log(err);
       });
+
+      setLoading(false)
   }, []);
 
 
 
-
+// if (loading){
+//   return(
+ 
+//   )
+// }
 
 
   return (
     <div>
-      <Tabs
+      {loading?(
+                <Loader color="primary" size="lg" show={loading} />
+      ):(
+<>
+<Tabs
         defaultActiveKey="profile"
         id="justify-tab-example"
         className="mb-3 gap-3"
@@ -782,6 +798,10 @@ const [clothId,setclothId]=useState()
         </Link>
 
             </div>
+</>
+      )}
+
+
     </div>
   );
 }
