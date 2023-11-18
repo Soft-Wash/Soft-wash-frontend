@@ -41,7 +41,6 @@ function PaymentPage() {
   }
 
   function GetUserDetails() {
-    console.log(orderId);
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/order`)
       .then((resp) => {
@@ -64,7 +63,7 @@ function PaymentPage() {
       const [total, setTotal] = useState()
       function calcSubTotal(arr){
           let sub_total = 0;
-          arr.map((item) => {
+          arr?.map((item) => {
               let item_price = parseInt(item.price) * item.quantity
               sub_total += item_price
           })
@@ -195,7 +194,7 @@ useEffect(()=>{
                     <h5 class="TextColor pt-3 fw-5">Pick Up Information</h5>
                     <div className="Address py-3">
                       <h6 className="fw-bold">Pic-Up Address</h6>
-                      <p>{orderData?.deliveryAddress}</p>
+                      <p>{orderData?.deliveryAddress[0]?.FullAddress}</p>
                       <Link to="/address">
                         <button className="btn btn-outline-primary px-5 ">
                           Change

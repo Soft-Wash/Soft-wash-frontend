@@ -4,7 +4,6 @@ import Calender from '../components/Calender';
 import SelectedCart from '../common/SelectedCart';
 import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
-import Navigation from '../common/Navigation';
 import { Link } from 'react-router-dom';
 import BookingBanner from '../components/BookingBanner';
 
@@ -14,7 +13,6 @@ import BookingBanner from '../components/BookingBanner';
 function DatePage (){
     return(
        <div>
-            <Navigation />
             <BookingBanner />
             <Container>
             <div className='date-body justify-content-between'>

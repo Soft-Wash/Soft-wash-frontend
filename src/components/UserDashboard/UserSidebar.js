@@ -1,26 +1,13 @@
 import '../../styles/UserProfile.css';
-// import Nav from 'react-bootstrap/Nav';
-// import logo from '../../assets/Orders/SoftWash.png'
-// import { FaHome, FaClipboardList, FaPhoneAlt } from "react-icons/fa";
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { CDBSidebar, CDBSidebarContent, CDBSidebarFooter, CDBSidebarHeader, CDBSidebarMenu, CDBSidebarMenuItem,} from 'cdbreact';
-// import { Link, NavLink } from 'react-router-dom';
 import {useEffect,useState} from "react"
 
 function UserSidebar(){
 
     return(
-        // <div className='user-sidebar-profile '>
-        //     <div className='user-sidebar-logo mt-4 mb-4'>
-        //         <img src={logo} alt="" />
-        //     </div>
-        //     <Nav variant="pills" defaultActiveKey="/home">                
-        //         <Link to='/'><FaHome className='sidebar-icon'/>Home</Link>
-        //         <Link to='/order-details'><FaClipboardList className='sidebar-icon'/>My Orders</Link>
-        //         <Link to='/dashboard-contact-us'><FaPhoneAlt className='sidebar-icon'/>Contact Us</Link>
-        //     </Nav>
-        // </div>
+        
 
         <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
           <CDBSidebar textColor="rgb(13,202,240)" backgroundColor="rgb(11,9,9)">
@@ -62,16 +49,8 @@ function UserSidebar(){
               </div>
             </CDBSidebarFooter>
           </CDBSidebar>
-        <div className='user-sidebar-profile '>
-            <div className='user-sidebar-logo mt-4 mb-4'>
-                <img src={logo} alt="" />
-            </div>
-            <Nav variant="pills" defaultActiveKey="/home">                
-                <Link to='/'><FaHome className='sidebar-icon'/>Home</Link>
-                <Link to={`/my-orders`}><FaClipboardList className='sidebar-icon'/>My Orders</Link>
-                <Link to='/dashboard-contact-us'><FaPhoneAlt className='sidebar-icon'/>Contact Us</Link>
-            </Nav>
-        </div>
+      </div>
+
     )
 }
 

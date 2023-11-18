@@ -2,7 +2,7 @@ import '../../styles/UserOrderDetails.css';
 import { FaCircleInfo, FaHotTubPerson, FaMoneyCheckDollar } from "react-icons/fa6";
 import Accordion from 'react-bootstrap/Accordion';
 
-import { useState } from "react";
+
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -20,7 +20,6 @@ function OrderDetailsBody(){
     // const progress = 20;
     const [progress, setProgress] = useState(0);
 
-      return(
 
     const [orderdetails,setorderDetails] = useState()
     const [pickUpDateValue, setpickUpDate]=useState()
