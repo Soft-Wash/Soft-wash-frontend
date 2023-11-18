@@ -33,8 +33,8 @@ function PaymentPage() {
                                 </div>
                             </div>
                             </div>
-                            <div className="div2 GreyBorder2">
-                            <div className="PayOpsCash">
+                            <div className="div2 GreyBorder2 ">
+                                <div className="PayOpsCard">
                                 <div className='PaymtText' style={{display:"flex", alignItems:"center", gap:"50px"}} >
                                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
                                     <label className="form-check-label" for="flexRadioDefault1">
@@ -44,7 +44,7 @@ function PaymentPage() {
                                 <div>
                                     <img className='PayOpsImg' src={cash} alt="" />
                                 </div>
-                            </div>
+                                </div>
                             </div>
                             <div className='PickUpDetails GreyBorder mt-3 p-3'>
                                 <div className="PickUpAddress py-3">

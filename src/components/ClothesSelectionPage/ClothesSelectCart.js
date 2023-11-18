@@ -643,7 +643,7 @@ function SelectedCart({ initialQuantity }) {
                   {regularWash &&
                     regularWash.map((item) => (
                         <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>>
+                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
                           <div className="d-flex align-items-center">
                             <ClothAccordian
                               img={item.img}

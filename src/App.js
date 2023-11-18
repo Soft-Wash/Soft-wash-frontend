@@ -48,7 +48,7 @@ function App() {
          <Route path="/order-details" element={<UserOrderDetailsPage />} />
          <Route path="/ClothesSelection" element={<ClothesSelection/>}/>
         <Route path="/PaymentPage" element={<PaymentPage/>}/>
-         <Route path="/pricing" element={<PricingPage />} />
+         <Route path="/pricing" element={<PricingPage />} />co
          <Route path="/ourservices" element={<Services/>} />
          <Route path="/about" element={<About/>} />
          <Route path="/marketplace" element={<MarketPlace/>} />
