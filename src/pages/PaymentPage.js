@@ -64,7 +64,7 @@ function PaymentPage() {
       const [total, setTotal] = useState()
       function calcSubTotal(arr){
           let sub_total = 0;
-          arr.map((item) => {
+          arr?.map((item) => {
               let item_price = parseInt(item.price) * item.quantity
               sub_total += item_price
           })
