@@ -4,7 +4,7 @@
 
 import { Button } from "react-bootstrap";
 import "../../styles/Washman Styles/WashmanProfile.css";
-import profilePic from "../../assets/washman/kevin2.jpg";
+import profilePic from "../../assets/images/bovi.jpeg";
 import { Link } from 'react-router-dom';
 
 
@@ -41,36 +41,36 @@ function UserProfileBody(){
         //     </div>
         // </div>
         <div className="user-dashboard-bg">
-            {/* <div className="washman-page-content">
-                <div className="washman-header">
+            <div className="user-page-content">
+                <div className="user-header">
                     <h2>USER PROFILE</h2>
                 </div>
-                <div className="washman-profilePic-sec d-flex">
-                    <div className="washman-profilePic">
+                <div className="user-profilePic-sec d-flex">
+                    <div className="user-profilePic">
                         <img src={profilePic}/>
                     </div>
-                    <Button className="washman-dp-btn">Change Photo</Button>
+                    <Button className="user-dp-btn">Change Photo</Button>
                 </div>                
                 <div>
-                    <div className="washman-profile-field">
+                    <div className="user-profile-field">
                         <h4>First Name</h4>
                         <h4>Peter</h4>
                     </div>
-                    <div className="washman-profile-field">
+                    <div className="user-profile-field">
                         <h4>Last Name</h4>
                         <h4>Scott</h4>
                     </div>   
-                    <div className="washman-profile-field">
+                    <div className="user-profile-field">
                         <h4>Gender</h4>
                         <h4>Male</h4>
                     </div>  
-                    <div className="washman-profile-field">
+                    <div className="user-profile-field">
                         <h4>Email</h4>
                         <h4>peterscott@gmail.com</h4>
                     </div>
                 </div>      
-                <Link to={"/washman-edit-profile"} className="washman-form-link">
-                <Button className="edit-washman-profile-btn">Edit Profile</Button>     
+                <Link to={"/user-edit-profile"} className="user-form-link">
+                <Button className="edit-user-profile-btn">Edit Profile</Button>     
                 </Link>  
             </div> */}
         </div>
