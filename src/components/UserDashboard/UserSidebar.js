@@ -5,7 +5,6 @@ import '../../styles/UserProfile.css';
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { CDBSidebar, CDBSidebarContent, CDBSidebarFooter, CDBSidebarHeader, CDBSidebarMenu, CDBSidebarMenuItem,} from 'cdbreact';
-// import { Link, NavLink } from 'react-router-dom';
 import {useEffect,useState} from "react"
 
 function UserSidebar(){

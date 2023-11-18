@@ -2,9 +2,7 @@ import { Button } from "react-bootstrap";
 import "../../styles/Washman Styles/WashmanProfile.css";
 import profilePic from "../../assets/washman/kevin2.jpg";
 import { Link } from 'react-router-dom';
-
 import "../../styles/Washman Styles/WashmanProfile.css"
-import profilePic from "../../assets/washman/kevin2.jpg"
 
 function WashmanProfileBody(){
     return(

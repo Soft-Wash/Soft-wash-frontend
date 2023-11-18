@@ -13,19 +13,12 @@ import { useNavigate } from "react-router-dom";
 import { BsFillTrashFill } from "react-icons/bs";
 
 function AddressInfo() {
-  const [selectedItems, setSelectedItems] = useState();
   const [selectedTime, setSelectedTime] = useState();
   const [customerId, setCustomerId] = useState();
-  const [clothIds,setClothIds] = useState()
+  const [clothIds, setClothIds] = useState();
   let arrayObj = [];
   const navigate = useNavigate();
-  function AddressInfo() {
-    const [selectedTime, setSelectedTime] = useState();
-    const [customerId, setCustomerId] = useState();
-    const [clothIds,setClothIds] = useState()
-    let arrayObj = [];
-    const navigate = useNavigate();
-  const [selectedItems,setSelectedItems]= useState()
+  const [selectedItems, setSelectedItems] = useState();
   const [selectedDate, setSelectedDate] = useState();
   const [clicked, setClicked] = useState(false);
 
@@ -83,6 +76,7 @@ function AddressInfo() {
   const handleChange = (e) => {
     const value =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
+  
 
     if (e.target.name.startsWith("AddressType")) {
       setSelectedAddress({ ...selectedAddress, AddressType: e.target.name });
