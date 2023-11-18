@@ -53,8 +53,6 @@ export default function Orders() {
   
   return (
     <>
-      <Navigation />
-
       <div className="d-flex">
         <div>
           <Sidebar />
