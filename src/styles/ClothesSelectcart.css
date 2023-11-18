@@ -13,3 +13,18 @@
 .nav-tabs .nav-item:not(.active) .nav-link {
   border-color: #007bff; /* Set your desired border color */
 }
+
+.SelectButton{
+  height: "";
+  justify-content: space-between;
+  position: absolute;
+  right:50px ;
+}
+
+.nav-tabs{
+  font-size: 0.9rem;
+  color: red;
+}
+@media (max-width:500px) {
+  
+}

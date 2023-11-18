@@ -1,0 +1,128 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    /* font-family: IBM Plex Sans,sans-serif; */
+      text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+.sideNavLJ{
+    width: 310px;
+    height: 100vh;
+    position: fixed;
+    background-color: #DFE4F440;
+    padding: 20px 40px;
+}
+
+.navLogoLJ{
+    text-align: center;
+}
+
+.navLogoLJ img{
+    width: 200px;
+}
+
+.Sidecontent{
+    margin-top: 50px;
+}
+.nav-itemLJ{
+    height: 50px;
+    padding: 5px 20px;
+    margin: 5px 0px;
+    padding:10px;
+    align-items: center;
+}
+
+.nav-item2LJ{
+    /* height: 50px; */
+    padding: 5px 20px;
+    margin: 5px 0px;
+    padding:10px;
+    align-items: center;
+}
+
+.nav-itemLJ Link{
+    font-size: 300px;
+    color: #40344E;
+    align-items: center;
+}
+
+.myNavPillsLJ a i img{
+    color: #00C9B6;
+}
+
+.nav-itemLJ span{
+    margin-left: 10px;
+    font-weight: lighter;
+}
+
+.myNavPillsLJ :hover{
+    color: #00C9B6;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 10px rgba(154,171,237,0.06);
+    border-radius: 10px;
+}
+
+.myNavPillsLJ a :hover{
+    color: #00C9B6;
+}
+
+.nav-link{
+    font-size: 20px;
+}
+
+/* RIGHT SIDE PAGE */
+
+.RightsideLJ{
+    width: 93%;
+    /* margin: 0 auto; */
+    padding: 20px;
+}
+
+.NavRightLJ{
+    display: flex;
+    justify-content: space-between;
+    height: 90px;
+    border-bottom: 1px solid rgb(223 228 244);
+    padding-top: 20px;
+    align-items: center;
+}
+
+.NavRightLJ img{
+    border: 1px solid rgb(223 228 244);
+    border-radius: 100px;
+    width: 40px;
+}
+
+.NavRightLeftLJ{
+    font-size: 1.5rem;
+    color: #40344E;
+    font-weight: 600;
+}
+
+.navRightRightLJ{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.navRightRightLJ p{
+    font-size: 17px;
+    color: #40344E;
+    font-weight: 100;
+}
+
+.navRightRightLJ .iconLJ{
+    width: 20px;
+    border: none;
+}
+
+/* CONTENT */
+
+.card1{
+
+}

@@ -6,7 +6,7 @@ import ClothesSelectCart from '../components/ClothesSelectionPage/ClothesSelectC
 
 function ClothesSelection() {
   return (
-    <div className='container'>
+    <div className='container text-align-center'>
         <BookingBanner/>
         <ClothesSelectCart/>
     </div>

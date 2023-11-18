@@ -162,35 +162,34 @@ function SelectedCart({ initialQuantity }) {
 
 
   return (
-    <div>
+    <div className="scale">
       <Tabs
         defaultActiveKey="profile"
         id="justify-tab-example"
         className="mb-3 gap-3"
-        justify
+        style={{borderColor:"transparent", justifyContent:"center", height:"", fontSize:"0.9rem"}}
+
       >
-        <Tab eventKey="home" title="Dry Wash" className="custom-tab">
+        <Tab eventKey="home" title="Dry Wash">
           <Container>
             <div className="d-flex justify-content-between border-bottom pb-3">
               <h3 className="date-headers">Select an Item(s)</h3>
             </div>
             <div>
-              <Accordion defaultActiveKey="0" className="MensWear">
+              <Accordion defaultActiveKey="0" className="MensWear" style={{backgroundColor:"#f5f5f5"}}>
                 <Accordion.Item eventKey="0">
-                  <Accordion.Header>Mens Wear</Accordion.Header>
+                  <Accordion.Header>Mens Wear</Accordion.Header  >
                   {mensWear &&
                     mensWear.map((item) => (
                       <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB">
-                          <div className="d-flex align-items-center">
+                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
+                          <div className="d-flex align-items-center justify-content-between">
                             <ClothAccordian
                               img={item.img}
                               name={item.name}
                               price={item.price}
                             />
-                            <div
-                              className="d-flex text align"
-                              style={{ height: "35px", marginLeft: "450px" }}
+                            <div className="d-flex justify-content-between SelectButton"
                             >
                               <button
                                 className="-ve"
@@ -225,73 +224,53 @@ function SelectedCart({ initialQuantity }) {
                     ))}
                 </Accordion.Item>
               </Accordion>
-              <Accordion defaultActiveKey="0" className="Ladies Wear">
+              <Accordion defaultActiveKey="0" className="Ladies Wear" >
                 <Accordion.Item eventKey="0">
-                  <Accordion.Header>Ladies Wear</Accordion.Header>
-                  <Accordion.Body>
-                    <div className="container">
-                      <div className="cart-item1 GreyBorderB">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={Native}
-                                alt="Native"
+                  <Accordion.Header>Ladies Wear</Accordion.Header  >
+                  {mensWear &&
+                    mensWear.map((item) => (
+                      <Accordion.Body key={item._id}>
+                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
+                          <div className="d-flex align-items-center justify-content-between">
+                            <ClothAccordian
+                              img={item.img}
+                              name={item.name}
+                              price={item.price}
+                            />
+                            <div className="d-flex justify-content-between"
+                              style={{ height: "35px", justifyContent:"between", position:"absolute", right:"50px"}}
+                            >
+                              <button
+                                className="-ve"
+                                onClick={() => decrement(item._id)}
+                              >
+                                -
+                              </button>
+                              <input
+                                type="text"
+                                step="1"
+                                min="0"
+                                max=""
+                                name="quantity"
+                                value={clothQuantity[item._id] || 0}
+                                title="Qty"
+                                className="input-text qty text"
+                                size="4"
+                                pattern=""
+                                inputMode=""
+                                readOnly
                               />
+                              <button
+                                className="pve"
+                                onClick={() => increment(item._id)}
+                              >
+                                +
+                              </button>
                             </div>
-                            <div className="mx-5">
-                              <div>
-                                <h5>Native</h5>
-                                <span>2 x N2,000 / per piece</span>
-                              </div>
-                            </div>
-                            {/* <ClothesSelectCounter /> */}
                           </div>
                         </div>
-                      </div>
-                      <div className="cart-item2 GreyBorderB">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={Native}
-                                alt="Native"
-                              />
-                            </div>
-                            <div className="mx-5">
-                              <div>
-                                <h5>Native</h5>
-                                <span>2 x N2,000 / per piece</span>
-                              </div>
-                            </div>
-                            {/* <ClothesSelectCounter /> */}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="cart-item3 GreyBorderB">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={Native}
-                                alt="Native"
-                              />
-                            </div>
-                            <div className="mx-5">
-                              <div>
-                                <h5>Native</h5>
-                                <span>2 x N2,000 / per piece</span>
-                              </div>
-                            </div>
-                            {/* <ClothesSelectCounter /> */}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </Accordion.Body>
+                      </Accordion.Body>
+                    ))}
                 </Accordion.Item>
               </Accordion>
               <Accordion defaultActiveKey="0" className="Regular">
@@ -300,7 +279,7 @@ function SelectedCart({ initialQuantity }) {
                   {regular &&
                     regular.map((item) => (
                         <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB">
+                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
                           <div className="d-flex align-items-center">
                             <ClothAccordian
                               img={item.img}
@@ -309,7 +288,7 @@ function SelectedCart({ initialQuantity }) {
                             />
                             <div
                               className="d-flex text align"
-                              style={{ height: "35px", marginLeft: "450px" }}
+                              style={{ height: "35px", justifyContent:"between", position:"absolute", right:"50px"}}
                             >
                               <button
                                 className="-ve"
@@ -350,7 +329,7 @@ function SelectedCart({ initialQuantity }) {
                   {kidsWear &&
                     kidsWear.map((item) => (
                         <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB">
+                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
                           <div className="d-flex align-items-center">
                             <ClothAccordian
                               img={item.img}
@@ -358,8 +337,8 @@ function SelectedCart({ initialQuantity }) {
                               price={item.price}
                             />
                             <div
-                              className="d-flex text align"
-                              style={{ height: "35px", marginLeft: "450px" }}
+                              className="d-flex justify-content-between"
+                              style={{ height: "35px", justifyContent:"between", position:"absolute", right:"50px"}}
                             >
                               <button
                                 className="-ve"
@@ -400,7 +379,7 @@ function SelectedCart({ initialQuantity }) {
                   {accessories &&
                     accessories.map((item) => (
                         <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB">
+                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
                           <div className="d-flex align-items-center">
                             <ClothAccordian
                               img={item.img}
@@ -408,8 +387,8 @@ function SelectedCart({ initialQuantity }) {
                               price={item.price}
                             />
                             <div
-                              className="d-flex text align"
-                              style={{ height: "35px", marginLeft: "450px" }}
+                              className="d-flex justify-content-between"
+                              style={{ height: "35px", justifyContent:"between", position:"absolute", right:"50px"}}
                             >
                               <button
                                 className="-ve"
@@ -450,7 +429,7 @@ function SelectedCart({ initialQuantity }) {
                   {shoes &&
                     shoes.map((item) => (
                         <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB">
+                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
                           <div className="d-flex align-items-center">
                             <ClothAccordian
                               img={item.img}
@@ -459,7 +438,7 @@ function SelectedCart({ initialQuantity }) {
                             />
                             <div
                               className="d-flex text align"
-                              style={{ height: "35px", marginLeft: "450px" }}
+                              style={{ height: "35px", justifyContent:"between", position:"absolute", right:"50px"}}
                             >
                               <button
                                 className="-ve"
@@ -494,13 +473,13 @@ function SelectedCart({ initialQuantity }) {
                     ))}
                 </Accordion.Item>
               </Accordion>
-              <Accordion defaultActiveKey="0" className="Home Linen">
+              <Accordion defaultActiveKey="0" className="Home Linen" style={{border:"none"}}>
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>Home Linen</Accordion.Header>
                   {homeLinen &&
                     homeLinen.map((item) => (
                         <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB">
+                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
                           <div className="d-flex align-items-center">
                             <ClothAccordian
                               img={item.img}
@@ -509,7 +488,7 @@ function SelectedCart({ initialQuantity }) {
                             />
                             <div
                               className="d-flex text align"
-                              style={{ height: "35px", marginLeft: "450px" }}
+                              style={{ height: "35px", justifyContent:"between", position:"absolute", right:"50px"}}
                             >
                               <button
                                 className="-ve"
@@ -556,13 +535,13 @@ function SelectedCart({ initialQuantity }) {
               <h3 className="date-headers">Select an Item(s)</h3>
             </div>
             <div>
-              <Accordion defaultActiveKey="0" className="Only Vacuum ">
+              <Accordion defaultActiveKey="0" className="Only Vacuum">
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>Only Vacuum Steam Press</Accordion.Header>
-                  {onlyVacum &&
+                  { onlyVacum &&
                     onlyVacum.map((item) => (
                         <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB">
+                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
                           <div className="d-flex align-items-center">
                             <ClothAccordian
                               img={item.img}
@@ -571,7 +550,7 @@ function SelectedCart({ initialQuantity }) {
                             />
                             <div
                               className="d-flex text align"
-                              style={{ height: "35px", marginLeft: "450px" }}
+                              style={{ height: "35px", justifyContent:"between", position:"absolute", right:"50px"}}
                             >
                               <button
                                 className="-ve"
@@ -612,7 +591,7 @@ function SelectedCart({ initialQuantity }) {
                   {vacum &&
                     vacum.map((item) => (
                         <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB">
+                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
                           <div className="d-flex align-items-center">
                             <ClothAccordian
                               img={item.img}
@@ -621,7 +600,7 @@ function SelectedCart({ initialQuantity }) {
                             />
                             <div
                               className="d-flex text align"
-                              style={{ height: "35px", marginLeft: "450px" }}
+                              style={{ height: "35px", justifyContent:"between", position:"absolute", right:"50px"}}
                             >
                               <button
                                 className="-ve"
@@ -664,7 +643,7 @@ function SelectedCart({ initialQuantity }) {
                   {regularWash &&
                     regularWash.map((item) => (
                         <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB">
+                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>>
                           <div className="d-flex align-items-center">
                             <ClothAccordian
                               img={item.img}
@@ -673,7 +652,7 @@ function SelectedCart({ initialQuantity }) {
                             />
                             <div
                               className="d-flex text align"
-                              style={{ height: "35px", marginLeft: "450px" }}
+                              style={{ height: "35px", justifyContent:"between", position:"absolute", right:"50px"}}
                             >
                               <button
                                 className="-ve"
@@ -714,7 +693,7 @@ function SelectedCart({ initialQuantity }) {
                   {heavyWash &&
                     heavyWash.map((item) => (
                         <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB">
+                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
                           <div className="d-flex align-items-center">
                             <ClothAccordian
                               img={item.img}
@@ -723,7 +702,7 @@ function SelectedCart({ initialQuantity }) {
                             />
                             <div
                               className="d-flex text align"
-                              style={{ height: "35px", marginLeft: "450px" }}
+                              style={{ height: "35px", justifyContent:"between", position:"absolute", right:"50px"}}
                             >
                               <button
                                 className="-ve"
@@ -770,7 +749,7 @@ function SelectedCart({ initialQuantity }) {
               </button>
         </Link>
 
-            </div>
+      </div>
     </div>
   );
 }
