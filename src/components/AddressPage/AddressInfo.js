@@ -137,7 +137,7 @@ function AddressInfo() {
               />
               <Row className="w-100">
                 <p className="w-100 text-black fs-5 fw-semibold my-auto ">
-                  No. 234, Whyoming Street, Solid Estate, Bay Area, Nigeria
+              {selectedAddress?.FullAddress}
                 </p>
               </Row>
               <BsFillTrashFill
