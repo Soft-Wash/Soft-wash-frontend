@@ -8,94 +8,156 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { axiosInstance } from "../../services/AxiosInstance";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import {BsFillTrashFill} from "react-icons/bs";
 
 function AddressInfo() {
+  const [selectedItems, setSelectedItems] = useState();
+  const [selectedTime, setSelectedTime] = useState();
+  const [customerId, setCustomerId] = useState();
+  const [clothIds,setClothIds] = useState()
+  let arrayObj = [];
+  const navigate = useNavigate();
+  function AddressInfo() {
+    const [selectedTime, setSelectedTime] = useState();
+    const [customerId, setCustomerId] = useState();
+    const [clothIds,setClothIds] = useState()
+    let arrayObj = [];
+    const navigate = useNavigate();
+  const [selectedItems,setSelectedItems]= useState()
+  const [selectedDate, setSelectedDate] = useState();
+  const [clicked, setClicked] = useState(false);
 
-  const [cartItems, setCartItems] = useState();
-  let arrayObj=[]
-
-  useEffect(() => {
+  const getQuantity = () => {
     const clothQuantity = localStorage.getItem("clothQuantity");
     const clothQuantities = JSON.parse(clothQuantity);
     const keys = Object.keys(clothQuantities);
     const values = Object.values(clothQuantities);
-    arrayObj=keys
-  }, []);
-
-
-
-
-
-  const handleSubmit = () => {
-        let data = {ids:arrayObj}
-    if(arrayObj?.length){
-        axiosInstance
-        .post(`/cloth/clothtypes/ids`, data)
-        .then((resp) => {
-        //   console.log(arrayObj);
-          console.log(resp.data);
-          setCartItems(resp.data);
-        });
-    }
-
+    arrayObj = keys;
+    let mainArr = keys.map((key, index) => ({
+      id: key,
+      quantity: values[index],
+    }));
+    axios
+      .put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
+      .then((resp) => {
+        setSelectedItems(resp.data);
+      });
   };
 
-  useEffect(()=>{
- handleSubmit();
-  },[]) 
+  useEffect(() => {
+    getQuantity();
+    const calenderSelectedTime = localStorage.getItem("calenderSelectedTime");
+    const parsedCalenderSelectedTime = calenderSelectedTime
+      ? JSON.parse(calenderSelectedTime)
+      : null;
+    setSelectedTime(parsedCalenderSelectedTime);
+    const calenderSetDate = localStorage.getItem("calenderStartDate");
+    const storedDate = new Date(JSON.parse(calenderSetDate));
+    const parsedCalenderSetDate = storedDate;
+    setSelectedDate(parsedCalenderSetDate);
+    const customer_id = localStorage.getItem("softwashLoginUser");
+    const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
+    setCustomerId(parsedCustomerData);
+    const clothQuantity = localStorage.getItem("clothQuantity");
+    const parsedClothQuantity = clothQuantity ? JSON.parse(clothQuantity) : null;
+    if (parsedClothQuantity) {
+      let keys = Object.keys(parsedClothQuantity);
+      const values = Object.values(parsedClothQuantity);
+      setClothIds(keys);
+    }
+  }, []);
 
-const [selectedAddress, setSelectedAddress] = useState({
-  contactNumber:"",
-  FullAddress:"",
-  SearchedAddress:"",
-  AddressTypeHome:false,
-  AddressTypeWork:false,
-  AddressTypeOther:false
+  const [selectedAddress, setSelectedAddress] = useState({
+    contactNumber: "",
+    FullAddress: "",
+    SearchedAddress: "",
+    AddressTypeHome: false,
+    AddressTypeWork: false,
+    AddressTypeOther: false,
+  });
 
-})
+  const handleChange = (e) => {
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    setSelectedAddress({ ...selectedAddress, [e.target.name]: value });
+  };
 
-const handleChange =(e)=>{
-  const value =
-  e.target.type === "checkbox"
-  ? e.target.checked
-  : e.target.value
 
-  setSelectedAddress({...selectedAddress, [e.target.name]:value })
-  
-}
 
-const handleAddress=()=>{
-  localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
-  console.log(selectedAddress)
-}
+  let orderPostObj = {
+    customer_id: customerId?._id,
+    deliveryAddress: selectedAddress.FullAddress,
+    pickuptime: selectedTime,
+    schedule_date: selectedDate,
+    clothtype_ids:clothIds
+  };
 
-useEffect(() => {
-  const storedAddress = localStorage.getItem("selectedAddress");
 
-  if (storedAddress) {
-    setSelectedAddress(JSON.parse(storedAddress));
+  function postOrderAddress() {
+    console.log(orderPostObj);
+    axiosInstance.post("/order/create", orderPostObj).then((resp) => {
+      console.log(resp.data);
+      const orderId = resp.data._id
+      localStorage.setItem("RecentOrder", JSON.stringify(resp.data));
+      localStorage.setItem('selectedAddress',JSON.stringify(selectedAddress))
+      navigate(`/paymentpage/${orderId}`)
+    });
+
+
   }
-}, []);
 
+  useEffect(() => {
+    const storedAddress = localStorage.getItem("selectedAddress");
+    if (storedAddress) {
+      setSelectedAddress(JSON.parse(storedAddress));
+    }
+  }, []);
 
   return (
     <Container>
       <Row className="justify-content-between">
         <Col lg={7} md={12} sm={12}>
-          <Row className="border border-2 shadow rounded py-4">
+          <div className="w-100 border border-2 shadow-sm rounded py-4 px-3">
+            <h4 className="text-primary mb-3 fw-semibold ps-2 text-capitalize">
+              Choose your address
+            </h4>
 
-          </Row>
+            <div
+              className={`w-100 d-flex justify-content-between gap-3 shadow-sm rounded py-4 mx-auto mx-0 ps-4 ${
+                clicked
+                  ? "border bg-primary-subtle  shadow-sm border border-primary border-2 "
+                  : null
+              }`}
+              style={{ width: "90%" }}
+            >
+              <Form.Check
+                type="radio"
+                aria-label="radio 1"
+                onClick={() => setClicked(true)}
+              />
+              <Row className="w-100">
+                <p className="w-100 text-black fs-5 fw-semibold my-auto ">
+                  No. 234, Whyoming Street, Solid Estate, Bay Area, Nigeria
+                </p>
+              </Row>
+              <BsFillTrashFill
+                className="me-2 p-1 h-100 my-auto  border border-info rounded-circle text-info"
+                style={{ width: "30px", heigth: "auto" }}
+              />
+            </div>
+          </div>
           <Row className="w-100 text-center my-4">
             <h3>Or</h3>
           </Row>
-          <Row className="border border-2 shadow rounded py-4">
+          <Row className="border border-2 shadow-sm rounded py-4">
             <Accordion defaultActiveKey="0">
               <Accordion.Item eventKey="1">
                 <Accordion.Header>Add Address</Accordion.Header>
                 <Accordion.Body>
                   <Row>
                     <InputGroup className="mb-3">
-                      {/* <InputGroup.Text id="basic-addon1">@</InputGroup.Text> */}
                       <Form.Control
                         placeholder="Enter Contact Number"
                         aria-label="Enter Contact Number"
@@ -108,7 +170,6 @@ useEffect(() => {
                   </Row>
                   <Row>
                     <InputGroup className="mb-3">
-                      {/* <InputGroup.Text id="basic-addon1">@</InputGroup.Text> */}
                       <Form.Control
                         placeholder="Enter Full Address"
                         aria-label="Enter Full Address"
@@ -146,18 +207,33 @@ useEffect(() => {
                   <Row className="d-flex">
                     <h5>Address Type</h5>
                     <Row>
-                    <Form.Group className="d-flex gap-2">
-                      <Form.Check type="radio" aria-label="radio 1" onChange={handleChange} name="AddressTypeHome"/>
-                      <Form.Label>Home</Form.Label>
-                    </Form.Group>
-                    <Form.Group className="d-flex gap-2">
-                      <Form.Check type="radio" aria-label="radio 1"     onChange={handleChange} name="AddressTypeWork"/>
-                      <Form.Label>Work</Form.Label>
-                    </Form.Group>
-                    <Form.Group className="d-flex gap-2">
-                      <Form.Check type="radio" aria-label="radio 1"     onChange={handleChange} name="AddressTypeOther"/>
-                      <Form.Label>Other</Form.Label>
-                    </Form.Group>
+                      <Form.Group className="d-flex gap-2">
+                        <Form.Check
+                          type="radio"
+                          aria-label="radio 1"
+                          onChange={handleChange}
+                          name="AddressTypeHome"
+                        />
+                        <Form.Label>Home</Form.Label>
+                      </Form.Group>
+                      <Form.Group className="d-flex gap-2">
+                        <Form.Check
+                          type="radio"
+                          aria-label="radio 1"
+                          onChange={handleChange}
+                          name="AddressTypeWork"
+                        />
+                        <Form.Label>Work</Form.Label>
+                      </Form.Group>
+                      <Form.Group className="d-flex gap-2">
+                        <Form.Check
+                          type="radio"
+                          aria-label="radio 1"
+                          onChange={handleChange}
+                          name="AddressTypeOther"
+                        />
+                        <Form.Label>Other</Form.Label>
+                      </Form.Group>
                     </Row>
                   </Row>
                 </Accordion.Body>
@@ -166,52 +242,64 @@ useEffect(() => {
           </Row>
         </Col>
 
-        <Col lg={4} md={12} sm={12} className="border border-2 shadow pb-3 mt-3">
-          <Row className="d-flex justify-content-between  mt-3 mx-auto">
-            {/* <Col lg={7} md={6} sm={6}> */}
-              <h4 className="text-primary my-auto">Selected Items</h4>
+        <Col
+          lg={4}
+          md={12}
+          sm={12}
+          className="border border-2 shadow-sm pb-3 mt-3"
+        >
+          <div className="d-flex justify-content-between  mt-3 mx-auto">
+            <h4 className="text-primary my-auto col-lg-6">Selected Items</h4>
+            <Button variant="primary" className="w-25 my-auto  col-lg-3">
+              Edit
+            </Button>
             {/* </Col> */}
-            {/* <Col lg={5} md={5} sm={6} className="text-end"> */}
-              <Button variant="primary" className="w-50 my-auto">
-                Edit
-              </Button>
-            {/* </Col> */}
-          </Row>
+          </div>
           <hr />
-          <h4 className="text-capitalize ms-1">dry wash</h4>
+          <h5 className="text-capitalize ms-1">dry wash</h5>
           <Accordion defaultActiveKey="0">
-                    <Accordion.Item eventKey="0">
-                        <Accordion.Header>Mens Wear</Accordion.Header>
-                        <Accordion.Body>
-                        {cartItems && cartItems.map((item)=>(
-                                  <div className="cart-item" key={item._id}>
-                                  <div className="d-flex justify-content-between">
-                                    <h5>{item.name}</h5>
-                                    <h5>{item.price}</h5>
-                                  </div>
-                                  <p>2 x N2,000 / per piece</p>
-                                </div>  
-                ))}
-                        </Accordion.Body>
-                    </Accordion.Item>      
-                </Accordion>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>Mens Wear</Accordion.Header>
+              <Accordion.Body>
+                {selectedItems &&
+                  selectedItems.map((item) => (
+                    <div className="cart-item" key={item._id}>
+                      <div className="d-flex justify-content-between">
+                        <h5>{item.name}</h5>
+                        <h5>{item.price}</h5>
+                      </div>
+                      <p>{`${item.quantity} x ${item.price} / per piece`}</p>
+                    </div>
+                  ))}
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
         </Col>
       </Row>
 
       <Container className="d-flex justify-content-center w-100 text-center my-5">
         <Col lg={4} md={5} sm={5}>
           <Link to="/date">
-          <Button  variant="outline-primary" className="me-auto w-75 text-center">Prev</Button>
+            <Button
+              variant="outline-primary"
+              className="me-auto w-75 text-center"
+            >
+              Prev
+            </Button>
           </Link>
-
         </Col>
         <Col lg={4} md={5} sm={5}>
-          <Link to="/PaymentPage">
-          <Button variant="primary" className="me-auto w-75 text-center" onClick={handleAddress}>Next</Button>
-          </Link>
-</Col>
+          {/* <Link to="/PaymentPage"> */}
+          <Button
+            variant="primary"
+            className="me-auto w-75 text-center"
+            onClick={postOrderAddress}
+          >
+            Next
+          </Button>
+          {/* </Link> */}
+        </Col>
       </Container>
-
     </Container>
   );
 }

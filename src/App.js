@@ -1,4 +1,5 @@
 import "./App.css";
+// import ScrollToTop from "./utils/ScrollToTop";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UserLogin from "./pages/auth/login/UserLogin";
 import UserRegister from "./pages/auth/register/UserRegister";
@@ -15,6 +16,7 @@ import About from "./pages/About";
 import MarketPlace from "./pages/MarketPlace/MarketPlace";
 import Orders from "./pages/user/Orders";
 import OrderReceipt from "./pages/user/OrderReceipt";
+
 import SingleProduct from "./pages/MarketPlace/SingleProduct";
 import Wishlist from "./pages/MarketPlace/Wishlist"
 import Cart from "./pages/MarketPlace/Cart" 
@@ -26,12 +28,18 @@ import UserOrderDetailsPage from "./pages/UserOrderDetailsPage";
 import VariablesContext from "./context/VariablesContext";
 import SupervisorMainDash from "./pages/SupervisorDashboard/SupervisorMainDash";
 import CreateWashMan from "./pages/SupervisorDashboard/CreateWashman";
+// import WashmanProfilePage from "./components/Washman Components/WashmanProfileBody"
+import WashmanOrdersPage from "./pages/Washman Pages/WashmanOrdersPage";
+import WashmanDashboardPage from "./pages/Washman Pages/WashmanDashboardPage";
+import WashmanSingleOrderPage from "./pages/Washman Pages/WashmanSingleOrderPage";
+import WashmanEditProfilePage from "./pages/Washman Pages/WashmanEditProfilePage";
+
  
 
 
 function App() {
   return (
-<VariablesContext>
+<>
 <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage/>} />
@@ -45,9 +53,9 @@ function App() {
          <Route path="/date" element={<DatePage />} />
          <Route path="/user-profile" element={<UserProfilePage />} />
          <Route path="/dashboard-contact-us" element={<UserDashboardContactPage />} />
-         <Route path="/order-details" element={<UserOrderDetailsPage />} />
+         <Route path="/order-details/" element={<UserOrderDetailsPage />} />
          <Route path="/ClothesSelection" element={<ClothesSelection/>}/>
-        <Route path="/PaymentPage" element={<PaymentPage/>}/>
+        <Route path="/PaymentPage/:orderId" element={<PaymentPage/>}/>
          <Route path="/pricing" element={<PricingPage />} />
          <Route path="/ourservices" element={<Services/>} />
          <Route path="/about" element={<About/>} />
@@ -59,13 +67,26 @@ function App() {
         <Route path="/order-receipt" element={<OrderReceipt/>}/>
         <Route path="/SupervisorMainDash" element={<SupervisorMainDash/>}/>
         <Route path="/CreateWashman" element={<CreateWashMan/>}/>
+
+         
+        <Route path="/my-orders/" element={<Orders/>}/>
+        <Route path="/order-receipt/:orderId" element={<OrderReceipt/>}/>
+
+        {/* WASHMAN ROUTES */}
+        {/* <Route path="/washman-profile" element={<WashmanProfilePage/>}/> */}
+        <Route path="/washman-orders" element={<WashmanOrdersPage/>}/>
+        <Route path="/washman-dashboard" element={<WashmanDashboardPage/>}/>
+        <Route path="/washman-single-order" element={<WashmanSingleOrderPage/>}/>
+        <Route path="/washman-edit-profile" element={<WashmanEditProfilePage/>}/>
+
       </Routes>
     </BrowserRouter>
-</VariablesContext>
+</>
 
 
 
   );
 }
+
 
 export default App;

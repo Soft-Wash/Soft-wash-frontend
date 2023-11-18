@@ -4,40 +4,35 @@ import Accordion from "react-bootstrap/Accordion";
 import { useState } from "react";
 import { useEffect } from "react";
 import { axiosInstance } from "../services/AxiosInstance";
+import axios from "axios";
 
 function SelectedCart() {
-  const [cartItems, setCartItems] = useState();
+  const [selectedItems,setSelectedItems]= useState()
   let arrayObj=[]
-
-  useEffect(() => {
+  
+  const getQuantity = () => {
     const clothQuantity = localStorage.getItem("clothQuantity");
     const clothQuantities = JSON.parse(clothQuantity);
     const keys = Object.keys(clothQuantities);
     const values = Object.values(clothQuantities);
-    arrayObj=keys
+    arrayObj = keys;
+    let mainArr = keys.map((key, index) => ({ id: key, quantity: values[index] }));
+    console.log(mainArr)
+    axios.put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
+    .then((resp) => {
+      setSelectedItems(resp.data)
+      selectedItems && console.log(selectedItems)
+      selectedItems && sessionStorage.setItem('softCart', JSON.stringify(selectedItems))
+     })
+
+  };
+
+  useEffect(() => {
+    getQuantity()
   }, []);
 
 
 
-
-
-  const handleSubmit = () => {
-        let data = {ids:arrayObj}
-    if(arrayObj?.length){
-        axiosInstance
-        .post(`/cloth/clothtypes/ids`, data)
-        .then((resp) => {
-        //   console.log(arrayObj);
-          console.log(resp.data);
-          setCartItems(resp.data);
-        });
-    }
-
-  };
-
-  useEffect(()=>{
- handleSubmit();
-  },[])
 
 
 
@@ -55,13 +50,13 @@ function SelectedCart() {
             <Accordion.Item eventKey="0">
               <Accordion.Header>Mens Wear</Accordion.Header>
               <Accordion.Body>
-                {cartItems && cartItems.map((item)=>(
+                {selectedItems && selectedItems.map((item)=>(
                                   <div className="cart-item" key={item._id}>
                                   <div className="d-flex justify-content-between">
                                     <h5>{item.name}</h5>
                                     <h5>{item.price}</h5>
                                   </div>
-                                  <p>2 x N2,000 / per piece</p>
+                                  <p>{`${item.quantity} x ${item.price} / per piece`}</p>
                                 </div>  
                 ))}
               </Accordion.Body>
