@@ -71,7 +71,7 @@ function WashmanEditProfileBody(){
 
                     
                     <Button className="edit-washman-profile-btn" type="submit">
-                        Edit Profile
+                        Save
                     </Button>     
                 </Form>
                 </div>        

@@ -32,10 +32,14 @@ function WashmanSingleOrderBody(){
                     <div className="washman-profile-field">
                         <h4>Order Status</h4>
                         <select>
-                            <option></option>
-                            <option>Recieved</option>
-                            <option>Processing</option>
-                            <option>Completed</option>
+                            <option>ORDER PLACED</option>
+                            <option>CONFIRMED</option>
+                            <option>RECEIVED</option>
+                            <option>CLEANING</option>
+                            <option>READY</option>
+                            <option>SHIPPED</option>
+                            <option>DELIVERED</option>
+                            <option>DECLINE</option>
                         </select>
                     </div>
                 </div>       

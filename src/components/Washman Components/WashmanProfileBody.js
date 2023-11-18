@@ -1,4 +1,8 @@
 import { Button } from "react-bootstrap";
+import "../../styles/Washman Styles/WashmanProfile.css";
+import profilePic from "../../assets/washman/kevin2.jpg";
+import { Link } from 'react-router-dom';
+
 import "../../styles/Washman Styles/WashmanProfile.css"
 import profilePic from "../../assets/washman/kevin2.jpg"
 
@@ -32,8 +36,10 @@ function WashmanProfileBody(){
                         <h4>Email</h4>
                         <h4>peterscott@gmail.com</h4>
                     </div>
-                </div>        
+                </div>      
+                <Link to={"/washman-edit-profile"} className="washman-form-link">
                 <Button className="edit-washman-profile-btn">Edit Profile</Button>     
+                </Link>  
             </div>
         </div>
     )

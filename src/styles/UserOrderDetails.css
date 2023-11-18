@@ -34,3 +34,54 @@
 .order-field h3{
     font-size: 17px;
 }
+.progress-bar-ckeck{
+    color: rgb(13,202,240);
+}
+
+/* .order-progress-circle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 2px;
+  background-color: #17a2b8; 
+}
+.order-progress-circle + .order-progress-circle::after {
+  transform: translateX(-50%);
+} */
+
+
+/* .order-progress-circle{
+    background-color: aqua;
+} */
+.order-progress-circle h6{
+    font-size: 12px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+
+
+.progress-line1 {
+    position: relative;
+    bottom: 65px;
+    left: 50px;
+    border: 2px solid grey;
+    margin: 0 auto; 
+}
+
+.progress-line2 {
+    position: relative;
+    bottom: 53px;
+    left: 50px;
+    border: 2px solid grey;
+    margin: 0 auto; 
+}
+
+
+
+.order-progress-circle .duration-500 {
+    position: relative;
+}
+
+
