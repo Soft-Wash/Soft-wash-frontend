@@ -94,7 +94,7 @@ useEffect(()=>{
   localStorage.setItem("paymentType", JSON.stringify(paymentMethod));
 },[paymentMethod])
 
-  console.log(paymentMethod)
+
 
   const postOrder = () => {
     const deliveryType = JSON.parse(localStorage.getItem('deliveryType'))
@@ -159,7 +159,7 @@ useEffect(()=>{
                     </div>
                   </div>
                 </div>
-                <div className="div2 GreyBorder2">
+                <div className="div2 GreyBorder2 mt-2">
                   <div className="PayOpsCash">
                     <div
                       className="PaymtText"
