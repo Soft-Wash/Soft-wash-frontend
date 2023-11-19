@@ -53,13 +53,11 @@ export default function Orders() {
   
   return (
     <>
-      <Navigation />
-
       <div className="d-flex">
         <div>
           <Sidebar />
         </div>
-        <Container className="m-5 ms-5">
+        <Container className="myorders-container m-5 ms-5">
           <div className="mx-0 mb-4 w-75 d-flex justify-content-between">
             <div>
               <h4>My Orders</h4>
@@ -109,7 +107,7 @@ export default function Orders() {
               <OrderProp 
               id={item._id}
               pickup={item.pickuptime}
-              address={pickUpDateValue}
+              address={item.deliveryAddress[0].FullAddress}
               price={item.subtotal}
               status={item.status}
               />
@@ -121,7 +119,7 @@ export default function Orders() {
               <OrderProp
               id={item._id.substring(0,item._id.length/2)}
               pickup={item.pickuptime}
-              address={pickUpDateValue}
+              address={item.deliveryAddress[0].FullAddress}
               price={item.subtotal}
               status={item.status}
  />
