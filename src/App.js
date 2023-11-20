@@ -25,7 +25,6 @@ import DatePage from "./pages/DatePage";
 import UserProfilePage from "./pages/UserProfilePage";
 import UserDashboardContactPage from "./pages/UserDashboardContactPage";
 import UserOrderDetailsPage from "./pages/UserOrderDetailsPage";
-import VariablesContext from "./context/VariablesContext";
 import WashmanProfilePage from "./components/Washman Components/WashmanProfileBody"
 import WashmanOrdersPage from "./pages/Washman Pages/WashmanOrdersPage";
 import WashmanDashboardPage from "./pages/Washman Pages/WashmanDashboardPage";

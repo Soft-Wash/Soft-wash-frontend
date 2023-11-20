@@ -12,6 +12,10 @@ body {
     align-items: center;
 }
 
+.confirm-button{
+    margin-left: 20px;
+}
+
 /* =======   EMIX BANNER ================ */
 /* .PaymentBanner{
     background-image: url("./assets/images/banerfinal4.png");

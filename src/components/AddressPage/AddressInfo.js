@@ -35,6 +35,7 @@ function AddressInfo() {
     axios
       .put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
       .then((resp) => {
+        localStorage.setItem('softCart', JSON.stringify(resp.data))
         setSelectedItems(resp.data);
       });
   };
@@ -216,7 +217,7 @@ function AddressInfo() {
                           aria-label="radio 1"
                           onChange={handleChange}
                           name="AddressTypeHome"
-                          checked={selectedAddress.AddressTypeHome === 'AddressTypeHome'}
+                          checked={selectedAddress.AddressType === 'AddressTypeHome'}
                         />
                         <Form.Label>Home</Form.Label>
                       </Form.Group>
@@ -226,7 +227,7 @@ function AddressInfo() {
                           aria-label="radio 1"
                           onChange={handleChange}
                           name="AddressTypeWork"
-                          checked={selectedAddress.AddressTypeWork === 'AddressTypeWork'}
+                          checked={selectedAddress.AddressType === 'AddressTypeWork'}
                         />
                         <Form.Label>Work</Form.Label>
                       </Form.Group>
@@ -236,7 +237,7 @@ function AddressInfo() {
                           aria-label="radio 1"
                           onChange={handleChange}
                           name="AddressTypeOther"
-                          checked={selectedAddress.AddressTypeOther === 'AddressTypeOther'}
+                          checked={selectedAddress.AddressType === 'AddressTypeOther'}
                         />
                         <Form.Label>Other</Form.Label>
                       </Form.Group>

@@ -41,7 +41,7 @@ axiosInstance.get(`/order/${orderId}/order`)
     
     return(
         <div className="dashboard-bg">
-            <h1>Order Details</h1>
+            <h4 className='order-details-tag'>Order Details</h4>
 
             <div className="user-dashboard-contact-body">
                 <div className='order-header'>

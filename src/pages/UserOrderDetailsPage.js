@@ -1,16 +1,19 @@
 import '../../src/styles/UserProfile.css';
 import '../../src/styles/UserOrderDetails.css';
 import UserDashboardNav from "../components/UserDashboard/UserDashboardNav";
-import UserSidebar from "../components/UserDashboard/UserSidebar";
+import Sidebar from "../components/OrdersPage/Sidebar";
 // import UserProfileBody from '../components/UserDashboard/UserProfileBody';
 import OrderDetailsBody from '../components/UserDashboard/OrderDetailsBody';
 
 
 function UserOrderDetailsPage(){
     return(
-        <div className='d-flex'>
-            <UserSidebar />
-            <OrderDetailsBody />
+        <div className='user-dashboard-container '>
+
+            <div className='user-dashboard-content d-flex'>
+            <Sidebar />
+                <OrderDetailsBody />
+            </div>
         </div>
     )
 }

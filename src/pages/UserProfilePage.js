@@ -1,6 +1,6 @@
 import '../../src/styles/UserProfile.css';
 import UserDashboardNav from "../components/UserDashboard/UserDashboardNav";
-import UserSidebar from "../components/UserDashboard/UserSidebar";
+import Sidebar from "../components/OrdersPage/Sidebar";
 import UserProfileBody from '../components/UserDashboard/UserProfileBody';
 
 
@@ -8,8 +8,8 @@ import UserProfileBody from '../components/UserDashboard/UserProfileBody';
 function UserProfilePage(){
     return(
         <div className='d-flex'>
-            <UserSidebar />           
-            <UserProfileBody />
+                <Sidebar />           
+                <UserProfileBody />
         </div>
     )
 }
