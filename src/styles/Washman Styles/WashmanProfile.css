@@ -1,19 +1,8 @@
-
-
-
-
-
-
-
-
-
-
-.user-dashboard-bg{
+.washman-bg{
     width: 100vw;
     background-color: whitesmoke;
 }
-
-.user-page-content{
+.washman-page-content{
     width: 70%;
     margin: auto;
     margin-top: 30px;
@@ -21,27 +10,27 @@
     border-radius: 10px;
     background-color: white;
 }
-.user-header{
+.washman-header{
     border-bottom: 2px solid grey;
 }
-.user-header h2{
+.washman-header h2{
     font-size: 17px;
 }
-.user-profilePic-sec{
+.washman-profilePic-sec{
     width: 100%;
     padding: 20px 0;
 }
-.user-profilePic{
+.washman-profilePic{
     width: 120px;
     height: 120px;
     border-radius: 70px;
 }
-.user-profilePic img{
+.washman-profilePic img{
     width: 100%;
     height: 100%;
     border-radius: 70px;
 }
-.user-dp-btn{
+.washman-dp-btn{
     height: 35px;
     margin-top: 75px;
     margin-left: 15px;
@@ -52,12 +41,12 @@
     background-color: rgb(13,202,240);
     border: none;
 }
-.user-dp-btn:hover{
+.washman-dp-btn:hover{
     background-color: rgb(14, 149, 176);
 }
 
 
-.user-profile-field{
+.washman-profile-field{
     width: 100%;
     padding: 5px 40px 5px 10px;
     margin-top: 20px;
@@ -68,10 +57,10 @@
     border: 1px solid grey;
     background-color: whitesmoke;
 }
-.user-profile-field h4{
+.washman-profile-field h4{
     font-size: 13px;
 }
-.edit-user-profile-btn{
+.edit-washman-profile-btn{
     width: 100%;
     height: 35px;
     margin-top: 25px;
@@ -83,11 +72,40 @@
     background-color: rgb(13,202,240);
     border: none;
 }
-.edit-user-profile-btn:hover{
+.edit-washman-profile-btn:hover{
     background-color: rgb(14, 149, 176);
 }
 
-.user-form-link{
-    text-decoration: none;
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

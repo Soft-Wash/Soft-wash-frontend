@@ -9,13 +9,18 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { axiosInstance } from "../../services/AxiosInstance";
 import axios from "axios";
-import {BsFillTrashFill} from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import { BsFillTrashFill } from "react-icons/bs";
 
 function AddressInfo() {
+  const [selectedTime, setSelectedTime] = useState();
+  const [customerId, setCustomerId] = useState();
+  const [clothIds, setClothIds] = useState();
+  let arrayObj = [];
+  const navigate = useNavigate();
+  const [selectedItems, setSelectedItems] = useState();
+  const [selectedDate, setSelectedDate] = useState();
   const [clicked, setClicked] = useState(false);
-
-  const [selectedItems,setSelectedItems]= useState()
-  let arrayObj=[]
 
   const getQuantity = () => {
     const clothQuantity = localStorage.getItem("clothQuantity");
@@ -23,49 +28,87 @@ function AddressInfo() {
     const keys = Object.keys(clothQuantities);
     const values = Object.values(clothQuantities);
     arrayObj = keys;
-    let mainArr = keys.map((key, index) => ({ id: key, quantity: values[index] }));
-    axios.put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
-    .then((resp) => {
-      setSelectedItems(resp.data)
-      selectedItems && console.log(selectedItems)
-      selectedItems && sessionStorage.setItem('cart', selectedItems)
-     })
-
+    let mainArr = keys.map((key, index) => ({
+      id: key,
+      quantity: values[index],
+    }));
+    axios
+      .put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
+      .then((resp) => {
+        localStorage.setItem('softCart', JSON.stringify(resp.data))
+        setSelectedItems(resp.data);
+      });
   };
 
   useEffect(() => {
-    getQuantity()
+    getQuantity();
+    const calenderSelectedTime = localStorage.getItem("calenderSelectedTime");
+    const parsedCalenderSelectedTime = calenderSelectedTime
+      ? JSON.parse(calenderSelectedTime)
+      : null;
+    setSelectedTime(parsedCalenderSelectedTime);
+    const calenderSetDate = localStorage.getItem("calenderStartDate");
+    const storedDate = new Date(JSON.parse(calenderSetDate));
+    const parsedCalenderSetDate = storedDate;
+    setSelectedDate(parsedCalenderSetDate);
+    const customer_id = localStorage.getItem("softwashLoginUser");
+    const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
+    setCustomerId(parsedCustomerData);
+    const clothQuantity = localStorage.getItem("clothQuantity");
+    const parsedClothQuantity = clothQuantity
+      ? JSON.parse(clothQuantity)
+      : null;
+    if (parsedClothQuantity) {
+      let keys = Object.keys(parsedClothQuantity);
+      const values = Object.values(parsedClothQuantity);
+      setClothIds(keys);
+    }
   }, []);
-
-
-
-
-
- 
 
   const [selectedAddress, setSelectedAddress] = useState({
     contactNumber: "",
     FullAddress: "",
     SearchedAddress: "",
-    AddressTypeHome: false,
-    AddressTypeWork: false,
-    AddressTypeOther: false,
+    AddressType: ""
   });
+
+  console.log(selectedAddress)
 
   const handleChange = (e) => {
     const value =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
+  
 
-    setSelectedAddress({ ...selectedAddress, [e.target.name]: value });
+    if (e.target.name.startsWith("AddressType")) {
+      setSelectedAddress({ ...selectedAddress, AddressType: e.target.name });
+    } else {
+      setSelectedAddress({ ...selectedAddress, [e.target.name]: value });
+    }
   };
 
-  const handleAddress = () => {
-    localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
+
+
+  let orderPostObj = {
+    customer_id: customerId?._id,
+    deliveryAddress: selectedAddress,
+    pickuptime: selectedTime,
+    schedule_date: selectedDate,
+    clothtype_ids: clothIds,
   };
+
+  function postOrderAddress() {
+    console.log(orderPostObj);
+    axiosInstance.post("/order/create", orderPostObj).then((resp) => {
+      console.log(resp.data);
+      const orderId = resp.data._id;
+      localStorage.setItem("RecentOrder", JSON.stringify(resp.data));
+      localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
+      navigate(`/paymentpage/${orderId}`);
+    });
+  }
 
   useEffect(() => {
     const storedAddress = localStorage.getItem("selectedAddress");
-
     if (storedAddress) {
       setSelectedAddress(JSON.parse(storedAddress));
     }
@@ -79,8 +122,8 @@ function AddressInfo() {
             <h4 className="text-primary mb-3 fw-semibold ps-2 text-capitalize">
               Choose your address
             </h4>
-
-            <div
+            {selectedAddress.FullAddress.length ?(
+             <div
               className={`w-100 d-flex justify-content-between gap-3 shadow-sm rounded py-4 mx-auto mx-0 ps-4 ${
                 clicked
                   ? "border bg-primary-subtle  shadow-sm border border-primary border-2 "
@@ -95,14 +138,19 @@ function AddressInfo() {
               />
               <Row className="w-100">
                 <p className="w-100 text-black fs-5 fw-semibold my-auto ">
-                  No. 234, Whyoming Street, Solid Estate, Bay Area, Nigeria
+              {selectedAddress?.FullAddress}
                 </p>
               </Row>
               <BsFillTrashFill
                 className="me-2 p-1 h-100 my-auto  border border-info rounded-circle text-info"
                 style={{ width: "30px", heigth: "auto" }}
               />
-            </div>
+            </div> 
+            ):(
+              <p style={{margin:"10px"}}>No Address Added Yet!</p>
+            )}
+
+
           </div>
           <Row className="w-100 text-center my-4">
             <h3>Or</h3>
@@ -169,6 +217,7 @@ function AddressInfo() {
                           aria-label="radio 1"
                           onChange={handleChange}
                           name="AddressTypeHome"
+                          checked={selectedAddress.AddressType === 'AddressTypeHome'}
                         />
                         <Form.Label>Home</Form.Label>
                       </Form.Group>
@@ -178,6 +227,7 @@ function AddressInfo() {
                           aria-label="radio 1"
                           onChange={handleChange}
                           name="AddressTypeWork"
+                          checked={selectedAddress.AddressType === 'AddressTypeWork'}
                         />
                         <Form.Label>Work</Form.Label>
                       </Form.Group>
@@ -187,6 +237,7 @@ function AddressInfo() {
                           aria-label="radio 1"
                           onChange={handleChange}
                           name="AddressTypeOther"
+                          checked={selectedAddress.AddressType === 'AddressTypeOther'}
                         />
                         <Form.Label>Other</Form.Label>
                       </Form.Group>
@@ -214,21 +265,22 @@ function AddressInfo() {
           <hr />
           <h5 className="text-capitalize ms-1">dry wash</h5>
           <Accordion defaultActiveKey="0">
-                    <Accordion.Item eventKey="0">
-                        <Accordion.Header>Mens Wear</Accordion.Header>
-                        <Accordion.Body>
-                        {selectedItems && selectedItems.map((item)=>(
-                                  <div className="cart-item" key={item._id}>
-                                  <div className="d-flex justify-content-between">
-                                    <h5>{item.name}</h5>
-                                    <h5>{item.price * item.quantity}</h5>
-                                  </div>
-                                  <p>{`${item.quantity} x ${item.price} / per piece`}</p>
-                                </div>  
-                ))}
-                        </Accordion.Body>
-                    </Accordion.Item>      
-                </Accordion>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>Mens Wear</Accordion.Header>
+              <Accordion.Body>
+                {selectedItems &&
+                  selectedItems.map((item) => (
+                    <div className="cart-item" key={item._id}>
+                      <div className="d-flex justify-content-between">
+                        <h5>{item.name}</h5>
+                        <h5>{item.price}</h5>
+                      </div>
+                      <p>{`${item.quantity} x ${item.price} / per piece`}</p>
+                    </div>
+                  ))}
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
         </Col>
       </Row>
 
@@ -244,19 +296,20 @@ function AddressInfo() {
           </Link>
         </Col>
         <Col lg={4} md={5} sm={5}>
-          <Link to="/PaymentPage">
-            <Button
-              variant="primary"
-              className="me-auto w-75 text-center"
-              onClick={handleAddress}
-            >
-              Next
-            </Button>
-          </Link>
+          {/* <Link to="/PaymentPage"> */}
+          <Button
+            variant="primary"
+            className="me-auto w-75 text-center"
+            onClick={postOrderAddress}
+          >
+            Next
+          </Button>
+          {/* </Link> */}
         </Col>
       </Container>
     </Container>
   );
 }
+
 
 export default AddressInfo;

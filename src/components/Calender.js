@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import TimePicker from "react-time-picker";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { useEffect } from "react";
 
 function Calender() {
@@ -13,8 +12,6 @@ function Calender() {
 
 
   });
-
-  // const startDateTimestamp = startDate.getTime()
 
   const [selectedTime, setSelectedTime] = useState(() => {
     const storedTime = localStorage.getItem("calenderSelectedTime");
@@ -28,10 +25,18 @@ function Calender() {
 
 
 
-  const handleTimeChange = (event) => {
-    setSelectedTime(event.target.value);
+  const handleTimeChange = (time) => {
+    setSelectedTime(time);
   };
 
+  const[activeBtn, setActiveBtn] = useState(1);
+
+  const handleBtnClick = (btnNo,time) => {
+      setActiveBtn(btnNo)
+      handleTimeChange(time)
+  }
+
+  console.log(selectedTime)
 
   
   return (
@@ -40,25 +45,33 @@ function Calender() {
         <h3 className="date-headers">
           When would you like your order to be ready?
         </h3>
-        <DatePicker
-          className="react-datepicker__calendar"
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          minDate={new Date()}
-        />
+        <div className="d-flex">
+          <DatePicker
+            className="react-datepicker__calendar"
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            minDate={new Date()}
+          />         
 
-        <label htmlFor="timePicker"></label>
-        <input
-          type="time"
-          id="timePicker"
-          name="timePicker"
-          value={selectedTime}
-          onChange={handleTimeChange}
-        />
+          <div className="mx-5" style={{display: "flex", flexDirection: "column"}}>
+            <Button className="booking-time-btn px-5" 
+            variant={activeBtn === 1 ? 'primary' : 'light'}
+            onClick={() => handleBtnClick(1,"08:00 - 10:00 AM")}
+            >
+              08:00 - 10:00 AM
+            </Button>
+            <Button className="booking-time-btn px-5 my-3" 
+            variant={activeBtn === 2 ? 'primary' : 'light'}
+            onClick={() => handleBtnClick(2,"04:00 - 07:00 PM")}
+            >
+              04:00 - 07:00 PM
+            </Button>
+          </div>
+        </div>
         {!startDate || !selectedTime ? <div className="color-red">please select date or time</div> : "" }
       </div>
     </Container>
   );
 }
 
-export default Calender;
+export default Calender;

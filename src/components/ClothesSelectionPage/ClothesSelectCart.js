@@ -13,8 +13,10 @@ import { variableManager } from "../../context/VariablesContext";
 import ClothAccordian from "./ClothAccordian";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import {Loader} from "../../common/Loader"
 
 function SelectedCart({ initialQuantity }) {
+  const [loading, setLoading] = useState(false); 
   const [kidsWear, setkidsWear] = useState();
   const [accessories, setAccessories] = useState();
   const [shoes, setShoes] = useState();
@@ -26,9 +28,11 @@ function SelectedCart({ initialQuantity }) {
   const [regularWash, SetRegularWash] = useState();
   const [heavyWash, SetHeavyWash] = useState();
   const [clothItems, setClothItem] = useState();
+  const [customerId, setCustomerId]= useState()
   const navigate = useNavigate()
   const [selectedItems,setSelectedItems]= useState()
-  let arrayObj=[]
+const [clothId,setclothId]=useState()
+
 
   const [clothQuantity, setClothQuantity] = useState(() => {
     const storedQuantity = localStorage.getItem('clothQuantity');
@@ -40,6 +44,7 @@ function SelectedCart({ initialQuantity }) {
       const newQuantity = (prevQuantities[clothId] || 0) + 1;
       return { ...prevQuantities, [clothId]: newQuantity };
     });
+    // setclothId(clothId)
   };
 
   const decrement = (clothId) => {
@@ -63,14 +68,20 @@ function SelectedCart({ initialQuantity }) {
       );
       localStorage.setItem("clothQuantity", JSON.stringify(filteredQuantities));
     }
+
   };
-  
+
+
+
 
   useEffect(() => {
     HandleLocalSave()
   }, [clothQuantity]);
 
   useEffect(() => {
+
+    setLoading(true)
+
     axiosInstance
       .get(`/cloth/kidswear/category`)
       .then((resp) => {
@@ -160,16 +171,26 @@ function SelectedCart({ initialQuantity }) {
       .catch((err) => {
         console.log(err);
       });
+
+      setLoading(false)
   }, []);
 
 
 
-
+// if (loading){
+//   return(
+ 
+//   )
+// }
 
 
   return (
     <div>
-      <Tabs
+      {loading?(
+                <Loader color="primary" size="lg" show={loading} />
+      ):(
+<>
+<Tabs
         defaultActiveKey="profile"
         id="justify-tab-example"
         className="mb-3 gap-3"
@@ -777,6 +798,10 @@ function SelectedCart({ initialQuantity }) {
         </Link>
 
             </div>
+</>
+      )}
+
+
     </div>
   );
 }

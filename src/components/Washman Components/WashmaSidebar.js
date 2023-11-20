@@ -1,14 +1,10 @@
-import '../../styles/UserProfile.css';
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { CDBSidebar, CDBSidebarContent, CDBSidebarFooter, CDBSidebarHeader, CDBSidebarMenu, CDBSidebarMenuItem,} from 'cdbreact';
-import {useEffect,useState} from "react"
+import { Link, NavLink } from 'react-router-dom';
 
-function UserSidebar(){
 
-    return(
-        
-
+function WashmaSidebar (){
+    return (
         <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
           <CDBSidebar textColor="rgb(13,202,240)" backgroundColor="rgb(11,9,9)">
             <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
@@ -16,7 +12,6 @@ function UserSidebar(){
                 SOFTWASH 
               </Link>
             </CDBSidebarHeader>
-
             <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
             <Link exact to="/washman-dashboard" activeClassName="activeClicked">
@@ -49,11 +44,10 @@ function UserSidebar(){
               </div>
             </CDBSidebarFooter>
           </CDBSidebar>
-      </div>
-
-    )
+        </div>
+      );
 }
 
-export default UserSidebar;
 
 
+export default WashmaSidebar;
