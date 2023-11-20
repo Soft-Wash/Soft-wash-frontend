@@ -19,13 +19,6 @@ function AddressInfo() {
   const [clothIds,setClothIds] = useState()
   let arrayObj = [];
   const navigate = useNavigate();
-  function AddressInfo() {
-    const [selectedTime, setSelectedTime] = useState();
-    const [customerId, setCustomerId] = useState();
-    const [clothIds,setClothIds] = useState()
-    let arrayObj = [];
-    const navigate = useNavigate();
-  const [selectedItems,setSelectedItems]= useState()
   const [selectedDate, setSelectedDate] = useState();
   const [clicked, setClicked] = useState(false);
 
