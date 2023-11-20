@@ -22,7 +22,8 @@ function SelectedCart() {
     .then((resp) => {
       setSelectedItems(resp.data)
       selectedItems && console.log(selectedItems)
-      selectedItems && sessionStorage.setItem('softCart', JSON.stringify(selectedItems))
+      selectedItems && localStorage.setItem('softCart', JSON.stringify(selectedItems))
+      selectedItems && console.log(selectedItems)
      })
 
   };

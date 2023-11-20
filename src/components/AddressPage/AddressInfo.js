@@ -35,6 +35,7 @@ function AddressInfo() {
     axios
       .put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
       .then((resp) => {
+        localStorage.setItem('softCart', JSON.stringify(resp.data))
         setSelectedItems(resp.data);
       });
   };
