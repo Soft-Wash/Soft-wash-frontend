@@ -1,348 +1,93 @@
 
-.user-sidebar-profile {
-    width: 200px;
-    height: 150vh;
-    background-color: white; 
-    display: flex;
-    flex-direction: column;
-    /* box-shadow: 0 0 10px 2px gainsboro; */
-}
-  
-.user-sidebar-profile a {
-    width: 200px;
-    padding: 15px 0;
-    font-size: 20px; 
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-    padding-left: 30px;
-    text-decoration: none; 
-    color: rgb(13,202,240);
-    /* border-bottom: 3px solid #007bff; */
-    border-radius: 5px;
-}
-  
-  .user-sidebar-profile a:hover {
-    background-color: rgb(13,202,240); 
-    color: white;
-}
-  
 
-.user-sidebar-profile .navigate-home{
+
+
+
+
+
+
+
+
+.user-dashboard-bg{
+    width: 100vw;
+    background-color: whitesmoke;
+}
+
+.user-page-content{
+    width: 70%;
+    margin: auto;
     margin-top: 30px;
-}
-
-.user-sidebar-logo{
-    width: 75%;
-    height: 25px;
-    margin-left: 12.5%;
-    display: flex;
-    justify-content: center;
-}
-.user-sidebar-logo img{
-    width: 100%;
-    height: 100%;
-}
-.sidebar-icon{
-    font-size: 25px;
-}
-
-.user-dashboard-nav{
-    width: 100%;
-    padding: 20px 10px;
-    display: flex;
-    justify-content: space-between;
-    background-color:white;
-    box-shadow: 10px 0 10px 2px grey;
-}
-.user-dashboard-nav a{
-    padding: 0 10px;
-    display: none;
-    color: black;
-    text-decoration: none;
-}
-.user-dashboard-container{
-    width: 100%;
-    display: flex;
-    /* height: 100%; */
-}
-
-.user-dashboard-content{
-    width: 100%;
-}
-
-.user-nav-icon{
-    font-size: 30px;
-    margin-right: 25px;
-    color: rgb(14, 134, 159);
-}
-
-.user-dashboard-body{
-    width: 100%;
-    height: 180vh;
-    /* margin-top: 5px; */
-    margin-left: 5px;
-    background-color: rgb(245,246,254);
-}
-.user-body-cols{
-    width: 100%;
-    height: 70%;
-    display: flex;
-    justify-content: space-evenly;
-}
-.user-profile-col1{
-    width: 25%;
-    height: 100%;
-    border-radius: 35px;
+    padding: 20px;
+    border-radius: 10px;
     background-color: white;
 }
-.user-profile-col2{
-    width: 60%;
+.user-header{
+    border-bottom: 2px solid grey;
+}
+.user-header h2{
+    font-size: 17px;
+}
+.user-profilePic-sec{
+    width: 100%;
+    padding: 20px 0;
+}
+.user-profilePic{
+    width: 120px;
+    height: 120px;
+    border-radius: 70px;
+}
+.user-profilePic img{
+    width: 100%;
     height: 100%;
-    border-radius: 35px;
-    background-color: white;
+    border-radius: 70px;
 }
-.user-body-icon-div{
+.user-dp-btn{
+    height: 35px;
+    margin-top: 75px;
+    margin-left: 15px;
+    font-size: 13px;
     display: flex;
+    align-items: center;
     justify-content: center;
-}
-.user-body-icon{
-    font-size: 150px;
-    /* margin-left: 30%; */
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-.user-profile-col1 h3{ 
-    text-align: center;
-}
-.user-profile-col1 h4{ 
-    padding: 25px 0;
-    margin: 20px 0;
-    text-align: center;
-    color: white;
     background-color: rgb(13,202,240);
+    border: none;
 }
-.user-dashboard-body h2{
-    font-size: 40px;
-    font-weight: 700;
-    padding: 40px  80px;
+.user-dp-btn:hover{
+    background-color: rgb(14, 149, 176);
 }
 
-.user-profile-col2 .desc{
+
+.user-profile-field{
     width: 100%;
-    padding: 30px 20px;
+    padding: 5px 40px 5px 10px;
+    margin-top: 20px;
     display: flex;
     justify-content: space-between;
-}
-.user-profile-details{
-    width: 100%;
-    padding: 15px 20px;
-    display: flex;
-    border-bottom: 1px solid gainsboro;
-}
-.user-profile-details p{
-    font-size: 20px;
-    margin-right: 50px;
-}
-
-
-
-
-
-
-
-
-
-
-
-/* contact sidebar */
-.user-sidebar-contact {
-    width: 200px;
-    height: 154vh;
-    background-color: white; 
-    display: flex;
-    flex-direction: column;
-    /* box-shadow: 0 0 10px 2px gainsboro; */
-}
-  
-.user-sidebar-contact a {
-    width: 200px;
-    padding: 15px 0;
-    font-size: 20px; 
-    display: flex;
-    justify-content: flex-start;
     align-items: center;
-    gap: 10px;
-    padding-left: 30px;
-    text-decoration: none; 
-    color: rgb(13,202,240);
-    /* border-bottom: 3px solid #007bff; */
     border-radius: 5px;
+    border: 1px solid grey;
+    background-color: whitesmoke;
 }
-  
-  .user-sidebar-contact a:hover {
-    background-color: rgb(13,202,240); 
-    color: white;
+.user-profile-field h4{
+    font-size: 13px;
 }
-  
-
-.user-sidebar-profile .navigate-home{
-    margin-top: 30px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@media (max-width: 1440px){
-
-    
-
-    .user-body-icon{
-        font-size: 120px;
-    }
-    
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-@media (max-width: 1024px){
-    .user-sidebar {
-        height: 160vh;
-    }
-    .user-dashboard-body{
-        height: 140vh;
-    }
-    .user-body-icon{
-        font-size: 100px;
-        margin-top: 30px;
-        margin-bottom: 30px;
-    }
-    .user-dashboard-body h2{
-    font-size: 30px;
-    }
-    .user-body-cols{
+.edit-user-profile-btn{
     width: 100%;
-    }
-    .user-profile-col1{
-        width: 30%;
-    }
-    .user-profile-col2{
-        width: 60%;
-    }
-    .user-profile-col1 h3{ 
-    font-size: 20px;
-    }
-    .user-profile-col1 h4{ 
-        font-size: 15px;
-        padding: 15px 0;
-        margin: 30px 0;
-    }
-    .user-body-icon{
-        font-size: 90px;
-    }
-    .user-profile-details p{
-    font-size: 18px;
-    }
-    .user-profile-details h4{
-    font-size: 18px;
-    }
-    .user-profile-details h3{
-        font-size: 20px;
-        }
-}
-
-
-
-
-
-
-
-
-
-
-
-@media (max-width: 770px){
-    .user-dashboard-body{
-        height: 300vh;
-    }
-    .user-dashboard-nav a{
-        display: flex;
-        font-size: 15px;
-    }
-    .user-nav-icon{
-        font-size: 20px;
-        margin-right: 15px;
-    }
-    .user-dashboard-body h2{
-    font-size: 25px;
-    font-weight: 700;
-    padding: 20px  40px;
-    }
-    .user-sidebar-profile{
-        display: none;
-    }
-    .user-body-cols{
-    width: 100%;
-    height: 85%;
+    height: 35px;
+    margin-top: 25px;
+    /* margin-left: 15px; */
+    font-size: 15px;
     display: flex;
-    flex-wrap: wrap;
-    /* justify-content: space-evenly; */
-    }
-    .user-profile-col1{
-    width: 85%;
-    height: 45%;
-    border-radius: 35px;
-    margin-bottom: 30px;
-    /* background-color: red; */
-    }
-    .user-profile-col2{
-        width: 85%;
-        height: 55%;
-        border-radius: 35px;
-        background-color: white;
-    }
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(13,202,240);
+    border: none;
+}
+.edit-user-profile-btn:hover{
+    background-color: rgb(14, 149, 176);
+}
 
+.user-form-link{
+    text-decoration: none;
 
-    .user-sidebar-contact {
-        display: none;
-    }
 }

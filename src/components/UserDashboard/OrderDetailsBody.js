@@ -1,6 +1,13 @@
 import '../../styles/UserOrderDetails.css';
 import { FaCircleInfo, FaHotTubPerson, FaMoneyCheckDollar } from "react-icons/fa6";
 import Accordion from 'react-bootstrap/Accordion';
+
+
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import ProgressBar from "react-bootstrap/ProgressBar";
+import { FaCheck } from "react-icons/fa";
 import {useEffect,useState} from "react"
 import { axiosInstance } from "../../services/AxiosInstance";
 
@@ -8,6 +15,11 @@ import { axiosInstance } from "../../services/AxiosInstance";
 
 
 function OrderDetailsBody(){
+
+    let [count, setCount] = useState(0);
+    // const progress = 20;
+    const [progress, setProgress] = useState(0);
+
 
     const [orderdetails,setorderDetails] = useState()
     const [pickUpDateValue, setpickUpDate]=useState()
@@ -29,7 +41,7 @@ axiosInstance.get(`/order/${orderId}/order`)
     
     return(
         <div className="dashboard-bg">
-            <h1>Order Details</h1>
+            <h4 className='order-details-tag'>Order Details</h4>
 
             <div className="user-dashboard-contact-body">
                 <div className='order-header'>
@@ -85,9 +97,116 @@ axiosInstance.get(`/order/${orderId}/order`)
                     <h3>Total</h3>
                     <p>N16,500</p>
                 </div>
+                <Col lg={12} md={10} sm={10} className="text-center position-relative">
+                    
+                    <Row classname="w-500px">
+                    <Container className=" d-flex gap-5 mt-4 position-relative">
+                        <div className='order-progress-circle '>
+                            <Col
+                            className={`duration-500 border border-4 ${ "border-info"}  text-center rounded-circle  bg-white size-sm-30px`}
+                            style={{ height: "50px", width: "50px" }}
+                            >
+                                <p className="  fw-semibold fs-4 text-secondary mt-sm"><FaCheck className='progress-bar-ckeck'/></p>
+                            </Col>
+                            <h6>ORDER PLACED</h6>
+                            <hr className='progress-line1'/>
+                        </div>
+                                            
+
+                        <div className='order-progress-circle'>
+                            <Col
+                                className={`duration-500 border border-4 ${progress > 12.5 ? "border-info" : null}  text-center rounded-circle bg-white size-sm-30px`}
+                                style={{ height: "50px", width: "50px" }}
+                                >
+                                <p className=" fw-semibold fs-4 text-secondary mt-sm"></p>
+                            </Col>
+                            <h6>CONFIRMED</h6>
+                            <hr className='progress-line2'/>
+                        </div>
+                        
+
+                        <div className='order-progress-circle'>
+                        <Col
+                            className={`duration-500 border border-4 ${progress > 25 ? "border-info" : null}  text-center rounded-circle bg-white size-sm-30px`}
+                            style={{ height: "50px", width: "50px" }}
+                            >
+                            <p className=" fw-semibold fs-4 text-secondary mt-sm"></p>
+                        </Col>
+                        <h6>RECIEVED</h6>
+                        <hr className='progress-line2'/>
+                        </div>
+                        
+                        
+                        <div className='order-progress-circle'>
+                        <Col 
+                            className={`duration-500 border border-4 ${progress > 37.5 ? "border-info" : null}  text-center rounded-circle bg-white size-sm-30px`}
+                            style={{ height: "50px", width: "50px" }}
+                            >
+                            <p className=" fw-semibold fs-4 text-secondary mt-sm"></p>
+                        </Col>
+                        <h6>CLEANING</h6>
+                        <hr className='progress-line2'/>
+                        </div>
+                        
+                        
+                        <div className='order-progress-circle'>
+                        <Col 
+                            className={`duration-500 border border-4 ${progress > 37.5 ? "border-info" : null}  text-center rounded-circle bg-white size-sm-30px`}
+                            style={{ height: "50px", width: "50px" }}
+                            >
+                            <p className=" fw-semibold fs-4 text-secondary mt-sm"></p>
+                        </Col>
+                        <h6>READY</h6>
+                        <hr className='progress-line2'/>
+                        </div>
+                        
+                        
+                        <div className='order-progress-circle'>
+                        <Col 
+                            className={`duration-500 border border-4 ${progress > 37.5 ? "border-info" : null}  text-center rounded-circle bg-white size-sm-30px`}
+                            style={{ height: "50px", width: "50px" }}
+                            >
+                            <p className=" fw-semibold fs-4 text-secondary mt-sm"></p>
+                        </Col>
+                        <h6>SHIPPED</h6>
+                        <hr className='progress-line2'/>
+                        </div>
+                        
+                        
+                        <div className='order-progress-circle'>
+                        <Col 
+                            className={`duration-500 border border-4 ${progress > 37.5 ? "border-info" : null}  text-center rounded-circle bg-white size-sm-30px`}
+                            style={{ height: "50px", width: "50px" }}
+                            >
+                            <p className=" fw-semibold fs-4 text-secondary mt-sm"></p>
+                        </Col>
+                        <h6>DELIVERED</h6>
+                        <hr className='progress-line2'/>
+                        </div>
+                        
+                        
+                        <div className='order-progress-circle'>
+                        <Col 
+                            className={`duration-500 border border-4 ${progress > 37.5 ? "border-info" : null}  text-center rounded-circle bg-white size-sm-30px`}
+                            style={{ height: "50px", width: "50px" }}
+                            >
+                            <p className=" fw-semibold fs-4 text-secondary mt-sm"></p>
+                        </Col>
+                        <h6>DECLINED</h6>
+                        </div>                    
+                    </Container>
+
+                        <Col className="px-4 position-relative neg-top-15" style={{top:"-30px", zIndex:"-1"}}>
+                        <ProgressBar now={progress} variant="info"  className=" duration-300 " style={{height:"2px"}}/>
+                        </Col>
+
+                        
+                    </Row>
+                </Col>
             </div>
         </div>
     )
+    
 }
 
 

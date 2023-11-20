@@ -35,6 +35,7 @@ function AddressInfo() {
     axios
       .put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
       .then((resp) => {
+        localStorage.setItem('softCart', JSON.stringify(resp.data))
         setSelectedItems(resp.data);
       });
   };
@@ -76,6 +77,7 @@ function AddressInfo() {
   const handleChange = (e) => {
     const value =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
+  
 
     if (e.target.name.startsWith("AddressType")) {
       setSelectedAddress({ ...selectedAddress, AddressType: e.target.name });
@@ -136,7 +138,7 @@ function AddressInfo() {
               />
               <Row className="w-100">
                 <p className="w-100 text-black fs-5 fw-semibold my-auto ">
-                  No. 234, Whyoming Street, Solid Estate, Bay Area, Nigeria
+              {selectedAddress?.FullAddress}
                 </p>
               </Row>
               <BsFillTrashFill
@@ -215,7 +217,7 @@ function AddressInfo() {
                           aria-label="radio 1"
                           onChange={handleChange}
                           name="AddressTypeHome"
-                          checked={selectedAddress.AddressTypeHome === 'AddressTypeHome'}
+                          checked={selectedAddress.AddressType === 'AddressTypeHome'}
                         />
                         <Form.Label>Home</Form.Label>
                       </Form.Group>
@@ -225,7 +227,7 @@ function AddressInfo() {
                           aria-label="radio 1"
                           onChange={handleChange}
                           name="AddressTypeWork"
-                          checked={selectedAddress.AddressTypeWork === 'AddressTypeWork'}
+                          checked={selectedAddress.AddressType === 'AddressTypeWork'}
                         />
                         <Form.Label>Work</Form.Label>
                       </Form.Group>
@@ -235,7 +237,7 @@ function AddressInfo() {
                           aria-label="radio 1"
                           onChange={handleChange}
                           name="AddressTypeOther"
-                          checked={selectedAddress.AddressTypeOther === 'AddressTypeOther'}
+                          checked={selectedAddress.AddressType === 'AddressTypeOther'}
                         />
                         <Form.Label>Other</Form.Label>
                       </Form.Group>
@@ -308,5 +310,6 @@ function AddressInfo() {
     </Container>
   );
 }
+
 
 export default AddressInfo;
