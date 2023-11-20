@@ -8,12 +8,9 @@ import OrderDetailsBody from '../components/UserDashboard/OrderDetailsBody';
 
 function UserOrderDetailsPage(){
     return(
-        <div className='user-dashboard-container'>
+        <div className='d-flex'>
             <UserSidebar />
-            <div className='user-dashboard-content'>
-                <UserDashboardNav />
-                <OrderDetailsBody />
-            </div>
+            <OrderDetailsBody />
         </div>
     )
 }

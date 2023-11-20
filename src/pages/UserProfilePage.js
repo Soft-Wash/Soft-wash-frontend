@@ -8,8 +8,8 @@ import UserProfileBody from '../components/UserDashboard/UserProfileBody';
 function UserProfilePage(){
     return(
         <div className='d-flex'>
-                <UserSidebar />           
-                <UserProfileBody />
+            <UserSidebar />           
+            <UserProfileBody />
         </div>
     )
 }
