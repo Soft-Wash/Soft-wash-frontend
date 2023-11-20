@@ -12,7 +12,6 @@ function WashmaSidebar (){
                 SOFTWASH 
               </Link>
             </CDBSidebarHeader>
-
             <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
             <Link exact to="/washman-dashboard" activeClassName="activeClicked">

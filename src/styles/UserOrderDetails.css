@@ -1,11 +1,13 @@
 .dashboard-bg{
     width: 100%;
-    height: 140vh;
-    margin-top: 10px;
+    height: 100vh;
     padding-top: 15px;
     background-color: rgb(245,246,254);
+    padding-bottom: 20px;
+    overflow: scroll;
+    
 }
-.dashboard-bg h1{
+.order-details-tag{
     margin-left: 50px;
 } 
 .user-dashboard-contact-body{

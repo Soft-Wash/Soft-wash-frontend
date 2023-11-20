@@ -41,7 +41,6 @@ function PaymentPage() {
   }
 
   function GetUserDetails() {
-    console.log(orderId);
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/order`)
       .then((resp) => {
@@ -64,7 +63,7 @@ function PaymentPage() {
       const [total, setTotal] = useState()
       function calcSubTotal(arr){
           let sub_total = 0;
-          arr.map((item) => {
+          arr?.map((item) => {
               let item_price = parseInt(item.price) * item.quantity
               sub_total += item_price
           })
@@ -195,7 +194,7 @@ useEffect(()=>{
                     <h5 class="TextColor pt-3 fw-5">Pick Up Information</h5>
                     <div className="Address py-3">
                       <h6 className="fw-bold">Pic-Up Address</h6>
-                      <p>{orderData?.deliveryAddress}</p>
+                      <p>{orderData?.deliveryAddress[0]?.FullAddress}</p>
                       <Link to="/address">
                         <button className="btn btn-outline-primary px-5 ">
                           Change
@@ -216,17 +215,9 @@ useEffect(()=>{
                     </Link>
                   </div>
                 </div>
-                <div className="PrevNextBtn">
-                  <Link to="/address">
-                    <button className="btn btn-outline-primary px-5 ">
-                      Prev
-                    </button>
-                  </Link>
-                  <button className="btn btn-info px-5" onClick={postOrder}>
-                    Confirm
-                  </button>
-                </div>
+
               </div>
+              
             </div>
             <div className="PayOpsRight col md-12">
             <div className="div3 GreyBorder">
@@ -251,6 +242,7 @@ useEffect(()=>{
                                 <div><h4>₦{total || "0.00"}</h4> </div>
                            </div>
                         </div>
+                        
               <div className="PrevNextBtnRight">
                 <button className="btn btn-outline-primary  ">Prev</button>
                 <button className="btn btn-info">Confirm</button>
@@ -259,6 +251,16 @@ useEffect(()=>{
           </div>
         </div>
       </div>
+      <div className="PrevNextBtn text-center mt-4 mb-4">
+                  <Link to="/address">
+                    <button className="btn btn-primary px-5 ">
+                      Prev
+                    </button>
+                  </Link>
+                  <button className="confirm-button btn btn-primary px-5" onClick={postOrder}>
+                    Confirm
+                  </button>
+                </div>
     </div>
   );
 }
