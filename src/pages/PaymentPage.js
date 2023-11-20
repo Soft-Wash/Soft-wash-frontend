@@ -55,7 +55,7 @@ function PaymentPage() {
 
   }
 
-      // Calculate Sob Total
+      // Calculate Sub Total
       const [subTotal, setSubtotal] = useState()
       const [deliveryFee, setDeliveryFee] = useState()
       const [discount, setDiscount] = useState()
@@ -75,7 +75,7 @@ function PaymentPage() {
     getLocalStorageData();
     GetUserDetails();
      // Calculate sub total
-     calcSubTotal(JSON.parse(sessionStorage.getItem('softCart')))
+     calcSubTotal(JSON.parse(localStorage.getItem('softCart')))
   }, []);
 
 
