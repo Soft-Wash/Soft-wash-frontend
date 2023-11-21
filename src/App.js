@@ -16,7 +16,6 @@ import About from "./pages/About";
 import MarketPlace from "./pages/MarketPlace/MarketPlace";
 import Orders from "./pages/user/Orders";
 import OrderReceipt from "./pages/user/OrderReceipt";
-
 import SingleProduct from "./pages/MarketPlace/SingleProduct";
 import Wishlist from "./pages/MarketPlace/Wishlist"
 import Cart from "./pages/MarketPlace/Cart" 
@@ -30,6 +29,8 @@ import WashmanOrdersPage from "./pages/Washman Pages/WashmanOrdersPage";
 import WashmanDashboardPage from "./pages/Washman Pages/WashmanDashboardPage";
 import WashmanSingleOrderPage from "./pages/Washman Pages/WashmanSingleOrderPage";
 import WashmanEditProfilePage from "./pages/Washman Pages/WashmanEditProfilePage";
+import AdminDashboard from "./pages/Admin/AdminDashboard"
+import Leave from "./pages/Admin/Leave";
  
 
 
@@ -59,7 +60,6 @@ function App() {
          <Route path="/singleproduct" element={<SingleProduct/>} />
          <Route path="/wishlist" element={<Wishlist/>} />
          <Route path="/cart" element={<Cart/>} />
-         
         <Route path="/my-orders/" element={<Orders/>}/>
         <Route path="/order-receipt/:orderId" element={<OrderReceipt/>}/>
 
@@ -69,6 +69,10 @@ function App() {
         <Route path="/washman-dashboard" element={<WashmanDashboardPage/>}/>
         <Route path="/washman-single-order" element={<WashmanSingleOrderPage/>}/>
         <Route path="/washman-edit-profile" element={<WashmanEditProfilePage/>}/>
+
+        {/* Admin Routes */}
+        <Route path="/admindashboard" element={<AdminDashboard/>}/>
+        <Route path="/leave" element={<Leave/>}/>
 
       </Routes>
     </BrowserRouter>

@@ -1,0 +1,152 @@
+:root {
+  --primary-color: #6651d1;
+  --primary-opacity: 102, 81, 209;
+  --secondary-color: #fb8e0b;
+  --bg-dark: #474958;
+  --bg-grey: #e8e9ed;
+  --bg-light: #f8f8fa;
+  --text-grey: #6b7280;
+  --text-dark: #222843;
+  --success: #00cc73;
+  --headercolor: #15b8d8;
+}
+
+
+.leave-container{
+  padding: 20px;
+  width: 100%;
+}
+
+.leave-process-div{
+  display: flex;
+
+
+}
+
+.leave-process-div p{
+ padding: 30px;
+ margin-bottom: 0;
+}
+
+.leave-hr{
+  border-bottom: 1px solid grey;
+  width: 100%;
+  margin-top: 0;
+}
+
+.user-profile-container{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  align-items: center;
+}
+
+.user-profile-container img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.user-profile-container-p2{
+ color: grey;
+ font-size: 14px;
+ margin-top: 0;
+}
+
+.user-profile-container-p1{
+  margin-bottom: 0;
+  white-space: nowrap;
+ }
+
+.user-profile-container-innerd{
+  margin-left: 10px;
+}
+
+.user-profile-container-innercont{
+  display: flex;
+  align-items: center;
+}
+
+.card-innerdiv{
+  background-color: rgb(233, 233, 233);
+}
+
+.date-container-innerd{
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.date-container-innerd input{
+  width: 120px;
+}
+
+.date-container-innerd-hr{
+  border-bottom: 2px solid rgb(49, 49, 49);
+  width: 60px;
+  margin-bottom: 0;
+}
+
+.date-container{
+  padding: 20px;
+}
+
+.card-container{
+  width: 370px;
+}
+
+.hrtag-ptag{
+  text-align: center;
+}
+
+.leave-count-div{
+  /* padding: 10px; */
+  display: flex;
+  border-radius: 3px;
+  background-color: rgb(239, 239, 239);
+  width: 200px;
+  height: 35px;
+  margin-left: 20px;
+  text-align: center;
+  margin-top: 20px;
+  align-items: center;
+  padding: 10px;
+
+}
+
+.leave-count-div-p1{
+  color: green;
+font-weight: bold;
+}
+
+.leave-count-div-p2{
+  margin-left: 10px;
+}
+
+.leave-button-divs{
+display: flex;
+padding-left:  20px;
+padding-right: 20px;
+justify-content: space-between;
+text-align: center;
+margin-top: 20px;
+margin-bottom: 20px;
+}
+
+.leave-button-divs-btn2{
+  padding-left: 50px;
+  padding-right: 50px;
+  border: 2px solid #15b8d8;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+}
+
+.leave-button-divs-btn1{
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: #15b8d8;
+  border: 2px solid #15b8d8;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
