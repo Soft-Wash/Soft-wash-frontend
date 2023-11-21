@@ -51,7 +51,7 @@ function App() {
          <Route path="/date" element={<DatePage />} />
          <Route path="/user-profile" element={<UserProfilePage />} />
          <Route path="/dashboard-contact-us" element={<UserDashboardContactPage />} />
-         <Route path="/order-details/" element={<UserOrderDetailsPage />} />
+         <Route path="/order-details" element={<UserOrderDetailsPage />} />
          <Route path="/ClothesSelection" element={<ClothesSelection/>}/>
         <Route path="/PaymentPage/:orderId" element={<PaymentPage/>}/>
          <Route path="/pricing" element={<PricingPage />} />

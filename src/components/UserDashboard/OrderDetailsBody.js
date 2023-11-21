@@ -97,9 +97,9 @@ axiosInstance.get(`/order/${orderId}/order`)
                     <h3>Total</h3>
                     <p>N16,500</p>
                 </div>
-                <Col lg={12} md={10} sm={10} className="text-center position-relative">
+                <Col lg={12} md={6} sm={10} className="text-center position-relative">
                     
-                    <Row classname="w-500px">
+                    <Row classname="w-100 align-centre">
                     <Container className=" d-flex gap-5 mt-4 position-relative">
                         <div className='order-progress-circle '>
                             <Col
