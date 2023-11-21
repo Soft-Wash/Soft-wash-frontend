@@ -209,6 +209,39 @@ margin-bottom: 0;
 
   .card-textinput::placeholder{
     vertical-align: top;
-    text-align: start; /* This ensures that the text starts from the left */
+    text-align: start; 
     padding-top: 10px; 
   }
+
+  .admin-content-table{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 13px;
+    min-width: 500px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 10px 2px gainsboro;
+}
+.admin-content-table thead tr{
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
+    background-color: rgb(13,202,240);
+    color: white;
+}
+
+.admin-content-table th,
+.admin-content-table td{
+    padding: 20px 25px;
+    border-right: 1px solid gray;
+}
+.admin-content-table tbody tr{
+    border-bottom: 1px solid grey;
+
+}
+.admin-content-table tbody tr:nth-of-type(even){
+    background-color: rgb(230, 230, 230);
+}
+.admin-content-table tbody tr:last-of-type{
+    border-bottom: 3px solid rgb(13,202,240);
+}

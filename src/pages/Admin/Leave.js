@@ -4,12 +4,16 @@ import { Row, Col, Container } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import userImage from "../../assets/images/bovi.jpeg";
 import { useState } from "react";
+import PendingLeave from "../../components/Admin/PendingLeave";
+
 
 function Leave() {
   const [toggleRejection, setToggleRejection] = useState(true);
   const [toogleEmployeeInput, settoogleEmployeeInput] = useState(false);
   const [toggleRejection2, setToggleRejection2] = useState(true);
   const [toogleEmployeeInput2, settoogleEmployeeInput2] = useState(false);
+  const [toggleApproved, settoggleApproved]=useState(false)
+  const [toggleLeaveManagement, settoggleLeaveManagement]=useState(true)
 
   function ToggleTextArea() {
     setToggleRejection(!toggleRejection);
@@ -33,6 +37,15 @@ function Leave() {
     setToggleRejection2(false)
   }
 
+  function toggleApprovedData(){
+    settoggleApproved(!toggleApproved)
+    settoggleLeaveManagement(false)
+  }
+
+  function toggleLeaveManage(){
+    settoggleLeaveManagement(!toggleLeaveManagement)
+    settoggleApproved(false)
+  }
 
   return (
     <div>
@@ -40,13 +53,12 @@ function Leave() {
         <AdminSidebar />
         <div className="leave-container">
           <div className="leave-process-div">
-            <p>pending</p>
-            <p>approved</p>
+            <p onClick={toggleLeaveManage}>pending</p>
+            <p onClick={toggleApprovedData}>approved</p>
             <p>rejected</p>
           </div>
           <hr className="leave-hr" />
-
-          <Row>
+{toggleLeaveManagement?          <Row>
             <Col>
               <Card className="card-container">
                 <div className="card-innerdiv">
@@ -362,7 +374,10 @@ function Leave() {
                 </p>
               </Card>
             </Col>
-          </Row>
+          </Row>:''}
+
+{toggleApproved?<PendingLeave/>:""}
+
         </div>
       </div>
     </div>
