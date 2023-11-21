@@ -6,6 +6,10 @@ import { Link } from 'react-router-dom';
 
 
 function WashmanProfileBody(){
+
+    
+    
+
     return(
         <div className="washman-bg">
             <div className="washman-page-content">

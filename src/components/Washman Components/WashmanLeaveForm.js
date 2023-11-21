@@ -13,6 +13,19 @@ function WashmanLeaveForm(){
     const [err, setErr] = useState(false);
     const Navigate = useNavigate();
 
+
+    const apiUrl = "http://localhost:8003";
+
+    handleNewLeaveRequest = () => {
+        const newLeaveData = {
+            firstname: firstname,
+            lastname: lastname,
+            email: lastname,
+            
+
+        }
+    }
+
     return(
         <div className="washman-bg">
       <div className="washman-page-content">
@@ -61,7 +74,7 @@ function WashmanLeaveForm(){
                 onChange={(e) => setEmail(e.target.value)}
               />
 
-<Form.Label
+               <Form.Label
                 htmlFor="formBasicEmail"
                 className="reset-input-headers"
               >
