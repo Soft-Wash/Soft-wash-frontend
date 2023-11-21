@@ -1,7 +1,8 @@
 import { useState } from "react";
 import {Link} from "react-router-dom"
+import userImage from "../../assets/images/bovi.jpeg";
 
-function PendingLeave() {
+function RejectedLeave() {
 
   return (
     <div>
@@ -19,7 +20,8 @@ function PendingLeave() {
                         </thead>
                         <tbody>
                             <tr>
-                                <th>Stacy Peter</th>
+                        <th>Stacy Peter</th>
+
                                 <th>Washman</th>
                                 <th>Sick</th>
                                 <th>16/12/23</th>
@@ -42,4 +44,4 @@ function PendingLeave() {
   );
 }
 
-export default PendingLeave;
+export default RejectedLeave;
