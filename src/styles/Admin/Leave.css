@@ -15,6 +15,8 @@
 .leave-container{
   padding: 20px;
   width: 100%;
+  overflow: scroll;
+  height: 100vh;
 }
 
 .leave-process-div{
@@ -92,7 +94,7 @@
 }
 
 .card-container{
-  width: 370px;
+  width: 350px;
 }
 
 .hrtag-ptag{
@@ -134,8 +136,8 @@ margin-bottom: 20px;
 }
 
 .leave-button-divs-btn2{
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 40px;
+  padding-right: 40px;
   border: 2px solid #15b8d8;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -143,10 +145,56 @@ margin-bottom: 20px;
 }
 
 .leave-button-divs-btn1{
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 40px;
+  padding-right: 40px;
   background-color: #15b8d8;
   border: 2px solid #15b8d8;
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+.card-container3-innerd2-h6{
+  padding-left: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.card-container3-innerd2-hr{
+margin-bottom: 0;
+}
+
+.card-container3-innerd2-p1{
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.user-profile-container-innercont-img{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+.user-profile-container2-p2{
+  color: grey;
+  font-size: 12px;
+  margin-top: 0;
+ }
+ 
+ .user-profile-container2-p1{
+   margin-bottom: 0;
+   white-space: nowrap;
+   font-size: 14px;
+  }
+
+  .card-container3-innerd1-cover{
+    overflow: scroll;
+    height: 500px;
+  }
+
+  .no-leave{
+    margin-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: rgb(136, 136, 136);
+
+  }
