@@ -1,5 +1,5 @@
 import DashNav from "../../components/FrontDesk/DashNav";
-import Sidebar from "../../Front_Desk/Components/Sidebar";
+import Sidebar from "../../components/FrontDesk/Sidebar";
 import DashInfo from "../../components/FrontDesk/DashInfo";
 import { Container } from "react-bootstrap";
 

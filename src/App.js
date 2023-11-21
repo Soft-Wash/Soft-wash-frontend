@@ -66,7 +66,7 @@ function App() {
         <Route path="/my-orders" element={<Orders/>}/>
         <Route path="/order-receipt" element={<OrderReceipt/>}/>
 
-        <Route path="/frontdesk/login" element={<Login/>} />
+        <Route path="/frontdesk" element={<Login/>} />
         <Route path="/frontdesk/dash" element={<Dashboard/>} />
          
         <Route path="/my-orders/" element={<Orders/>}/>
