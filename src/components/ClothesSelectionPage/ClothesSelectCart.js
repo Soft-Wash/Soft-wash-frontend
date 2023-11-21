@@ -190,107 +190,34 @@ const [clothId,setclothId]=useState()
                 <Loader color="primary" size="lg" show={loading} />
       ):(
 <>
-      <Tabs defaultActiveKey="profile" id="justify-tab-example" className="mb-3 gap-3 justify-content-center" style={{borderBottom:"none"}}>
-        <Tab eventKey="home" title="Dry Wash" className="custom-tab " style={{borderBottom:"none"}}>
+<Tabs
+        defaultActiveKey="profile"
+        id="justify-tab-example"
+        className="mb-3 gap-3"
+        justify
+      >
+        <Tab eventKey="home" title="Dry Wash" className="custom-tab">
           <Container>
-            <div className="d-flex justify-content-between pb-3">
+            <div className="d-flex justify-content-between border-bottom pb-3">
               <h3 className="date-headers">Select an Item(s)</h3>
             </div>
             <div>
-              <Accordion defaultActiveKey="1" className="MensWear" style={{borderTop:"none"}} >
-                <Accordion.Item eventKey="0" style={{border:"none", borderLeft:"none", borderRight:"none", borderBottom:"none"}}>
-                  <Accordion.Header style={{border:"none"}}>Mens Wear</Accordion.Header>
+              <Accordion defaultActiveKey="0" className="MensWear">
+                <Accordion.Item eventKey="0">
+                  <Accordion.Header>Mens Wear</Accordion.Header>
                   {mensWear &&
                     mensWear.map((item) => (
                       <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
-                          {/* <div className="d-flex align-items-center justify-content-between">
+                        <div className="cart-item1 GreyBorderB">
+                          <div className="d-flex align-items-center">
                             <ClothAccordian
                               img={item.img}
                               name={item.name}
                               price={item.price}
                             />
-                            <div className="d-flex justify-content-between" style={{position:"absolute",right:"50px", height:"35px"}}>
-                              <button className="-ve"
-                                onClick={() => decrement(item._id)}>
-                                -
-                              </button>
-                              <input
-                                type="text"
-                                step="1"
-                                min="0"
-                                max=""
-                                name="quantity"
-                                value={clothQuantity[item._id] || 0}
-                                title="Qty"
-                                className="input-text qty text"
-                                size="4"
-                                pattern=""
-                                inputMode=""
-                                readOnly
-                              />
-                              <button className="pve"
-                                onClick={() => increment(item._id)}>
-                                +
-                              </button>
-                            </div>
-                            
-                          </div> */}
-                          <div className="button-container">
-                            <ClothAccordian className="buttns"
-                              img={item.img}
-                              name={item.name}
-                              price={item.price}
-                            />
-                            <div className="ve-buttons">
-                              <button
-                                className="-ve"
-                                onClick={() => decrement(item._id)}
-                              >
-                                -
-                              </button>
-                              <input
-                                type="text"
-                                step="1"
-                                min="0"
-                                max=""
-                                name="quantity"
-                                value={clothQuantity[item._id] || 0}
-                                title="Qty"
-                                className="input-text qty text"
-                                size="4"
-                                pattern=""
-                                inputMode=""
-                                readOnly
-                              />
-                              <button
-                                className="pve"
-                                onClick={() => increment(item._id)}
-                              >
-                                +
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </Accordion.Body>
-                    ))}
-                </Accordion.Item>
-              </Accordion>
-              <Accordion defaultActiveKey="1" className="Ladies border-top" >
-                <Accordion.Item eventKey="0" style={{border:"none"}}>
-                  <Accordion.Header>Ladies Wear</Accordion.Header>
-                  {mensWear &&
-                    mensWear.map((item) => (
-                      <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
-                          {/* <div className="d-flex align-items-center justify-content-between">
-                            <ClothAccordian
-                              img={item.img}
-                              name={item.name}
-                              price={item.price}
-                            />
-                            <div className="d-flex justify-content-between"
-                              style={{ height: "35px", justifyContent:"between", position:"absolute", right:"50px"}}
+                            <div
+                              className="d-flex text align"
+                              style={{ height: "35px", marginLeft: "450px" }}
                             >
                               <button
                                 className="-ve"
@@ -319,98 +246,98 @@ const [clothId,setclothId]=useState()
                                 +
                               </button>
                             </div>
-                          </div> */}
-                          <div className="button-container">
-                            <ClothAccordian className="buttns"
-                              img={item.img}
-                              name={item.name}
-                              price={item.price}
-                            />
-                            <div className="ve-buttons">
-                              <button
-                                className="-ve"
-                                onClick={() => decrement(item._id)}
-                              >
-                                -
-                              </button>
-                              <input
-                                type="text"
-                                step="1"
-                                min="0"
-                                max=""
-                                name="quantity"
-                                value={clothQuantity[item._id] || 0}
-                                title="Qty"
-                                className="input-text qty text"
-                                size="4"
-                                pattern=""
-                                inputMode=""
-                                readOnly
-                              />
-                              <button
-                                className="pve"
-                                onClick={() => increment(item._id)}
-                              >
-                                +
-                              </button>
-                            </div>
                           </div>
                         </div>
                       </Accordion.Body>
                     ))}
                 </Accordion.Item>
               </Accordion>
-              <Accordion defaultActiveKey="1" className="Regular border-top" >
-                <Accordion.Item eventKey="0" style={{border:"none"}}>
+              <Accordion defaultActiveKey="0" className="Ladies Wear">
+                <Accordion.Item eventKey="0">
+                  <Accordion.Header>Ladies Wear</Accordion.Header>
+                  <Accordion.Body>
+                    <div className="container">
+                      <div className="cart-item1 GreyBorderB">
+                        <div className="">
+                          <div className="d-flex align-items-center ">
+                            <div>
+                              <img
+                                className="Imgselection"
+                                src={Native}
+                                alt="Native"
+                              />
+                            </div>
+                            <div className="mx-5">
+                              <div>
+                                <h5>Native</h5>
+                                <span>2 x N2,000 / per piece</span>
+                              </div>
+                            </div>
+                            <ClothesSelectCounter />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="cart-item2 GreyBorderB">
+                        <div className="">
+                          <div className="d-flex align-items-center ">
+                            <div>
+                              <img
+                                className="Imgselection"
+                                src={Native}
+                                alt="Native"
+                              />
+                            </div>
+                            <div className="mx-5">
+                              <div>
+                                <h5>Native</h5>
+                                <span>2 x N2,000 / per piece</span>
+                              </div>
+                            </div>
+                            <ClothesSelectCounter />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="cart-item3 GreyBorderB">
+                        <div className="">
+                          <div className="d-flex align-items-center ">
+                            <div>
+                              <img
+                                className="Imgselection"
+                                src={Native}
+                                alt="Native"
+                              />
+                            </div>
+                            <div className="mx-5">
+                              <div>
+                                <h5>Native</h5>
+                                <span>2 x N2,000 / per piece</span>
+                              </div>
+                            </div>
+                            <ClothesSelectCounter />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Accordion.Body>
+                </Accordion.Item>
+              </Accordion>
+              <Accordion defaultActiveKey="0" className="Regular">
+                <Accordion.Item eventKey="0">
                   <Accordion.Header>Regular</Accordion.Header>
                   {regular &&
                     regular.map((item) => (
-                      <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
-                          {/* <div className="d-flex align-items-center justify-content-between">
+                        <Accordion.Body key={item._id}>
+                        <div className="cart-item1 GreyBorderB">
+                          <div className="d-flex align-items-center">
                             <ClothAccordian
                               img={item.img}
                               name={item.name}
                               price={item.price}
                             />
-                            <div className="d-flex justify-content-between"
-                              style={{ height: "35px", justifyContent:"between", position:"absolute", right:"50px"}}
+                            <div
+                              className="d-flex text align"
+                              style={{ height: "35px", marginLeft: "450px" }}
                             >
-                              <button
-                                className="-ve"
-                                onClick={() => decrement(item._id)}
-                              >
-                                -
-                              </button>
-                              <input
-                                type="text"
-                                step="1"
-                                min="0"
-                                max=""
-                                name="quantity"
-                                value={clothQuantity[item._id] || 0}
-                                title="Qty"
-                                className="input-text qty text"
-                                size="4"
-                                pattern=""
-                                inputMode=""
-                                readOnly
-                              />
-                              <button
-                                className="pve"
-                                onClick={() => increment(item._id)}
-                              >
-                                +
-                              </button>
-                            </div>
-                          </div> */}
-                          <div className="button-container">
-                            <ClothAccordian className="buttns"
-                              img={item.img}
-                              name={item.name}
-                              price={item.price}
-                            />
-                            <div className="ve-buttons">
                               <button
                                 className="-ve"
                                 onClick={() => decrement(item._id)}
@@ -444,57 +371,23 @@ const [clothId,setclothId]=useState()
                     ))}
                 </Accordion.Item>
               </Accordion>
-              <Accordion defaultActiveKey="1" className="Kids Wear border-top" >
-                <Accordion.Item eventKey="0" style={{border:"none"}}>
+              <Accordion defaultActiveKey="0" className="Kids Wear">
+                <Accordion.Item eventKey="0">
                   <Accordion.Header>Kids Wear</Accordion.Header>
                   {kidsWear &&
                     kidsWear.map((item) => (
-                      <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
-                          {/* <div className="d-flex align-items-center justify-content-between">
+                        <Accordion.Body key={item._id}>
+                        <div className="cart-item1 GreyBorderB">
+                          <div className="d-flex align-items-center">
                             <ClothAccordian
                               img={item.img}
                               name={item.name}
                               price={item.price}
                             />
-                            <div className="d-flex justify-content-between"
-                              style={{ height: "35px", justifyContent:"between", position:"absolute", right:"50px"}}
+                            <div
+                              className="d-flex text align"
+                              style={{ height: "35px", marginLeft: "450px" }}
                             >
-                              <button
-                                className="-ve"
-                                onClick={() => decrement(item._id)}
-                              >
-                                -
-                              </button>
-                              <input
-                                type="text"
-                                step="1"
-                                min="0"
-                                max=""
-                                name="quantity"
-                                value={clothQuantity[item._id] || 0}
-                                title="Qty"
-                                className="input-text qty text"
-                                size="4"
-                                pattern=""
-                                inputMode=""
-                                readOnly
-                              />
-                              <button
-                                className="pve"
-                                onClick={() => increment(item._id)}
-                              >
-                                +
-                              </button>
-                            </div>
-                          </div> */}
-                          <div className="button-container">
-                            <ClothAccordian className="buttns"
-                              img={item.img}
-                              name={item.name}
-                              price={item.price}
-                            />
-                            <div className="ve-buttons">
                               <button
                                 className="-ve"
                                 onClick={() => decrement(item._id)}
@@ -528,57 +421,23 @@ const [clothId,setclothId]=useState()
                     ))}
                 </Accordion.Item>
               </Accordion>
-              <Accordion defaultActiveKey="1" className="Accessories border-top" >
-                <Accordion.Item eventKey="0" style={{border:"none"}}>
-                  <Accordion.Header>Accessories</Accordion.Header>
+              <Accordion defaultActiveKey="0" className="Accesories">
+                <Accordion.Item eventKey="0">
+                  <Accordion.Header>Accesories</Accordion.Header>
                   {accessories &&
                     accessories.map((item) => (
-                      <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
-                          {/* <div className="d-flex align-items-center justify-content-between">
+                        <Accordion.Body key={item._id}>
+                        <div className="cart-item1 GreyBorderB">
+                          <div className="d-flex align-items-center">
                             <ClothAccordian
                               img={item.img}
                               name={item.name}
                               price={item.price}
                             />
-                            <div className="d-flex justify-content-between"
-                              style={{ height: "35px", justifyContent:"between", position:"absolute", right:"50px"}}
+                            <div
+                              className="d-flex text align"
+                              style={{ height: "35px", marginLeft: "450px" }}
                             >
-                              <button
-                                className="-ve"
-                                onClick={() => decrement(item._id)}
-                              >
-                                -
-                              </button>
-                              <input
-                                type="text"
-                                step="1"
-                                min="0"
-                                max=""
-                                name="quantity"
-                                value={clothQuantity[item._id] || 0}
-                                title="Qty"
-                                className="input-text qty text"
-                                size="4"
-                                pattern=""
-                                inputMode=""
-                                readOnly
-                              />
-                              <button
-                                className="pve"
-                                onClick={() => increment(item._id)}
-                              >
-                                +
-                              </button>
-                            </div>
-                          </div> */}
-                          <div className="button-container">
-                            <ClothAccordian className="buttns"
-                              img={item.img}
-                              name={item.name}
-                              price={item.price}
-                            />
-                            <div className="ve-buttons">
                               <button
                                 className="-ve"
                                 onClick={() => decrement(item._id)}
@@ -612,57 +471,23 @@ const [clothId,setclothId]=useState()
                     ))}
                 </Accordion.Item>
               </Accordion>
-              <Accordion defaultActiveKey="1" className="Shoes border-top" >
-                <Accordion.Item eventKey="0" style={{border:"none"}}>
+              <Accordion defaultActiveKey="0" className="Shoes">
+                <Accordion.Item eventKey="0">
                   <Accordion.Header>Shoes</Accordion.Header>
                   {shoes &&
                     shoes.map((item) => (
-                      <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
-                          {/* <div className="d-flex align-items-center justify-content-between">
+                        <Accordion.Body key={item._id}>
+                        <div className="cart-item1 GreyBorderB">
+                          <div className="d-flex align-items-center">
                             <ClothAccordian
                               img={item.img}
                               name={item.name}
                               price={item.price}
                             />
-                            <div className="d-flex justify-content-between"
-                              style={{ height: "35px", justifyContent:"between", position:"absolute", right:"50px"}}
+                            <div
+                              className="d-flex text align"
+                              style={{ height: "35px", marginLeft: "450px" }}
                             >
-                              <button
-                                className="-ve"
-                                onClick={() => decrement(item._id)}
-                              >
-                                -
-                              </button>
-                              <input
-                                type="text"
-                                step="1"
-                                min="0"
-                                max=""
-                                name="quantity"
-                                value={clothQuantity[item._id] || 0}
-                                title="Qty"
-                                className="input-text qty text"
-                                size="4"
-                                pattern=""
-                                inputMode=""
-                                readOnly
-                              />
-                              <button
-                                className="pve"
-                                onClick={() => increment(item._id)}
-                              >
-                                +
-                              </button>
-                            </div>
-                          </div> */}
-                          <div className="button-container">
-                            <ClothAccordian className="buttns"
-                              img={item.img}
-                              name={item.name}
-                              price={item.price}
-                            />
-                            <div className="ve-buttons">
                               <button
                                 className="-ve"
                                 onClick={() => decrement(item._id)}
@@ -696,57 +521,23 @@ const [clothId,setclothId]=useState()
                     ))}
                 </Accordion.Item>
               </Accordion>
-              <Accordion defaultActiveKey="1" className="Home Linen border-top" >
-                <Accordion.Item eventKey="0" style={{border:"none"}}>
+              <Accordion defaultActiveKey="0" className="Home Linen">
+                <Accordion.Item eventKey="0">
                   <Accordion.Header>Home Linen</Accordion.Header>
                   {homeLinen &&
                     homeLinen.map((item) => (
-                      <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
-                          {/* <div className="d-flex align-items-center justify-content-between">
+                        <Accordion.Body key={item._id}>
+                        <div className="cart-item1 GreyBorderB">
+                          <div className="d-flex align-items-center">
                             <ClothAccordian
                               img={item.img}
                               name={item.name}
                               price={item.price}
                             />
-                            <div className="d-flex justify-content-between"
-                              style={{ height: "35px", justifyContent:"between", position:"absolute", right:"50px"}}
+                            <div
+                              className="d-flex text align"
+                              style={{ height: "35px", marginLeft: "450px" }}
                             >
-                              <button
-                                className="-ve"
-                                onClick={() => decrement(item._id)}
-                              >
-                                -
-                              </button>
-                              <input
-                                type="text"
-                                step="1"
-                                min="0"
-                                max=""
-                                name="quantity"
-                                value={clothQuantity[item._id] || 0}
-                                title="Qty"
-                                className="input-text qty text"
-                                size="4"
-                                pattern=""
-                                inputMode=""
-                                readOnly
-                              />
-                              <button
-                                className="pve"
-                                onClick={() => increment(item._id)}
-                              >
-                                +
-                              </button>
-                            </div>
-                          </div> */}
-                          <div className="button-container">
-                            <ClothAccordian className="buttns"
-                              img={item.img}
-                              name={item.name}
-                              price={item.price}
-                            />
-                            <div className="ve-buttons">
                               <button
                                 className="-ve"
                                 onClick={() => decrement(item._id)}
@@ -786,63 +577,29 @@ const [clothId,setclothId]=useState()
             </div> */}
           </Container>
         </Tab>
-        <Tab eventKey="profile" title="Laundry" className="custom-tab" style={{borderBottom:"none"}}>
+        <Tab eventKey="profile" title="Laundry" className="custom-tab">
           <Container>
-            <div className="d-flex justify-content-between pb-3">
+            <div className="d-flex justify-content-between border-bottom pb-3">
               <h3 className="date-headers">Select an Item(s)</h3>
             </div>
             <div>
-              <Accordion defaultActiveKey="1" className="Only Vacuum" style={{borderTop:"none"}} >
-                <Accordion.Item eventKey="0" style={{border:"none", borderLeft:"none", borderRight:"none", borderBottom:"none"}}>
-                  <Accordion.Header style={{border:"none"}}>Only Vacuum Steam Press</Accordion.Header>
+              <Accordion defaultActiveKey="0" className="Only Vacuum ">
+                <Accordion.Item eventKey="0">
+                  <Accordion.Header>Only Vacuum Steam Press</Accordion.Header>
                   {onlyVacum &&
                     onlyVacum.map((item) => (
-                      <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
-                          {/* <div className="d-flex align-items-center justify-content-between">
+                        <Accordion.Body key={item._id}>
+                        <div className="cart-item1 GreyBorderB">
+                          <div className="d-flex align-items-center">
                             <ClothAccordian
                               img={item.img}
                               name={item.name}
                               price={item.price}
                             />
-                            <div className="d-flex justify-content-between"
-                              style={{ height: "35px", justifyContent:"between", position:"absolute", right:"50px"}}
+                            <div
+                              className="d-flex text align"
+                              style={{ height: "35px", marginLeft: "450px" }}
                             >
-                              <button
-                                className="-ve"
-                                onClick={() => decrement(item._id)}
-                              >
-                                -
-                              </button>
-                              <input
-                                type="text"
-                                step="1"
-                                min="0"
-                                max=""
-                                name="quantity"
-                                value={clothQuantity[item._id] || 0}
-                                title="Qty"
-                                className="input-text qty text"
-                                size="4"
-                                pattern=""
-                                inputMode=""
-                                readOnly
-                              />
-                              <button
-                                className="pve"
-                                onClick={() => increment(item._id)}
-                              >
-                                +
-                              </button>
-                            </div>
-                          </div> */}
-                          <div className="button-container">
-                            <ClothAccordian className="buttns"
-                              img={item.img}
-                              name={item.name}
-                              price={item.price}
-                            />
-                            <div className="ve-buttons">
                               <button
                                 className="-ve"
                                 onClick={() => decrement(item._id)}
@@ -876,57 +633,23 @@ const [clothId,setclothId]=useState()
                     ))}
                 </Accordion.Item>
               </Accordion>
-              <Accordion defaultActiveKey="1" className="Vacuum Steam Press border-top" style={{borderTop:"none"}} >
-                <Accordion.Item eventKey="0" style={{border:"none", borderLeft:"none", borderRight:"none", borderBottom:"none"}}>
-                  <Accordion.Header style={{border:"none"}}>Vacuum Steam Press</Accordion.Header>
+              <Accordion defaultActiveKey="0" className="Vacuum Steam Press">
+                <Accordion.Item eventKey="0">
+                  <Accordion.Header>Vacuum Steam Press</Accordion.Header>
                   {vacum &&
                     vacum.map((item) => (
-                      <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
-                          {/* <div className="d-flex align-items-center justify-content-between">
+                        <Accordion.Body key={item._id}>
+                        <div className="cart-item1 GreyBorderB">
+                          <div className="d-flex align-items-center">
                             <ClothAccordian
                               img={item.img}
                               name={item.name}
                               price={item.price}
                             />
-                            <div className="d-flex justify-content-between"
-                              style={{ height: "35px", justifyContent:"between", position:"absolute", right:"50px"}}
+                            <div
+                              className="d-flex text align"
+                              style={{ height: "35px", marginLeft: "450px" }}
                             >
-                              <button
-                                className="-ve"
-                                onClick={() => decrement(item._id)}
-                              >
-                                -
-                              </button>
-                              <input
-                                type="text"
-                                step="1"
-                                min="0"
-                                max=""
-                                name="quantity"
-                                value={clothQuantity[item._id] || 0}
-                                title="Qty"
-                                className="input-text qty text"
-                                size="4"
-                                pattern=""
-                                inputMode=""
-                                readOnly
-                              />
-                              <button
-                                className="pve"
-                                onClick={() => increment(item._id)}
-                              >
-                                +
-                              </button>
-                            </div>
-                          </div> */}
-                          <div className="button-container">
-                            <ClothAccordian className="buttns"
-                              img={item.img}
-                              name={item.name}
-                              price={item.price}
-                            />
-                            <div className="ve-buttons">
                               <button
                                 className="-ve"
                                 onClick={() => decrement(item._id)}
@@ -960,57 +683,25 @@ const [clothId,setclothId]=useState()
                     ))}
                 </Accordion.Item>
               </Accordion>
-              <Accordion defaultActiveKey="1" className="Regular Wash & Fold border-top" style={{borderTop:"none"}} >
-                <Accordion.Item eventKey="0" style={{border:"none", borderLeft:"none", borderRight:"none", borderBottom:"none"}}>
-                  <Accordion.Header style={{border:"none"}}>Regular Wash & Fold</Accordion.Header>
+              <Accordion defaultActiveKey="0" className="Regular Wash & Fold">
+                <Accordion.Item eventKey="0">
+                  <Accordion.Header>
+                    Regular: Wash, Dry and Fold
+                  </Accordion.Header>
                   {regularWash &&
                     regularWash.map((item) => (
-                      <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
-                          {/* <div className="d-flex align-items-center justify-content-between">
+                        <Accordion.Body key={item._id}>
+                        <div className="cart-item1 GreyBorderB">
+                          <div className="d-flex align-items-center">
                             <ClothAccordian
                               img={item.img}
                               name={item.name}
                               price={item.price}
                             />
-                            <div className="d-flex justify-content-between"
-                              style={{ height: "35px", justifyContent:"between", position:"absolute", right:"50px"}}
+                            <div
+                              className="d-flex text align"
+                              style={{ height: "35px", marginLeft: "450px" }}
                             >
-                              <button
-                                className="-ve"
-                                onClick={() => decrement(item._id)}
-                              >
-                                -
-                              </button>
-                              <input
-                                type="text"
-                                step="1"
-                                min="0"
-                                max=""
-                                name="quantity"
-                                value={clothQuantity[item._id] || 0}
-                                title="Qty"
-                                className="input-text qty text"
-                                size="4"
-                                pattern=""
-                                inputMode=""
-                                readOnly
-                              />
-                              <button
-                                className="pve"
-                                onClick={() => increment(item._id)}
-                              >
-                                +
-                              </button>
-                            </div>
-                          </div> */}
-                          <div className="button-container">
-                            <ClothAccordian className="buttns"
-                              img={item.img}
-                              name={item.name}
-                              price={item.price}
-                            />
-                            <div className="ve-buttons">
                               <button
                                 className="-ve"
                                 onClick={() => decrement(item._id)}
@@ -1044,57 +735,23 @@ const [clothId,setclothId]=useState()
                     ))}
                 </Accordion.Item>
               </Accordion>
-              <Accordion defaultActiveKey="1" className="Heavy Wash & Fold border-top" style={{borderTop:"none"}} >
-                <Accordion.Item eventKey="0" style={{border:"none", borderLeft:"none", borderRight:"none", borderBottom:"none"}}>
-                  <Accordion.Header style={{border:"none"}}>Heavy Wash & Fold</Accordion.Header>
+              <Accordion defaultActiveKey="0" className="Heavy Wash & Fold">
+                <Accordion.Item eventKey="0">
+                  <Accordion.Header>Heavy Wash & Fold</Accordion.Header>
                   {heavyWash &&
                     heavyWash.map((item) => (
-                      <Accordion.Body key={item._id}>
-                        <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
-                          {/* <div className="d-flex align-items-center justify-content-between">
+                        <Accordion.Body key={item._id}>
+                        <div className="cart-item1 GreyBorderB">
+                          <div className="d-flex align-items-center">
                             <ClothAccordian
                               img={item.img}
                               name={item.name}
                               price={item.price}
                             />
-                            <div className="d-flex justify-content-between"
-                              style={{ height: "35px", justifyContent:"between", position:"absolute", right:"50px"}}
+                            <div
+                              className="d-flex text align"
+                              style={{ height: "35px", marginLeft: "450px" }}
                             >
-                              <button
-                                className="-ve"
-                                onClick={() => decrement(item._id)}
-                              >
-                                -
-                              </button>
-                              <input
-                                type="text"
-                                step="1"
-                                min="0"
-                                max=""
-                                name="quantity"
-                                value={clothQuantity[item._id] || 0}
-                                title="Qty"
-                                className="input-text qty text"
-                                size="4"
-                                pattern=""
-                                inputMode=""
-                                readOnly
-                              />
-                              <button
-                                className="pve"
-                                onClick={() => increment(item._id)}
-                              >
-                                +
-                              </button>
-                            </div>
-                          </div> */}
-                          <div className="button-container">
-                            <ClothAccordian className="buttns"
-                              img={item.img}
-                              name={item.name}
-                              price={item.price}
-                            />
-                            <div className="ve-buttons">
                               <button
                                 className="-ve"
                                 onClick={() => decrement(item._id)}
@@ -1135,12 +792,12 @@ const [clothId,setclothId]=useState()
       </Tabs>
       <div className="d-flex justify-content-center gap-3 mt-5 mb-3">
         <Link to="/date">
-          <button className="btn btn-primary px-5">
-            Next
-          </button>
+        <button className="btn btn-primary px-5">
+                Next
+              </button>
         </Link>
 
-        </div>
+            </div>
 </>
       )}
 

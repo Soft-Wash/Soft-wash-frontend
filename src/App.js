@@ -31,7 +31,6 @@ import WashmanSingleOrderPage from "./pages/Washman Pages/WashmanSingleOrderPage
 import WashmanEditProfilePage from "./pages/Washman Pages/WashmanEditProfilePage";
 import AdminDashboard from "./pages/Admin/AdminDashboard"
 import Leave from "./pages/Admin/Leave";
-import SupervisorDashBoard from "./pages/SupervisorPage/SupervisorDashBoard";
  
 
 
@@ -74,10 +73,6 @@ function App() {
         {/* Admin Routes */}
         <Route path="/admindashboard" element={<AdminDashboard/>}/>
         <Route path="/leave" element={<Leave/>}/>
-
-        {/* SUPERVISOR ROUTES */}
-
-        <Route path="/SupervisorDash-Board" element={<SupervisorDashBoard/>}/>
 
       </Routes>
     </BrowserRouter>
