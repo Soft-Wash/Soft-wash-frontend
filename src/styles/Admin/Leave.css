@@ -95,6 +95,7 @@
 
 .card-container{
   width: 350px;
+  min-height: 550px;
 }
 
 .hrtag-ptag{
@@ -196,5 +197,18 @@ margin-bottom: 0;
     padding-left: 10px;
     padding-right: 10px;
     color: rgb(136, 136, 136);
+    
+  }
 
+  .card-textinput{
+    width: 285px;
+    min-height: 140px;
+    padding-left: 10px;
+    border: none;
+  }
+
+  .card-textinput::placeholder{
+    vertical-align: top;
+    text-align: start; /* This ensures that the text starts from the left */
+    padding-top: 10px; 
   }
