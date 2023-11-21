@@ -14,17 +14,7 @@ function WashmanLeaveForm(){
     const Navigate = useNavigate();
 
 
-    const apiUrl = "http://localhost:8003";
-
-    handleNewLeaveRequest = () => {
-        const newLeaveData = {
-            firstname: firstname,
-            lastname: lastname,
-            email: lastname,
-            
-
-        }
-    }
+    
 
     return(
         <div className="washman-bg">
