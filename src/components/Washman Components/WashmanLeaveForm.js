@@ -74,7 +74,7 @@ function WashmanLeaveForm(){
                 onChange={(e) => setEmail(e.target.value)}
               />
 
-               <Form.Label
+              <Form.Label
                 htmlFor="formBasicEmail"
                 className="reset-input-headers"
               >
@@ -87,7 +87,7 @@ function WashmanLeaveForm(){
                 onChange={(e) => setEmail(e.target.value)}
               />
 
-<Form.Label
+              <Form.Label
                 htmlFor="formBasicEmail"
                 className="reset-input-headers"
               >
@@ -100,7 +100,7 @@ function WashmanLeaveForm(){
                 onChange={(e) => setEmail(e.target.value)}
               />
 
-<Form.Label
+              <Form.Label
                 htmlFor="formBasicEmail"
                 className="reset-input-headers"
               >
