@@ -14,9 +14,15 @@ function SupervisorDashBoard() {
     //         </div>
     //     </div>
     // </div>
-    <div className='d-flex'>
-        <SupervisorSideBar/>
-        <SupervisorDashBody/>
+    <div className='row d-flex'>
+        <div className="col">
+            <SupervisorSideBar/>
+        </div>
+        <div className="col">
+            <SupervisorDashBody/>
+        </div>
+       
+        
     </div>
   )
 }
