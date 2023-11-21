@@ -7,8 +7,19 @@ import image1 from "../../assets/HomePage/images/hero-img.png";
 import "../../styles/HomePage.css"
 import { Link } from "react-router-dom";
 // import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function SectionOne() {
+const Navigate = useNavigate()
+  const userDetails = JSON.parse(localStorage.getItem('softwashLoginUser'))
+
+function checkLogin(){
+  if (!userDetails){
+    Navigate('/userLogin')
+  } else{
+    Navigate('/ClothesSelection')
+  }
+}
 
   return (
     <div className="sec-1-bg py-4" >
@@ -25,11 +36,11 @@ function SectionOne() {
                   Our professional and experienced cleaning <br />
                   staff does the job right the first time.
                 </p>
-                <Link to="/ClothesSelection">
-                <Button variant="outline-info" className="textwhite-hover mt-4" size="lg">
+                {/* <Link to=""> */}
+                <Button variant="outline-info" className="textwhite-hover mt-4" size="lg" onClick={checkLogin}>
                   SCHEDULE PICKUP
                 </Button>{" "}
-                </Link>
+                {/* </Link> */}
 
               </div>
             </Card>

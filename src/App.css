@@ -52,7 +52,6 @@ body {
     position: absolute;
 }
 
-/* .myorders-container{
-    overflow: scroll;
-    height: 100vh;
-} */
+.validation-tag{
+    color: red;
+}
