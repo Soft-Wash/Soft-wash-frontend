@@ -1,4 +1,4 @@
-// import "../../styles/Washman Styles/WashmanSidebar.css"
+// import "../../styles/Washman Styles/WashmanSidebar.css";
 import React from 'react';
 import { CDBSidebar, CDBSidebarContent, CDBSidebarFooter, CDBSidebarHeader, CDBSidebarMenu, CDBSidebarMenuItem,} from 'cdbreact';
 import { NavLink } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 
 function WashmanSidebar(){
     return (
-        <div className='washman-sidebar' style={{display: 'flex', height: '100vh', overflow: 'scroll initial'}} >
+        <div className='washman-sidebar' style={{display: 'flex', height: 'auto', overflow: 'scroll initial'}} >
           <CDBSidebar className='washman-sidebar-content' textColor="rgb(13,202,240)" backgroundColor="#333">
             <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
               <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
@@ -16,20 +16,20 @@ function WashmanSidebar(){
 
             <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink exact to="/" activeClassName="activeClicked">
+            <NavLink exact to="/washman-dashboard" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/tables" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Tables</CDBSidebarMenuItem>
+            <NavLink exact to="/washman-orders" activeclassname="activeClicked">
+              <CDBSidebarMenuItem icon="table">View Orders</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/profile" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
+            <NavLink exact to="/washman-profile" activeclassname="activeClicked">
+              <CDBSidebarMenuItem icon="user">My Profile</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/analytics" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="chart-line">Analytics</CDBSidebarMenuItem>
+            <NavLink exact to="/washman-leave-application" activeclassname="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line">Leave Application</CDBSidebarMenuItem>
             </NavLink>
 
-            <NavLink exact to="/hero404" target="_blank" activeClassName="activeClicked">
+            <NavLink exact to="/hero404" target="_blank" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="exclamation-circle">404 page</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
@@ -52,8 +52,3 @@ function WashmanSidebar(){
 
 
 export default WashmanSidebar;
-
-
-// style={{display: 'flex', height: '100vh', overflow: 'scroll initial'}} 
-
-// textColor="#fff" backgroundColor="#333"

@@ -5,18 +5,19 @@ import "../../styles/Washman Styles/WashmanProfile.css";
 import "../../styles/Washman Styles/WashmanEditProfile.css";
 import Form from "react-bootstrap/Form";
 
-function WashmanEditProfileBody() {
-  const [email, setEmail] = useState("");
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [err, setErr] = useState(false);
-  const Navigate = useNavigate();
+function WashmanLeaveForm(){
 
-  return (
-    <div className="washman-bg">
+    const [email, setEmail] = useState("");
+    const [firstname, setFirstname] = useState("");
+    const [lastname, setLastname] = useState("");
+    const [err, setErr] = useState(false);
+    const Navigate = useNavigate();
+
+    return(
+        <div className="washman-bg">
       <div className="washman-page-content">
         <div className="washman-header">
-          <h2>EDIT PROFILE</h2>
+          <h2>LEAVE APPLICATION FORM</h2>
         </div>
         <div>
           <Form className="centralize  mt-4">
@@ -60,6 +61,45 @@ function WashmanEditProfileBody() {
                 onChange={(e) => setEmail(e.target.value)}
               />
 
+<Form.Label
+                htmlFor="formBasicEmail"
+                className="reset-input-headers"
+              >
+                Branch
+              </Form.Label>
+              <Form.Control
+                type="email"
+                placeholder=""
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+
+<Form.Label
+                htmlFor="formBasicEmail"
+                className="reset-input-headers"
+              >
+                Proposed Start date for Leave
+              </Form.Label>
+              <Form.Control
+                type="date"
+                placeholder=""
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+
+<Form.Label
+                htmlFor="formBasicEmail"
+                className="reset-input-headers"
+              >
+                Proposed end Date for Leave
+              </Form.Label>
+              <Form.Control
+                type="date"
+                placeholder=""
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+
               {err && email === "" ? (
                 <span className="reset-err-msg">Kindly enter your email</span>
               ) : null}
@@ -72,7 +112,7 @@ function WashmanEditProfileBody() {
         </div>
       </div>
     </div>
-  );
+    )
 }
 
-export default WashmanEditProfileBody;
+export default WashmanLeaveForm;

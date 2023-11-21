@@ -30,6 +30,7 @@ import WashmanOrdersPage from "./pages/Washman Pages/WashmanOrdersPage";
 import WashmanDashboardPage from "./pages/Washman Pages/WashmanDashboardPage";
 import WashmanSingleOrderPage from "./pages/Washman Pages/WashmanSingleOrderPage";
 import WashmanEditProfilePage from "./pages/Washman Pages/WashmanEditProfilePage";
+import WashmanLeavePage from "./pages/Washman Pages/WashmanLeavePage";
  
 
 
@@ -69,6 +70,7 @@ function App() {
         <Route path="/washman-dashboard" element={<WashmanDashboardPage/>}/>
         <Route path="/washman-single-order" element={<WashmanSingleOrderPage/>}/>
         <Route path="/washman-edit-profile" element={<WashmanEditProfilePage/>}/>
+        <Route path="/washman-leave-application" element={<WashmanLeavePage/>}/>
 
       </Routes>
     </BrowserRouter>

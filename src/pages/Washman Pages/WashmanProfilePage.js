@@ -1,5 +1,6 @@
+import React from "react";
+import WashmanSidebar from "../../components/Washman Components/WashmanSidebar";
 import WashmanProfileBody from "../../components/Washman Components/WashmanProfileBody";
-import WashmanSidebar from "../../components/Washman Components/WashmaSidebar";
 
 
 
