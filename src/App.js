@@ -30,6 +30,7 @@ import WashmanDashboardPage from "./pages/Washman Pages/WashmanDashboardPage";
 import WashmanSingleOrderPage from "./pages/Washman Pages/WashmanSingleOrderPage";
 import WashmanEditProfilePage from "./pages/Washman Pages/WashmanEditProfilePage";
 import AdminDashboard from "./pages/Admin/AdminDashboard"
+import Leave from "./pages/Admin/Leave";
  
 
 
@@ -68,7 +69,10 @@ function App() {
         <Route path="/washman-dashboard" element={<WashmanDashboardPage/>}/>
         <Route path="/washman-single-order" element={<WashmanSingleOrderPage/>}/>
         <Route path="/washman-edit-profile" element={<WashmanEditProfilePage/>}/>
+
+        {/* Admin Routes */}
         <Route path="/admindashboard" element={<AdminDashboard/>}/>
+        <Route path="/leave" element={<Leave/>}/>
 
       </Routes>
     </BrowserRouter>

@@ -2,7 +2,6 @@
 padding-left: 20px;
 padding-top: 30px;
 width: 100%;
-border: 1px solid black;
 }
 
 .dashboard-line{
@@ -20,15 +19,29 @@ border: 1px solid black;
 }
 
 .category-container{
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  
 }
 
 
 .icon-container-innerd2{
+  align-items: center;
+  margin-left: 10px;
+  margin: auto 0;
+}
+
+.icon-container-innerd1{
   display: flex;
+  align-items: center;
 }
 
 .clipboard-icon{
-  font-size: 30px;
+  font-size: 40px;
+}
 
+.icon-container-innerd2 p{
+  margin: 0 ;
+  font-size: 18px;
+  font-weight: bold;
 }
