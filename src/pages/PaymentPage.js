@@ -100,13 +100,20 @@ useEffect(()=>{
     const deliveryType = JSON.parse(localStorage.getItem('deliveryType'))
     const key = Object.keys(deliveryType)
     const stringDeliveryType = key.join("");
+
     const paymentType = JSON.parse(localStorage.getItem('paymentType'))
     const paymentkey = Object.keys(paymentType)
-    const stringPaymenType = paymentkey.join("");
+    const stringPaymentType = paymentkey.join("");
+
+      // Validate payment type selection
+    if (!stringPaymentType) {
+      alert("Please select a payment type before confirming the order.");
+      return; 
+    }
     orderDetails = {
       subtotal: 20000,
       delivery_type: stringDeliveryType,
-      payment_method:stringPaymenType
+      payment_method:stringPaymentType
     };
   
     console.log(orderDetails);
