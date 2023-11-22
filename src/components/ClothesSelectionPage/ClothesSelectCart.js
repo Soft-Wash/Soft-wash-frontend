@@ -54,6 +54,8 @@ const [clothId,setclothId]=useState()
         const { [clothId]: _, ...updatedQuantities } = prevQuantities;
         localStorage.setItem("clothQuantity", JSON.stringify(updatedQuantities));
         return updatedQuantities;
+
+
       }
   
       // Return the updated state with the new quantity
@@ -62,20 +64,27 @@ const [clothId,setclothId]=useState()
   };
 
   const HandleLocalSave = () => {
-    if (clothQuantity) {
-      const filteredQuantities = Object.fromEntries(
-        Object.entries(clothQuantity).filter(([key, value]) => value >= 1)
-      );
-      localStorage.setItem("clothQuantity", JSON.stringify(filteredQuantities));
-    }
 
+
+    if (!clothQuantity || Object.keys(clothQuantity).length === 0) {
+      alert("Please add at least one cloth.");
+      return; // validation for clothes selection 
+    }
+    const filteredQuantities = Object.fromEntries(
+      Object.entries(clothQuantity).filter(([key, value]) => value >= 1)
+    );
+    
+    localStorage.setItem("clothQuantity", JSON.stringify(filteredQuantities));
+
+    // Redirect to the next page
+    navigate('/date')
   };
 
 
 
 
   useEffect(() => {
-    HandleLocalSave()
+    // HandleLocalSave()
   }, [clothQuantity]);
 
   useEffect(() => {
@@ -1134,12 +1143,9 @@ const [clothId,setclothId]=useState()
         </Tab>
       </Tabs>
       <div className="d-flex justify-content-center gap-3 mt-5 mb-3">
-        <Link to="/date">
-          <button className="btn btn-primary px-5">
+          <button className="btn btn-primary px-5" onClick={HandleLocalSave}>
             Next
           </button>
-        </Link>
-
         </div>
 </>
       )}
