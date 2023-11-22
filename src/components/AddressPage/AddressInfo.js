@@ -39,7 +39,6 @@ function AddressInfo() {
         setSelectedItems(resp.data);
       });
   };
-
   useEffect(() => {
     getQuantity();
     const calenderSelectedTime = localStorage.getItem("calenderSelectedTime");
