@@ -16,13 +16,13 @@ function AdminDashboard(){
   const [Employees,setEmployees]=useState()
   const [frontdesk,setfrontdesk]=useState()
   const [washMan,setWashman]=useState()
+  const [Customers,setCustomers] = useState()
 
   async function getEmployees(){
     try {
       const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/employees/`);
       setEmployees(response.data);
     } catch (error) {
-      // Handle the error here
       console.error("Error fetching data:", error);
     }
   }
@@ -57,6 +57,10 @@ const supervisors = getEmployeesId('supervisor')
     axiosInstance.get('/order/day')
     .then((resp)=>{
       setdayorder(resp.data)
+    })
+    axiosInstance.get('/users/')
+    .then((resp)=>{
+      setCustomers(resp.data)
     })
     getEmployees()
 
@@ -126,7 +130,7 @@ const supervisors = getEmployeesId('supervisor')
     </div>
     <div className="icon-container-innerd2">
         <p>Total Customers</p>
-        <p>10</p>
+        <p>{Customers?.length}</p>
     </div>
   </div>
   <div className="icon-container">
@@ -136,6 +140,15 @@ const supervisors = getEmployeesId('supervisor')
     <div className="icon-container-innerd2">
         <p>Total Branches</p>
         <p>{branches?.length}</p>
+    </div>
+  </div>
+  <div className="icon-container mb-3">
+    <div className="icon-container-innerd1">
+    <FaClipboardList className="clipboard-icon"/>
+    </div>
+    <div className="icon-container-innerd2 ">
+        <p >Today Orders</p>
+        <p>{dayorder?.length}</p>
     </div>
   </div>
   <div className="icon-container mb-3">

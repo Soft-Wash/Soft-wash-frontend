@@ -51,9 +51,7 @@ function AddressInfo() {
     const storedDate = new Date(JSON.parse(calenderSetDate));
     const parsedCalenderSetDate = storedDate;
     setSelectedDate(parsedCalenderSetDate);
-    const customer_id = localStorage.getItem("softwashLoginUser");
-    const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
-    setCustomerId(parsedCustomerData);
+
     const clothQuantity = localStorage.getItem("clothQuantity");
     const parsedClothQuantity = clothQuantity
       ? JSON.parse(clothQuantity)
@@ -88,16 +86,20 @@ function AddressInfo() {
 
 
 
-  let orderPostObj = {
-    customer_id: customerId?._id,
-    branch_id:"655debc4ec7b0b6e0f591bf7",
-    deliveryAddress: selectedAddress,
-    pickuptime: selectedTime,
-    schedule_date: selectedDate,
-    clothtype_ids: clothIds,
-  };
+
 
   function postOrderAddress() {
+    const customer_id = localStorage.getItem("softwashLoginUser");
+    const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
+    let orderPostObj = {
+      customer_id: parsedCustomerData?._id,
+      branch_id:"655debc4ec7b0b6e0f591bf7",
+      deliveryAddress: selectedAddress,
+      pickuptime: selectedTime,
+      schedule_date: selectedDate,
+      clothtype_ids: clothIds,
+    };
+
     console.log(orderPostObj);
     axiosInstance.post("/order/create", orderPostObj).then((resp) => {
       console.log(resp.data);
