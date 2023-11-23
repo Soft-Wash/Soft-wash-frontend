@@ -20,6 +20,14 @@ function OderTable() {
       axiosInstance.get("/order/day").then((resp) => {
         setOrders(resp.data);
       });
+    } else if(selectedOption==="Weekly Orders"){
+      axiosInstance.get("/order/week").then((resp) => {
+        setOrders(resp.data);
+      });
+    } else if(selectedOption==="Monthly Orders"){
+      axiosInstance.get("/order/month").then((resp) => {
+        setOrders(resp.data);
+      });
     }
   };
 

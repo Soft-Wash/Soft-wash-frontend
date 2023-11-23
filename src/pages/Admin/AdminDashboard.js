@@ -4,6 +4,7 @@ import { FaClipboardList, FaListAlt} from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import {useState,useEffect} from "react"
 import { axiosInstance } from "../../services/AxiosInstance";
+import axios from "axios";
 
 
 
@@ -12,6 +13,18 @@ function AdminDashboard(){
   const [branches,setbranches]=useState();
   const [orders,setorders]=useState();
   const [dayorder,setdayorder]=useState();
+  const [Employees,setEmployees]=useState()
+
+  async function getEmployees(){
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/employees/`);
+      console.log(response.data);
+      setEmployees(response.data);
+    } catch (error) {
+      // Handle the error here
+      console.error("Error fetching data:", error);
+    }
+  }
 
   useEffect(()=>{
     axiosInstance.get('/order/')
@@ -27,6 +40,9 @@ function AdminDashboard(){
       console.log(resp.data)
       setdayorder(resp.data)
     })
+
+    getEmployees()
+
   },[])
 
 
@@ -45,8 +61,8 @@ function AdminDashboard(){
     <FaClipboardList className="clipboard-icon"/>
     </div>
     <div className="icon-container-innerd2">
-        <p>Total Washman</p>
-        <p>10</p>
+        <p>Total Employees</p>
+        <p>{Employees?.length}</p>
     </div>
   </div>
   <div className="icon-container mb-3">
