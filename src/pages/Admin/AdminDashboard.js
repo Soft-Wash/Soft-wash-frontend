@@ -40,30 +40,7 @@ const getEmployeesId=(roleName)=>{
 
 const FrontDesk = getEmployeesId('frontdesk')
 const washman = getEmployeesId('washman')
-
-
-
-  async function getWashman(){
-    try {
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/employees/${washman}/employee`);
-      setWashman(response.data);
-      console.log(response.data)
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  }
-
-
-  async function getFrontdesk(){
-    try {
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/employees/${FrontDesk}/employee`);
-      setfrontdesk(response.data);
-      console.log(response.data)
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  }
-
+const supervisors = getEmployeesId('supervisor')
 
   
 
@@ -75,14 +52,14 @@ const washman = getEmployeesId('washman')
     axiosInstance.get('/branch/')
     .then((resp)=>{
       setbranches(resp.data)
+      localStorage.setItem("branches",JSON.stringify(resp.data))
     })
     axiosInstance.get('/order/day')
     .then((resp)=>{
       setdayorder(resp.data)
     })
-    // getEmployees()
-    // getFrontdesk()
-    // getWashman()
+    getEmployees()
+
 
   },[])
 
@@ -111,8 +88,11 @@ const washman = getEmployeesId('washman')
     <FaClipboardList className="clipboard-icon"/>
     </div>
     <div className="icon-container-innerd2">
-        <p>Total Front desk</p>
+      <Link className="order-dashboard-link" to={`/frontdesk/${FrontDesk[0]}`}>
+      <p>Total Front desks</p>
         <p>{FrontDesk?.length || 0}</p>
+      </Link>
+
     </div>
   </div>
   <div className="icon-container mb-3">
@@ -120,8 +100,11 @@ const washman = getEmployeesId('washman')
     <FaClipboardList className="clipboard-icon"/>
     </div>
     <div className="icon-container-innerd2">
-        <p>Total Washman</p>
+      <Link  className="order-dashboard-link" to={`/washman/${washman[0]}`}>
+      <p>Total Washmans</p>
         <p>{washman?.length || 0}</p>
+      </Link>
+
     </div>
   </div>
 
@@ -130,8 +113,11 @@ const washman = getEmployeesId('washman')
     <FaClipboardList className="clipboard-icon"/>
     </div>
     <div className="icon-container-innerd2">
-        <p>Total supervisors</p>
-        <p>10</p>
+      <Link  className="order-dashboard-link" to={`/supervisor/${supervisors[0]}`}>
+      <p>Total supervisors</p>
+        <p>{supervisors?.length}</p>
+      </Link>
+
     </div>
   </div>
   <div className="icon-container mb-3">
