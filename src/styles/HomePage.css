@@ -76,7 +76,7 @@
 }
 
 .scale-out {
-  animation: scaleIn 1s ease-in-out forwards;
+  animation: scaleIn .3s ease-in-out forwards;
   opacity: 0;
 }
 
@@ -90,7 +90,7 @@
 }
 
 .animateY-up:hover{
-  animation: animateY 0.5s linear reverse;
+  animation: animateY 0.3s linear reverse;
 
 }
 

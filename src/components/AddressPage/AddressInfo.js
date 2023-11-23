@@ -21,7 +21,7 @@ function AddressInfo() {
   const [selectedItems, setSelectedItems] = useState();
   const [selectedDate, setSelectedDate] = useState();
   const [clicked, setClicked] = useState(false);
-  const [validAuth, setValidAuth] = useState(true);
+  const [err, setErr] = useState(false)
 
   const getQuantity = () => {
     const clothQuantity = localStorage.getItem("clothQuantity");
@@ -40,6 +40,7 @@ function AddressInfo() {
         setSelectedItems(resp.data);
       });
   };
+
   useEffect(() => {
     getQuantity();
     const calenderSelectedTime = localStorage.getItem("calenderSelectedTime");
@@ -72,28 +73,25 @@ function AddressInfo() {
   console.log(selectedAddress)
 
   const handleChange = (e) => {
+
     const value =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
-
 
     if (e.target.name.startsWith("AddressType")) {
       setSelectedAddress({ ...selectedAddress, AddressType: e.target.name });
     } else {
       setSelectedAddress({ ...selectedAddress, [e.target.name]: value });
     }
-
-    if(selectedAddress.contactNumber === "" || selectedAddress.FullAddress === "" || selectedAddress.SearchedAddress === "" || selectedAddress.AddressType === ""){
-      setValidAuth(false)
-      return
-    }
+    
   };
 
 
   function postOrderAddress() {
-    // if(selectedAddress.contactNumber === "" || selectedAddress.FullAddress === "" || selectedAddress.SearchedAddress === "" || selectedAddress.AddressType === ""){
-    //   setValidAuth(false)
-    //   return
-    // }
+       if(selectedAddress.contactNumber === "" || selectedAddress.FullAddress === "" || selectedAddress.SearchedAddress === "" || selectedAddress.AddressType === ""){
+      setErr(true)
+      return
+    }
+
     const customer_id = localStorage.getItem("softwashLoginUser");
     const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
     let orderPostObj = {
@@ -179,7 +177,7 @@ function AddressInfo() {
                         value={selectedAddress.contactNumber}
                       />
                     </InputGroup>
-                      <p className={`${validAuth? "text-danger" : "d-none"}`}>Field required</p>
+                    <p className={`text-danger fw-semibold ${(err === true && selectedAddress.contactNumber === "") ? "" : "d-none" }`}>Field Required</p>
                   </Row>
                   <Row>
                     <InputGroup className="mb-3">
@@ -192,7 +190,7 @@ function AddressInfo() {
                         value={selectedAddress.FullAddress}
                       />
                     </InputGroup>
-                      <p className={`${validAuth? "text-danger" : "d-none"}`}>Field required</p>
+                     <p className={`text-danger fw-semibold ${(err === true && selectedAddress.FullAddress === "") ? "" : "d-none" }`}>Field Required</p>
                   </Row>
 
                   <Row>
@@ -214,7 +212,7 @@ function AddressInfo() {
                         value={selectedAddress.SearchedAddress}
                       />
                     </InputGroup>
-                    <p className={`${validAuth? "text-danger" : "d-none"}`}>Field required</p>
+                     <p className={`text-danger fw-semibold ${(err === true && selectedAddress.SearchedAddress === "") ? "" : "d-none" }`}>Field Required</p>
                   </Row>
                   <Row>
                     <img src={mapSample} alt="maps" />
@@ -252,7 +250,7 @@ function AddressInfo() {
                         />
                         <Form.Label>Other</Form.Label>
                       </Form.Group>
-                      <p className={`${validAuth? "text-danger" : "d-none"}`}>Field required</p>
+                      <p className={`text-danger fw-semibold ${(err === true && selectedAddress.AddressType === "") ? "" : "d-none" }`}>Field Required</p>
                     </Row>
                   </Row>
                 </Accordion.Body>
