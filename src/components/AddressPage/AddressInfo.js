@@ -40,7 +40,6 @@ function AddressInfo() {
         setSelectedItems(resp.data);
       });
   };
-
   useEffect(() => {
     getQuantity();
     const calenderSelectedTime = localStorage.getItem("calenderSelectedTime");
@@ -96,6 +95,7 @@ function AddressInfo() {
 
   let orderPostObj = {
     customer_id: customerId?._id,
+    branch_id:"655debc4ec7b0b6e0f591bf7",
     deliveryAddress: selectedAddress,
     pickuptime: selectedTime,
     schedule_date: selectedDate,
