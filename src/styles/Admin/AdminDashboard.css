@@ -45,3 +45,8 @@ width: 100%;
   font-size: 18px;
   font-weight: bold;
 }
+
+.order-dashboard-link{
+  text-decoration: none;
+  color: white;
+}
