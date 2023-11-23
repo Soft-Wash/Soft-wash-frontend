@@ -90,10 +90,10 @@ function AddressInfo() {
 
 
   function postOrderAddress() {
-    if(selectedAddress.contactNumber === "" || selectedAddress.FullAddress === "" || selectedAddress.SearchedAddress === "" || selectedAddress.AddressType === ""){
-      setValidAuth(false)
-      return
-    }
+    // if(selectedAddress.contactNumber === "" || selectedAddress.FullAddress === "" || selectedAddress.SearchedAddress === "" || selectedAddress.AddressType === ""){
+    //   setValidAuth(false)
+    //   return
+    // }
     const customer_id = localStorage.getItem("softwashLoginUser");
     const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
     let orderPostObj = {
