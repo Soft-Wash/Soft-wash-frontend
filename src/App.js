@@ -70,7 +70,7 @@ function App() {
          <Route path="/wishlist" element={<Wishlist/>} />
          <Route path="/cart" element={<Cart/>} />
         <Route path="/my-orders" element={<Orders/>}/>
-        <Route path="/order-receipt" element={<OrderReceipt/>}/>
+        <Route path="/order-receipt/:orderId" element={<OrderReceipt/>}/>
 
         {/* Front desk */}
           <Route path="/frontdesk" element={<Login/>} />

@@ -33,17 +33,11 @@ const orderDetails = JSON.parse(localStorage.getItem('orderDetails'))
     });
   }
 
-  function Tonavigate(){
-    navigate(`/my-orders/${orderId}`)
-  }
-
   useEffect(()=>{
     getOrderDetails()
   },[])
 
   console.log(userData)
-
-
 
   return (
     <>
