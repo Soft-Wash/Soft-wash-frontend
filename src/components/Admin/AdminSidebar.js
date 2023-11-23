@@ -16,7 +16,7 @@ function AdminSidebar(){
 
             <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink exact to="/" activeClassName="activeClicked">
+            <NavLink exact to="/admindashboard" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/tables" activeClassName="activeClicked">
@@ -29,7 +29,7 @@ function AdminSidebar(){
               <CDBSidebarMenuItem icon="chart-line">Create Employee</CDBSidebarMenuItem>
             </NavLink>
 
-            <NavLink exact to="/hero404" target="_blank" activeClassName="activeClicked">
+            <NavLink exact to="/leave" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="exclamation-circle">Leave</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
