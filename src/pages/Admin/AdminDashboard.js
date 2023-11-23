@@ -14,17 +14,58 @@ function AdminDashboard(){
   const [orders,setorders]=useState();
   const [dayorder,setdayorder]=useState();
   const [Employees,setEmployees]=useState()
+  const [frontdesk,setfrontdesk]=useState()
+  const [washMan,setWashman]=useState()
 
   async function getEmployees(){
     try {
       const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/employees/`);
-      console.log(response.data);
       setEmployees(response.data);
     } catch (error) {
       // Handle the error here
       console.error("Error fetching data:", error);
     }
   }
+
+const getEmployeesId=(roleName)=>{
+  if(Employees){
+   const employeesWithRole = Employees.filter((employee)=> employee.role.name.toLowerCase()===roleName.toLowerCase())
+   const roleIds = employeesWithRole.map((employee)=> employee.role._id)
+    return roleIds
+  }else {
+    return []
+  }
+
+}
+
+const FrontDesk = getEmployeesId('frontdesk')
+const washman = getEmployeesId('washman')
+
+
+
+  async function getWashman(){
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/employees/${washman}/employee`);
+      setWashman(response.data);
+      console.log(response.data)
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
+
+
+  async function getFrontdesk(){
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/employees/${FrontDesk}/employee`);
+      setfrontdesk(response.data);
+      console.log(response.data)
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
+
+
+  
 
   useEffect(()=>{
     axiosInstance.get('/order/')
@@ -37,11 +78,11 @@ function AdminDashboard(){
     })
     axiosInstance.get('/order/day')
     .then((resp)=>{
-      console.log(resp.data)
       setdayorder(resp.data)
     })
-
-    getEmployees()
+    // getEmployees()
+    // getFrontdesk()
+    // getWashman()
 
   },[])
 
@@ -71,7 +112,16 @@ function AdminDashboard(){
     </div>
     <div className="icon-container-innerd2">
         <p>Total Front desk</p>
-        <p>10</p>
+        <p>{FrontDesk?.length || 0}</p>
+    </div>
+  </div>
+  <div className="icon-container mb-3">
+    <div className="icon-container-innerd1">
+    <FaClipboardList className="clipboard-icon"/>
+    </div>
+    <div className="icon-container-innerd2">
+        <p>Total Washman</p>
+        <p>{washman?.length || 0}</p>
     </div>
   </div>
 
