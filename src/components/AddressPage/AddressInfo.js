@@ -21,6 +21,7 @@ function AddressInfo() {
   const [selectedItems, setSelectedItems] = useState();
   const [selectedDate, setSelectedDate] = useState();
   const [clicked, setClicked] = useState(false);
+  const [validAuth, setValidAuth] = useState(true);
 
   const getQuantity = () => {
     const clothQuantity = localStorage.getItem("clothQuantity");
@@ -69,7 +70,7 @@ function AddressInfo() {
     contactNumber: "",
     FullAddress: "",
     SearchedAddress: "",
-    AddressType: ""
+    AddressType: "",
   });
 
   console.log(selectedAddress)
@@ -77,12 +78,17 @@ function AddressInfo() {
   const handleChange = (e) => {
     const value =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
-  
+
 
     if (e.target.name.startsWith("AddressType")) {
       setSelectedAddress({ ...selectedAddress, AddressType: e.target.name });
     } else {
       setSelectedAddress({ ...selectedAddress, [e.target.name]: value });
+    }
+
+    if(selectedAddress.contactNumber === "" || selectedAddress.FullAddress === "" || selectedAddress.SearchedAddress === "" || selectedAddress.AddressType === ""){
+      setValidAuth(false)
+      return
     }
   };
 
@@ -94,9 +100,14 @@ function AddressInfo() {
     pickuptime: selectedTime,
     schedule_date: selectedDate,
     clothtype_ids: clothIds,
+    branch_id: "655deba5ec7b0b6e0f591bf5"
   };
 
   function postOrderAddress() {
+    if(selectedAddress.contactNumber === "" || selectedAddress.FullAddress === "" || selectedAddress.SearchedAddress === "" || selectedAddress.AddressType === ""){
+      setValidAuth(false)
+      return
+    }
     console.log(orderPostObj);
     axiosInstance.post("/order/create", orderPostObj).then((resp) => {
       console.log(resp.data);
@@ -171,6 +182,7 @@ function AddressInfo() {
                         value={selectedAddress.contactNumber}
                       />
                     </InputGroup>
+                      <p className={`${validAuth? "text-danger" : "d-none"}`}>Field required</p>
                   </Row>
                   <Row>
                     <InputGroup className="mb-3">
@@ -183,6 +195,7 @@ function AddressInfo() {
                         value={selectedAddress.FullAddress}
                       />
                     </InputGroup>
+                      <p className={`${validAuth? "text-danger" : "d-none"}`}>Field required</p>
                   </Row>
 
                   <Row>
@@ -204,6 +217,7 @@ function AddressInfo() {
                         value={selectedAddress.SearchedAddress}
                       />
                     </InputGroup>
+                    <p className={`${validAuth? "text-danger" : "d-none"}`}>Field required</p>
                   </Row>
                   <Row>
                     <img src={mapSample} alt="maps" />
@@ -241,6 +255,7 @@ function AddressInfo() {
                         />
                         <Form.Label>Other</Form.Label>
                       </Form.Group>
+                      <p className={`${validAuth? "text-danger" : "d-none"}`}>Field required</p>
                     </Row>
                   </Row>
                 </Accordion.Body>
@@ -299,7 +314,7 @@ function AddressInfo() {
           {/* <Link to="/PaymentPage"> */}
           <Button
             variant="primary"
-            className="me-auto w-75 text-center"
+            className={`me-auto w-75 text-center `}
             onClick={postOrderAddress}
           >
             Next
