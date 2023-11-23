@@ -8,14 +8,9 @@ import UserDashboardContactBody from '../components/UserDashboard/UserDashboardC
 
 function UserDashboardContactPage(){
     return(
-        <div className='user-dashboard-container'>
-            <div className='user-sidebar-contact'>
-                <UserSidebar />
-            </div>
-            <div className='user-dashboard-content'>
-                <UserDashboardNav />
-                <UserDashboardContactBody />
-            </div>
+        <div className='d-flex'>
+            <UserSidebar />
+            <UserDashboardContactBody />
         </div>
     )
 }

@@ -16,7 +16,6 @@ import About from "./pages/About";
 import MarketPlace from "./pages/MarketPlace/MarketPlace";
 import Orders from "./pages/user/Orders";
 import OrderReceipt from "./pages/user/OrderReceipt";
-
 import SingleProduct from "./pages/MarketPlace/SingleProduct";
 import Wishlist from "./pages/MarketPlace/Wishlist"
 import Cart from "./pages/MarketPlace/Cart" 
@@ -33,6 +32,13 @@ import WashmanOrdersPage from "./pages/Washman Pages/WashmanOrdersPage";
 import WashmanDashboardPage from "./pages/Washman Pages/WashmanDashboardPage";
 import WashmanSingleOrderPage from "./pages/Washman Pages/WashmanSingleOrderPage";
 import WashmanEditProfilePage from "./pages/Washman Pages/WashmanEditProfilePage";
+import AdminDashboard from "./pages/Admin/AdminDashboard"
+import Leave from "./pages/Admin/Leave";
+import SupervisorDashBoard from "./pages/SupervisorPage/SupervisorDashBoard";
+import OrderTable from  "./pages/Admin/OrderTable"
+import FrontDesk from "./pages/Admin/Frontdesk";
+import Supervisor from "./pages/Admin/Supervisor";
+import Washman from "./pages/Admin/Washman";
  
 
 
@@ -53,7 +59,7 @@ function App() {
          <Route path="/date" element={<DatePage />} />
          <Route path="/user-profile" element={<UserProfilePage />} />
          <Route path="/dashboard-contact-us" element={<UserDashboardContactPage />} />
-         <Route path="/order-details/" element={<UserOrderDetailsPage />} />
+         <Route path="/order-details" element={<UserOrderDetailsPage />} />
          <Route path="/ClothesSelection" element={<ClothesSelection/>}/>
         <Route path="/PaymentPage/:orderId" element={<PaymentPage/>}/>
          <Route path="/pricing" element={<PricingPage />} />
@@ -66,11 +72,10 @@ function App() {
         <Route path="/my-orders" element={<Orders/>}/>
         <Route path="/order-receipt" element={<OrderReceipt/>}/>
 
-        <Route path="/frontdesk" element={<Login/>} />
-        <Route path="/frontdesk/dash" element={<Dashboard/>} />
+        {/* Front desk */}
+          <Route path="/frontdesk" element={<Login/>} />
+          <Route path="/frontdesk/dash" element={<Dashboard/>} />
          
-        <Route path="/my-orders/" element={<Orders/>}/>
-        <Route path="/order-receipt/:orderId" element={<OrderReceipt/>}/>
 
         {/* WASHMAN ROUTES */}
         <Route path="/washman-profile" element={<WashmanProfilePage/>}/>
@@ -78,6 +83,18 @@ function App() {
         <Route path="/washman-dashboard" element={<WashmanDashboardPage/>}/>
         <Route path="/washman-single-order" element={<WashmanSingleOrderPage/>}/>
         <Route path="/washman-edit-profile" element={<WashmanEditProfilePage/>}/>
+
+        {/* Admin Routes */}
+        <Route path="/admindashboard" element={<AdminDashboard/>}/>
+        <Route path="/leave" element={<Leave/>}/>
+        <Route path="/ordertable" element={<OrderTable/>}/>
+        <Route path="/frontdesk/:roldId" element={<FrontDesk/>}/>
+        <Route path="/supervisor/:roldId" element={<Supervisor/>}/>
+        <Route path="/washman/:roldId" element={<Washman/>}/>
+
+        {/* SUPERVISOR ROUTES */}
+
+        <Route path="/SupervisorDash-Board" element={<SupervisorDashBoard/>}/>
 
       </Routes>
     </BrowserRouter>

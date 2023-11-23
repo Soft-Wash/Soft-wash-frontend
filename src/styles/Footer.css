@@ -1,6 +1,7 @@
 .footer-buttonn{
   background-color: var(--headercolor);
   color: white;
+  white-space: nowrap;
 }
 
 
@@ -32,4 +33,5 @@
   .mobile-flex-row{
     flex-direction: column;
   }
+
 }
