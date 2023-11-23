@@ -54,6 +54,7 @@ function AddressInfo() {
     const customer_id = localStorage.getItem("softwashLoginUser");
     const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
     setCustomerId(parsedCustomerData);
+    // customerId && console.log(customerId)
     const clothQuantity = localStorage.getItem("clothQuantity");
     const parsedClothQuantity = clothQuantity
       ? JSON.parse(clothQuantity)
@@ -100,7 +101,6 @@ function AddressInfo() {
     pickuptime: selectedTime,
     schedule_date: selectedDate,
     clothtype_ids: clothIds,
-    branch_id: "655deba5ec7b0b6e0f591bf5"
   };
 
   function postOrderAddress() {
