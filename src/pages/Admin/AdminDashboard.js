@@ -14,17 +14,35 @@ function AdminDashboard(){
   const [orders,setorders]=useState();
   const [dayorder,setdayorder]=useState();
   const [Employees,setEmployees]=useState()
+  const [frontdesk,setfrontdesk]=useState()
+  const [washMan,setWashman]=useState()
 
   async function getEmployees(){
     try {
       const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/employees/`);
-      console.log(response.data);
       setEmployees(response.data);
     } catch (error) {
       // Handle the error here
       console.error("Error fetching data:", error);
     }
   }
+
+const getEmployeesId=(roleName)=>{
+  if(Employees){
+   const employeesWithRole = Employees.filter((employee)=> employee.role.name.toLowerCase()===roleName.toLowerCase())
+   const roleIds = employeesWithRole.map((employee)=> employee.role._id)
+    return roleIds
+  }else {
+    return []
+  }
+
+}
+
+const FrontDesk = getEmployeesId('frontdesk')
+const washman = getEmployeesId('washman')
+const supervisors = getEmployeesId('supervisor')
+
+  
 
   useEffect(()=>{
     axiosInstance.get('/order/')
@@ -34,14 +52,14 @@ function AdminDashboard(){
     axiosInstance.get('/branch/')
     .then((resp)=>{
       setbranches(resp.data)
+      localStorage.setItem("branches",JSON.stringify(resp.data))
     })
     axiosInstance.get('/order/day')
     .then((resp)=>{
-      console.log(resp.data)
       setdayorder(resp.data)
     })
-
     getEmployees()
+
 
   },[])
 
@@ -70,8 +88,23 @@ function AdminDashboard(){
     <FaClipboardList className="clipboard-icon"/>
     </div>
     <div className="icon-container-innerd2">
-        <p>Total Front desk</p>
-        <p>10</p>
+      <Link className="order-dashboard-link" to={`/frontdesk/${FrontDesk[0]}`}>
+      <p>Total Front desks</p>
+        <p>{FrontDesk?.length || 0}</p>
+      </Link>
+
+    </div>
+  </div>
+  <div className="icon-container mb-3">
+    <div className="icon-container-innerd1">
+    <FaClipboardList className="clipboard-icon"/>
+    </div>
+    <div className="icon-container-innerd2">
+      <Link  className="order-dashboard-link" to={`/washman/${washman[0]}`}>
+      <p>Total Washmans</p>
+        <p>{washman?.length || 0}</p>
+      </Link>
+
     </div>
   </div>
 
@@ -80,8 +113,11 @@ function AdminDashboard(){
     <FaClipboardList className="clipboard-icon"/>
     </div>
     <div className="icon-container-innerd2">
-        <p>Total supervisors</p>
-        <p>10</p>
+      <Link  className="order-dashboard-link" to={`/supervisor/${supervisors[0]}`}>
+      <p>Total supervisors</p>
+        <p>{supervisors?.length}</p>
+      </Link>
+
     </div>
   </div>
   <div className="icon-container mb-3">
