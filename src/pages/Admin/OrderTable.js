@@ -2,26 +2,51 @@ import { useEffect } from "react";
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 import "../../styles/Admin/tableorder.css";
 import { axiosInstance } from "../../services/AxiosInstance";
-import {useState} from "react"
+import { useState } from "react";
 
 function OderTable() {
+  const [orders, setOrders] = useState();
+  const [selectedOption, setSelectedOption] = useState("All Orders");
 
-  const [orders,setorders]=useState()
 
-  useEffect(()=>{
-    axiosInstance.get('/order/')
-    .then((resp)=>{
-      setorders(resp.data)
-      console.log(resp.data)
-    })
-  },[])
 
+
+  const fetchData = () => {
+    if (selectedOption === "All Orders") {
+      axiosInstance.get("/order").then((resp) => {
+        setOrders(resp.data);
+      });
+    } else if(selectedOption==="Daily Orders"){
+      axiosInstance.get("/order/day").then((resp) => {
+        setOrders(resp.data);
+      });
+    }
+  };
+
+  const handleSelectChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [selectedOption]);
 
   return (
     <div>
       <div className="d-flex">
         <AdminSidebar />
         <div className="ordertable-div">
+          <div>
+            <select name="" className="select-dropdown" id="" onChange={handleSelectChange}>
+            <option value="All Orders">All Order</option>
+              <option value="Daily Orders">
+                Daily Order
+              </option>
+              <option value="Weekly Orders">Weekly Order</option>
+              <option value="Monthly Orders">Monthly Order</option>
+              <option value="Yearly Orders">Yearly Order</option>
+            </select>
+          </div>
           <table className="ordertbale-content-table">
             <thead>
               <tr>
@@ -34,18 +59,17 @@ function OderTable() {
               </tr>
             </thead>
             <tbody>
-              {orders&&orders.map((item)=>(
-                              <tr>
-                              <th>{item?._id}</th>
-                              <th>{item?.branch}</th>
-                              <th>{item?.payment_method}</th>
-                              <th>{item?.deliveryAddress[0]?.FullAddress}</th>
-                              <th>{item?.subtotal}</th>
-                              <th>{item?.status}</th>
-                            </tr>
-              
-              ))}
-
+              {orders &&
+                orders.map((item) => (
+                  <tr key={item._id}>
+                    <th>{item._id.substring(0, item._id.length / 2)}</th>
+                    <th>{item?.branch_id?.name}</th>
+                    <th>{item?.payment_method}</th>
+                    <th>{item?.deliveryAddress[0]?.FullAddress}</th>
+                    <th>{item?.subtotal}</th>
+                    <th>{item?.status}</th>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>

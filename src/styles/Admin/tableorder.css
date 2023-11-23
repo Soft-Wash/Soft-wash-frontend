@@ -2,6 +2,7 @@
 
 .ordertable-div{
   padding-left: 20px;
+  padding-top: 20px;
 }  
   .ordertbale-content-table{
     border-collapse: collapse;
@@ -11,7 +12,7 @@
     border-radius: 5px 5px 0 0;
     overflow: hidden;
     box-shadow: 0 0 10px 2px gainsboro;
-    margin-top: 100px;
+    margin-top: 80px;
 }
 .ordertbale-content-table thead tr{
     width: 100%;
@@ -40,4 +41,10 @@
 .ordertable-div{
   overflow: scroll;
   height: 100vh;
+  width: 100vw;
+}
+
+.select-dropdown{
+  width: 150px;
+  border: 1px solid grey;
 }
