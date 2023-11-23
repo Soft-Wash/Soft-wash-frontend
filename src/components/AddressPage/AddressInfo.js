@@ -68,28 +68,30 @@ function AddressInfo() {
     SearchedAddress: "",
     AddressType: ""
   });
-
-  console.log(selectedAddress)
-
+  
+  
   const handleChange = (e) => {
     const value =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
   
-
-    if (e.target.name.startsWith("AddressType")) {
-      setSelectedAddress({ ...selectedAddress, AddressType: e.target.name });
+      
+      if (e.target.name.startsWith("AddressType")) {
+        setSelectedAddress({ ...selectedAddress, AddressType: e.target.name });
     } else {
       setSelectedAddress({ ...selectedAddress, [e.target.name]: value });
     }
   };
 
 
-
-
-
+  
+  
+  
   function postOrderAddress() {
     const customer_id = localStorage.getItem("softwashLoginUser");
     const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
+    
+    console.log(selectedAddress)
+
     let orderPostObj = {
       customer_id: parsedCustomerData?._id,
       branch_id:"655debc4ec7b0b6e0f591bf7",
