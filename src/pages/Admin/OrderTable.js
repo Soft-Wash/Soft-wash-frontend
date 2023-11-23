@@ -23,6 +23,7 @@ function OderTable() {
     } else if(selectedOption==="Weekly Orders"){
       axiosInstance.get("/order/week").then((resp) => {
         setOrders(resp.data);
+        
       });
     } else if(selectedOption==="Monthly Orders"){
       axiosInstance.get("/order/month").then((resp) => {
@@ -60,7 +61,7 @@ function OderTable() {
               <tr>
                 <th>Order Id</th>
                 <th>Branch</th>
-                <th>Payment_method</th>
+                <th>Customer</th>
                 <th>Addresss</th>
                 <th>SubTotal</th>
                 <th>Status</th>
@@ -72,7 +73,7 @@ function OderTable() {
                   <tr key={item._id}>
                     <th>{item._id.substring(0, item._id.length / 2)}</th>
                     <th>{item?.branch_id?.name}</th>
-                    <th>{item?.payment_method}</th>
+                    <th>{item?.customer_id?.fullName}</th>
                     <th>{item?.deliveryAddress[0]?.FullAddress}</th>
                     <th>{item?.subtotal}</th>
                     <th>{item?.status}</th>
