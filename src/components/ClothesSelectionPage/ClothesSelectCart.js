@@ -27,11 +27,7 @@ function SelectedCart({ initialQuantity }) {
   const [vacum, SetVacum] = useState();
   const [regularWash, SetRegularWash] = useState();
   const [heavyWash, SetHeavyWash] = useState();
-  const [clothItems, setClothItem] = useState();
-  const [customerId, setCustomerId]= useState()
   const navigate = useNavigate()
-  const [selectedItems,setSelectedItems]= useState()
-const [clothId,setclothId]=useState()
 
 
   const [clothQuantity, setClothQuantity] = useState(() => {
@@ -175,13 +171,6 @@ const [clothId,setclothId]=useState()
       setLoading(false)
   }, []);
 
-
-
-// if (loading){
-//   return(
- 
-//   )
-// }
 
 
   return (

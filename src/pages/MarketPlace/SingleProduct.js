@@ -15,7 +15,6 @@ import {
   FiInstagram,
 } from "react-icons/fi";
 import "../../styles/SingleProduct.css";
-import itemImg from "../../assets/MarketPlace/Images/1465908830684_spxspy1512_nittol_anti-bacterial_multi-purpose_soap_150_g_180x2x2.jpg";
 import Accordion from "react-bootstrap/Accordion";
 import { FaFacebookSquare, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import Footer from "../../common/Footer";
@@ -23,11 +22,13 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { axiosInstance } from "../../services/AxiosInstance";
 
-function SingleProduct() {
+function SingleProduct({ initialQuantity }) {
   const [togglereview, setToggleReview] = useState(false);
   const [shopItems, setshopItems] = useState();
   const [moreProduct, setmoreProduct] = useState();
   const productId = useParams();
+  const [clothQuantity,setclothQuantity] =useState({})
+
   const id = productId.productId;
   console.log(id);
 
@@ -48,6 +49,32 @@ function SingleProduct() {
   }, []);
 
   const sliceData = moreProduct?.slice(1, 3);
+
+
+  const increment=(itemId)=>{
+const updatedQuantity = {...clothQuantity}
+updatedQuantity[itemId] = (updatedQuantity[itemId] || 0)+1
+setclothQuantity(updatedQuantity)
+  }
+
+  const decrement=(itemId)=>{
+   const updatedQuantity = {...clothQuantity}
+    updatedQuantity[itemId] = Math.max((updatedQuantity[itemId] || 0)-1,0)
+    setclothQuantity(updatedQuantity)
+      }
+
+      function addToCart(){
+        const cartData = {
+          product_id: shopItems?._id,
+          quantity: clothQuantity[shopItems?._id] || 0,
+        };
+        
+        axiosInstance.post('/cart/create',cartData)
+        .then((resp)=>{
+          console.log(resp.data)
+        })
+      }
+
 
   return (
     <div>
@@ -114,9 +141,9 @@ function SingleProduct() {
 
             <div className="d-flex mt-5">
               <div className="cart-inpt-div d-flex">
-                <button className="cart-inpt-div-btn1 bg-info">-</button>
-                <input type="text" className="cart-input" />
-                <button className="cart-inpt-div-btn2 bg-info">+</button>
+                <button className="cart-inpt-div-btn1 bg-info"onClick={() => decrement(shopItems?._id)}>-</button>
+                <input type="text" className="cart-input" value={clothQuantity[shopItems?._id] || 0}/>
+                <button className="cart-inpt-div-btn2 bg-info" onClick={() => increment(shopItems?._id)}>+</button>
               </div>
               <Button
                 variant="secondary"
