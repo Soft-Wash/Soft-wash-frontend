@@ -40,6 +40,7 @@ import FrontDesk from "./pages/Admin/Frontdesk";
 import Supervisor from "./pages/Admin/Supervisor";
 import Washman from "./pages/Admin/Washman";
 import Register from "./pages/Admin/RegisterEmployee"
+import Iventry from "./pages/Admin/Iventry";
  
 
 
@@ -66,12 +67,13 @@ function App() {
          <Route path="/pricing" element={<PricingPage />} />
          <Route path="/ourservices" element={<Services/>} />
          <Route path="/about" element={<About/>} />
-         <Route path="/marketplace" element={<MarketPlace/>} />
-         <Route path="/singleproduct" element={<SingleProduct/>} />
+         <Route path="/shop" element={<MarketPlace/>} />
+         <Route path="/singleproduct/:productId" element={<SingleProduct/>} />
          <Route path="/wishlist" element={<Wishlist/>} />
          <Route path="/cart" element={<Cart/>} />
         <Route path="/my-orders" element={<Orders/>}/>
         <Route path="/order-receipt/:orderId" element={<OrderReceipt/>}/>
+        <Route path="/iventry" element={<Iventry/>}/>
 
         {/* Front desk */}
           <Route path="/frontdesk" element={<Login/>} />

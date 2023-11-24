@@ -19,92 +19,35 @@ import itemImg from "../../assets/MarketPlace/Images/1465908830684_spxspy1512_ni
 import Accordion from "react-bootstrap/Accordion";
 import { FaFacebookSquare, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import Footer from "../../common/Footer";
-import itemImg1 from "../../assets/MarketPlace/Images/1507033810106_sptows2927_so_klin_detergent_190_g_1024x1024.jpg";
-import itemImg2 from "../../assets/MarketPlace/Images/1499349122495_spxspz1244_waw_hyper-concentrated_multi-use_detergent_200_g_180x2x.jpg";
-import itemImg3 from "../../assets/MarketPlace/Images/1509621985884_sptows2785_ariel_original_perfume_detergent_powder_1_kg_1024x1024.jpg";
-import itemImg4 from "../../assets/MarketPlace/Images/1516383180440_spxty4380_waw_multi-purpose_soap_250_g_180x2x2.jpg";
-import itemImg5 from "../../assets/MarketPlace/Images/Afer-Ironing-Board-Maxi-130-x-47-cm-Supermart-ng-9833_180x2x.jpg";
-import itemImg6 from "../../assets/MarketPlace/Images/1465908830684_spxspy1512_nittol_anti-bacterial_multi-purpose_soap_150_g_180x2x2.jpg";
-import itemImg7 from "../../assets/MarketPlace/Images/cloth-hangers-prices-in-lagos-nigeria-75x75.jpg";
-import itemImg8 from "../../assets/MarketPlace/Images/cloth-pegs-and-clips-75x75.jpg";
-import itemImg9 from "../../assets/MarketPlace/Images/laundry-finishing-tables-lagos-nigeria.jpg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { axiosInstance } from "../../services/AxiosInstance";
 
 function SingleProduct() {
-const [togglereview,setToggleReview] = useState(false)
-const reviewToggleFunc = () => {
-  setToggleReview(!togglereview)
-}
+  const [togglereview, setToggleReview] = useState(false);
+  const [shopItems, setshopItems] = useState();
+  const [moreProduct, setmoreProduct] = useState();
+  const productId = useParams();
+  const id = productId.productId;
+  console.log(id);
 
-  const mockData = [
-    {
-      name: "Klin Detergent",
-      description:
-        "Experience the cleaning power of Klin Detergent, a trusted solution for tackling tough stains and keeping your clothes fresh and vibrant. Our detergent is specially formulated to provide effective cleaning and fabric care. Say goodbye to stubborn stains and hello to clean, crisp clothing. Available at an affordable price of $3.00.",
-      price: "$3.00",
-      image: itemImg1,
-    },
-    {
-      name: "WAW Detergent",
-      description:
-        "Experience the cleaning power of Klin Detergent, a trusted solution for tackling tough stains and keeping your clothes fresh and vibrant. Our detergent is specially formulated to provide effective cleaning and fabric care. Say goodbye to stubborn stains and hello to clean, crisp clothing. Available at an affordable price of $3.00.",
-      price: "$3.00",
-      image: itemImg2,
-    },
-    {
-      name: "Arial Detergent",
-      description:
-        "Experience the cleaning power of Klin Detergent, a trusted solution for tackling tough stains and keeping your clothes fresh and vibrant. Our detergent is specially formulated to provide effective cleaning and fabric care. Say goodbye to stubborn stains and hello to clean, crisp clothing. Available at an affordable price of $3.00.",
-      price: "$3.00",
-      image: itemImg3,
-    },
+  const reviewToggleFunc = () => {
+    setToggleReview(!togglereview);
+  };
 
-    {
-      name: "Klin Detergent",
-      description:
-        "Experience the cleaning power of Klin Detergent, a trusted solution for tackling tough stains and keeping your clothes fresh and vibrant. Our detergent is specially formulated to provide effective cleaning and fabric care. Say goodbye to stubborn stains and hello to clean, crisp clothing. Available at an affordable price of $3.00.",
-      price: "$3.00",
-      image: itemImg4,
-    },
-    {
-      name: "WAW SOAP",
-      description:
-        "Experience the cleaning power of Klin Detergent, a trusted solution for tackling tough stains and keeping your clothes fresh and vibrant. Our detergent is specially formulated to provide effective cleaning and fabric care. Say goodbye to stubborn stains and hello to clean, crisp clothing. Available at an affordable price of $3.00.",
-      price: "$3.00",
-      image: itemImg5,
-    },
-    {
-      name: "Klin Detergent",
-      description:
-        "Experience the cleaning power of Klin Detergent, a trusted solution for tackling tough stains and keeping your clothes fresh and vibrant. Our detergent is specially formulated to provide effective cleaning and fabric care. Say goodbye to stubborn stains and hello to clean, crisp clothing. Available at an affordable price of $3.00.",
-      price: "$3.00",
-      image: itemImg6,
-    },
+  useEffect(() => {
+    axiosInstance.get(`/product/${id}`).then((resp) => {
+      console.log(resp.data);
+      setshopItems(resp.data);
+    });
 
-    {
-      name: "Klin Detergent",
-      description:
-        "Experience the cleaning power of Klin Detergent, a trusted solution for tackling tough stains and keeping your clothes fresh and vibrant. Our detergent is specially formulated to provide effective cleaning and fabric care. Say goodbye to stubborn stains and hello to clean, crisp clothing. Available at an affordable price of $3.00.",
-      price: "$3.00",
-      image: itemImg7,
-    },
-    {
-      name: "Klin Detergent",
-      description:
-        "Experience the cleaning power of Klin Detergent, a trusted solution for tackling tough stains and keeping your clothes fresh and vibrant. Our detergent is specially formulated to provide effective cleaning and fabric care. Say goodbye to stubborn stains and hello to clean, crisp clothing. Available at an affordable price of $3.00.",
-      price: "$3.00",
-      image: itemImg8,
-    },
-    {
-      name: "Klin Detergent",
-      description:
-        "Experience the cleaning power of Klin Detergent, a trusted solution for tackling tough stains and keeping your clothes fresh and vibrant. Our detergent is specially formulated to provide effective cleaning and fabric care. Say goodbye to stubborn stains and hello to clean, crisp clothing. Available at an affordable price of $3.00.",
-      price: "$3.00",
-      image: itemImg9,
-    },
-  ];
+    axiosInstance.get(`/product/`).then((resp) => {
+      console.log(resp.data);
+      setmoreProduct(resp.data);
+    });
+  }, []);
 
-  const slicedData = mockData.splice(1, 3);
+  const sliceData = moreProduct?.slice(1, 3);
 
   return (
     <div>
@@ -159,13 +102,13 @@ const reviewToggleFunc = () => {
       <Container className="mt-5">
         <Row>
           <Col className="singleproduct-item">
-            <img src={itemImg} alt="" />
+            <img src={shopItems?.img} alt="" />
           </Col>
           <Col>
             <p>Canoe / laundry</p>
-            <p className="fs-2">Canoe Extra Care Soap With Glycerine 130 g</p>
+            <p className="fs-2">{shopItems?.name}</p>
             <div className="d-flex">
-              <h5 className="fs-3 text-success">&#8358; 4,650.00</h5>
+              <h5 className="fs-3 text-success">&#8358;{shopItems?.price}</h5>
               <h5 className="underline-price fs-4 mt-1">&#8358; 4,650.00</h5>
             </div>
 
@@ -195,14 +138,7 @@ const reviewToggleFunc = () => {
             <Accordion defaultActiveKey="0" className="border-0">
               <Accordion.Item eventKey="0" className="border-0">
                 <Accordion.Header>Description</Accordion.Header>
-                <Accordion.Body>
-                  Experience the cleaning power of Klin Detergent, a trusted
-                  solution for tackling tough stains and keeping your clothes
-                  fresh and vibrant. Our detergent is specially formulated to
-                  provide effective cleaning and fabric care. Say goodbye to
-                  stubborn stains and hello to clean, crisp clothing. Available
-                  at an affordable price of $3.00
-                </Accordion.Body>
+                <Accordion.Body>{shopItems?.description}</Accordion.Body>
               </Accordion.Item>
             </Accordion>
 
@@ -266,52 +202,74 @@ const reviewToggleFunc = () => {
       <Container>
         <Card className="customer-reviewcard">
           <h4 className="review-h4">Customer Reviews</h4>
-          <p onClick={reviewToggleFunc} className="review-ptag">Write a Review</p>
+          <p onClick={reviewToggleFunc} className="review-ptag">
+            Write a Review
+          </p>
         </Card>
-        {togglereview? (        <Container className="review-container">
-          <p>Write a Review</p>
-          <form action="">
-            <label className="" htmlFor="">Name <br />
-              <input type="text" className="review-inpt" placeholder="Enter Your Name" />
-            </label> 
-            <label className="label01" htmlFor="">Email <br />
-              <input type="text" className="review-inpt" placeholder="Email" />
-            </label>
-            <p className="mt-3">Rating</p>
-            <p></p>
-            <label className="label01" htmlFor="">Review <br />
-              <input type="text" className="review-inpt" placeholder="Give your review a title" />
-            </label>
-            <label className="label01" htmlFor="">Body of review <br />
-              <textarea name="" id="" cols="30" rows="10" className="review-textarea"></textarea>
-            </label>
-            <div className="review-btn-div">
-            <Button
-                        variant="secondary"
-                        className="review-btn bg-info"
-                      >
-                        Submit Review
-                      </Button>{" "}
-            </div>
-
-          </form>
-
-        </Container>): ""}
-
+        {togglereview ? (
+          <Container className="review-container">
+            <p>Write a Review</p>
+            <form action="">
+              <label className="" htmlFor="">
+                Name <br />
+                <input
+                  type="text"
+                  className="review-inpt"
+                  placeholder="Enter Your Name"
+                />
+              </label>
+              <label className="label01" htmlFor="">
+                Email <br />
+                <input
+                  type="text"
+                  className="review-inpt"
+                  placeholder="Email"
+                />
+              </label>
+              <p className="mt-3">Rating</p>
+              <p></p>
+              <label className="label01" htmlFor="">
+                Review <br />
+                <input
+                  type="text"
+                  className="review-inpt"
+                  placeholder="Give your review a title"
+                />
+              </label>
+              <label className="label01" htmlFor="">
+                Body of review <br />
+                <textarea
+                  name=""
+                  id=""
+                  cols="30"
+                  rows="10"
+                  className="review-textarea"
+                ></textarea>
+              </label>
+              <div className="review-btn-div">
+                <Button variant="secondary" className="review-btn bg-info">
+                  Submit Review
+                </Button>{" "}
+              </div>
+            </form>
+          </Container>
+        ) : (
+          ""
+        )}
       </Container>
 
       <Container className="mt-3">
         <h4>You May Also Like</h4>
         <Row>
-          {slicedData &&
-            slicedData.map((item) => (
+          {sliceData &&
+            sliceData.map((item) => (
               <Col xs={12} sm={12} md={4} lg={4} xl={3} key={item.name}>
                 <Card
                   className="item-card border text-center mt-2"
                   style={{ height: "350px" }}
                 >
                   <FiHeart className="cart-icon02" />
-                  <img src={item.image} className="item-image  mt-5" alt="" />
+                  <img src={item.img} className="item-image  mt-5" alt="" />
                   <h5 className="name-tag mt-1">{item.name}</h5>
                   <p className="price-tag fs-4 m-0"> &#8358; 4,650</p>
                   <div>
