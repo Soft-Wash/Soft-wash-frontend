@@ -36,6 +36,7 @@ import OrderTable from  "./pages/Admin/OrderTable"
 import FrontDesk from "./pages/Admin/Frontdesk";
 import Supervisor from "./pages/Admin/Supervisor";
 import Washman from "./pages/Admin/Washman";
+import Register from "./pages/Admin/RegisterEmployee"
  
 
 
@@ -82,6 +83,7 @@ function App() {
         <Route path="/frontdesk/:roldId" element={<FrontDesk/>}/>
         <Route path="/supervisor/:roldId" element={<Supervisor/>}/>
         <Route path="/washman/:roldId" element={<Washman/>}/>
+        <Route path="/registeremployee" element={<Register/>}/>
 
         {/* SUPERVISOR ROUTES */}
 
