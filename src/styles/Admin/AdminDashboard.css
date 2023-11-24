@@ -38,10 +38,17 @@ width: 100%;
 
 .clipboard-icon{
   font-size: 40px;
+  color: white;
 }
 
 .icon-container-innerd2 p{
   margin: 0 ;
   font-size: 18px;
   font-weight: bold;
+  color: white;
+}
+
+.order-dashboard-link{
+  text-decoration: none;
+  color: white;
 }

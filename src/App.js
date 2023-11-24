@@ -31,6 +31,11 @@ import WashmanSingleOrderPage from "./pages/Washman Pages/WashmanSingleOrderPage
 import WashmanEditProfilePage from "./pages/Washman Pages/WashmanEditProfilePage";
 import AdminDashboard from "./pages/Admin/AdminDashboard"
 import Leave from "./pages/Admin/Leave";
+import SupervisorDashBoard from "./pages/SupervisorPage/SupervisorDashBoard";
+import OrderTable from  "./pages/Admin/OrderTable"
+import FrontDesk from "./pages/Admin/Frontdesk";
+import Supervisor from "./pages/Admin/Supervisor";
+import Washman from "./pages/Admin/Washman";
  
 
 
@@ -67,12 +72,20 @@ function App() {
         <Route path="/washman-profile" element={<WashmanProfilePage/>}/>
         <Route path="/washman-orders" element={<WashmanOrdersPage/>}/>
         <Route path="/washman-dashboard" element={<WashmanDashboardPage/>}/>
-        <Route path="/washman-single-order" element={<WashmanSingleOrderPage/>}/>
+        <Route path="/washman-single-order/:_id" element={<WashmanSingleOrderPage/>}/>
         <Route path="/washman-edit-profile" element={<WashmanEditProfilePage/>}/>
 
         {/* Admin Routes */}
         <Route path="/admindashboard" element={<AdminDashboard/>}/>
         <Route path="/leave" element={<Leave/>}/>
+        <Route path="/ordertable" element={<OrderTable/>}/>
+        <Route path="/frontdesk/:roldId" element={<FrontDesk/>}/>
+        <Route path="/supervisor/:roldId" element={<Supervisor/>}/>
+        <Route path="/washman/:roldId" element={<Washman/>}/>
+
+        {/* SUPERVISOR ROUTES */}
+
+        <Route path="/SupervisorDash-Board" element={<SupervisorDashBoard/>}/>
 
       </Routes>
     </BrowserRouter>

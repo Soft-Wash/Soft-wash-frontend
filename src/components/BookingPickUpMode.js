@@ -1,63 +1,55 @@
-import { useState,useEffect } from 'react';
-import { Container } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Container, Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 
 function BookingPickUpMode() {
+  const [isOptionSelected, setIsOptionSelected] = useState(false);
+  const [checkedOption, setCheckedOption] = useState(null);
 
-  const [empty, setEmpty] = useState(false);
-  const [deliveryType, setDeliveryType] = useState(()=>{
-    const storedItem = localStorage.getItem('deliveryType')
-    return storedItem? JSON.parse(storedItem):storedItem
-  })
-  
-  const handleChange =(e)=>{
-    const value =
-    e.target.type === "checkbox"
-    ? e.target.checked
-    : e.target.type === "file" 
-    ? e.target.file[0]
-    : e.target.value
+  const handleChange = (e) => {
+    const selectedOption = e.target.value;
+    setCheckedOption(selectedOption);
 
-    setDeliveryType({[e.target.name]:value })
-    
-  }
+    if (!selectedOption) {
+      setIsOptionSelected(false);
+    } else {
+      setIsOptionSelected(true);
+    }
+  };
 
   useEffect(() => {
-    localStorage.setItem("deliveryType", JSON.stringify(deliveryType));
-  }, [deliveryType]);
-
+    localStorage.setItem('deliveryType', JSON.stringify(checkedOption));
+  }, [checkedOption]);
 
   return (
     <Container>
-     <div className='select-pickup-type'>
-      <h3 className='date-headers'>Which service do you require?</h3>
-          <Form>
-        {['radio'].map((type) => (
-          <div key={`reverse-${type}`} className="mb-3">
-            <Form.Check            
+      <div className="booking-pickup-mode select-pickup-type">
+        <h3 className="section-header">Which service do you require?</h3>
+        <Form>
+          <div className="mb-3">
+            <Form.Check
               label="Pick Up only"
-              onChange={(e) => {
-                handleChange(e);
-              }}
-              name="pickUpOnly"
-              type={type}
-              id={`reverse-${type}-1`}
-              checked={deliveryType === 'pickUpOnly'}
+              onChange={handleChange}
+              name="deliveryType"
+              type="radio"
+              id="pickup-only"
+              value="pickUpOnly"
+              checked={checkedOption === 'pickUpOnly'}
             />
-            
-            <Form.Check            
+
+            <Form.Check
               label="Pick Up and Delivery"
-              onChange={(e) => {
-                handleChange(e);
-              }}
-              name="pickUpOnlyAndDelivery"
-              type={type}
-              id={`reverse-${type}-2`}
-              checked={deliveryType === 'pickUpOnlyAndDelivery'}
-            />          
+              onChange={handleChange}
+              name="deliveryType"
+              type="radio"
+              id="pickup-delivery"
+              value="pickUpDelivery"
+              checked={checkedOption === 'pickUpDelivery'}
+            />
           </div>
-        ))}
-      </Form>
+        </Form>
+
+        
       </div>
     </Container>
   );

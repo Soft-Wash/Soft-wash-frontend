@@ -10,7 +10,6 @@ function Calender() {
     const storedDate = localStorage.getItem("calenderStartDate");
     return storedDate ? new Date(JSON.parse(storedDate)) : new Date();
 
-
   });
 
   const [selectedTime, setSelectedTime] = useState(() => {

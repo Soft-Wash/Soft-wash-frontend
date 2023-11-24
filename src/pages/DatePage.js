@@ -6,11 +6,16 @@ import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import BookingBanner from '../components/BookingBanner';
+import React, { useState } from 'react';
 
 
 
 
 function DatePage (){
+
+    const [isOptionSelected, setIsOptionSelected] = useState(false);
+
+
     return(
        <div>
             <BookingBanner />
@@ -30,8 +35,9 @@ function DatePage (){
                 </Link>
 
                 <Link to="/address">
-                <Button className='px-4 mx-3' variant="primary">Next</Button>
+                <Button className='px-4 mx-3' variant="primary" disabled={!isOptionSelected}>Next</Button>
                 </Link>
+        {/* <Button disabled={!isOptionSelected}>Next</Button> */}
 
             </div>
             </Container>
