@@ -88,6 +88,7 @@ function handlePaymentPage(e){
   : e.target.value
 
   setpaymentMethod({[e.target.name]:value })
+  
 }
 
 useEffect(()=>{
@@ -102,14 +103,23 @@ useEffect(()=>{
     const stringDeliveryType = key.join("");
 
     const paymentType = JSON.parse(localStorage.getItem('paymentType'))
+    console.log(paymentType)
+
+    
+  if (!paymentType || Object.keys(paymentType).length === 0) {
+    alert('Select payment type before confirming the order.');
+    return; // Return early if payment type is not selected
+  }
+    
     const paymentkey = Object.keys(paymentType)
     const stringPaymentType = paymentkey.join("");
 
       // Validate payment type selection
-    if (!stringPaymentType) {
-      alert("Please select a payment type before confirming the order.");
-      return; 
-    }
+    // if (!stringPaymentType) {
+    //   alert("Please select a payment type before confirming the order.");
+    //   return; 
+    // }
+    
     orderDetails = {
       subtotal: 20000,
       delivery_type: stringDeliveryType,

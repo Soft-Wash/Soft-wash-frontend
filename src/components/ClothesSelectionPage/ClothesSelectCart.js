@@ -14,6 +14,8 @@ import ClothAccordian from "./ClothAccordian";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {Loader} from "../../common/Loader"
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -67,10 +69,10 @@ const [clothId,setclothId]=useState()
 
   const HandleLocalSave = () => {
 
-
+      // validation 
     if (!clothQuantity || Object.keys(clothQuantity).length === 0) {
-      alert("Please add at least one cloth.");
-      return; // validation for clothes selection 
+      toast.error('Add at least one item to continue');
+      return; 
     }
     const filteredQuantities = Object.fromEntries(
       Object.entries(clothQuantity).filter(([key, value]) => value >= 1)
