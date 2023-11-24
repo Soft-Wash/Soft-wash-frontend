@@ -64,6 +64,7 @@ export default function Signup() {
       .post("employees/create", payload)
       .then((resp) => {
         console.log(resp.data);
+        navigate('/admindashboard')
       })
       .catch((error) => {
         console.log(error.message);

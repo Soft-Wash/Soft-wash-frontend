@@ -24,6 +24,9 @@ import DatePage from "./pages/DatePage";
 import UserProfilePage from "./pages/UserProfilePage";
 import UserDashboardContactPage from "./pages/UserDashboardContactPage";
 import UserOrderDetailsPage from "./pages/UserOrderDetailsPage";
+import VariablesContext from "./context/VariablesContext";
+import Dashboard from "./pages/FrontDesk/Dashboard";
+import Login from "./pages/FrontDesk/Login";
 import WashmanProfilePage from "./components/Washman Components/WashmanProfileBody"
 import WashmanOrdersPage from "./pages/Washman Pages/WashmanOrdersPage";
 import WashmanDashboardPage from "./pages/Washman Pages/WashmanDashboardPage";
@@ -42,8 +45,8 @@ import Register from "./pages/Admin/RegisterEmployee"
 
 function App() {
   return (
-<>
-<BrowserRouter>
+<>  
+  <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage/>} />
         <Route path="/address" element={<AddressPage/>} />
@@ -52,6 +55,7 @@ function App() {
         <Route path="/auth/reset-password" element={<ResetPaswdPage />} />
          <Route path="/auth/new-password" element={<NewPaswdPage />} />
          <Route path="/auth/verify" element={<AuthenticatePaswdPage />} />
+
          <Route path="/how-it-works" element={<HowItWorks />} />
          <Route path="/date" element={<DatePage />} />
          <Route path="/user-profile" element={<UserProfilePage />} />
@@ -66,8 +70,13 @@ function App() {
          <Route path="/singleproduct" element={<SingleProduct/>} />
          <Route path="/wishlist" element={<Wishlist/>} />
          <Route path="/cart" element={<Cart/>} />
-        <Route path="/my-orders/" element={<Orders/>}/>
+        <Route path="/my-orders" element={<Orders/>}/>
         <Route path="/order-receipt/:orderId" element={<OrderReceipt/>}/>
+
+        {/* Front desk */}
+          <Route path="/frontdesk" element={<Login/>} />
+          <Route path="/frontdesk/dash" element={<Dashboard/>} />
+         
 
         {/* WASHMAN ROUTES */}
         <Route path="/washman-profile" element={<WashmanProfilePage/>}/>
