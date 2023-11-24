@@ -7,10 +7,10 @@ import '../../styles/orderNavigation.css'
 function Navigation() {
   return (
     <div
-      className="user-dashboard-nav  bg-body-white shadow-sm pe-3"
-      style={{ height: "55px" }}
+      className="w-100 user-dashboard-nav d-flex  bg-body-white shadow-sm pe-3"
+      style={{ height: "55px", display: "flex" }}
     >
-      <div className=" mx-auto w-100 lg-display-none">
+      <div className=" mx-auto d-flex lg-display-none">
         <img src={logo} alt="img-fluid my-auto" />
       </div>
 
