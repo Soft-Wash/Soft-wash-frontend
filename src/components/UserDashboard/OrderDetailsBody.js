@@ -180,20 +180,11 @@ axiosInstance.get(`/order/${orderId}/order`)
                             >
                             <p className=" fw-semibold fs-4 text-secondary mt-sm"></p>
                         </Col>
-                        <h6>DELIVERED</h6>
-                        <hr className='progress-line2'/>
+                        <h6>DELIVERED</h6>                        
                         </div>
                         
                         
-                        <div className='order-progress-circle'>
-                        <Col 
-                            className={`duration-500 border border-4 ${progress > 37.5 ? "border-info" : null}  text-center rounded-circle bg-white size-sm-30px`}
-                            style={{ height: "50px", width: "50px" }}
-                            >
-                            <p className=" fw-semibold fs-4 text-secondary mt-sm"></p>
-                        </Col>
-                        <h6>DECLINED</h6>
-                        </div>                    
+                        
                     </Container>
 
                         <Col className="px-4 position-relative neg-top-15" style={{top:"-30px", zIndex:"-1"}}>
