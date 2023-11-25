@@ -84,7 +84,7 @@ function App() {
         <Route path="/washman-profile" element={<WashmanProfilePage/>}/>
         <Route path="/washman-orders" element={<WashmanOrdersPage/>}/>
         <Route path="/washman-dashboard" element={<WashmanDashboardPage/>}/>
-        <Route path="/washman-single-order" element={<WashmanSingleOrderPage/>}/>
+        <Route path="/washman-single-order/:_id" element={<WashmanSingleOrderPage/>}/>
         <Route path="/washman-edit-profile" element={<WashmanEditProfilePage/>}/>
 
         {/* Admin Routes */}

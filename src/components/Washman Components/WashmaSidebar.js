@@ -5,7 +5,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 function WashmaSidebar (){
     return (
-        <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
+        <div style={{ display: 'flex', height: 'auto', overflow: 'scroll initial' }}>
           <CDBSidebar textColor="rgb(13,202,240)" backgroundColor="rgb(11,9,9)">
             <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
               <Link to="/" className="text-decoration-none" style={{ color: 'inherit' }}>

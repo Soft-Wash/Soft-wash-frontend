@@ -14,16 +14,27 @@ function SupervisorDashBoard() {
     //         </div>
     //     </div>
     // </div>
-    <div className='row d-flex'>
-        <div className="col">
-            <SupervisorSideBar/>
+    // <div className='d-flex overflow y-hidden supervisor-bg'>
+    //     <div className="position-relative">
+    //         <SupervisorSideBar/>
+    //     </div>
+    //     <div className="">
+    //         <SupervisorDashBody/>
+    //     </div>
+    // </div>
+   
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                    <SupervisorSideBar/>
+                </nav>
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                    <SupervisorDashBody/>
+                </main>
+            </div>
         </div>
-        <div className="col">
-            <SupervisorDashBody/>
-        </div>
-       
-        
-    </div>
+
+
   )
 }
 

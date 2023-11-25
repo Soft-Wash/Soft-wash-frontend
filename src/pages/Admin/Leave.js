@@ -430,7 +430,7 @@ function Leave() {
           )}
 
           {toggleApproved ? <ApprovedLeave /> : ""}
-          {rejectedLeave?  <RejectedLeave/>:""}
+          {rejectedLeave?  <RejectedLeave/> : ""}
 
         </div>
       </div>
