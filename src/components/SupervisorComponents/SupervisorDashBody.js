@@ -77,10 +77,10 @@ function SupervisorDashBody() {
                     </div>
                     
                 </div>  
-                <div className="MainCards">
+                <div className="MainCards d-flex">
                     <Card style={{ width: '18rem', borderColor:"#0DCAF0"}}>
                         <Card.Body>
-                            <Card.Title className='mb-5'>Team Members</Card.Title>
+                            <Card.Title className='mb-5'>SOFT-WASH TEAM</Card.Title>
                             <div className='FrotDesk'>
                                 <Card.Subtitle className="mb-3 text-muted px-3">Front Desk</Card.Subtitle>
                                 <div className="FrontDesk1 d-flex align-items-center justify-content-between px-3 py-2" >
@@ -125,9 +125,10 @@ function SupervisorDashBody() {
                             <Card.Link style={{textDecoration:"none", float:"right"}} href="#">More Details <FaArrowAltCircleRight /></Card.Link>
                         </Card.Body>
                     </Card>
+                    <InventoryChart/>
                 </div>
                 <div className="chart">
-                    <InventoryChart/>
+                    
                 </div>
                 {/* <div className="washman-table-div">
                     <table className="washman-content-table">
