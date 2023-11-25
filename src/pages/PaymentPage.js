@@ -9,6 +9,11 @@ import { useEffect } from "react";
 import { axiosInstance } from "../services/AxiosInstance";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 function PaymentPage() {
   const [selectedTime, setSelectedTime] = useState();
@@ -79,21 +84,42 @@ function PaymentPage() {
   }, []);
 
 
-function handlePaymentPage(e){
-  const value =
-  e.target.type === "checkbox"
-  ? e.target.checked
-  : e.target.type === "file" 
-  ? e.target.file[0]
-  : e.target.value
+// function handlePaymentPage(e){
+//   const value =
+//   e.target.type === "checkbox"
+//   ? e.target.checked
+//   : e.target.type === "file" 
+//   ? e.target.file[0]
+//   : e.target.value
+//   setpaymentMethod({[e.target.name]:value })
 
-  setpaymentMethod({[e.target.name]:value })
-  
+
+//   console.log(paymentMethod)
+// }
+
+// useEffect(()=>{
+//   localStorage.setItem("paymentType", JSON.stringify(paymentMethod));
+// },[paymentMethod])
+
+function handlePaymentPage(e) {
+  const value =
+    e.target.type === "checkbox"
+      ? e.target.checked
+      : e.target.type === "file"
+      ? e.target.file[0]
+      : e.target.value;
+
+  setpaymentMethod((prevPaymentMethod) => ({
+    ...prevPaymentMethod,
+    [e.target.name]: value,
+  }));
 }
 
-useEffect(()=>{
+useEffect(() => {
   localStorage.setItem("paymentType", JSON.stringify(paymentMethod));
-},[paymentMethod])
+  console.log(paymentMethod); // This will log the updated paymentMethod
+}, [paymentMethod]);
+
 
 
 
@@ -107,8 +133,10 @@ useEffect(()=>{
 
     
   if (!paymentType || Object.keys(paymentType).length === 0) {
-    alert('Select payment type before confirming the order.');
-    return; // Return early if payment type is not selected
+    // alert('Select payment type before confirming the order.');
+    toast.error('Select payment Option')
+    return; // Return early if payment type is not selecte
+
   }
     
     const paymentkey = Object.keys(paymentType)
@@ -138,6 +166,7 @@ useEffect(()=>{
   return (
     <div>
       <BookingBanner />
+      <ToastContainer position="top-center" />
       <div className="container">
         {/* <EmixNav/> */}
         <div className="p-3">
