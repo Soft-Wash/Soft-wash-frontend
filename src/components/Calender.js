@@ -46,7 +46,7 @@ function Calender() {
         </h3>
         <div className="d-flex">
           <DatePicker
-            className="react-datepicker__calendar"
+            className="react-datepicker__calendar form-control border-primary"
             selected={startDate}
             onChange={(date) => setStartDate(date)}
             minDate={new Date()}
