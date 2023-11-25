@@ -114,11 +114,6 @@ useEffect(()=>{
     const paymentkey = Object.keys(paymentType)
     const stringPaymentType = paymentkey.join("");
 
-      // Validate payment type selection
-    // if (!stringPaymentType) {
-    //   alert("Please select a payment type before confirming the order.");
-    //   return; 
-    // }
     
     orderDetails = {
       subtotal: 20000,
