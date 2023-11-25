@@ -77,6 +77,9 @@ setclothQuantity(updatedQuantity)
           customer_id:Customer_id
         };
 
+
+        console.log(cartData)
+
         
         axiosInstance.post('/cart/create',cartData)
         .then((resp)=>{

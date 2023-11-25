@@ -7,6 +7,7 @@ import itemImg from "../../assets/MarketPlace/Images/1509621985884_sptows2785_ar
 import Footer from "../../common/Footer";
 import { axiosInstance } from "../../services/AxiosInstance";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 function Cart() {
   const [cartItems, setcartItems] = useState([]);
@@ -20,8 +21,14 @@ function Cart() {
       .get(`/cart/customer?customer_id=${Customer_id}`)
       .then((resp) => {
       
+
+        const initialQuantity = {};
+        resp.data.forEach((item)=> {
+          initialQuantity[item.product_id._id]=item.quantity
+        })
+        console.log(resp.data);
+        setclothQuantity(initialQuantity)
         setcartItems(resp.data);
-        console.log(cartItems);
       });
   };
 
@@ -33,6 +40,14 @@ function Cart() {
     const updatedQuantity = {...clothQuantity}
     updatedQuantity[itemId]= (updatedQuantity[itemId] || 0)+1
     setclothQuantity(updatedQuantity)
+    const Quantity={
+      quantity:updatedQuantity
+    }
+    console.log(Quantity)
+    // axiosInstance.put(`/cart/${itemId}/update`,Quantity)
+    // .then((resp)=>{
+    //   console.log(resp.data)
+    // })
   }
 
 
@@ -45,10 +60,12 @@ const decrement =(itemId)=>{
 
 const DeleteCartItem=(itemId)=>{
   console.log(itemId)
-  axiosInstance.delete(`/cart/${itemId}`)
+  axios.delete(`${process.env.REACT_APP_BASE_URL}/cart/${itemId}/delete`)
   .then((resp)=>{
     console.log(resp.data)
-    setcartItems(resp.data)
+    setcartItems((prevItems) =>
+    prevItems.filter((item) => item._id !== itemId)
+  );
   })
   .catch((error)=>{
     console.error("Error deleting item from cart:", error);
@@ -95,7 +112,7 @@ const DeleteCartItem=(itemId)=>{
                   <div className="price-quantity-div-inner">
                     <div className="cart-inpt-div d-flex">
                       <button className="cart-inpt-div-btn1 bg-info" onClick={()=>decrement(item.product_id._id)}>-</button>
-                      <input type="text" className="cart-input" value={clothQuantity[item.product_id._id] || 0}/>
+                      <input type="text" className="cart-input" value={clothQuantity[item.product_id._id] || item.quantity}/>
                       <button className="cart-inpt-div-btn2 bg-info" onClick={()=>increment(item.product_id._id)}>+</button>
                     </div>
                     <p className="remove-cart" onClick={()=>DeleteCartItem(item._id)}>Remove</p>
