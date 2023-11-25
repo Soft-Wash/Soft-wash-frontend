@@ -32,14 +32,27 @@ function Cart() {
   const increment=(itemId)=>{
     const updatedQuantity = {...clothQuantity}
     updatedQuantity[itemId]= (updatedQuantity[itemId] || 0)+1
-    setclothQuantity(clothQuantity)
+    setclothQuantity(updatedQuantity)
   }
 
 
 const decrement =(itemId)=>{
   const updatedQuantity={...clothQuantity}
   updatedQuantity[itemId]=Math.max((updatedQuantity[itemId]||0)-1,0)
-  setclothQuantity(clothQuantity)
+  setclothQuantity(updatedQuantity)
+}
+
+
+const DeleteCartItem=(itemId)=>{
+  console.log(itemId)
+  axiosInstance.delete(`/cart/${itemId}`)
+  .then((resp)=>{
+    console.log(resp.data)
+    setcartItems(resp.data)
+  })
+  .catch((error)=>{
+    console.error("Error deleting item from cart:", error);
+  })
 }
   
 
@@ -81,14 +94,14 @@ const decrement =(itemId)=>{
                   <p className="current-price fw-bold">&#8358; {item.product_id.price}</p>
                   <div className="price-quantity-div-inner">
                     <div className="cart-inpt-div d-flex">
-                      <button className="cart-inpt-div-btn1 bg-info" onClick={decrement}>-</button>
+                      <button className="cart-inpt-div-btn1 bg-info" onClick={()=>decrement(item.product_id._id)}>-</button>
                       <input type="text" className="cart-input" value={clothQuantity[item.product_id._id] || 0}/>
-                      <button className="cart-inpt-div-btn2 bg-info" onClick={increment}>+</button>
+                      <button className="cart-inpt-div-btn2 bg-info" onClick={()=>increment(item.product_id._id)}>+</button>
                     </div>
-                    <p className="remove-cart">Remove</p>
+                    <p className="remove-cart" onClick={()=>DeleteCartItem(item._id)}>Remove</p>
                   </div>
                   <p className="total-price fw-bold">&#8358; {item.product_id.price}</p>
-                  <p className="remove2-cart">Remove</p>
+                  <p className="remove2-cart" onClick={()=>DeleteCartItem(item._id)}>Remove</p>
                 </div>
               </div>
             </div>

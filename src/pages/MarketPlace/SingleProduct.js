@@ -90,6 +90,7 @@ setclothQuantity(updatedQuantity)
       }
 
 
+
   return (
     <div>
       <Container fluid className="nav-container pt-4">
