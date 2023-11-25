@@ -26,6 +26,7 @@ function PaymentPage() {
   const [userOrder, setuserOrder] = useState();
   const [newlocaldate, setnewlocaldate] = useState(selectedDate);
   const [selectedAddress, setSelectedAddress] = useState();
+  const [validationError, setValidationError] = useState('');
   const [paymentMethod,setpaymentMethod]= useState(()=>{
     const storedPayment = localStorage.getItem('paymentType')
     return storedPayment?JSON.parse(storedPayment): ""
@@ -135,6 +136,7 @@ useEffect(() => {
   if (!paymentType || Object.keys(paymentType).length === 0) {
     // alert('Select payment type before confirming the order.');
     toast.error('Select payment Option')
+    
     return; // Return early if payment type is not selecte
 
   }
