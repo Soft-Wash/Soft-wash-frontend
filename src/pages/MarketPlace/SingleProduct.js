@@ -22,15 +22,15 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { axiosInstance } from "../../services/AxiosInstance";
 
-function SingleProduct({ initialQuantity }) {
+function SingleProduct() {
   const [togglereview, setToggleReview] = useState(false);
   const [shopItems, setshopItems] = useState();
   const [moreProduct, setmoreProduct] = useState();
   const productId = useParams();
   const [clothQuantity,setclothQuantity] =useState({})
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const id = productId.productId;
-  console.log(id);
 
   const reviewToggleFunc = () => {
     setToggleReview(!togglereview);
@@ -38,12 +38,10 @@ function SingleProduct({ initialQuantity }) {
 
   useEffect(() => {
     axiosInstance.get(`/product/${id}`).then((resp) => {
-      console.log(resp.data);
       setshopItems(resp.data);
     });
 
     axiosInstance.get(`/product/`).then((resp) => {
-      console.log(resp.data);
       setmoreProduct(resp.data);
     });
   }, []);
@@ -63,16 +61,32 @@ setclothQuantity(updatedQuantity)
     setclothQuantity(updatedQuantity)
       }
 
-      function addToCart(){
+      const  addToCart=()=>{
+        const CustomerData = JSON.parse(localStorage.getItem('softwashLoginUser'))
+        const Customer_id = CustomerData._id
+        const quantity = parseInt(clothQuantity[shopItems?._id], 10);
+
+        if (isNaN(quantity) || quantity < 1) {
+          setErrorMessage('Please add a quantity');
+          return; 
+        }
+
         const cartData = {
           product_id: shopItems?._id,
           quantity: clothQuantity[shopItems?._id] || 0,
+          customer_id:Customer_id
         };
+
         
         axiosInstance.post('/cart/create',cartData)
         .then((resp)=>{
           console.log(resp.data)
         })
+        .catch((error) => {
+          console.error("Error adding item to cart:", error);
+          setErrorMessage("Item already in the cart.");
+        });
+        
       }
 
 
@@ -148,10 +162,12 @@ setclothQuantity(updatedQuantity)
               <Button
                 variant="secondary"
                 className="cart-button2 bg-info border-0 rounded-0"
+                onClick={()=>addToCart()}
               >
                 Add to Cart
               </Button>{" "}
             </div>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
 
             <div className="d-flex  mt-5">
               <FiHeart className="wishlist-icon" />
