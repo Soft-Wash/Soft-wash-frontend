@@ -2,9 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 
+
+
 function BookingPickUpMode() {
   const [isOptionSelected, setIsOptionSelected] = useState(false);
-  const [checkedOption, setCheckedOption] = useState(null);
+  const [checkedOption, setCheckedOption] = useState(() => {
+    // Check local storage for existing value
+    const storedOption = localStorage.getItem('deliveryType');
+    return storedOption ? JSON.parse(storedOption) : null;
+  });
 
   const handleChange = (e) => {
     const selectedOption = e.target.value;
@@ -20,6 +26,8 @@ function BookingPickUpMode() {
   useEffect(() => {
     localStorage.setItem('deliveryType', JSON.stringify(checkedOption));
   }, [checkedOption]);
+
+
 
   return (
     <Container>
