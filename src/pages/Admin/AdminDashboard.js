@@ -14,8 +14,6 @@ function AdminDashboard(){
   const [orders,setorders]=useState();
   const [dayorder,setdayorder]=useState();
   const [Employees,setEmployees]=useState()
-  const [frontdesk,setfrontdesk]=useState()
-  const [washMan,setWashman]=useState()
   const [Customers,setCustomers] = useState()
 
   async function getEmployees(){
@@ -167,6 +165,37 @@ const supervisors = getEmployeesId('supervisor')
   </div>
   
   </div>
+
+  <h4 className="">Today order </h4>
+  <div className="admindashboard-ordertable-div">
+          <div>
+          </div>
+          <table className="admindashboard-content-table">
+            <thead>
+              <tr>
+                <th>Order Id</th>
+                <th>Branch</th>
+                <th>Customer</th>
+                <th>Addresss</th>
+                <th>SubTotal</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dayorder &&
+                dayorder.map((item) => (
+                  <tr key={item._id}>
+                    <th>{item._id.substring(0, item._id.length / 2)}</th>
+                    <th>{item?.branch_id?.name}</th>
+                    <th>{item?.customer_id?.fullName}</th>
+                    <th>{item?.deliveryAddress[0]?.FullAddress}</th>
+                    <th>{item?.subtotal}</th>
+                    <th>{item?.status}</th>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
 
 
 </div>

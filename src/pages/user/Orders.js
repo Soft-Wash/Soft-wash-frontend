@@ -1,24 +1,18 @@
-import Navigation from "../../components/OrdersPage/Navigation";
+
 import Sidebar from "../../components/OrdersPage/Sidebar";
 import { Container, Row, Col, Nav } from "react-bootstrap";
-import InputGroup from "react-bootstrap/InputGroup";
 
 import "../../styles/UserProfile.css";
-import { Form } from "react-router-dom";
 import Tab from "react-bootstrap/Tab";
-import Tabs from "react-bootstrap/Tabs";
 import OrderProp from "../../components/OrdersPage/OrderProp";
 import { useEffect } from "react";
 import { axiosInstance } from "../../services/AxiosInstance";
 import { useState } from "react";
-import {useParams} from "react-router-dom"
 
 export default function Orders() {
   const [userOrders,setuserOrders] = useState()
   const [orderplaced,setorderplaced] = useState()
   const [UserId,setUserId]= useState()
-  // const { userId } = useParams();
-  // console.log(userId)
   const [pickUpDateValue, setpickUpDate]=useState()
 
 
