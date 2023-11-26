@@ -86,7 +86,11 @@
 
 
 
-
+@media (max-width: 1024px) {
+    .washman-page-content{
+        width: 80%;        
+    }
+}
 
 
 
