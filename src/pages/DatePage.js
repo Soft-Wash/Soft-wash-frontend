@@ -91,9 +91,7 @@ const handleDeliveryOption = () => {
                 <Link to="/ClothesSelection">
                 <Button variant="light" border="primary" >Previous</Button>
                 </Link>
-                <Link >
                 <Button className='px-4 mx-3' variant="primary" onClick ={handleDeliveryOption}>Next</Button>
-                </Link>
 
                 {/* <Button disabled={!isOptionSelected}>Next</Button> */}
 

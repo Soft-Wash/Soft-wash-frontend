@@ -11,7 +11,7 @@ export default function OrderProp(props) {
 
   return (
     <>
-      <Row className="mt-4 px-5 py-4 border border-1 shadow-sm rounded-4">
+      <Row className="mt-4 px-5 py-4 border border-1 shadow-sm rounded-4" style={{borderBottom:"none"}}>
         <Col lg={3} md={4} sm={6}>
           <Row className="mb-1 fw-bold fs-6">Order Id</Row>
           <Row

@@ -65,70 +65,68 @@ export default function Orders() {
             </div>
           </div>
           <Row>
-        <Tab.Container id="left-tabs-example" defaultActiveKey="first">
-      <Row>
-        <Col lg={12}>
-          <Nav variant="pills" className="flex-row text-black">
-            <Nav.Item>
-              <Nav.Link eventKey="first" className="text-black">Show all</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="second" className="text-black" onClick={getPLacedOrder}>Order Placed</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="third" className="text-black">Confirmed</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="fourth" className="text-black">Received</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="fifth" className="text-black">Cleaning</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="sixth" className="text-black">Ready</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="seventh" className="text-black">Shipped</Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </Col>
-      </Row>
+            <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+              <Row>
+                <Col lg={12} >
+                  <Nav variant="pills" className="flex-row text-black">
+                    <Nav.Item>
+                      <Nav.Link eventKey="first" className="text-black">Show all</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey="second" className="text-black" onClick={getPLacedOrder}>Order Placed</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey="third" className="text-black">Confirmed</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey="fourth" className="text-black">Received</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey="fifth" className="text-black">Cleaning</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey="sixth" className="text-black">Ready</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey="seventh" className="text-black">Shipped</Nav.Link>
+                    </Nav.Item>
+                  </Nav>
+                </Col>
+              </Row>
+              <Row>
+                <Tab.Content>
+                  <Tab.Pane eventKey="first" style={{border:"none"}}>
+                    {userOrders && userOrders.map((item)=>(
+                    <OrderProp 
+                    id={item._id}
+                    pickup={item.pickuptime}
+                    address={item.deliveryAddress[0].FullAddress}
+                    price={item.subtotal}
+                    status={item.status}
+                    />
+                    ))}
 
-      <Row>
-      <Tab.Content>
-            <Tab.Pane eventKey="first">
-              {userOrders && userOrders.map((item)=>(
-              <OrderProp 
-              id={item._id}
-              pickup={item.pickuptime}
-              address={item.deliveryAddress[0].FullAddress}
-              price={item.subtotal}
-              status={item.status}
-              />
-              ))}
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="second">
+                    {userOrders&&userOrders.map((item)=>(
+                    <OrderProp
+                    id={item._id}
+                    pickup={item.pickuptime}
+                    address={item.deliveryAddress[0].FullAddress}
+                    price={item.subtotal}
+                    status={item.status}/>
+                    ))}
 
-            </Tab.Pane>
-            <Tab.Pane eventKey="second">
-              {userOrders&&userOrders.map((item)=>(
-              <OrderProp
-              id={item._id}
-              pickup={item.pickuptime}
-              address={item.deliveryAddress[0].FullAddress}
-              price={item.subtotal}
-              status={item.status}
- />
-              ))}
-
-            </Tab.Pane>
-            <Tab.Pane eventKey="third"><OrderProp /></Tab.Pane>
-            <Tab.Pane eventKey="fourth"></Tab.Pane>
-            <Tab.Pane eventKey="fifth"></Tab.Pane>
-            <Tab.Pane eventKey="sixth"></Tab.Pane>
-            <Tab.Pane eventKey="seventh"><OrderProp /></Tab.Pane>
-          </Tab.Content>
-      </Row>
-    </Tab.Container>
-        </Row>
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="third"><OrderProp /></Tab.Pane>
+                  <Tab.Pane eventKey="fourth"></Tab.Pane>
+                  <Tab.Pane eventKey="fifth"></Tab.Pane>
+                  <Tab.Pane eventKey="sixth"></Tab.Pane>
+                  <Tab.Pane eventKey="seventh"><OrderProp /></Tab.Pane>
+                </Tab.Content>
+              </Row>
+            </Tab.Container>
+          </Row>
       </Container>
       </div>
     </>
