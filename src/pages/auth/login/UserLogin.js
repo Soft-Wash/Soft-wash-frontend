@@ -35,7 +35,6 @@ export default function Login() {
         const {  email, password } = loginDetails;
         if ( email && password) {
           handleLoginSubmit(loginDetails);
-          console.log(loginDetails)
         } else {
           setEmpty(true);
         }

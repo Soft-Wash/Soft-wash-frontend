@@ -15,7 +15,6 @@ import {
   FiInstagram,
 } from "react-icons/fi";
 import "../../styles/SingleProduct.css";
-import itemImg from "../../assets/MarketPlace/Images/1465908830684_spxspy1512_nittol_anti-bacterial_multi-purpose_soap_150_g_180x2x2.jpg";
 import Accordion from "react-bootstrap/Accordion";
 import { FaFacebookSquare, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import Footer from "../../common/Footer";
@@ -28,8 +27,10 @@ function SingleProduct() {
   const [shopItems, setshopItems] = useState();
   const [moreProduct, setmoreProduct] = useState();
   const productId = useParams();
+  const [clothQuantity,setclothQuantity] =useState({})
+  const [errorMessage, setErrorMessage] = useState(null);
+
   const id = productId.productId;
-  console.log(id);
 
   const reviewToggleFunc = () => {
     setToggleReview(!togglereview);
@@ -37,17 +38,61 @@ function SingleProduct() {
 
   useEffect(() => {
     axiosInstance.get(`/product/${id}`).then((resp) => {
-      console.log(resp.data);
       setshopItems(resp.data);
     });
 
     axiosInstance.get(`/product/`).then((resp) => {
-      console.log(resp.data);
       setmoreProduct(resp.data);
     });
   }, []);
 
   const sliceData = moreProduct?.slice(1, 3);
+
+
+  const increment=(itemId)=>{
+const updatedQuantity = {...clothQuantity}
+updatedQuantity[itemId] = (updatedQuantity[itemId] || 0)+1
+setclothQuantity(updatedQuantity)
+  }
+
+  const decrement=(itemId)=>{
+   const updatedQuantity = {...clothQuantity}
+    updatedQuantity[itemId] = Math.max((updatedQuantity[itemId] || 0)-1,0)
+    setclothQuantity(updatedQuantity)
+      }
+
+      const  addToCart=()=>{
+        const CustomerData = JSON.parse(localStorage.getItem('softwashLoginUser'))
+        const Customer_id = CustomerData._id
+        const quantity = parseInt(clothQuantity[shopItems?._id], 10);
+
+        if (isNaN(quantity) || quantity < 1) {
+          setErrorMessage('Please add a quantity');
+          return; 
+        }
+
+        const cartData = {
+          product_id: shopItems?._id,
+          quantity: clothQuantity[shopItems?._id] || 0,
+          customer_id:Customer_id
+        };
+
+
+        console.log(cartData)
+
+        
+        axiosInstance.post('/cart/create',cartData)
+        .then((resp)=>{
+          console.log(resp.data)
+        })
+        .catch((error) => {
+          console.error("Error adding item to cart:", error);
+          setErrorMessage("Item already in the cart.");
+        });
+        
+      }
+
+
 
   return (
     <div>
@@ -114,17 +159,19 @@ function SingleProduct() {
 
             <div className="d-flex mt-5">
               <div className="cart-inpt-div d-flex">
-                <button className="cart-inpt-div-btn1 bg-info">-</button>
-                <input type="text" className="cart-input" />
-                <button className="cart-inpt-div-btn2 bg-info">+</button>
+                <button className="cart-inpt-div-btn1 bg-info"onClick={() => decrement(shopItems?._id)}>-</button>
+                <input type="text" className="cart-input" value={clothQuantity[shopItems?._id] || 0}/>
+                <button className="cart-inpt-div-btn2 bg-info" onClick={() => increment(shopItems?._id)}>+</button>
               </div>
               <Button
                 variant="secondary"
                 className="cart-button2 bg-info border-0 rounded-0"
+                onClick={()=>addToCart()}
               >
                 Add to Cart
               </Button>{" "}
             </div>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
 
             <div className="d-flex  mt-5">
               <FiHeart className="wishlist-icon" />
