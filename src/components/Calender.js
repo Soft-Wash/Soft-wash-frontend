@@ -67,7 +67,7 @@ function Calender() {
             </Button>
           </div>
         </div>
-        {!startDate || !selectedTime ? <div className="color-red">please select date or time</div> : "" }
+        {/* {!startDate || !selectedTime ? <div className="color-red">please select date or time</div> : "" } */}
       </div>
     </Container>
   );

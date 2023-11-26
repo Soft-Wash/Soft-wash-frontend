@@ -50,10 +50,6 @@ const handleDeliveryOption = () => {
     }
 };
 
-
-
-
-
     return(
        <div>
             <ToastContainer position="top-center" />
