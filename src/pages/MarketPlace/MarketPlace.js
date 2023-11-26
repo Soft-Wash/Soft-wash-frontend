@@ -18,6 +18,9 @@ import { useEffect } from "react";
 import { axiosInstance } from "../../services/AxiosInstance";
 
 function MarketPlace() {
+  const [errorMessage, setErrorMessage] = useState(null);
+
+
 
   const [shopItems,setshopItems]=useState()
   useEffect(()=>{
@@ -28,6 +31,28 @@ function MarketPlace() {
 
     })
   },[])
+
+  const  addToCart=(item_id)=>{
+    const CustomerData = JSON.parse(localStorage.getItem('softwashLoginUser'))
+    const Customer_id = CustomerData._id
+
+    const cartData = {
+      product_id: item_id,
+      quantity:1,
+      customer_id:Customer_id
+    };
+
+    
+    axiosInstance.post('/cart/create',cartData)
+    .then((resp)=>{
+      console.log(resp.data)
+    })
+    .catch((error) => {
+      console.error("Error adding item to cart:", error);
+
+    });
+    
+  }
 
 
 
@@ -131,26 +156,30 @@ function MarketPlace() {
           {shopItems &&
             shopItems.map((item) => (
               <Col xs={12} sm={12} md={4} lg={4} xl={3} key={item.name}>
-                <Link to={`/singleproduct/${item._id}`}>
+
                   <Card
                     className="item-card border text-center mt-4"
                     style={{ height: "350px" }}
                   >
                     <FiHeart className="cart-icon02" />
                     <img src={item.img} className="item-image  mt-5" alt="" />
+                    <Link to={`/singleproduct/${item._id}`} className="sibglepagelink">
                     <h5 className="name-tag mt-1">{item.name}</h5>
+                    </Link>
                     <p className="price-tag fs-4 m-0"> &#8358; 4,650</p>
                     <div>
                       <Button
                         variant="secondary"
                         className="cart-button bg-info border-0 w-75 rounded-0"
+                        onClick={()=>addToCart(item._id)}
                       >
                         Add to Cart
                       </Button>{" "}
                     </div>
                   </Card>
-                </Link>
+
               </Col>
+              
             ))}
         </Row>
       </Container>
