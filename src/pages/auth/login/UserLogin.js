@@ -8,6 +8,8 @@ import { useState,useContext } from 'react';
 import{handleLogin} from '../../../services/Login'
 import { variableManager } from '../../../context/VariablesContext';
 import{Loader} from "../../../common/Loader"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
     const navigate = useNavigate();
@@ -38,21 +40,37 @@ export default function Login() {
           console.log(loginDetails)
         } else {
           setEmpty(true);
+          
         }
       }
-
+      // function handleValidation() {
+      //   const {  email, password } = loginDetails;
+      //   if ( !email && !password) {
+      //     toast.error("Incorrect Credentials")
+      //     setEmpty(true);
+      //   } else {
+      //     handleLoginSubmit(loginDetails);
+      //     console.log(loginDetails)
+          
+      //   }
+      // }
 
       async function handleLoginSubmit(payload){
         setLoading(true)
         const {data,error} = await handleLogin(payload);
         setLoading(false);
         if(data){
+          toast.success("Login Successful")
           navigate('/')
+        } else if(error){
+          toast.error("Incorrect Email Or Password");
         }
         console.log(data?data:error);
       }
   
     return (
+      <>
+      <ToastContainer position="top-center" />
       <div className="signup-container login-container">
         <div className="form-section">
           <div className="content">
@@ -158,6 +176,7 @@ export default function Login() {
         </div>
         <Loader color="primary" size="lg" show={loading} /> 
       </div>
+      </>
     );
   }
   
