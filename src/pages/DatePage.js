@@ -50,29 +50,6 @@ const handleDeliveryOption = () => {
     }
 };
 
-  
-//   const handleDeliveryDate = () => {
-//     const deliveryDate = DeliveryType().deliveryDate;
-
-//     if (!deliveryDate) {
-//         toast.error('Select Delivery Date & Time Continue');
-//     } else {
-//         navigate('/address');
-//     }
-// };
-
-// const handleDeliveryTime = () => {
-//     const deliveryTime = DeliveryType().deliveryTime;
-
-//     if (!deliveryTime) {
-//         toast.error('Select Delivery Date to Continue');
-//     } else {
-//         navigate('/address');
-//     }
-// };
-
-
-
     return(
        <div>
             <ToastContainer position="top-center" />
