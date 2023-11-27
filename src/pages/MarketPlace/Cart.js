@@ -12,6 +12,7 @@ function Cart() {
   const [cartItems, setcartItems] = useState([]);
   const [clothQuantity, setclothQuantity] = useState({});
   const [updatedCart, setupdatedCart] = useState();
+  const [totalprice,setTotalprice]=useState()
 
   const GetCartItems = () => {
     const CustomerData = JSON.parse(localStorage.getItem("softwashLoginUser"));
@@ -24,7 +25,6 @@ function Cart() {
         resp.data.forEach((item) => {
           initialQuantity[item.product_id._id] = item.quantity;
         });
-        console.log(resp.data);
         setclothQuantity(initialQuantity);
         setcartItems(resp.data);
       });
@@ -32,7 +32,7 @@ function Cart() {
 
   useEffect(() => {
     GetCartItems();
-  }, []);
+  }, [updatedCart]);
 
   const increment = (itemId) => {
     const updatedQuantity = { ...clothQuantity };
@@ -46,9 +46,10 @@ function Cart() {
       quantity: UpdatedQuantity,
     };
     axiosInstance.put(`/cart/${itemId}/update`, Quantity).then((resp) => {
-      console.log(resp.data);
       setupdatedCart(resp.data);
+
     });
+
   };
 
   const decrement = (itemId) => {
@@ -57,15 +58,15 @@ function Cart() {
     setclothQuantity(updatedQuantity);
     const updatedId = itemId;
     const UpdatedQuantity = updatedQuantity[itemId];
-
     const Quantity = {
       quantity: UpdatedQuantity,
     };
     axiosInstance.put(`/cart/${itemId}/update`, Quantity).then((resp) => {
-      console.log(resp.data);
       setupdatedCart(resp.data);
     });
+
   };
+
 
   const DeleteCartItem = (itemId) => {
     console.log(itemId);
@@ -81,6 +82,23 @@ function Cart() {
         console.error("Error deleting item from cart:", error);
       });
   };
+
+  const CalculateTotal = (cartItems) => {
+    const total = cartItems.reduce((accumulator, cartItem) => {
+      const price = cartItem.product_id.price || 0;
+      const itemTotal = cartItem.quantity * price;
+      return accumulator + itemTotal;
+    }, 0);
+    setTotalprice(total)
+    return total;
+
+  };
+  
+  
+useEffect(()=>{
+  const result = CalculateTotal(cartItems);
+},[cartItems])
+
 
   return (
     <div>
@@ -183,7 +201,7 @@ function Cart() {
             </form>
           </div>
           <div className="sub-total-div-inner2 col col-12 col-md-6 col-lg-6 ">
-            <h4>Subtotal:&#8358; 4,650.00</h4>
+            <h4>Subtotal:&#8358; {totalprice}</h4>
             <Button
               variant="secondary"
               className="checkout-button bg-info border-0"
