@@ -11,8 +11,9 @@ import axios from "axios";
 function Cart() {
   const [cartItems, setcartItems] = useState([]);
   const [clothQuantity, setclothQuantity] = useState({});
-  const [updatedCart, setupdatedCart] = useState();
+  const [updatedCart, setupdatedCart] = useState([]);
   const [totalprice,setTotalprice]=useState()
+  const Cart_Array = []
 
   const GetCartItems = () => {
     const CustomerData = JSON.parse(localStorage.getItem("softwashLoginUser"));
@@ -26,29 +27,49 @@ function Cart() {
           initialQuantity[item.product_id._id] = item.quantity;
         });
         setclothQuantity(initialQuantity);
+        console.log(resp.data)
         setcartItems(resp.data);
       });
   };
 
   useEffect(() => {
     GetCartItems();
-  }, [updatedCart]);
+  }, []);
 
   const increment = (itemId) => {
     const updatedQuantity = { ...clothQuantity };
     updatedQuantity[itemId] = (updatedQuantity[itemId] || 0) + 1;
     setclothQuantity(updatedQuantity);
-
-    const updatedId = itemId;
     const UpdatedQuantity = updatedQuantity[itemId];
 
     const Quantity = {
       quantity: UpdatedQuantity,
     };
-    axiosInstance.put(`/cart/${itemId}/update`, Quantity).then((resp) => {
-      setupdatedCart(resp.data);
+   
+    console.log(UpdatedQuantity)
+  
+    setcartItems((prevCartItems) => {
+      const updatedCartItems = prevCartItems.map((item) =>
+        item.product_id._id === itemId
+          ? { ...item, quantity: UpdatedQuantity } 
+          : item
+      );
+      console.log(updatedCartItems)
+  
+      setcartItems(updatedCartItems);
 
     });
+
+    console.log(cartItems)
+
+    setTimeout(()=>{
+  axiosInstance.put(`/cart/${itemId}/update`, Quantity).then((resp) => {     
+      console.log(resp.data)
+
+     });
+    },30000)
+
+  
 
   };
 
@@ -61,9 +82,29 @@ function Cart() {
     const Quantity = {
       quantity: UpdatedQuantity,
     };
-    axiosInstance.put(`/cart/${itemId}/update`, Quantity).then((resp) => {
-      setupdatedCart(resp.data);
+
+    setcartItems((prevCartItems) => {
+      const updatedCartItems = prevCartItems.map((item) =>
+        item.product_id._id === itemId
+          ? { ...item, quantity: UpdatedQuantity } 
+          : item
+      );
+      console.log(updatedCartItems)
+  
+      setcartItems(updatedCartItems);
+
     });
+
+    console.log(cartItems)
+
+    
+
+    setTimeout(()=>{
+      axiosInstance.put(`/cart/${itemId}/update`, Quantity).then((resp) => {     
+          console.log(resp.data)
+    
+         });
+        },30000)
 
   };
 
@@ -96,7 +137,9 @@ function Cart() {
   
   
 useEffect(()=>{
+
   const result = CalculateTotal(cartItems);
+
 },[cartItems])
 
 
