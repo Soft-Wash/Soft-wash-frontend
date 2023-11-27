@@ -135,7 +135,7 @@ useEffect(() => {
     
   if (!paymentType || Object.keys(paymentType).length === 0) {
     // alert('Select payment type before confirming the order.');
-    toast.error('Select payment Option')
+    toast.error('Select Payment Method')
     
     return; // Return early if payment type is not selecte
 
