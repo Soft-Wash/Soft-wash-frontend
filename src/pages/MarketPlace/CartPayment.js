@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { axiosInstance } from "../../services/AxiosInstance";
 
 function CartPayment() {
   const [selectedTime, setSelectedTime] = useState();
@@ -27,7 +28,8 @@ function CartPayment() {
   const [discount, setDiscount] = useState();
   const [tax, setTax] = useState();
   const [total, setTotal] = useState();
-  function calcSubTotal(arr) {
+  const [cartItems,setcartItems]=useState()
+  function calcSubTotal() {
     const cartTotal = JSON.parse(localStorage.getItem('cartTotal'))
     
     let sub_total = 0;
@@ -43,9 +45,19 @@ function CartPayment() {
   }
 
   useEffect(() => {
-    // Calculate sub total
-    calcSubTotal(JSON.parse(localStorage.getItem("softCart")));
+    calcSubTotal();
+    const customer_id = localStorage.getItem("softwashLoginUser");
+    const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
+    console.log(parsedCustomerData._id)
+    axiosInstance
+      .get(`/cart/customer?customer_id=${parsedCustomerData._id}`)
+      .then((resp) => {
+        console.log(resp.data)
+        setcartItems(resp.data);
+      });
   }, []);
+
+  
 
   function handlePaymentPage(e) {
     const value =
@@ -55,10 +67,7 @@ function CartPayment() {
         ? e.target.file[0]
         : e.target.value;
 
-    setpaymentMethod((prevPaymentMethod) => ({
-      ...prevPaymentMethod,
-      [e.target.name]: value,
-    }));
+    setpaymentMethod({[e.target.name]: value});
   }
 
   useEffect(() => {
@@ -66,23 +75,26 @@ function CartPayment() {
     console.log(paymentMethod); // This will log the updated paymentMethod
   }, [paymentMethod]);
 
+
+
   const postOrder = () => {
-    const deliveryType = JSON.parse(localStorage.getItem("deliveryType"));
-    const key = Object.keys(deliveryType);
-    const stringDeliveryType = key.join("");
 
     const paymentType = JSON.parse(localStorage.getItem("paymentType"));
-    console.log(paymentType);
-
-    if (!paymentType || Object.keys(paymentType).length === 0) {
+    if (!paymentType) {
       // alert('Select payment type before confirming the order.');
       toast.error("Select Payment Method");
+      console.log(paymentMethod)
 
       return; // Return early if payment type is not selecte
     }
-
     const paymentkey = Object.keys(paymentType);
     const stringPaymentType = paymentkey.join("");
+    console.log(stringPaymentType)
+    // const OrderDetails = {
+    //   customer_id:parsedCustomerData._id,
+    //   cart_ids:
+    // }
+
   };
 
   return (
