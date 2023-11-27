@@ -29,6 +29,7 @@ function CartPayment() {
   const [tax, setTax] = useState();
   const [total, setTotal] = useState();
   const [cartItems,setcartItems]=useState()
+  // const []
   function calcSubTotal() {
     const cartTotal = JSON.parse(localStorage.getItem('cartTotal'))
     
@@ -81,11 +82,10 @@ function CartPayment() {
 
     const paymentType = JSON.parse(localStorage.getItem("paymentType"));
     if (!paymentType) {
-      // alert('Select payment type before confirming the order.');
       toast.error("Select Payment Method");
       console.log(paymentMethod)
 
-      return; // Return early if payment type is not selecte
+      return; 
     }
     const paymentkey = Object.keys(paymentType);
     const stringPaymentType = paymentkey.join("");
