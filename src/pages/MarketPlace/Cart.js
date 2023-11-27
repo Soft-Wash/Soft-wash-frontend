@@ -131,16 +131,22 @@ function Cart() {
       return accumulator + itemTotal;
     }, 0);
     setTotalprice(total)
+localStorage.setItem('cartTotal',JSON.stringify(total))
     return total;
 
   };
   
   
 useEffect(()=>{
-
   const result = CalculateTotal(cartItems);
-
 },[cartItems])
+
+// const UpdatedTotal=(cartId)=>{
+//   axiosInstance.put(`/cart/${cartId}/cartitem/update`, totalprice).then((resp) => {     
+//     console.log(resp.data)
+
+//    });
+// }
 
 
   return (

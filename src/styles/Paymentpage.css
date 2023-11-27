@@ -16,36 +16,6 @@ body {
     margin-left: 20px;
 }
 
-/* =======   EMIX BANNER ================ */
-/* .PaymentBanner{
-    background-image: url("./assets/images/banerfinal4.png");
-    background-size:70%;
-    background-position-x:95%;
-    background-repeat: no-repeat;
-    background-position-y:53%;
-    height: 350px;
-    background-color: #409CF6;
-    margin-left: 10px;
-    margin-right: 10px;
-} */
-
-/* .BannPix{
-    width: 400px;
-    height:600px;
-} */
-
-/* .BannerText{
-    padding-top: 250px;
-    color:black;
-} */
-
-/* .GreyBorder{
-    border: 1px solid rgba(184, 181, 181, 0.5);
-    margin-top: 30px;
-    box-shadow: 0 0 5px rgba(219, 214, 214, 0.5);
-} */
-
-/*========== PAYMENT PAGE ========*/
 
 .GreyBorderB{
     border-bottom: 1px solid rgba(184, 181, 181, 0.5);
@@ -168,9 +138,6 @@ body {
     /* height: 35px; */
 }
 
-/* @media (max-width:1800){
-
-} */
 @media (max-width: 1800px){
     .PrevNextBtnRight{
       display:none

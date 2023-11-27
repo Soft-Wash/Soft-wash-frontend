@@ -41,6 +41,7 @@ import Supervisor from "./pages/Admin/Supervisor";
 import Washman from "./pages/Admin/Washman";
 import Register from "./pages/Admin/RegisterEmployee"
 import Iventry from "./pages/Admin/Iventry";
+import CartPayment from "./pages/MarketPlace/CartPayment";
  
 
 
@@ -74,6 +75,7 @@ function App() {
         <Route path="/my-orders" element={<Orders/>}/>
         <Route path="/order-receipt/:orderId" element={<OrderReceipt/>}/>
         <Route path="/iventry" element={<Iventry/>}/>
+        <Route path="/cartpayment" element={<CartPayment/>}/>
 
         {/* Front desk */}
           <Route path="/frontdesk" element={<Login/>} />
