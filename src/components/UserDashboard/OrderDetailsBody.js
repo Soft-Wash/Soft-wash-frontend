@@ -72,9 +72,9 @@ axiosInstance.get(`/order/${orderId}/order`)
                             <div className="cart-item">
                             <div className="d-flex justify-content-between">
                                 <h5>{item.name}</h5>
-                                <h5>N{orderdetails.subtotal}</h5>
+                                <h5>N{item.price}</h5>
                             </div>
-                            <p>{`2 x N${item.price} / per piece`}</p>
+                            <p>{`2 x N${item?.price} / per piece`}</p>
                         </div>
                             ))}
 
@@ -95,7 +95,7 @@ axiosInstance.get(`/order/${orderId}/order`)
                 </div>
                 <div className='order-field'>
                     <h3>Total</h3>
-                    <p>N16,500</p>
+                    <p>N{orderdetails?.subtotal}</p>
                 </div>
                 <Col lg={12} md={6} sm={10} className="text-center position-relative">
                     

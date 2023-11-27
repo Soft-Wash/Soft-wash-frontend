@@ -69,12 +69,17 @@ function PaymentPage() {
       const [total, setTotal] = useState()
       function calcSubTotal(arr){
           let sub_total = 0;
+          let deliveryFee = 1500
           arr?.map((item) => {
               let item_price = parseInt(item.price) * item.quantity
               sub_total += item_price
+              const total =sub_total + deliveryFee 
+              setTotal(total)
+              console.log(total)
           })
           setSubtotal(sub_total)
           console.log(sub_total)
+      
       }
 
   useEffect(() => {
@@ -84,23 +89,6 @@ function PaymentPage() {
      calcSubTotal(JSON.parse(localStorage.getItem('softCart')))
   }, []);
 
-
-// function handlePaymentPage(e){
-//   const value =
-//   e.target.type === "checkbox"
-//   ? e.target.checked
-//   : e.target.type === "file" 
-//   ? e.target.file[0]
-//   : e.target.value
-//   setpaymentMethod({[e.target.name]:value })
-
-
-//   console.log(paymentMethod)
-// }
-
-// useEffect(()=>{
-//   localStorage.setItem("paymentType", JSON.stringify(paymentMethod));
-// },[paymentMethod])
 
 function handlePaymentPage(e) {
   const value =
@@ -146,7 +134,7 @@ useEffect(() => {
 
     
     orderDetails = {
-      subtotal: 20000,
+      subtotal: total,
       delivery_type: stringDeliveryType,
       payment_method:stringPaymentType
     };

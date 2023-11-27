@@ -51,7 +51,8 @@ export default function Orders() {
         <div>
           <Sidebar />
         </div>
-        <Container className="myorders-container m-5 ms-5 vh-100">
+        <div></div>
+        <Container className="myorders-container m-5 ms-5">
           <div className="mx-0 mb-4 w-75 d-flex justify-content-between">
             <div>
               <h4>My Orders</h4>

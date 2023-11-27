@@ -91,3 +91,8 @@
     text-decoration: none;
 
 }
+
+.myorders-container{
+    overflow: scroll;
+    height: 100vh;
+}
