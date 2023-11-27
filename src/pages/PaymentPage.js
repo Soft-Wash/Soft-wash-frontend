@@ -98,10 +98,9 @@ function handlePaymentPage(e) {
       ? e.target.file[0]
       : e.target.value;
 
-  setpaymentMethod((prevPaymentMethod) => ({
-    ...prevPaymentMethod,
+  setpaymentMethod ({
     [e.target.name]: value,
-  }));
+  });
 }
 
 useEffect(() => {
@@ -121,7 +120,7 @@ useEffect(() => {
     console.log(paymentType)
 
     
-  if (!paymentType || Object.keys(paymentType).length === 0) {
+  if (!paymentType) {
     // alert('Select payment type before confirming the order.');
     toast.error('Select Payment Method')
     
