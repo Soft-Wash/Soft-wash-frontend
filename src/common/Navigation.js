@@ -63,14 +63,13 @@ function Navigation() {
                 Pricing
               </NavLink>
             </Nav.Link>
-            <Nav.Link target="_blank">
-              <NavLink
+            <Nav.Link>
+              <Link
                 className="howitworks-link"
-                to="/marketplace"
-                target="_blank"
+                to="/shop"
               >
                 Shop
-              </NavLink>
+              </Link>
             </Nav.Link>
             {userLoggedIn ? (
               <NavDropdown title="Activities" id="navbarScrollingDropdown">

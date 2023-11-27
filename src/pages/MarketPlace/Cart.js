@@ -3,7 +3,6 @@ import Navigation from "../../common/MarketPlaceNavbar/Navigation";
 import { Link } from "react-router-dom";
 import "../../styles/Cart.css";
 import Button from "react-bootstrap/Button";
-import itemImg from "../../assets/MarketPlace/Images/1509621985884_sptows2785_ariel_original_perfume_detergent_powder_1_kg_1024x1024.jpg";
 import Footer from "../../common/Footer";
 import { axiosInstance } from "../../services/AxiosInstance";
 import { useEffect, useState } from "react";
@@ -11,7 +10,9 @@ import axios from "axios";
 
 function Cart() {
   const [cartItems, setcartItems] = useState([]);
-  const [clothQuantity,setclothQuantity]=useState({})
+  const [clothQuantity, setclothQuantity] = useState({});
+  const [updatedCart, setupdatedCart] = useState();
+  const [totalprice,setTotalprice]=useState()
 
   const GetCartItems = () => {
     const CustomerData = JSON.parse(localStorage.getItem("softwashLoginUser"));
@@ -20,58 +21,84 @@ function Cart() {
     axiosInstance
       .get(`/cart/customer?customer_id=${Customer_id}`)
       .then((resp) => {
-      
-
         const initialQuantity = {};
-        resp.data.forEach((item)=> {
-          initialQuantity[item.product_id._id]=item.quantity
-        })
-        console.log(resp.data);
-        setclothQuantity(initialQuantity)
+        resp.data.forEach((item) => {
+          initialQuantity[item.product_id._id] = item.quantity;
+        });
+        setclothQuantity(initialQuantity);
         setcartItems(resp.data);
       });
   };
 
   useEffect(() => {
     GetCartItems();
-  }, []);
+  }, [updatedCart]);
 
-  const increment=(itemId)=>{
-    const updatedQuantity = {...clothQuantity}
-    updatedQuantity[itemId]= (updatedQuantity[itemId] || 0)+1
-    setclothQuantity(updatedQuantity)
-    const Quantity={
-      quantity:updatedQuantity
-    }
-    console.log(Quantity)
-    // axiosInstance.put(`/cart/${itemId}/update`,Quantity)
-    // .then((resp)=>{
-    //   console.log(resp.data)
-    // })
-  }
+  const increment = (itemId) => {
+    const updatedQuantity = { ...clothQuantity };
+    updatedQuantity[itemId] = (updatedQuantity[itemId] || 0) + 1;
+    setclothQuantity(updatedQuantity);
+
+    const updatedId = itemId;
+    const UpdatedQuantity = updatedQuantity[itemId];
+
+    const Quantity = {
+      quantity: UpdatedQuantity,
+    };
+    axiosInstance.put(`/cart/${itemId}/update`, Quantity).then((resp) => {
+      setupdatedCart(resp.data);
+
+    });
+
+  };
+
+  const decrement = (itemId) => {
+    const updatedQuantity = { ...clothQuantity };
+    updatedQuantity[itemId] = Math.max((updatedQuantity[itemId] || 0) - 1, 0);
+    setclothQuantity(updatedQuantity);
+    const updatedId = itemId;
+    const UpdatedQuantity = updatedQuantity[itemId];
+    const Quantity = {
+      quantity: UpdatedQuantity,
+    };
+    axiosInstance.put(`/cart/${itemId}/update`, Quantity).then((resp) => {
+      setupdatedCart(resp.data);
+    });
+
+  };
 
 
-const decrement =(itemId)=>{
-  const updatedQuantity={...clothQuantity}
-  updatedQuantity[itemId]=Math.max((updatedQuantity[itemId]||0)-1,0)
-  setclothQuantity(updatedQuantity)
-}
+  const DeleteCartItem = (itemId) => {
+    console.log(itemId);
+    axios
+      .delete(`${process.env.REACT_APP_BASE_URL}/cart/${itemId}/delete`)
+      .then((resp) => {
+        console.log(resp.data);
+        setcartItems((prevItems) =>
+          prevItems.filter((item) => item._id !== itemId)
+        );
+      })
+      .catch((error) => {
+        console.error("Error deleting item from cart:", error);
+      });
+  };
 
+  const CalculateTotal = (cartItems) => {
+    const total = cartItems.reduce((accumulator, cartItem) => {
+      const price = cartItem.product_id.price || 0;
+      const itemTotal = cartItem.quantity * price;
+      return accumulator + itemTotal;
+    }, 0);
+    setTotalprice(total)
+    return total;
 
-const DeleteCartItem=(itemId)=>{
-  console.log(itemId)
-  axios.delete(`${process.env.REACT_APP_BASE_URL}/cart/${itemId}/delete`)
-  .then((resp)=>{
-    console.log(resp.data)
-    setcartItems((prevItems) =>
-    prevItems.filter((item) => item._id !== itemId)
-  );
-  })
-  .catch((error)=>{
-    console.error("Error deleting item from cart:", error);
-  })
-}
+  };
   
+  
+useEffect(()=>{
+  const result = CalculateTotal(cartItems);
+},[cartItems])
+
 
   return (
     <div>
@@ -79,7 +106,9 @@ const DeleteCartItem=(itemId)=>{
       <Container className="cart-container mt-5">
         <h3>Shopping Cart</h3>
         <p className="mt-4">
-          <Link to="/shop" className="continue-shopping">Continue Shopping</Link>
+          <Link to="/shop" className="continue-shopping">
+            Continue Shopping
+          </Link>
         </p>
         <div className="cart-description-div row">
           <div className="col">
@@ -93,14 +122,17 @@ const DeleteCartItem=(itemId)=>{
           </div>
         </div>
         {cartItems &&
-          cartItems.map((item,index) => (
+          cartItems.map((item, index) => (
             <div key={index}>
               <hr className="lin01" />
               <div className="items-div d-flex row">
                 <div className="d-flex col">
-                  <img src={item.product_id.img} className="cart-item-img" alt="" />
+                  <img
+                    src={item.product_id.img}
+                    className="cart-item-img"
+                    alt=""
+                  />
                   <h6 className="item-name">
-                   
                     <span className="mobile-totalprice">
                       {" "}
                       <p>&#8358; {item.product_id.price}</p>
@@ -108,17 +140,47 @@ const DeleteCartItem=(itemId)=>{
                   </h6>
                 </div>
                 <div className="price-quantity-div d-flex col">
-                  <p className="current-price fw-bold">&#8358; {item.product_id.price}</p>
+                  <p className="current-price fw-bold">
+                    &#8358; {item.product_id.price}
+                  </p>
                   <div className="price-quantity-div-inner">
                     <div className="cart-inpt-div d-flex">
-                      <button className="cart-inpt-div-btn1 bg-info" onClick={()=>decrement(item.product_id._id)}>-</button>
-                      <input type="text" className="cart-input" value={clothQuantity[item.product_id._id] || item.quantity}/>
-                      <button className="cart-inpt-div-btn2 bg-info" onClick={()=>increment(item.product_id._id)}>+</button>
+                      <button
+                        className="cart-inpt-div-btn1 bg-info"
+                        onClick={() => decrement(item.product_id._id)}
+                      >
+                        -
+                      </button>
+                      <input
+                        type="text"
+                        className="cart-input"
+                        value={
+                          clothQuantity[item.product_id._id] || item.quantity
+                        }
+                      />
+                      <button
+                        className="cart-inpt-div-btn2 bg-info"
+                        onClick={() => increment(item.product_id._id)}
+                      >
+                        +
+                      </button>
                     </div>
-                    <p className="remove-cart" onClick={()=>DeleteCartItem(item._id)}>Remove</p>
+                    <p
+                      className="remove-cart"
+                      onClick={() => DeleteCartItem(item._id)}
+                    >
+                      Remove
+                    </p>
                   </div>
-                  <p className="total-price fw-bold">&#8358; {item.product_id.price}</p>
-                  <p className="remove2-cart" onClick={()=>DeleteCartItem(item._id)}>Remove</p>
+                  <p className="total-price fw-bold">
+                    &#8358; {item.product_id.price}
+                  </p>
+                  <p
+                    className="remove2-cart"
+                    onClick={() => DeleteCartItem(item._id)}
+                  >
+                    Remove
+                  </p>
                 </div>
               </div>
             </div>
@@ -139,7 +201,7 @@ const DeleteCartItem=(itemId)=>{
             </form>
           </div>
           <div className="sub-total-div-inner2 col col-12 col-md-6 col-lg-6 ">
-            <h4>Subtotal:&#8358; 4,650.00</h4>
+            <h4>Subtotal:&#8358; {totalprice}</h4>
             <Button
               variant="secondary"
               className="checkout-button bg-info border-0"

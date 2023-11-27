@@ -45,8 +45,11 @@ function Navigation(){
                     Print Invoice
                   </NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link href="#">
+                <Nav.Link to="/cart">
+                  <Link to="/cart" className="color-dark-link">
                   <FiShoppingCart className="fs-4 " />
+                  </Link>
+
                 </Nav.Link>
               </Nav>
               <Form className="d-flex">
