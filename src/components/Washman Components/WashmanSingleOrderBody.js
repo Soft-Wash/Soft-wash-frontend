@@ -17,7 +17,6 @@ function WashmanSingleOrderBody() {
 
   const [selectedOption, setSelectedOption] = useState("Order Placed");
   const [order, setOrder] = useState(null);
-  const [orderPlaced, setOrderPlaced] = useState();
   const [indexFound, setIndexFound] = useState(0);
 
   const { _id } = useParams();
@@ -37,7 +36,6 @@ function WashmanSingleOrderBody() {
       .get(`${process.env.REACT_APP_BASE_URL}/order/${_id}/order`)
       .then((resp) => {
         console.log(resp);
-        // console.log(resp.data.status);
         setOrder(resp.data);
         setIndexFound(orderStatusArray.indexOf(resp.data.status));
         console.log(orderStatusArray.indexOf(resp.data.status));
@@ -62,7 +60,6 @@ function WashmanSingleOrderBody() {
           console.log(resp.data);
 					setIndexFound(orderStatusArray.indexOf(selectedOption));
           localStorage.setItem("orderProgress", progress);
-          setOrderPlaced(resp.data);
         });
   
   };
@@ -124,7 +121,7 @@ function WashmanSingleOrderBody() {
                 indexFound >= index ? "progress_bar_active" : null
               }`}
             ></div>
-            <p>{status}</p>
+            <p className="status-description">{status}</p>
           </div>
         ))}
       </div>

@@ -11,6 +11,8 @@
     margin: 20px auto;
     display: flex;
     height: auto;
+    background: none;
+    
   }
   .progress_content {
     width: 100%;
@@ -51,6 +53,10 @@
 
   .progress-fill{
     background: green;
+  }
+
+  .status-description{
+    font-weight: bold;
   }
 
   
