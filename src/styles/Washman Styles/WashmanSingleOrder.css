@@ -52,7 +52,7 @@
     width: 50px;
     z-index: 3;
     position: absolute;
-    right: 510px;
+    right: 522px;
     background-color: white;
     display: flex;
     align-items: center;
@@ -65,7 +65,7 @@
     width: 50px;
     z-index: 3;
     position: absolute;
-    right: 410px;
+    right: 427px;
     background-color: white;
     display: flex;
     align-items: center;
@@ -78,7 +78,7 @@
     width: 50px;
     z-index: 3;
     position: absolute;
-    right: 310px;
+    right: 331px;
     background-color: white;
     display: flex;
     align-items: center;
@@ -92,7 +92,7 @@
     width: 50px;
     z-index: 3;
     position: absolute;
-    right: 210px;
+    right: 236px;
     background-color: white;
     display: flex;
     align-items: center;
@@ -106,7 +106,7 @@
     width: 50px;
     z-index: 3;
     position: absolute;
-    right: 110px;
+    right: 141px;
     background-color: white;
     display: flex;
     align-items: center;
@@ -120,16 +120,17 @@
     width: 50px;
     z-index: 3;
     position: absolute;
-    right: 0px;
+    right: 45px;
     background-color: white;
     display: flex;
     align-items: center;
 }
 
-
-
-
 .progress-bar{
     height: 5px;
-    width: 100%;
+    width: 93%;
+}
+
+.progress-bar{
+    border: grey;
 }

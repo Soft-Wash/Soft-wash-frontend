@@ -29,7 +29,7 @@ function WashmanSingleOrderBody() {
   }, []);
 
   const handleButtonClick = () => {
-    setProgress((prevProgress) => Math.min(prevProgress + 14.29, 100));
+    setProgress((prevProgress) => Math.min(prevProgress + 14.29, 100.03));
   };
 
   const handleSeleectChange = async (e) => {
@@ -137,137 +137,6 @@ function WashmanSingleOrderBody() {
         >
           Update Order
         </Button>
-        {/* <div className="progressBar  position-relative">
-					<Col lg={12} md={6} sm={10} className="text-center">
-						<Row classname="w-100 align-centre">
-							<Container className="containerOfCircles d-flex gap-5 mt-4 position-absolute">
-								<div className="order-progress-circle">
-									<Col
-										className={`duration-500 border border-4  ${
-											progress >= 14.29 ? "border-info" : null
-										}  text-center rounded-circle  bg-white size-sm-30px`}
-										style={{ height: "50px", width: "50px",  }}
-									>
-										{progress >= 14.29 && (
-											<p className="  fw-semibold fs-4 text-secondary mt-sm">
-												<FaCheck className="progress-bar-ckeck" />
-											</p>
-										)}
-									</Col>
-									<h6>ORDER PLACED</h6>
-								</div>
-
-								<div className="order-progress-circle2">
-									<Col
-										className={`duration-500 border border-4 ${
-											progress > 28.58 ? "border-info" : null
-										}  text-center rounded-circle bg-white size-sm-30px`}
-										style={{ height: "50px", width: "50px" }}
-									>
-										{progress >= 28.58 && (
-											<p className="  fw-semibold fs-4 text-secondary mt-sm">
-												<FaCheck className="progress-bar-ckeck" />
-											</p>
-										)}
-									</Col>
-									<h6>CONFIRMED</h6>
-								</div>
-
-								<div className="order-progress-circle3">
-									<Col
-										className={`duration-500 border border-4 ${
-											progress > 42.87 ? "border-info" : null
-										}  text-center rounded-circle bg-white size-sm-30px`}
-										style={{ height: "50px", width: "50px" }}
-									>
-										{progress >= 42.87 && (
-											<p className="  fw-semibold fs-4 text-secondary mt-sm">
-												<FaCheck className="progress-bar-ckeck" />
-											</p>
-										)}
-									</Col>
-									<h6>RECIEVED</h6>
-								</div>
-
-								<div className="order-progress-circle">
-									<Col
-										className={`duration-500 border border-4 ${
-											progress > 57.16 ? "border-info" : null
-										}  text-center rounded-circle bg-white size-sm-30px`}
-										style={{ height: "50px", width: "50px" }}
-									>
-										{progress >= 57.16 && (
-											<p className="  fw-semibold fs-4 text-secondary mt-sm">
-												<FaCheck className="progress-bar-ckeck" />
-											</p>
-										)}
-									</Col>
-									<h6>CLEANING</h6>
-								</div>
-
-								<div className="order-progress-circle">
-									<Col
-										className={`duration-500 border border-4 ${
-											progress > 71.45 ? "border-info" : null
-										}  text-center rounded-circle bg-white size-sm-30px`}
-										style={{ height: "50px", width: "50px" }}
-									>
-										{progress >= 71.45 && (
-											<p className="  fw-semibold fs-4 text-secondary mt-sm">
-												<FaCheck className="progress-bar-ckeck" />
-											</p>
-										)}
-									</Col>
-									<h6>READY</h6>
-								</div>
-
-								<div className="order-progress-circle">
-									<Col
-										className={`duration-500 border border-4 ${
-											progress > 85.74 ? "border-info" : null
-										}  text-center rounded-circle bg-white size-sm-30px`}
-										style={{ height: "50px", width: "50px" }}
-									>
-										{progress >= 85.74 && (
-											<p className="  fw-semibold fs-4 text-secondary mt-sm">
-												<FaCheck className="progress-bar-ckeck" />
-											</p>
-										)}
-									</Col>
-									<h6>SHIPPED</h6>
-								</div>
-
-								<div className="order-progress-circle">
-									<Col
-										className={`duration-500 border border-4 ${
-											progress > 100.03 ? "border-info" : null
-										}  text-center rounded-circle bg-white size-sm-30px`}
-										style={{ height: "50px", width: "50px" }}
-									>
-										{progress >= 100.03 && (
-											<p className="  fw-semibold fs-4 text-secondary mt-sm">
-												<FaCheck className="progress-bar-ckeck" />
-											</p>
-										)}
-									</Col>
-									<h6>DELIVERED</h6>
-								</div>
-							</Container>
-
-							<Col
-								className="px-4 position-absolute"
-								style={{ top: "50px", zIndex: "3" }}
-							>
-								<ProgressBar
-									now={progress}
-									variant="info"
-									className=" duration-300"
-									style={{ height: "2px" }}
-								/>
-							</Col>
-						</Row>
-					</Col>
-				</div> */}
         <div className="progress-status-div">
 				<Col className="progress-bar-col">
             <ProgressBar now={progress} variant="info" className="progress-bar" />
@@ -275,14 +144,26 @@ function WashmanSingleOrderBody() {
           <Container className="progress-status-div-container">
             <Row className="progress-status-div-row">
               <div className={`progress-status-div-cirle1 ${progress >= 14.29 ? "border-info" : null}`}>
-							<FaCheck className="progress-bar-ckeck" />
+							{progress>= 14.29 && (<FaCheck className="progress-bar-ckeck" />)}
 							</div>
-							<div className={`progress-status-div-cirle2 ${progress >= 28.58 ? "border-info" : null}`}></div>
-              <div className={`progress-status-div-cirle3 ${progress >= 42.87 ? "border-info" : null}`}></div>
-							<div className={`progress-status-div-cirle4 ${progress >= 57.16 ? "border-info" : null}`}></div>
-              <div className={`progress-status-div-cirle5 ${progress >= 71.54 ? "border-info" : null}`}></div>
-							<div className={`progress-status-div-cirle6 ${progress >= 85.74 ? "border-info" : null}`}></div>
-              <div className={`progress-status-div-cirle7 ${progress >= 100.03 ? "border-info" : null}`}></div>
+							<div className={`progress-status-div-cirle2 ${progress >= 28.58 ? "border-info" : null}`}>
+							{progress>= 28.58 && (<FaCheck className="progress-bar-ckeck" />)}
+							</div>
+              <div className={`progress-status-div-cirle3 ${progress >= 42.87 ? "border-info" : null}`}>
+							{progress>= 42.87 && (<FaCheck className="progress-bar-ckeck" />)}
+							</div>
+							<div className={`progress-status-div-cirle4 ${progress >= 57.16 ? "border-info" : null}`}>
+							{progress>=  57.16 && (<FaCheck className="progress-bar-ckeck" />)}
+							</div>
+              <div className={`progress-status-div-cirle5 ${progress >= 71.45 ? "border-info" : null}`}>
+							{progress>=  71.45 && (<FaCheck className="progress-bar-ckeck" />)}
+							</div>
+							<div className={`progress-status-div-cirle6 ${progress >= 85.74 ? "border-info" : null}`}>
+							{progress>=  85.74 && (<FaCheck className="progress-bar-ckeck" />)}
+							</div>
+              <div className={`progress-status-div-cirle7 ${progress >= 100.03 ? "border-info" : null}`}>
+							{progress>=  100.03 && (<FaCheck className="progress-bar-ckeck" />)}
+							</div>
 
             </Row>
           </Container>
