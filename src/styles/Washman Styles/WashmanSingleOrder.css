@@ -6,131 +6,51 @@
     background-color: white;
 }
 
-
-
-.progress-status-div{
-    margin-top: 50px;
-}
-
-
-
-.progress-bar-col{
+.progress {
+    width: 70%;
+    margin: 20px auto;
+    display: flex;
+    height: auto;
+  }
+  .progress_content {
+    width: 100%;
+    display: grid;
     position: relative;
-    z-index: 1;
-    top: 47px;
-}
-
-.progress-status-div-row{
-    justify-content: space-between;
-    position: relative;
-    top: 20px;
-
-}
-
-.progress-bar-ckeck{
-    font-size: 25px;
-    
-}
-
-.progress-status-div-cirle1{
-    border: 3px solid rgb(207, 207, 207);
-    border-radius: 100%;
-    height: 50px;
+  }
+  .progress_circle {
     width: 50px;
-    z-index: 3;
-    position: absolute;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid green;
     background-color: white;
     display: flex;
+    justify-content: center;
     align-items: center;
-    
-}
-
-.progress-status-div-cirle2{
-    border: 3px solid rgb(207, 207, 207);
-    border-radius: 100%;
-    height: 50px;
-    width: 50px;
-    z-index: 3;
-    position: absolute;
-    right: 522px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-}
-
-.progress-status-div-cirle3{
-    border: 3px solid rgb(207, 207, 207);
-    border-radius: 100%;
-    height: 50px;
-    width: 50px;
-    z-index: 3;
-    position: absolute;
-    right: 427px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-}
-
-.progress-status-div-cirle4{
-    border: 3px solid rgb(207, 207, 207);
-    border-radius: 100%;
-    height: 50px;
-    width: 50px;
-    z-index: 3;
-    position: absolute;
-    right: 331px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-}
-
-
-.progress-status-div-cirle5{
-    border: 3px solid rgb(207, 207, 207);
-    border-radius: 100%;
-    height: 50px;
-    width: 50px;
-    z-index: 3;
-    position: absolute;
-    right: 236px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-}
-
-
-.progress-status-div-cirle6{
-    border: 3px solid rgb(207, 207, 207);
-    border-radius: 100%;
-    height: 50px;
-    width: 50px;
-    z-index: 3;
-    position: absolute;
-    right: 141px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-}
-
-
-.progress-status-div-cirle7{
-    border: 3px solid rgb(207, 207, 207);
-    border-radius: 100%;
-    height: 50px;
-    width: 50px;
-    z-index: 3;
-    position: absolute;
-    right: 45px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-}
-
-.progress-bar{
+  }
+  .progress_content:not(:last-child) .progress_bar {
     height: 5px;
-    width: 93%;
-}
+    width: 51%;
+    background-color: #dedede;
+    position: absolute ;
+    top: 30%;
+    right: 0;
+  }
+  .progress_circle.active {
+    background-color: green;
+    border: 1px solid green;
+  }
+  .progress_bar_active {
+    background: green !important;
+  }
 
-.progress-bar{
-    border: grey;
-}
+  .progress-ckeck{
+    font-size: 25px;
+    color: white;
+
+  }
+
+  .progress-fill{
+    background: green;
+  }
+
+  

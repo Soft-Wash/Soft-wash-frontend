@@ -40,63 +40,79 @@ function WashmanSingleOrderBody() {
       axios
         .put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
           status: selectedOption,
+					branch_id:"655debc4ec7b0b6e0f591bf7"
         })
         .then((resp) => {
           console.log(resp);
+					handleButtonClick()
         });
+		
     } else if (selectedOption === "Confirmed") {
       console.log(selectedOption);
       axios
         .put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
           status: selectedOption,
+					branch_id:"655debc4ec7b0b6e0f591bf7"
         })
         .then((resp) => {
           console.log(resp);
+					handleButtonClick()
         });
+
     } else if (selectedOption === "Recieved") {
       console.log(selectedOption);
       axios
         .put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
           status: selectedOption,
+					branch_id:"655debc4ec7b0b6e0f591bf7"
         })
         .then((resp) => {
           console.log(resp);
+					handleButtonClick()
         });
     } else if (selectedOption === "Cleaning") {
       console.log(selectedOption);
       axios
         .put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
           status: selectedOption,
+					branch_id:"655debc4ec7b0b6e0f591bf7"
         })
         .then((resp) => {
           console.log(resp);
+					handleButtonClick()
         });
     } else if (selectedOption === "Ready") {
       console.log(selectedOption);
       axios
         .put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
           status: selectedOption,
+					branch_id:"655debc4ec7b0b6e0f591bf7"
         })
         .then((resp) => {
           console.log(resp);
+					handleButtonClick()
         });
     } else if (selectedOption === "Shipped") {
       console.log(selectedOption);
       axios
         .put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
           status: selectedOption,
+					branch_id:"655debc4ec7b0b6e0f591bf7"
         })
         .then((resp) => {
           console.log(resp);
+					handleButtonClick()
         });
     } else if (selectedOption === "Delivered") {
       console.log(selectedOption);
       axios
         .put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
           status: selectedOption,
+					branch_id:"655debc4ec7b0b6e0f591bf7"
         })
         .then((resp) => {
           console.log(resp);
+					handleButtonClick()
         });
     }
   };
@@ -137,39 +153,61 @@ function WashmanSingleOrderBody() {
         >
           Update Order
         </Button>
-        <div className="progress-status-div">
-				<Col className="progress-bar-col">
-            <ProgressBar now={progress} variant="info" className="progress-bar" />
-          </Col>
-          <Container className="progress-status-div-container">
-            <Row className="progress-status-div-row">
-              <div className={`progress-status-div-cirle1 ${progress >= 14.29 ? "border-info" : null}`}>
-							{progress>= 14.29 && (<FaCheck className="progress-bar-ckeck" />)}
-							</div>
-							<div className={`progress-status-div-cirle2 ${progress >= 28.58 ? "border-info" : null}`}>
-							{progress>= 28.58 && (<FaCheck className="progress-bar-ckeck" />)}
-							</div>
-              <div className={`progress-status-div-cirle3 ${progress >= 42.87 ? "border-info" : null}`}>
-							{progress>= 42.87 && (<FaCheck className="progress-bar-ckeck" />)}
-							</div>
-							<div className={`progress-status-div-cirle4 ${progress >= 57.16 ? "border-info" : null}`}>
-							{progress>=  57.16 && (<FaCheck className="progress-bar-ckeck" />)}
-							</div>
-              <div className={`progress-status-div-cirle5 ${progress >= 71.45 ? "border-info" : null}`}>
-							{progress>=  71.45 && (<FaCheck className="progress-bar-ckeck" />)}
-							</div>
-							<div className={`progress-status-div-cirle6 ${progress >= 85.74 ? "border-info" : null}`}>
-							{progress>=  85.74 && (<FaCheck className="progress-bar-ckeck" />)}
-							</div>
-              <div className={`progress-status-div-cirle7 ${progress >= 100.03 ? "border-info" : null}`}>
-							{progress>=  100.03 && (<FaCheck className="progress-bar-ckeck" />)}
-							</div>
 
-            </Row>
-          </Container>
-
-        </div>
       </div>
+			<div className="progress">
+      <div className="progress_content">
+        <div className={`progress_circle ${progress >= 14.29 ? "progress-fill" : null}`}>
+					{progress >= 14.29 && (				<FaCheck className="progress-ckeck" />)}
+
+				</div>
+        <div className={`progress_bar ${progress >= 14.29? "progress_bar_active" : null}`}></div>
+        <p className="">Order placed</p>
+      </div>
+      <div className="progress_content">
+        <div className={`progress_circle ${progress >= 28.58 ? "progress-fill" : null}`}>
+				{progress >= 28.58 && (				<FaCheck className="progress-ckeck" />)}
+				</div>
+        <div className={`progress_bar ${progress >= 28.58 ? "progress_bar_active" : null}`}></div>
+        <p>confirmed</p>
+      </div>
+      <div className="progress_content">
+        <div className={`progress_circle ${progress >= 42.87 ? "progress-fill" : null}`}>
+				{progress >= 42.87 && (<FaCheck className="progress-ckeck" />)}
+				</div>
+        <div className={`progress_bar ${progress >= 42.87 ? "progress_bar_active" : null}`}>
+				</div>
+        <p>Recieved</p>
+      </div>
+      <div className="progress_content">
+        <div className={`progress_circle ${progress >= 57.16 ? "progress-fill" : null}` }>
+				{progress >= 42.87 && (<FaCheck className="progress-ckeck" />)}
+				</div>
+        <div className={`progress_bar ${progress >= 42.87 ? "progress_bar_active" : null}`}></div>
+        <p>Cleaning</p>
+      </div>
+      <div className="progress_content">
+        <div className={`progress_circle ${progress >= 71.45 ? "progress-fill" : null}` }>
+				{progress >= 71.45 && (<FaCheck className="progress-ckeck" />)}
+				</div>
+        <div className={`progress_bar ${progress >= 71.45 ? "progress_bar_active" : null}` }></div>
+        <p>ready</p>
+      </div>
+      <div className="progress_content">
+        <div className={`progress_circle ${progress >= 85.74 ? "progress-fill" : null}` }>
+				{progress >= 85.74 && (<FaCheck className="progress-ckeck" />)}
+				</div>
+        <div className={`progress_bar ${progress >= 85.74 ? "progress_bar_active" : null}` }></div>
+        <p>shipped</p>
+      </div>
+      <div className="progress_content">
+        <div className={`progress_circle ${progress >= 100.03 ? "progress-fill" : null}` }>
+				{progress >= 100.03 && (<FaCheck className="progress-ckeck" />)}
+				</div>
+        <div className={`progress_bar ${progress >= 100.03 ? "progress_bar_active" : null}` }></div>
+        <p>delivered</p>
+      </div>
+    </div>
       <button className="btn" onClick={() => handleButtonClick()}>
         Next
       </button>
