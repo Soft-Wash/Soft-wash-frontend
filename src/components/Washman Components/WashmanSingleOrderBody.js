@@ -11,269 +11,208 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import { FaCheck } from "react-icons/fa";
 
 function WashmanSingleOrderBody() {
-	const [progress, setProgress] = useState(0);
-	const [selectedOption, setSelectedOption] = useState("Order Placed");
-	const [order, setOrder] = useState(null);
-	const { _id } = useParams();
+  const [progress, setProgress] = useState(0);
+  const [selectedOption, setSelectedOption] = useState("Order Placed");
+  const [order, setOrder] = useState(null);
+  const { _id } = useParams();
 
-	useEffect(() => {
-		axios
-			.get(`${process.env.REACT_APP_BASE_URL}/order/${_id}/order`)
-			.then((resp) => {
-				console.log(resp);
-				setOrder(resp.data);
-			})
-			.catch((error) => {
-				console.error("Error fetching order:", error);
-			});
-	}, []);
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/order/${_id}/order`)
+      .then((resp) => {
+        console.log(resp);
+        setOrder(resp.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching order:", error);
+      });
+  }, []);
 
-	const handleButtonClick = () => {
-		setProgress((prevProgress) => Math.min(prevProgress + 14.29, 100));
-	};
+  const handleButtonClick = () => {
+    setProgress((prevProgress) => Math.min(prevProgress + 14.29, 100.03));
+  };
 
-	const handleSeleectChange = async (e) => {
-		setSelectedOption(e.target.value);
+  const handleSeleectChange = async (e) => {
+    setSelectedOption(e.target.value);
 
-		if (selectedOption === "Order Placed") {
-			console.log(selectedOption);
-			axios
-				.put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
-					status: selectedOption,
-				})
-				.then((resp) => {
-					console.log(resp);
-				});
-		} else if (selectedOption === "Confirmed") {
-			console.log(selectedOption);
-			axios
-				.put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
-					status: selectedOption,
-				})
-				.then((resp) => {
-					console.log(resp);
-				});
-		} else if (selectedOption === "Recieved") {
-			console.log(selectedOption);
-			axios
-				.put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
-					status: selectedOption,
-				})
-				.then((resp) => {
-					console.log(resp);
-				});
-		} else if (selectedOption === "Cleaning") {
-			console.log(selectedOption);
-			axios
-				.put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
-					status: selectedOption,
-				})
-				.then((resp) => {
-					console.log(resp);
-				});
-		} else if (selectedOption === "Ready") {
-			console.log(selectedOption);
-			axios
-				.put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
-					status: selectedOption,
-				})
-				.then((resp) => {
-					console.log(resp);
-				});
-		} else if (selectedOption === "Shipped") {
-			console.log(selectedOption);
-			axios
-				.put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
-					status: selectedOption,
-				})
-				.then((resp) => {
-					console.log(resp);
-				});
-		} else if (selectedOption === "Delivered") {
-			console.log(selectedOption);
-			axios
-				.put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
-					status: selectedOption,
-				})
-				.then((resp) => {
-					console.log(resp);
-				});
-		}
-	};
+    if (selectedOption === "Order Placed") {
+      console.log(selectedOption);
+      axios
+        .put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
+          status: selectedOption,
+					branch_id:"655debc4ec7b0b6e0f591bf7"
+        })
+        .then((resp) => {
+          console.log(resp);
+					handleButtonClick()
+        });
+		
+    } else if (selectedOption === "Confirmed") {
+      console.log(selectedOption);
+      axios
+        .put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
+          status: selectedOption,
+					branch_id:"655debc4ec7b0b6e0f591bf7"
+        })
+        .then((resp) => {
+          console.log(resp);
+					handleButtonClick()
+        });
 
-	return (
-		<div className="washman-bg">
-			<div className="washman-page-content">
-				<div className="washman-header">
-					<h2>ORDER DETAILS</h2>
+    } else if (selectedOption === "Recieved") {
+      console.log(selectedOption);
+      axios
+        .put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
+          status: selectedOption,
+					branch_id:"655debc4ec7b0b6e0f591bf7"
+        })
+        .then((resp) => {
+          console.log(resp);
+					handleButtonClick()
+        });
+    } else if (selectedOption === "Cleaning") {
+      console.log(selectedOption);
+      axios
+        .put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
+          status: selectedOption,
+					branch_id:"655debc4ec7b0b6e0f591bf7"
+        })
+        .then((resp) => {
+          console.log(resp);
+					handleButtonClick()
+        });
+    } else if (selectedOption === "Ready") {
+      console.log(selectedOption);
+      axios
+        .put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
+          status: selectedOption,
+					branch_id:"655debc4ec7b0b6e0f591bf7"
+        })
+        .then((resp) => {
+          console.log(resp);
+					handleButtonClick()
+        });
+    } else if (selectedOption === "Shipped") {
+      console.log(selectedOption);
+      axios
+        .put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
+          status: selectedOption,
+					branch_id:"655debc4ec7b0b6e0f591bf7"
+        })
+        .then((resp) => {
+          console.log(resp);
+					handleButtonClick()
+        });
+    } else if (selectedOption === "Delivered") {
+      console.log(selectedOption);
+      axios
+        .put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
+          status: selectedOption,
+					branch_id:"655debc4ec7b0b6e0f591bf7"
+        })
+        .then((resp) => {
+          console.log(resp);
+					handleButtonClick()
+        });
+    }
+  };
+
+  return (
+    <div className="washman-bg">
+      <div className="washman-page-content">
+        <div className="washman-header">
+          <h2>ORDER DETAILS</h2>
+        </div>
+        <div className="washman-single-order-content">
+          {order &&
+            Object.entries(order).map(([key, value]) =>
+              typeof value === "string" ? (
+                <div key={key} className="washman-profile-field">
+                  <h4>{key}</h4>
+                  <h4>{value}</h4>
+                </div>
+              ) : null
+            )}
+
+          <div className="washman-profile-field">
+            <h4>Order Status</h4>
+            <select onChange={(e) => setSelectedOption(e.target.value)}>
+              <option value="Order Placed">ORDER PLACED</option>
+              <option value="Confirmed">CONFIRMED</option>
+              <option value="Recieved">RECEIVED</option>
+              <option value="Cleaning">CLEANING</option>
+              <option value="Ready">READY</option>
+              <option value="Shipped">SHIPPED</option>
+              <option value="Delivered">DELIVERED</option>
+            </select>
+          </div>
+        </div>
+        <Button
+          className="edit-washman-profile-btn"
+          onClick={handleSeleectChange}
+        >
+          Update Order
+        </Button>
+
+      </div>
+			<div className="progress">
+      <div className="progress_content">
+        <div className={`progress_circle ${progress >= 14.29 ? "progress-fill" : null}`}>
+					{progress >= 14.29 && (				<FaCheck className="progress-ckeck" />)}
+
 				</div>
-				<div className="washman-single-order-content">
-					{order &&
-						Object.entries(order).map(([key, value]) =>
-							typeof value === "string" ? (
-								<div key={key} className="washman-profile-field">
-									<h4>{key}</h4>
-									<h4>{value}</h4>
-								</div>
-							) : null
-						)}
-
-					<div className="washman-profile-field">
-						<h4>Order Status</h4>
-						<select onChange={(e) => setSelectedOption(e.target.value)}>
-							<option value="Order Placed">ORDER PLACED</option>
-							<option value="Confirmed">CONFIRMED</option>
-							<option value="Recieved">RECEIVED</option>
-							<option value="Cleaning">CLEANING</option>
-							<option value="Ready">READY</option>
-							<option value="Shipped">SHIPPED</option>
-							<option value="Delivered">DELIVERED</option>
-						</select>
-					</div>
+        <div className={`progress_bar ${progress >= 14.29? "progress_bar_active" : null}`}></div>
+        <p className="">Order placed</p>
+      </div>
+      <div className="progress_content">
+        <div className={`progress_circle ${progress >= 28.58 ? "progress-fill" : null}`}>
+				{progress >= 28.58 && (				<FaCheck className="progress-ckeck" />)}
 				</div>
-				<Button
-					className="edit-washman-profile-btn"
-					onClick={handleSeleectChange}
-				>
-					Update Order
-				</Button>
-				<div className="progressBar">
-					<Col lg={12} md={6} sm={10} className="text-center position-relative">
-						<Row classname="w-100 align-centre">
-							<Container className=" d-flex gap-5 mt-4 position-relative">
-								<div className="order-progress-circle position-absolute ">
-									<Col
-										className={`duration-500 border border-4  ${
-											progress >= 14.29 ? "border-info" : null
-										}  text-center rounded-circle  bg-white size-sm-30px`}
-										style={{ height: "50px", width: "50px",  }}
-									>
-										{progress >= 14.29 && (
-											<p className="  fw-semibold fs-4 text-secondary mt-sm">
-												<FaCheck className="progress-bar-ckeck" />
-											</p>
-										)}
-									</Col>
-									<h6>ORDER PLACED</h6>
-								</div>
-
-								<div className="order-progress-circle">
-									<Col
-										className={`duration-500 border border-4 ${
-											progress > 28.58 ? "border-info" : null
-										}  text-center rounded-circle bg-white size-sm-30px`}
-										style={{ height: "50px", width: "50px" }}
-									>
-										{progress >= 28.58 && (
-											<p className="  fw-semibold fs-4 text-secondary mt-sm">
-												<FaCheck className="progress-bar-ckeck" />
-											</p>
-										)}
-									</Col>
-									<h6>CONFIRMED</h6>
-								</div>
-
-								<div className="order-progress-circle">
-									<Col
-										className={`duration-500 border border-4 ${
-											progress > 42.87 ? "border-info" : null
-										}  text-center rounded-circle bg-white size-sm-30px`}
-										style={{ height: "50px", width: "50px" }}
-									>
-										{progress >= 42.87 && (
-											<p className="  fw-semibold fs-4 text-secondary mt-sm">
-												<FaCheck className="progress-bar-ckeck" />
-											</p>
-										)}
-									</Col>
-									<h6>RECIEVED</h6>
-								</div>
-
-								<div className="order-progress-circle">
-									<Col
-										className={`duration-500 border border-4 ${
-											progress > 57.16 ? "border-info" : null
-										}  text-center rounded-circle bg-white size-sm-30px`}
-										style={{ height: "50px", width: "50px" }}
-									>
-										{progress >= 57.16 && (
-											<p className="  fw-semibold fs-4 text-secondary mt-sm">
-												<FaCheck className="progress-bar-ckeck" />
-											</p>
-										)}
-									</Col>
-									<h6>CLEANING</h6>
-								</div>
-
-								<div className="order-progress-circle">
-									<Col
-										className={`duration-500 border border-4 ${
-											progress > 71.45 ? "border-info" : null
-										}  text-center rounded-circle bg-white size-sm-30px`}
-										style={{ height: "50px", width: "50px" }}
-									>
-										{progress >= 71.45 && (
-											<p className="  fw-semibold fs-4 text-secondary mt-sm">
-												<FaCheck className="progress-bar-ckeck" />
-											</p>
-										)}
-									</Col>
-									<h6>READY</h6>
-								</div>
-
-								<div className="order-progress-circle">
-									<Col
-										className={`duration-500 border border-4 ${
-											progress > 85.74 ? "border-info" : null
-										}  text-center rounded-circle bg-white size-sm-30px`}
-										style={{ height: "50px", width: "50px" }}
-									>
-										{progress >= 85.74 && (
-											<p className="  fw-semibold fs-4 text-secondary mt-sm">
-												<FaCheck className="progress-bar-ckeck" />
-											</p>
-										)}
-									</Col>
-									<h6>SHIPPED</h6>
-								</div>
-
-								<div className="order-progress-circle">
-									<Col
-										className={`duration-500 border border-4 ${
-											progress > 100.03 ? "border-info" : null
-										}  text-center rounded-circle bg-white size-sm-30px`}
-										style={{ height: "50px", width: "50px" }}
-									>
-										{progress >= 100.03 && (
-											<p className="  fw-semibold fs-4 text-secondary mt-sm">
-												<FaCheck className="progress-bar-ckeck" />
-											</p>
-										)}
-									</Col>
-									<h6>DELIVERED</h6>
-								</div>
-							</Container>
-
-							<Col
-								className="px-4 position-relative"
-								style={{ top: "0", zIndex: "1" }}
-							>
-								<ProgressBar
-									now={progress}
-									variant="info"
-									className=" duration-300"
-									style={{ height: "2px" }}
-								/>
-							</Col>
-						</Row>
-					</Col>
+        <div className={`progress_bar ${progress >= 28.58 ? "progress_bar_active" : null}`}></div>
+        <p>confirmed</p>
+      </div>
+      <div className="progress_content">
+        <div className={`progress_circle ${progress >= 42.87 ? "progress-fill" : null}`}>
+				{progress >= 42.87 && (<FaCheck className="progress-ckeck" />)}
 				</div>
-			</div>
-                <button className="btn" onClick={() => handleButtonClick()}>
-                Next
-                </button>
-		</div>
-	);
+        <div className={`progress_bar ${progress >= 42.87 ? "progress_bar_active" : null}`}>
+				</div>
+        <p>Recieved</p>
+      </div>
+      <div className="progress_content">
+        <div className={`progress_circle ${progress >= 57.16 ? "progress-fill" : null}` }>
+				{progress >= 42.87 && (<FaCheck className="progress-ckeck" />)}
+				</div>
+        <div className={`progress_bar ${progress >= 42.87 ? "progress_bar_active" : null}`}></div>
+        <p>Cleaning</p>
+      </div>
+      <div className="progress_content">
+        <div className={`progress_circle ${progress >= 71.45 ? "progress-fill" : null}` }>
+				{progress >= 71.45 && (<FaCheck className="progress-ckeck" />)}
+				</div>
+        <div className={`progress_bar ${progress >= 71.45 ? "progress_bar_active" : null}` }></div>
+        <p>ready</p>
+      </div>
+      <div className="progress_content">
+        <div className={`progress_circle ${progress >= 85.74 ? "progress-fill" : null}` }>
+				{progress >= 85.74 && (<FaCheck className="progress-ckeck" />)}
+				</div>
+        <div className={`progress_bar ${progress >= 85.74 ? "progress_bar_active" : null}` }></div>
+        <p>shipped</p>
+      </div>
+      <div className="progress_content">
+        <div className={`progress_circle ${progress >= 100.03 ? "progress-fill" : null}` }>
+				{progress >= 100.03 && (<FaCheck className="progress-ckeck" />)}
+				</div>
+        <div className={`progress_bar ${progress >= 100.03 ? "progress_bar_active" : null}` }></div>
+        <p>delivered</p>
+      </div>
+    </div>
+      <button className="btn" onClick={() => handleButtonClick()}>
+        Next
+      </button>
+    </div>
+  );
 }
 
 export default WashmanSingleOrderBody;
