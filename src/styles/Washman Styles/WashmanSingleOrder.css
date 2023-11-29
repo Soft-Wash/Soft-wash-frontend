@@ -5,3 +5,131 @@
     color: black;
     background-color: white;
 }
+
+
+
+.progress-status-div{
+    margin-top: 50px;
+}
+
+
+
+.progress-bar-col{
+    position: relative;
+    z-index: 1;
+    top: 47px;
+}
+
+.progress-status-div-row{
+    justify-content: space-between;
+    position: relative;
+    top: 20px;
+
+}
+
+.progress-bar-ckeck{
+    font-size: 25px;
+    
+}
+
+.progress-status-div-cirle1{
+    border: 3px solid rgb(207, 207, 207);
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+    z-index: 3;
+    position: absolute;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    
+}
+
+.progress-status-div-cirle2{
+    border: 3px solid rgb(207, 207, 207);
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+    z-index: 3;
+    position: absolute;
+    right: 510px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+.progress-status-div-cirle3{
+    border: 3px solid rgb(207, 207, 207);
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+    z-index: 3;
+    position: absolute;
+    right: 410px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+.progress-status-div-cirle4{
+    border: 3px solid rgb(207, 207, 207);
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+    z-index: 3;
+    position: absolute;
+    right: 310px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+
+.progress-status-div-cirle5{
+    border: 3px solid rgb(207, 207, 207);
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+    z-index: 3;
+    position: absolute;
+    right: 210px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+
+.progress-status-div-cirle6{
+    border: 3px solid rgb(207, 207, 207);
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+    z-index: 3;
+    position: absolute;
+    right: 110px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+
+.progress-status-div-cirle7{
+    border: 3px solid rgb(207, 207, 207);
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+    z-index: 3;
+    position: absolute;
+    right: 0px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+.progress-bar{
+    height: 5px;
+    width: 100%;
+}
