@@ -11,9 +11,20 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import { FaCheck } from "react-icons/fa";
 
 function WashmanSingleOrderBody() {
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(
+    parseFloat(localStorage.getItem("orderProgress")) || 0
+  );
+
   const [selectedOption, setSelectedOption] = useState("Order Placed");
   const [order, setOrder] = useState(null);
+	const [orderPlaced, setOrderPlaced]=useState()
+	const [confirmed,setConfirmed]=useState()
+	const [recieved,setRecieved]=useState()
+	const [cleaning,setCleaning]=useState()
+	const [ready,setReady]=useState()
+	const [shipped,setShipped]=useState()
+	const [delivered,setDelivered]=useState()
+	
   const { _id } = useParams();
 
   useEffect(() => {
@@ -43,8 +54,10 @@ function WashmanSingleOrderBody() {
 					branch_id:"655debc4ec7b0b6e0f591bf7"
         })
         .then((resp) => {
-          console.log(resp);
+          console.log(resp.data);
 					handleButtonClick()
+					localStorage.setItem("orderProgress", progress);
+					setOrderPlaced(resp.data)
         });
 		
     } else if (selectedOption === "Confirmed") {
@@ -55,8 +68,10 @@ function WashmanSingleOrderBody() {
 					branch_id:"655debc4ec7b0b6e0f591bf7"
         })
         .then((resp) => {
-          console.log(resp);
+          console.log(resp.data);
+					localStorage.setItem("orderProgress", progress);
 					handleButtonClick()
+					setConfirmed(resp.data)
         });
 
     } else if (selectedOption === "Recieved") {
@@ -67,8 +82,10 @@ function WashmanSingleOrderBody() {
 					branch_id:"655debc4ec7b0b6e0f591bf7"
         })
         .then((resp) => {
-          console.log(resp);
+          console.log(resp.data);
+					localStorage.setItem("orderProgress", progress);
 					handleButtonClick()
+					setRecieved(resp.data)
         });
     } else if (selectedOption === "Cleaning") {
       console.log(selectedOption);
@@ -78,8 +95,10 @@ function WashmanSingleOrderBody() {
 					branch_id:"655debc4ec7b0b6e0f591bf7"
         })
         .then((resp) => {
-          console.log(resp);
+          console.log(resp.data);
+					localStorage.setItem("orderProgress", progress);
 					handleButtonClick()
+					setCleaning(resp.data)
         });
     } else if (selectedOption === "Ready") {
       console.log(selectedOption);
@@ -89,8 +108,10 @@ function WashmanSingleOrderBody() {
 					branch_id:"655debc4ec7b0b6e0f591bf7"
         })
         .then((resp) => {
-          console.log(resp);
+          console.log(resp.data);
+					localStorage.setItem("orderProgress", progress);
 					handleButtonClick()
+					setReady(resp.data)
         });
     } else if (selectedOption === "Shipped") {
       console.log(selectedOption);
@@ -100,8 +121,10 @@ function WashmanSingleOrderBody() {
 					branch_id:"655debc4ec7b0b6e0f591bf7"
         })
         .then((resp) => {
-          console.log(resp);
+          console.log(resp.data);
+					localStorage.setItem("orderProgress", progress);
 					handleButtonClick()
+					setShipped(resp.data)
         });
     } else if (selectedOption === "Delivered") {
       console.log(selectedOption);
@@ -111,8 +134,10 @@ function WashmanSingleOrderBody() {
 					branch_id:"655debc4ec7b0b6e0f591bf7"
         })
         .then((resp) => {
-          console.log(resp);
+          console.log(resp.data);
+					localStorage.setItem("orderProgress", progress);
 					handleButtonClick()
+					setDelivered(resp.data)
         });
     }
   };
@@ -137,6 +162,7 @@ function WashmanSingleOrderBody() {
           <div className="washman-profile-field">
             <h4>Order Status</h4>
             <select onChange={(e) => setSelectedOption(e.target.value)}>
+						<option value="" hidden>Select Status</option>
               <option value="Order Placed">ORDER PLACED</option>
               <option value="Confirmed">CONFIRMED</option>
               <option value="Recieved">RECEIVED</option>
@@ -158,53 +184,53 @@ function WashmanSingleOrderBody() {
 			<div className="progress">
       <div className="progress_content">
         <div className={`progress_circle ${progress >= 14.29 ? "progress-fill" : null}`}>
-					{progress >= 14.29 && (				<FaCheck className="progress-ckeck" />)}
+					{progress >= 14.29 && (<FaCheck className="progress-ckeck" />)}
 
 				</div>
-        <div className={`progress_bar ${progress >= 14.29? "progress_bar_active" : null}`}></div>
+        <div className={`progress_bar ${progress >= 28.58? "progress_bar_active" : null}`}></div>
         <p className="">Order placed</p>
       </div>
       <div className="progress_content">
         <div className={`progress_circle ${progress >= 28.58 ? "progress-fill" : null}`}>
 				{progress >= 28.58 && (				<FaCheck className="progress-ckeck" />)}
 				</div>
-        <div className={`progress_bar ${progress >= 28.58 ? "progress_bar_active" : null}`}></div>
+        <div className={`progress_bar ${progress >= 42.87 ? "progress_bar_active" : null}`}></div>
         <p>confirmed</p>
       </div>
       <div className="progress_content">
         <div className={`progress_circle ${progress >= 42.87 ? "progress-fill" : null}`}>
 				{progress >= 42.87 && (<FaCheck className="progress-ckeck" />)}
 				</div>
-        <div className={`progress_bar ${progress >= 42.87 ? "progress_bar_active" : null}`}>
+        <div className={`progress_bar ${progress >= 57.16 ? "progress_bar_active" : null}`}>
 				</div>
         <p>Recieved</p>
       </div>
       <div className="progress_content">
         <div className={`progress_circle ${progress >= 57.16 ? "progress-fill" : null}` }>
-				{progress >= 42.87 && (<FaCheck className="progress-ckeck" />)}
+				{progress >= 57.16 && (<FaCheck className="progress-ckeck" />)}
 				</div>
-        <div className={`progress_bar ${progress >= 42.87 ? "progress_bar_active" : null}`}></div>
+        <div className={`progress_bar ${progress >= 69.45 ? "progress_bar_active" : null}`}></div>
         <p>Cleaning</p>
       </div>
       <div className="progress_content">
-        <div className={`progress_circle ${progress >= 71.45 ? "progress-fill" : null}` }>
-				{progress >= 71.45 && (<FaCheck className="progress-ckeck" />)}
+        <div className={`progress_circle ${progress >= 69.45 ? "progress-fill" : null}` }>
+				{progress >= 69.45 && (<FaCheck className="progress-ckeck" />)}
 				</div>
-        <div className={`progress_bar ${progress >= 71.45 ? "progress_bar_active" : null}` }></div>
+        <div className={`progress_bar ${progress >= 82.74 ? "progress_bar_active" : null}` }></div>
         <p>ready</p>
       </div>
       <div className="progress_content">
-        <div className={`progress_circle ${progress >= 85.74 ? "progress-fill" : null}` }>
-				{progress >= 85.74 && (<FaCheck className="progress-ckeck" />)}
+        <div className={`progress_circle ${progress >= 82.74 ? "progress-fill" : null}` }>
+				{progress >= 82.74 && (<FaCheck className="progress-ckeck" />)}
 				</div>
-        <div className={`progress_bar ${progress >= 85.74 ? "progress_bar_active" : null}` }></div>
+        <div className={`progress_bar ${progress >= 97.03 ? "progress_bar_active" : null}` }></div>
         <p>shipped</p>
       </div>
       <div className="progress_content">
-        <div className={`progress_circle ${progress >= 100.03 ? "progress-fill" : null}` }>
-				{progress >= 100.03 && (<FaCheck className="progress-ckeck" />)}
+        <div className={`progress_circle ${progress >= 97.03 ? "progress-fill" : null}` }>
+				{progress >= 97.03 && (<FaCheck className="progress-ckeck" />)}
 				</div>
-        <div className={`progress_bar ${progress >= 100.03 ? "progress_bar_active" : null}` }></div>
+        <div className={`progress_bar ${progress >= 97.03 ? "progress_bar_active" : null}` }></div>
         <p>delivered</p>
       </div>
     </div>
