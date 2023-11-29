@@ -209,28 +209,28 @@ function WashmanSingleOrderBody() {
         <div className={`progress_circle ${progress >= 57.16 ? "progress-fill" : null}` }>
 				{progress >= 57.16 && (<FaCheck className="progress-ckeck" />)}
 				</div>
-        <div className={`progress_bar ${progress >= 69.45 ? "progress_bar_active" : null}`}></div>
+        <div className={`progress_bar ${progress >= 71.45 ? "progress_bar_active" : null}`}></div>
         <p>Cleaning</p>
       </div>
       <div className="progress_content">
-        <div className={`progress_circle ${progress >= 69.45 ? "progress-fill" : null}` }>
+        <div className={`progress_circle ${progress >= 71.45 ? "progress-fill" : null}` }>
 				{progress >= 69.45 && (<FaCheck className="progress-ckeck" />)}
 				</div>
-        <div className={`progress_bar ${progress >= 82.74 ? "progress_bar_active" : null}` }></div>
+        <div className={`progress_bar ${progress >= 85.74 ? "progress_bar_active" : null}` }></div>
         <p>ready</p>
       </div>
       <div className="progress_content">
-        <div className={`progress_circle ${progress >= 82.74 ? "progress-fill" : null}` }>
+        <div className={`progress_circle ${progress >= 85.74 ? "progress-fill" : null}` }>
 				{progress >= 82.74 && (<FaCheck className="progress-ckeck" />)}
 				</div>
-        <div className={`progress_bar ${progress >= 97.03 ? "progress_bar_active" : null}` }></div>
+        <div className={`progress_bar ${progress >= 100.03 ? "progress_bar_active" : null}` }></div>
         <p>shipped</p>
       </div>
       <div className="progress_content">
-        <div className={`progress_circle ${progress >= 97.03 ? "progress-fill" : null}` }>
+        <div className={`progress_circle ${progress >= 100.03 ? "progress-fill" : null}` }>
 				{progress >= 97.03 && (<FaCheck className="progress-ckeck" />)}
 				</div>
-        <div className={`progress_bar ${progress >= 97.03 ? "progress_bar_active" : null}` }></div>
+        <div className={`progress_bar ${progress >= 100.03 ? "progress_bar_active" : null}` }></div>
         <p>delivered</p>
       </div>
     </div>
