@@ -5,11 +5,6 @@ import {
   FaMoneyCheckDollar,
 } from "react-icons/fa6";
 import Accordion from "react-bootstrap/Accordion";
-
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import ProgressBar from "react-bootstrap/ProgressBar";
 import { FaCheck } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../../services/AxiosInstance";
@@ -35,6 +30,7 @@ function OrderDetailsBody() {
     axiosInstance.get(`/order/${orderId}/order`).then((resp) => {
       console.log(resp.data);
       setIndexFound(orderStatusArray.indexOf(resp.data.status))
+      console.log(resp.data.status)
       setorderDetails(resp.data);
       const pickUpDate = resp.data.schedule_date;
       const latestDate = new Date(pickUpDate);
@@ -104,19 +100,19 @@ function OrderDetailsBody() {
         </div>
         <div className="progress2">
         {orderStatusArray.map((status, index) => (
-          <div className="progress_content" key={index}>
+          <div className="progress_content2" key={index}>
             <div
-              className={`progress_circle ${
-                indexFound >= index ? "progress-fill" : null
+              className={`progress_circle2 ${
+                indexFound >= index ? "progress-fill2" : null
               }`}
             >
               {indexFound >= index && (
-                <FaCheck className="progress-check" />
+                <FaCheck className="progress-check2" />
               )}
             </div>
             <div
-              className={`progress_bar ${
-                indexFound >= index ? "progress_bar_active" : null
+              className={`progress_bar2 ${
+                indexFound >= index ? "progress_bar_active2" : null
               }`}
             ></div>
             <p className="status-description">{status}</p>
