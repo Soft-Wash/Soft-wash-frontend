@@ -1,0 +1,45 @@
+.sales-report-container{
+  margin: 0;
+margin-right: 0;
+  width: 90%;
+  height: 100vh;
+  overflow: scroll;
+  background-color: rgb(240, 240, 240);
+}
+
+.sales-report-contianer-innerd1{
+padding: 20px;
+width: 100%;
+}
+
+.salesreport-hr{
+  width: 100%;
+  border-bottom:1px solid grey ;
+}
+
+.form-background{
+  background-color: white;
+  height: auto;
+  width: 100%;
+padding: 20px;
+  margin-right: 0;
+}
+
+
+.form-content{
+  background-color: white;
+  height: auto;
+  width: 100%;
+  box-shadow: 2px 2px 4px 4px rgb(224, 224, 224)
+}
+
+.form-details-div-header{
+  background-color: rgb(13,202,240);
+  height: 45px;
+  padding: 10px;
+}
+
+.form-details-div-header p{
+  color: white;
+  font-weight: bold;
+}

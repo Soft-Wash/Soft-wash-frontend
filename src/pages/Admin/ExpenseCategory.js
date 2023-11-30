@@ -1,66 +1,67 @@
 import AdminSidebar from "../../components/Admin/AdminSidebar";
-import "../../styles/Admin/ExpenseCategory.css"
-import { Link } from "react-router-dom"
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
+import "../../styles/Admin/ExpenseCategory.css";
+import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
 
-function ExpenseCategory(){
-
+function ExpenseCategory() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  return(
+  return (
     <div>
       <div>
-      <>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="name@example.com"
-                autoFocus
-              />
-            </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>Example textarea</Form.Label>
-              <Form.Control as="textarea" rows={3} />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
+        <>
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Expense Category Add</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form>
+                <Form.Group
+                  className="mb-3"
+                  controlId="exampleForm.ControlInput1"
+                >
+                  <Form.Label>Category Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Category Name"
+                    autoFocus
+                  />
+                </Form.Group>
+                <Form.Group
+                  className="mb-3"
+                  controlId="exampleForm.ControlTextarea1"
+                >
+                  <Form.Label>Category Type</Form.Label>
+                  <Form.Control as="select" autoFocus>
+                  <option value="" hidden>Select Category Type</option>
+                    <option value="option1">Lability</option>
+                    <option value="option2">Assets</option>
+
+                  </Form.Control>
+                </Form.Group>
+              </Form>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="info text-white" onClick={handleClose}>
+                Sumit
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </>
       </div>
       <div className="d-flex">
-        <AdminSidebar/>
+        <AdminSidebar />
         <div className="expenses-container2">
           <div className="expenses-container-innerd2">
             <div className="header-tags2">
-            <h3>Expense Category</h3>
-            <button onClick={handleShow}>
-              Add New
-            </button>
-
+              <h3>Expense Category</h3>
+              <button onClick={handleShow}>Add New</button>
             </div>
 
             <hr className="expenses-hr" />
@@ -90,16 +91,15 @@ function ExpenseCategory(){
                       <th className="no-th2">1</th>
                       <th className="date-th">Chemical</th>
                       <th className="assets-th">
-
                         <button className="tax-include2-btn1">Asset</button>
-
                       </th>
                       <th className="buttons-th">
                         <div className="d-flex">
-                        <button className="action2-buttons-btn1">Edit</button>
-                        <button className="action2-buttons-btn2">Delete</button>
+                          <button className="action2-buttons-btn1">Edit</button>
+                          <button className="action2-buttons-btn2">
+                            Delete
+                          </button>
                         </div>
-
                       </th>
                     </tr>
                   </tbody>
@@ -111,7 +111,7 @@ function ExpenseCategory(){
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default ExpenseCategory;

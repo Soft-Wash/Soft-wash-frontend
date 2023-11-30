@@ -34,6 +34,9 @@ function AdminSidebar(){
             <NavLink exact to="/expensescategory" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">Expense Category</CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/salesreport" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line">Report</CDBSidebarMenuItem>
+            </NavLink>
             <NavLink exact to="/iventry" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">Iventry Managment</CDBSidebarMenuItem>
             </NavLink>
