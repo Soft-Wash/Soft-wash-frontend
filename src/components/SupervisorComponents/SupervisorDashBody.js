@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 // import PersonIcon from '@mui/icons-material/Person';
 import "../../styles/SupervisorStyles/supervisordashbody.css"
-import InventoryChart from '../../pages/SupervisorPage/InentoryChart';
+import InventoryChart from './InentoryChart';
 
 
 function SupervisorDashBody() {

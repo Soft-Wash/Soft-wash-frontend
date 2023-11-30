@@ -17,7 +17,7 @@ function SupervisorSideBar() {
                     <NavLink exact to="/" activeClassName="activeClicked">
                         <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
                     </NavLink>
-                    <NavLink exact to="/tables" activeClassName="activeClicked">
+                    <NavLink exact to="/ordertable" activeClassName="activeClicked">
                         <CDBSidebarMenuItem icon="table">View Orders</CDBSidebarMenuItem>
                     </NavLink>
                     <NavLink exact to="" activeClassName="activeClicked">
@@ -26,7 +26,7 @@ function SupervisorSideBar() {
                     <NavLink exact to="/tables" activeClassName="activeClicked">
                         <CDBSidebarMenuItem icon="table">Manage Payments</CDBSidebarMenuItem>
                     </NavLink>
-                    <NavLink exact to="/tables" activeClassName="activeClicked">
+                    <NavLink exact to="/leave" activeClassName="activeClicked">
                         <CDBSidebarMenuItem icon="table">Manage Leave</CDBSidebarMenuItem>
                     </NavLink>
                     <NavLink exact to="/analytics" activeClassName="activeClicked">

@@ -42,6 +42,7 @@ import Washman from "./pages/Admin/Washman";
 import Register from "./pages/Admin/RegisterEmployee"
 import Iventry from "./pages/Admin/Iventry";
 import CartPayment from "./pages/MarketPlace/CartPayment";
+import SupervisorDash from "./pages/SupervisorPage/SupervisorDash";
  
 
 
@@ -101,6 +102,7 @@ function App() {
         {/* SUPERVISOR ROUTES */}
 
         <Route path="/SupervisorDash-Board" element={<SupervisorDashBoard/>}/>
+        <Route path ="/SupervisorDash" element ={<SupervisorDash/>}/>
 
       </Routes>
     </BrowserRouter>

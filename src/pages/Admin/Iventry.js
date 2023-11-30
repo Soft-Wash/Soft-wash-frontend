@@ -8,8 +8,8 @@ function Iventry(){
   return(
     <div>
       <div className="d-flex">
-<AdminSidebar/>
-<div className="iventory-container">
+        <AdminSidebar/>
+        <div className="iventory-container">
 <h4 className="">Order Management & Supplies </h4>
   <hr className="dashboard-line" />
   
@@ -88,7 +88,7 @@ function Iventry(){
   </div>  
   
   </div>
-</div>
+        </div>
       </div>
 
     </div>
