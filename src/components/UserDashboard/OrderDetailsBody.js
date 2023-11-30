@@ -15,18 +15,26 @@ import { useEffect, useState } from "react";
 import { axiosInstance } from "../../services/AxiosInstance";
 
 function OrderDetailsBody() {
-  let [count, setCount] = useState(0);
-  // const progress = 20;
-  const [progress, setProgress] = useState(0);
-  
 
   const [orderdetails, setorderDetails] = useState();
   const [pickUpDateValue, setpickUpDate] = useState();
+  const [indexFound, setIndexFound] = useState(0);
+  const orderStatusArray = [
+    "Order Placed",
+    "Confirmed",
+    "Received",
+    "Cleaning",
+    "Ready",
+    "Shipped",
+    "Delivered",
+  ];
+
 
   useEffect(() => {
     const orderId = JSON.parse(localStorage.getItem("OrderDetailsId"));
     axiosInstance.get(`/order/${orderId}/order`).then((resp) => {
       console.log(resp.data);
+      setIndexFound(orderStatusArray.indexOf(resp.data.status))
       setorderDetails(resp.data);
       const pickUpDate = resp.data.schedule_date;
       const latestDate = new Date(pickUpDate);
@@ -94,113 +102,27 @@ function OrderDetailsBody() {
           <h3>Total</h3>
           <p>N{orderdetails?.subtotal}</p>
         </div>
-        <Col lg={12} md={6} sm={10} className="text-center position-relative">
-          <Row classname="w-100 align-centre">
-            <Container className=" d-flex gap-5 mt-4 position-relative">
-              <div className="order-progress-circle ">
-                <Col
-                  className={`duration-500 border border-4 ${"border-info"}  text-center rounded-circle  bg-white size-sm-30px`}
-                  style={{ height: "50px", width: "50px" }}
-                >
-                  <p className="  fw-semibold fs-4 text-secondary mt-sm">
-                    <FaCheck className="progress-bar-ckeck" />
-                  </p>
-                </Col>
-                <h6>ORDER PLACED</h6>
-                <hr className="progress-line1" />
-              </div>
-
-              <div className="order-progress-circle">
-                <Col
-                  className={`duration-500 border border-4 ${
-                    progress > 12.5 ? "border-info" : null
-                  }  text-center rounded-circle bg-white size-sm-30px`}
-                  style={{ height: "50px", width: "50px" }}
-                >
-                  <p className=" fw-semibold fs-4 text-secondary mt-sm"></p>
-                </Col>
-                <h6>CONFIRMED</h6>
-                <hr className="progress-line2" />
-              </div>
-
-              <div className="order-progress-circle">
-                <Col
-                  className={`duration-500 border border-4 ${
-                    progress > 25 ? "border-info" : null
-                  }  text-center rounded-circle bg-white size-sm-30px`}
-                  style={{ height: "50px", width: "50px" }}
-                >
-                  <p className=" fw-semibold fs-4 text-secondary mt-sm"></p>
-                </Col>
-                <h6>RECIEVED</h6>
-                <hr className="progress-line2" />
-              </div>
-
-              <div className="order-progress-circle">
-                <Col
-                  className={`duration-500 border border-4 ${
-                    progress > 37.5 ? "border-info" : null
-                  }  text-center rounded-circle bg-white size-sm-30px`}
-                  style={{ height: "50px", width: "50px" }}
-                >
-                  <p className=" fw-semibold fs-4 text-secondary mt-sm"></p>
-                </Col>
-                <h6>CLEANING</h6>
-                <hr className="progress-line2" />
-              </div>
-
-              <div className="order-progress-circle">
-                <Col
-                  className={`duration-500 border border-4 ${
-                    progress > 37.5 ? "border-info" : null
-                  }  text-center rounded-circle bg-white size-sm-30px`}
-                  style={{ height: "50px", width: "50px" }}
-                >
-                  <p className=" fw-semibold fs-4 text-secondary mt-sm"></p>
-                </Col>
-                <h6>READY</h6>
-                <hr className="progress-line2" />
-              </div>
-
-              <div className="order-progress-circle">
-                <Col
-                  className={`duration-500 border border-4 ${
-                    progress > 37.5 ? "border-info" : null
-                  }  text-center rounded-circle bg-white size-sm-30px`}
-                  style={{ height: "50px", width: "50px" }}
-                >
-                  <p className=" fw-semibold fs-4 text-secondary mt-sm"></p>
-                </Col>
-                <h6>SHIPPED</h6>
-                <hr className="progress-line2" />
-              </div>
-
-              <div className="order-progress-circle">
-                <Col
-                  className={`duration-500 border border-4 ${
-                    progress > 37.5 ? "border-info" : null
-                  }  text-center rounded-circle bg-white size-sm-30px`}
-                  style={{ height: "50px", width: "50px" }}
-                >
-                  <p className=" fw-semibold fs-4 text-secondary mt-sm"></p>
-                </Col>
-                <h6>DELIVERED</h6>
-              </div>
-            </Container>
-
-            <Col
-              className="px-4 position-relative neg-top-15"
-              style={{ top: "-30px", zIndex: "-1" }}
+        <div className="progress2">
+        {orderStatusArray.map((status, index) => (
+          <div className="progress_content" key={index}>
+            <div
+              className={`progress_circle ${
+                indexFound >= index ? "progress-fill" : null
+              }`}
             >
-              <ProgressBar
-                now={progress}
-                variant="info"
-                className=" duration-300 "
-                style={{ height: "2px" }}
-              />
-            </Col>
-          </Row>
-        </Col>
+              {indexFound >= index && (
+                <FaCheck className="progress-check" />
+              )}
+            </div>
+            <div
+              className={`progress_bar ${
+                indexFound >= index ? "progress_bar_active" : null
+              }`}
+            ></div>
+            <p className="status-description">{status}</p>
+          </div>
+        ))}
+      </div>
       </div>
     </div>
   );

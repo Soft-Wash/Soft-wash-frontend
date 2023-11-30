@@ -40,87 +40,56 @@
     color: rgb(13,202,240);
 }
 
-/* .order-progress-circle::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  height: 2px;
-  background-color: #17a2b8; 
-}
-.order-progress-circle + .order-progress-circle::after {
-  transform: translateX(-50%);
-} */
 
-
-/* .order-progress-circle{
-    background-color: aqua;
-} */
-.order-progress-circle h6{
-    font-size: 12px;
-    text-align: center;
-    margin-top: 5px;
-}
-
-
-
-.progress-line1 {
-    position: relative;
-    /* bottom: 65px;
-    left: 50px; */
-    border: 2px solid grey;
-    margin: 0 auto; 
-}
-
-.progress-line2 {
-    position: relative;
-    /* bottom: 53px;
-    left: 50px; */
-    border: 2px solid grey;
-    margin: 0 auto; 
-}
-
-
-
-.order-progress-circle .duration-500 {
-    position: relative;
-}
-
-
-@media (max-width: 1440px){
-    .progress-line1 {
-        bottom: 53px;
-        left: 50px;
-    }
+.progress2 {
+    width: 89%;
+    margin: 20px auto;
+    display: flex;
+    height: auto;
+    background: none;
     
-    .progress-line2 {
-        bottom: 53px;
-        left: 50px;
-    }
-}
+  }
+  .progress_content {
+    width: 100%;
+    display: grid;
+    position: relative;
+  }
+  .progress_circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid green;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .progress_content:not(:last-child) .progress_bar {
+    height: 5px;
+    width: 51%;
+    background-color: #dedede;
+    position: absolute ;
+    top: 20%;
+    right: 0;
+  }
+  .progress_circle.active {
+    background-color: green;
+    border: 1px solid green;
+  }
+  .progress_bar_active {
+    background: green !important;
+  }
 
+  .progress-check{
+    font-size: 25px;
+    color: white;
 
+  }
 
-@media (max-width: 1024px){
-    .progress-line1 {
-        bottom: 65px;
-        left: 50px;
-    }
-    
-    .progress-line2 {
-        bottom: 53px;
-        left: 50px;
-    }
-}
+  .progress-fill{
+    background: green;
+  }
 
-@media (max-width: 770px){
-    .progress-line1 {
-        bottom: 65px;
-        left: 50px;
-    }
-    
-    .progress-line2 {
-        bottom: 53px;
-        left: 50px;
-    }
-}
+  .status-description{
+    font-weight: bold;
+  }
