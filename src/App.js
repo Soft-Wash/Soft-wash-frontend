@@ -43,6 +43,7 @@ import Register from "./pages/Admin/RegisterEmployee"
 import Iventry from "./pages/Admin/Iventry";
 import CartPayment from "./pages/MarketPlace/CartPayment";
 import SupervisorDash from "./pages/SupervisorPage/SupervisorDash";
+import Expenses from "./pages/Admin/Expenses";
  
 
 
@@ -98,6 +99,7 @@ function App() {
         <Route path="/supervisor/:roldId" element={<Supervisor/>}/>
         <Route path="/washman/:roldId" element={<Washman/>}/>
         <Route path="/registeremployee" element={<Register/>}/>
+        <Route path="/expenses" element={<Expenses/>}/>
 
         {/* SUPERVISOR ROUTES */}
 
