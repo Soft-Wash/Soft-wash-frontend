@@ -1,0 +1,75 @@
+.supervisor-container{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 30px;
+    overflow: scroll;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(215, 215, 215);
+    }
+  
+.dashboard-line{
+    width: 100%;
+    border-bottom: 1px solid black;
+    }
+      
+.HeaderCards-Container{
+    /* display: grid;
+    grid-template-columns: repeat(5, 1fr); */
+    gap: 10px; 
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+    
+}
+.sup-Card{
+    width: 180px;
+    height: 80px;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.supervisor-dashboard-icons{
+    font-size: 40px;
+    margin-right: 15px;
+}
+
+    .Sup-HeadCard{
+    display: flex;
+    background-color: white;
+    height: 100px;
+    width: 200px;
+    padding-left: 10px;
+   position: relative;
+  }
+  
+  .Sup-HeadCard-innerd2 p{
+    margin: 0 ;
+    font-size: 18px;
+    font-weight: bold;
+    color:black;
+  }
+  
+  .clipboard-icon{
+    font-size: 40px;
+    color: black;
+  }
+  
+ 
+
+  
+
+    /*  */
+
+    .washman-blue{
+        background-color: rgb(13,202,240);
+    }
+    .washman-purple{
+        background-color: purple;
+    }
+    .washman-green{
+        background-color: green;
+    }

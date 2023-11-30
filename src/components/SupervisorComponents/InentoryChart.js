@@ -16,7 +16,8 @@ const InventoryChart = () => {
       ],
     };
     return (
-      <div style={{width:"50%"}}>
+      <div style={{width:"100%"}}>
+        <h4 className='text-center mb-3'>Inventory Chart</h4>
         < Line data={data} />
       </div>
     );
