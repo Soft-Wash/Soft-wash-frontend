@@ -43,6 +43,10 @@ import Register from "./pages/Admin/RegisterEmployee"
 import Iventry from "./pages/Admin/Iventry";
 import CartPayment from "./pages/MarketPlace/CartPayment";
 import SupervisorDash from "./pages/SupervisorPage/SupervisorDash";
+import Expenses from "./pages/Admin/Expenses";
+import AddNewExpenses from "./pages/Admin/AddNewExpenses";
+import ExpenseCategory from "./pages/Admin/ExpenseCategory";
+import SalesReport from "./pages/Admin/SalesReport";
  
 
 
@@ -98,6 +102,10 @@ function App() {
         <Route path="/supervisor/:roldId" element={<Supervisor/>}/>
         <Route path="/washman/:roldId" element={<Washman/>}/>
         <Route path="/registeremployee" element={<Register/>}/>
+        <Route path="/expenses" element={<Expenses/>}/>
+        <Route path="/newexpenses" element={<AddNewExpenses/>}/>
+        <Route path="/expensescategory" element={<ExpenseCategory/>}/>
+        <Route path="/salesreport" element={<SalesReport/>}/>
 
         {/* SUPERVISOR ROUTES */}
 
