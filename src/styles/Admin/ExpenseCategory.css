@@ -1,4 +1,4 @@
-.expenses-container{
+.expenses-container2{
   margin: 0;
 margin-right: 0;
   width: 90%;
@@ -7,7 +7,7 @@ margin-right: 0;
   background-color: rgb(240, 240, 240);
 }
 
-.expenses-container-innerd{
+.expenses-container-innerd2{
   margin-left: 30px;
   margin-top: 30px;
   margin-right: 20px;
@@ -18,7 +18,7 @@ margin-right: 0;
   border-bottom:1px solid grey ;
 }
 
-.expenses-table-content{
+.expenses-table-content2{
   background-color: white;
   height: auto;
   width: 100%;
@@ -27,21 +27,21 @@ margin-right: 0;
   margin-right: 0;
 }
 
-.show-container{
+.show-container2{
   display: flex;
   align-items: center;
 }
 
-.show-container-p1{
+.show-container2-p1{
   margin-right: 10px;
 }
 
-.show-container-p2{
+.show-container2-p2{
   margin-left: 10px;
 }
 
 
-.admindashboard-ordertable-div{
+.admindashboard-ordertable-div2{
   padding-left: 20px;
   overflow: scroll;
   height: 100vh;
@@ -49,7 +49,7 @@ margin-right: 0;
 }  
 
 
-  .expenses-content-table{
+  .expenses-content-table2{
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 13px;
@@ -59,7 +59,7 @@ margin-right: 0;
     box-shadow: 0 0 10px 2px gainsboro;
     /* margin-top: 80px; */
 }
-.expenses-content-table thead tr{
+.expenses-content-table2 thead tr{
     width: 100%;
     text-align: left;
     font-weight: bold;
@@ -67,32 +67,74 @@ margin-right: 0;
     color: white;
 }
 
-.expenses-content-table th,
-.expenses-content-table td{
+/* .expenses-content-table2 th,
+.expenses-content-table2 td{
     padding: 20px 25px;
     border-right: 1px solid gray;
   
+} */
+
+.chemical-th{
+  padding: 20px 25px;
+  border-right: 1px solid gray;
+  padding-right: 250px;
 }
 
-.expenses-content-table tbody tr{
+.category-th{
+  padding: 20px 25px;
+  border-right: 1px solid gray;
+}
+
+.action-th{
+  padding: 20px 25px;
+  border-right: 1px solid gray;
+}
+
+.s-no{
+  padding: 20px 25px;
+  border-right: 1px solid gray;
+}
+
+.no-th2{
+  padding: 20px 25px;
+  border-right: 1px solid gray;
+}
+
+.date-th{
+  padding: 20px 25px;
+  border-right: 1px solid gray;
+}
+
+.assets-th{
+  padding: 20px 25px;
+  padding-right: 250px;
+  border-right: 1px solid gray;
+}
+
+.buttons-th{
+  padding: 20px 25px;
+  border-right: 1px solid gray;
+}
+
+.expenses-content-table2 tbody tr{
     border-bottom: 1px solid grey;
 
 }
-.expenses-content-table tbody tr:nth-of-type(even){
+.expenses-content-table2 tbody tr:nth-of-type(even){
     background-color: rgb(230, 230, 230);
 }
-.expenses-content-table tbody tr:last-of-type{
+.expenses-content-table2 tbody tr:last-of-type{
     border-bottom: 3px solid rgb(13,202,240);
 }
 
-.action-buttons-btn1{
+.action2-buttons-btn1{
   border: none;
   padding: 5px;
   background-color: grey;
   color: white;
   font-weight: bold;
 }
-.action-buttons{
+.action2-buttons{
 display: flex;
 align-items: center;
 justify-content: center;
@@ -101,7 +143,7 @@ padding: 5px;
 }
 
 
-.action-buttons-btn2{
+.action2-buttons-btn2{
   border: none;
   padding: 5px;
   background-color: rgb(214, 11, 11);
@@ -110,21 +152,21 @@ padding: 5px;
   font-weight: bold;
 }
 
-.tax-include-btn1{
-  background-color: rgb(198, 18, 18);
+.tax-include2-btn1{
+  background-color: green;
   padding: 3px;
   border: none;
   color: white;
   font-weight: bold;
 }
 
-.header-tags{
+.header-tags2{
   display: flex;
   justify-content: space-between;
   /* padding-right: 20px; */
 }
 
-.header-tags button{
+.header-tags2 button{
   border: none;
   color: white;
   padding: 5px;

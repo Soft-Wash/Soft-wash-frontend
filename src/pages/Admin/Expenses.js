@@ -1,5 +1,6 @@
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 import "../../styles/Admin/Expenses.css";
+import { Link } from "react-router-dom";
 
 function Expenses() {
   return (
@@ -8,7 +9,16 @@ function Expenses() {
         <AdminSidebar />
         <div className="expenses-container">
           <div className="expenses-container-innerd">
+            <div className="header-tags">
             <h3>Expenses</h3>
+            <Link to="/newexpenses">
+            <button>
+              Add New
+            </button>
+            </Link>
+
+            </div>
+
             <hr className="expenses-hr" />
             <div className="expenses-table-content">
               <div className="show-container">
@@ -42,16 +52,22 @@ function Expenses() {
 
                       <th>Fuel</th>
                       <th>
+
                         <button className="tax-include-btn1">No</button>
+
                       </th>
                       <th>Cash</th>
                       <th>
+                        <div className="d-flex">
                         <button className="action-buttons-btn1">Edit</button>
                         <button className="action-buttons-btn2">Delete</button>
+                        </div>
+
                       </th>
                     </tr>
                   </tbody>
                 </table>
+                <p>showing 1 0f 1 of 1 entries</p>
               </div>
             </div>
           </div>
