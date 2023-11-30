@@ -48,6 +48,7 @@ import AddNewExpenses from "./pages/Admin/AddNewExpenses";
 import ExpenseCategory from "./pages/Admin/ExpenseCategory";
 import SalesReport from "./pages/Admin/SalesReport";
 import OrderReport from "./pages/Admin/OrderReport";
+import ExpenseReport from "./pages/Admin/ExpenseReport";
  
 
 
@@ -108,9 +109,9 @@ function App() {
         <Route path="/expensescategory" element={<ExpenseCategory/>}/>
         <Route path="/salesreport" element={<SalesReport/>}/>
         <Route path="/orderreport" element={<OrderReport/>}/>
+        <Route path="/expensereport" element={<ExpenseReport/>}/>
 
         {/* SUPERVISOR ROUTES */}
-
         <Route path="/SupervisorDash-Board" element={<SupervisorDashBoard/>}/>
         <Route path ="/SupervisorDash" element ={<SupervisorDash/>}/>
 
