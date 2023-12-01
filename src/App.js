@@ -49,6 +49,7 @@ import ExpenseCategory from "./pages/Admin/ExpenseCategory";
 import SalesReport from "./pages/Admin/SalesReport";
 import OrderReport from "./pages/Admin/OrderReport";
 import ExpenseReport from "./pages/Admin/ExpenseReport";
+import SingleOrder from "./pages/Admin/SingleOrder";
  
 
 
@@ -110,6 +111,7 @@ function App() {
         <Route path="/salesreport" element={<SalesReport/>}/>
         <Route path="/orderreport" element={<OrderReport/>}/>
         <Route path="/expensereport" element={<ExpenseReport/>}/>
+        <Route path="/adminsingleorder/:_id" element={<SingleOrder/>}/>
 
         {/* SUPERVISOR ROUTES */}
         <Route path="/SupervisorDash-Board" element={<SupervisorDashBoard/>}/>

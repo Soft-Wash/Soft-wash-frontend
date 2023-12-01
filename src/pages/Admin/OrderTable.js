@@ -3,6 +3,7 @@ import AdminSidebar from "../../components/Admin/AdminSidebar";
 import "../../styles/Admin/tableorder.css";
 import { axiosInstance } from "../../services/AxiosInstance";
 import { useState } from "react";
+import { Link } from "react-router-dom"
 
 function OderTable() {
   const [orders, setOrders] = useState();
@@ -65,6 +66,7 @@ function OderTable() {
                 <th>Addresss</th>
                 <th>SubTotal</th>
                 <th>Status</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -76,7 +78,18 @@ function OderTable() {
                     <th>{item?.customer_id?.fullName}</th>
                     <th>{item?.deliveryAddress[0]?.FullAddress}</th>
                     <th>{item?.subtotal}</th>
-                    <th>{item?.status}</th>
+                    <th className="allorders-status-th">
+                      <button> {item?.status}</button>
+                      </th>
+                      <th>
+                      <div className="d-flex">
+                        <Link to={`/adminsingleorder/${item._id}`}>
+                        <button className="action-buttons-btn1">View</button>
+                        </Link>
+
+                        <button className="action-buttons-btn2">Print</button>
+                        </div>
+                      </th>
                   </tr>
                 ))}
             </tbody>
