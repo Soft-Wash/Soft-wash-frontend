@@ -35,36 +35,35 @@ function SupervisorDash() {
                 <hr className="dashboard-line" />
     
                 <section1 className="HeaderCards-Container mb-4">
-                    <div className="sup-Card washman-blue">
+                    <div className=" AllOrder sup-Card washman-blue">
                         <FaClipboardList className="supervisor-dashboard-icons "/>
                         <div>
                             <h5>All Orders</h5>
                             <h5>3</h5>
                         </div>
                     </div>
-                    <Link to ="/"></Link>
-                    <div className="sup-Card washman-purple">
+                    <div className="AllUsers sup-Card washman-purple">
                         <FaRegUser className="supervisor-dashboard-icons "/>
                         <div>
                             <h5>All Users</h5>
                             <h5>3</h5>
                         </div>
                     </div>
-                    <div className="sup-Card washman-green">
+                    <div className="FrontDesk sup-Card washman-green">
                         <FaChalkboardUser className="supervisor-dashboard-icons "/>
                         <div>
                             <h5>FrontDesk</h5>
                             <h5>3</h5>
                         </div>
                     </div>
-                    <div className="sup-Card washman-blue">
+                    <div className="Washman sup-Card washman-blue">
                         <FaChalkboardUser className="supervisor-dashboard-icons "/>
                         <div>
                             <h5>Washman</h5>
                             <h5>3</h5>
                         </div>
                     </div>
-                    <div className="sup-Card washman-green">
+                    <div className="Inventory sup-Card washman-green">
                         <FaChalkboardUser className="supervisor-dashboard-icons "/>
                         <div>
                             <h5>Inventory</h5>
