@@ -41,6 +41,29 @@ function OderTable() {
     fetchData();
   }, [selectedOption]);
 
+
+  const getStatusColorClass = (status) => {
+    switch (status) {
+      case 'order placed':
+        return 'order-placed';
+      case 'Received':
+        return 'received-color';
+      case 'Cleaning':
+        return 'Cleaning-color';
+      case 'Confirmed':
+          return 'confirmed-color';  
+      case 'Shipped':
+            return 'shipped-color'; 
+      case 'Ready':
+            return 'ready-color'
+      case 'Delivered':
+            return 'delivered-color'          
+
+      default:
+        return ''; 
+    }
+  };
+
   return (
     <div>
       <div className="d-flex">
@@ -79,7 +102,7 @@ function OderTable() {
                     <th>{item?.deliveryAddress[0]?.FullAddress}</th>
                     <th>{item?.subtotal}</th>
                     <th className="allorders-status-th">
-                      <button> {item?.status}</button>
+                      <button className={`status-button ${getStatusColorClass(item?.status)}`}> {item?.status}</button>
                       </th>
                       <th>
                       <div className="d-flex">

@@ -53,7 +53,49 @@
 
 .allorders-status-th button{
   white-space: nowrap;
-  border-radius: 20px;
-  padding-right: 5px;
-  padding-left: 5px;
+  border-radius: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  color: white;
+  font-weight: bold;
+  border: none;
+
+}
+
+
+
+.pending-color {
+  background-color: yellow; 
+}
+
+.processing-color {
+  background-color: orange; 
+}
+
+.shipped-color {
+  background-color: rgb(0, 68, 255); 
+}
+
+.confirmed-color {
+  background-color: rgb(93, 217, 93); 
+}
+
+.received-color{
+  background-color: purple;
+}
+
+.order-placed{
+  background-color: rgb(127, 127, 127);
+}
+
+.Cleaning-color{
+  background-color: rgb(240, 163, 8); 
+}
+
+.ready-color{
+background-color: green;
+}
+
+.delivered-color{
+  background-color: rgb(11, 20, 185); 
 }
