@@ -42,7 +42,7 @@ import Washman from "./pages/Admin/Washman";
 import Register from "./pages/Admin/RegisterEmployee"
 import Iventry from "./pages/Admin/Iventry";
 import CartPayment from "./pages/MarketPlace/CartPayment";
-import SupervisorDash from "./pages/SupervisorPage/SupervisorDash";
+import WashmanLeavePage from "./pages/Washman Pages/WashmanLeavePage";
  
 
 
@@ -89,6 +89,8 @@ function App() {
         <Route path="/washman-dashboard" element={<WashmanDashboardPage/>}/>
         <Route path="/washman-single-order/:_id" element={<WashmanSingleOrderPage/>}/>
         <Route path="/washman-edit-profile" element={<WashmanEditProfilePage/>}/>
+        <Route path="/washman-leave" element={<WashmanLeavePage />}/>
+        
 
         {/* Admin Routes */}
         <Route path="/admindashboard" element={<AdminDashboard/>}/>
@@ -102,7 +104,7 @@ function App() {
         {/* SUPERVISOR ROUTES */}
 
         <Route path="/SupervisorDash-Board" element={<SupervisorDashBoard/>}/>
-        <Route path ="/SupervisorDash" element ={<SupervisorDash/>}/>
+        {/* <Route path ="/SupervisorDash" element ={<SupervisorDash/>}/> */}
 
       </Routes>
     </BrowserRouter>
