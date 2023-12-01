@@ -47,7 +47,8 @@ axiosInstance.get(`/expense/${_id}`)
     });
   };
 
-  console.log(paramsData);
+
+
 
 
   return (

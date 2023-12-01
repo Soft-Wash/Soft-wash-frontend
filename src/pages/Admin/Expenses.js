@@ -30,6 +30,16 @@ function Expenses() {
   };
 
 
+  const DeleteExpense =(_id)=>{
+    axiosInstance.delete(`/expense/${_id}/delete`)
+    .then((resp)=>{
+      console.log(resp.data)
+      setExpenses((prevItems) =>
+      prevItems.filter((item) => item._id !== _id)
+    );
+    })
+  }
+
   return (
     <div>
       <div className="d-flex">
@@ -91,7 +101,7 @@ function Expenses() {
                         <button className="action-buttons-btn1">Edit</button>
                         </Link>
 
-                      <button className="action-buttons-btn2">Delete</button>
+                      <button className="action-buttons-btn2" onClick={()=>DeleteExpense(item._id)}>Delete</button>
                       </div>
 
                     </th>
