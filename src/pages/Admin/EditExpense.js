@@ -1,54 +1,77 @@
+import { useEffect } from "react";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 import { axiosInstance } from "../../services/AxiosInstance";
-import "../../styles/Admin/NewExpenses.css";
+import "../../styles/Admin/EditExpense.css";
 
-function AddNewExpenses() {
-  const [expenseDetails, setExpenseDetails] = useState({
-  });
+function EditExpense() {
+  const [paramsData,setParamsData]=useState()
+  const DataId = useParams()
+  const _id = DataId._id
+  console.log(_id)
+
+  useEffect(()=>{
+axiosInstance.get(`/expense/${_id}`)
+.then((resp)=>{
+  console.log(resp.data)
+  setParamsData({
+    expenseId:resp.data._id,
+    date:resp.data.date,
+    amount:resp.data.amount,
+    category:resp.data.category,
+    payment_method:resp.data.payment_method,
+    note:resp.data.note,
+    tax_include:resp.data.tax_include
+  })
+
+})
+  },[])
+
+
 
   const HandleExpense = (e) => {
     const value =
-    e.target.type === "checkbox"
-      ? e.target.checked
-      : e.target.type === "file"
-      ? e.target.files[0]
-      : e.target.value;
+      e.target.type === "checkbox"
+        ? e.target.checked
+        : e.target.type === "file"
+        ? e.target.files[0]
+        : e.target.value;
 
-    setExpenseDetails({ ...expenseDetails, [e.target.name]: value});
+        setParamsData({ ...paramsData, [e.target.name]: value });
   };
 
-  const postExpense=()=>{
-    axiosInstance.post('/expense/create',expenseDetails)
-    .then((resp)=>{
-      console.log(resp.data)
+  const postExpense = () => {
+    axiosInstance.put(`/expense/${_id}/update`, paramsData).then((resp) => {
+      console.log(resp.data);
+    });
+  };
 
-    })
-  }
+  console.log(paramsData);
 
-  console.log(expenseDetails)
 
   return (
     <div>
-      <div className="new-expenses-container d-flex">
+      <div className="edit-expenses-container d-flex">
         <AdminSidebar />
-        <div className="new-expenses-container-innerd">
+        <div className="edit-expenses-container-innerd">
           <h4>Add Expense</h4>
           <hr className="addexpenses-hr" />
-          <div className="addexpenses-table-content">
-            <div className="addexpenses-details-div">
-              <div className="expenses-details-div-header">
+          <div className="editexpenses-table-content">
+            <div className="editexpenses-details-div">
+              <div className="editexpenses-details-div-header">
                 <p> Expenses Details</p>
               </div>
-              <div className="expenses-details-div-form">
-                <div className="expenses-details-div-form-innerd1">
+              <div className="editexpenses-details-div-form">
+                <div className="editexpenses-details-div-form-innerd1">
                   <label htmlFor="">
                     Date <br />
                     <input
                       type="date"
                       name="date"
-                      className="expenses-details-div-form-innerd1-inpt1"
-                      onChange={HandleExpense} 
+                      className="editexpenses-details-div-form-innerd1-inpt1"
+                      onChange={HandleExpense}
+                      value={paramsData?.date}
                     />
                   </label>
                   <label htmlFor="">
@@ -57,19 +80,21 @@ function AddNewExpenses() {
                       type="text"
                       name="amount"
                       placeholder="Enter Expense Amount"
-                      className="expenses-details-div-form-innerd1-inpt2"
-                      onChange={HandleExpense} 
+                      defaultValue={paramsData?.amount}
+                      className="editexpenses-details-div-form-innerd1-inpt2"
+                      onChange={HandleExpense}
                     />
                   </label>
                 </div>
-                <div className="expenses-details-div-form-innerd2">
+                <div className="editexpenses-details-div-form-innerd2">
                   <label htmlFor="">
                     Expense Category <br />
                     <select
                       name="category"
                       id=""
-                      className="expenses-details-div-form-innerd1-selct1"
-                      onChange={HandleExpense} 
+                      className="editexpenses-details-div-form-innerd1-selct1"
+                      onChange={HandleExpense}
+                      value={paramsData?.category}
                     >
                       <option value="" hidden>
                         select category
@@ -85,8 +110,9 @@ function AddNewExpenses() {
                     <select
                       name="payment_method"
                       id=""
-                      className="expenses-details-div-form-innerd1-selct2"
-                      onChange={HandleExpense} 
+                      className="editexpenses-details-div-form-innerd1-selct2"
+                      onChange={HandleExpense}
+                      value={paramsData?.payment_method}
                     >
                       <option value="" hidden>
                         select payment
@@ -102,14 +128,28 @@ function AddNewExpenses() {
                     <div className="checkbox-container">
                       <div className="checkbox-div">
                         <div>
-                          <input className="radio-inpt1" type="radio" name="tax_include" value="no" onChange={HandleExpense}  />
+                          <input
+                            className="radio-inpt1"
+                            type="radio"
+                            name="tax_include"
+                            value="no"
+                            checked={paramsData?.tax_include === "no"}
+                            onChange={HandleExpense}
+                          />
                         </div>
 
                         <p className="checkbox-p1">No</p>
                       </div>
                       <div className="checkbox-div2">
                         <div>
-                          <input className="radio-inpt2" type="radio" name="tax_include" value="yes" onChange={HandleExpense} />
+                          <input
+                            className="radio-inpt2"
+                            type="radio"
+                            name="tax_include"
+                            value="yes"
+                            onChange={HandleExpense}
+                            checked={paramsData?.tax_include === "yes"}
+                          />
                         </div>
                         <p className="checkbox-p2">Yes</p>
                       </div>
@@ -127,13 +167,16 @@ function AddNewExpenses() {
                       cols="30"
                       rows="10"
                       onChange={HandleExpense}
+                      defaultValue={paramsData?.note}
                     ></textarea>
                   </label>
                 </div>
               </div>
             </div>
 
-            <button className="submit-button" onClick={postExpense}>Sumit</button>
+            <button className="submit-button" onClick={postExpense}>
+              Sumit
+            </button>
           </div>
         </div>
       </div>
@@ -141,4 +184,4 @@ function AddNewExpenses() {
   );
 }
 
-export default AddNewExpenses;
+export default EditExpense;
