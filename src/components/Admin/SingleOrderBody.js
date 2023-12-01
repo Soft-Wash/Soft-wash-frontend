@@ -10,7 +10,7 @@ import Col from "react-bootstrap/Col";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { FaCheck } from "react-icons/fa";
 
-function WashmanSingleOrderBody() {
+function SingleOrderBody() {
   const [progress, setProgress] = useState(
     parseFloat(localStorage.getItem("orderProgress")) || 0
   );
@@ -20,6 +20,7 @@ function WashmanSingleOrderBody() {
   const [indexFound, setIndexFound] = useState(0);
 
   const { _id } = useParams();
+  console.log(_id)
 
   const orderStatusArray = [
     "Order Placed",
@@ -129,4 +130,4 @@ function WashmanSingleOrderBody() {
   );
 }
 
-export default WashmanSingleOrderBody;
+export default SingleOrderBody;

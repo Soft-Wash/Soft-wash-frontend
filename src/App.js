@@ -43,6 +43,14 @@ import Register from "./pages/Admin/RegisterEmployee"
 import Iventry from "./pages/Admin/Iventry";
 import CartPayment from "./pages/MarketPlace/CartPayment";
 import SupervisorDash from "./pages/SupervisorPage/SupervisorDash";
+import Expenses from "./pages/Admin/Expenses";
+import AddNewExpenses from "./pages/Admin/AddNewExpenses";
+import ExpenseCategory from "./pages/Admin/ExpenseCategory";
+import SalesReport from "./pages/Admin/SalesReport";
+import OrderReport from "./pages/Admin/OrderReport";
+import ExpenseReport from "./pages/Admin/ExpenseReport";
+import SingleOrder from "./pages/Admin/SingleOrder";
+import EditExpense from "./pages/Admin/EditExpense";
  
 
 
@@ -98,9 +106,16 @@ function App() {
         <Route path="/supervisor/:roldId" element={<Supervisor/>}/>
         <Route path="/washman/:roldId" element={<Washman/>}/>
         <Route path="/registeremployee" element={<Register/>}/>
+        <Route path="/expenses" element={<Expenses/>}/>
+        <Route path="/newexpenses" element={<AddNewExpenses/>}/>
+        <Route path="/expensescategory" element={<ExpenseCategory/>}/>
+        <Route path="/salesreport" element={<SalesReport/>}/>
+        <Route path="/orderreport" element={<OrderReport/>}/>
+        <Route path="/expensereport" element={<ExpenseReport/>}/>
+        <Route path="/adminsingleorder/:_id" element={<SingleOrder/>}/>
+        <Route path="/editexpense/:_id" element={<EditExpense/>}/>
 
         {/* SUPERVISOR ROUTES */}
-
         <Route path="/SupervisorDash-Board" element={<SupervisorDashBoard/>}/>
         <Route path ="/SupervisorDash" element ={<SupervisorDash/>}/>
 

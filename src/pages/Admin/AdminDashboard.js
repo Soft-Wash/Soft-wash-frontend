@@ -81,7 +81,7 @@ const supervisors = getEmployeesId('supervisor')
     <FaClipboardList className="clipboard-icon"/>
     </div>
     <div className="icon-container-innerd2">
-        <p>Total Employees</p>
+        <p>Employees</p>
         <p>{Employees?.length}</p>
     </div>
   </div>
@@ -91,7 +91,7 @@ const supervisors = getEmployeesId('supervisor')
     </div>
     <div className="icon-container-innerd2">
       <Link className="order-dashboard-link" to={`/frontdesk/${FrontDesk[0]}`}>
-      <p>Total Front desks</p>
+      <p>Front desks</p>
         <p>{FrontDesk?.length || 0}</p>
       </Link>
 
@@ -103,7 +103,7 @@ const supervisors = getEmployeesId('supervisor')
     </div>
     <div className="icon-container-innerd2">
       <Link  className="order-dashboard-link" to={`/washman/${washman[0]}`}>
-      <p>Total Washmans</p>
+      <p>Washmen</p>
         <p>{washman?.length || 0}</p>
       </Link>
 
@@ -116,7 +116,7 @@ const supervisors = getEmployeesId('supervisor')
     </div>
     <div className="icon-container-innerd2">
       <Link  className="order-dashboard-link" to={`/supervisor/${supervisors[0]}`}>
-      <p>Total supervisors</p>
+      <p>supervisors</p>
         <p>{supervisors?.length}</p>
       </Link>
 
@@ -127,7 +127,7 @@ const supervisors = getEmployeesId('supervisor')
     <FaClipboardList className="clipboard-icon"/>
     </div>
     <div className="icon-container-innerd2">
-        <p>Total Customers</p>
+        <p>Customers</p>
         <p>{Customers?.length}</p>
     </div>
   </div>
@@ -136,7 +136,7 @@ const supervisors = getEmployeesId('supervisor')
     <FaClipboardList className="clipboard-icon"/>
     </div>
     <div className="icon-container-innerd2">
-        <p>Total Branches</p>
+        <p>Branches</p>
         <p>{branches?.length}</p>
     </div>
   </div>
@@ -156,7 +156,7 @@ const supervisors = getEmployeesId('supervisor')
  
     <div className="icon-container-innerd2">
     <Link className="order-dashboard-link" to="/ordertable">
-        <p>Total Orders</p>
+        <p>Orders</p>
         <p>{orders?.length}</p>
         </Link>
     </div>
