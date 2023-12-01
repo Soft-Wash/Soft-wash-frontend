@@ -1,8 +1,45 @@
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 import "../../styles/Admin/Expenses.css";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import { axiosInstance } from "../../services/AxiosInstance";
 
 function Expenses() {
+
+  const [expenses,setExpenses] = useState()
+
+  useEffect(()=>{
+    axiosInstance.get('/expense/')
+    .then((resp)=>{
+      setExpenses(resp.data)
+
+    })
+  },[])
+
+
+  const getStatusColorClass = (tax) => {
+    switch (tax) {
+      case 'yes':
+        return 'tax-include-btn2';
+      case 'no':
+        return 'tax-include-btn1';         
+      default:
+        return ''; 
+    }
+  };
+
+
+  const DeleteExpense =(_id)=>{
+    axiosInstance.delete(`/expense/${_id}/delete`)
+    .then((resp)=>{
+      console.log(resp.data)
+      setExpenses((prevItems) =>
+      prevItems.filter((item) => item._id !== _id)
+    );
+    })
+  }
+
   return (
     <div>
       <div className="d-flex">
@@ -45,26 +82,32 @@ function Expenses() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th>1</th>
-                      <th>08-dec-23</th>
-                      <th>100</th>
+                    {expenses && expenses.map((item)=>(
+                    <tr key={item._id}>
+                    <th>1</th>
+                    <th>{item.date}</th>
+                    <th>{item.amount}</th>
 
-                      <th>Fuel</th>
-                      <th>
+                    <th>{item.category}</th>
+                    <th>
 
-                        <button className="tax-include-btn1">No</button>
+                      <button className={`tax-include-btn1 ${getStatusColorClass(item?.tax_include)}`}>{item.tax_include}</button>
 
-                      </th>
-                      <th>Cash</th>
-                      <th>
-                        <div className="d-flex">
+                    </th>
+                    <th>{item.payment_method}</th>
+                    <th>
+                      <div className="d-flex">
+                        <Link to={`/editexpense/${item._id}`}>
                         <button className="action-buttons-btn1">Edit</button>
-                        <button className="action-buttons-btn2">Delete</button>
-                        </div>
+                        </Link>
 
-                      </th>
-                    </tr>
+                      <button className="action-buttons-btn2" onClick={()=>DeleteExpense(item._id)}>Delete</button>
+                      </div>
+
+                    </th>
+                  </tr>
+                    ))}
+
                   </tbody>
                 </table>
                 <p>showing 1 0f 1 of 1 entries</p>

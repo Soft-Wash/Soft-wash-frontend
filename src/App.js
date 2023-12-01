@@ -50,6 +50,7 @@ import SalesReport from "./pages/Admin/SalesReport";
 import OrderReport from "./pages/Admin/OrderReport";
 import ExpenseReport from "./pages/Admin/ExpenseReport";
 import SingleOrder from "./pages/Admin/SingleOrder";
+import EditExpense from "./pages/Admin/EditExpense";
  
 
 
@@ -112,6 +113,7 @@ function App() {
         <Route path="/orderreport" element={<OrderReport/>}/>
         <Route path="/expensereport" element={<ExpenseReport/>}/>
         <Route path="/adminsingleorder/:_id" element={<SingleOrder/>}/>
+        <Route path="/editexpense/:_id" element={<EditExpense/>}/>
 
         {/* SUPERVISOR ROUTES */}
         <Route path="/SupervisorDash-Board" element={<SupervisorDashBoard/>}/>

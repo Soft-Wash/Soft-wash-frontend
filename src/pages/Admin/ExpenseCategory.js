@@ -1,16 +1,59 @@
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 import "../../styles/Admin/ExpenseCategory.css";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
+import { axiosInstance } from "../../services/AxiosInstance";
+import { useEffect,useState } from "react";
 
 function ExpenseCategory() {
   const [show, setShow] = useState(false);
+  const [expenseData,setExpenseData]=useState({})
+  const [expenses,setExpenses] = useState()
+  const [expenseResp,setExpenseResp]=useState()
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+
+  useEffect(()=>{
+    axiosInstance.get('/expensecategory/')
+    .then((resp)=>{
+      setExpenses(resp.data)
+
+    })
+  },[])
+
+  const handleInputChange=(e)=>{
+    const value = 
+    e.target.type ==="checkbox"
+    ? e.target.checked
+    : e.target.type === "file"
+    ? e.target.files[0]
+    : e.target.value
+
+    setExpenseData({...expenseData, [e.target.name]:value});
+  }
+
+
+  const postExpense=()=>{
+    axiosInstance.post('/expensecategory/create',expenseData)
+    .then((resp)=>{
+      setExpenseResp(resp.data)
+    })
+  }
+
+  const DeleteExpense =(_id)=>{
+    axiosInstance.delete(`/expensecategory/${_id}/delete`)
+    .then((resp)=>{
+      console.log(resp.data)
+      setExpenses((prevItems) =>
+      prevItems.filter((item) => item._id !== _id)
+    );
+    })
+  }
+
 
   return (
     <div>
@@ -30,7 +73,9 @@ function ExpenseCategory() {
                   <Form.Control
                     type="text"
                     placeholder="Enter Category Name"
+                    name="name"
                     autoFocus
+                    onChange={handleInputChange}
                   />
                 </Form.Group>
                 <Form.Group
@@ -38,17 +83,17 @@ function ExpenseCategory() {
                   controlId="exampleForm.ControlTextarea1"
                 >
                   <Form.Label>Category Type</Form.Label>
-                  <Form.Control as="select" autoFocus>
+                  <Form.Control as="select" autoFocus  onChange={handleInputChange} name="category_type">
                   <option value="" hidden>Select Category Type</option>
-                    <option value="option1">Lability</option>
-                    <option value="option2">Assets</option>
+                    <option value="lability">Lability</option>
+                    <option value="assets">Assets</option>
 
                   </Form.Control>
                 </Form.Group>
               </Form>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="info text-white" onClick={handleClose}>
+              <Button variant="info text-white" onClick={postExpense}>
                 Sumit
               </Button>
             </Modal.Footer>
@@ -87,21 +132,24 @@ function ExpenseCategory() {
                     </tr>
                   </thead>
                   <tbody>
+                    {expenses && expenses.map((item)=>(
                     <tr className="table-tr">
-                      <th className="no-th2">1</th>
-                      <th className="date-th">Chemical</th>
-                      <th className="assets-th">
-                        <button className="tax-include2-btn1">Asset</button>
-                      </th>
-                      <th className="buttons-th">
-                        <div className="d-flex">
-                          <button className="action2-buttons-btn1">Edit</button>
-                          <button className="action2-buttons-btn2">
-                            Delete
-                          </button>
-                        </div>
-                      </th>
-                    </tr>
+                    <th className="no-th2">1</th>
+                    <th className="date-th">{item.name}</th>
+                    <th className="assets-th">
+                      <button className="tax-include2-btn1">{item.category_type}</button>
+                    </th>
+                    <th className="buttons-th">
+                      <div className="d-flex">
+                        <button className="action2-buttons-btn1">Edit</button>
+                        <button className="action2-buttons-btn2" onClick={()=>DeleteExpense(item._id)}>
+                          Delete
+                        </button>
+                      </div>
+                    </th>
+                  </tr>
+                    ))}
+
                   </tbody>
                 </table>
                 <p>showing 1 0f 1 of 1 entries</p>
