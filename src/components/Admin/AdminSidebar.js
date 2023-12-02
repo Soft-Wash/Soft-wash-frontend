@@ -19,14 +19,26 @@ function AdminSidebar(){
             <NavLink exact to="/admindashboard" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/tables" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Tables</CDBSidebarMenuItem>
-            </NavLink>
             <NavLink exact to="/profile" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/registeremployee" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">Create Employee</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/expenses" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line">Expenses</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/expensescategory" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line">Expense Category</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/salesreport" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line">Sales Report</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/orderreport" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line">Order Report</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/expensereport" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line">Expense Report</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/iventry" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">Iventry Managment</CDBSidebarMenuItem>

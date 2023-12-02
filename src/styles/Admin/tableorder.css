@@ -3,6 +3,7 @@
 .ordertable-div{
   padding-left: 20px;
   padding-top: 20px;
+  padding-right: 20px;
 }  
   .ordertbale-content-table{
     border-collapse: collapse;
@@ -24,7 +25,7 @@
 
 .ordertbale-content-table th,
 .ordertbale-content-table td{
-    padding: 20px 25px;
+    padding: 20px 15px;
     border-right: 1px solid gray;
 }
 .ordertbale-content-table tbody tr{
@@ -47,4 +48,54 @@
 .select-dropdown{
   width: 150px;
   border: 1px solid grey;
+}
+
+
+.allorders-status-th button{
+  white-space: nowrap;
+  border-radius: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  color: white;
+  font-weight: bold;
+  border: none;
+
+}
+
+
+
+.pending-color {
+  background-color: yellow; 
+}
+
+.processing-color {
+  background-color: orange; 
+}
+
+.shipped-color {
+  background-color: rgb(0, 68, 255); 
+}
+
+.confirmed-color {
+  background-color: rgb(93, 217, 93); 
+}
+
+.received-color{
+  background-color: purple;
+}
+
+.order-placed{
+  background-color: rgb(127, 127, 127);
+}
+
+.Cleaning-color{
+  background-color: rgb(240, 163, 8); 
+}
+
+.ready-color{
+background-color: green;
+}
+
+.delivered-color{
+  background-color: rgb(11, 20, 185); 
 }
