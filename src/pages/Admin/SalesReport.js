@@ -1,7 +1,41 @@
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 import "../../styles/Admin/SalesReport.css";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
+import { axiosInstance } from "../../services/AxiosInstance";
 
 function SalesReport() {
+  const [salesReportData, setSalesReportData] = useState();
+  const [reporData, setReporData] = useState({});
+
+  const HandleSalesReport = (e) => {
+    const value = e.target.value;
+
+    setReporData({ ...reporData, [e.target.name]: value });
+  };
+
+  const SubmitDates = () => {
+    console.log(reporData);
+
+    const { startDate, endDate } = reporData;
+
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/cartorder/shop/sales/report`, {
+        params: {
+          startDate,
+          endDate,
+        },
+      })
+      .then((resp) => {
+        console.log(resp.data);
+        setSalesReportData(resp.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <div>
       <div className="d-flex">
@@ -18,14 +52,27 @@ function SalesReport() {
                 <div className="form-data">
                   <label htmlFor="" className="form-data-label1">
                     Start Date <br />
-                    <input className="form-data-inpt1" type="date" />
+                    <input
+                      className="form-data-inpt1"
+                      type="date"
+                      name="startDate"
+                      onChange={HandleSalesReport}
+                    />
                   </label>
                   <label htmlFor="" className="form-data-label2">
                     End Date <br />
-                    <input className="form-data-inpt2" type="date" />
+                    <input
+                      className="form-data-inpt2"
+                      type="date"
+                      name="endDate"
+                      onChange={HandleSalesReport}
+                    />
                   </label>
                 </div>
               </div>
+              <button className="sales-Sort-button" onClick={SubmitDates}>
+                Submit
+              </button>
             </div>
             <div className="sales-table-content">
               <div className="show-container">
@@ -46,24 +93,33 @@ function SalesReport() {
                       <th>Date</th>
                       <th>Customer</th>
                       <th>Subtotal</th>
-                      <th>Addon Total</th>
                       <th>Discount</th>
                       <th>Tax Amount</th>
-                      <th>Gross Amount</th> 
-
+                      <th>Gross Amount</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th>1</th>
-                      <th>08-dec-23</th>
-                      <th>100</th>
+                    {salesReportData?.length < 1 ? (
+                      <tr>
+                        <td colSpan="6" className="no-data-message">
+                          No data available
+                        </td>
+                      </tr>
+                    ) : (
+                      salesReportData &&
+                      salesReportData.map((item) => (
+                        <tr key={item._id}>
+                          <th>1</th>
+                          <th>{item?.date_created}</th>
+                          <th>{item?.customer_id.fullName}</th>
 
-                      <th>Fuel</th>
-                      <th>food</th>
-                      <th>Cash</th>
-                      <th>money</th>
-                    </tr>
+                          <th>{item?.total}</th>
+                          <th>{item?.discount || "Nil"}</th>
+                          <th>{item?.tax_amount || "N10"}</th>
+                          <th>{item?.total}</th>
+                        </tr>
+                      ))
+                    )}
                   </tbody>
                 </table>
                 <p>showing 1 0f 1 of 1 entries</p>

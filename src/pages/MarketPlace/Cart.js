@@ -141,12 +141,6 @@ useEffect(()=>{
   const result = CalculateTotal(cartItems);
 },[cartItems])
 
-// const UpdatedTotal=(cartId)=>{
-//   axiosInstance.put(`/cart/${cartId}/cartitem/update`, totalprice).then((resp) => {     
-//     console.log(resp.data)
-
-//    });
-// }
 
 
   return (
@@ -251,12 +245,15 @@ useEffect(()=>{
           </div>
           <div className="sub-total-div-inner2 col col-12 col-md-6 col-lg-6 ">
             <h4>Subtotal:&#8358; {totalprice}</h4>
+            <Link to="/cartpayment">
             <Button
               variant="secondary"
               className="checkout-button bg-info border-0"
             >
               Checkout
             </Button>{" "}
+            </Link>
+
           </div>
         </div>
       </Container>
