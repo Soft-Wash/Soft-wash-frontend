@@ -44,32 +44,32 @@ function OderTable() {
     getOrderStatus();
   }, [selectedOption, statusSelect]);
 
-  // const getOrderStatus = () => {
-  //   axios?.get(`${process.env.REACT_APP_BASE_URL}/order/status?status=${statusSelect}`).then((resp) => {
-  //     console.log(statusSelect);
-  //     console.log(resp.data);
-  //     setStatusData(resp.data);
-  //   });
-  // };
-
   const getOrderStatus = () => {
-    if (!statusSelect) {
-      console.error("Status is not defined.");
-      return;
-    }
-  
-    axios
-      ?.get(`${process.env.REACT_APP_BASE_URL}/order/status?status=${statusSelect}`)
-      .then((resp) => {
-        console.log(statusSelect);
-        console.log(resp.data);
-        setStatusData(resp.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching order status:", error);
-        // Handle the error as needed.
-      });
+    axios?.get(`${process.env.REACT_APP_BASE_URL}/order/status?status=${statusSelect}`).then((resp) => {
+      console.log(statusSelect);
+      console.log(resp.data);
+      setStatusData(resp.data);
+    });
   };
+
+  // const getOrderStatus = () => {
+  //   if (!statusSelect) {
+  //     console.error("Status is not defined.");
+  //     return;
+  //   }
+  
+  //   axios
+  //     ?.get(`${process.env.REACT_APP_BASE_URL}/order/status?status=${statusSelect}`)
+  //     .then((resp) => {
+  //       console.log(statusSelect);
+  //       console.log(resp.data);
+  //       setStatusData(resp.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching order status:", error);
+  //       // Handle the error as needed.
+  //     });
+  // };
   
   const getStatusColorClass = (status) => {
     switch (status) {
