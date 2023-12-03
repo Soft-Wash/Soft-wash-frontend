@@ -51,6 +51,9 @@ import OrderReport from "./pages/Admin/OrderReport";
 import ExpenseReport from "./pages/Admin/ExpenseReport";
 import SingleOrder from "./pages/Admin/SingleOrder";
 import EditExpense from "./pages/Admin/EditExpense";
+import CreateSupUsers from "./pages/SupervisorPage/CreateSupUsers";
+import SupOrderTable from "./pages/SupervisorPage/SupOrderTable";
+
  
 
 
@@ -116,8 +119,10 @@ function App() {
         <Route path="/editexpense/:_id" element={<EditExpense/>}/>
 
         {/* SUPERVISOR ROUTES */}
-        <Route path="/SupervisorDash-Board" element={<SupervisorDashBoard/>}/>
+        <Route path ="/CreateSupUsers" element ={<CreateSupUsers/>}/>
+        <Route path ="/SupOrderTable" element ={<SupOrderTable/>}/>
         <Route path ="/SupervisorDash" element ={<SupervisorDash/>}/>
+
 
       </Routes>
     </BrowserRouter>

@@ -14,14 +14,14 @@ function SupervisorSideBar() {
 
             <CDBSidebarContent className="sidebar-content">
                 <CDBSidebarMenu>
-                    <NavLink exact to="/" activeClassName="activeClicked">
+                    <NavLink exact to="/SupervisorDash" activeClassName="activeClicked">
                         <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
                     </NavLink>
-                    <NavLink exact to="/ordertable" activeClassName="activeClicked">
+                    <NavLink exact to="/SupOrderTable" activeClassName="activeClicked">
                         <CDBSidebarMenuItem icon="table">View Orders</CDBSidebarMenuItem>
                     </NavLink>
-                    <NavLink exact to="" activeClassName="activeClicked">
-                        <CDBSidebarMenuItem icon="user">Users</CDBSidebarMenuItem>
+                    <NavLink exact to="/CreatesupUsers" activeClassName="activeClicked">
+                        <CDBSidebarMenuItem icon="user">Create User</CDBSidebarMenuItem>
                     </NavLink>
                     <NavLink exact to="/tables" activeClassName="activeClicked">
                         <CDBSidebarMenuItem icon="table">Manage Payments</CDBSidebarMenuItem>

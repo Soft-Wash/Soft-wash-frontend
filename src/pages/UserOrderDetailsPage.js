@@ -12,7 +12,7 @@ function UserOrderDetailsPage(){
 
             <div className='user-dashboard-content d-flex'>
             <Sidebar />
-                <OrderDetailsBody />
+            <OrderDetailsBody />
             </div>
         </div>
     )
