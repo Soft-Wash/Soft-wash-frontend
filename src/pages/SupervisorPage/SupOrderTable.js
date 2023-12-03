@@ -32,35 +32,8 @@ function OderTable() {
     }
   };
 
-// const fetchRoleById = async (roleId) => {
-//     try {
-//       const response = axiosInstance.get(`/roles/${roleId}`);
-//       return response.data;
-//     } catch (error) {
-//       console.error("Error fetching role by ID:", error);
-//       return null;
-//     }
-//   };
+  const targetBranchId = '655debc4ec7b0b6e0f591bf7';
 
-// const fetchData = (id) => {
-//     if (selectedOption === "All Orders") {
-//       axiosInstance.get(`/order/${id}`).then((resp) => {
-//         setOrders(resp.data);
-//       });
-//     } else if (selectedOption === "Daily Orders") {
-//       axiosInstance.get(`/order/day/${id}`).then((resp) => {
-//         setOrders(resp.data);
-//       });
-//     } else if (selectedOption === "Weekly Orders") {
-//       axiosInstance.get(`/order/week/${id}`).then((resp) => {
-//         setOrders(resp.data);
-//       });
-//     } else if (selectedOption === "Monthly Orders") {
-//       axiosInstance.get(`/order/month/${id}`).then((resp) => {
-//         setOrders(resp.data);
-//       });
-//     }
-//   };
 
   const handleSelectChange = (e) => {
     setSelectedOption(e.target.value);
@@ -118,12 +91,16 @@ function OderTable() {
                 <th>Addresss</th>
                 <th>SubTotal</th>
                 <th>Status</th>
+                <th>Date Ordered</th>
                 <th>Action</th>
               </tr>
             </thead>
+            
             <tbody>
               {orders &&
-                orders.map((item) => (
+                orders
+                
+                .map((item) => (
                   <tr key={item._id}>
                     <th>{item._id.substring(0, item._id.length / 2)}</th>
                     <th>{item?.branch_id?.name}</th>
@@ -133,6 +110,7 @@ function OderTable() {
                     <th className="allorders-status-th">
                       <button className={`status-button ${getStatusColorClass(item?.status)}`}> {item?.status}</button>
                       </th>
+                    <th>{item?.date_created}</th>
                       <th>
                       <div className="d-flex">
                         <Link to={`/adminsingleorder/${item._id}`}>
