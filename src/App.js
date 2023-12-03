@@ -32,6 +32,7 @@ import WashmanOrdersPage from "./pages/Washman Pages/WashmanOrdersPage";
 import WashmanDashboardPage from "./pages/Washman Pages/WashmanDashboardPage";
 import WashmanSingleOrderPage from "./pages/Washman Pages/WashmanSingleOrderPage";
 import WashmanEditProfilePage from "./pages/Washman Pages/WashmanEditProfilePage";
+import WashmanLeavePage from "./pages/Washman Pages/WashmanLeavePage"
 import AdminDashboard from "./pages/Admin/AdminDashboard"
 import Leave from "./pages/Admin/Leave";
 import SupervisorDashBoard from "./pages/SupervisorPage/SupervisorDashBoard";
