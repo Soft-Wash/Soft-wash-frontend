@@ -101,19 +101,25 @@ const SubmitDates = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {orderReportData && orderReportData.map((item)=>(
-                  <tr key={item?._id}>
-                  <th>{item?.date_created}</th>
-                  <th>{item?._id.substring(0,item?._id.length/2)}</th>
-                  <th>{item?.customer_id.fullName}</th>
+  {orderReportData?.length < 1 ? (
+    <tr>
+      <td colSpan="6" className="no-data-message">No data available</td>
+    </tr>
+  ) : (
+    orderReportData &&
+    orderReportData.map((item) => (
+      <tr key={item?._id}>
+        <th>{item?.date_created}</th>
+        <th>{item?._id.substring(0, item?._id.length / 2)}</th>
+        <th>{item?.customer_id?.fullName}</th>
+        <th>{item?.subtotal}</th>
+        <th>{item?.status}</th>
+        <th>{item?.subtotal}</th>
+      </tr>
+    ))
+  )}
+</tbody>
 
-                  <th>{item?.subtotal}</th>
-                  <th>{item?.status}</th>
-                  <th>{item?.subtotal}</th>
-                </tr>
-                    ))}
-  
-                  </tbody>
                 </table>
                 <p>showing 1 0f 1 of 1 entries</p>
               </div>
