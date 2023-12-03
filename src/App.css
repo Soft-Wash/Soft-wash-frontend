@@ -16,6 +16,9 @@ body {
     align-items: center;
 }
 
+.color-dark-link{
+    color: black;
+}
 
 
 .active{
@@ -51,4 +54,7 @@ body {
     width: 100vw;
     position: absolute;
 }
-  
+
+.validation-tag{
+    color: red;
+}

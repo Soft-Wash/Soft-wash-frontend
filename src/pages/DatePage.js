@@ -6,13 +6,53 @@ import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import BookingBanner from '../components/BookingBanner';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 function DatePage (){
+    const navigate = useNavigate();
+    const [isOptionSelected, setIsOptionSelected] = useState(false);
+
+//     const deliveryType = JSON.parse(localStorage.getItem('deliveryType'))
+//     console.log(deliveryType)
+
+    
+//   if (!deliveryType || Object.keys(deliveryType).length === 0) {
+//     // alert('Select payment type before confirming the order.');
+//     toast.error('Select Service Required')
+    
+//     return; 
+
+//   }
+
+function DeliveryType() {
+    const deliveryOption = JSON.parse(localStorage.getItem("deliveryType"));
+    const deliveryDate = JSON.parse(localStorage.getItem("calenderStartDate"));
+    // const deliveryTime = JSON.parse(localStorage.getItem("calenderSelectedTime"));
+    return { deliveryOption, deliveryDate};
+}
+
+const handleDeliveryOption = () => {
+    const deliveryOption = DeliveryType().deliveryOption;
+    const deliveryDate = DeliveryType().deliveryDate
+
+    if (deliveryOption && deliveryDate) {
+        navigate('/address');
+        console.log('here')
+    } else {
+        toast.error('Select Service & Date ');
+    }
+};
+
     return(
        <div>
+            <ToastContainer position="top-center" />
             <BookingBanner />
             <Container>
             <div className='date-body justify-content-between'>
@@ -28,10 +68,9 @@ function DatePage (){
                 <Link to="/ClothesSelection">
                 <Button variant="light" border="primary" >Previous</Button>
                 </Link>
+                <Button className='px-4 mx-3' variant="primary" onClick ={handleDeliveryOption}>Next</Button>
 
-                <Link to="/address">
-                <Button className='px-4 mx-3' variant="primary">Next</Button>
-                </Link>
+                {/* <Button disabled={!isOptionSelected}>Next</Button> */}
 
             </div>
             </Container>

@@ -10,7 +10,6 @@ function Calender() {
     const storedDate = localStorage.getItem("calenderStartDate");
     return storedDate ? new Date(JSON.parse(storedDate)) : new Date();
 
-
   });
 
   const [selectedTime, setSelectedTime] = useState(() => {
@@ -47,7 +46,7 @@ function Calender() {
         </h3>
         <div className="d-flex">
           <DatePicker
-            className="react-datepicker__calendar"
+            className="react-datepicker__calendar form-control border-primary"
             selected={startDate}
             onChange={(date) => setStartDate(date)}
             minDate={new Date()}
@@ -68,7 +67,7 @@ function Calender() {
             </Button>
           </div>
         </div>
-        {!startDate || !selectedTime ? <div className="color-red">please select date or time</div> : "" }
+        {/* {!startDate || !selectedTime ? <div className="color-red">please select date or time</div> : "" } */}
       </div>
     </Container>
   );

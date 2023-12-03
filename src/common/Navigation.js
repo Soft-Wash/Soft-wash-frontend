@@ -13,6 +13,9 @@ import { BsBell } from "react-icons/bs";
 import img from "../assets/icons/linkedin.png";
 
 function Navigation() {
+  const OrderDetails = JSON.parse(localStorage.getItem("orderDetails"));
+
+
   const [userLoggedIn, setUserLoggedIn] = useState();
   useEffect(() => {
     const userDetails = localStorage.getItem("softwashLoginUser");
@@ -60,21 +63,28 @@ function Navigation() {
                 Pricing
               </NavLink>
             </Nav.Link>
-            <Nav.Link target="_blank">
-              <NavLink
+            <Nav.Link>
+              <Link
                 className="howitworks-link"
-                to="/marketplace"
-                target="_blank"
+                to="/shop"
               >
                 Shop
-              </NavLink>
+              </Link>
             </Nav.Link>
             {userLoggedIn ? (
               <NavDropdown title="Activities" id="navbarScrollingDropdown">
-                <NavDropdown.Item href="#action3">
-                  Submit Order
+                <NavDropdown.Item>
+                  <Link to="/ClothesSelection" className="color-dark-link">
+                    Create Order
+                  </Link>
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action4">Track Order</NavDropdown.Item>
+                <NavDropdown.Item>
+                  {OrderDetails? <Link to="my-orders" className="color-dark-link">
+                    {" "}
+                    All Order
+                  </Link>:''}
+
+                </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action5">
                   View Order History
@@ -87,43 +97,45 @@ function Navigation() {
           {userLoggedIn ? (
             <div className="my-auto">
               <div className="d-flex">
-              <div
-                className="my-auto position-relative fs-6"
-                style={{
-                  top: "0px",
-                  right: "30px",
-                  height: "20px",
-                  width: "40px",
-                }}
-              >
-                <small
-                  className=" d-flex align-items-center p-1 position-absolute bg-danger text-white fs-6 rounded-circle border border-white"
-                  style={{ top: "-4px", right: "9px", height: "20px" }}
+                <div
+                  className="my-auto position-relative fs-6"
+                  style={{
+                    top: "0px",
+                    right: "30px",
+                    height: "20px",
+                    width: "40px",
+                  }}
                 >
-                  3
-                </small>
+                  <small
+                    className=" d-flex align-items-center p-1 position-absolute bg-danger text-white fs-6 rounded-circle border border-white"
+                    style={{ top: "-4px", right: "9px", height: "20px" }}
+                  >
+                    3
+                  </small>
 
-                <BsBell className=" fs-4 mr-0" />
-              </div>
-              <Dropdown className="d-inline mx-2 my-auto" align={{ lg: "end" }}>
-                <Dropdown.Toggle
-                  id="dropdown-autoclose-true"
-                  className="bg-transparent text-black border-0 p-0"
+                  <BsBell className=" fs-4 mr-0" />
+                </div>
+                <Dropdown
+                  className="d-inline mx-2 my-auto"
+                  align={{ lg: "end" }}
                 >
-                  <img
-                    src={img}
-                    alt="profile"
-                    className="img-fluid "
-                    style={{ height: "36px", width: "auto" }}
-                  />
-                </Dropdown.Toggle>
-                <Dropdown.Menu className="mt-4">
-                  <Dropdown.Item href="#">Profile</Dropdown.Item>
-                  <Dropdown.Item href="#">Logout</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+                  <Dropdown.Toggle
+                    id="dropdown-autoclose-true"
+                    className="bg-transparent text-black border-0 p-0"
+                  >
+                    <img
+                      src={img}
+                      alt="profile"
+                      className="img-fluid "
+                      style={{ height: "36px", width: "auto" }}
+                    />
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu className="mt-4">
+                    <Dropdown.Item href="#">Profile</Dropdown.Item>
+                    <Dropdown.Item href="#">Logout</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
               </div>
-
             </div>
           ) : (
             <Button

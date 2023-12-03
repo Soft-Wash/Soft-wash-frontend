@@ -1,0 +1,109 @@
+.admin-container{
+padding-left: 20px;
+padding-top: 30px;
+overflow: scroll;
+width: 100vw;
+height: 100vh;
+background-color: rgb(215, 215, 215);
+}
+
+.dashboard-line{
+  width: 90%;
+  border-bottom: 1px solid black;
+}
+
+.icon-container{
+  display: flex;
+  background-color: white;
+  height: 100px;
+  width: 200px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.category-container{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  
+}
+
+
+.icon-container-innerd2{
+  align-items: center;
+  margin-left: 10px;
+  margin: auto 0;
+}
+
+.icon-container-innerd1{
+  display: flex;
+  align-items: center;
+}
+
+.clipboard-icon{
+  font-size: 40px;
+  color:black;
+}
+
+.icon-container-innerd2 p{
+  margin: 0 ;
+  font-size: 18px;
+  font-weight: bold;
+  color:black;
+}
+
+.order-dashboard-link{
+  text-decoration: none;
+  color: white;
+}
+
+
+
+.admindashboard-ordertable-div{
+  padding-left: 20px;
+  overflow: scroll;
+  height: 100vh;
+  width: 100vw;
+}  
+
+
+
+  .admindashboard-content-table{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 13px;
+    min-width: 500px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 10px 2px gainsboro;
+    /* margin-top: 80px; */
+}
+.admindashboard-content-table thead tr{
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
+    background-color: rgb(13,202,240);
+    color: white;
+}
+
+.admindashboard-content-table th,
+.admindashboard-content-table td{
+    padding: 20px 25px;
+    border-right: 1px solid gray;
+}
+.admindashboard-content-table tbody tr{
+    border-bottom: 1px solid grey;
+
+}
+.admindashboard-content-table tbody tr:nth-of-type(even){
+    background-color: rgb(230, 230, 230);
+}
+.admindashboard-content-table tbody tr:last-of-type{
+    border-bottom: 3px solid rgb(13,202,240);
+}
+
+
+
+.select-dropdown{
+  width: 150px;
+  border: 1px solid grey;
+}

@@ -1,0 +1,186 @@
+.sales-report-container{
+  margin: 0;
+margin-right: 0;
+  width: 90%;
+  height: 100vh;
+  overflow: scroll;
+  background-color: rgb(240, 240, 240);
+}
+
+.sales-report-contianer-innerd1{
+padding: 20px;
+width: 100%;
+}
+
+.salesreport-hr{
+  width: 100%;
+  border-bottom:1px solid grey ;
+}
+
+.form-background{
+  background-color: white;
+  height: auto;
+  width: 100%;
+padding: 20px;
+  margin-right: 0;
+  min-height: 200px;
+}
+
+
+.form-content{
+  background-color: white;
+  height: auto;
+  width: 100%;
+  min-height: 150px;
+  box-shadow: 2px 2px 4px 4px rgb(224, 224, 224)
+}
+
+.form-details-div-header{
+  background-color: rgb(13,202,240);
+  height: 45px;
+  padding: 10px;
+}
+
+.form-details-div-header p{
+  color: white;
+  font-weight: bold;
+}
+
+.form-data-inpt1{
+  width: 420px;
+  padding: 3px;
+
+}
+
+.form-data-inpt2{
+  width: 420px;
+  padding: 3px;
+ 
+
+}
+
+.form-data{
+  display: flex;
+  padding: 20px;
+}
+
+.form-data-label2{
+  margin-left: 20px;
+}
+
+
+.sales-table-content{
+  background-color: white;
+  height: auto;
+  width: 100%;
+padding: 20px;
+  padding-bottom: 20px;
+  margin-right: 0;
+  margin-top: 20px;
+  box-shadow: 2px 2px 4px 4px rgb(224, 224, 224)
+}
+
+.show-container{
+  display: flex;
+  align-items: center;
+}
+
+.show-container-p1{
+  margin-right: 10px;
+}
+
+.show-container-p2{
+  margin-left: 10px;
+}
+
+
+.admindashboard-ordertable-div{
+  padding-left: 20px;
+  overflow: scroll;
+  height: 100vh;
+  width: 100vw;
+}  
+
+
+  .sales-content-table{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 13px;
+    min-width: 500px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 10px 2px gainsboro;
+    /* margin-top: 80px; */
+}
+.sales-content-table thead tr{
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
+    background-color: rgb(13,202,240);
+    color: white;
+}
+
+.sales-content-table th,
+.sales-content-table td{
+    padding: 20px 25px;
+    border-right: 1px solid gray;
+
+  
+}
+
+.sales-content-table th{
+  white-space: nowrap;
+}
+
+.sales-content-table tbody tr{
+    border-bottom: 1px solid grey;
+
+}
+.sales-content-table tbody tr:nth-of-type(even){
+    background-color: rgb(230, 230, 230);
+}
+.sales-content-table tbody tr:last-of-type{
+    border-bottom: 3px solid rgb(13,202,240);
+}
+
+.action-buttons-btn1{
+  border: none;
+  padding: 5px;
+  background-color: grey;
+  color: white;
+  font-weight: bold;
+}
+.action-buttons{
+display: flex;
+align-items: center;
+justify-content: center;
+margin-top: 15px;
+padding: 5px;
+}
+
+
+.action-buttons-btn2{
+  border: none;
+  padding: 5px;
+  background-color: rgb(214, 11, 11);
+  margin-left: 5px;
+  color: white;
+  font-weight: bold;
+}
+
+.tax-include-btn1{
+  background-color: rgb(198, 18, 18);
+  padding: 3px;
+  border: none;
+  color: white;
+  font-weight: bold;
+}
+
+.sales-Sort-button{
+  margin-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: rgb(13,202,240);
+  color: white;
+   border: none;
+}

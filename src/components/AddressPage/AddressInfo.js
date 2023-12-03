@@ -21,6 +21,7 @@ function AddressInfo() {
   const [selectedItems, setSelectedItems] = useState();
   const [selectedDate, setSelectedDate] = useState();
   const [clicked, setClicked] = useState(false);
+  const [err, setErr] = useState(false)
 
   const getQuantity = () => {
     const clothQuantity = localStorage.getItem("clothQuantity");
@@ -35,6 +36,7 @@ function AddressInfo() {
     axios
       .put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
       .then((resp) => {
+        localStorage.setItem('softCart', JSON.stringify(resp.data))
         setSelectedItems(resp.data);
       });
   };
@@ -50,9 +52,6 @@ function AddressInfo() {
     const storedDate = new Date(JSON.parse(calenderSetDate));
     const parsedCalenderSetDate = storedDate;
     setSelectedDate(parsedCalenderSetDate);
-    const customer_id = localStorage.getItem("softwashLoginUser");
-    const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
-    setCustomerId(parsedCustomerData);
     const clothQuantity = localStorage.getItem("clothQuantity");
     const parsedClothQuantity = clothQuantity
       ? JSON.parse(clothQuantity)
@@ -68,34 +67,47 @@ function AddressInfo() {
     contactNumber: "",
     FullAddress: "",
     SearchedAddress: "",
-    AddressType: ""
+    AddressType: "",
   });
-
-  console.log(selectedAddress)
-
+  
+  
   const handleChange = (e) => {
+
     const value =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
-  
 
     if (e.target.name.startsWith("AddressType")) {
       setSelectedAddress({ ...selectedAddress, AddressType: e.target.name });
     } else {
       setSelectedAddress({ ...selectedAddress, [e.target.name]: value });
     }
+    
   };
 
 
-
-  let orderPostObj = {
-    customer_id: customerId?._id,
-    deliveryAddress: selectedAddress,
-    pickuptime: selectedTime,
-    schedule_date: selectedDate,
-    clothtype_ids: clothIds,
-  };
-
+  
+  
+  
   function postOrderAddress() {
+       if(selectedAddress.contactNumber === "" || selectedAddress.FullAddress === "" || selectedAddress.SearchedAddress === "" || selectedAddress.AddressType === ""){
+      setErr(true)
+      return
+    }
+
+    const customer_id = localStorage.getItem("softwashLoginUser");
+    const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
+    
+    console.log(selectedAddress)
+
+    let orderPostObj = {
+      customer_id: parsedCustomerData?._id,
+      branch_id:"655debc4ec7b0b6e0f591bf7",
+      deliveryAddress: selectedAddress,
+      pickuptime: selectedTime,
+      schedule_date: selectedDate,
+      clothtype_ids: clothIds,
+    };
+
     console.log(orderPostObj);
     axiosInstance.post("/order/create", orderPostObj).then((resp) => {
       console.log(resp.data);
@@ -170,6 +182,7 @@ function AddressInfo() {
                         value={selectedAddress.contactNumber}
                       />
                     </InputGroup>
+                    <p className={`text-danger fw-semibold ${(err === true && selectedAddress.contactNumber === "") ? "" : "d-none" }`}>Field Required</p>
                   </Row>
                   <Row>
                     <InputGroup className="mb-3">
@@ -182,6 +195,7 @@ function AddressInfo() {
                         value={selectedAddress.FullAddress}
                       />
                     </InputGroup>
+                     <p className={`text-danger fw-semibold ${(err === true && selectedAddress.FullAddress === "") ? "" : "d-none" }`}>Field Required</p>
                   </Row>
 
                   <Row>
@@ -203,6 +217,7 @@ function AddressInfo() {
                         value={selectedAddress.SearchedAddress}
                       />
                     </InputGroup>
+                     <p className={`text-danger fw-semibold ${(err === true && selectedAddress.SearchedAddress === "") ? "" : "d-none" }`}>Field Required</p>
                   </Row>
                   <Row>
                     <img src={mapSample} alt="maps" />
@@ -216,7 +231,7 @@ function AddressInfo() {
                           aria-label="radio 1"
                           onChange={handleChange}
                           name="AddressTypeHome"
-                          checked={selectedAddress.AddressTypeHome === 'AddressTypeHome'}
+                          checked={selectedAddress.AddressType === 'AddressTypeHome'}
                         />
                         <Form.Label>Home</Form.Label>
                       </Form.Group>
@@ -226,7 +241,7 @@ function AddressInfo() {
                           aria-label="radio 1"
                           onChange={handleChange}
                           name="AddressTypeWork"
-                          checked={selectedAddress.AddressTypeWork === 'AddressTypeWork'}
+                          checked={selectedAddress.AddressType === 'AddressTypeWork'}
                         />
                         <Form.Label>Work</Form.Label>
                       </Form.Group>
@@ -236,10 +251,11 @@ function AddressInfo() {
                           aria-label="radio 1"
                           onChange={handleChange}
                           name="AddressTypeOther"
-                          checked={selectedAddress.AddressTypeOther === 'AddressTypeOther'}
+                          checked={selectedAddress.AddressType === 'AddressTypeOther'}
                         />
                         <Form.Label>Other</Form.Label>
                       </Form.Group>
+                      <p className={`text-danger fw-semibold ${(err === true && selectedAddress.AddressType === "") ? "" : "d-none" }`}>Field Required</p>
                     </Row>
                   </Row>
                 </Accordion.Body>
@@ -298,7 +314,7 @@ function AddressInfo() {
           {/* <Link to="/PaymentPage"> */}
           <Button
             variant="primary"
-            className="me-auto w-75 text-center"
+            className={`me-auto w-75 text-center `}
             onClick={postOrderAddress}
           >
             Next

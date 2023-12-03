@@ -9,6 +9,7 @@ import "../../styles/MarketPlace.css";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { FiChevronDown } from "react-icons/fi";
 import Navbar from "react-bootstrap/Navbar";
+import {Link} from "react-router-dom"
 
 function Navigation(){
   return(
@@ -16,8 +17,11 @@ function Navigation(){
       <Container fluid className="nav-container pt-4">
         <Navbar expand="lg" className="bg-body-tertiary">
           <Container>
-            <Navbar.Brand href="#">
+            <Navbar.Brand >
+              <Link to="/shop">
               <img src={Logo} alt="" />
+              </Link>
+
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
@@ -41,8 +45,11 @@ function Navigation(){
                     Print Invoice
                   </NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link href="#">
+                <Nav.Link to="/cart">
+                  <Link to="/cart" className="color-dark-link">
                   <FiShoppingCart className="fs-4 " />
+                  </Link>
+
                 </Nav.Link>
               </Nav>
               <Form className="d-flex">

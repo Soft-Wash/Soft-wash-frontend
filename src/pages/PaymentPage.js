@@ -9,6 +9,11 @@ import { useEffect } from "react";
 import { axiosInstance } from "../services/AxiosInstance";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 function PaymentPage() {
   const [selectedTime, setSelectedTime] = useState();
@@ -21,6 +26,7 @@ function PaymentPage() {
   const [userOrder, setuserOrder] = useState();
   const [newlocaldate, setnewlocaldate] = useState(selectedDate);
   const [selectedAddress, setSelectedAddress] = useState();
+  const [validationError, setValidationError] = useState('');
   const [paymentMethod,setpaymentMethod]= useState(()=>{
     const storedPayment = localStorage.getItem('paymentType')
     return storedPayment?JSON.parse(storedPayment): ""
@@ -55,7 +61,7 @@ function PaymentPage() {
 
   }
 
-      // Calculate Sob Total
+      // Calculate Sub Total
       const [subTotal, setSubtotal] = useState()
       const [deliveryFee, setDeliveryFee] = useState()
       const [discount, setDiscount] = useState()
@@ -63,50 +69,73 @@ function PaymentPage() {
       const [total, setTotal] = useState()
       function calcSubTotal(arr){
           let sub_total = 0;
+          let deliveryFee = 1500
           arr?.map((item) => {
               let item_price = parseInt(item.price) * item.quantity
               sub_total += item_price
+              const total =sub_total + deliveryFee 
+              setTotal(total)
+              console.log(total)
           })
           setSubtotal(sub_total)
           console.log(sub_total)
+      
       }
 
   useEffect(() => {
     getLocalStorageData();
     GetUserDetails();
      // Calculate sub total
-     calcSubTotal(JSON.parse(sessionStorage.getItem('softCart')))
+     calcSubTotal(JSON.parse(localStorage.getItem('softCart')))
   }, []);
 
 
-function handlePaymentPage(e){
+function handlePaymentPage(e) {
   const value =
-  e.target.type === "checkbox"
-  ? e.target.checked
-  : e.target.type === "file" 
-  ? e.target.file[0]
-  : e.target.value
+    e.target.type === "checkbox"
+      ? e.target.checked
+      : e.target.type === "file"
+      ? e.target.file[0]
+      : e.target.value;
 
-  setpaymentMethod({[e.target.name]:value })
+  setpaymentMethod ({
+    [e.target.name]: value,
+  });
 }
 
-useEffect(()=>{
+useEffect(() => {
   localStorage.setItem("paymentType", JSON.stringify(paymentMethod));
-},[paymentMethod])
+  console.log(paymentMethod); // This will log the updated paymentMethod
+}, [paymentMethod]);
 
-  console.log(paymentMethod)
+
+
 
   const postOrder = () => {
     const deliveryType = JSON.parse(localStorage.getItem('deliveryType'))
     const key = Object.keys(deliveryType)
     const stringDeliveryType = key.join("");
+
     const paymentType = JSON.parse(localStorage.getItem('paymentType'))
+    console.log(paymentType)
+
+    
+  if (!paymentType) {
+    // alert('Select payment type before confirming the order.');
+    toast.error('Select Payment Method')
+    
+    return; // Return early if payment type is not selecte
+
+  }
+    
     const paymentkey = Object.keys(paymentType)
-    const stringPaymenType = paymentkey.join("");
+    const stringPaymentType = paymentkey.join("");
+
+    
     orderDetails = {
-      subtotal: 20000,
+      subtotal: total,
       delivery_type: stringDeliveryType,
-      payment_method:stringPaymenType
+      payment_method:stringPaymentType
     };
   
     console.log(orderDetails);
@@ -126,6 +155,7 @@ useEffect(()=>{
   return (
     <div>
       <BookingBanner />
+      <ToastContainer position="top-center" />
       <div className="container">
         {/* <EmixNav/> */}
         <div className="p-3">
@@ -159,7 +189,7 @@ useEffect(()=>{
                     </div>
                   </div>
                 </div>
-                <div className="div2 GreyBorder2">
+                <div className="div2 GreyBorder2 mt-2">
                   <div className="PayOpsCash">
                     <div
                       className="PaymtText"
@@ -215,17 +245,9 @@ useEffect(()=>{
                     </Link>
                   </div>
                 </div>
-                <div className="PrevNextBtn">
-                  <Link to="/address">
-                    <button className="btn btn-outline-primary px-5 ">
-                      Prev
-                    </button>
-                  </Link>
-                  <button className="btn btn-info px-5" onClick={postOrder}>
-                    Confirm
-                  </button>
-                </div>
+
               </div>
+              
             </div>
             <div className="PayOpsRight col md-12">
             <div className="div3 GreyBorder">
@@ -250,6 +272,7 @@ useEffect(()=>{
                                 <div><h4>₦{total || "0.00"}</h4> </div>
                            </div>
                         </div>
+                        
               <div className="PrevNextBtnRight">
                 <button className="btn btn-outline-primary  ">Prev</button>
                 <button className="btn btn-info">Confirm</button>
@@ -258,6 +281,16 @@ useEffect(()=>{
           </div>
         </div>
       </div>
+      <div className="PrevNextBtn text-center mt-4 mb-4">
+                  <Link to="/address">
+                    <button className="btn btn-primary px-5 ">
+                      Prev
+                    </button>
+                  </Link>
+                  <button className="confirm-button btn btn-primary px-5" onClick={postOrder}>
+                    Confirm
+                  </button>
+                </div>
     </div>
   );
 }
