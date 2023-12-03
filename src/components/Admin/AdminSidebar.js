@@ -25,6 +25,9 @@ function AdminSidebar(){
             <NavLink exact to="/registeremployee" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">Create Employee</CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/UserRegister" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line">Create Order</CDBSidebarMenuItem>
+            </NavLink>
             <NavLink exact to="/expenses" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">Expenses</CDBSidebarMenuItem>
             </NavLink>

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { axiosInstance } from "../../services/AxiosInstance";
+import { toast } from 'react-toastify';
 
 function Expenses() {
 
@@ -37,6 +38,7 @@ function Expenses() {
       setExpenses((prevItems) =>
       prevItems.filter((item) => item._id !== _id)
     );
+    toast.success('Expense deleted succesful')
     })
   }
 
