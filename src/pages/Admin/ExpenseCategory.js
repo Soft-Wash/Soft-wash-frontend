@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { axiosInstance } from "../../services/AxiosInstance";
 import { useEffect,useState } from "react";
+import { toast } from 'react-toastify';
 
 function ExpenseCategory() {
   const [show, setShow] = useState(false);
@@ -41,6 +42,8 @@ function ExpenseCategory() {
     axiosInstance.post('/expensecategory/create',expenseData)
     .then((resp)=>{
       setExpenseResp(resp.data)
+      toast.success('Expense category succesful')
+      console.log(resp.data)
     })
   }
 
@@ -133,7 +136,7 @@ function ExpenseCategory() {
                   </thead>
                   <tbody>
                     {expenses && expenses.map((item)=>(
-                    <tr className="table-tr">
+                    <tr className="table-tr" key={item._id}>
                     <th className="no-th2">1</th>
                     <th className="date-th">{item.name}</th>
                     <th className="assets-th">

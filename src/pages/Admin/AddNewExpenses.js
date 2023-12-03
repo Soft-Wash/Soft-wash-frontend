@@ -2,6 +2,7 @@ import { useState } from "react";
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 import { axiosInstance } from "../../services/AxiosInstance";
 import "../../styles/Admin/NewExpenses.css";
+import { toast } from 'react-toastify';
 
 function AddNewExpenses() {
   const [expenseDetails, setExpenseDetails] = useState({
@@ -22,11 +23,9 @@ function AddNewExpenses() {
     axiosInstance.post('/expense/create',expenseDetails)
     .then((resp)=>{
       console.log(resp.data)
-
+      toast.success('Expense created succesful')
     })
   }
-
-  console.log(expenseDetails)
 
   return (
     <div>

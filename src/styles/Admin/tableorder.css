@@ -50,6 +50,11 @@
   border: 1px solid grey;
 }
 
+.select-dropdown2{
+  width: 170px;
+  border: 1px solid grey;
+}
+
 
 .allorders-status-th button{
   white-space: nowrap;
@@ -98,4 +103,9 @@ background-color: green;
 
 .delivered-color{
   background-color: rgb(11, 20, 185); 
+}
+
+.order-table-select-div{
+  display: flex;
+  justify-content: space-between;
 }
