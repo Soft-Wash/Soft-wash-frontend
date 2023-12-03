@@ -3,7 +3,7 @@ import { ErrorHandler } from "./ErrorHandler";
 
 export default function AxiosConfig() {
   const instanceConfig = axios.create({
-    baseURL: process.env.REACT_APP_BASE_URL,
+    baseURL:process.env.REACT_APP_BASE_URL,
     headers: {
       common: {
         Authorization: `Bearer 12|${localStorage.getItem("softwashUserToken")}`,
