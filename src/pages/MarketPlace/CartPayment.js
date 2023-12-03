@@ -14,13 +14,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { axiosInstance } from "../../services/AxiosInstance";
 
 function CartPayment() {
-  const [selectedTime, setSelectedTime] = useState();
-  const [selectedDate, setSelectedDate] = useState();
-  const [newlocaldate, setnewlocaldate] = useState(selectedDate);
   const [paymentMethod, setpaymentMethod] = useState(() => {
     const storedPayment = localStorage.getItem("paymentType");
     return storedPayment ? JSON.parse(storedPayment) : "";
   });
+  const [selectedAddress,setSelectedAddress]=useState(()=>{
+    const address = localStorage.getItem('shopDeliveryAddress')
+    return address ? JSON.parse(address): "";
+  })
 
   // Calculate Sub Total
   const [subTotal, setSubtotal] = useState();
@@ -29,7 +30,6 @@ function CartPayment() {
   const [tax, setTax] = useState();
   const [total, setTotal] = useState();
   const [cartItems,setcartItems]=useState()
-  // const []
   function calcSubTotal() {
     const cartTotal = JSON.parse(localStorage.getItem('cartTotal'))
     
@@ -38,10 +38,8 @@ function CartPayment() {
       sub_total += cartTotal;
       const total = sub_total + deliveryFee;
       setTotal(total);
-      console.log(total);
-
     setSubtotal(sub_total);
-    console.log(sub_total);
+
 
   }
 
@@ -68,32 +66,51 @@ function CartPayment() {
         ? e.target.file[0]
         : e.target.value;
 
-    setpaymentMethod({[e.target.name]: value});
+
+    if (e.target.name.startsWith('devliveryAddy')){
+      setSelectedAddress(e.target.value)
+    }else{
+      setpaymentMethod(e.target.name);
+    }
   }
 
   useEffect(() => {
     localStorage.setItem("paymentType", JSON.stringify(paymentMethod));
-    console.log(paymentMethod); // This will log the updated paymentMethod
-  }, [paymentMethod]);
+    localStorage.setItem("shopDeliveryAddress", JSON.stringify(selectedAddress));
+
+    console.log(paymentMethod); 
+  }, [paymentMethod,selectedAddress]);
+
+  const CartIds = cartItems?.map((item)=> item = item._id)
+  console.log(CartIds)
 
 
 
   const postOrder = () => {
 
     const paymentType = JSON.parse(localStorage.getItem("paymentType"));
+    const deliveryAddy = JSON.parse(localStorage.getItem("shopDeliveryAddress"));
     if (!paymentType) {
       toast.error("Select Payment Method");
       console.log(paymentMethod)
-
       return; 
     }
-    const paymentkey = Object.keys(paymentType);
-    const stringPaymentType = paymentkey.join("");
-    console.log(stringPaymentType)
-    // const OrderDetails = {
-    //   customer_id:parsedCustomerData._id,
-    //   cart_ids:
-    // }
+    const customer_id = localStorage.getItem("softwashLoginUser");
+    const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
+    const OrderDetails = {
+      customer_id:parsedCustomerData._id,
+      cart_ids:CartIds,
+      total:total,
+      delivery_fee:1500,
+      delivery_address:selectedAddress
+    }
+    console.log(OrderDetails)
+    axiosInstance.post('/cartorder/create',OrderDetails )
+    .then((resp)=>{
+      console.log(resp.data)
+      toast.success('order created succesful')
+      
+    })
 
   };
 
@@ -166,7 +183,7 @@ function CartPayment() {
                 </div>
                 <div className="PickUpDetails GreyBorder mt-3 p-3">
                   <div className="PickUpAddress py-3">
-                    <input type="text" placeholder="Enter Delivery Address" className="cart-addressInput" />
+                    <input type="text" placeholder="Enter Delivery Address" className="cart-addressInput" name="devliveryAddy"   onChange={(e) => handlePaymentPage(e)} value={selectedAddress}/>
                   </div>
                   <div className="PickUpDate">
                     <h6 className="fw-bold">Pic-Up Date</h6>
