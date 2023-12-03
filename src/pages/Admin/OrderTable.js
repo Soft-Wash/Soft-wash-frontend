@@ -10,7 +10,6 @@ function OderTable() {
   const [selectedOption, setSelectedOption] = useState("All Orders");
   const [statusSelect, setStatusSelect] = useState();
   const [statusData, setStatusData] = useState();
-
   const fetchData = () => {
     if (selectedOption === "All Orders") {
       axiosInstance.get("/order").then((resp) => {
