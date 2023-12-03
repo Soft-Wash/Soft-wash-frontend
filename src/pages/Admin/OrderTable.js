@@ -111,7 +111,7 @@ function OderTable() {
               </tr>
             </thead>
             <tbody>
-              {statusData.length<1 ? (
+              {statusData?.length<1 ? (
                 <tr>
                   <td colSpan="6" className="no-data-message">
                     No data available
