@@ -84,6 +84,10 @@ function App() {
          <Route path="/wishlist" element={<Wishlist/>} />
          <Route path="/cart" element={<Cart/>} />
         <Route path="/my-orders" element={<Orders/>}/>
+        <Route path="/order-receipt" element={<OrderReceipt/>}/>
+        <Route path="/SupervisorMainDash" element={<SupervisorMainDash/>}/>
+        <Route path="/CreateWashman" element={<CreateWashMan/>}/>
+        <Route path="/my-orders/" element={<Orders/>}/>
         <Route path="/order-receipt/:orderId" element={<OrderReceipt/>}/>
         <Route path="/iventry" element={<Iventry/>}/>
         <Route path="/cartpayment" element={<CartPayment/>}/>
