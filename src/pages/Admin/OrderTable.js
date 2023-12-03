@@ -4,6 +4,7 @@ import "../../styles/Admin/tableorder.css";
 import { axiosInstance } from "../../services/AxiosInstance";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function OderTable() {
   const [orders, setOrders] = useState();
@@ -45,7 +46,7 @@ function OderTable() {
   }, [selectedOption, statusSelect]);
 
   const getOrderStatus = () => {
-    axiosInstance.get(`/order/status?status=${statusSelect}`).then((resp) => {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/order/status?status=${statusSelect}`).then((resp) => {
       console.log(statusSelect);
       console.log(resp.data);
       setStatusData(resp.data);
