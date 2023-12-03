@@ -19,15 +19,13 @@ const HandleSalesReport=(e)=>{
   
 }
 
-// console.log(reporData)
 
 const SubmitDates = () => {
   console.log(reporData);
 
-  // Assuming reporData is an object with startDate and endDate properties
   const { startDate, endDate } = reporData;
 
-  axios.get(`${process.env.REACT_APP_BASE_URL}/order/laundry/sales/report`, {
+  axios.get(`${process.env.REACT_APP_BASE_URL}/cartorder/shop/sales/report`, {
     params: {
       startDate,
       endDate,
@@ -102,12 +100,12 @@ const SubmitDates = () => {
                     <tr>
                     <th>1</th>
                     <th>{item?.date_created}</th>
-                    <th>{item?.customer_id}</th>
+                    <th>{item?.customer_id.fullName}</th>
 
-                    <th>{item?.subtotal}</th>
-                    <th>{item?.discount || "N20"}</th>
-                    <th>{item?.tax_amount || "Nil"}</th>
-                    <th>{item?.subtotal}</th>
+                    <th>{item?.total}</th>
+                    <th>{item?.discount || "Nil"}</th>
+                    <th>{item?.tax_amount || "N10"}</th>
+                    <th>{item?.total}</th>
                   </tr>
                     ))}
 

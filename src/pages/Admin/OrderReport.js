@@ -1,7 +1,43 @@
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 import "../../styles/Admin/OrderReport.css";
+import { useState } from "react";
+import axios from "axios";
 
 function OrderReport() {
+
+  const [orderReportData,setOrderReportData]=useState()
+const [reporData,setReporData] = useState({})
+
+const HandleSalesReport=(e)=>{
+  const value = e.target.value
+
+  setReporData({...reporData, [e.target.name]:value})
+  
+}
+
+
+const SubmitDates = () => {
+
+
+  const { startDate, endDate, status } = reporData;
+
+  axios.get(`${process.env.REACT_APP_BASE_URL}/order/laundry/sales/report`, {
+    params: {
+      startDate,
+      endDate,
+      status
+    },
+  })
+  .then((resp) => {
+    console.log(resp.data);
+    setOrderReportData(resp.data);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+};
+
+
   return (
     <div>
       <div className="d-flex">
@@ -18,17 +54,17 @@ function OrderReport() {
                 <div className="order-form-data">
                   <label htmlFor="" className="order-form-data-label1">
                     Start Date <br />
-                    <input className="order-form-data-inpt1" type="date" />
+                    <input className="order-form-data-inpt1" type="date"  name="startDate" onChange={HandleSalesReport} />
                   </label>
                   <label htmlFor="" className="order-form-data-label2">
                     End Date <br />
-                    <input className="order-form-data-inpt2" type="date" />
+                    <input className="order-form-data-inpt2" type="date" name="endDate" onChange={HandleSalesReport} />
                   </label>
                   <label htmlFor="" className="order-form-data-label3">
                     Status <br />
-                    <select name="" className="order-form-data-inpt3" id="">
+                    <select name="status" className="order-form-data-inpt3" id="" onChange={HandleSalesReport}>
                       <option value="" hidden>Select Order Status</option>
-                      <option value="Order Placed">ORDER PLACED</option>
+                      <option value="order placed">ORDER PLACED</option>
                       <option value="Confirmed">CONFIRMED</option>
                       <option value="Received">RECEIVED</option>
                       <option value="Cleaning">CLEANING</option>
@@ -39,6 +75,7 @@ function OrderReport() {
                   </label>
                 </div>
               </div>
+              <button className="order-Sort-button" onClick={SubmitDates}>Submit</button>
             </div>
             <div className="order-table-content">
               <div className="show-container">
@@ -55,27 +92,27 @@ function OrderReport() {
                 <table className="order-content-table">
                   <thead>
                     <tr>
-                      <th>S No</th>
                       <th>Date</th>
+                      <th>Order#</th>
                       <th>Customer</th>
-                      <th>Subtotal</th>
-                      <th>Addon Total</th>
-                      <th>Discount</th>
-                      <th>Tax Amount</th>
+                      <th>Order Amount</th>
+                      <th>Status</th>
                       <th>Gross Amount</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th>1</th>
-                      <th>08-dec-23</th>
-                      <th>100</th>
+                    {orderReportData && orderReportData.map((item)=>(
+                  <tr key={item?._id}>
+                  <th>{item?.date_created}</th>
+                  <th>{item?._id.substring(0,item?._id.length/2)}</th>
+                  <th>{item?.customer_id.fullName}</th>
 
-                      <th>Fuel</th>
-                      <th>food</th>
-                      <th>Cash</th>
-                      <th>money</th>
-                    </tr>
+                  <th>{item?.subtotal}</th>
+                  <th>{item?.status}</th>
+                  <th>{item?.subtotal}</th>
+                </tr>
+                    ))}
+  
                   </tbody>
                 </table>
                 <p>showing 1 0f 1 of 1 entries</p>
