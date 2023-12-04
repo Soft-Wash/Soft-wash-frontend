@@ -1,15 +1,17 @@
-import { useEffect, axios } from "react";
+import { useEffect } from "react";
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 import "../../styles/Admin/tableorder.css";
 import { axiosInstance } from "../../services/AxiosInstance";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function OderTable() {
   const [orders, setOrders] = useState();
   const [selectedOption, setSelectedOption] = useState("All Orders");
   const [statusSelect, setStatusSelect] = useState();
   const [statusData, setStatusData] = useState();
+
   const fetchData = () => {
     if (selectedOption === "All Orders") {
       axiosInstance.get("/order").then((resp) => {
@@ -44,32 +46,13 @@ function OderTable() {
   }, [selectedOption, statusSelect]);
 
   const getOrderStatus = () => {
-    axios?.get(`${process.env.REACT_APP_BASE_URL}/order/status?status=${statusSelect}`).then((resp) => {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/order/status?status=${statusSelect}`).then((resp) => {
       console.log(statusSelect);
       console.log(resp.data);
       setStatusData(resp.data);
     });
   };
 
-  // const getOrderStatus = () => {
-  //   if (!statusSelect) {
-  //     console.error("Status is not defined.");
-  //     return;
-  //   }
-  
-  //   axios
-  //     ?.get(`${process.env.REACT_APP_BASE_URL}/order/status?status=${statusSelect}`)
-  //     .then((resp) => {
-  //       console.log(statusSelect);
-  //       console.log(resp.data);
-  //       setStatusData(resp.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching order status:", error);
-  //       // Handle the error as needed.
-  //     });
-  // };
-  
   const getStatusColorClass = (status) => {
     switch (status) {
       case "order placed":
@@ -174,4 +157,4 @@ function OderTable() {
   );
 }
 
-export default OderTable;
+export default OderTable;
