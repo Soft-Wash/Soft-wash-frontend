@@ -11,10 +11,10 @@ import { useNavigate } from "react-router-dom";
 
 function SectionOne() {
 const Navigate = useNavigate()
-  const userDetails = JSON.parse(localStorage.getItem('softwashLoginUser'))
+const userToken = JSON.parse(localStorage.getItem("softwashLoginToken"))
 
 function checkLogin(){
-  if (!userDetails){
+  if (!userToken){
     Navigate('/userLogin')
   } else{
     Navigate('/ClothesSelection')

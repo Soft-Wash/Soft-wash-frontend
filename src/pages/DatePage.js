@@ -54,7 +54,7 @@ const handleDeliveryOption = () => {
        <div>
             <ToastContainer position="top-center" />
             <BookingBanner />
-            <Container>
+            <Container className='datepage-container'>
             <div className='date-body justify-content-between'>
                 <div className='date-body-left'>
                     <BookingPickUpMode />
@@ -69,9 +69,6 @@ const handleDeliveryOption = () => {
                 <Button variant="light" border="primary" >Previous</Button>
                 </Link>
                 <Button className='px-4 mx-3' variant="primary" onClick ={handleDeliveryOption}>Next</Button>
-
-                {/* <Button disabled={!isOptionSelected}>Next</Button> */}
-
             </div>
             </Container>
             
