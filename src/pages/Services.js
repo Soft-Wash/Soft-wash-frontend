@@ -14,10 +14,20 @@ import Button from "react-bootstrap/Button";
 import Footer from "../common/Footer";
 import { useState,useEffect } from "react";
 import HeaderBanner from "../common/HeaderBanner";
+import { useNavigate } from "react-router-dom";
 
 function Services() {
 
+  const Navigate = useNavigate()
+  const userToken = JSON.parse(localStorage.getItem("softwashLoginToken"))
 
+function checkLogin(){
+  if (!userToken){
+    Navigate('/userLogin')
+  } else{
+    Navigate('/ClothesSelection')
+  }
+}
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
@@ -124,8 +134,8 @@ function Services() {
                 time while we take care of your laundry needs.
               </p>
               <div>
-                <Button variant="info" className=" text-white" size="lg">
-                  Large button
+                <Button variant="info" className=" text-white" size="lg" onClick={checkLogin}>
+                  SCHEDULE PICKUP
                 </Button>{" "}
               </div>
             </Card>

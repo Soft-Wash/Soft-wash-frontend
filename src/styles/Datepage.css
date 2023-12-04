@@ -91,6 +91,10 @@
     border: 2px solid rgb(0,131,255);
 }
 
+.datepage-container{
+    padding-bottom: 40px;
+}
+
 
 
 @media (max-width: 770px){

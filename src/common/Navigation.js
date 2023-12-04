@@ -14,15 +14,18 @@ import img from "../assets/icons/linkedin.png";
 
 function Navigation() {
   const OrderDetails = JSON.parse(localStorage.getItem("orderDetails"));
-
-
   const [userLoggedIn, setUserLoggedIn] = useState();
   useEffect(() => {
-    const userDetails = localStorage.getItem("softwashLoginUser");
-    const userData = JSON.parse(userDetails);
-    setUserLoggedIn(userData);
+    const userToken = JSON.parse(localStorage.getItem("softwashLoginToken"))
+    setUserLoggedIn(userToken);
   }, []);
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear local storage
+    localStorage.clear();
+    navigate('/')
+  };
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -101,7 +104,7 @@ function Navigation() {
                   className="my-auto position-relative fs-6"
                   style={{
                     top: "0px",
-                    right: "30px",
+                    right: "0px",
                     height: "20px",
                     width: "40px",
                   }}
@@ -132,7 +135,7 @@ function Navigation() {
                   </Dropdown.Toggle>
                   <Dropdown.Menu className="mt-4">
                     <Dropdown.Item href="#">Profile</Dropdown.Item>
-                    <Dropdown.Item href="#">Logout</Dropdown.Item>
+                    <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </div>
