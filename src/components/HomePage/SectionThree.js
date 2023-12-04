@@ -9,11 +9,23 @@ import image1 from "../../assets/HomePage/images/work-step1.png";
 import image2 from "../../assets/HomePage/images/work-step2.png";
 import image3 from "../../assets/HomePage/images/work-step3.png";
 import image4 from "../../assets/HomePage/images/work-step4.png";
+import { useNavigate } from "react-router-dom";
 
 export default function SectionThree() {
   let [count, setCount] = useState(0);
   let arr = [image1, image2, image3, image4];
   const [progress, setProgress] = useState(0);
+
+  const Navigate = useNavigate()
+  const userDetails = JSON.parse(localStorage.getItem('softwashLoginUser'))
+
+function checkLogin(){
+  if (!userDetails){
+    Navigate('/userLogin')
+  } else{
+    Navigate('/ClothesSelection')
+  }
+}
 
   return (
     <div className="sec-3-bg my-5 px-5 py-5 mw-100 overflow-hidden p-none-sm">
@@ -38,10 +50,12 @@ export default function SectionThree() {
                 </p>
 
                 <div className="shedule-pickup-div">
+                  
                   <Button
                     variant="outline-info textwhite-hover"
                     className=" mt-4"
                     size="lg"
+                    onClick={checkLogin}
                   >
                     GET SERVICE NOW
                   </Button>{" "}
