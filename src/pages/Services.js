@@ -42,18 +42,6 @@ function checkLogin(){
       <HeaderBanner
       pageTitle="Services"
       currentPage="Services"/>
-      {/* <div>
-        <div className="below-navbar container-fluid  pt-4 pb-3">
-          <div className="container d-flex justify-content-between align-items-center">
-            <div className="page-navigation-title d-flex">
-              <p className="fs-5 text-white">Home</p>
-              <FaChevronRight className="greatherthan-Icon my-auto"/>
-              <p className="fs-5 text-white">Pricing</p>
-            </div>
-            <p className="fs-3  text-white">Services</p>
-          </div>
-        </div>
-      </div> */}
       <Container fluid className="servicebg-container">
         <Col className="service-title-div align-center pt-5 pb-5">
           <p className="title-ptag fs-5">Stay Clean And Dress Well</p>
