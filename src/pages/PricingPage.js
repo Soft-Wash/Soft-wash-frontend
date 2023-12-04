@@ -37,9 +37,17 @@ useEffect(()=>{
     if (selectedCategory === "All") {
       return true; 
     } else if (selectedCategory === "Wash & Fold") {
-      return item.description === "Washed & Fold" || item.description === "Dry Clean & Iron";
-    } else {
+      return item.desc === "Washed & Fold";
+    } else if(selectedCategory === "Washing"){
       return true;
+    } else if (selectedCategory==="Iron"){
+      return item.desc === "Dry Clean & Iron"
+    }else if(selectedCategory==="Dry Clean"){
+      return item.desc === "Dry Clean & Iron"
+    }else if(selectedCategory === "Steam Iron"){
+      return item.desc === "Dry Clean & Iron"
+    } else if(selectedCategory === "Curtain Wash"){
+      return item.desc === "Washed & Fold";
     }
   });
 
@@ -59,43 +67,43 @@ useEffect(()=>{
         <div className="cloth-title-div d-flex justify-content-center text-center mt-4">
           <ul className="cloth-title-div-ul flex-wrap">
           <li
-            className={selectedCategory === "All" ? "all-ptag selected" : "all-ptag"}
+            className={selectedCategory === "All" ? "all-ptag selected" : ""}
             onClick={() => setSelectedCategory('All')}
           >
             All
           </li>
           <li
-            className={selectedCategory === "Washing" ? "selected" : ""}
+            className={selectedCategory === "Washing" ? "all-ptag selected" : ""}
             onClick={() => setSelectedCategory("Washing")}
           >
             Washing
           </li>
           <li
-            className={selectedCategory === "Iron" ? "selected" : ""}
+            className={selectedCategory === "Iron" ? "all-ptag selected" : ""}
             onClick={() => setSelectedCategory("Iron")}
           >
             Iron
           </li>
           <li
-            className={selectedCategory === "Wash & Fold" ? "selected" : ""}
+            className={selectedCategory === "Wash & Fold" ? "all-ptag selected" : ""}
             onClick={() => setSelectedCategory("Wash & Fold")}
           >
             Wash & Fold
           </li>
           <li
-            className={selectedCategory === "Dry Clean" ? "selected" : ""}
+            className={selectedCategory === "Dry Clean" ? "all-ptag selected" : ""}
             onClick={() => setSelectedCategory("Dry Clean")}
           >
             Dry Clean
           </li>
           <li
-            className={selectedCategory === "Steam Iron" ? "selected" : ""}
+            className={selectedCategory === "Steam Iron" ? "all-ptag selected" : ""}
             onClick={() => setSelectedCategory("Steam Iron")}
           >
             Steam Iron
           </li>
           <li
-            className={selectedCategory === "Curtain Wash" ? "selected" : ""}
+            className={selectedCategory === "Curtain Wash" ? "all-ptag selected" : ""}
             onClick={() => setSelectedCategory("Curtain Wash")}
           >
             Curtain Wash
