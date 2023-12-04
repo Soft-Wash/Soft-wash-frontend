@@ -1,13 +1,13 @@
 import React from 'react';
-import '../../../styles/register.css';
-import facebook from "../../../assets/icons/facebook.png";
-import linkedIn from "../../../assets/icons/linkedin.png";
-import googlePlus from "../../../assets/icons/google-plus.png";
+import '../../styles/register.css';
+import facebook from "../../assets/icons/facebook.png";
+import linkedIn from "../../assets/icons/linkedin.png";
+import googlePlus from "../../assets/icons/google-plus.png";
 import { useNavigate } from "react-router-dom";
 import { useState,useContext } from 'react';
-import{handleLogin} from '../../../services/Login'
-import { variableManager } from '../../../context/VariablesContext';
-import{Loader} from "../../../common/Loader"
+import{handleLogin} from '../../services/EmployeeLoginService'
+import { variableManager } from '../../context/VariablesContext';
+import{Loader} from "../../common/Loader"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -60,7 +60,7 @@ export default function EmployeeLogin() {
         setLoading(false);
         if(data){
           toast.success("Login Successful")
-          navigate('/')
+          navigate('/SupervisorDash')
         } else if(error){
           toast.error("Incorrect Email Or Password");
         }

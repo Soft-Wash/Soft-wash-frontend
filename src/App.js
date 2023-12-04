@@ -56,6 +56,7 @@ import Customer from "./pages/Admin/Customer";
 import EditCustomer from "./pages/Admin/EditCustomer";
 import CreateSupUsers from "./pages/SupervisorPage/CreateSupUsers";
 import SupOrderTable from "./pages/SupervisorPage/SupOrderTable";
+import EmployeeLogin from "./pages/EmployeePage/EmployeeLogin";
 
  
 
@@ -133,6 +134,9 @@ function App() {
         <Route path ="/SupOrderTable" element ={<SupOrderTable/>}/>
         <Route path ="/SupervisorDash" element ={<SupervisorDash/>}/>
 
+        {/* EMPLOYEE LOGIN */}
+
+        <Route path ="/EmployeeLogin" element ={<EmployeeLogin/>}/>
 
       </Routes>
     </BrowserRouter>
