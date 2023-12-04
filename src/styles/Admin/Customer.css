@@ -1,0 +1,92 @@
+.customer-container{
+  margin: 0;
+margin-right: 0;
+  width: 90%;
+  height: 100vh;
+  overflow: scroll;
+  background-color: rgb(240, 240, 240);
+}
+
+.customer-container-innerd{
+  padding: 20px;
+  width: 100%;
+  }
+
+  .customer-table-content{
+    background-color: white;
+    height: auto;
+    width: 100%;
+  padding: 20px;
+  max-width: 100%;
+    padding-bottom: 20px;
+    margin-right: 0;
+    margin-top: 20px;
+    box-shadow: 2px 2px 4px 4px rgb(224, 224, 224)
+  }
+  
+
+  .customer-content{
+    width: 100%;
+    max-width: 90%;
+  
+  }
+
+  .customer-ordertable-div{
+    padding-left: 20px;
+    overflow: scroll;
+    height: 100vh;
+    width: 100vw;
+    padding-right: 20px;
+  }  
+  
+  
+    .customer-content-table{
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 13px;
+      min-width: 500px;
+      max-width: 100%;
+      border-radius: 5px 5px 0 0;
+      overflow: hidden;
+      box-shadow: 0 0 10px 2px gainsboro;
+      /* margin-top: 80px; */
+  }
+  .customer-content-table thead tr{
+      width: 100%;
+      text-align: left;
+      font-weight: bold;
+      background-color: rgb(13,202,240);
+      color: white;
+  }
+  
+  .customer-content-table th,
+  .customer-content-table td{
+      padding: 20px 25px;
+      border-right: 1px solid gray;
+  
+    
+  }
+  
+  .customer-content-table th{
+    white-space: nowrap;
+  }
+  
+  .customer-content-table tbody tr{
+      border-bottom: 1px solid grey;
+  
+  }
+  .customer-content-table tbody tr:nth-of-type(even){
+      background-color: rgb(230, 230, 230);
+  }
+  .customer-content-table tbody tr:last-of-type{
+      border-bottom: 3px solid rgb(13,202,240);
+  }
+
+
+  .customer-edit-tbtn{
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: grey;
+    color: white;
+    border: none;
+  }
