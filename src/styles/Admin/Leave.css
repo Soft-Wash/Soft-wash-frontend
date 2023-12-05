@@ -245,3 +245,17 @@ margin-bottom: 0;
 .admin-content-table tbody tr:last-of-type{
     border-bottom: 3px solid rgb(13,202,240);
 }
+
+.pending-leave-div{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 10px;
+  height: 100vh;
+  overflow: scroll;
+}
+
+.onleave-table{
+  margin-left: 10px;
+  height: 100vh;
+  overflow: scroll;
+}

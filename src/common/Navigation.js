@@ -89,8 +89,11 @@ function Navigation() {
 
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action5">
-                  View Order History
+                <NavDropdown.Item >
+                  <Link to="my-orders" className="color-dark-link">
+                   Order History
+                  </Link>
+ 
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (

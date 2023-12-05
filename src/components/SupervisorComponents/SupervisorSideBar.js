@@ -33,8 +33,8 @@ function SupervisorSideBar() {
                         <CDBSidebarMenuItem icon="chart-line">Manage Inventory</CDBSidebarMenuItem>
                     </NavLink>
                     
-                    <NavLink exact to="/hero404" target="_blank" activeClassName="activeClicked">
-                        <CDBSidebarMenuItem icon="exclamation-circle">404 page</CDBSidebarMenuItem>
+                    <NavLink exact to="/SupervisorExpense" activeClassName="activeClicked">
+                        <CDBSidebarMenuItem icon="exclamation-circle">Expense Register</CDBSidebarMenuItem>
                     </NavLink>
                 </CDBSidebarMenu>
             </CDBSidebarContent>

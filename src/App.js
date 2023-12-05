@@ -54,9 +54,12 @@ import SingleOrder from "./pages/Admin/SingleOrder";
 import EditExpense from "./pages/Admin/EditExpense";
 import Customer from "./pages/Admin/Customer";
 import EditCustomer from "./pages/Admin/EditCustomer";
+import CreateLeave from "./pages/Admin/CreateLeave";
 import CreateSupUsers from "./pages/SupervisorPage/CreateSupUsers";
 import SupOrderTable from "./pages/SupervisorPage/SupOrderTable";
 import EmployeeLogin from "./pages/EmployeePage/EmployeeLogin";
+import SupervisorExpense from "./pages/SupervisorPage/SupervisorExpense";
+import CreateExpenseSup from "./pages/SupervisorPage/CreateExpenseSup";
 
  
 
@@ -127,12 +130,16 @@ function App() {
         <Route path="/editexpense/:_id" element={<EditExpense/>}/>
         <Route path="/admincustomer" element={<Customer/>}/>
         <Route path="/editcustomer/:id" element={<EditCustomer/>}/>
+        <Route path="/createleave" element={<CreateLeave/>}/>
 
 
         {/* SUPERVISOR ROUTES */}
         <Route path ="/CreateSupUsers" element ={<CreateSupUsers/>}/>
         <Route path ="/SupOrderTable" element ={<SupOrderTable/>}/>
         <Route path ="/SupervisorDash" element ={<SupervisorDash/>}/>
+        <Route path ="/SupervisorExpense" element ={<SupervisorExpense/>}/>
+        <Route path ="/CreateExpenseSup" element ={<CreateExpenseSup/>}/>
+       
 
         {/* EMPLOYEE LOGIN */}
 
