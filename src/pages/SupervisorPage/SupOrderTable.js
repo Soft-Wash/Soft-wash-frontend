@@ -5,9 +5,11 @@ import { axiosInstance } from "../../services/AxiosInstance";
 import { useState } from "react";
 import { Link } from "react-router-dom"
 
-function OderTable() {
+function SupOrderTable() {
   const [orders, setOrders] = useState();
   const [selectedOption, setSelectedOption] = useState("All Orders");
+  const [statusSelect, setStatusSelect] = useState();
+  const [statusData, setStatusData] = useState();
 
 
 
@@ -32,7 +34,7 @@ function OderTable() {
     }
   };
 
-  const targetBranchId = '655debc4ec7b0b6e0f591bf7';
+//   const targetBranchId = '655debc4ec7b0b6e0f591bf7';
 
 
   const handleSelectChange = (e) => {
@@ -130,4 +132,4 @@ function OderTable() {
   );
 }
 
-export default OderTable;
+export default SupOrderTable;

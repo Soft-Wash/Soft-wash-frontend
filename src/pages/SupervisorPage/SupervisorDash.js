@@ -9,8 +9,15 @@ import SupervisorSideBar from "../../components/SupervisorComponents/SupervisorS
 import SupervisorTeam from "../../components/SupervisorComponents/SupervisorTeam";
 import InventoryChart from "../../components/SupervisorComponents/InentoryChart";
 import SupervisorCarousel from "../../components/SupervisorComponents/SupervisorCarousel";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { axiosInstance } from "../../services/AxiosInstance";
 
 function SupervisorDash() {
+
+  const [branches, setbranches] = useState();
+  const [orders, setOrders] = useState();
+  const [Employees, setEmployees] = useState();
     const getTimeOfDay = () => {
         const currentHour = moment().hour();
     
@@ -23,8 +30,51 @@ function SupervisorDash() {
         }
       };
   
-    // Get the time of day
     const timeOfDay = getTimeOfDay();
+
+    // GET DASH BOARD CARDS FROM ENDPOINT
+
+    const [error, setError] = useState(null);
+
+    const targetBranchId = '655debc4ec7b0b6e0f591bf7'; 
+    useEffect(() => {
+      axiosInstance.get("/order/").then((resp) => {
+        const filteredOrders = resp.data.filter(item => item?.branch_id?._id === targetBranchId);
+        setOrders(filteredOrders);
+      });
+
+      const fetchEmployees = async () => {
+        try {
+          const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/employees?branchId=${targetBranchId}`);
+          setEmployees(response.data);
+        } catch (error) {
+          console.error('Error fetching employees:', error);
+        }
+      };
+  
+      if (targetBranchId) {
+        fetchEmployees();
+      }
+    }, [targetBranchId]);
+
+    const getEmployeesId = (roleName) => {
+      if (Employees) {
+        const employeesWithRole = Employees.filter(
+          (employee) =>
+            employee.role.name.toLowerCase() === roleName.toLowerCase()
+        );
+        const roleIds = employeesWithRole.map((employee) => employee.role._id);
+        return roleIds;
+      } else {
+        return [];
+      }
+    };
+
+    const FrontDesk = getEmployeesId("frontdesk");
+    const washman = getEmployeesId("washman");
+    
+    
+    
   return (
     <div>
         <div className="d-flex">
@@ -39,28 +89,28 @@ function SupervisorDash() {
                         <FaClipboardList className="supervisor-dashboard-icons "/>
                         <div>
                             <h5>All Orders</h5>
-                            <h5>3</h5>
+                            <h5>{orders?.length}</h5>
                         </div>
                     </div>
                     <div className="AllUsers sup-Card washman-purple">
                         <FaRegUser className="supervisor-dashboard-icons "/>
                         <div>
                             <h5>All Users</h5>
-                            <h5>3</h5>
+                            <h5> {Employees?.length}</h5>
                         </div>
                     </div>
                     <div className="FrontDesk sup-Card washman-green">
                         <FaChalkboardUser className="supervisor-dashboard-icons "/>
                         <div>
                             <h5>FrontDesk</h5>
-                            <h5>3</h5>
+                            <h5> {FrontDesk?.length || 0}</h5>
                         </div>
                     </div>
                     <div className="Washman sup-Card washman-blue">
                         <FaChalkboardUser className="supervisor-dashboard-icons "/>
                         <div>
                             <h5>Washman</h5>
-                            <h5>3</h5>
+                            <h5>{washman?.length || 0}</h5>
                         </div>
                     </div>
                     <div className="Inventory sup-Card washman-green">
