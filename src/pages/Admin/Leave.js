@@ -9,34 +9,26 @@ import RejectedLeave from "../../components/Admin/RejectedLeave";
 import { axiosInstance } from "../../services/AxiosInstance";
 
 function Leave() {
-  const [toggleRejection, setToggleRejection] = useState(true);
-  const [toogleEmployeeInput, settoogleEmployeeInput] = useState(false);
   const [toggleRejection2, setToggleRejection2] = useState(true);
-  const [toogleEmployeeInput2, settoogleEmployeeInput2] = useState(false);
+  const [toogleEmployeeInput2, settoggleEmployeeInput2] = useState(false);
   const [toggleApproved, settoggleApproved] = useState(false);
   const [toggleLeaveManagement, settoggleLeaveManagement] = useState(true);
-  const [rejectedLeave,setrejectedLeave]= useState(false)
-  const [pendingleaves,setpendingleaves]=useState()
-
-  function ToggleTextArea() {
-    setToggleRejection(!toggleRejection);
-    settoogleEmployeeInput(false);
-  }
-
-  function toogleEmployeeMessage() {
-    settoogleEmployeeInput(!toogleEmployeeInput);
-    setToggleRejection(false);
-  }
+  const [rejectedLeave, setrejectedLeave] = useState(false);
+  const [pendingleaves, setpendingleaves] = useState();
+  const [employeeID, setEmployeeID] = useState(null);
 
   function ToggleTextArea2() {
     setToggleRejection2(!toggleRejection2);
-    settoogleEmployeeInput2(false);
+    settoggleEmployeeInput2(false);
+    setEmployeeID(null);
   }
 
-  function toogleEmployeeMessage2() {
-    settoogleEmployeeInput2(!toogleEmployeeInput2);
+  function toogleEmployeeMessage2(itemId) {
+    setEmployeeID(itemId);
     setToggleRejection2(false);
   }
+
+  console.log();
 
   function toggleApprovedData() {
     settoggleApproved(!toggleApproved);
@@ -57,7 +49,7 @@ function Leave() {
   }
 
   function toggleRejectedLeave() {
-    setrejectedLeave(!rejectedLeave)
+    setrejectedLeave(!rejectedLeave);
     settoggleLeaveManagement(false);
     settoggleApproved(false);
     if (rejectedLeave) {
@@ -65,16 +57,14 @@ function Leave() {
     }
   }
 
-  useEffect(()=>{
-axiosInstance.get('/leave/status?status=pending')
-.then((resp)=>{
-  console.log(resp.data)
-  setpendingleaves(resp.data)
+  useEffect(() => {
+    axiosInstance.get("/leave/status?status=pending").then((resp) => {
+      console.log(resp.data);
+      setpendingleaves(resp.data);
+    });
+  }, []);
 
-})
-  },[])
-
-  console.log(pendingleaves)
+  console.log(pendingleaves);
 
   const calculateDaysInterval = (start, end) => {
     const startDate = new Date(start);
@@ -83,144 +73,176 @@ axiosInstance.get('/leave/status?status=pending')
     return interval;
   };
 
-
- 
-
-
   return (
     <div>
       <div className="d-flex">
         <AdminSidebar />
         <div className="leave-container">
           <div className="leave-process-div">
-            <p onClick={toggleLeaveManage} style={{cursor:"pointer"}}>pending</p>
-            <p onClick={toggleApprovedData} style={{cursor:"pointer"}}>approved</p>
-            <p style={{cursor:"pointer"}} onClick={toggleRejectedLeave}>rejected</p>
+            <p onClick={toggleLeaveManage} style={{ cursor: "pointer" }}>
+              pending
+            </p>
+            <p onClick={toggleApprovedData} style={{ cursor: "pointer" }}>
+              approved
+            </p>
+            <p style={{ cursor: "pointer" }} onClick={toggleRejectedLeave}>
+              rejected
+            </p>
           </div>
           <hr className="leave-hr" />
           {toggleLeaveManagement ? (
             <div className="d-flex">
               <Row>
-              <div className="pending-leave-div">
-                {pendingleaves && pendingleaves.map((item)=>(
-                <Card className="card-container">
-                <div className="card-innerdiv">
-                  <div className="user-profile-container">
-                    <div className="user-profile-container-innercont">
-                      <div>
-                        <img src={userImage} alt="" />
-                      </div>
+                <div className="pending-leave-div">
+                  {pendingleaves &&
+                    pendingleaves.map((item) => (
+                      <Card className="card-container" key={item._id}>
+                        <div className="card-innerdiv">
+                          <div className="user-profile-container">
+                            <div className="user-profile-container-innercont">
+                              <div>
+                                <img src={userImage} alt="" />
+                              </div>
 
-                      <div className="user-profile-container-innerd">
-                        <p className="user-profile-container-p1">
-                          {item?.fullName}
-                        </p>
-                        <p className="user-profile-container-p2">
-                          {item.employee_id?.role?.name}
-                        </p>
-                      </div>
-                    </div>
+                              <div className="user-profile-container-innerd">
+                                <p className="user-profile-container-p1">
+                                  {item?.fullName}
+                                </p>
+                                <p className="user-profile-container-p2">
+                                  {item.employee_id?.role?.name}
+                                </p>
+                              </div>
+                            </div>
 
-                    <p>{new Date(item.date_created).toLocaleDateString('en-GB',{day:'numeric',month:'short', year:'2-digit'})}</p>
-                  </div>
+                            <p>
+                              {new Date(item.date_created).toLocaleDateString(
+                                "en-GB",
+                                {
+                                  day: "numeric",
+                                  month: "short",
+                                  year: "2-digit",
+                                }
+                              )}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="date-container">
+                          <div className="date-container-innerd">
+                            <div>
+                              <input
+                                type="text"
+                                value={new Date(
+                                  item?.startDate
+                                ).toLocaleDateString("en-GB", {
+                                  day: "numeric",
+                                  month: "short",
+                                  year: "numeric",
+                                })}
+                              />
+                            </div>
+                            <div className="hrtag-ptag">
+                              <hr className="date-container-innerd-hr" />
+                              <p className="days-interval-p">
+                                {calculateDaysInterval(
+                                  item.startDate,
+                                  item.endDate
+                                )}
+                                D
+                              </p>
+                            </div>
+                            <div>
+                              <input
+                                type="text"
+                                value={new Date(
+                                  item?.endDate
+                                ).toLocaleDateString("en-GB", {
+                                  day: "numeric",
+                                  month: "short",
+                                  year: "numeric",
+                                })}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        {employeeID != item._id ? (
+                          <div>
+                            <Card
+                              border="grey"
+                              style={{
+                                width: "20rem",
+                                margin: "0 auto",
+                                height: "200px",
+                              }}
+                            >
+                              <Card.Header>{item.leaveType}</Card.Header>
+                              <Card.Body>
+                                <Card.Text>{item.reasons}</Card.Text>
+                              </Card.Body>
+                            </Card>
+                            <div className="leave-count-div">
+                              <p className="leave-count-div-p1">10</p>
+                              <b className="leave-count-div-p2">
+                                Leaves Available
+                              </b>
+                            </div>
+
+                            <div className="leave-button-divs">
+                              <div>
+                                <button className="leave-button-divs-btn1">
+                                  Approve
+                                </button>
+                              </div>
+                              <div>
+                                <button
+                                  className="leave-button-divs-btn2"
+                                  onClick={() =>
+                                    toogleEmployeeMessage2(item._id)
+                                  }
+                                >
+                                  Reject
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <Card
+                            border="grey"
+                            style={{
+                              width: "auto",
+                              height: "auto",
+                              position: "absolute",
+                              top: "200px",
+                              left: "14px",
+                            }}
+                          >
+                            <Card.Header>Reasons for rejection</Card.Header>
+                            <Card.Body>
+                              <textarea
+                                className="card-textinput"
+                                placeholder="Reasons for rejection"
+                              ></textarea>
+                            </Card.Body>
+
+                            <div className="leave-button-divs">
+                              <div>
+                                <button className="leave-button-divs-btn1">
+                                  Send
+                                </button>
+                              </div>
+                              <div>
+                                <button
+                                  className="leave-button-divs-btn2"
+                                  onClick={ToggleTextArea2}
+                                >
+                                  Cancel
+                                </button>
+                              </div>
+                            </div>
+                          </Card>
+                        )}
+                      </Card>
+                    ))}
                 </div>
-                <div className="date-container">
-                  <div className="date-container-innerd">
-                    <div>
-                      <input type="text" value={new Date(item?.startDate).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})} />
-                    </div>
-                    <div className="hrtag-ptag">
-                      <hr className="date-container-innerd-hr" />
-                      <p className="days-interval-p">{calculateDaysInterval(item.startDate,item.endDate)}D</p>
-                    </div>
-                    <div>
-                      <input type="text" value={new Date(item?.endDate).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}/>
-                    </div>
-                  </div>
-                </div>
-                {toggleRejection2 ? (
-                  <div>
-                    <Card
-                      border="grey"
-                      style={{
-                        width: "20rem",
-                        margin: "0 auto",
-                        height: "200px",
-                      }}
-                    >
-                      <Card.Header>{item.leaveType}</Card.Header>
-                      <Card.Body>
-                        <Card.Text>
-                        {item.reasons}
-                        </Card.Text>
-                      </Card.Body>
-                    </Card>
-                    <div className="leave-count-div">
-                      <p className="leave-count-div-p1">10</p>
-                      <b className="leave-count-div-p2">Leaves Available</b>
-                    </div>
-
-                    <div className="leave-button-divs">
-                      <div>
-                        <button className="leave-button-divs-btn1">
-                          Approve
-                        </button>
-                      </div>
-                      <div>
-                        <button
-                          className="leave-button-divs-btn2"
-                          onClick={()=>toogleEmployeeMessage2(item._id)}
-                        >
-                          Reject
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  ""
-                )}
-                {toogleEmployeeInput2 ? (
-                  <Card
-                    border="grey"
-                    style={{
-                      width: "auto",
-                      height: "auto",
-                      position: "absolute",
-                      top: "200px",
-                      left: "14px",
-                    }}
-                  >
-                    <Card.Header>Reasons for rejection</Card.Header>
-                    <Card.Body>
-                      <textarea
-                        className="card-textinput"
-                        placeholder="Reasons for rejection"
-                      ></textarea>
-                    </Card.Body>
-
-                    <div className="leave-button-divs">
-                      <div>
-                        <button className="leave-button-divs-btn1">
-                          Send
-                        </button>
-                      </div>
-                      <div>
-                        <button
-                          className="leave-button-divs-btn2"
-                          onClick={ToggleTextArea2}
-                        >
-                          Cancel
-                        </button>
-                      </div>
-                    </div>
-                  </Card>
-                ) : (
-                  ""
-                )}
-              </Card>
-                ))}
-              </div>
-
               </Row>
 
               <Col className="onleave-table">
@@ -337,8 +359,7 @@ axiosInstance.get('/leave/status?status=pending')
           )}
 
           {toggleApproved ? <ApprovedLeave /> : ""}
-          {rejectedLeave?  <RejectedLeave/> : ""}
-
+          {rejectedLeave ? <RejectedLeave /> : ""}
         </div>
       </div>
     </div>
