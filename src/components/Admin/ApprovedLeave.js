@@ -1,46 +1,54 @@
-import { useState } from "react";
-import {Link} from "react-router-dom"
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import userImage from "../../assets/images/bovi.jpeg";
+import { axiosInstance } from "../../services/AxiosInstance";
 
 function ApprovedLeave() {
+  const [approvedLeave, setApprovedLeave] = useState();
 
-  
+  useEffect(() => {
+    axiosInstance.get("/leave/status?status=approved").then((resp) => {
+      console.log(resp.data);
+      setApprovedLeave(resp.data);
+    });
+  }, []);
 
   return (
     <div>
       <div>
-      <table className="admin-content-table">
-                        <thead>
-                            <tr>
-                                <th>Employee Name</th>
-                                <th>Role</th>
-                                <th>Leave type</th>
-                                <th>From</th>
-                                <th>To</th>
-                                <th>Total Days</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                        <th>Stacy Peter</th>
-
-                                <th>Washman</th>
-                                <th>Sick</th>
-                                <th>16/12/23</th>
-                                <th>17/12/23</th>
-                                <th>1 day</th>
-                            </tr>
-                            <tr>
-                                <th>Stacy Peterwwwwwwwww</th>
-                                <th>Washman</th>
-                                <th>Sick</th>
-                                <th>16/12/23</th>
-                                <th>17/12/23</th>
-                                <th>1 day</th>
-                            </tr>
-
-                        </tbody>
-                    </table>
+        <table className="admin-content-table">
+          <thead>
+            <tr>
+              <th>Employee Name</th>
+              <th>Role</th>
+              <th>Leave type</th>
+              <th>From</th>
+              <th>To</th>
+              <th>Total Days</th>
+            </tr>
+          </thead>
+          <tbody>
+            {approvedLeave?.length < 1 ? (
+              <tr>
+                <td colSpan="6" className="no-data-message">
+                  No data available
+                </td>
+              </tr>
+            ) : (
+              approvedLeave &&
+              approvedLeave.map((item) => (
+                <tr key={item._id}>
+                  <th>{item?.fullName}</th>
+                  <th>{item?.customer_id?.role?.name}</th>
+                  <th>{item?.leaveType}</th>
+                  <th>{item.startDate}</th>
+                  <th>{item.endDate}</th>
+                  <th>1 day</th>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );
