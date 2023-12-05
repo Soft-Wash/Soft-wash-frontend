@@ -123,8 +123,11 @@ function AdminDashboard() {
                 <FaClipboardList className="clipboard-icon" />
               </div>
               <div className="icon-container-innerd2">
+                <Link className="order-dashboard-link" to={`/admincustomer`}>
                 <p>Customers</p>
                 <p>{Customers?.length}</p>
+                </Link>
+
               </div>
             </div>
             <div className="icon-container">
