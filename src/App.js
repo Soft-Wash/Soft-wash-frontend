@@ -54,6 +54,7 @@ import SingleOrder from "./pages/Admin/SingleOrder";
 import EditExpense from "./pages/Admin/EditExpense";
 import Customer from "./pages/Admin/Customer";
 import EditCustomer from "./pages/Admin/EditCustomer";
+import CreateLeave from "./pages/Admin/CreateLeave";
 
  
 
@@ -126,6 +127,7 @@ function App() {
         <Route path="/editexpense/:_id" element={<EditExpense/>}/>
         <Route path="/admincustomer" element={<Customer/>}/>
         <Route path="/editcustomer/:id" element={<EditCustomer/>}/>
+        <Route path="/createleave" element={<CreateLeave/>}/>
 
 
         {/* SUPERVISOR ROUTES */}
