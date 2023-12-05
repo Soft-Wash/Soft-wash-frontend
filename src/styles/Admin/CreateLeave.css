@@ -49,7 +49,7 @@
 
 .createleave-details-div-form-innerd1{
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .createleave-details-div-form-innerd1-inpt1{
@@ -60,7 +60,12 @@
 
 .createleave-details-div-form-innerd1-inpt2{
   width: 420px;
-  padding: 3px;
+  padding: 5px;
+
+}
+
+.leavetype-label{
+  margin-left: 20px;
 }
 
 .createleave-details-div-form-innerd1-selct1{
@@ -71,6 +76,8 @@
 .createleave-details-div-form-innerd1-selct2{
   width: 420px;
   padding: 5px;
+  overflow: hidden;
+  height: 100vh;
 }
 
 .createleave-details-div-form-innerd2{
