@@ -3,8 +3,9 @@ import AdminSidebar from "../../components/Admin/AdminSidebar";
 import { axiosInstance } from "../../services/AxiosInstance";
 import "../../styles/Admin/NewExpenses.css";
 import { ToastContainer, toast } from 'react-toastify';
+import SupervisorSideBar from "../../components/SupervisorComponents/SupervisorSideBar";
 
-function AddNewExpenses() {
+function CreateExpenseSup() {
   const [expenseDetails, setExpenseDetails] = useState({
   });
 
@@ -23,14 +24,15 @@ function AddNewExpenses() {
     axiosInstance.post('/expense/create',expenseDetails)
     .then((resp)=>{
       console.log(resp.data)
-      toast.success('Expense created succesful')
+      toast.success('Expense created succesfully')
     })
   }
 
   return (
     <div>
+        <ToastContainer position="top-center"/>
       <div className="new-expenses-container d-flex">
-        <AdminSidebar />
+        <SupervisorSideBar />
         <div className="new-expenses-container-innerd">
           <h4>Add Expense</h4>
           <hr className="addexpenses-hr" />
@@ -132,7 +134,7 @@ function AddNewExpenses() {
               </div>
             </div>
 
-            <button className="submit-button" onClick={postExpense}>Sumit</button>
+            <button className="submit-button rounded-2 px-4" onClick={postExpense}>Sumit</button>
           </div>
         </div>
       </div>
@@ -140,4 +142,4 @@ function AddNewExpenses() {
   );
 }
 
-export default AddNewExpenses;
+export default CreateExpenseSup;

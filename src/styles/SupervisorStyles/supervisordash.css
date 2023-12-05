@@ -16,7 +16,7 @@
 .HeaderCards-Container{
     /* display: grid;
     grid-template-columns: repeat(5, 1fr); */
-    gap: 10px; 
+    /* gap: 10px;  */
     justify-content: space-between;
     display: flex;
     width: 100%;
@@ -37,7 +37,7 @@
     margin-right: 15px;
 }
 
-    .Sup-HeadCard{
+.Sup-HeadCard {
     display: flex;
     background-color: white;
     height: 100px;

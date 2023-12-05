@@ -55,6 +55,11 @@ import EditExpense from "./pages/Admin/EditExpense";
 import Customer from "./pages/Admin/Customer";
 import EditCustomer from "./pages/Admin/EditCustomer";
 import CreateLeave from "./pages/Admin/CreateLeave";
+import CreateSupUsers from "./pages/SupervisorPage/CreateSupUsers";
+import SupOrderTable from "./pages/SupervisorPage/SupOrderTable";
+import EmployeeLogin from "./pages/EmployeePage/EmployeeLogin";
+import SupervisorExpense from "./pages/SupervisorPage/SupervisorExpense";
+import CreateExpenseSup from "./pages/SupervisorPage/CreateExpenseSup";
 
  
 
@@ -88,8 +93,6 @@ function App() {
          <Route path="/cart" element={<Cart/>} />
         <Route path="/my-orders" element={<Orders/>}/>
         <Route path="/order-receipt" element={<OrderReceipt/>}/>
-        <Route path="/SupervisorMainDash" element={<SupervisorMainDash/>}/>
-        <Route path="/CreateWashman" element={<CreateWashMan/>}/>
         <Route path="/my-orders/" element={<Orders/>}/>
         <Route path="/order-receipt/:orderId" element={<OrderReceipt/>}/>
         <Route path="/iventry" element={<Iventry/>}/>
@@ -131,8 +134,16 @@ function App() {
 
 
         {/* SUPERVISOR ROUTES */}
-        <Route path="/SupervisorDash-Board" element={<SupervisorDashBoard/>}/>
-        {/* <Route path ="/SupervisorDash" element ={<SupervisorDash/>}/> */}
+        <Route path ="/CreateSupUsers" element ={<CreateSupUsers/>}/>
+        <Route path ="/SupOrderTable" element ={<SupOrderTable/>}/>
+        <Route path ="/SupervisorDash" element ={<SupervisorDash/>}/>
+        <Route path ="/SupervisorExpense" element ={<SupervisorExpense/>}/>
+        <Route path ="/CreateExpenseSup" element ={<CreateExpenseSup/>}/>
+       
+
+        {/* EMPLOYEE LOGIN */}
+
+        <Route path ="/EmployeeLogin" element ={<EmployeeLogin/>}/>
 
       </Routes>
     </BrowserRouter>
