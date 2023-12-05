@@ -4,6 +4,8 @@ import userImage from "../../assets/images/bovi.jpeg";
 
 function ApprovedLeave() {
 
+  
+
   return (
     <div>
       <div>

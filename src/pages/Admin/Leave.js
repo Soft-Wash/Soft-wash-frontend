@@ -7,6 +7,9 @@ import { useEffect, useState } from "react";
 import ApprovedLeave from "../../components/Admin/ApprovedLeave";
 import RejectedLeave from "../../components/Admin/RejectedLeave";
 import { axiosInstance } from "../../services/AxiosInstance";
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Leave() {
   const [toggleRejection2, setToggleRejection2] = useState(true);
@@ -16,6 +19,12 @@ function Leave() {
   const [rejectedLeave, setrejectedLeave] = useState(false);
   const [pendingleaves, setpendingleaves] = useState();
   const [employeeID, setEmployeeID] = useState(null);
+  const [approveLeave,setApproveLeave]=useState()
+  const [rejectedReason,setrejectedReason]=useState({
+    status:"rejected",
+    adminApproval:"rejected"
+
+  })
 
   function ToggleTextArea2() {
     setToggleRejection2(!toggleRejection2);
@@ -27,8 +36,6 @@ function Leave() {
     setEmployeeID(itemId);
     setToggleRejection2(false);
   }
-
-  console.log();
 
   function toggleApprovedData() {
     settoggleApproved(!toggleApproved);
@@ -57,14 +64,41 @@ function Leave() {
     }
   }
 
+  const handleRejection =(e)=>{
+    const value = e.target.value
+    setrejectedReason({...rejectedReason, [e.target.name]:value})
+
+  }
+
+  const handleApproval=(Id)=>{
+    const leaveApproved={
+      adminApproval:"approved"
+    }
+    axiosInstance.put(`/leave/${Id}/adminApproval`, leaveApproved)
+    .then((resp)=>{
+      console.log(resp.data)
+      toast.success('Approved succesful')
+
+    })
+  }
+
+
+  const HandleRejectLeave =(Id)=>{
+    axiosInstance.put(`/leave/${Id}/adminApproval`, rejectedReason)
+    .then((resp)=>{
+      console.log(resp.data)
+      toast.error('Leave Rejected')
+
+    })
+  }
+
   useEffect(() => {
     axiosInstance.get("/leave/status?status=pending").then((resp) => {
-      console.log(resp.data);
       setpendingleaves(resp.data);
     });
   }, []);
 
-  console.log(pendingleaves);
+
 
   const calculateDaysInterval = (start, end) => {
     const startDate = new Date(start);
@@ -75,6 +109,7 @@ function Leave() {
 
   return (
     <div>
+                  <ToastContainer position="top-center" />
       <div className="d-flex">
         <AdminSidebar />
         <div className="leave-container">
@@ -188,7 +223,7 @@ function Leave() {
 
                             <div className="leave-button-divs">
                               <div>
-                                <button className="leave-button-divs-btn1">
+                                <button className="leave-button-divs-btn1" onClick={()=>handleApproval(item._id)}>
                                   Approve
                                 </button>
                               </div>
@@ -220,12 +255,14 @@ function Leave() {
                               <textarea
                                 className="card-textinput"
                                 placeholder="Reasons for rejection"
+                                name="rejectReason"
+                                onChange={handleRejection}
                               ></textarea>
                             </Card.Body>
 
                             <div className="leave-button-divs">
                               <div>
-                                <button className="leave-button-divs-btn1">
+                                <button className="leave-button-divs-btn1" onClick={()=>HandleRejectLeave(item._id)}>
                                   Send
                                 </button>
                               </div>
