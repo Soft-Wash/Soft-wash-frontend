@@ -50,6 +50,9 @@ function AdminSidebar(){
             <NavLink exact to="/leave" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="exclamation-circle">Leave</CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/createleave" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="exclamation-circle">Create Leave</CDBSidebarMenuItem>
+            </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
     

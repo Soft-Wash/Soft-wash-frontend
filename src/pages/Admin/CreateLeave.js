@@ -2,6 +2,10 @@ import AdminSidebar from "../../components/Admin/AdminSidebar";
 import "../../styles/Admin/CreateLeave.css";
 import { axiosInstance } from "../../services/AxiosInstance";
 import { useState } from "react";
+import axios from "axios";
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function CreateLeave() {
   const [createLeaveData, setCreateLeaveData] = useState();
@@ -17,9 +21,11 @@ function CreateLeave() {
   };
 
   const postExpense = () => {
-    axiosInstance.post(`/expense/update`).then((resp) => {
+    axios.post(`${process.env.REACT_APP_BASE_URL}/leave/create`,leaveData)
+    .then((resp) => {
       console.log(resp.data);
       setCreateLeaveData(resp.data);
+      toast.success('Application succesful')
     });
   };
 
@@ -33,7 +39,7 @@ function CreateLeave() {
           <div className="createLeave-content">
             <div className="createleave-details-div">
               <div className="createleave-details-div-header">
-                <p> Expenses Details</p>
+                <p> Leave Form</p>
               </div>
               <div className="createleave-details-div-form">
                 <div className="createleave-details-div-form-innerd1">
@@ -47,6 +53,24 @@ function CreateLeave() {
                       onChange={HandleLeave}
                       placeholder="Customer Name"
                     />
+                  </label>
+                  <label htmlFor="" className="leavetype-label">
+                    Leave Type
+                    <br />
+                    <select
+                      type="text"
+                      name="leaveType"
+                      className="createleave-details-div-form-innerd1-inpt2"
+                      onChange={HandleLeave}
+                      placeholder="Customer Name"
+                    >
+                      <option value="sick">Sick</option>
+                      <option value="annual">Annual</option>
+                      <option value="wedding">Wedding</option>
+                      <option value="patarnity">Patarnity</option>
+                      <option value="matarnity">Matarnity</option>
+
+                    </select>
                   </label>
                 </div>
                 <div className="createleave-details-div-form-innerd2">
@@ -72,14 +96,15 @@ function CreateLeave() {
 
                 <div className="createleave-note-div">
                   <label htmlFor="">
-                    Reasons <br />
+                    Reasons 
                     <br />
                     <textarea
-                      name=""
+                      name="reasons"
                       id=""
                       cols="30"
                       rows="10"
                       className="createleave-note-div-textarea"
+                      onChange={HandleLeave}
                     ></textarea>
                   </label>
                 </div>
