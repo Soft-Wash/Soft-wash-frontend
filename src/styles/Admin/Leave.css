@@ -199,6 +199,10 @@ margin-bottom: 0;
     height: 500px;
   }
 
+  .card-container3{
+    max-width: 320px;
+  }
+
   .no-leave{
     margin-top: 20px;
     padding-left: 10px;
