@@ -31,6 +31,7 @@ function CreateLeave() {
 
   return (
     <div>
+       <ToastContainer position="top-center" />
       <div className="d-flex">
         <AdminSidebar />
         <div className="createleave-container-innerd">

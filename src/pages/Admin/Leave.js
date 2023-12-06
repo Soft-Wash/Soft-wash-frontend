@@ -19,7 +19,9 @@ function Leave() {
   const [rejectedLeave, setrejectedLeave] = useState(false);
   const [pendingleaves, setpendingleaves] = useState();
   const [employeeID, setEmployeeID] = useState(null);
-  const [approveLeave,setApproveLeave]=useState()
+  const [todayLeave,setTodayLeave]=useState()
+  const [thisWeek,setThisWeek]=useState()
+  const [nextWeek,setNextWeek]=useState()
   const [rejectedReason,setrejectedReason]=useState({
     status:"rejected",
     adminApproval:"rejected"
@@ -92,10 +94,28 @@ function Leave() {
     })
   }
 
+  const currentDate = new Date().toISOString().split('T')[0];
+  console.log(currentDate)
+
   useEffect(() => {
     axiosInstance.get("/leave/status?status=pending").then((resp) => {
       setpendingleaves(resp.data);
     });
+    axiosInstance.get(`leave/today?startDate=${currentDate}`)
+    .then((resp)=>{
+      console.log(resp.data)
+      setTodayLeave(resp.data)
+    })
+    axiosInstance.get(`leave/this-week`)
+    .then((resp)=>{
+      console.log(resp.data)
+      setThisWeek(resp.data)
+    })
+    axiosInstance.get(`leave/next-week`)
+    .then((resp)=>{
+      console.log(resp.data)
+      setNextWeek(resp.data)
+    })
   }, []);
 
 
@@ -109,7 +129,7 @@ function Leave() {
 
   return (
     <div>
-                  <ToastContainer position="top-center" />
+        <ToastContainer position="top-center" />
       <div className="d-flex">
         <AdminSidebar />
         <div className="leave-container">
@@ -292,6 +312,13 @@ function Leave() {
                       <hr className="card-container3-innerd2-hr" />
                       <p className="card-container3-innerd2-p1">Today</p>
                       <div className="user-profile-container-innercont">
+                        {todayLeave.length<1?(
+                                            <p colSpan="6" className="no-data-message1">
+                                            No employee on leave today 
+                                          </p>
+                        ):( todayLeave && todayLeave.map((item)=>(
+                        <>
+                        
                         <div>
                           <img
                             className="user-profile-container-innercont-img"
@@ -302,15 +329,25 @@ function Leave() {
 
                         <div className="user-profile-container-innerd">
                           <p className="user-profile-container2-p1">
-                            Gerald Fakaa
+                            {item?.employee_id?.fullName}
                           </p>
                           <p className="user-profile-container2-p2">
-                            Front Desk
+                          {item?.employee_id.role?.name}
                           </p>
                         </div>
+                        </>
+                        )))}
+
                       </div>
                       <p className="card-container3-innerd2-p1">This week</p>
                       <div className="user-profile-container-innercont">
+                      {thisWeek?.length<1?(
+                                          <p colSpan="6" className="no-data-message1">
+                                          No employee on leave this <br /> week
+                                        </p>
+                      ) :(thisWeek && thisWeek.map((item)=>(
+                        <>
+                        
                         <div>
                           <img
                             className="user-profile-container-innercont-img"
@@ -321,33 +358,25 @@ function Leave() {
 
                         <div className="user-profile-container-innerd">
                           <p className="user-profile-container2-p1">
-                            Gerald Fakaa
+                            {item?.employee_id?.fullName}
                           </p>
                           <p className="user-profile-container2-p2">
-                            Front Desk
+                          {item?.employee_id.role?.name}
                           </p>
                         </div>
-                      </div>
-                      <div className="user-profile-container-innercont">
-                        <div>
-                          <img
-                            className="user-profile-container-innercont-img"
-                            src={userImage}
-                            alt=""
-                          />
-                        </div>
-
-                        <div className="user-profile-container-innerd">
-                          <p className="user-profile-container2-p1">
-                            Gerald Fakaa
-                          </p>
-                          <p className="user-profile-container2-p2">
-                            Front Desk
-                          </p>
-                        </div>
+                        </>
+                        )))}
                       </div>
                       <p className="card-container3-innerd2-p1">Next week</p>
                       <div className="user-profile-container-innercont">
+                      {nextWeek?.length<1?(
+                  
+                  <p colSpan="6" className="no-data-message1">
+                    No employee on leave next <br /> week..
+                  </p>
+                
+                      ) :(nextWeek && nextWeek?.map((item)=>(
+                        <>
                         <div>
                           <img
                             className="user-profile-container-innercont-img"
@@ -358,30 +387,14 @@ function Leave() {
 
                         <div className="user-profile-container-innerd">
                           <p className="user-profile-container2-p1">
-                            Gerald Fakaa
+                            {item?.employee_id?.fullName}
                           </p>
                           <p className="user-profile-container2-p2">
-                            Front Desk
+                          {item?.employee_id.role?.name}
                           </p>
                         </div>
-                      </div>
-                      <div className="user-profile-container-innercont">
-                        <div>
-                          <img
-                            className="user-profile-container-innercont-img"
-                            src={userImage}
-                            alt=""
-                          />
-                        </div>
-
-                        <div className="user-profile-container-innerd">
-                          <p className="user-profile-container2-p1">
-                            Gerald Fakaa
-                          </p>
-                          <p className="user-profile-container2-p2">
-                            Front Desk
-                          </p>
-                        </div>
+                        </>
+                        )))}
                       </div>
                     </div>
                   </div>
