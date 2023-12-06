@@ -20,6 +20,19 @@ function ApprovedLeave() {
     return interval
   }
 
+  const getStatusColorClass = (status) => {
+    switch (status) {
+      case "pending":
+        return "pendingcolor";
+      case "approved":
+        return "approvedcolor";
+      case "rejected":
+        return "rejectedcolor"
+      default:
+        return "";
+    }
+  };
+
   return (
     <div>
       <div>
@@ -49,10 +62,15 @@ function ApprovedLeave() {
                   <th>{item?.fullName}</th>
                   <th>{item?.employee_id?.role?.name}</th>
                   <th>{item?.leaveType}</th>
-                  <th>{new Date(item.startDate).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</th>
-                  <th>{new Date(item.endDate).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</th>
+                  <th>{new Date(item.startDate).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</th>
+                  <th>{new Date(item.endDate).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</th>
                   <th>{CalculateDays(item.startDate,item.endDate)} days</th>
-                  <th>{item?.status}</th>
+                  <th>
+                    <button className={`status-button1 ${getStatusColorClass(item?.status)}`}>
+                    {item?.status}
+                    </button>
+
+                  </th>
                 </tr>
               ))
             )}
