@@ -13,6 +13,13 @@ function ApprovedLeave() {
     });
   }, []);
 
+  const CalculateDays =(start,end)=>{
+    const startDate = new Date(start)
+    const endDate = new Date(end)
+    const interval = Math.round((endDate-startDate)/(1000*60*60*24))
+    return interval
+  }
+
   return (
     <div>
       <div>
@@ -39,11 +46,11 @@ function ApprovedLeave() {
               approvedLeave.map((item) => (
                 <tr key={item._id}>
                   <th>{item?.fullName}</th>
-                  <th>{item?.customer_id?.role?.name}</th>
+                  <th>{item?.employee_id?.role?.name}</th>
                   <th>{item?.leaveType}</th>
-                  <th>{item.startDate}</th>
-                  <th>{item.endDate}</th>
-                  <th>1 day</th>
+                  <th>{new Date(item.startDate).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</th>
+                  <th>{new Date(item.endDate).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</th>
+                  <th>{CalculateDays(item.startDate,item.endDate)} days</th>
                 </tr>
               ))
             )}

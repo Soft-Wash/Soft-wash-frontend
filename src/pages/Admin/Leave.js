@@ -114,13 +114,13 @@ function Leave() {
         <AdminSidebar />
         <div className="leave-container">
           <div className="leave-process-div">
-            <p onClick={toggleLeaveManage} style={{ cursor: "pointer" }}>
+            <p onClick={toggleLeaveManage} className={`${toggleLeaveManagement?'leave-process-div-p':''}`} style={{ cursor: "pointer" }}>
               pending
             </p>
-            <p onClick={toggleApprovedData} style={{ cursor: "pointer" }}>
+            <p onClick={toggleApprovedData}  className={`${toggleApproved ? 'leave-process-div-p':''}`} style={{ cursor: "pointer" }}>
               approved
             </p>
-            <p style={{ cursor: "pointer" }} onClick={toggleRejectedLeave}>
+            <p style={{ cursor: "pointer" }}  className={`${rejectedLeave ? 'leave-process-div-p':''}`} onClick={toggleRejectedLeave}>
               rejected
             </p>
           </div>
