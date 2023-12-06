@@ -19,7 +19,7 @@ function Leave() {
   const [rejectedLeave, setrejectedLeave] = useState(false);
   const [pendingleaves, setpendingleaves] = useState();
   const [employeeID, setEmployeeID] = useState(null);
-  const [approveLeave,setApproveLeave]=useState()
+  const [todayLeave,setTodayLeave]=useState()
   const [rejectedReason,setrejectedReason]=useState({
     status:"rejected",
     adminApproval:"rejected"
@@ -92,10 +92,18 @@ function Leave() {
     })
   }
 
+  const currentDate = new Date().toISOString().split('T')[0];
+  console.log(currentDate)
+
   useEffect(() => {
     axiosInstance.get("/leave/status?status=pending").then((resp) => {
       setpendingleaves(resp.data);
     });
+    axiosInstance.get(`leave/today?startDate=${currentDate}`)
+    .then((resp)=>{
+      console.log(resp.data)
+      setTodayLeave(resp.data)
+    })
   }, []);
 
 
@@ -109,7 +117,7 @@ function Leave() {
 
   return (
     <div>
-                  <ToastContainer position="top-center" />
+        <ToastContainer position="top-center" />
       <div className="d-flex">
         <AdminSidebar />
         <div className="leave-container">
@@ -292,6 +300,9 @@ function Leave() {
                       <hr className="card-container3-innerd2-hr" />
                       <p className="card-container3-innerd2-p1">Today</p>
                       <div className="user-profile-container-innercont">
+                        {todayLeave && todayLeave.map((item)=>(
+                        <>
+                        
                         <div>
                           <img
                             className="user-profile-container-innercont-img"
@@ -302,12 +313,15 @@ function Leave() {
 
                         <div className="user-profile-container-innerd">
                           <p className="user-profile-container2-p1">
-                            Gerald Fakaa
+                            {item?.employee_id?.fullName}
                           </p>
                           <p className="user-profile-container2-p2">
-                            Front Desk
+                          {item?.employee_id.role?.name}
                           </p>
                         </div>
+                        </>
+                        ))}
+
                       </div>
                       <p className="card-container3-innerd2-p1">This week</p>
                       <div className="user-profile-container-innercont">
