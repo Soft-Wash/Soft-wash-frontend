@@ -1,10 +1,16 @@
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 import "../../styles/Admin/ExpenseReport.css"
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function ExpenseReport(){
+
+
   return(
     <div>
+            <ToastContainer position="top-center" />
       <div className="d-flex">
         <AdminSidebar />
         <div className="expense-report-container">
