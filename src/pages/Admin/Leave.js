@@ -95,7 +95,6 @@ function Leave() {
   }
 
   const currentDate = new Date().toISOString().split('T')[0];
-  console.log(currentDate)
 
   useEffect(() => {
     axiosInstance.get("/leave/status?status=pending").then((resp) => {
@@ -103,17 +102,14 @@ function Leave() {
     });
     axiosInstance.get(`leave/today?startDate=${currentDate}`)
     .then((resp)=>{
-      console.log(resp.data)
       setTodayLeave(resp.data)
     })
     axiosInstance.get(`leave/this-week`)
     .then((resp)=>{
-      console.log(resp.data)
       setThisWeek(resp.data)
     })
     axiosInstance.get(`leave/next-week`)
     .then((resp)=>{
-      console.log(resp.data)
       setNextWeek(resp.data)
     })
   }, []);
@@ -312,7 +308,7 @@ function Leave() {
                       <hr className="card-container3-innerd2-hr" />
                       <p className="card-container3-innerd2-p1">Today</p>
                       <div className="user-profile-container-innercont">
-                        {todayLeave.length<1?(
+                        {todayLeave?.length<1?(
                                             <p colSpan="6" className="no-data-message1">
                                             No employee on leave today 
                                           </p>
