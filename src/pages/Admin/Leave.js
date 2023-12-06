@@ -85,6 +85,8 @@ function Leave() {
   }
 
 
+  console.log(rejectedReason)
+
   const HandleRejectLeave =(Id)=>{
     axiosInstance.put(`/leave/${Id}/adminApproval`, rejectedReason)
     .then((resp)=>{
@@ -313,7 +315,7 @@ function Leave() {
                                             No employee on leave today 
                                           </p>
                         ):( todayLeave && todayLeave.map((item)=>(
-                        <>
+                        <div className="onleave-div">
                         
                         <div>
                           <img
@@ -331,7 +333,7 @@ function Leave() {
                           {item?.employee_id.role?.name}
                           </p>
                         </div>
-                        </>
+                        </div>
                         )))}
 
                       </div>
@@ -341,8 +343,9 @@ function Leave() {
                                           <p colSpan="6" className="no-data-message1">
                                           No employee on leave this <br /> week
                                         </p>
+                                        
                       ) :(thisWeek && thisWeek.map((item)=>(
-                        <>
+                        <div className="onleave-div">
                         
                         <div>
                           <img
@@ -360,7 +363,7 @@ function Leave() {
                           {item?.employee_id.role?.name}
                           </p>
                         </div>
-                        </>
+                        </div>
                         )))}
                       </div>
                       <p className="card-container3-innerd2-p1">Next week</p>
