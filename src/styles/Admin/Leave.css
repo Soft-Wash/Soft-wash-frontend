@@ -298,3 +298,10 @@ margin-bottom: 0;
   padding-right: 7px;
   font-weight: bold;
 }
+
+.no-data-message1{
+  margin-left: 10px;
+  white-space: wrap;
+  font-weight: bold;
+  color: #474958;
+}
