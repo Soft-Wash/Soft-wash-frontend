@@ -266,3 +266,31 @@ margin-bottom: 0;
   height: 100vh;
   overflow: scroll;
 }
+
+.pendingcolor {
+  background-color: orange; 
+  color: white;
+  border: none;
+
+}
+
+.approvedcolor {
+  background-color: green; 
+  color: white;
+  border: none;
+  font-weight: bold;
+}
+
+.rejectedcolor {
+  background-color: rgb(192, 8, 8); 
+  color: white;
+  border: none;
+  font-weight: bold;
+}
+
+.status-button1{
+  border-radius: 30px;
+  padding-left: 7px;
+  padding-right: 7px;
+  font-weight: bold;
+}

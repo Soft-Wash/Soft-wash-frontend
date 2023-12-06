@@ -2,6 +2,7 @@ import { useState,useEffect } from "react";
 import {Link} from "react-router-dom"
 import userImage from "../../assets/images/bovi.jpeg";
 import { axiosInstance } from "../../services/AxiosInstance";
+import "../../styles/Admin/Leave.css"
 
 function RejectedLeave() {
 
@@ -21,6 +22,19 @@ function RejectedLeave() {
     return interval
   }
 
+  const getStatusColorClass = (status) => {
+    switch (status) {
+      case "pending":
+        return "pendingcolor";
+      case "approved":
+        return "approvedcolor";
+      case "rejected":
+        return "rejectedcolor"
+      default:
+        return "";
+    }
+  };
+
   return (
     <div>
       <div>
@@ -33,6 +47,7 @@ function RejectedLeave() {
                                 <th>From</th>
                                 <th>To</th>
                                 <th>Total Days</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,6 +67,12 @@ function RejectedLeave() {
                   <th>{new Date(item.startDate).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</th>
                   <th>{new Date(item.endDate).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</th>
                   <th>{CalculateDays(item.startDate,item.endDate)} days</th>
+                  <th>
+                    <button className={`status-button1 ${getStatusColorClass(item?.status)}`}>
+                    {item?.status}
+                    </button>
+
+                  </th>
                 </tr>
               ))
             )}

@@ -32,6 +32,7 @@ function ApprovedLeave() {
               <th>From</th>
               <th>To</th>
               <th>Total Days</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
@@ -51,6 +52,7 @@ function ApprovedLeave() {
                   <th>{new Date(item.startDate).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</th>
                   <th>{new Date(item.endDate).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</th>
                   <th>{CalculateDays(item.startDate,item.endDate)} days</th>
+                  <th>{item?.status}</th>
                 </tr>
               ))
             )}
