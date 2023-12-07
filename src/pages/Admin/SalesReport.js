@@ -16,8 +16,6 @@ function SalesReport() {
   };
 
   const SubmitDates = () => {
-    console.log(reporData);
-
     const { startDate, endDate } = reporData;
 
     axios
@@ -110,7 +108,7 @@ function SalesReport() {
                       salesReportData.map((item) => (
                         <tr key={item._id}>
                           <th>1</th>
-                          <th>{item?.date_created}</th>
+                          <th>{new Date(item?.date_created).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</th>
                           <th>{item?.customer_id.fullName}</th>
 
                           <th>{item?.total}</th>

@@ -60,6 +60,7 @@ import SupOrderTable from "./pages/SupervisorPage/SupOrderTable";
 import EmployeeLogin from "./pages/EmployeePage/EmployeeLogin";
 import SupervisorExpense from "./pages/SupervisorPage/SupervisorExpense";
 import CreateExpenseSup from "./pages/SupervisorPage/CreateExpenseSup";
+import WorkFlowTask from "./pages/Admin/WorkFlowTask";
 
  
 
@@ -131,6 +132,7 @@ function App() {
         <Route path="/admincustomer" element={<Customer/>}/>
         <Route path="/editcustomer/:id" element={<EditCustomer/>}/>
         <Route path="/createleave" element={<CreateLeave/>}/>
+        <Route path="/workflowtask" element={<WorkFlowTask/>}/>
 
 
         {/* SUPERVISOR ROUTES */}
