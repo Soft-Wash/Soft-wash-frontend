@@ -11,13 +11,15 @@ function SupervisorExpense() {
 
   const [expenses,setExpenses] = useState()
 
-  useEffect(()=>{
-    axiosInstance.get('/expense/')
-    .then((resp)=>{
-      setExpenses(resp.data)
+//   useEffect(()=>{
+//     axiosInstance.get('/expense/')
+//     .then((resp)=>{
+//         console.log(resp)
+//       setExpenses(resp.data)
 
-    })
-  },[])
+
+//     })
+//   },[])
 
 
   const getStatusColorClass = (tax) => {
@@ -77,6 +79,7 @@ function SupervisorExpense() {
                   <thead>
                     <tr>
                       <th>S No</th>
+                      <th>Branch</th>
                       <th>Date</th>
                       <th>Purpose</th>
                       <th>Amount</th>
@@ -89,6 +92,7 @@ function SupervisorExpense() {
                     {expenses && expenses.map((item)=>(
                     <tr key={item._id}>
                     <th>1</th>
+                    <th>{item.branch}</th>
                     <th>{item.date}</th>
                     <th>{item.category}</th>
                     <th>{item.amount}</th>
