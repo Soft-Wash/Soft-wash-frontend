@@ -3,9 +3,44 @@ import "../../styles/Admin/ExpenseReport.css"
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {useState} from "react"
+import axios from "axios";
 
 
 function ExpenseReport(){
+
+  const [epenseReport,setEpenseReport]=useState()
+const [reporData,setReporData] = useState({})
+
+const HandleSalesReport=(e)=>{
+  const value = e.target.value
+
+  setReporData({...reporData, [e.target.name]:value})
+  
+}
+
+console.log(reporData)
+
+const SubmitDates = () => {
+
+  const { startDate, endDate} = reporData;
+  console.log(reporData)
+
+  axios.get(`${process.env.REACT_APP_BASE_URL}/expense/report/expense`, {
+    params: {
+      startDate,
+      endDate
+    },
+  })
+  .then((resp) => {
+    console.log(resp.data);
+    setEpenseReport(resp.data);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+};
+
 
 
   return(
@@ -25,14 +60,15 @@ function ExpenseReport(){
                 <div className="expense-form-data">
                   <label htmlFor="" className="expense-form-data-label1">
                     Start Date <br />
-                    <input className="expense-form-data-inpt1" type="date" />
+                    <input className="expense-form-data-inpt1" type="date" name="startDate" onChange={HandleSalesReport}/>
                   </label>
                   <label htmlFor="" className="expense-form-data-label2">
                     End Date <br />
-                    <input className="expense-form-data-inpt2" type="date" />
+                    <input className="expense-form-data-inpt2" type="date" name="endDate" onChange={HandleSalesReport} />
                   </label>
                 </div>
               </div>
+              <button className="order-Sort-button" onClick={SubmitDates}>Submit</button>
             </div>
             <div className="sales-table-content">
               <div className="show-container">
@@ -49,28 +85,28 @@ function ExpenseReport(){
                 <table className="expense-content-table">
                   <thead>
                     <tr>
-                      <th>S No</th>
+                      <th>orderId</th>
                       <th>Date</th>
-                      <th>Customer</th>
-                      <th>Subtotal</th>
-                      <th>Addon Total</th>
-                      <th>Discount</th>
-                      <th>Tax Amount</th>
-                      <th>Gross Amount</th> 
-
+                      <th>Amount</th>
+                      <th>Tax</th>
+                      <th>Payment Method</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th>1</th>
-                      <th>08-dec-23</th>
-                      <th>100</th>
+                    {epenseReport?.length<1?(
+    <tr>
+    <td colSpan="6" className="no-data-message">No data available</td>
+  </tr>
+                    ) :(epenseReport && epenseReport.map((item)=>(
+                    <tr key={item._id}>
+                    <th>{item?._id.substring(0,item?._id?.length/2)}</th>
+                    <th>{new Date(item?.date)?.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</th>
+                    <th>{item?.amount}</th>
+                    <th>{item?.tax_include}</th>
+                    <th>{item?.payment_method}</th>
+                  </tr>
+                    )))}
 
-                      <th>Fuel</th>
-                      <th>food</th>
-                      <th>Cash</th>
-                      <th>money</th>
-                    </tr>
                   </tbody>
                 </table>
                 <p>showing 1 0f 1 of 1 entries</p>

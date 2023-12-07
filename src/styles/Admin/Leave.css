@@ -71,8 +71,13 @@
 }
 
 .user-profile-container-innercont{
-  display: flex;
+  display: grid;
   align-items: center;
+  grid-template-columns: repeat(1,1fr);
+}
+
+.onleave-div{
+  display: flex;
 }
 
 .card-innerdiv{
@@ -174,6 +179,7 @@ margin-bottom: 0;
 .card-container3-innerd2-p1{
   margin-top: 10px;
   margin-left: 10px;
+  font-weight: bold;
 }
 .user-profile-container-innercont-img{
   width: 40px;
@@ -191,7 +197,7 @@ margin-bottom: 0;
  .user-profile-container2-p1{
    margin-bottom: 0;
    white-space: nowrap;
-   font-size: 14px;
+   font-size: 16px;
   }
 
   .card-container3-innerd1-cover{
@@ -302,6 +308,7 @@ margin-bottom: 0;
 .no-data-message1{
   margin-left: 10px;
   white-space: wrap;
-  font-weight: bold;
-  color: #474958;
+  font-weight: 300;
+  color: #87898c;
 }
+

@@ -2,7 +2,9 @@ import { useState } from "react";
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 import { axiosInstance } from "../../services/AxiosInstance";
 import "../../styles/Admin/NewExpenses.css";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AddNewExpenses() {
   const [expenseDetails, setExpenseDetails] = useState({
@@ -29,6 +31,7 @@ function AddNewExpenses() {
 
   return (
     <div>
+       <ToastContainer position="top-center" />
       <div className="new-expenses-container d-flex">
         <AdminSidebar />
         <div className="new-expenses-container-innerd">
