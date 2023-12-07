@@ -16,8 +16,6 @@ function SalesReport() {
   };
 
   const SubmitDates = () => {
-    console.log(reporData);
-
     const { startDate, endDate } = reporData;
 
     axios
