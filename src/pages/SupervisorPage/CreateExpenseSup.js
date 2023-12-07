@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 import { axiosInstance } from "../../services/AxiosInstance";
 import "../../styles/Admin/NewExpenses.css";
@@ -8,6 +8,19 @@ import SupervisorSideBar from "../../components/SupervisorComponents/SupervisorS
 function CreateExpenseSup() {
   const [expenseDetails, setExpenseDetails] = useState({
   });
+  const [branches, setbranches] = useState();
+  const [roles, setroles] = useState();
+  const [empty, setEmpty] = useState(false);
+
+  useEffect(() => {
+    axiosInstance.get("/branch/").then((resp) => {
+      setbranches(resp.data);
+    });
+
+    axiosInstance.get("/roles/").then((resp) => {
+      setroles(resp.data);
+    });
+  }, []);
 
   const HandleExpense = (e) => {
     const value =
@@ -27,6 +40,7 @@ function CreateExpenseSup() {
       toast.success('Expense created succesfully')
     })
   }
+  
 
   return (
     <div>
@@ -40,6 +54,31 @@ function CreateExpenseSup() {
             <div className="addexpenses-details-div">
               <div className="expenses-details-div-header">
                 <p> Expenses Details</p>
+              </div>
+              <div className="expenses-details-div-form">
+                <label htmlFor="">
+                    Soft-Wash Branch <br />
+                    <select
+                    type="text"
+                    name="branch"
+                    id=""
+                    className="expenses-details-div-form-innerd1-selct1"
+                    onChange={HandleExpense} 
+                    >
+                    <option value="" hidden>
+                        Select Branch
+                    </option>
+                    {branches &&
+                        branches.map((item) => (
+                            <option key={item._d} value={item._id}>
+                            {item.name}
+                    </option>
+                    ))}
+                    </select>
+                    {empty && !branches && (
+                    <div className="error">branch is required</div>
+              )}
+                </label>
               </div>
               <div className="expenses-details-div-form">
                 <div className="expenses-details-div-form-innerd1">

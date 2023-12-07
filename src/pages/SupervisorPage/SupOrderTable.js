@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import SupervisorSideBar from "../../components/SupervisorComponents/SupervisorSideBar";
-import "../../styles/Admin/tableorder.css";
+import "../../styles/SupervisorStyles/Supordertable.css";
 import { axiosInstance } from "../../services/AxiosInstance";
 import { useState } from "react";
 import { Link } from "react-router-dom"

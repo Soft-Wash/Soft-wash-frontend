@@ -1,0 +1,119 @@
+
+
+.ordertable-div{
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-right: 20px;
+  }  
+    .ordertbale-content-table{
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 13px;
+      min-width: 500px;
+      border-radius: 5px 5px 0 0;
+      overflow: hidden;
+      box-shadow: 0 0 10px 2px gainsboro;
+      margin-top: 80px;
+  }
+  .ordertbale-content-table thead tr{
+      width: 100%;
+      text-align: left;
+      font-weight: bold;
+      background-color: rgb(13,202,240);
+      color: white;
+  }
+  
+  .ordertbale-content-table th,
+  .ordertbale-content-table td{
+      padding: 20px 15px;
+      border-right: 1px solid gray;
+  }
+  .ordertbale-content-table tbody tr{
+      border-bottom: 1px solid grey;
+  
+  }
+  .ordertbale-content-table tbody tr:nth-of-type(even){
+      background-color: rgb(230, 230, 230);
+  }
+  .ordertbale-content-table tbody tr:last-of-type{
+      border-bottom: 3px solid rgb(13,202,240);
+  }
+  
+  .ordertable-div{
+    overflow: scroll;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  .select-dropdown{
+    width: 150px;
+    border: 1px solid grey;
+    width: 20em;
+    height: 2em;
+    /* padding: 0 4em 0 1em; */
+    /* background: #0DCAF0; */
+    /* color: white; */
+    border-radius: 0.25em;
+    box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+  
+  .select-dropdown2{
+    width: 170px;
+    border: 1px solid grey;
+  }
+  
+  
+  .allorders-status-th button{
+    white-space: nowrap;
+    border-radius: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    color: white;
+    font-weight: bold;
+    border: none;
+  
+  }
+  
+  
+  
+  .pending-color {
+    background-color: yellow; 
+  }
+  
+  .processing-color {
+    background-color: orange; 
+  }
+  
+  .shipped-color {
+    background-color: rgb(0, 68, 255); 
+  }
+  
+  .confirmed-color {
+    background-color: rgb(93, 217, 93); 
+  }
+  
+  .received-color{
+    background-color: purple;
+  }
+  
+  .order-placed{
+    background-color: rgb(127, 127, 127);
+  }
+  
+  .Cleaning-color{
+    background-color: rgb(240, 163, 8); 
+  }
+  
+  .ready-color{
+  background-color: green;
+  }
+  
+  .delivered-color{
+    background-color: rgb(11, 20, 185); 
+  }
+  
+  .order-table-select-div{
+    display: flex;
+    justify-content: space-between;
+  }
