@@ -35,10 +35,10 @@ function TaskTable(){
     switch (status) {
       case "pending":
         return "order-placed";
-      case "Received":
-        return "inprogress";
-      case "Completed":
+      case "inprogress":
         return "Cleaning-color";
+      case "Completed":
+        return "shipped-color";
       default:
         return "";
     }
