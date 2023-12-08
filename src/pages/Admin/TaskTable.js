@@ -88,8 +88,14 @@ function TaskTable(){
                 statusData &&
                 statusData.map((item) => (
                   <tr key={item._id}>
-                    <th>{item._id.substring(0, item._id.length / 2)}</th>
-                    <th>{item?.order_id?._id.substring(0, item._id.length / 2)}</th>
+                    <th>{item?._id?.substring(0, item?._id?.length / 2)}</th>
+                    <th>
+        {item?.order_id?.map((orderId) => (
+          <div key={orderId._id}>
+            {orderId?._id?.substring(0, orderId?._id?.length / 2)}
+          </div>
+        ))}
+      </th>
                     <th>{item?.order_id?.customer_id?.fullName}</th>
                     <th>{item?.employee_id?.fullName}</th>
                     <th>{new Date(item?.startDate).toLocaleDateString('en-Gb',{day:'numeric',month:'short',year:'numeric'})}</th>

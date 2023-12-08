@@ -37,7 +37,21 @@ function CreateTask(){
       ? e.target.files[0]
       : e.target.value;
 
-      setTaskDetails({ ...taskDetails, [e.target.name]: value});
+setTaskDetails((prevState) => {
+  // Check if the field is 'order_id'
+  if (e.target.name === 'order_id') {
+    // Use the spread operator to create a new array with the existing values and the new value
+    const newOrderIds = [...prevState.order_id, value];
+    
+    // Update the state with the new array
+    return { ...prevState, [e.target.name]: newOrderIds };
+  }
+
+  // For other fields, keep the existing logic
+  return { ...prevState, [e.target.name]: value };
+});
+
+      
   };
 
 
