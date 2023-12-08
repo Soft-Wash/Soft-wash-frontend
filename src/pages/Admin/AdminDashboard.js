@@ -15,6 +15,7 @@ function AdminDashboard() {
 
   async function getEmployees() {
     try {
+      console.log(process.env.REACT_APP_BASE_URL)
       const response = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/employees/`
       );
@@ -42,17 +43,17 @@ function AdminDashboard() {
   const supervisors = getEmployeesId("supervisor");
 
   useEffect(() => {
-    axiosInstance.get("/order/").then((resp) => {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/order/`).then((resp) => {
       setorders(resp.data);
     });
-    axiosInstance.get("/branch/").then((resp) => {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/branch/`).then((resp) => {
       setbranches(resp.data);
       localStorage.setItem("branches", JSON.stringify(resp.data));
     });
-    axiosInstance.get("/order/day").then((resp) => {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/order/day`).then((resp) => {
       setdayorder(resp.data);
     });
-    axiosInstance.get("/users/").then((resp) => {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/users/`).then((resp) => {
       setCustomers(resp.data);
     });
     getEmployees();

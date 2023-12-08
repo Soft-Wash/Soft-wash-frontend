@@ -1,0 +1,57 @@
+.workflow-content{
+  padding-left: 20px;
+  padding-top: 30px;
+  overflow: scroll;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(215, 215, 215);
+  }
+
+  .dashboard-line{
+    width: 90%;
+    border-bottom: 1px solid black;
+  }
+  
+  .workflow-container{
+    display: flex;
+    background-color: white;
+    height: 100px;
+    width: 200px;
+    padding-left: 10px;
+    padding-top: 10px;
+  }
+  
+  .workflow-cards{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    
+  }
+
+  .workflow-container-innerd2{
+    align-items: center;
+    margin-left: 10px;
+    margin: auto 0;
+  }
+  
+  .workflow-container-innerd1{
+    display: flex;
+    align-items: center;
+  }
+  
+  .workflow-clipboard-icon{
+    font-size: 40px;
+    color:black;
+  }
+
+  .workflow-container-innerd2 p{
+    margin: 0 ;
+    font-size: 18px;
+    font-weight: bold;
+    color:black;
+  }
+  
+  .order-dashboard-link{
+    text-decoration: none;
+    color: white;
+  }
+  
