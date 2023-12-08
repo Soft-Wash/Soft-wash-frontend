@@ -139,7 +139,7 @@ function App() {
         <Route path="/workflowtask" element={<WorkFlowTask/>}/>
         <Route path="/createtask" element={<CreateTask/>}/>
         <Route path="/tasktable" element={<TaskTable/>}/>
-        <Route path="/singletaskpage" element={<SingleTaskPage/>}/>
+        <Route path="/singletaskpage/:_id" element={<SingleTaskPage/>}/>
 
 
         {/* SUPERVISOR ROUTES */}
