@@ -29,6 +29,7 @@ function SingleTaskBody() {
       .get(`${process.env.REACT_APP_BASE_URL}/task/${_id}/task`)
       .then((resp) => {
         setTask(resp.data);
+        console.log(resp.data)
         setIndexFound(taskStatusArray.indexOf(resp.data.status));
         console.log(taskStatusArray.indexOf(resp.data.status));
       })

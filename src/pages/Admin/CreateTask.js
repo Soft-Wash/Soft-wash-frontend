@@ -1,64 +1,66 @@
 import WorkFlowSideBar from "../../components/Admin/WorkFlowSideBar";
-import "../../styles/Admin/CreateTask.css"
-import {useState,useEffect} from "react"
+import "../../styles/Admin/CreateTask.css";
+import { useState, useEffect } from "react";
 import { axiosInstance } from "../../services/AxiosInstance";
-import { toast } from 'react-toastify';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
+function CreateTask() {
+  const [taskDetails, setTaskDetails] = useState({});
+  const [orders, setorders] = useState();
+  const [employees, setEmployees] = useState();
+  const [allOrders, setAllOrders] = useState();
 
-
-function CreateTask(){
-  const [taskDetails, setTaskDetails] = useState({
-  });
-  const [orders,setorders]=useState()
-  const [employees,setEmployees]=useState()
-  const [allOrders,setAllOrders]=useState()
-  
-
-  useEffect(()=>{
-    axios.get(`${process.env.REACT_APP_BASE_URL}/order/status?status=order placed`).then((resp) => {
-      setAllOrders(resp.data);
-
-    });
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/order/status?status=order placed`)
+      .then((resp) => {
+        setAllOrders(resp.data);
+      });
     axios.get(`${process.env.REACT_APP_BASE_URL}/employees/`).then((resp) => {
-      console.log(resp.data)
+      console.log(resp.data);
       setEmployees(resp.data);
-
     });
-  },[])
+  }, []);
 
   const HandleTask = (e) => {
     const value =
-    e.target.type === "checkbox"
-      ? e.target.checked
-      : e.target.type === "file"
-      ? e.target.files[0]
-      : e.target.value;
+      e.target.type === "checkbox"
+        ? e.target.checked
+        : e.target.type === "file"
+        ? e.target.files[0]
+        : e.target.value;
 
-      setTaskDetails({ ...taskDetails, [e.target.name]: value});
+        setTaskDetails((prevState) => {
+          if (e.target.name === "order_id") {
+            const existingOrderIds = prevState?.order_id || [];
+            const newOrderIds = [...existingOrderIds, value];
+      
+            return { ...prevState, order_id: newOrderIds };
+          }
+      
+          return { ...prevState, [e.target.name]: value };
+        });
   };
 
+  console.log(taskDetails);
 
-  console.log(taskDetails)
+  const CreateTask = () => {
+    axiosInstance.post("/task/create", taskDetails).then((resp) => {
+      console.log(resp.data);
 
-  const CreateTask=()=>{
-    axiosInstance.post('/task/create',taskDetails)
-    .then((resp)=>{
-      console.log(resp.data)
+      toast.success("Task created succesful");
+    });
+  };
 
-      toast.success('Task created succesful')
-    })
-  }
-
-
-  return(
+  return (
     <div>
-   <ToastContainer position="top-center" />
-<div className="d-flex">
-<WorkFlowSideBar/>
-<div className="new-task-container-innerd">
+      <ToastContainer position="top-center" />
+      <div className="d-flex">
+        <WorkFlowSideBar />
+        <div className="new-task-container-innerd">
           <h4>Create Task</h4>
           <hr className="addtask-hr" />
           <div className="addtask-table-content">
@@ -68,21 +70,23 @@ function CreateTask(){
               </div>
               <div className="task-details-div-form">
                 <div className="task-details-div-form-innerd1">
-                <label htmlFor="">
+                  <label htmlFor="">
                     Employees <br />
                     <select
                       name="employee_id"
                       id=""
                       className="task-details-div-form-innerd1-selct1"
-                      onChange={HandleTask} 
+                      onChange={HandleTask}
                     >
                       <option value="" hidden>
                         Select Employee
                       </option>
-                      {employees && employees.map((item)=>(
-                         <option value={item._id}>{item.fullName} {item?.role?.name}</option>
-                      ))}
-
+                      {employees &&
+                        employees.map((item) => (
+                          <option value={item._id}>
+                            {item.fullName} {item?.role?.name}
+                          </option>
+                        ))}
                     </select>
                   </label>
                   <label htmlFor="" className="order-label">
@@ -91,19 +95,19 @@ function CreateTask(){
                       name="order_id"
                       id=""
                       className="task-details-div-form-innerd1-selct1"
-                      onChange={HandleTask} 
+                      onChange={HandleTask}
                     >
                       <option value="" hidden>
                         Select category
                       </option>
-                      {allOrders && allOrders.map((item)=>(
-                         <option value={item._id}>{item._id}</option>
-                      ))}
+                      {allOrders &&
+                        allOrders.map((item) => (
+                          <option value={item._id}>{item._id}</option>
+                        ))}
                     </select>
                   </label>
                 </div>
                 <div className="task-details-div-form-innerd2">
-
                   <label htmlFor="" className="">
                     Start Date <br />
                     <input
@@ -124,21 +128,21 @@ function CreateTask(){
                   </label>
                 </div>
                 <div className="task-details-div-form-innerd2">
-                <label htmlFor="">
+                  <label htmlFor="">
                     Task Type <br />
                     <select
                       name="taskType"
                       id=""
                       className="task-details-div-form-innerd1-selct1"
-                      onChange={HandleTask} 
+                      onChange={HandleTask}
                     >
                       <option value="" hidden>
                         Select Task Type
                       </option>
-                        <option value="washing">Washing</option>
-                        <option value="ironing">Ironing</option>
-                        <option value="folding">Folding</option>
-                        <option value="Delivery">Delivery</option>
+                      <option value="washing">Washing</option>
+                      <option value="ironing">Ironing</option>
+                      <option value="folding">Folding</option>
+                      <option value="Delivery">Delivery</option>
                     </select>
                   </label>
                 </div>
@@ -159,12 +163,14 @@ function CreateTask(){
               </div>
             </div>
 
-            <button className="submit-button" onClick={CreateTask}>Sumit</button>
+            <button className="submit-button" onClick={CreateTask}>
+              Sumit
+            </button>
           </div>
         </div>
-</div>
+      </div>
     </div>
-  )
+  );
 }
 
 export default CreateTask;
