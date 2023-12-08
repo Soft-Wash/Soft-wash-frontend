@@ -49,6 +49,11 @@
 
 .task-details-div-form-innerd1{
   display: flex;
+}
+
+.task-details-div-form-innerd2{
+  display: flex;
+  margin-top: 50px;
 
 }
 

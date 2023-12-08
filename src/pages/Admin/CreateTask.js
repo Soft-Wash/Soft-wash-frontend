@@ -55,6 +55,7 @@ function CreateTask(){
 
   return(
     <div>
+   <ToastContainer position="top-center" />
 <div className="d-flex">
 <WorkFlowSideBar/>
 <div className="new-task-container-innerd">
@@ -76,7 +77,7 @@ function CreateTask(){
                       onChange={HandleTask} 
                     >
                       <option value="" hidden>
-                        select Employee
+                        Select Employee
                       </option>
                       {employees && employees.map((item)=>(
                          <option value={item._id}>{item.fullName} {item?.role?.name}</option>
@@ -93,11 +94,51 @@ function CreateTask(){
                       onChange={HandleTask} 
                     >
                       <option value="" hidden>
-                        select category
+                        Select category
                       </option>
                       {allOrders && allOrders.map((item)=>(
-                         <option value="fuel">{item._id}</option>
+                         <option value={item._id}>{item._id}</option>
                       ))}
+                    </select>
+                  </label>
+                </div>
+                <div className="task-details-div-form-innerd2">
+
+                  <label htmlFor="" className="">
+                    Start Date <br />
+                    <input
+                      className="form-data-inpt2"
+                      type="date"
+                      name="startDate"
+                      onChange={HandleTask}
+                    />
+                  </label>
+                  <label htmlFor="" className="order-label">
+                    End Date <br />
+                    <input
+                      className="form-data-inpt2"
+                      type="date"
+                      name="endDate"
+                      onChange={HandleTask}
+                    />
+                  </label>
+                </div>
+                <div className="task-details-div-form-innerd2">
+                <label htmlFor="">
+                    Task Type <br />
+                    <select
+                      name="taskType"
+                      id=""
+                      className="task-details-div-form-innerd1-selct1"
+                      onChange={HandleTask} 
+                    >
+                      <option value="" hidden>
+                        Select Task Type
+                      </option>
+                        <option value="washing">Washing</option>
+                        <option value="ironing">Ironing</option>
+                        <option value="folding">Folding</option>
+                        <option value="Delivery">Delivery</option>
                     </select>
                   </label>
                 </div>
