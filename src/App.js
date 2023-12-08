@@ -61,6 +61,8 @@ import EmployeeLogin from "./pages/EmployeePage/EmployeeLogin";
 import SupervisorExpense from "./pages/SupervisorPage/SupervisorExpense";
 import CreateExpenseSup from "./pages/SupervisorPage/CreateExpenseSup";
 import WorkFlowTask from "./pages/Admin/WorkFlowTask";
+import CreateTask from "./pages/Admin/CreateTask";
+
 
  
 
@@ -133,6 +135,7 @@ function App() {
         <Route path="/editcustomer/:id" element={<EditCustomer/>}/>
         <Route path="/createleave" element={<CreateLeave/>}/>
         <Route path="/workflowtask" element={<WorkFlowTask/>}/>
+        <Route path="/createtask" element={<CreateTask/>}/>
 
 
         {/* SUPERVISOR ROUTES */}

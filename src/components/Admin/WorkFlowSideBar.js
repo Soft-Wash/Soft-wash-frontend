@@ -25,6 +25,9 @@ function WorkFlowSideBar(){
             <NavLink exact to="/registeremployee" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">BusyWashMen</CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/createtask" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line">Create Task</CDBSidebarMenuItem>
+            </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
     
