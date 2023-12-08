@@ -34,17 +34,13 @@ function CreateTask() {
         : e.target.value;
 
         setTaskDetails((prevState) => {
-          // Check if the field is 'order_id'
           if (e.target.name === "order_id") {
-            // Use the spread operator to create a new array with the existing values and the new value
             const existingOrderIds = prevState?.order_id || [];
             const newOrderIds = [...existingOrderIds, value];
-        
-            // Update the state with the new array
+      
             return { ...prevState, order_id: newOrderIds };
           }
-        
-          // For other fields, keep the existing logic
+      
           return { ...prevState, [e.target.name]: value };
         });
   };
