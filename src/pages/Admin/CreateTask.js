@@ -1,20 +1,35 @@
 import WorkFlowSideBar from "../../components/Admin/WorkFlowSideBar";
 import "../../styles/Admin/CreateTask.css"
-import {useState} from "react"
+import {useState,useEffect} from "react"
 import { axiosInstance } from "../../services/AxiosInstance";
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
 
 
 
 function CreateTask(){
-
-
-  const [expenseDetails, setExpenseDetails] = useState({
+  const [taskDetails, setTaskDetails] = useState({
   });
+  const [orders,setorders]=useState()
+  const [employees,setEmployees]=useState()
+  const [allOrders,setAllOrders]=useState()
+  
 
-  const HandleExpense = (e) => {
+  useEffect(()=>{
+    axios.get(`${process.env.REACT_APP_BASE_URL}/order/status?status=order placed`).then((resp) => {
+      setAllOrders(resp.data);
+
+    });
+    axios.get(`${process.env.REACT_APP_BASE_URL}/employees/`).then((resp) => {
+      console.log(resp.data)
+      setEmployees(resp.data);
+
+    });
+  },[])
+
+  const HandleTask = (e) => {
     const value =
     e.target.type === "checkbox"
       ? e.target.checked
@@ -22,14 +37,18 @@ function CreateTask(){
       ? e.target.files[0]
       : e.target.value;
 
-    setExpenseDetails({ ...expenseDetails, [e.target.name]: value});
+      setTaskDetails({ ...taskDetails, [e.target.name]: value});
   };
 
-  const postExpense=()=>{
-    axiosInstance.post('/expense/create',expenseDetails)
+
+  console.log(taskDetails)
+
+  const CreateTask=()=>{
+    axiosInstance.post('/task/create',taskDetails)
     .then((resp)=>{
       console.log(resp.data)
-      toast.success('Expense created succesful')
+
+      toast.success('Task created succesful')
     })
   }
 
@@ -48,59 +67,37 @@ function CreateTask(){
               </div>
               <div className="task-details-div-form">
                 <div className="task-details-div-form-innerd1">
-                  <label htmlFor="">
-                    Customer <br />
-                    <input
-                      type="date"
-                      name="date"
-                      className="task-details-div-form-innerd1-inpt1"
-                      onChange={HandleExpense} 
-                    />
-                  </label>
-                  <label htmlFor="">
-                    Expense Amount <br />
-                    <input
-                      type="text"
-                      name="amount"
-                      placeholder="Enter Expense Amount"
-                      className="task-details-div-form-innerd1-inpt2"
-                      onChange={HandleExpense} 
-                    />
-                  </label>
-                </div>
-                <div className="task-details-div-form-innerd2">
-                  <label htmlFor="">
-                    Expense Category <br />
+                <label htmlFor="">
+                    Employees <br />
                     <select
-                      name="category"
+                      name="employee_id"
                       id=""
                       className="task-details-div-form-innerd1-selct1"
-                      onChange={HandleExpense} 
+                      onChange={HandleTask} 
+                    >
+                      <option value="" hidden>
+                        select Employee
+                      </option>
+                      {employees && employees.map((item)=>(
+                         <option value={item._id}>{item.fullName} {item?.role?.name}</option>
+                      ))}
+
+                    </select>
+                  </label>
+                  <label htmlFor="" className="order-label">
+                    Orders <br />
+                    <select
+                      name="order_id"
+                      id=""
+                      className="task-details-div-form-innerd1-selct1"
+                      onChange={HandleTask} 
                     >
                       <option value="" hidden>
                         select category
                       </option>
-                      <option value="fuel">fuel</option>
-                      <option value="rent">rent</option>
-                      <option value="chemical">chemical</option>
-                      <option value="detergent">detergent</option>
-                    </select>
-                  </label>
-                  <label htmlFor="" className="checkbox-label2">
-                    Payment Method <br />
-                    <select
-                      name="payment_method"
-                      id=""
-                      className="task-details-div-form-innerd1-selct2"
-                      onChange={HandleExpense} 
-                    >
-                      <option value="" hidden>
-                        select payment
-                      </option>
-                      <option value="card">card</option>
-                      <option value="cash">Cash</option>
-                      <option value="cheque">cheque</option>
-                      <option value="bank_transfer">Bank Transfe <button className="select-button">good</button></option>
+                      {allOrders && allOrders.map((item)=>(
+                         <option value="fuel">{item._id}</option>
+                      ))}
                     </select>
                   </label>
                 </div>
@@ -114,14 +111,14 @@ function CreateTask(){
                       id=""
                       cols="30"
                       rows="10"
-                      onChange={HandleExpense}
+                      onChange={HandleTask}
                     ></textarea>
                   </label>
                 </div>
               </div>
             </div>
 
-            <button className="submit-button" onClick={postExpense}>Sumit</button>
+            <button className="submit-button" onClick={CreateTask}>Sumit</button>
           </div>
         </div>
 </div>

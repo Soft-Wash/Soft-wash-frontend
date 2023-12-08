@@ -49,7 +49,7 @@
 
 .task-details-div-form-innerd1{
   display: flex;
-  justify-content: space-between;
+
 }
 
 .task-details-div-form-innerd1-inpt1{
@@ -148,4 +148,8 @@ width: 885px;
   color: black;
   border: 1px solid rgb(13,202,240);
 
+}
+
+.order-label{
+  margin-left: 20px;
 }
