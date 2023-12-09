@@ -64,6 +64,7 @@ import WorkFlowTask from "./pages/Admin/WorkFlowTask";
 import CreateTask from "./pages/Admin/CreateTask";
 import TaskTable from "./pages/Admin/TaskTable";
 import SingleTaskPage from "./pages/Admin/SingleTaskPage";
+import SupSingleOrder from "./pages/SupervisorPage/SupSingleOrder";
 
 
  
@@ -148,6 +149,7 @@ function App() {
         <Route path ="/SupervisorDash" element ={<SupervisorDash/>}/>
         <Route path ="/SupervisorExpense" element ={<SupervisorExpense/>}/>
         <Route path ="/CreateExpenseSup" element ={<CreateExpenseSup/>}/>
+        <Route path ="/SupSingleOrder/:_id" element ={<SupSingleOrder/>}/>
        
 
         {/* EMPLOYEE LOGIN */}
