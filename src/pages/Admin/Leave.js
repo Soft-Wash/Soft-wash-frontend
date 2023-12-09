@@ -33,7 +33,6 @@ function Leave() {
     settoggleEmployeeInput2(false);
     setEmployeeID(null);
   }
-
   function toogleEmployeeMessage2(itemId) {
     setEmployeeID(itemId);
     setToggleRejection2(false);
