@@ -152,7 +152,7 @@ function Leave() {
                       <Card className="card-container" key={item._id}>
                         <div className="card-innerdiv">
                           <div className="user-profile-container">
-                            <div className="user-profile-container-innercont">
+                            <div className="user-profile-container-innercont2">
                               <div>
                                 <img src={userImage} alt="" />
                               </div>

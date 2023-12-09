@@ -1,0 +1,160 @@
+.new-task-container-innerd{
+  padding: 20px;
+  width: 100%;
+  width: 90%;
+  height: 100vh;
+  overflow: scroll;
+  background-color: rgb(240, 240, 240);
+}
+
+.addtask-hr{
+  width: 100%;
+  border-bottom:1px solid grey ;
+}
+
+
+
+
+.addtask-table-content{
+  background-color: white;
+  /* height: auto; */
+  width: 100%;
+  min-height: 500px;
+  padding: 20px;
+}
+
+.addtask-details-div{
+  background-color: white;
+  height: auto;
+  width: 100%;
+  box-shadow: 2px 2px 4px 4px rgb(224, 224, 224);
+
+}
+
+.task-details-div-header{
+  background-color: rgb(13,202,240);
+  height: 45px;
+
+  padding: 10px;
+}
+
+.task-details-div-header p{
+  color: white;
+  font-weight: bold;
+}
+
+.task-details-div-form{
+  padding: 20px;
+}
+
+.task-details-div-form-innerd1{
+  display: flex;
+}
+
+.task-details-div-form-innerd2{
+  display: flex;
+  margin-top: 50px;
+
+}
+
+.task-details-div-form-innerd1-inpt1{
+  width: 420px;
+  padding: 3px;
+
+}
+
+.task-details-div-form-innerd1-inpt2{
+  width: 420px;
+  padding: 3px;
+}
+
+.task-details-div-form-innerd1-selct1{
+  width: 300px;
+  padding: 3px;
+}
+
+.task-details-div-form-innerd1-selct2{
+  width: 300px;
+  padding: 3px;
+}
+
+.task-details-div-form-innerd2{
+  display: flex;
+  /* justify-content: space-between; */
+  margin-top: 20px;
+}
+
+.checkbox-div{
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-label2{
+  margin-left: 20px;
+}
+
+.checkbox-label3{
+  margin-left: 20px;
+}
+
+.checkbox-container{
+  display: flex;
+  align-items: center;
+
+}
+
+.checkbox-div2{
+margin-left: 20px;
+display: flex;
+align-items: center;
+}
+
+.checkbox-p1{
+  margin-left: 10px;
+}
+
+.checkbox-p2{
+  margin-left: 10px;
+}
+
+.note-div{
+  width: 100%;
+}
+
+.note-div-textarea{
+min-height: 100px;
+width: 885px;
+}
+
+.submit-button{
+  margin-top: 20px;
+  border: none;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: white;
+  background-color: rgb(13,202,240);
+}
+
+.dropdown_item-div{
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.dropdown-cont{
+  width: 300px;
+}
+
+
+#dropdown-basic-button{
+  width: 300px;
+  background-color: white;
+  color: black;
+  border: 1px solid rgb(13,202,240);
+
+}
+
+.order-label{
+  margin-left: 20px;
+}
