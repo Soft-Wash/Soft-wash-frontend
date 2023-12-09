@@ -22,11 +22,8 @@ function WorkFlowSideBar(){
             <NavLink exact to="/workflowtask" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">Task View</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/profile" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user">OccupiedWashMen</CDBSidebarMenuItem>
-            </NavLink>
             <NavLink exact to="/registeremployee" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="chart-line">BusyWashMen</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="chart-line">Available WashMen</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/tasktable" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">All Task</CDBSidebarMenuItem>
