@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SupervisorSideBar from "../../components/SupervisorComponents/SupervisorSideBar";
+import StaffOnLeave from "../../components/SupervisorComponents/StaffOnLeave";
 
 function SupLeave() {
   const [toggleRejection2, setToggleRejection2] = useState(true);
@@ -19,7 +20,6 @@ function SupLeave() {
   const [toggleApproved, settoggleApproved] = useState(false);
   const [toggleLeaveManagement, settoggleLeaveManagement] = useState(true);
   const [rejectedLeave, setrejectedLeave] = useState(false);
-  const [toggleCreateLeave, setToggleCreateLeave] = useState(false);
   const [pendingleaves, setpendingleaves] = useState();
   const [employeeID, setEmployeeID] = useState(null);
   const [todayLeave,setTodayLeave]=useState()
@@ -28,8 +28,9 @@ function SupLeave() {
   const [rejectedReason,setrejectedReason]=useState({
     status:"rejected",
     supervisorApproval:"rejected"
-
   })
+
+  const [toggleStaffOnLeave, setToggleStaffOnLeave] = useState(false); 
 
   function ToggleTextArea2() {
     setToggleRejection2(!toggleRejection2);
@@ -54,6 +55,7 @@ function SupLeave() {
     settoggleLeaveManagement(!toggleLeaveManagement);
     settoggleApproved(false);
     setrejectedLeave(false);
+    setToggleStaffOnLeave(false);
     if (toggleLeaveManagement) {
       settoggleLeaveManagement(true);
     }
@@ -63,11 +65,20 @@ function SupLeave() {
     setrejectedLeave(!rejectedLeave);
     settoggleLeaveManagement(false);
     settoggleApproved(false);
+     setToggleStaffOnLeave(false);
     if (rejectedLeave) {
       setrejectedLeave(true);
     }
   }
- 
+  function toggleStaffsonLeave() {
+    setToggleStaffOnLeave(!toggleStaffOnLeave);
+    settoggleLeaveManagement(false);
+    setrejectedLeave(false);
+    settoggleApproved(false);
+    if (toggleStaffOnLeave) {  // Corrected condition here
+      setToggleStaffOnLeave(true);
+    }
+  }
   const handleRejection =(e)=>{
     const value = e.target.value
     setrejectedReason({...rejectedReason, [e.target.name]:value})
@@ -143,6 +154,9 @@ function SupLeave() {
                 </p>
                 <p style={{ cursor: "pointer" }}  className={`${rejectedLeave ? 'leave-process-div-p':''}`} onClick={toggleRejectedLeave}>
                 rejected
+                </p>
+                <p onClick={toggleStaffsonLeave} className={`${toggleStaffOnLeave ? 'leave-process-div-p':''}`} style={{ cursor: "pointer" }}>
+                Staff On Leave
                 </p>
             </div>
 
@@ -419,7 +433,7 @@ function SupLeave() {
 
           {toggleApproved ? <ApprovedLeave /> : ""}
           {rejectedLeave ? <RejectedLeave /> : ""}
-          {toggleCreateLeave ? <SupLeave /> : ""}
+          {toggleStaffOnLeave ? <StaffOnLeave/> : ''}
         </div>
       </div>
     </div>

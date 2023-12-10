@@ -21,15 +21,32 @@ function SupCreateLeave() {
     setLeaveData({ ...leaveData, [e.target.name]: value });
   };
 
-  const postExpense = () => {
-    axios.post(`${process.env.REACT_APP_BASE_URL}/leave/create`,leaveData)
-    .then((resp) => {
-      console.log(resp.data);
-      setCreateLeaveData(resp.data);
-      toast.success('Application succesful')
-    });
-  };
+//   const postExpense = () => {
+//     axios.post(`${process.env.REACT_APP_BASE_URL}/leave/create`,leaveData)
+//     .then((resp) => {
+//       console.log(resp.data);
+//       setCreateLeaveData(resp.data);
+//       toast.success('Application succesful')
+//     });
+//   };
 
+const postExpense = () => {
+    axios.post(`${process.env.REACT_APP_BASE_URL}/leave/create`, leaveData)
+      .then((resp) => {
+        console.log(resp.data);
+        setCreateLeaveData(resp.data);
+        toast.success('Application successful');
+      })
+      .catch((error) => {
+        if (error.response && error.response.data && error.response.data.message) {
+          // If the server provides an error message, display it
+          toast.error(error.response.data.message);
+        } else {
+          // Display a generic error message if no specific message is available
+          toast.error('Leave duration must be between 5 and 21 days');
+        }
+      });
+  };
   return (
     <div>
        <ToastContainer position="top-center" />
