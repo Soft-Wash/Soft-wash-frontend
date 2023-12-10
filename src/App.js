@@ -68,6 +68,7 @@ import SupSingleOrder from "./pages/SupervisorPage/SupSingleOrder";
 import SupLeave from "./pages/SupervisorPage/SupLeave";
 import SupCreateLeave from "./components/SupervisorComponents/SupCreateLeave";
 import EditExpenseSup from "./pages/SupervisorPage/EditEpenseSup";
+import SalesReportSup from "./pages/SupervisorPage/SalesReportSup";
 
 
  
@@ -156,6 +157,7 @@ function App() {
         <Route path ="/SupSingleOrder/:_id" element ={<SupSingleOrder/>}/>
         <Route path ="/SupLeave" element ={<SupLeave/>}/>
         <Route path ="/SupCreateLeave" element ={<SupCreateLeave/>}/>
+        <Route path="/supsalesreport" element={<SalesReportSup/>}/>
 
        
 
