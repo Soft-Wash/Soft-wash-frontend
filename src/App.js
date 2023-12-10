@@ -65,6 +65,8 @@ import CreateTask from "./pages/Admin/CreateTask";
 import TaskTable from "./pages/Admin/TaskTable";
 import SingleTaskPage from "./pages/Admin/SingleTaskPage";
 import SupSingleOrder from "./pages/SupervisorPage/SupSingleOrder";
+import SupLeave from "./pages/SupervisorPage/SupLeave";
+import SupCreateLeave from "./components/SupervisorComponents/SupCreateLeave";
 
 
  
@@ -150,6 +152,9 @@ function App() {
         <Route path ="/SupervisorExpense" element ={<SupervisorExpense/>}/>
         <Route path ="/CreateExpenseSup" element ={<CreateExpenseSup/>}/>
         <Route path ="/SupSingleOrder/:_id" element ={<SupSingleOrder/>}/>
+        <Route path ="/SupLeave" element ={<SupLeave/>}/>
+        <Route path ="/SupCreateLeave" element ={<SupCreateLeave/>}/>
+
        
 
         {/* EMPLOYEE LOGIN */}
