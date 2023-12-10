@@ -64,6 +64,12 @@ import WorkFlowTask from "./pages/Admin/WorkFlowTask";
 import CreateTask from "./pages/Admin/CreateTask";
 import TaskTable from "./pages/Admin/TaskTable";
 import SingleTaskPage from "./pages/Admin/SingleTaskPage";
+import SupSingleOrder from "./pages/SupervisorPage/SupSingleOrder";
+import SupLeave from "./pages/SupervisorPage/SupLeave";
+import SupCreateLeave from "./components/SupervisorComponents/SupCreateLeave";
+import EditExpenseSup from "./pages/SupervisorPage/EditEpenseSup";
+import SalesReportSup from "./pages/SupervisorPage/SalesReportSup";
+import ExpenseReportSup from "./pages/SupervisorPage/ExpenseReportSup";
 
 
  
@@ -147,7 +153,14 @@ function App() {
         <Route path ="/SupOrderTable" element ={<SupOrderTable/>}/>
         <Route path ="/SupervisorDash" element ={<SupervisorDash/>}/>
         <Route path ="/SupervisorExpense" element ={<SupervisorExpense/>}/>
+        <Route path="/editexpenseSup/:_id" element={<EditExpenseSup/>}/>
         <Route path ="/CreateExpenseSup" element ={<CreateExpenseSup/>}/>
+        <Route path ="/SupSingleOrder/:_id" element ={<SupSingleOrder/>}/>
+        <Route path ="/SupLeave" element ={<SupLeave/>}/>
+        <Route path ="/SupCreateLeave" element ={<SupCreateLeave/>}/>
+        <Route path="/supsalesreport" element={<SalesReportSup/>}/>
+        <Route path="/supexpensereport" element={<ExpenseReportSup/>}/>
+
        
 
         {/* EMPLOYEE LOGIN */}

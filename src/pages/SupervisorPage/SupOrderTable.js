@@ -115,7 +115,7 @@ function SupOrderTable() {
                     <th>{item?.date_created}</th>
                       <th>
                       <div className="d-flex">
-                        <Link to={`/adminsingleorder/${item._id}`}>
+                        <Link to={`/SupSingleOrder/${item._id}`}>
                         <button className="action-buttons-btn1">View</button>
                         </Link>
 
