@@ -25,8 +25,8 @@ function PaymentPage() {
   const [orderData, setorderData] = useState();
   const [userOrder, setuserOrder] = useState();
   const [newlocaldate, setnewlocaldate] = useState(selectedDate);
-  const [selectedAddress, setSelectedAddress] = useState();
   const [validationError, setValidationError] = useState('');
+  const [, setFormErrorMessage] = useState("");
   const [paymentMethod,setpaymentMethod]= useState(()=>{
     const storedPayment = localStorage.getItem('paymentType')
     return storedPayment?JSON.parse(storedPayment): ""
@@ -111,45 +111,69 @@ useEffect(() => {
 
 
 
-  const postOrder = () => {
-    const deliveryType = JSON.parse(localStorage.getItem('deliveryType'))
-    const key = Object.keys(deliveryType)
-    const stringDeliveryType = key.join("");
+const postOrder = async () => {
+  try {
+    const deliveryType = JSON.parse(localStorage.getItem('deliveryType'));
+    const key = Object.keys(deliveryType);
+    const stringDeliveryType = key.join('');
 
-    const paymentType = JSON.parse(localStorage.getItem('paymentType'))
-    console.log(paymentType)
+    const paymentType = JSON.parse(localStorage.getItem('paymentType'));
+    console.log(paymentType);
 
-    
-  if (!paymentType) {
-    // alert('Select payment type before confirming the order.');
-    toast.error('Select Payment Method')
-    
-    return; // Return early if payment type is not selecte
+    if (!paymentType) {
+      // alert('Select payment type before confirming the order.');
+      toast.error('Select Payment Method');
+      return; // Return early if payment type is not selected
+    }
 
-  }
-    
-    const paymentkey = Object.keys(paymentType)
-    const stringPaymentType = paymentkey.join("");
+    const paymentkey = Object.keys(paymentType);
+    const stringPaymentType = paymentkey.join('');
 
-    
-    orderDetails = {
+    const orderDetails = {
       subtotal: total,
       delivery_type: stringDeliveryType,
-      payment_method:stringPaymentType
+      payment_method: stringPaymentType,
     };
-  
+
     console.log(orderDetails);
 
-    axios
-      .put(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/update`, orderDetails)
-      .then((resp) => {
-        console.log(orderDetails);
-        console.log(resp.data);
-        setuserOrder(resp.data);
-        localStorage.setItem("orderDetails", JSON.stringify(resp.data));
-              navigate(`/order-receipt/${orderId}`);
-      });
-  };
+    const payment_url = `${process.env.REACT_APP_BASE_URL}/api/v1/payments/initiate-payment`;
+    const order_url = `${process.env.REACT_APP_BASE_URL}/api/v1/orders/create`;
+    const data = {
+      email: userOrder?.email,
+      amount: orderDetails.subtotal,
+      metadata: {
+        order_id: userOrder.order_id,
+        branch_id: userOrder.branch_id,
+      },
+    };
+
+    console.log(data);
+
+    const response = await axios.post(payment_url, data);
+
+    if (response?.data.data.paymentLink) {
+      window.open(response?.data.data.paymentLink.data.authorization_url, '_blank');
+      localStorage.removeItem('RecentOrder');
+
+      const resp = await axios.put(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/update`, orderDetails);
+
+      console.log(orderDetails);
+      console.log(resp.data);
+
+      setuserOrder(resp.data);
+      localStorage.setItem('orderDetails', JSON.stringify(resp.data));
+
+      navigate(`/order-receipt/${orderId}`);
+    }
+  } catch (error) {
+    // Handle errors here
+    console.error(error);
+    setFormErrorMessage('An error occurred in the payment transaction.');
+  }
+};
+
+
 
 
   return (
