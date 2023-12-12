@@ -52,6 +52,7 @@ function PaymentPage() {
       .then((resp) => {
         console.log(resp.data);
         setorderData(resp.data);
+        console.log(process.env.REACT_APP_BASE_URL)
         const pickUpDate = resp.data.schedule_date;
         const latestDate = new Date(pickUpDate);
         const options = { day: "numeric", month: "long" };
@@ -60,6 +61,8 @@ function PaymentPage() {
       });
 
   }
+
+
 
       // Calculate Sub Total
       const [subTotal, setSubtotal] = useState()
@@ -75,10 +78,8 @@ function PaymentPage() {
               sub_total += item_price
               const total =sub_total + deliveryFee 
               setTotal(total)
-              console.log(total)
           })
           setSubtotal(sub_total)
-          console.log(sub_total)
       
       }
 
@@ -105,7 +106,6 @@ function handlePaymentPage(e) {
 
 useEffect(() => {
   localStorage.setItem("paymentType", JSON.stringify(paymentMethod));
-  console.log(paymentMethod); // This will log the updated paymentMethod
 }, [paymentMethod]);
 
 
@@ -135,16 +135,18 @@ const postOrder = async () => {
       payment_method: stringPaymentType,
     };
 
-    console.log(orderDetails);
+    // console.log(orderDetails);
+    // console.log(orderData)
 
-    const payment_url = `${process.env.REACT_APP_BASE_URL}/api/v1/payments/initiate-payment`;
-    const order_url = `${process.env.REACT_APP_BASE_URL}/api/v1/orders/create`;
+    const payment_url = `${process.env.REACT_APP_BASE_URL}/payments/initiate-payment`;
+    console.log(payment_url)
+    // const order_url = `${process.env.REACT_APP_BASE_URL}/api/v1/orders/create`;
     const data = {
-      email: userOrder?.email,
-      amount: orderDetails.subtotal,
+      email: orderData?.customer_id?.email,
+      amount: orderDetails?.subtotal,
       metadata: {
-        order_id: userOrder.order_id,
-        branch_id: userOrder.branch_id,
+        order_id: orderData?._id,
+        branch_id: orderData?.branch_id,
       },
     };
 
