@@ -98,9 +98,11 @@ function handlePaymentPage(e) {
       : e.target.value;
 
   setpaymentMethod ({
-    [e.target.name]: value,
+    ...paymentMethod, payment_method: e.target.name
   });
 }
+
+console.log(paymentMethod)
 
 useEffect(() => {
   localStorage.setItem("paymentType", JSON.stringify(paymentMethod));
@@ -124,8 +126,9 @@ const postOrder = async () => {
       return; // Return early if payment type is not selected
     }
 
-    const paymentkey = Object.keys(paymentType);
+    const paymentkey = Object.values(paymentType);
     const stringPaymentType = paymentkey.join('');
+    console.log(stringPaymentType)
 
     const orderDetails = {
       subtotal: total,
@@ -196,8 +199,9 @@ const postOrder = async () => {
                         type="radio"
                         name="payWithCard"
                         id="flexRadioDefault1"
+                        // value={paymentMethod}
                         onChange={(e)=>handlePaymentPage(e)}
-                        checked={paymentMethod === "payWithCard"}
+                        checked={paymentMethod.payment_method === "payWithCard"}
                       />
                       <label class="form-check-label" for="flexRadioDefault1">
                         Pay With Card
@@ -223,8 +227,9 @@ const postOrder = async () => {
                         type="radio"
                         name="payWithCash"
                         id="flexRadioDefault1"
+                        // value={paymentMethod}
                         onChange={(e)=>handlePaymentPage(e)}
-                        checked={paymentMethod === "payWithCash"}
+                        checked={paymentMethod.payment_method === "payWithCash"}
                       />
                       <label
                         className="form-check-label"
