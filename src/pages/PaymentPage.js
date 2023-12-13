@@ -153,6 +153,7 @@ const postOrder = async () => {
       const resp = await axios.put(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/update`, orderDetails);
       setuserOrder(resp.data);
       localStorage.setItem('orderDetails', JSON.stringify(resp.data));
+      navigate(`/order-receipt/${orderId}`);
 
   
     }else{

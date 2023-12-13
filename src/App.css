@@ -58,3 +58,8 @@ body {
 .validation-tag{
     color: red;
 }
+
+.pendingpayment-ptag{
+    text-align: center;
+    margin: 0 auto;
+}
