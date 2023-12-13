@@ -50,9 +50,7 @@ function PaymentPage() {
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/order`)
       .then((resp) => {
-        console.log(resp.data);
         setorderData(resp.data);
-        console.log(process.env.REACT_APP_BASE_URL)
         const pickUpDate = resp.data.schedule_date;
         const latestDate = new Date(pickUpDate);
         const options = { day: "numeric", month: "long" };
@@ -135,12 +133,7 @@ const postOrder = async () => {
       payment_method: stringPaymentType,
     };
 
-    // console.log(orderDetails);
-    // console.log(orderData)
-
     const payment_url = `${process.env.REACT_APP_BASE_URL}/payments/initiate-payment`;
-    console.log(payment_url)
-    // const order_url = `${process.env.REACT_APP_BASE_URL}/api/v1/orders/create`;
     const data = {
       email: orderData?.customer_id?.email,
       amount: orderDetails?.subtotal,
@@ -149,23 +142,22 @@ const postOrder = async () => {
         branch_id: orderData?.branch_id,
       },
     };
-
-    console.log(data);
-
     const response = await axios.post(payment_url, data);
 
-    if (response?.data.data.paymentLink) {
+    if (response?.data.data.paymentLink && stringPaymentType === "payWithCard" ) {
       window.open(response?.data.data.paymentLink.data.authorization_url, '_blank');
       localStorage.removeItem('RecentOrder');
+      console.log(response?.data?.data?.body?.reference)
+      localStorage.setItem("payment_reference",JSON.stringify(response?.data?.data?.body?.reference))
 
       const resp = await axios.put(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/update`, orderDetails);
-
-      console.log(orderDetails);
-      console.log(resp.data);
-
       setuserOrder(resp.data);
       localStorage.setItem('orderDetails', JSON.stringify(resp.data));
 
+  
+    }else{
+      const resp = await axios.put(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/update`, orderDetails);
+      setuserOrder(resp.data);
       navigate(`/order-receipt/${orderId}`);
     }
   } catch (error) {
