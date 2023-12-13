@@ -135,8 +135,7 @@ const postOrder = async () => {
       payment_method: stringPaymentType,
     };
 
-    // console.log(orderDetails);
-    // console.log(orderData)
+
 
     const payment_url = `${process.env.REACT_APP_BASE_URL}/payments/initiate-payment`;
     console.log(payment_url)
@@ -154,18 +153,18 @@ const postOrder = async () => {
 
     const response = await axios.post(payment_url, data);
 
-    if (response?.data.data.paymentLink) {
+    if (response?.data.data.paymentLink && stringPaymentType === "payWithCard" ) {
       window.open(response?.data.data.paymentLink.data.authorization_url, '_blank');
       localStorage.removeItem('RecentOrder');
 
       const resp = await axios.put(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/update`, orderDetails);
-
-      console.log(orderDetails);
-      console.log(resp.data);
-
       setuserOrder(resp.data);
       localStorage.setItem('orderDetails', JSON.stringify(resp.data));
 
+  
+    }else{
+      const resp = await axios.put(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/update`, orderDetails);
+      setuserOrder(resp.data);
       navigate(`/order-receipt/${orderId}`);
     }
   } catch (error) {
