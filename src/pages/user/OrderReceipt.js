@@ -23,7 +23,6 @@ export default function OrderReceipt() {
     const ref =  JSON.parse(localStorage.getItem("payment_reference"))
     axiosInstance.get(`/payments/getstatus?reference=${ref}`)
     .then((resp)=>{
-      console.log(resp.data)
       setPaymentStatus(resp.data)
 
     })
@@ -34,7 +33,6 @@ export default function OrderReceipt() {
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/order`)
       .then((resp) => {
-        console.log(resp.data);
         setUserData(resp.data);
         const pickUpDate = resp.data.schedule_date;
         const latestDate = new Date(pickUpDate);
@@ -58,11 +56,14 @@ export default function OrderReceipt() {
   }
 
   useEffect(() => {
-    getPaymentStatus()
+    const intervalId = setInterval(() => {
+      getPaymentStatus();
+    }, 5000);
     getOrderDetails();
+    return () => clearInterval(intervalId);
+
   }, []);
 
-  console.log(userData);
   return (
     <>
       <Banner />
@@ -105,11 +106,11 @@ export default function OrderReceipt() {
       </div>
     </div>
   ) : paymentStatus?.data?.status === "failed" ? (
-    <p className="pendingpayment-ptag">Payment Failed. Please try again or choose another payment method.</p>
+    <p className="pendingpayment-ptag">Payment Failed. Please try again or choose another payment method. <br /> <Link to={`/paymentpage/${userData?._id}`}>back</Link></p>
   ) : paymentStatus?.data?.status === "abandoned" ? (
     <p className="pendingpayment-ptag">Payment Abandoned. Please review your order and try again.</p>
   ) : (
-    <p className="pendingpayment-ptag">Pending Payment. Please wait...</p>
+    <p className="pendingpayment-ptag">Loading...</p>
   )}
 </Container>
 
