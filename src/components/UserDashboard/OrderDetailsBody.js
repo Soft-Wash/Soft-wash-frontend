@@ -29,7 +29,8 @@ function OrderDetailsBody() {
     const orderId = JSON.parse(localStorage.getItem("OrderDetailsId"));
     axiosInstance.get(`/order/${orderId}/order`).then((resp) => {
       console.log(resp.data);
-      setIndexFound(orderStatusArray.indexOf(resp.data.status))
+      const statusIndex = orderStatusArray.indexOf(resp.data.status);
+      setIndexFound(statusIndex >= 0 ? statusIndex : 0);
       console.log(resp.data.status)
       setorderDetails(resp.data);
       const pickUpDate = resp.data.schedule_date;
@@ -39,6 +40,8 @@ function OrderDetailsBody() {
       setpickUpDate(pickUpDateValue);
     });
   }, []);
+
+  console.log(indexFound)
 
   return (
     <div className="dashboard-bg">
@@ -98,21 +101,21 @@ function OrderDetailsBody() {
           <h3>Total</h3>
           <p>N{orderdetails?.subtotal}</p>
         </div>
-        <div className="progress2">
+        <div className="progress1">
         {orderStatusArray.map((status, index) => (
-          <div className="progress_content2" key={index}>
+          <div className="progress_content" key={index}>
             <div
-              className={`progress_circle2 ${
-                indexFound >= index ? "progress-fill2" : null
+              className={`progress_circle ${
+                indexFound >= index ? "progress-fill" : null
               }`}
             >
               {indexFound >= index && (
-                <FaCheck className="progress-check2" />
+                <FaCheck className="progress-check" />
               )}
             </div>
             <div
-              className={`progress_bar2 ${
-                indexFound >= index ? "progress_bar_active2" : null
+              className={`progress_bar1 ${
+                indexFound >= index ? "progress_bar_active" : null
               }`}
             ></div>
             <p className="status-description">{status}</p>

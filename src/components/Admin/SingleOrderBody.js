@@ -4,10 +4,6 @@ import "../../styles/Washman Styles/WashmanSingleOrder.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import ProgressBar from "react-bootstrap/ProgressBar";
 import { FaCheck } from "react-icons/fa";
 
 function SingleOrderBody() {
@@ -59,7 +55,8 @@ function SingleOrderBody() {
         })
         .then((resp) => {
           console.log(resp.data);
-					setIndexFound(orderStatusArray.indexOf(selectedOption));
+          const statusIndex = orderStatusArray.indexOf(selectedOption);
+          setIndexFound(statusIndex >= 0 ? statusIndex : 0);
           localStorage.setItem("orderProgress", progress);
         });
   

@@ -118,7 +118,6 @@ const postOrder = async () => {
     const stringDeliveryType = key.join('');
 
     const paymentType = JSON.parse(localStorage.getItem('paymentType'));
-    console.log(paymentType);
 
     if (!paymentType) {
       // alert('Select payment type before confirming the order.');

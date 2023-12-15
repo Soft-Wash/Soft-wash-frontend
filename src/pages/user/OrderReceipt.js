@@ -32,6 +32,9 @@ export default function OrderReceipt() {
       setPaymentStatus(resp.data)
 
     })
+    .catch((error)=>{
+      console.log(error.message)
+    })
   }
 
   function getOrderDetails() {
