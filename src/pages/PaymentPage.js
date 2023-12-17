@@ -120,9 +120,8 @@ const postOrder = async () => {
     const paymentType = JSON.parse(localStorage.getItem('paymentType'));
 
     if (!paymentType) {
-      // alert('Select payment type before confirming the order.');
       toast.error('Select Payment Method');
-      return; // Return early if payment type is not selected
+      return; 
     }
 
     const paymentkey = Object.values(paymentType);
