@@ -64,6 +64,7 @@ setclothQuantity(updatedQuantity)
 
       const  addToCart=()=>{
         const CustomerData = JSON.parse(localStorage.getItem('softwashLoginUser'))
+        console.log(CustomerData)
         const Customer_id = CustomerData._id
         const quantity = parseInt(clothQuantity[shopItems?._id], 10);
 
