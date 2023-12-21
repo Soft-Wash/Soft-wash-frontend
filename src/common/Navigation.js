@@ -16,7 +16,7 @@ function Navigation() {
   const OrderDetails = JSON.parse(localStorage.getItem("orderDetails"));
   const [userLoggedIn, setUserLoggedIn] = useState();
   useEffect(() => {
-    const userToken = JSON.parse(localStorage.getItem("softwashLoginToken"))
+    const userToken = JSON.parse(localStorage.getItem("softwashLoginToken"));
     setUserLoggedIn(userToken);
   }, []);
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ function Navigation() {
   const handleLogout = () => {
     // Clear local storage
     localStorage.clear();
-    navigate('/')
+    navigate("/");
   };
 
   return (
@@ -67,22 +67,16 @@ function Navigation() {
               </NavLink>
             </Nav.Link>
             <Nav.Link>
-              <Link
-                className="howitworks-link"
-                to="/shop"
-              >
+              <Link className="howitworks-link" to="/shop">
                 Shop
               </Link>
             </Nav.Link>
             {userLoggedIn ? (
-            <Nav.Link>
-            <Link
-              className="howitworks-link"
-              to="/shop"
-            >
-              My-orders
-            </Link>
-          </Nav.Link>
+              <Nav.Link>
+                <Link className="howitworks-link" to="/my-orders">
+                  My-orders
+                </Link>
+              </Nav.Link>
             ) : (
               ""
             )}

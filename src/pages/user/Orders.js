@@ -34,6 +34,8 @@ export default function Orders() {
     });
   }, []);
 
+  console.log(UserId)
+
   const status={
     status:"Confirmed"
   }
@@ -41,13 +43,19 @@ export default function Orders() {
   const getPLacedOrder = () => {
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/order/${UserId}/orderstatus/user`, {
-        status: "order placed",
+        data: {
+          status: "order placed",
+        },
       })
       .then((resp) => {
         console.log(resp.data);
         setorderplaced(resp.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching placed orders:", error);
       });
   };
+  
 
   const getConfirmedOrder = async () => {
     try {

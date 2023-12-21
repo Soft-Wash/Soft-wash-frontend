@@ -1,6 +1,6 @@
 
 
-.ordertable-div{
+.payment-content{
   padding-left: 20px;
   padding-top: 20px;
   padding-right: 20px;
@@ -8,7 +8,7 @@
   height: 100vh;
   width: 100vw;
 }  
-  .ordertbale-content-table{
+  .payment-content-table{
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 13px;
@@ -18,7 +18,7 @@
     box-shadow: 0 0 10px 2px gainsboro;
     margin-top: 80px;
 }
-.ordertbale-content-table thead tr{
+.payment-content-table thead tr{
     width: 100%;
     text-align: left;
     font-weight: bold;
@@ -26,19 +26,19 @@
     color: white;
 }
 
-.ordertbale-content-table th,
-.ordertbale-content-table td{
+.payment-content-table th,
+.payment-content-table td{
     padding: 20px 15px;
     border-right: 1px solid gray;
 }
-.ordertbale-content-table tbody tr{
+.payment-content-table tbody tr{
     border-bottom: 1px solid grey;
 
 }
-.ordertbale-content-table tbody tr:nth-of-type(even){
+.payment-content-table tbody tr:nth-of-type(even){
     background-color: rgb(230, 230, 230);
 }
-.ordertbale-content-table tbody tr:last-of-type{
+.payment-content-table tbody tr:last-of-type{
     border-bottom: 3px solid rgb(13,202,240);
 }
 
@@ -54,7 +54,7 @@
 }
 
 
-.allorders-status-th button{
+.payment-content-status-th button{
   white-space: nowrap;
   border-radius: 5px;
   padding-right: 10px;
@@ -103,7 +103,7 @@ background-color: green;
   background-color: rgb(11, 20, 185); 
 }
 
-.order-table-select-div{
+.payment-content-select-div{
   display: flex;
   justify-content: space-between;
 }

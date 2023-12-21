@@ -64,6 +64,7 @@ import WorkFlowTask from "./pages/Admin/WorkFlowTask";
 import CreateTask from "./pages/Admin/CreateTask";
 import TaskTable from "./pages/Admin/TaskTable";
 import SingleTaskPage from "./pages/Admin/SingleTaskPage";
+import PaymentHistory from "./pages/user/PaymentHistory";
 
 
  
@@ -102,6 +103,7 @@ function App() {
         <Route path="/order-receipt/:orderId" element={<OrderReceipt/>}/>
         <Route path="/iventry" element={<Iventry/>}/>
         <Route path="/cartpayment" element={<CartPayment/>}/>
+        <Route path="/paymenthistory" element={<PaymentHistory/>}/>
 
         {/* Front desk */}
           <Route path="/frontdesk" element={<Login/>} />
