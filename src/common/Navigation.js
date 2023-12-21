@@ -75,27 +75,14 @@ function Navigation() {
               </Link>
             </Nav.Link>
             {userLoggedIn ? (
-              <NavDropdown title="Activities" id="navbarScrollingDropdown">
-                <NavDropdown.Item>
-                  <Link to="/ClothesSelection" className="color-dark-link">
-                    Create Order
-                  </Link>
-                </NavDropdown.Item>
-                <NavDropdown.Item>
-                  {OrderDetails? <Link to="my-orders" className="color-dark-link">
-                    {" "}
-                    All Order
-                  </Link>:''}
-
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item >
-                  <Link to="my-orders" className="color-dark-link">
-                   Order History
-                  </Link>
- 
-                </NavDropdown.Item>
-              </NavDropdown>
+            <Nav.Link>
+            <Link
+              className="howitworks-link"
+              to="/shop"
+            >
+              My-orders
+            </Link>
+          </Nav.Link>
             ) : (
               ""
             )}

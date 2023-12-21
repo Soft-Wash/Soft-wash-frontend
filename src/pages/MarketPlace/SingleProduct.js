@@ -32,6 +32,7 @@ function SingleProduct() {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const id = productId.productId;
+  console.log(id)
 
   const reviewToggleFunc = () => {
     setToggleReview(!togglereview);

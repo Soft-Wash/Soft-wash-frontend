@@ -25,7 +25,13 @@ function Sidebar (){
             </Link>
 
             <Link exact to="/hero404" target="_blank" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="exclamation-circle">404 page</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="chart-line">Create Order</CDBSidebarMenuItem>
+            </Link>
+            <Link exact to="/hero404" target="_blank" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line">Order History</CDBSidebarMenuItem>
+            </Link>
+            <Link exact to="/hero404" target="_blank" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line">Payment History</CDBSidebarMenuItem>
             </Link>
           </CDBSidebarMenu>
         </CDBSidebarContent>
