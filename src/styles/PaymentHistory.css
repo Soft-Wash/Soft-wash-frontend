@@ -107,3 +107,7 @@ background-color: green;
   display: flex;
   justify-content: space-between;
 }
+
+.action-btn-div {
+  justify-content: center;
+}

@@ -1,7 +1,20 @@
 import Sidebar from "../../components/OrdersPage/Sidebar";
 import "../../styles/PaymentHistory.css";
+import { axiosInstance } from "../../services/AxiosInstance";
+import {useState,useEffect} from "react"
 
 function PaymentHistory() {
+
+  const [paymentHistory,setPaymentHistory]= useState()
+
+
+const userId = JSON.parse(localStorage.getItem('Userid'))
+  axiosInstance.get(`/payment/${userId}/userpayments`)
+  .then((resp)=>{
+    console.log(resp.data)
+    setPaymentHistory(resp.data)
+  })
+
   return (
     <div>
       <div className="d-flex">
@@ -15,7 +28,7 @@ function PaymentHistory() {
               // onChange={handleSelectChange}
             >
               <option value="" hidden>
-                Select Order Status
+                Select Payment Status
               </option>
               <option value="order placed">Pending</option>
               <option value="Confirmed">Confirmed</option>
@@ -30,8 +43,7 @@ function PaymentHistory() {
                 <th>Customer</th>
                 <th>Addresss</th>
                 <th>SubTotal</th>
-                <th>Status</th>
-                <th>Action</th>
+                <th>Payment Status</th>
               </tr>
             </thead>
             <tbody>
@@ -46,14 +58,12 @@ function PaymentHistory() {
                 <th></th>
                 <th></th>
                 <th></th>
-                <th></th>
                 <th className="payment-content-status-th">
                   <button className="status-button"></button>
                 </th>
                 <th>
-                  <div className="d-flex">
-                    <button className="action-buttons-btn1">View</button>
-                    <button className="action-buttons-btn2">Print</button>
+                  <div className="action-btn-div d-flex">
+                    <button className="action-buttons-btn1">Pending</button>
                   </div>
                 </th>
               </tr>
