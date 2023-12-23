@@ -1,4 +1,4 @@
-.CreateOrder-conten{
+.createorder-content-container{
   margin: 0;
   margin-right: 0;
     width: 90%;
@@ -6,3 +6,45 @@
     overflow: scroll;
     background-color: rgb(240, 240, 240);
 }
+
+.createorder-content{
+  padding: 20px;
+}
+
+.cloth-card{
+  width: 100%;
+  box-shadow: 2px 2px 4px 4px rgb(224, 224, 224);
+  height: auto;
+  min-height: 550px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 2.5fr 3fr;
+
+}
+
+.createorder-content-hr{
+  border-bottom: 1px solid grey;
+  width: 100%;
+
+}
+
+.cloth-card-div1{
+border: 1px solid rgb(207, 207, 207);
+box-shadow: 2px 2px 4px 4px rgb(232, 232, 232);
+height: 380px;
+display: grid;
+grid-template-columns: repeat(4,1fr);
+padding: 20px;
+}
+
+.cloth-card-div2{
+  border: 1px solid rgb(207, 207, 207);
+  box-shadow: 2px 2px 4px 4px rgb(232, 232, 232);
+  margin-left: 20px;
+  }
+
+  .cloth-border{
+    width: 80px;
+    height: 80px;
+    border: 3px solid grey;
+  }
