@@ -34,9 +34,6 @@ function Calender() {
       setActiveBtn(btnNo)
       handleTimeChange(time)
   }
-
-  console.log(selectedTime)
-
   
   return (
     <Container>

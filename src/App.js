@@ -64,12 +64,16 @@ import WorkFlowTask from "./pages/Admin/WorkFlowTask";
 import CreateTask from "./pages/Admin/CreateTask";
 import TaskTable from "./pages/Admin/TaskTable";
 import SingleTaskPage from "./pages/Admin/SingleTaskPage";
+
+import PaymentHistory from "./pages/user/PaymentHistory";
+import CreateOrder from "./pages/Admin/CreatOrder";
 import SupSingleOrder from "./pages/SupervisorPage/SupSingleOrder";
 import SupLeave from "./pages/SupervisorPage/SupLeave";
 import SupCreateLeave from "./components/SupervisorComponents/SupCreateLeave";
 import EditExpenseSup from "./pages/SupervisorPage/EditEpenseSup";
 import SalesReportSup from "./pages/SupervisorPage/SalesReportSup";
 import ExpenseReportSup from "./pages/SupervisorPage/ExpenseReportSup";
+
 
 
  
@@ -108,6 +112,7 @@ function App() {
         <Route path="/order-receipt/:orderId" element={<OrderReceipt/>}/>
         <Route path="/iventry" element={<Iventry/>}/>
         <Route path="/cartpayment" element={<CartPayment/>}/>
+        <Route path="/paymenthistory" element={<PaymentHistory/>}/>
 
         {/* Front desk */}
           <Route path="/frontdesk" element={<Login/>} />
@@ -146,6 +151,7 @@ function App() {
         <Route path="/createtask" element={<CreateTask/>}/>
         <Route path="/tasktable" element={<TaskTable/>}/>
         <Route path="/singletaskpage/:_id" element={<SingleTaskPage/>}/>
+        <Route path="/createOrder" element={<CreateOrder/>}/>
 
 
         {/* SUPERVISOR ROUTES */}
