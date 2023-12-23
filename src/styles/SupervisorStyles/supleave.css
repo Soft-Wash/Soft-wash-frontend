@@ -1,0 +1,344 @@
+:root {
+    --primary-color: #6651d1;
+    --primary-opacity: 102, 81, 209;
+    --secondary-color: #fb8e0b;
+    --bg-dark: #474958;
+    --bg-grey: #e8e9ed;
+    --bg-light: #f8f8fa;
+    --text-grey: #6b7280;
+    --text-dark: #222843;
+    --success: #00cc73;
+    --headercolor: #15b8d8;
+  }
+  
+  
+  .leave-container{
+    padding: 20px;
+    width: 100%;
+    overflow: scroll;
+    height: 100vh;
+  }
+  
+  .leave-process-div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+  
+  }
+  
+  .leave-process-div p{
+   margin-bottom: 0;
+  }
+  
+  .leave-process-div-p{
+    /* padding: 30px; */
+    margin-bottom: 0;
+    border-bottom: 3px solid black;
+   }
+
+
+
+.create-leave-btn {
+  padding: 1rem 1.2rem;
+  
+}
+.create-leave-link{
+    text-decoration: none;
+    color: black;
+    padding: 30px;
+}
+
+.create-leave-link:hover{
+    border-bottom: 3px solid #0dcaf0;
+    /* padding: 30px; */
+}  
+
+.create-leave-btn:hover {
+  box-shadow: #0DCAF0 0 0 0 3px, transparent 0 0 0 0;
+}
+
+
+  
+
+  .leave-hr{
+    border-bottom: 1px solid grey;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .user-profile-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+  }
+  
+  .user-profile-container img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .user-profile-container-p2{
+   color: grey;
+   font-size: 14px;
+   margin-top: 0;
+  }
+  
+  .user-profile-container-p1{
+    margin-bottom: 0;
+    white-space: nowrap;
+   }
+  
+  .user-profile-container-innerd{
+    margin-left: 10px;
+  }
+  
+  .user-profile-container-innercont{
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(1,1fr);
+  }
+  
+  .user-profile-container-innercont2{
+    display: flex;
+    align-items: center;
+  }
+  
+  .onleave-div{
+    display: flex;
+  }
+  
+  .card-innerdiv{
+    background-color: rgb(233, 233, 233);
+  }
+  
+  .date-container-innerd{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+  }
+  
+  .date-container-innerd input{
+    width: 120px;
+  }
+  
+  .date-container-innerd-hr{
+    border-bottom: 2px solid rgb(49, 49, 49);
+    width: 60px;
+    margin-bottom: 0;
+  }
+  
+  .date-container{
+    padding: 20px;
+  }
+  
+  .card-container{
+    width: 350px;
+    min-height: 550px;
+    max-height: 550px;
+  }
+  
+  .hrtag-ptag{
+    text-align: center;
+  }
+  
+  .leave-count-div{
+    /* padding: 10px; */
+    display: flex;
+    border-radius: 3px;
+    background-color: rgb(239, 239, 239);
+    width: 200px;
+    height: 35px;
+    margin-left: 20px;
+    text-align: center;
+    margin-top: 20px;
+    align-items: center;
+    padding: 10px;
+  
+  }
+  
+  .leave-count-div-p1{
+    color: green;
+  font-weight: bold;
+  }
+  
+  .leave-count-div-p2{
+    margin-left: 10px;
+  }
+  
+  .leave-button-divs{
+  display: flex;
+  padding-left:  20px;
+  padding-right: 20px;
+  justify-content: space-between;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  }
+  
+  .leave-button-divs-btn2{
+    padding-left: 40px;
+    padding-right: 40px;
+    border: 2px solid #15b8d8;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  
+  }
+  
+  .leave-button-divs-btn1{
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: #15b8d8;
+    border: 2px solid #15b8d8;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  
+  .card-container3-innerd2-h6{
+    padding-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .card-container3-innerd2-hr{
+  margin-bottom: 0;
+  }
+  
+  .card-container3-innerd2-p1{
+    margin-top: 10px;
+    margin-left: 10px;
+    font-weight: bold;
+  }
+  .user-profile-container-innercont-img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 10px;
+  }
+  
+  .user-profile-container2-p2{
+    color: grey;
+    font-size: 12px;
+    margin-top: 0;
+   }
+   
+   .user-profile-container2-p1{
+     margin-bottom: 0;
+     white-space: nowrap;
+     font-size: 16px;
+    }
+  
+    .card-container3-innerd1-cover{
+      overflow: scroll;
+      height: 500px;
+    }
+  
+    .card-container3{
+      max-width: 320px;
+    }
+  
+    .no-leave{
+      margin-top: 20px;
+      padding-left: 10px;
+      padding-right: 10px;
+      color: rgb(136, 136, 136);
+      
+    }
+  
+    .card-textinput{
+      width: 285px;
+      min-height: 140px;
+      padding-left: 10px;
+      border: none;
+    }
+  
+    .card-textinput::placeholder{
+      vertical-align: top;
+      text-align: start; 
+      padding-top: 10px; 
+    }
+  
+    .admin-content-table{
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 13px;
+      min-width: 500px;
+      border-radius: 5px 5px 0 0;
+      overflow: hidden;
+      box-shadow: 0 0 10px 2px gainsboro;
+  }
+  .admin-content-table thead tr{
+      width: 100%;
+      text-align: left;
+      font-weight: bold;
+      background-color: rgb(13,202,240);
+      color: white;
+  }
+  
+  .admin-content-table th,
+  .admin-content-table td{
+      padding: 20px 25px;
+      border-right: 1px solid gray;
+  }
+  .admin-content-table tbody tr{
+      border-bottom: 1px solid grey;
+  
+  }
+  .admin-content-table tbody tr:nth-of-type(even){
+      background-color: rgb(230, 230, 230);
+  }
+  .admin-content-table tbody tr:last-of-type{
+      border-bottom: 3px solid rgb(13,202,240);
+  }
+  
+  .pending-leave-div{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+    height: 100vh;
+    overflow: scroll;
+  }
+  
+  .onleave-table{
+    margin-left: 10px;
+    height: 100vh;
+    overflow: scroll;
+  }
+  
+  .pendingcolor {
+    background-color: orange; 
+    color: white;
+    border: none;
+  
+  }
+  
+  .approvedcolor {
+    background-color: green; 
+    color: white;
+    border: none;
+    font-weight: bold;
+  }
+  
+  .rejectedcolor {
+    background-color: rgb(192, 8, 8); 
+    color: white;
+    border: none;
+    font-weight: bold;
+  }
+  
+  .status-button1{
+    border-radius: 30px;
+    padding-left: 7px;
+    padding-right: 7px;
+    font-weight: bold;
+  }
+  
+  .no-data-message1{
+    margin-left: 10px;
+    white-space: wrap;
+    font-weight: 300;
+    color: #87898c;
+  }
+  

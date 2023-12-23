@@ -11,15 +11,15 @@ function SupervisorExpense() {
 
   const [expenses,setExpenses] = useState()
 
-//   useEffect(()=>{
-//     axiosInstance.get('/expense/')
-//     .then((resp)=>{
-//         console.log(resp)
-//       setExpenses(resp.data)
+  useEffect(()=>{
+    axiosInstance.get('/expense/')
+    .then((resp)=>{
+        console.log(resp)
+      setExpenses(resp.data)
 
 
-//     })
-//   },[])
+    })
+  },[])
 
 
   const getStatusColorClass = (tax) => {
@@ -104,7 +104,7 @@ function SupervisorExpense() {
                     <th>{item.payment_method}</th>
                     <th>
                       <div className="d-flex">
-                        <Link to={`/editexpense/${item._id}`}>
+                        <Link to={`/editexpenseSup/${item._id}`}>
                         <button className="action-buttons-btn1 rounded-2">Edit</button>
                         </Link>
 
