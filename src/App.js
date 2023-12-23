@@ -65,6 +65,7 @@ import CreateTask from "./pages/Admin/CreateTask";
 import TaskTable from "./pages/Admin/TaskTable";
 import SingleTaskPage from "./pages/Admin/SingleTaskPage";
 import PaymentHistory from "./pages/user/PaymentHistory";
+import CreateOrder from "./pages/Admin/CreatOrder";
 
 
  
@@ -142,6 +143,7 @@ function App() {
         <Route path="/createtask" element={<CreateTask/>}/>
         <Route path="/tasktable" element={<TaskTable/>}/>
         <Route path="/singletaskpage/:_id" element={<SingleTaskPage/>}/>
+        <Route path="/createOrder" element={<CreateOrder/>}/>
 
 
         {/* SUPERVISOR ROUTES */}

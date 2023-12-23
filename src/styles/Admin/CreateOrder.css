@@ -1,0 +1,8 @@
+.CreateOrder-conten{
+  margin: 0;
+  margin-right: 0;
+    width: 90%;
+    height: 100vh;
+    overflow: scroll;
+    background-color: rgb(240, 240, 240);
+}
