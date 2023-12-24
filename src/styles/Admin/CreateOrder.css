@@ -114,10 +114,11 @@ display: flex;
 
 .time-btns{
   display: flex;
+  align-items: center;
 }
 
 .booking-time-btn2{
-  border: 2px solid rgb(0,131,255);
+  border: 2px solid rgb(13, 202, 240);
 }
 
 .time-btns button:nth-child(2) {
@@ -126,4 +127,13 @@ display: flex;
 
 .lightblue{
   background-color: rgb(13, 202, 240);
+}
+
+.time-btn-input01{
+  width: 190px;
+  margin-left: 10px;
+  height: 40px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid grey;
 }

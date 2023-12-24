@@ -117,17 +117,21 @@ function CreateOrder() {
 
           <div className="time-btns">
             <Button className="booking-time-btn2 px-2 my-3" 
-            variant={activeBtn === 1 ? 'lightblue' : 'light'}
+            variant={activeBtn === 1 ? 'info' : 'light'}
             onClick={() => handleBtnClick(1,"08:00 - 10:00 AM")}
             >
               08:00-10:00 AM
             </Button>
             <Button className="booking-time-btn2 px-2 my-3" 
-            variant={activeBtn === 2 ? 'lightblue' : 'light'}
+            variant={activeBtn === 2 ? 'info' : 'light'}
             onClick={() => handleBtnClick(2,"04:00 - 07:00 PM")}
             >
               04:00-07:00 PM
             </Button>
+            <div className="time-btn-input01-div">
+            <input type="date" className="time-btn-input01" />
+            </div>
+
           </div>
               </div>
             </div>
