@@ -5,6 +5,7 @@ import { axiosInstance } from "../../services/AxiosInstance";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { FaCaretUp, FaCaretDown } from "react-icons/fa";
 
 function CreateOrder() {
   const [clothTypes, setclothTypes] = useState();
@@ -15,8 +16,6 @@ function CreateOrder() {
     const storedTime = localStorage.getItem("AdminSelectedTime");
     return storedTime ? JSON.parse(storedTime) : "";
   });
-
-
 
   useEffect(() => {
     axiosInstance.get("cloth/").then((resp) => {
@@ -33,12 +32,12 @@ function CreateOrder() {
     setSelectedTime(time);
   };
 
-  const[activeBtn, setActiveBtn] = useState(1);
+  const [activeBtn, setActiveBtn] = useState(1);
 
-  const handleBtnClick = (btnNo,time) => {
-      setActiveBtn(btnNo)
-      handleTimeChange(time)
-  }
+  const handleBtnClick = (btnNo, time) => {
+    setActiveBtn(btnNo);
+    handleTimeChange(time);
+  };
 
   return (
     <div>
@@ -107,7 +106,7 @@ function CreateOrder() {
               <div className="cloth-card-div2">
                 <div className="cloth-card-div2-innerd1">
                   <div>
-                  <input type="text" placeholder="Enter Customer Name" />
+                    <input type="text" placeholder="Enter Customer Name" />
                   </div>
 
                   <div>
@@ -115,24 +114,65 @@ function CreateOrder() {
                   </div>
                 </div>
 
-          <div className="time-btns">
-            <Button className="booking-time-btn2 px-2 my-3" 
-            variant={activeBtn === 1 ? 'info' : 'light'}
-            onClick={() => handleBtnClick(1,"08:00 - 10:00 AM")}
-            >
-              08:00-10:00 AM
-            </Button>
-            <Button className="booking-time-btn2 px-2 my-3" 
-            variant={activeBtn === 2 ? 'info' : 'light'}
-            onClick={() => handleBtnClick(2,"04:00 - 07:00 PM")}
-            >
-              04:00-07:00 PM
-            </Button>
-            <div className="time-btn-input01-div">
-            <input type="date" className="time-btn-input01" />
-            </div>
+                <div className="time-btns">
+                  <Button
+                    className="booking-time-btn2 px-2 my-3"
+                    variant={activeBtn === 1 ? "info" : "light"}
+                    onClick={() => handleBtnClick(1, "08:00 - 10:00 AM")}
+                  >
+                    08:00-10:00 AM
+                  </Button>
+                  <Button
+                    className="booking-time-btn2 px-2 my-3"
+                    variant={activeBtn === 2 ? "info" : "light"}
+                    onClick={() => handleBtnClick(2, "04:00 - 07:00 PM")}
+                  >
+                    04:00-07:00 PM
+                  </Button>
+                  <div className="time-btn-input01-div">
+                    <input type="date" className="time-btn-input01" />
+                  </div>
+                </div>
+                <div className="cart-card">
+                  <table className="cart-card-table">
+                    <thead className="cart-card-thead">
+                      <tr>
+                        <th className="cart-card-thead-th1">Service</th>
+                        <th className="cart-card-thead-th2">Color</th>
+                        <th className="cart-card-thead-th3">Qty</th>
+                        <th className="cart-card-thead-th4">Rate</th>
+                        <th className="cart-card-thead-th5">Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th className="cart-card-thead-th1">Service</th>
+                        <th className="cart-card-thead-th2">Color</th>
+                        <th className="cart-card2-thead-th3">
+                          <div>
+                            <input type="text" />
+                          </div>
+                          <div className="cart-button-divs">
+                            <div>
+                            <button className="cart-card-btn1">
+                              <FaCaretUp className="caret-icon1" />
+                            </button>
+                            </div>
 
-          </div>
+                            <div>
+                            <button className="cart-card-btn2">
+                              <FaCaretDown className="caret-icon2"/>
+                            </button>
+                            </div>
+
+                          </div>
+                        </th>
+                        <th className="cart-card-thead-th4">Rate</th>
+                        <th className="cart-card-thead-th5">Amount</th>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
