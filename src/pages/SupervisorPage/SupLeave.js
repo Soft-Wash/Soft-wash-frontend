@@ -1,5 +1,6 @@
 import AdminSidebar from "../../components/Admin/AdminSidebar";
-import "../../styles/Admin/Leave.css";
+import { Link } from "react-router-dom";
+import "../../styles/SupervisorStyles/supleave.css";
 import { Row, Col, Container } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import userImage from "../../assets/images/bovi.jpeg";
@@ -10,8 +11,10 @@ import { axiosInstance } from "../../services/AxiosInstance";
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import SupervisorSideBar from "../../components/SupervisorComponents/SupervisorSideBar";
+import StaffOnLeave from "../../components/SupervisorComponents/StaffOnLeave";
 
-function Leave() {
+function SupLeave() {
   const [toggleRejection2, setToggleRejection2] = useState(true);
   const [toogleEmployeeInput2, settoggleEmployeeInput2] = useState(false);
   const [toggleApproved, settoggleApproved] = useState(false);
@@ -24,9 +27,10 @@ function Leave() {
   const [nextWeek,setNextWeek]=useState()
   const [rejectedReason,setrejectedReason]=useState({
     status:"rejected",
-    adminApproval:"rejected"
-
+    supervisorApproval:"rejected"
   })
+
+  const [toggleStaffOnLeave, setToggleStaffOnLeave] = useState(false); 
 
   function ToggleTextArea2() {
     setToggleRejection2(!toggleRejection2);
@@ -51,6 +55,7 @@ function Leave() {
     settoggleLeaveManagement(!toggleLeaveManagement);
     settoggleApproved(false);
     setrejectedLeave(false);
+    setToggleStaffOnLeave(false);
     if (toggleLeaveManagement) {
       settoggleLeaveManagement(true);
     }
@@ -60,11 +65,20 @@ function Leave() {
     setrejectedLeave(!rejectedLeave);
     settoggleLeaveManagement(false);
     settoggleApproved(false);
+     setToggleStaffOnLeave(false);
     if (rejectedLeave) {
       setrejectedLeave(true);
     }
   }
-
+  function toggleStaffsonLeave() {
+    setToggleStaffOnLeave(!toggleStaffOnLeave);
+    settoggleLeaveManagement(false);
+    setrejectedLeave(false);
+    settoggleApproved(false);
+    if (toggleStaffOnLeave) {  // Corrected condition here
+      setToggleStaffOnLeave(true);
+    }
+  }
   const handleRejection =(e)=>{
     const value = e.target.value
     setrejectedReason({...rejectedReason, [e.target.name]:value})
@@ -73,9 +87,9 @@ function Leave() {
 
   const handleApproval=(Id)=>{
     const leaveApproved={
-      adminApproval:"approved"
+      supervisorApproval:"approved"
     }
-    axiosInstance.put(`/leave/${Id}/adminApproval`, leaveApproved)
+    axiosInstance.put(`/leave/${Id}/supervisorApproval`, leaveApproved)
     .then((resp)=>{
       console.log(resp.data)
       toast.success('Approved succesful')
@@ -87,7 +101,7 @@ function Leave() {
   console.log(rejectedReason)
 
   const HandleRejectLeave =(Id)=>{
-    axiosInstance.put(`/leave/${Id}/adminApproval`, rejectedReason)
+    axiosInstance.put(`/leave/${Id}/supervisorApproval`, rejectedReason)
     .then((resp)=>{
       console.log(resp.data)
       toast.error('Leave Rejected')
@@ -128,19 +142,30 @@ function Leave() {
     <div>
         <ToastContainer position="top-center" />
       <div className="d-flex">
-        <AdminSidebar />
+        <SupervisorSideBar />
         <div className="leave-container">
           <div className="leave-process-div">
-            <p onClick={toggleLeaveManage} className={`${toggleLeaveManagement?'leave-process-div-p':''}`} style={{ cursor: "pointer" }}>
-              pending
-            </p>
-            <p onClick={toggleApprovedData}  className={`${toggleApproved ? 'leave-process-div-p':''}`} style={{ cursor: "pointer" }}>
-              approved
-            </p>
-            <p style={{ cursor: "pointer" }}  className={`${rejectedLeave ? 'leave-process-div-p':''}`} onClick={toggleRejectedLeave}>
-              rejected
-            </p>
+            <div className="d-flex">
+                <p role="button" onClick={toggleLeaveManage} className={`${toggleLeaveManagement?'leave-process-div-p':''}`} style={{ cursor: "pointer" }}>
+                pending
+                </p>
+                <p onClick={toggleApprovedData}  className={`${toggleApproved ? 'leave-process-div-p':''}`} style={{ cursor: "pointer" }}>
+                approved
+                </p>
+                <p style={{ cursor: "pointer" }}  className={`${rejectedLeave ? 'leave-process-div-p':''}`} onClick={toggleRejectedLeave}>
+                rejected
+                </p>
+                <p onClick={toggleStaffsonLeave} className={`${toggleStaffOnLeave ? 'leave-process-div-p':''}`} style={{ cursor: "pointer" }}>
+                Staff On Leave
+                </p>
+            </div>
+
+            <Link to="/SupCreateLeave" className="create-leave-link">
+                Create Leave
+            </Link>
+            
           </div>
+          
           <hr className="leave-hr" />
           {toggleLeaveManagement ? (
             <div className="d-flex">
@@ -408,10 +433,11 @@ function Leave() {
 
           {toggleApproved ? <ApprovedLeave /> : ""}
           {rejectedLeave ? <RejectedLeave /> : ""}
+          {toggleStaffOnLeave ? <StaffOnLeave/> : ''}
         </div>
       </div>
     </div>
   );
 }
 
-export default Leave;
+export default SupLeave;
