@@ -149,21 +149,24 @@ function CreateOrder() {
                         <th className="cart-card-thead-th1">Service</th>
                         <th className="cart-card-thead-th2">Color</th>
                         <th className="cart-card2-thead-th3">
-                          <div>
+                          <div className="cart-card2-thead-th3-innerd">
                             <input type="text" />
                           </div>
                           <div className="cart-button-divs">
-                            <div>
-                            <button className="cart-card-btn1">
-                              <FaCaretUp className="caret-icon1" />
-                            </button>
-                            </div>
 
-                            <div>
+                            <button className="cart-card-btn1">
+                              <div>
+                              <FaCaretUp className="caret-icon1" />
+                              </div>
+
+                            </button>
+
+
+
                             <button className="cart-card-btn2">
                               <FaCaretDown className="caret-icon2"/>
                             </button>
-                            </div>
+
 
                           </div>
                         </th>
