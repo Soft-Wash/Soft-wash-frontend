@@ -146,32 +146,15 @@ function CreateOrder() {
                     </thead>
                     <tbody>
                       <tr>
-                        <th className="cart-card-thead-th1">Service</th>
+                        <th className="cart-card-thead-th1">Shirt <span>[Wash]</span></th>
                         <th className="cart-card-thead-th2">Color</th>
                         <th className="cart-card2-thead-th3">
                           <div className="cart-card2-thead-th3-innerd">
                             <input type="text" />
                           </div>
-                          <div className="cart-button-divs">
-
-                            <button className="cart-card-btn1">
-                              <div>
-                              <FaCaretUp className="caret-icon1" />
-                              </div>
-
-                            </button>
-
-
-
-                            <button className="cart-card-btn2">
-                              <FaCaretDown className="caret-icon2"/>
-                            </button>
-
-
-                          </div>
                         </th>
-                        <th className="cart-card-thead-th4">Rate</th>
-                        <th className="cart-card-thead-th5">Amount</th>
+                        <th className="cart-card-thead-th4">25</th>
+                        <th className="cart-card-thead-th5">25</th>
                       </tr>
                     </tbody>
                   </table>
