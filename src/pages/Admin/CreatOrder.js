@@ -11,6 +11,7 @@ function CreateOrder() {
   const [clothTypes, setclothTypes] = useState();
   const [show, setShow] = useState(false);
   const [smShow, setSmShow] = useState(false);
+  const [clothDetails,setClothDetails] = useState()
 
   const [selectedTime, setSelectedTime] = useState(() => {
     const storedTime = localStorage.getItem("AdminSelectedTime");
@@ -24,7 +25,20 @@ function CreateOrder() {
     });
   }, []);
 
-  const handleInputChange = () => {};
+  const handleInputChange = (e) => {
+    // const value = e.target.value
+    setClothDetails({
+       ...clothDetails ,serviceType: e.target.name
+    })
+  };
+
+  console.log(clothDetails);
+
+  const getClothDetails =(id)=>{
+    setSmShow(true)
+
+
+  }
 
   const AddService = () => {};
 
@@ -57,22 +71,16 @@ function CreateOrder() {
             <Modal.Body>
               <div className="radio-div">
                 <div className="radio-div-innerd">
-                  <input type="radio" />
+                  <input type="radio" name="PickUpAndDevlivery" onChange={handleInputChange} checked={clothDetails?.serviceType === "PickUpAndDevlivery"}/>
                 </div>
-                <p>Wash</p>
+                <p>Pick Up And Delivery</p>
               </div>
               <div className="radio-div">
                 <div className="radio-div-innerd">
-                  <input type="radio" />
+                  <input type="radio" name="PickUpOnly" onChange={handleInputChange} checked={clothDetails?.serviceType === "PickUpOnly"}/>
                 </div>
 
-                <p>Iron</p>
-              </div>
-              <div className="radio-div">
-                <div className="radio-div-innerd">
-                  <input type="radio" />
-                </div>
-                <p>Steam Iron</p>
+                <p>Pick Up Only</p>
               </div>
             </Modal.Body>
             <div className="modal-addbtn">
@@ -96,7 +104,7 @@ function CreateOrder() {
                         <img
                           src={item?.img}
                           alt=""
-                          onClick={() => setSmShow(true)}
+                          onClick={() =>getClothDetails(item._id) }
                         />
                         <p className="cloth-border-p">{item.name}</p>
                       </div>
@@ -146,8 +154,10 @@ function CreateOrder() {
                     </thead>
                     <tbody>
                       <tr>
-                        <th className="cart-card-thead-th1">Shirt <span>[Wash]</span></th>
-                        <th className="cart-card-thead-th2">Color</th>
+                        <th className="cart-card-thead-th1">
+                          Shirt <span>[Wash]</span>
+                        </th>
+                        <th className="cart-card-thead-th2">Black</th>
                         <th className="cart-card2-thead-th3">
                           <div className="cart-card2-thead-th3-innerd">
                             <input type="text" />
