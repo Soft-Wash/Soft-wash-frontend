@@ -186,10 +186,7 @@ export default function CreatesupUsers() {
                 </option>
                 {branches &&
                   branches.map((item) => (
-                    <option 
-                    key={item._d} 
-                    value={item._id} 
-                    disabled={item.name !== "Wuse-2-Soft-Wash"}>
+                    <option key={item._d} value={item._id}>
                       {item.name}
                     </option>
                   ))}
