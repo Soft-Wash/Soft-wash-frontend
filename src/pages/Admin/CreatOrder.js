@@ -6,12 +6,15 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { FaCaretUp, FaCaretDown } from "react-icons/fa";
+import axios from "axios";
 
 function CreateOrder() {
   const [clothTypes, setclothTypes] = useState();
   const [show, setShow] = useState(false);
   const [smShow, setSmShow] = useState(false);
   const [clothDetails,setClothDetails] = useState()
+  const [clothid,setClothid]=useState()
+  const [singleCloth,setsingleCloth]=useState()
 
   const [selectedTime, setSelectedTime] = useState(() => {
     const storedTime = localStorage.getItem("AdminSelectedTime");
@@ -36,11 +39,13 @@ function CreateOrder() {
 
   const getClothDetails =(id)=>{
     setSmShow(true)
-
-
+    setClothid(id)
   }
+  console.log(clothid)
 
-  const AddService = () => {};
+  const AddService = () => {
+
+  };
 
   const handleTimeChange = (time) => {
     setSelectedTime(time);
@@ -52,6 +57,15 @@ function CreateOrder() {
     setActiveBtn(btnNo);
     handleTimeChange(time);
   };
+
+  const getSingleOrder=()=>{
+    axios.post(`${process.env.REACT_APP_BASE_URL}/order/create`)
+    .then((resp)=>{
+      console.log(resp.data)
+      setsingleCloth(resp.data)
+
+    })
+  }
 
   return (
     <div>
@@ -84,7 +98,7 @@ function CreateOrder() {
               </div>
             </Modal.Body>
             <div className="modal-addbtn">
-              <button>Add</button>
+              <button onClick={()=>getSingleOrder()}>Add</button>
             </div>
           </Modal>
         </>
@@ -152,7 +166,7 @@ function CreateOrder() {
                         <th className="cart-card-thead-th5">Amount</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="cart-card-tbody">
                       <tr>
                         <th className="cart-card-thead-th1">
                           Shirt <span>[Wash]</span>
@@ -166,8 +180,14 @@ function CreateOrder() {
                         <th className="cart-card-thead-th4">25</th>
                         <th className="cart-card-thead-th5">25</th>
                       </tr>
+
                     </tbody>
+
                   </table>
+                  <div className="save-continue">
+                        <button className="save-continue-btn1">Save And Continue</button>
+                        <button className="save-continue-btn2">Clear All</button>
+                      </div>
                 </div>
               </div>
             </div>
