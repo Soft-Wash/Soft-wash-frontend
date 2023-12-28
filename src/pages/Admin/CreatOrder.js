@@ -6,11 +6,15 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { FaCaretUp, FaCaretDown } from "react-icons/fa";
+import axios from "axios";
 
 function CreateOrder() {
   const [clothTypes, setclothTypes] = useState();
   const [show, setShow] = useState(false);
   const [smShow, setSmShow] = useState(false);
+  const [clothDetails,setClothDetails] = useState()
+  const [clothid,setClothid]=useState()
+  const [singleCloth,setsingleCloth]=useState()
 
   const [selectedTime, setSelectedTime] = useState(() => {
     const storedTime = localStorage.getItem("AdminSelectedTime");
@@ -24,9 +28,24 @@ function CreateOrder() {
     });
   }, []);
 
-  const handleInputChange = () => {};
+  const handleInputChange = (e) => {
+    // const value = e.target.value
+    setClothDetails({
+       ...clothDetails ,serviceType: e.target.name
+    })
+  };
 
-  const AddService = () => {};
+  console.log(clothDetails);
+
+  const getClothDetails =(id)=>{
+    setSmShow(true)
+    setClothid(id)
+  }
+  console.log(clothid)
+
+  const AddService = () => {
+
+  };
 
   const handleTimeChange = (time) => {
     setSelectedTime(time);
@@ -38,6 +57,15 @@ function CreateOrder() {
     setActiveBtn(btnNo);
     handleTimeChange(time);
   };
+
+  const getSingleOrder=()=>{
+    axios.post(`${process.env.REACT_APP_BASE_URL}/order/create`)
+    .then((resp)=>{
+      console.log(resp.data)
+      setsingleCloth(resp.data)
+
+    })
+  }
 
   return (
     <div>
@@ -57,26 +85,20 @@ function CreateOrder() {
             <Modal.Body>
               <div className="radio-div">
                 <div className="radio-div-innerd">
-                  <input type="radio" />
+                  <input type="radio" name="PickUpAndDevlivery" onChange={handleInputChange} checked={clothDetails?.serviceType === "PickUpAndDevlivery"}/>
                 </div>
-                <p>Wash</p>
+                <p>Pick Up And Delivery</p>
               </div>
               <div className="radio-div">
                 <div className="radio-div-innerd">
-                  <input type="radio" />
+                  <input type="radio" name="PickUpOnly" onChange={handleInputChange} checked={clothDetails?.serviceType === "PickUpOnly"}/>
                 </div>
 
-                <p>Iron</p>
-              </div>
-              <div className="radio-div">
-                <div className="radio-div-innerd">
-                  <input type="radio" />
-                </div>
-                <p>Steam Iron</p>
+                <p>Pick Up Only</p>
               </div>
             </Modal.Body>
             <div className="modal-addbtn">
-              <button>Add</button>
+              <button onClick={()=>getSingleOrder()}>Add</button>
             </div>
           </Modal>
         </>
@@ -96,7 +118,7 @@ function CreateOrder() {
                         <img
                           src={item?.img}
                           alt=""
-                          onClick={() => setSmShow(true)}
+                          onClick={() =>getClothDetails(item._id) }
                         />
                         <p className="cloth-border-p">{item.name}</p>
                       </div>
@@ -144,10 +166,12 @@ function CreateOrder() {
                         <th className="cart-card-thead-th5">Amount</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="cart-card-tbody">
                       <tr>
-                        <th className="cart-card-thead-th1">Shirt <span>[Wash]</span></th>
-                        <th className="cart-card-thead-th2">Color</th>
+                        <th className="cart-card-thead-th1">
+                          Shirt <span>[Wash]</span>
+                        </th>
+                        <th className="cart-card-thead-th2">Black</th>
                         <th className="cart-card2-thead-th3">
                           <div className="cart-card2-thead-th3-innerd">
                             <input type="text" />
@@ -156,8 +180,14 @@ function CreateOrder() {
                         <th className="cart-card-thead-th4">25</th>
                         <th className="cart-card-thead-th5">25</th>
                       </tr>
+
                     </tbody>
+
                   </table>
+                  <div className="save-continue">
+                        <button className="save-continue-btn1">Save And Continue</button>
+                        <button className="save-continue-btn2">Clear All</button>
+                      </div>
                 </div>
               </div>
             </div>
