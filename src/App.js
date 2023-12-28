@@ -73,6 +73,8 @@ import SupCreateLeave from "./components/SupervisorComponents/SupCreateLeave";
 import EditExpenseSup from "./pages/SupervisorPage/EditEpenseSup";
 import SalesReportSup from "./pages/SupervisorPage/SalesReportSup";
 import ExpenseReportSup from "./pages/SupervisorPage/ExpenseReportSup";
+import SupTaskWorkflow from "./pages/SupervisorPage/SupTaskWorkflow";
+import SupCreateTask from "./pages/SupervisorPage/SupCreateTask";
 
 
 
@@ -166,7 +168,8 @@ function App() {
         <Route path ="/SupCreateLeave" element ={<SupCreateLeave/>}/>
         <Route path="/supsalesreport" element={<SalesReportSup/>}/>
         <Route path="/supexpensereport" element={<ExpenseReportSup/>}/>
-
+        <Route path="/suptaskworkflow" element={<SupTaskWorkflow/>}/>
+        <Route path="/SupCreateTask" element={<SupCreateTask/>}/>
        
 
         {/* EMPLOYEE LOGIN */}
