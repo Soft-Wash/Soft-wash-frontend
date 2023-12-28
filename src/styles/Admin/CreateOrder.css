@@ -225,3 +225,34 @@ padding: 0;
   position: relative;
 }
 
+
+.cart-card-tbody tr{
+  border-bottom: 1px solid rgb(190, 190, 190);
+}
+
+.save-continue{
+  margin-top: 20px;
+}
+
+.save-continue-btn1{
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: none;
+  background-color:rgb(13, 202, 240) ;
+  color: white;
+
+
+}
+
+.save-continue-btn2{
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: none;
+  background-color:rgb(175, 7, 7);
+  color: white;
+  margin-left: 20px;
+
+
+}
