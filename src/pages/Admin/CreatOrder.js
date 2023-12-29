@@ -13,13 +13,17 @@ function CreateOrder() {
   const [show, setShow] = useState(false);
   const [smShow, setSmShow] = useState(false);
   const [clothDetails,setClothDetails] = useState()
-  const [clothid,setClothid]=useState()
+  const [customerDetails,setcustomerDetails]=useState()
+  const [clothId,setClothId]=useState()
   const [singleCloth,setsingleCloth]=useState()
 
   const [selectedTime, setSelectedTime] = useState(() => {
     const storedTime = localStorage.getItem("AdminSelectedTime");
     return storedTime ? JSON.parse(storedTime) : "";
   });
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     axiosInstance.get("cloth/").then((resp) => {
@@ -33,19 +37,23 @@ function CreateOrder() {
     setClothDetails({
        ...clothDetails ,serviceType: e.target.name
     })
+
+ 
   };
 
-  console.log(clothDetails);
+  const handleCustomerData=(e)=>{
+    const value = e.target.value
+    setcustomerDetails({
+      ...customerDetails, [e.target.name]:value 
+    })
+  }
+
+  console.log(customerDetails);
 
   const getClothDetails =(id)=>{
     setSmShow(true)
-    setClothid(id)
+    setClothId((prev) => [...(prev || []), id]);
   }
-  console.log(clothid)
-
-  const AddService = () => {
-
-  };
 
   const handleTimeChange = (time) => {
     setSelectedTime(time);
@@ -58,17 +66,90 @@ function CreateOrder() {
     handleTimeChange(time);
   };
 
+  const OrderDetails = {
+    customer_id:"",
+    clothtype_ids:clothId,
+    pickuptime:"",
+    deliveryAddress:"",
+    delivery_type:"",
+    subtotal:""
+
+  }
+
   const getSingleOrder=()=>{
     axios.post(`${process.env.REACT_APP_BASE_URL}/order/create`)
     .then((resp)=>{
-      console.log(resp.data)
       setsingleCloth(resp.data)
+    })
+  }
 
+  
+
+  const Creatuser=()=>{
+    axiosInstance.post('/users/auth/register',customerDetails)
+    .then((resp)=>{
+      console.log(resp.data)
     })
   }
 
   return (
     <div>
+      <>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Customer</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Customer Name</Form.Label>
+              <Form.Control
+                type="text"
+                name="fullName"
+                placeholder="Enter Name"
+                autoFocus
+                onChange={handleCustomerData}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Phone</Form.Label>
+              <Form.Control
+                type="number"
+                name="phone"
+                placeholder="Enter phone Number"
+                autoFocus
+                onChange={handleCustomerData}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                placeholder="name@example.com"
+                autoFocus
+                onChange={handleCustomerData}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Address</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Address"
+                autoFocus
+                name="address"
+                onChange={handleCustomerData}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="info text-white" onClick={Creatuser}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      </>
       <div>
         <>
           <Modal
@@ -132,7 +213,7 @@ function CreateOrder() {
                   </div>
 
                   <div>
-                    <button>+Add</button>
+                    <button onClick={handleShow}>+Add</button>
                   </div>
                 </div>
 
@@ -160,9 +241,9 @@ function CreateOrder() {
                     <thead className="cart-card-thead">
                       <tr>
                         <th className="cart-card-thead-th1">Service</th>
-                        <th className="cart-card-thead-th2">Color</th>
+                        <th className="cart-card-thead-th2">Date</th>
                         <th className="cart-card-thead-th3">Qty</th>
-                        <th className="cart-card-thead-th4">Rate</th>
+                        <th className="cart-card-thead-th4">Time</th>
                         <th className="cart-card-thead-th5">Amount</th>
                       </tr>
                     </thead>
