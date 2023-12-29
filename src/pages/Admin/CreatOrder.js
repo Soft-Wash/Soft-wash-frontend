@@ -13,6 +13,7 @@ function CreateOrder() {
   const [show, setShow] = useState(false);
   const [smShow, setSmShow] = useState(false);
   const [clothDetails,setClothDetails] = useState()
+  const [customerDetails,setcustomerDetails]=useState()
   const [clothid,setClothid]=useState()
   const [singleCloth,setsingleCloth]=useState()
 
@@ -36,9 +37,18 @@ function CreateOrder() {
     setClothDetails({
        ...clothDetails ,serviceType: e.target.name
     })
+
+ 
   };
 
-  console.log(clothDetails);
+  const handleCustomerData=(e)=>{
+    const value = e.target.value
+    setcustomerDetails({
+      ...customerDetails, [e.target.name]:value 
+    })
+  }
+
+  console.log(customerDetails);
 
   const getClothDetails =(id)=>{
     setSmShow(true)
@@ -88,33 +98,41 @@ function CreateOrder() {
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Customer Name</Form.Label>
               <Form.Control
-                type="email"
+                type="text"
+                name="fullName"
                 placeholder="Enter Name"
                 autoFocus
+                onChange={handleCustomerData}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Phone</Form.Label>
               <Form.Control
-                type="email"
+                type="number"
+                name="phone"
                 placeholder="Enter phone Number"
                 autoFocus
+                onChange={handleCustomerData}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
+                name="email"
                 placeholder="name@example.com"
                 autoFocus
+                onChange={handleCustomerData}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Address</Form.Label>
               <Form.Control
-                type="email"
-                placeholder="name@example.com"
+                type="text"
+                placeholder="Enter Address"
                 autoFocus
+                name="address"
+                onChange={handleCustomerData}
               />
             </Form.Group>
           </Form>
