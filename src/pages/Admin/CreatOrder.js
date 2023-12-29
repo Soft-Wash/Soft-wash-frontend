@@ -14,7 +14,7 @@ function CreateOrder() {
   const [smShow, setSmShow] = useState(false);
   const [clothDetails,setClothDetails] = useState()
   const [customerDetails,setcustomerDetails]=useState()
-  const [clothid,setClothid]=useState()
+  const [clothId,setClothId]=useState()
   const [singleCloth,setsingleCloth]=useState()
 
   const [selectedTime, setSelectedTime] = useState(() => {
@@ -52,9 +52,8 @@ function CreateOrder() {
 
   const getClothDetails =(id)=>{
     setSmShow(true)
-    setClothid(id)
+    setClothId((prev) => [...(prev || []), id]);
   }
-  console.log(clothid)
 
   const handleTimeChange = (time) => {
     setSelectedTime(time);
@@ -69,7 +68,7 @@ function CreateOrder() {
 
   const OrderDetails = {
     customer_id:"",
-    clothtype_ids:"",
+    clothtype_ids:clothId,
     pickuptime:"",
     deliveryAddress:"",
     delivery_type:"",
@@ -80,9 +79,16 @@ function CreateOrder() {
   const getSingleOrder=()=>{
     axios.post(`${process.env.REACT_APP_BASE_URL}/order/create`)
     .then((resp)=>{
-      console.log(resp.data)
       setsingleCloth(resp.data)
+    })
+  }
 
+  
+
+  const Creatuser=()=>{
+    axiosInstance.post('/users/auth/register',customerDetails)
+    .then((resp)=>{
+      console.log(resp.data)
     })
   }
 
@@ -138,7 +144,7 @@ function CreateOrder() {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="info text-white" onClick={handleClose}>
+          <Button variant="info text-white" onClick={Creatuser}>
             Save Changes
           </Button>
         </Modal.Footer>
@@ -235,9 +241,9 @@ function CreateOrder() {
                     <thead className="cart-card-thead">
                       <tr>
                         <th className="cart-card-thead-th1">Service</th>
-                        <th className="cart-card-thead-th2">Color</th>
+                        <th className="cart-card-thead-th2">Date</th>
                         <th className="cart-card-thead-th3">Qty</th>
-                        <th className="cart-card-thead-th4">Rate</th>
+                        <th className="cart-card-thead-th4">Time</th>
                         <th className="cart-card-thead-th5">Amount</th>
                       </tr>
                     </thead>
