@@ -21,6 +21,9 @@ function CreateOrder() {
     return storedTime ? JSON.parse(storedTime) : "";
   });
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   useEffect(() => {
     axiosInstance.get("cloth/").then((resp) => {
       console.log(resp.data);
@@ -43,10 +46,6 @@ function CreateOrder() {
   }
   console.log(clothid)
 
-  const AddService = () => {
-
-  };
-
   const handleTimeChange = (time) => {
     setSelectedTime(time);
   };
@@ -57,6 +56,16 @@ function CreateOrder() {
     setActiveBtn(btnNo);
     handleTimeChange(time);
   };
+
+  const OrderDetails = {
+    customer_id:"",
+    clothtype_ids:"",
+    pickuptime:"",
+    deliveryAddress:"",
+    delivery_type:"",
+    subtotal:""
+
+  }
 
   const getSingleOrder=()=>{
     axios.post(`${process.env.REACT_APP_BASE_URL}/order/create`)
@@ -69,6 +78,54 @@ function CreateOrder() {
 
   return (
     <div>
+      <>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Customer</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Customer Name</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter Name"
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Phone</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter phone Number"
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="name@example.com"
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="name@example.com"
+                autoFocus
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="info text-white" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      </>
       <div>
         <>
           <Modal
@@ -132,7 +189,7 @@ function CreateOrder() {
                   </div>
 
                   <div>
-                    <button>+Add</button>
+                    <button onClick={handleShow}>+Add</button>
                   </div>
                 </div>
 
