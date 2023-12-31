@@ -115,7 +115,7 @@ function SupTaskTable(){
                     </th>
                     <th>
                       <div className="d-flex">
-                        <Link to={`/singletaskpage/${item._id}`}>
+                        <Link to={`/SupSingleTask/${item._id}`}>
                           <button className="action-buttons-btn1">View</button>
                         </Link>
 
