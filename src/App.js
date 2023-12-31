@@ -75,6 +75,7 @@ import SalesReportSup from "./pages/SupervisorPage/SalesReportSup";
 import ExpenseReportSup from "./pages/SupervisorPage/ExpenseReportSup";
 import SupTaskWorkflow from "./pages/SupervisorPage/SupTaskWorkflow";
 import SupCreateTask from "./pages/SupervisorPage/SupCreateTask";
+import SupTaskTable from "./pages/SupervisorPage/SupTaskTable";
 
 
 
@@ -170,6 +171,7 @@ function App() {
         <Route path="/supexpensereport" element={<ExpenseReportSup/>}/>
         <Route path="/suptaskworkflow" element={<SupTaskWorkflow/>}/>
         <Route path="/SupCreateTask" element={<SupCreateTask/>}/>
+        <Route path="SupTaskTable" element={<SupTaskTable/>}/>
        
 
         {/* EMPLOYEE LOGIN */}

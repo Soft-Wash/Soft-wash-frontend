@@ -1,5 +1,5 @@
 // import SupworkflowSidebar from "../../components/SupervisorComponents/SupworkflowSidebar";
-import "../../styles/Admin/WorkFlowTask.css";
+import "../../styles/SupervisorStyles/SupTaskworkflow.css";
 import { FaClipboardList } from "react-icons/fa";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -31,13 +31,24 @@ const [completedTask,setCompletedTask]=useState()
         {/* <SupworkflowSidebar/> */}
         <SupervisorSideBar />
         <div className="workflow-content">
-          <h4 className="">Task Workflow </h4>
-          <Link to="/SupCreateTask">
-                <h4>Create New Task</h4>
-            </Link>
+            <div className="workflowHeader">
+                <div>
+                    <h4 className="">Task Workflow </h4>
+                </div>
+                <div className="d-flex gap-4">
+                    <Link to="/SupTaskTable">
+                        <h4 style={{color:"#0DCAF0"}}>View Task</h4>
+                    </Link>
+                    <Link to="/SupCreateTask">
+                        <h4 style={{color:"#0DCAF0"}}>Create New Task</h4>
+                    </Link>
+                </div>
+                
+            </div>
+          
           <hr className="dashboard-line" />
           <div className="workflow-cards">
-            <div className="workflow-container mb-3">
+            <div className="workflow-container-L mb-3">
               <div className="workflow-container-innerd1">
                 <FaClipboardList className="workflow-clipboard-icon" />
               </div>
@@ -49,7 +60,7 @@ const [completedTask,setCompletedTask]=useState()
                 <p>{allTask?.length|| "0"}</p>
               </div>
             </div>
-            <div className="workflow-container mb-3">
+            <div className="workflow-container-M mb-3">
               <div className="workflow-container-innerd1">
                 <FaClipboardList className="workflow-clipboard-icon" />
               </div>
@@ -58,7 +69,7 @@ const [completedTask,setCompletedTask]=useState()
                 <p>{pendingTask?.length || "0"}</p>
               </div>
             </div>
-            <div className="workflow-container mb-3">
+            <div className="workflow-container-R mb-3">
               <div className="workflow-container-innerd1">
                 <FaClipboardList className="workflow-clipboard-icon" />
               </div>
@@ -68,6 +79,8 @@ const [completedTask,setCompletedTask]=useState()
               </div>
             </div>
           </div>
+
+          {/* <hr className="dashboard-line" /> */}
           
         </div>
       </div>
