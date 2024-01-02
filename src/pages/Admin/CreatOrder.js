@@ -18,12 +18,15 @@ function CreateOrder() {
   const [clothDetails,setClothDetails] = useState()
   const [customerDetails,setcustomerDetails]=useState()
   const [clothId,setClothId]=useState()
-  const [singleCloth,setsingleCloth]=useState()
+  const [createdOrder,setcreatedOrder]=useState()
+  const [sheduleDate,setsheduleDate]=useState()
 
   const [selectedTime, setSelectedTime] = useState(() => {
     const storedTime = localStorage.getItem("AdminSelectedTime");
     return storedTime ? JSON.parse(storedTime) : "";
   });
+
+  const customerId = JSON.parse(localStorage.getItem('UserId'))
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -39,9 +42,9 @@ function CreateOrder() {
     setClothDetails({
        ...clothDetails ,serviceType: e.target.name
     })
-
- 
   };
+
+
 
   const handleCustomerData=(e)=>{
     const value = e.target.value
@@ -50,7 +53,6 @@ function CreateOrder() {
     })
   }
 
-  console.log(customerDetails);
 
   const getClothDetails =(id)=>{
     setSmShow(true)
@@ -61,6 +63,13 @@ function CreateOrder() {
     setSelectedTime(time);
   };
 
+  const handleDate=(e)=>{
+
+    setsheduleDate(e.target.value)
+  }
+
+  console.log(sheduleDate)
+
   const [activeBtn, setActiveBtn] = useState(1);
 
   const handleBtnClick = (btnNo, time) => {
@@ -69,19 +78,24 @@ function CreateOrder() {
   };
 
   const OrderDetails = {
-    customer_id:"",
+    customer_id:customerId,
     clothtype_ids:clothId,
-    pickuptime:"",
-    deliveryAddress:"",
-    delivery_type:"",
+    pickuptime:selectedTime,
+    deliveryAddress:customerDetails?.address,
+    delivery_type:clothDetails?.serviceType,
+    schedule_date:sheduleDate,
     subtotal:""
 
   }
 
-  const getSingleOrder=()=>{
-    axios.post(`${process.env.REACT_APP_BASE_URL}/order/create`)
+  console.log(OrderDetails)
+
+
+
+  const CreateOrder=()=>{
+    axios.post(`${process.env.REACT_APP_BASE_URL}/order/create`,OrderDetails)
     .then((resp)=>{
-      setsingleCloth(resp.data)
+      setcreatedOrder(resp.data)
     })
   }
 
@@ -90,7 +104,6 @@ function CreateOrder() {
   const Creatuser=()=>{
     axiosInstance.post('/users/auth/register',customerDetails)
     .then((resp)=>{
-      console.log(resp.data)
       toast.success('user created succesfully')
       setTimeout(() => {
         handleClose()
@@ -101,7 +114,7 @@ function CreateOrder() {
 
   return (
     <div>
-            <ToastContainer position="top-center" />
+      <ToastContainer position="top-center" />
       <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -198,7 +211,7 @@ function CreateOrder() {
               </div>
             </Modal.Body>
             <div className="modal-addbtn">
-              <button onClick={()=>getSingleOrder()}>Add</button>
+              <button onClick={()=>setSmShow(false)}>Add</button>
             </div>
           </Modal>
         </>
@@ -252,7 +265,7 @@ function CreateOrder() {
                     04:00-07:00 PM
                   </Button>
                   <div className="time-btn-input01-div">
-                    <input type="date" className="time-btn-input01" />
+                    <input type="date" onChange={handleDate} className="time-btn-input01" />
                   </div>
                 </div>
                 <div className="cart-card">
@@ -285,7 +298,7 @@ function CreateOrder() {
 
                   </table>
                   <div className="save-continue">
-                        <button className="save-continue-btn1">Save And Continue</button>
+                        <button className="save-continue-btn1" onClick={CreateOrder}>Save And Continue</button>
                         <button className="save-continue-btn2">Clear All</button>
                       </div>
                 </div>
