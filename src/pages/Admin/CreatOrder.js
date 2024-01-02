@@ -92,6 +92,10 @@ function CreateOrder() {
     .then((resp)=>{
       console.log(resp.data)
       toast.success('user created succesfully')
+      setTimeout(() => {
+        handleClose()
+      }, 1000);
+
     })
   }
 
