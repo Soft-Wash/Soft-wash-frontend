@@ -7,6 +7,9 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { FaCaretUp, FaCaretDown } from "react-icons/fa";
 import axios from "axios";
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function CreateOrder() {
   const [clothTypes, setclothTypes] = useState();
@@ -27,7 +30,6 @@ function CreateOrder() {
 
   useEffect(() => {
     axiosInstance.get("cloth/").then((resp) => {
-      console.log(resp.data);
       setclothTypes(resp.data);
     });
   }, []);
@@ -89,11 +91,13 @@ function CreateOrder() {
     axiosInstance.post('/users/auth/register',customerDetails)
     .then((resp)=>{
       console.log(resp.data)
+      toast.success('user created succesfully')
     })
   }
 
   return (
     <div>
+            <ToastContainer position="top-center" />
       <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -138,6 +142,17 @@ function CreateOrder() {
                 placeholder="Enter Address"
                 autoFocus
                 name="address"
+                onChange={handleCustomerData}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="password"
+                autoFocus
+                name="password"
                 onChange={handleCustomerData}
               />
             </Form.Group>
