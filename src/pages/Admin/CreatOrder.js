@@ -24,6 +24,8 @@ function CreateOrder() {
   const [deliveryAddress,setdeliveryAddress]=useState({
     FullAddress:""
   })
+  const [initialValue,setinitialValue]=useState(0)
+  const [clothQuantity,setclothQuantity]=useState(0)
 
   const [selectedTime, setSelectedTime] = useState(() => {
     const storedTime = localStorage.getItem("AdminSelectedTime");
@@ -89,13 +91,10 @@ function CreateOrder() {
     setSelectedTime(time);
   };
 
-  console.log(selectedTime)
 
   const handleDate=(e)=>{
     setsheduleDate(e.target.value)
   }
-
-  console.log(sheduleDate)
 
   const [activeBtn, setActiveBtn] = useState(1);
 
@@ -142,6 +141,22 @@ function CreateOrder() {
       FullAddress: customerDetails?.address || ""
     });
   };
+
+  const AddQuantity=(clothId)=>{
+    setclothQuantity((prevValue)=>{ 
+      const newQuantity = (prevValue[clothId] || 0) + 1
+      return {...prevValue,[clothId]: newQuantity}
+    })
+
+  }
+
+  const Substract = (clothId)=>{
+    setclothQuantity((prevValue)=>{
+      const newQuantity =  Math.max((prevValue[clothId] || 0) -1, 0)
+      return {...prevValue,[clothId]:newQuantity}
+  })
+
+  }
   
 
 
@@ -321,7 +336,17 @@ function CreateOrder() {
                       <th className="cart-card-thead-th2">{item?.date}</th>
                       <th className="cart-card2-thead-th3">
                         <div className="cart-card2-thead-th3-innerd">
-                          <input type="text" />
+                          <input type="text"
+                           value={clothQuantity[item?._id] || 0}
+                            />
+                        </div>
+                        <div className="cart-card2-thead-btn-div">
+                          <div className="minus-btn">
+                            <button onClick={()=>Substract(item._id)}>-</button>
+                          </div>
+                          <div className="add-btn">
+                          <button onClick={()=>AddQuantity(item._id)}>+</button>
+                          </div>
                         </div>
                       </th>
                       <th className="cart-card-thead-th4">{item.time}</th>

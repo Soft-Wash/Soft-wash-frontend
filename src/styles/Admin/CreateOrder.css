@@ -193,12 +193,37 @@ width: 120px;
 }
 
 .cart-card2-thead-th3 input{
-  width: 100px;
+  width: 40px;
   height: 35px;
   padding-left: 10px;
   padding-right: 10px;
   box-sizing: border-box; 
 
+}
+
+.cart-card2-thead-btn-div{
+  margin-left: 10px;
+  display: flex;
+}
+
+.minus-btn button{
+  /* padding-top: -20px; */
+  border: 1px solid black;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.add-btn button{
+  /* padding-top: -20px; */
+  border: 1px solid black;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-left: 0;
+
+}
+
+.add-btn{
+  /* margin-left: 10px; */
 }
 
 
