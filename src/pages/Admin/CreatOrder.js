@@ -20,11 +20,22 @@ function CreateOrder() {
   const [clothId,setClothId]=useState()
   const [createdOrder,setcreatedOrder]=useState()
   const [sheduleDate,setsheduleDate]=useState()
+  const [clothName,setclothName]=useState()
+  const [deliveryAddress,setdeliveryAddress]=useState({
+    FullAddress:""
+  })
 
   const [selectedTime, setSelectedTime] = useState(() => {
     const storedTime = localStorage.getItem("AdminSelectedTime");
     return storedTime ? JSON.parse(storedTime) : "";
   });
+
+  const MiniClothCart = [{
+    service:clothName,
+    date:sheduleDate,
+    time:selectedTime,
+    amount:0
+  }]
 
   const customerId = JSON.parse(localStorage.getItem('UserId'))
 
@@ -35,36 +46,52 @@ function CreateOrder() {
     axiosInstance.get("cloth/").then((resp) => {
       setclothTypes(resp.data);
     });
+
+    // axiosInstance.get('/')
   }, []);
 
   const handleInputChange = (e) => {
-    // const value = e.target.value
     setClothDetails({
        ...clothDetails ,serviceType: e.target.name
     })
   };
-
-
 
   const handleCustomerData=(e)=>{
     const value = e.target.value
     setcustomerDetails({
       ...customerDetails, [e.target.name]:value 
     })
+    handleAddress()
   }
 
 
-  const getClothDetails =(id)=>{
+  const getClothDetails =(id,name)=>{
     setSmShow(true)
     setClothId((prev) => [...(prev || []), id]);
+    setclothName(name)
   }
+
+
+  const cartData = () => {
+    const idsArray = clothId.map(
+      (item) => item.id
+      );
+    console.log(idsArray);
+
+  };
+  
+
+
+
+
 
   const handleTimeChange = (time) => {
     setSelectedTime(time);
   };
 
-  const handleDate=(e)=>{
+  console.log(selectedTime)
 
+  const handleDate=(e)=>{
     setsheduleDate(e.target.value)
   }
 
@@ -77,29 +104,27 @@ function CreateOrder() {
     handleTimeChange(time);
   };
 
+
   const OrderDetails = {
     customer_id:customerId,
     clothtype_ids:clothId,
     pickuptime:selectedTime,
-    deliveryAddress:customerDetails?.address,
+    deliveryAddress:deliveryAddress,
     delivery_type:clothDetails?.serviceType,
     schedule_date:sheduleDate,
     subtotal:""
 
   }
 
-  console.log(OrderDetails)
-
-
 
   const CreateOrder=()=>{
     axios.post(`${process.env.REACT_APP_BASE_URL}/order/create`,OrderDetails)
     .then((resp)=>{
+      console.log(resp.data)
       setcreatedOrder(resp.data)
+      toast.success('order created succesfully')
     })
   }
-
-  
 
   const Creatuser=()=>{
     axiosInstance.post('/users/auth/register',customerDetails)
@@ -111,6 +136,14 @@ function CreateOrder() {
 
     })
   }
+
+  const handleAddress = () => {
+    setdeliveryAddress({
+      FullAddress: customerDetails?.address || ""
+    });
+  };
+  
+
 
   return (
     <div>
@@ -231,7 +264,7 @@ function CreateOrder() {
                         <img
                           src={item?.img}
                           alt=""
-                          onClick={() =>getClothDetails(item._id) }
+                          onClick={() =>getClothDetails(item._id,item.name) }
                         />
                         <p className="cloth-border-p">{item.name}</p>
                       </div>
@@ -280,25 +313,28 @@ function CreateOrder() {
                       </tr>
                     </thead>
                     <tbody className="cart-card-tbody">
+                      {MiniClothCart && MiniClothCart.map((item)=>(
                       <tr>
-                        <th className="cart-card-thead-th1">
-                          Shirt <span>[Wash]</span>
-                        </th>
-                        <th className="cart-card-thead-th2">Black</th>
-                        <th className="cart-card2-thead-th3">
-                          <div className="cart-card2-thead-th3-innerd">
-                            <input type="text" />
-                          </div>
-                        </th>
-                        <th className="cart-card-thead-th4">25</th>
-                        <th className="cart-card-thead-th5">25</th>
-                      </tr>
+                      <th className="cart-card-thead-th1">
+                        {item?.service} <span>[Wash]</span>
+                      </th>
+                      <th className="cart-card-thead-th2">{item?.date}</th>
+                      <th className="cart-card2-thead-th3">
+                        <div className="cart-card2-thead-th3-innerd">
+                          <input type="text" />
+                        </div>
+                      </th>
+                      <th className="cart-card-thead-th4">{item.time}</th>
+                      <th className="cart-card-thead-th5">{item.amount}</th>
+                    </tr>
+                      ))}
+
 
                     </tbody>
 
                   </table>
                   <div className="save-continue">
-                        <button className="save-continue-btn1" onClick={CreateOrder}>Save And Continue</button>
+                        <button className="save-continue-btn1" onClick={()=>CreateOrder()}>Save And Continue</button>
                         <button className="save-continue-btn2">Clear All</button>
                       </div>
                 </div>
