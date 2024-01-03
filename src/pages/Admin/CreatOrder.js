@@ -20,6 +20,9 @@ function CreateOrder() {
   const [clothId,setClothId]=useState()
   const [createdOrder,setcreatedOrder]=useState()
   const [sheduleDate,setsheduleDate]=useState()
+  const [deliveryAddress,setdeliveryAddress]=useState({
+    FullAddress:""
+  })
 
   const [selectedTime, setSelectedTime] = useState(() => {
     const storedTime = localStorage.getItem("AdminSelectedTime");
@@ -51,6 +54,7 @@ function CreateOrder() {
     setcustomerDetails({
       ...customerDetails, [e.target.name]:value 
     })
+    handleAddress()
   }
 
 
@@ -64,7 +68,6 @@ function CreateOrder() {
   };
 
   const handleDate=(e)=>{
-
     setsheduleDate(e.target.value)
   }
 
@@ -77,11 +80,13 @@ function CreateOrder() {
     handleTimeChange(time);
   };
 
+
+
   const OrderDetails = {
     customer_id:customerId,
     clothtype_ids:clothId,
     pickuptime:selectedTime,
-    deliveryAddress:customerDetails?.address,
+    deliveryAddress:deliveryAddress,
     delivery_type:clothDetails?.serviceType,
     schedule_date:sheduleDate,
     subtotal:""
@@ -95,7 +100,9 @@ function CreateOrder() {
   const CreateOrder=()=>{
     axios.post(`${process.env.REACT_APP_BASE_URL}/order/create`,OrderDetails)
     .then((resp)=>{
+      console.log(resp.data)
       setcreatedOrder(resp.data)
+      toast.success('order created succesfully')
     })
   }
 
@@ -111,6 +118,16 @@ function CreateOrder() {
 
     })
   }
+
+  const handleAddress = () => {
+    setdeliveryAddress({
+      FullAddress: customerDetails?.address || ""
+    });
+  };
+  
+
+  console.log(deliveryAddress)
+
 
   return (
     <div>
@@ -298,7 +315,7 @@ function CreateOrder() {
 
                   </table>
                   <div className="save-continue">
-                        <button className="save-continue-btn1" onClick={CreateOrder}>Save And Continue</button>
+                        <button className="save-continue-btn1" onClick={()=>CreateOrder()}>Save And Continue</button>
                         <button className="save-continue-btn2">Clear All</button>
                       </div>
                 </div>
