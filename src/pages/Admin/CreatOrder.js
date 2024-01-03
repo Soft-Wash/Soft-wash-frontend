@@ -32,13 +32,10 @@ function CreateOrder() {
     return storedTime ? JSON.parse(storedTime) : "";
   });
 
-  const MiniClothCart = [{
-    service:clothName,
-    date:sheduleDate,
-    time:selectedTime,
-    amount:0
-  }]
+  const [MiniClothCart, setMiniClothCart] = useState([]);
 
+  console.log(MiniClothCart)
+  
   const customerId = JSON.parse(localStorage.getItem('UserId'))
 
   const handleClose = () => setShow(false);
@@ -48,8 +45,6 @@ function CreateOrder() {
     axiosInstance.get("cloth/").then((resp) => {
       setclothTypes(resp.data);
     });
-
-    // axiosInstance.get('/')
   }, []);
 
   const handleInputChange = (e) => {
@@ -67,21 +62,46 @@ function CreateOrder() {
   }
 
 
-  const getClothDetails =(id,name)=>{
-    setSmShow(true)
-    setClothId((prev) => [...(prev || []), id]);
-    setclothName(name)
-  }
-
-
-  const cartData = () => {
-    const idsArray = clothId.map(
-      (item) => item.id
-      );
-    console.log(idsArray);
-
+  const getClothDetails = (id, name) => {
+    setSmShow(true);
+    setClothId(id);
+    setclothName(name);
+  
+    // Check if the cloth is already in MiniClothCart
+    const existingCloth = MiniClothCart.find((item) => item._id === id);
+  
+    if (existingCloth) {
+      // Cloth already in MiniClothCart, update quantity
+      setclothQuantity((prevValue) => ({
+        ...prevValue,
+        [id]: (prevValue[id] || 0) + 1,
+      }));
+    } else {
+      // Cloth not in MiniClothCart, add a new entry
+      setMiniClothCart((prevCart) => [
+        ...prevCart,
+        {
+          service: clothName,
+          date: sheduleDate,
+          time: selectedTime,
+          amount: 0,
+          _id: clothId,
+        },
+      ]);
+      setTimeout(() => {
+        setclothQuantity((prevValue) => {
+          const newQuantity = (prevValue[clothId] || 0) + 1;
+          return { ...prevValue, [id]: newQuantity };
+        });
+      }, 0);
+    }
   };
   
+  
+
+  const calculateQuantity =()=>{
+
+  }
 
 
 
@@ -147,15 +167,15 @@ function CreateOrder() {
       const newQuantity = (prevValue[clothId] || 0) + 1
       return {...prevValue,[clothId]: newQuantity}
     })
-
   }
+
+  console.log(clothQuantity)
 
   const Substract = (clothId)=>{
     setclothQuantity((prevValue)=>{
       const newQuantity =  Math.max((prevValue[clothId] || 0) -1, 0)
       return {...prevValue,[clothId]:newQuantity}
   })
-
   }
   
 
@@ -331,7 +351,7 @@ function CreateOrder() {
                       {MiniClothCart && MiniClothCart.map((item)=>(
                       <tr>
                       <th className="cart-card-thead-th1">
-                        {item?.service} <span>[Wash]</span>
+                        {item?.service}
                       </th>
                       <th className="cart-card-thead-th2">{item?.date}</th>
                       <th className="cart-card2-thead-th3">
@@ -342,10 +362,10 @@ function CreateOrder() {
                         </div>
                         <div className="cart-card2-thead-btn-div">
                           <div className="minus-btn">
-                            <button onClick={()=>Substract(item._id)}>-</button>
+                            <button onClick={()=>Substract(item?._id)}>-</button>
                           </div>
                           <div className="add-btn">
-                          <button onClick={()=>AddQuantity(item._id)}>+</button>
+                          <button onClick={()=>AddQuantity(item?._id)}>+</button>
                           </div>
                         </div>
                       </th>
