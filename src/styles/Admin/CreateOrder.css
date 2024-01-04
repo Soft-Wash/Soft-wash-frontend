@@ -264,6 +264,11 @@ padding: 0;
 
 .save-continue{
   margin-top: 20px;
+  display: flex;
+}
+
+.total-div{
+  margin-left: 20px;
 }
 
 .save-continue-btn1{

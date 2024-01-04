@@ -21,6 +21,7 @@ function CreateOrder() {
   const [createdOrder, setcreatedOrder] = useState();
   const [sheduleDate, setsheduleDate] = useState();
   const [clothName, setclothName] = useState();
+  const [clothPrice, setclothPrice] = useState();
   const [deliveryAddress, setdeliveryAddress] = useState({
     FullAddress: "",
   });
@@ -59,10 +60,13 @@ function CreateOrder() {
     handleAddress();
   };
 
-  const getClothDetails = (id, name) => {
-    setClothId((prev)=> (prev? [...prev ,id] : [id]));
+  const getClothDetails = (id, name, price) => {
+    setClothId((prev) => (prev ? [...prev, id] : [id]));
     setclothName(name);
+    setclothPrice(price);
   };
+
+  console.log(clothPrice);
 
   useEffect(() => {
     if (clothId) {
@@ -76,7 +80,7 @@ function CreateOrder() {
           ...prevCart,
           {
             service: clothName,
-            amount: 0,
+            amount: clothPrice,
             _id: clothId,
           },
         ]);
@@ -119,7 +123,7 @@ function CreateOrder() {
     subtotal: "",
   };
 
-  console.log(OrderDetails)
+  console.log(OrderDetails);
 
   const CreateOrder = () => {
     axios
@@ -306,7 +310,9 @@ function CreateOrder() {
                         <img
                           src={item?.img}
                           alt=""
-                          onClick={() => getClothDetails(item._id, item.name)}
+                          onClick={() =>
+                            getClothDetails(item._id, item.name, item.price)
+                          }
                         />
                         <p className="cloth-border-p">{item.name}</p>
                       </div>
@@ -353,8 +359,13 @@ function CreateOrder() {
                       <tr>
                         <th className="cart-card-thead-th1">Service</th>
                         <th className="cart-card-thead-th3">Qty</th>
-                        <th className="cart-card-thead-th5">Amount</th>
-                        <button className="choose-service-btn" onClick={()=>setSmShow(true)}>Add Service Type</button>
+                        <th className="cart-card-thead-th5">Price</th>
+                        <button
+                          className="choose-service-btn"
+                          onClick={() => setSmShow(true)}
+                        >
+                          Add Service Type
+                        </button>
                       </tr>
                     </thead>
                     <tbody className="cart-card-tbody">
@@ -401,6 +412,11 @@ function CreateOrder() {
                       Save And Continue
                     </button>
                     <button className="save-continue-btn2">Clear All</button>
+                    <div className="total-div">
+                      <h4>
+                        Total: <span></span>
+                      </h4>
+                    </div>
                   </div>
                 </div>
               </div>
