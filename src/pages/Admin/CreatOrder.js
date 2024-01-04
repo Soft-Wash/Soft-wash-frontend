@@ -7,24 +7,24 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { FaCaretUp, FaCaretDown } from "react-icons/fa";
 import axios from "axios";
-import { toast } from 'react-toastify';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function CreateOrder() {
   const [clothTypes, setclothTypes] = useState();
   const [show, setShow] = useState(false);
   const [smShow, setSmShow] = useState(false);
-  const [clothDetails,setClothDetails] = useState()
-  const [customerDetails,setcustomerDetails]=useState()
-  const [clothId,setClothId]=useState()
-  const [createdOrder,setcreatedOrder]=useState()
-  const [sheduleDate,setsheduleDate]=useState()
-  const [clothName,setclothName]=useState()
-  const [deliveryAddress,setdeliveryAddress]=useState({
-    FullAddress:""
-  })
-  const [clothQuantity,setclothQuantity]=useState(0)
+  const [clothDetails, setClothDetails] = useState();
+  const [customerDetails, setcustomerDetails] = useState();
+  const [clothId, setClothId] = useState();
+  const [createdOrder, setcreatedOrder] = useState();
+  const [sheduleDate, setsheduleDate] = useState();
+  const [clothName, setclothName] = useState();
+  const [deliveryAddress, setdeliveryAddress] = useState({
+    FullAddress: "",
+  });
+  const [clothQuantity, setclothQuantity] = useState(0);
   const [MiniClothCart, setMiniClothCart] = useState([]);
 
   const [selectedTime, setSelectedTime] = useState(() => {
@@ -32,11 +32,7 @@ function CreateOrder() {
     return storedTime ? JSON.parse(storedTime) : "";
   });
 
-  
-
-
-  
-  const customerId = JSON.parse(localStorage.getItem('UserId'))
+  const customerId = JSON.parse(localStorage.getItem("UserId"));
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -49,46 +45,45 @@ function CreateOrder() {
 
   const handleInputChange = (e) => {
     setClothDetails({
-       ...clothDetails ,serviceType: e.target.name
-    })
+      ...clothDetails,
+      serviceType: e.target.name,
+    });
   };
 
-  const handleCustomerData=(e)=>{
-    const value = e.target.value
+  const handleCustomerData = (e) => {
+    const value = e.target.value;
     setcustomerDetails({
-      ...customerDetails, [e.target.name]:value 
-    })
-    handleAddress()
-  }
-
+      ...customerDetails,
+      [e.target.name]: value,
+    });
+    handleAddress();
+  };
 
   const getClothDetails = (id, name) => {
     setSmShow(true);
     setClothId(id);
     setclothName(name);
-  
   };
 
-
   useEffect(() => {
-    if (clothId ) {
+    if (clothId) {
       const existingCloth = MiniClothCart.find((item) => item._id === clothId);
-  
+
       if (existingCloth) {
-       return toast.error("item already in cart")
+        return toast.error("item already in cart");
       } else {
         // If the cloth is not in the cart, add a new entry:
         setMiniClothCart((prevCart) => [
           ...prevCart,
           {
             service: clothName,
-            date: sheduleDate,
-            time: selectedTime,
+            // date: sheduleDate,
+            // time: selectedTime,
             amount: 0,
             _id: clothId,
           },
         ]);
-  
+
         // Also initialize the quantity for the new cloth in the clothQuantity state:
         setclothQuantity((prevValue) => ({
           ...prevValue,
@@ -99,28 +94,16 @@ function CreateOrder() {
   }, [clothId]);
 
   console.log(MiniClothCart);
-  
-  
-  
-  
-  
 
-  const calculateQuantity =()=>{
-
-  }
-
-
-
-
+  const calculateQuantity = () => {};
 
   const handleTimeChange = (time) => {
     setSelectedTime(time);
   };
 
-
-  const handleDate=(e)=>{
-    setsheduleDate(e.target.value)
-  }
+  const handleDate = (e) => {
+    setsheduleDate(e.target.value);
+  };
 
   const [activeBtn, setActiveBtn] = useState(1);
 
@@ -129,132 +112,141 @@ function CreateOrder() {
     handleTimeChange(time);
   };
 
-
   const OrderDetails = {
-    customer_id:customerId,
-    clothtype_ids:clothId,
-    pickuptime:selectedTime,
-    deliveryAddress:deliveryAddress,
-    delivery_type:clothDetails?.serviceType,
-    schedule_date:sheduleDate,
-    subtotal:""
+    customer_id: customerId,
+    clothtype_ids: clothId,
+    pickuptime: selectedTime,
+    deliveryAddress: deliveryAddress,
+    delivery_type: clothDetails?.serviceType,
+    schedule_date: sheduleDate,
+    subtotal: "",
+  };
 
-  }
+  const CreateOrder = () => {
+    axios
+      .post(`${process.env.REACT_APP_BASE_URL}/order/create`, OrderDetails)
+      .then((resp) => {
+        console.log(resp.data);
+        setcreatedOrder(resp.data);
+        toast.success("order created succesfully");
+      });
+  };
 
-
-  const CreateOrder=()=>{
-    axios.post(`${process.env.REACT_APP_BASE_URL}/order/create`,OrderDetails)
-    .then((resp)=>{
-      console.log(resp.data)
-      setcreatedOrder(resp.data)
-      toast.success('order created succesfully')
-    })
-  }
-
-  const Creatuser=()=>{
-    axiosInstance.post('/users/auth/register',customerDetails)
-    .then((resp)=>{
-      toast.success('user created succesfully')
+  const Creatuser = () => {
+    axiosInstance.post("/users/auth/register", customerDetails).then((resp) => {
+      toast.success("user created succesfully");
       setTimeout(() => {
-        handleClose()
+        handleClose();
       }, 1000);
-
-    })
-  }
-
-  const handleAddress = () => {
-    setdeliveryAddress({
-      FullAddress: customerDetails?.address || ""
     });
   };
 
-  const AddQuantity=(clothId)=>{
-    setclothQuantity((prevValue)=>{ 
-      const newQuantity = (prevValue[clothId] || 0) + 1
-      return {...prevValue,[clothId]: newQuantity}
-    })
-  }
+  const handleAddress = () => {
+    setdeliveryAddress({
+      FullAddress: customerDetails?.address || "",
+    });
+  };
 
-  console.log(clothQuantity)
+  const AddQuantity = (clothId) => {
+    setclothQuantity((prevValue) => {
+      const newQuantity = (prevValue[clothId] || 0) + 1;
+      return { ...prevValue, [clothId]: newQuantity };
+    });
+  };
 
-  const Substract = (clothId)=>{
-    setclothQuantity((prevValue)=>{
-      const newQuantity =  Math.max((prevValue[clothId] || 0) -1, 0)
-      return {...prevValue,[clothId]:newQuantity}
-  })
-  }
-  
+  console.log(clothQuantity);
 
+  const Substract = (clothId) => {
+    setclothQuantity((prevValue) => {
+      const newQuantity = Math.max((prevValue[clothId] || 0) - 1, 0);
+      return { ...prevValue, [clothId]: newQuantity };
+    });
+  };
 
   return (
     <div>
       <ToastContainer position="top-center" />
       <>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add Customer</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Customer Name</Form.Label>
-              <Form.Control
-                type="text"
-                name="fullName"
-                placeholder="Enter Name"
-                autoFocus
-                onChange={handleCustomerData}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Phone</Form.Label>
-              <Form.Control
-                type="number"
-                name="phone"
-                placeholder="Enter phone Number"
-                autoFocus
-                onChange={handleCustomerData}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                name="email"
-                placeholder="name@example.com"
-                autoFocus
-                onChange={handleCustomerData}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Address</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter Address"
-                autoFocus
-                name="address"
-                onChange={handleCustomerData}
-              />
-            </Form.Group>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add Customer</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+              >
+                <Form.Label>Customer Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="fullName"
+                  placeholder="Enter Name"
+                  autoFocus
+                  onChange={handleCustomerData}
+                />
+              </Form.Group>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+              >
+                <Form.Label>Phone</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="phone"
+                  placeholder="Enter phone Number"
+                  autoFocus
+                  onChange={handleCustomerData}
+                />
+              </Form.Group>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+              >
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  placeholder="name@example.com"
+                  autoFocus
+                  onChange={handleCustomerData}
+                />
+              </Form.Group>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+              >
+                <Form.Label>Address</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Address"
+                  autoFocus
+                  name="address"
+                  onChange={handleCustomerData}
+                />
+              </Form.Group>
 
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="password"
-                autoFocus
-                name="password"
-                onChange={handleCustomerData}
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="info text-white" onClick={Creatuser}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+              >
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="password"
+                  autoFocus
+                  name="password"
+                  onChange={handleCustomerData}
+                />
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="info text-white" onClick={Creatuser}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </>
       <div>
         <>
@@ -272,20 +264,30 @@ function CreateOrder() {
             <Modal.Body>
               <div className="radio-div">
                 <div className="radio-div-innerd">
-                  <input type="radio" name="PickUpAndDevlivery" onChange={handleInputChange} checked={clothDetails?.serviceType === "PickUpAndDevlivery"}/>
+                  <input
+                    type="radio"
+                    name="PickUpAndDevlivery"
+                    onChange={handleInputChange}
+                    checked={clothDetails?.serviceType === "PickUpAndDevlivery"}
+                  />
                 </div>
                 <p>Pick Up And Delivery</p>
               </div>
               <div className="radio-div">
                 <div className="radio-div-innerd">
-                  <input type="radio" name="PickUpOnly" onChange={handleInputChange} checked={clothDetails?.serviceType === "PickUpOnly"}/>
+                  <input
+                    type="radio"
+                    name="PickUpOnly"
+                    onChange={handleInputChange}
+                    checked={clothDetails?.serviceType === "PickUpOnly"}
+                  />
                 </div>
 
                 <p>Pick Up Only</p>
               </div>
             </Modal.Body>
             <div className="modal-addbtn">
-              <button onClick={()=>setSmShow(false)}>Add</button>
+              <button onClick={() => setSmShow(false)}>Add</button>
             </div>
           </Modal>
         </>
@@ -305,7 +307,7 @@ function CreateOrder() {
                         <img
                           src={item?.img}
                           alt=""
-                          onClick={() =>getClothDetails(item._id,item.name) }
+                          onClick={() => getClothDetails(item._id, item.name)}
                         />
                         <p className="cloth-border-p">{item.name}</p>
                       </div>
@@ -339,7 +341,11 @@ function CreateOrder() {
                     04:00-07:00 PM
                   </Button>
                   <div className="time-btn-input01-div">
-                    <input type="date" onChange={handleDate} className="time-btn-input01" />
+                    <input
+                      type="date"
+                      onChange={handleDate}
+                      className="time-btn-input01"
+                    />
                   </div>
                 </div>
                 <div className="cart-card">
@@ -347,47 +353,55 @@ function CreateOrder() {
                     <thead className="cart-card-thead">
                       <tr>
                         <th className="cart-card-thead-th1">Service</th>
-                        <th className="cart-card-thead-th2">Date</th>
                         <th className="cart-card-thead-th3">Qty</th>
-                        <th className="cart-card-thead-th4">Time</th>
                         <th className="cart-card-thead-th5">Amount</th>
                       </tr>
                     </thead>
                     <tbody className="cart-card-tbody">
-                      {MiniClothCart  && MiniClothCart.map((item)=>(
-                      <tr>
-                      <th className="cart-card-thead-th1">
-                        {item?.service}
-                      </th>
-                      <th className="cart-card-thead-th2">{item?.date}</th>
-                      <th className="cart-card2-thead-th3">
-                        <div className="cart-card2-thead-th3-innerd">
-                          <input type="text"
-                           value={clothQuantity[item?._id] || 0}
-                            />
-                        </div>
-                        <div className="cart-card2-thead-btn-div">
-                          <div className="minus-btn">
-                            <button onClick={()=>Substract(item?._id)}>-</button>
-                          </div>
-                          <div className="add-btn">
-                          <button onClick={()=>AddQuantity(item?._id)}>+</button>
-                          </div>
-                        </div>
-                      </th>
-                      <th className="cart-card-thead-th4">{item.time}</th>
-                      <th className="cart-card-thead-th5">{item.amount}</th>
-                    </tr>
-                      ))}
-
-
+                      {MiniClothCart &&
+                        MiniClothCart.map((item) => (
+                          <tr>
+                            <th className="cart-card-thead-th1">
+                              {item?.service}
+                            </th>
+                            <th className="cart-card2-thead-th3">
+                              <div className="cart-card2-thead-th3-innerd">
+                                <input
+                                  type="text"
+                                  value={clothQuantity[item?._id] || 0}
+                                />
+                              </div>
+                              <div className="cart-card2-thead-btn-div">
+                                <div className="minus-btn">
+                                  <button onClick={() => Substract(item?._id)}>
+                                    -
+                                  </button>
+                                </div>
+                                <div className="add-btn">
+                                  <button
+                                    onClick={() => AddQuantity(item?._id)}
+                                  >
+                                    +
+                                  </button>
+                                </div>
+                              </div>
+                            </th>
+                            <th className="cart-card-thead-th5">
+                              {item.amount}
+                            </th>
+                          </tr>
+                        ))}
                     </tbody>
-
                   </table>
                   <div className="save-continue">
-                        <button className="save-continue-btn1" onClick={()=>CreateOrder()}>Save And Continue</button>
-                        <button className="save-continue-btn2">Clear All</button>
-                      </div>
+                    <button
+                      className="save-continue-btn1"
+                      onClick={() => CreateOrder()}
+                    >
+                      Save And Continue
+                    </button>
+                    <button className="save-continue-btn2">Clear All</button>
+                  </div>
                 </div>
               </div>
             </div>
