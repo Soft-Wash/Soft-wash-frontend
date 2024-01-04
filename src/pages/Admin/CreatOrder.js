@@ -39,12 +39,21 @@ function CreateOrder() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  useEffect(() => {
-    axiosInstance.get("cloth/").then((resp) => {
-      setclothTypes(resp.data);
-    });
-  }, []);
 
+  useEffect(() => {
+    let isMounted = true;
+  
+    axiosInstance.get("cloth/").then((resp) => {
+      if (isMounted) {
+        setclothTypes(resp.data);
+      }
+    });
+  
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+  
   const handleInputChange = (e) => {
     setClothDetails({
       ...clothDetails,
@@ -67,9 +76,11 @@ function CreateOrder() {
     setclothPrice(price);
   };
 
-  console.log(clothPrice);
 
   useEffect(() => {
+    let isMounted = true;
+
+
     if (clothId) {
       const existingCloth = MiniClothCart.find((item) => item._id === clothId);
 
@@ -94,6 +105,9 @@ function CreateOrder() {
         }));
       }
     }
+    return () => {
+      isMounted = false;
+    };
   }, [clothId]);
 
   console.log(MiniClothCart);
@@ -120,7 +134,7 @@ function CreateOrder() {
     deliveryAddress: deliveryAddress,
     delivery_type: clothDetails?.serviceType,
     schedule_date: sheduleDate,
-    subtotal: "",
+    subtotal: totalPrice
   };
 
   console.log(OrderDetails);
@@ -157,7 +171,6 @@ function CreateOrder() {
     });
   };
 
-  console.log(clothQuantity);
 
   const Substract = (clothId) => {
     setclothQuantity((prevValue) => {
@@ -166,26 +179,22 @@ function CreateOrder() {
     });
   };
 
-// ...
 
 const calculateQuantity = (cartItems) => {
   const total = cartItems.reduce((accumulator, cartItem) => {
-    const price = cartItem.amount || 0; // use 'amount' instead of 'price'
+    const price = cartItem.amount || 0; 
     const itemTotal = clothQuantity[cartItem._id] * price;
     return accumulator + itemTotal;
   }, 0);
 
-  settotalPrice(total); // Update the totalPrice state
+  settotalPrice(total); 
 };
 
 useEffect(() => {
   calculateQuantity(MiniClothCart);
 }, [MiniClothCart, clothQuantity]);
 
-// ...
 
-
-  console.log(totalPrice)
 
   return (
     <div>
