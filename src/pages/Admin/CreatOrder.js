@@ -71,10 +71,17 @@ function CreateOrder() {
   };
 
   const getClothDetails = (id, name, price) => {
-    setClothId((prev) => (prev ? [...prev, id] : [id]));
-    setclothName(name);
-    setclothPrice(price);
+
+    if (!clothId?.includes(id)) {
+      setClothId((prev) => [...(prev || []), id]);
+
+      setclothName(name);
+      setclothPrice(price);
+    } else {
+      toast.error("Cloth already selected");
+    }
   };
+  
 
 
   useEffect(() => {
