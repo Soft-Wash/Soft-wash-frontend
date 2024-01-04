@@ -60,8 +60,7 @@ function CreateOrder() {
   };
 
   const getClothDetails = (id, name) => {
-    setSmShow(true);
-    setClothId(id);
+    setClothId((prev)=> (prev? [...prev ,id] : [id]));
     setclothName(name);
   };
 
@@ -77,8 +76,6 @@ function CreateOrder() {
           ...prevCart,
           {
             service: clothName,
-            // date: sheduleDate,
-            // time: selectedTime,
             amount: 0,
             _id: clothId,
           },
@@ -121,6 +118,8 @@ function CreateOrder() {
     schedule_date: sheduleDate,
     subtotal: "",
   };
+
+  console.log(OrderDetails)
 
   const CreateOrder = () => {
     axios
@@ -355,6 +354,7 @@ function CreateOrder() {
                         <th className="cart-card-thead-th1">Service</th>
                         <th className="cart-card-thead-th3">Qty</th>
                         <th className="cart-card-thead-th5">Amount</th>
+                        <button className="choose-service-btn" onClick={()=>setSmShow(true)}>Add Service Type</button>
                       </tr>
                     </thead>
                     <tbody className="cart-card-tbody">
