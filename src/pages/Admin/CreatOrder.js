@@ -24,17 +24,17 @@ function CreateOrder() {
   const [deliveryAddress,setdeliveryAddress]=useState({
     FullAddress:""
   })
-  const [initialValue,setinitialValue]=useState(0)
   const [clothQuantity,setclothQuantity]=useState(0)
+  const [MiniClothCart, setMiniClothCart] = useState([]);
 
   const [selectedTime, setSelectedTime] = useState(() => {
     const storedTime = localStorage.getItem("AdminSelectedTime");
     return storedTime ? JSON.parse(storedTime) : "";
   });
 
-  const [MiniClothCart, setMiniClothCart] = useState([]);
+  
 
-  console.log(MiniClothCart)
+
   
   const customerId = JSON.parse(localStorage.getItem('UserId'))
 
@@ -67,35 +67,41 @@ function CreateOrder() {
     setClothId(id);
     setclothName(name);
   
-    // Check if the cloth is already in MiniClothCart
-    const existingCloth = MiniClothCart.find((item) => item._id === id);
-  
-    if (existingCloth) {
-      // Cloth already in MiniClothCart, update quantity
-      setclothQuantity((prevValue) => ({
-        ...prevValue,
-        [id]: (prevValue[id] || 0) + 1,
-      }));
-    } else {
-      // Cloth not in MiniClothCart, add a new entry
-      setMiniClothCart((prevCart) => [
-        ...prevCart,
-        {
-          service: clothName,
-          date: sheduleDate,
-          time: selectedTime,
-          amount: 0,
-          _id: clothId,
-        },
-      ]);
-      setTimeout(() => {
-        setclothQuantity((prevValue) => {
-          const newQuantity = (prevValue[clothId] || 0) + 1;
-          return { ...prevValue, [id]: newQuantity };
-        });
-      }, 0);
-    }
   };
+
+
+  useEffect(() => {
+    if (clothId ) {
+      const existingCloth = MiniClothCart.find((item) => item._id === clothId);
+  
+      if (existingCloth) {
+       return toast.error("item already in cart")
+      } else {
+        // If the cloth is not in the cart, add a new entry:
+        setMiniClothCart((prevCart) => [
+          ...prevCart,
+          {
+            service: clothName,
+            date: sheduleDate,
+            time: selectedTime,
+            amount: 0,
+            _id: clothId,
+          },
+        ]);
+  
+        // Also initialize the quantity for the new cloth in the clothQuantity state:
+        setclothQuantity((prevValue) => ({
+          ...prevValue,
+          [clothId]: 1,
+        }));
+      }
+    }
+  }, [clothId]);
+
+  console.log(MiniClothCart);
+  
+  
+  
   
   
 
@@ -348,7 +354,7 @@ function CreateOrder() {
                       </tr>
                     </thead>
                     <tbody className="cart-card-tbody">
-                      {MiniClothCart && MiniClothCart.map((item)=>(
+                      {MiniClothCart  && MiniClothCart.map((item)=>(
                       <tr>
                       <th className="cart-card-thead-th1">
                         {item?.service}
