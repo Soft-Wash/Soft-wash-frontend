@@ -27,6 +27,7 @@ function CreateOrder() {
   });
   const [clothQuantity, setclothQuantity] = useState(0);
   const [MiniClothCart, setMiniClothCart] = useState([]);
+  const [totalPrice,settotalPrice]=useState()
 
   const [selectedTime, setSelectedTime] = useState(() => {
     const storedTime = localStorage.getItem("AdminSelectedTime");
@@ -82,6 +83,7 @@ function CreateOrder() {
             service: clothName,
             amount: clothPrice,
             _id: clothId,
+            quantity:clothQuantity
           },
         ]);
 
@@ -95,8 +97,6 @@ function CreateOrder() {
   }, [clothId]);
 
   console.log(MiniClothCart);
-
-  const calculateQuantity = () => {};
 
   const handleTimeChange = (time) => {
     setSelectedTime(time);
@@ -165,6 +165,27 @@ function CreateOrder() {
       return { ...prevValue, [clothId]: newQuantity };
     });
   };
+
+// ...
+
+const calculateQuantity = (cartItems) => {
+  const total = cartItems.reduce((accumulator, cartItem) => {
+    const price = cartItem.amount || 0; // use 'amount' instead of 'price'
+    const itemTotal = clothQuantity[cartItem._id] * price;
+    return accumulator + itemTotal;
+  }, 0);
+
+  settotalPrice(total); // Update the totalPrice state
+};
+
+useEffect(() => {
+  calculateQuantity(MiniClothCart);
+}, [MiniClothCart, clothQuantity]);
+
+// ...
+
+
+  console.log(totalPrice)
 
   return (
     <div>
@@ -414,7 +435,7 @@ function CreateOrder() {
                     <button className="save-continue-btn2">Clear All</button>
                     <div className="total-div">
                       <h4>
-                        Total: <span></span>
+                        Total: <span>{totalPrice}</span>
                       </h4>
                     </div>
                   </div>
