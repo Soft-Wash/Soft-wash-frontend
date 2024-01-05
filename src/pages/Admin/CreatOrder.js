@@ -27,7 +27,7 @@ function CreateOrder() {
   });
   const [clothQuantity, setclothQuantity] = useState(0);
   const [MiniClothCart, setMiniClothCart] = useState([]);
-  const [totalPrice,settotalPrice]=useState()
+  const [totalPrice, settotalPrice] = useState();
 
   const [selectedTime, setSelectedTime] = useState(() => {
     const storedTime = localStorage.getItem("AdminSelectedTime");
@@ -39,21 +39,20 @@ function CreateOrder() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-
   useEffect(() => {
     let isMounted = true;
-  
+
     axiosInstance.get("cloth/").then((resp) => {
       if (isMounted) {
         setclothTypes(resp.data);
       }
     });
-  
+
     return () => {
       isMounted = false;
     };
   }, []);
-  
+
   const handleInputChange = (e) => {
     setClothDetails({
       ...clothDetails,
@@ -71,32 +70,36 @@ function CreateOrder() {
   };
 
   const getClothDetails = (id, name, price) => {
-    setClothId((prev) => (prev ? [...prev, id] : [id]));
-    setclothName(name);
-    setclothPrice(price);
+    if (!clothId?.includes(id)) {
+     setClothId([id]);
+      setclothName(name);
+      setclothPrice(price);
+    } else {
+      toast.error("Cloth already selected");
+    }
   };
-
 
   useEffect(() => {
     let isMounted = true;
 
-
-    if (clothId) {
+    if (clothId && isMounted) {
       const existingCloth = MiniClothCart.find((item) => item._id === clothId);
 
       if (existingCloth) {
         return toast.error("item already in cart");
       } else {
         // If the cloth is not in the cart, add a new entry:
-        setMiniClothCart((prevCart) => [
-          ...prevCart,
-          {
-            service: clothName,
-            amount: clothPrice,
-            _id: clothId,
-            quantity:clothQuantity
-          },
-        ]);
+          setMiniClothCart((prevCart) => [
+            ...prevCart,
+            {
+              service: clothName,
+              amount: clothPrice,
+              _id: clothId,
+              quantity: clothQuantity,
+            },
+          ]);
+
+
 
         // Also initialize the quantity for the new cloth in the clothQuantity state:
         setclothQuantity((prevValue) => ({
@@ -134,20 +137,37 @@ function CreateOrder() {
     deliveryAddress: deliveryAddress,
     delivery_type: clothDetails?.serviceType,
     schedule_date: sheduleDate,
-    subtotal: totalPrice
+    subtotal: totalPrice,
   };
 
   console.log(OrderDetails);
 
   const CreateOrder = () => {
-    axios
-      .post(`${process.env.REACT_APP_BASE_URL}/order/create`, OrderDetails)
-      .then((resp) => {
-        console.log(resp.data);
-        setcreatedOrder(resp.data);
-        toast.success("order created succesfully");
-      });
+    if (
+      OrderDetails.clothtype_ids === undefined ||
+      OrderDetails.pickuptime === undefined ||
+      OrderDetails.deliveryAddress === undefined ||
+      OrderDetails.schedule_date === undefined 
+      
+    ) {
+      toast.error("Please select all fields");
+    } else if (!customerDetails || Object.keys(customerDetails).length === 0){
+      toast.error('please create a customer')
+    } else {
+      axios
+        .post(`${process.env.REACT_APP_BASE_URL}/order/create`, OrderDetails)
+        .then((resp) => {
+          console.log(resp.data);
+          setcreatedOrder(resp.data);
+          toast.success("Order created successfully");
+        })
+        .catch((error) => {
+          console.error("Error creating order:", error);
+          toast.error("Failed to create order");
+        });
+    }
   };
+  
 
   const Creatuser = () => {
     axiosInstance.post("/users/auth/register", customerDetails).then((resp) => {
@@ -171,7 +191,6 @@ function CreateOrder() {
     });
   };
 
-
   const Substract = (clothId) => {
     setclothQuantity((prevValue) => {
       const newQuantity = Math.max((prevValue[clothId] || 0) - 1, 0);
@@ -179,22 +198,19 @@ function CreateOrder() {
     });
   };
 
+  const calculateQuantity = (cartItems) => {
+    const total = cartItems.reduce((accumulator, cartItem) => {
+      const price = cartItem.amount || 0;
+      const itemTotal = clothQuantity[cartItem._id] * price;
+      return accumulator + itemTotal;
+    }, 0);
 
-const calculateQuantity = (cartItems) => {
-  const total = cartItems.reduce((accumulator, cartItem) => {
-    const price = cartItem.amount || 0; 
-    const itemTotal = clothQuantity[cartItem._id] * price;
-    return accumulator + itemTotal;
-  }, 0);
+    settotalPrice(total);
+  };
 
-  settotalPrice(total); 
-};
-
-useEffect(() => {
-  calculateQuantity(MiniClothCart);
-}, [MiniClothCart, clothQuantity]);
-
-
+  useEffect(() => {
+    calculateQuantity(MiniClothCart);
+  }, [MiniClothCart, clothQuantity]);
 
   return (
     <div>
@@ -336,7 +352,7 @@ useEffect(() => {
                 {clothTypes &&
                   clothTypes.map((item) => (
                     <>
-                      <div className="cloth-border">
+                      <div className="cloth-border" key={item._id}>
                         <img
                           src={item?.img}
                           alt=""
