@@ -71,7 +71,7 @@ function CreateOrder() {
 
   const getClothDetails = (id, name, price) => {
     if (!clothId?.includes(id)) {
-      setClothId((prev) => [...(prev || []), id]);
+     setClothId([id]);
       setclothName(name);
       setclothPrice(price);
     } else {
@@ -89,15 +89,17 @@ function CreateOrder() {
         return toast.error("item already in cart");
       } else {
         // If the cloth is not in the cart, add a new entry:
-        setMiniClothCart((prevCart) => [
-          ...prevCart,
-          {
-            service: clothName,
-            amount: clothPrice,
-            _id: clothId,
-            quantity: clothQuantity,
-          },
-        ]);
+          setMiniClothCart((prevCart) => [
+            ...prevCart,
+            {
+              service: clothName,
+              amount: clothPrice,
+              _id: clothId,
+              quantity: clothQuantity,
+            },
+          ]);
+
+
 
         // Also initialize the quantity for the new cloth in the clothQuantity state:
         setclothQuantity((prevValue) => ({
