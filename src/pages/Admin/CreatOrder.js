@@ -350,7 +350,7 @@ function CreateOrder() {
                 {clothTypes &&
                   clothTypes.map((item) => (
                     <>
-                      <div className="cloth-border">
+                      <div className="cloth-border" key={item._id}>
                         <img
                           src={item?.img}
                           alt=""
