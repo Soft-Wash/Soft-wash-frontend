@@ -66,7 +66,7 @@ export default function DashInfo() {
             <Col className="text-success text-end"><small>See All</small></Col>
         </Row>
         {
-          dayOrders && dayOrders.map((order, index) => <AnAppointment time={order.pickuptime} name={order.customer_id} status={order.status}/>)
+          dayOrders && dayOrders.map((order, index) => <AnAppointment key={index} time={order.pickuptime} name={order.customer_id} status={order.status}/>)
         }
         </Col>
 
@@ -79,6 +79,9 @@ export default function DashInfo() {
         <Row className=" pt-2 pb-2 fw-bold justify-content-between">
             <Col lg={11} md={11} sm={11} style={{fontSize: "13px"}}><small className="text-success" >Available Washmen</small><small > (Open to Orders)</small></Col> 
             <Col></Col> 
+        </Row>
+        <Row> 
+          
         </Row>
         </Col>
       </Row>
