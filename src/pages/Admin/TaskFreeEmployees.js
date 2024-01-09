@@ -18,7 +18,20 @@ function TaskFreeEmployees() {
       <div className="d-flex">
         <WorkFlowSideBar />
         <div className="taskfree_div">
+          <div className="taskfree_div_title">
           <h3>Available Employees</h3>
+          <div>
+          <select name="" id=""  className="select-dropdown2">
+            <option value="" hidden>Select Employee</option>
+            <option value="Washman">Washman</option>
+            <option value="Frontdesk">Frontdesk</option>
+            <option value="Supervisor">Supervisor</option>
+          </select>
+          
+          </div>
+
+          </div>
+
           <hr />
           <table className="taskfree_tablecontent">
             <thead>

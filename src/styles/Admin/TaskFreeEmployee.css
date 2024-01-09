@@ -52,3 +52,13 @@
   font-weight: bold;
 
 }
+
+.taskfree_div_title{
+  display: flex;
+  justify-content: space-between;
+}
+
+.select-dropdown2{
+  width: 170px;
+  border: 1px solid grey;
+}
