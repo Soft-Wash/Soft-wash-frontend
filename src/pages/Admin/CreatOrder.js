@@ -71,7 +71,7 @@ function CreateOrder() {
 
   const getClothDetails = (id, name, price) => {
     if (!clothId?.includes(id)) {
-     setClothId([id]);
+      setClothId([id]);
       setclothName(name);
       setclothPrice(price);
     } else {
@@ -88,30 +88,30 @@ function CreateOrder() {
       if (existingCloth) {
         return toast.error("item already in cart");
       } else {
-        // If the cloth is not in the cart, add a new entry:
-          setMiniClothCart((prevCart) => [
-            ...prevCart,
-            {
-              service: clothName,
-              amount: clothPrice,
-              _id: clothId,
-              quantity: clothQuantity,
-            },
-          ]);
-
-
-
         // Also initialize the quantity for the new cloth in the clothQuantity state:
         setclothQuantity((prevValue) => ({
           ...prevValue,
           [clothId]: 1,
         }));
+        // If the cloth is not in the cart, add a new entry:
+        setMiniClothCart((prevCart) => [
+          ...prevCart,
+          {
+            service: clothName,
+            amount: clothPrice,
+            _id: clothId,
+            quantity: clothQuantity,
+          },
+        ]);
       }
     }
     return () => {
       isMounted = false;
     };
   }, [clothId]);
+
+
+
 
   console.log(MiniClothCart);
 
@@ -147,12 +147,11 @@ function CreateOrder() {
       OrderDetails.clothtype_ids === undefined ||
       OrderDetails.pickuptime === undefined ||
       OrderDetails.deliveryAddress === undefined ||
-      OrderDetails.schedule_date === undefined 
-      
+      OrderDetails.schedule_date === undefined
     ) {
       toast.error("Please select all fields");
-    } else if (!customerDetails || Object.keys(customerDetails).length === 0){
-      toast.error('please create a customer')
+    } else if (!customerDetails || Object.keys(customerDetails).length === 0) {
+      toast.error("please create a customer");
     } else {
       axios
         .post(`${process.env.REACT_APP_BASE_URL}/order/create`, OrderDetails)
@@ -167,7 +166,6 @@ function CreateOrder() {
         });
     }
   };
-  
 
   const Creatuser = () => {
     axiosInstance.post("/users/auth/register", customerDetails).then((resp) => {

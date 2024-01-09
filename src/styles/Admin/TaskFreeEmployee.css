@@ -1,0 +1,54 @@
+.taskfree_div{
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-right: 20px;
+  overflow: scroll;
+  height: 100vh;
+  width: 100vw;
+}
+
+.taskfree_tablecontent{
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 13px;
+  min-width: 500px;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 10px 2px gainsboro;
+  margin-top: 80px
+}
+
+
+.taskfree_tablecontent thead tr{
+  width: 100%;
+  text-align: left;
+  font-weight: bold;
+  background-color: rgb(13,202,240);
+  color: white;
+}
+
+.taskfree_tablecontent th,
+.taskfree_tablecontent td{
+  padding: 20px 15px;
+  border-right: 1px solid gray;
+}
+.taskfree_tablecontent tbody tr{
+  border-bottom: 1px solid grey;
+
+}
+.taskfree_tablecontent tbody tr:nth-of-type(even){
+  background-color: rgb(230, 230, 230);
+}
+.taskfree_tablecontent tbody tr:last-of-type{
+  border-bottom: 3px solid rgb(13,202,240);
+}
+
+.action_button{
+  padding-left: 10px;
+  padding-right: 10px;
+  border: none;
+  background-color: green;
+  color: white;
+  font-weight: bold;
+
+}

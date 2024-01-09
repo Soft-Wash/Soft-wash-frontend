@@ -73,6 +73,7 @@ import SupCreateLeave from "./components/SupervisorComponents/SupCreateLeave";
 import EditExpenseSup from "./pages/SupervisorPage/EditEpenseSup";
 import SalesReportSup from "./pages/SupervisorPage/SalesReportSup";
 import ExpenseReportSup from "./pages/SupervisorPage/ExpenseReportSup";
+import TaskFreeEmployees from "./pages/Admin/TaskFreeEmployees";
 
 
 
@@ -152,6 +153,8 @@ function App() {
         <Route path="/tasktable" element={<TaskTable/>}/>
         <Route path="/singletaskpage/:_id" element={<SingleTaskPage/>}/>
         <Route path="/createOrder" element={<CreateOrder/>}/>
+        <Route path="/taskfreeemployee" element={<TaskFreeEmployees/>}/>
+        
 
 
         {/* SUPERVISOR ROUTES */}
