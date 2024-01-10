@@ -6,20 +6,45 @@ import axios from "axios";
 
 function WashmanOrdersBody(){
 
+
     const [orders, setOrders] = useState([]);
 
-    useEffect(()=>{
-        axios.get(`${process.env.REACT_APP_BASE_URL}/order/`)
-        .then((resp) => {
-            console.log(resp)
-            setOrders(resp.data);
-        })
-        .catch((error) => {
-            console.error("Error fetching orders:", error);
-          });
-    },[])
+    // useEffect(()=>{
+    //     axios.get(`${process.env.REACT_APP_BASE_URL}/order/`)
+    //     .then((resp) => {
+    //         console.log(resp)
+    //         setOrders(resp.data);
+    //     })
+    //     .catch((error) => {
+    //         console.error("Error fetching orders:", error);
+    //       });
+    // },[])
+
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
 
+    const washmanID = "655e49bad160aea8372bde1d";
+
+    useEffect(() => {
+        const fetchOrders = async () => {
+            try{
+                setLoading(true);
+                setError(null);
+                const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/order/${washmanID}/orders`)
+                setOrders(response.data)
+                console.log(response)
+            }
+            catch (error) {
+                setError(error.message || 'An error occurred while fetching orders.');
+            } 
+            finally {
+                setLoading(false);
+            }
+        }
+
+        fetchOrders();
+    }, [])
 
     return(
         <div className="washman-bg">
