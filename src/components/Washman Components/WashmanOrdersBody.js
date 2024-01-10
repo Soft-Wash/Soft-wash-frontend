@@ -26,25 +26,25 @@ function WashmanOrdersBody(){
 
     const washmanID = "655e49bad160aea8372bde1d";
 
-    useEffect(() => {
-        const fetchOrders = async () => {
-            try{
-                setLoading(true);
-                setError(null);
-                const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/order/${washmanID}/orders`)
-                setOrders(response.data)
-                console.log(response)
-            }
-            catch (error) {
-                setError(error.message || 'An error occurred while fetching orders.');
-            } 
-            finally {
-                setLoading(false);
-            }
-        }
+    // useEffect(() => {
+    //     const fetchOrders = async () => {
+    //         try{
+    //             setLoading(true);
+    //             setError(null);
+    //             const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/order/${washmanID}/orders`)
+    //             setOrders(response.data)
+    //             console.log(response)
+    //         }
+    //         catch (error) {
+    //             setError(error.message || 'An error occurred while fetching orders.');
+    //         } 
+    //         finally {
+    //             setLoading(false);
+    //         }
+    //     }
 
-        fetchOrders();
-    }, [])
+    //     fetchOrders();
+    // }, [])
 
     return(
         <div className="washman-bg">
