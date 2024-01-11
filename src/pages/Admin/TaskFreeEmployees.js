@@ -5,13 +5,25 @@ import { axiosInstance } from "../../services/AxiosInstance";
 
 function TaskFreeEmployees() {
   const [employee, setEmployee] = useState();
+  const [roles, setRoles] = useState();
 
   useEffect(() => {
-    axiosInstance.get("/employees/task/status").then((resp) => {
-      console.log(resp.data);
-      setEmployee(resp.data);
+
+    axiosInstance.get("/roles/").then((resp) => {
+
+      setRoles(resp.data);
     });
   }, []);
+
+  const handleFilter = (id) => {
+    console.log(id);
+    axiosInstance
+      .get(`/employees/task/employee/search?task=free&role=${id}`)
+      .then((resp) => {
+        console.log(resp.data);
+        setEmployee(resp.data);
+      });
+  };
 
   return (
     <div>
@@ -19,17 +31,23 @@ function TaskFreeEmployees() {
         <WorkFlowSideBar />
         <div className="taskfree_div">
           <div className="taskfree_div_title">
-          <h3>Available Employees</h3>
-          <div>
-          <select name="" id=""  className="select-dropdown2">
-            <option value="" hidden>Select Employee</option>
-            <option value="Washman">Washman</option>
-            <option value="Frontdesk">Frontdesk</option>
-            <option value="Supervisor">Supervisor</option>
-          </select>
-          
-          </div>
-
+            <h3>Available Employees</h3>
+            <div>
+              <select
+                name=""
+                id=""
+                className="select-dropdown2"
+                onChange={(e) => handleFilter(e.target.value)}
+              >
+                <option value="" hidden>
+                  Select Employee
+                </option>
+                {roles &&
+                  roles.map((item) => (
+                    <option value={item._id}>{item.name}</option>
+                  ))}
+              </select>
+            </div>
           </div>
 
           <hr />
@@ -43,7 +61,14 @@ function TaskFreeEmployees() {
               </tr>
             </thead>
             <tbody>
-              {employee &&
+              {!employee || employee.length < 1 ? (
+                <tr>
+                  <td colSpan="6" className="no-data-message">
+                    No data available
+                  </td>
+                </tr>
+              ) : (
+                employee &&
                 employee.map((item) => (
                   <tr>
                     <th>{item.fullName}</th>
@@ -53,7 +78,8 @@ function TaskFreeEmployees() {
                       <button className="action_button">View</button>
                     </th>
                   </tr>
-                ))}
+                ))
+              )}
             </tbody>
           </table>
         </div>
