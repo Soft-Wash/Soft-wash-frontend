@@ -74,7 +74,7 @@ import EditExpenseSup from "./pages/SupervisorPage/EditEpenseSup";
 import SalesReportSup from "./pages/SupervisorPage/SalesReportSup";
 import ExpenseReportSup from "./pages/SupervisorPage/ExpenseReportSup";
 import TaskFreeEmployees from "./pages/Admin/TaskFreeEmployees";
-
+import UserDashboard from "./pages/user/UserDashboard";
 
 
  
@@ -114,10 +114,11 @@ function App() {
         <Route path="/iventry" element={<Iventry/>}/>
         <Route path="/cartpayment" element={<CartPayment/>}/>
         <Route path="/paymenthistory" element={<PaymentHistory/>}/>
+        <Route path="/paymenthistory" element={<Dashboard/>}/>
 
         {/* Front desk */}
           <Route path="/frontdesk" element={<Login/>} />
-          <Route path="/frontdesk/dash" element={<Dashboard/>} />
+          <Route path="/userdashboard" element={<UserDashboard/>} />
          
 
         {/* WASHMAN ROUTES */}
