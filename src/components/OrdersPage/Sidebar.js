@@ -17,6 +17,9 @@ function Sidebar (){
             <Link exact to="/" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="table">Home</CDBSidebarMenuItem>
             </Link>
+            <Link exact to="/userdashboard" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="table">Dashboard</CDBSidebarMenuItem>
+            </Link>
             <Link exact to="/user-profile" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">My Profile</CDBSidebarMenuItem>
             </Link>

@@ -1,6 +1,5 @@
 import Sidebar from "../../components/OrdersPage/Sidebar";
 import { Container, Row, Col, Nav } from "react-bootstrap";
-
 import "../../styles/UserProfile.css";
 import Tab from "react-bootstrap/Tab";
 import OrderProp from "../../components/OrdersPage/OrderProp";
@@ -87,7 +86,6 @@ export default function Orders() {
         <div>
           <Sidebar />
         </div>
-        <div></div>
         <Container className="myorders-container m-5 ms-5">
           <div className="mx-0 mb-4 w-75 d-flex justify-content-between">
             <div>
