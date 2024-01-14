@@ -118,7 +118,16 @@ function Navigation() {
                     />
                   </Dropdown.Toggle>
                   <Dropdown.Menu className="mt-4">
-                    <Dropdown.Item href="#">Profile</Dropdown.Item>
+                    <Dropdown.Item >
+                      <Link>
+                      Profile
+                      </Link>
+                      </Dropdown.Item>
+                      <Dropdown.Item >
+                      <Link to="userdashboard">
+                      Dashboard
+                      </Link>
+                      </Dropdown.Item>
                     <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>

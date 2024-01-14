@@ -2,18 +2,21 @@ import Sidebar from "../../components/OrdersPage/Sidebar";
 import "../../styles/PaymentHistory.css";
 import { axiosInstance } from "../../services/AxiosInstance";
 import {useState,useEffect} from "react"
+import axios from "axios";
 
 function PaymentHistory() {
 
   const [paymentHistory,setPaymentHistory]= useState()
 
-
-const userId = JSON.parse(localStorage.getItem('Userid'))
-  axiosInstance.get(`/payment/${userId}/userpayments`)
+useEffect(()=>{
+  const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
+  axios.get(`${process.env.REACT_APP_BASE_URL}/payments/${userId._id}/userpayments`)
   .then((resp)=>{
     console.log(resp.data)
     setPaymentHistory(resp.data)
   })
+},[])
+
 
   return (
     <div>
