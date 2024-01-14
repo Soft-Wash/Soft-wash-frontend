@@ -75,6 +75,7 @@ import SalesReportSup from "./pages/SupervisorPage/SalesReportSup";
 import ExpenseReportSup from "./pages/SupervisorPage/ExpenseReportSup";
 import TaskFreeEmployees from "./pages/Admin/TaskFreeEmployees";
 import UserDashboard from "./pages/user/UserDashboard";
+import UserEditProfile from "./components/UserDashboard/UserEditProfile";
 
 
  
@@ -115,6 +116,7 @@ function App() {
         <Route path="/cartpayment" element={<CartPayment/>}/>
         <Route path="/paymenthistory" element={<PaymentHistory/>}/>
         <Route path="/paymenthistory" element={<Dashboard/>}/>
+        <Route path="/usereditprofile/:_id" element={<UserEditProfile/>}/>
 
         {/* Front desk */}
           <Route path="/frontdesk" element={<Login/>} />
