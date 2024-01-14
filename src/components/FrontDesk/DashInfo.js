@@ -1,13 +1,17 @@
 import { getOuterBindingIdentifiers } from "@babel/types";
+import img1 from '../../assets/images/bovi.jpeg';
+import img2 from "../../assets/washman-pic.jpg";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Spinner } from "react-bootstrap";
 import AnAppointment from "./AppointmentDashProp";
+import WashmanProp from "./WashmanProp";
 
 export default function DashInfo() {
   const [dayOrderCount, setDayOrderCount] = useState(0)
   const [dayOrders, setDayOrders] = useState([])
+  const [washmen, setWashmen] = useState([])
   const [pendingPayments, setPendingPayments] = useState([])
   const [pendingPaymentsCount, setPendingPaymentsCount] = useState(0)
  
@@ -63,10 +67,20 @@ export default function DashInfo() {
         <Col className="border bg-white rounded-4 overflow-y-scroll">
         <Row className=" pt-2 pb-2 fw-bold justify-content-between" style={{fontSize: "13px"}}>
             <Col lg={8} md={8} sm={8}><small>Today's Orders</small></Col> 
-            <Col className="text-success text-end"><small>See All</small></Col>
+            <Col className="text-end"><small><a href="#" class=" link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">See All</a></small></Col>
         </Row>
         {
-          dayOrders && dayOrders.map((order, index) => <AnAppointment key={index} time={order.pickuptime} name={order.customer_id} status={order.status}/>)
+          dayOrders.length > 0 ? (
+            dayOrders && dayOrders.map((order, index) => <AnAppointment key={index} time={order.pickuptime} name={order.customer_id} status={order.status}/>)
+          ) : (
+            <div className="w-100 h-75 d-flex justify-content-center">
+
+              <div className="d-flex flex-column m-auto">
+              <Spinner className="m-auto" animation="grow" variant="primary" />
+              <p className=" m-auto">No orders yet!</p>
+              </div>
+            </div>
+          )
         }
         </Col>
 
@@ -77,8 +91,11 @@ export default function DashInfo() {
 
         <Col className="border bg-white rounded-4" >
         <Row className=" pt-2 pb-2 fw-bold justify-content-between">
-            <Col lg={11} md={11} sm={11} style={{fontSize: "13px"}}><small className="text-success" >Available Washmen</small><small > (Open to Orders)</small></Col> 
-            <Col></Col> 
+            <Col lg={11} md={11} sm={11} style={{fontSize: "13px"}} className="pb-3"><small className="text-success" >Available Washmen</small><small > (Open to Orders)</small></Col> 
+            
+            <WashmanProp image={img2} name={"Gerald Fakaa"} status={"free"}/>
+            <WashmanProp image={img2} name={"Dambola Segun"} status={'unfree'}/>
+            <WashmanProp image={img2} name={"Seyi Owolabi"} status={"free"}/>
         </Row>
         <Row> 
           

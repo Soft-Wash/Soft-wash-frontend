@@ -13,7 +13,7 @@ export default function AnAppointment(props) {
         <Col
           lg={5}
           className="my-auto fw-semibold text-secondary text-start text-break px-0 hover:underline"
-          style={{ fontSize: "15px" , width:"8rem"}}
+          style={{ fontSize: "15px" , width:"6rem"}}
         >
           <small>{props.name || "Kingsley Owolabi"}</small>
         </Col>
