@@ -4,9 +4,9 @@ import profilePic from "../../assets/images/bovi.jpeg";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Sidebar from "../../components/OrdersPage/Sidebar";
 
-
-function UserProfileBody() {
+function UserEditProfile() {
   const [userData, setUserData] = useState();
   const [realImage,setRealImage]=useState()
   const [inputImage,setinputImage]=useState()
@@ -36,7 +36,8 @@ function UserProfileBody() {
   }
 
   return (
-
+    <div className="d-flex">
+    <Sidebar/>
     <div className="user-dashboard-bg">
       <div className="user-page-content">
         <div className="user-header">
@@ -58,36 +59,32 @@ function UserProfileBody() {
                   />
         </div>
         <div>
-          <div className="user-profile-field">
-            <h4>Full Name</h4>
-            <h4>{userData?.fullName}</h4>
-          </div>
+          <label htmlFor="">
+            Full Name <br />
+            <input type="text" className="usereditprofile_input" value={userData?.fullName} />
+          </label> <br /> <br />
 
-          <div className="user-profile-field">
-            <h4>Phone</h4>
-            <h4>{userData?.phone}</h4>
-          </div>
-          <div className="user-profile-field">
-            <h4>Email</h4>
-            <h4>{userData?.email}</h4>
-          </div>
-          <div className="user-profile-field">
-            <h4>Address</h4>
-            <h4>{userData?.address}</h4>
-          </div>
-          <div className="user-profile-field">
-            <h4>Verified</h4>
-            <h4>{userData?.isVerified}</h4>
-          </div>
+
+          <label htmlFor="">
+          Phone <br />
+            <input type="text" className="usereditprofile_input" value={userData?.phone} />
+          </label> <br /> <br />
+          <label htmlFor="">
+            Email <br />
+            <input type="text" className="usereditprofile_input" value={userData?.email} />
+          </label> <br /> <br />
+          <label htmlFor="">
+            Address <br />
+            <input type="text" className="usereditprofile_input" value={userData?.address} />
+          </label> 
          </div>
-        <Link to={`/usereditprofile/${userData?._id}`}  className="user-form-link">
-          <Button className="edit-user-profile-btn">Edit Profile</Button>
-        </Link>
+
+          <Button className="edit-user-profile-btn">Update Profile</Button>
+
       </div>
     </div>
-
-
+    </div>
   );
 }
 
-export default UserProfileBody;
+export default UserEditProfile;
