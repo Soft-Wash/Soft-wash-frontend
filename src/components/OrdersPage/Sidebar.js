@@ -27,7 +27,7 @@ function Sidebar (){
               <CDBSidebarMenuItem icon="chart-line">My Orders</CDBSidebarMenuItem>
             </Link>
 
-            <Link exact to="/ClothesSelection" target="_blank" activeClassName="activeClicked">
+            <Link exact to="/ClothesSelection" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">Create Order</CDBSidebarMenuItem>
             </Link>
             <Link exact to="/hero404" target="_blank" activeClassName="activeClicked">
