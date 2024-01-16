@@ -7,16 +7,24 @@ import axios from "axios";
 function PaymentHistory() {
 
   const [paymentHistory,setPaymentHistory]= useState()
+  const [status,setstatus]=useState()
 
 useEffect(()=>{
   const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
-  axios.get(`${process.env.REACT_APP_BASE_URL}/payments/${userId._id}/userpayments`)
+  console.log(userId._id)
+  axios.get(`${process.env.REACT_APP_BASE_URL}/payments/${userId._id}/userpayments`,{status:status})
   .then((resp)=>{
     console.log(resp.data)
     setPaymentHistory(resp.data)
   })
-},[])
+},[status])
 
+const HandleSelectTag=(e)=>{
+  const value = e.target.value;
+  setstatus(value)
+}
+
+console.log(status)
 
   return (
     <div>
@@ -28,14 +36,14 @@ useEffect(()=>{
               name="statusOrder"
               className="select-dropdown2"
               id=""
-              // onChange={handleSelectChange}
+              onChange={(e)=>HandleSelectTag(e)}
             >
               <option value="" hidden>
                 Select Payment Status
               </option>
-              <option value="order placed">Pending</option>
-              <option value="Confirmed">Confirmed</option>
-              <option value="Received">Failed</option>
+              <option value="pending">Pending</option>
+              <option value="success">Success</option>
+              <option value="failed">Failed</option>
             </select>
           </div>
           <table className="payment-content-table">
@@ -50,26 +58,31 @@ useEffect(()=>{
               </tr>
             </thead>
             <tbody>
-              {/* <tr>
+              {paymentHistory?.length < 1 ? (
+               <tr>
                   <td colSpan="6" className="no-data-message">
                     No data available
                   </td>
-                </tr> */}
+                </tr> 
+
+              ) : (
 
               <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th className="payment-content-status-th">
-                  <button className="status-button"></button>
-                </th>
-                <th>
-                  <div className="action-btn-div d-flex">
-                    <button className="action-buttons-btn1">Pending</button>
-                  </div>
-                </th>
-              </tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th className="payment-content-status-th">
+                <button className="status-button"></button>
+              </th>
+              <th>
+                <div className="action-btn-div d-flex">
+                  <button className="action-buttons-btn1">Pending</button>
+                </div>
+              </th>
+            </tr>
+              )}
+
             </tbody>
           </table>
         </div>
