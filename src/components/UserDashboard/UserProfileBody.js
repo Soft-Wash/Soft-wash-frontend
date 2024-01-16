@@ -10,6 +10,7 @@ function UserProfileBody() {
   const [userData, setUserData] = useState();
   const [realImage,setRealImage]=useState()
   const [inputImage,setinputImage]=useState()
+  const backend = "http://localhost:8003/"
 
   useEffect(() => {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
@@ -44,7 +45,7 @@ function UserProfileBody() {
         </div>
         <div className="user-profilePic-sec d-flex">
           <div className="user-profilePic">
-            <img src={profilePic} />
+            <img src={`${backend}${userData?.avatar}`}/>
           </div>
           <label htmlFor="imageUpload" className="user-dp-btn">Change Photo</label>
           <input
