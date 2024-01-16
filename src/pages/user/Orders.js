@@ -18,10 +18,10 @@ export default function Orders() {
 
 
   useEffect(() => {
-    const userId = JSON.parse(localStorage.getItem("UserId"));
+    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     setUserId(userId);
 
-    axiosInstance.get(`/order/${userId}/allorders`).then((resp) => {
+    axiosInstance.get(`/order/${userId._id}/allorders`).then((resp) => {
       // console.log(resp.data);
       setuserOrders(resp.data);
       const pickUpDate = resp.data.schedule_date;
@@ -33,7 +33,6 @@ export default function Orders() {
     });
   }, []);
 
-  console.log(UserId)
 
   const status={
     status:"Confirmed"
