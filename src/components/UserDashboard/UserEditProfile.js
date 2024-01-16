@@ -5,11 +5,13 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "../../components/OrdersPage/Sidebar";
+import { axiosInstance } from "../../services/AxiosInstance";
 
 function UserEditProfile() {
   const [userData, setUserData] = useState();
   const [realImage, setRealImage] = useState();
   const [inputImage, setinputImage] = useState();
+
 
   useEffect(() => {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
@@ -37,6 +39,22 @@ function UserEditProfile() {
       console.log(file);
     }
   };
+  console.log(realImage)
+
+  const UpdateProfile=()=>{
+    const formData = new FormData()
+   formData.append('fullName', userData.fullName)
+   formData.append('phone', userData.phone)
+   formData.append('email', userData.email)
+   formData.append('address', userData.address)
+   formData.append('avatar', realImage)
+   console.log([...formData.entries()]);
+    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
+    axiosInstance.put(`users/${userId._id}/update`,formData)
+    .then((resp)=>{
+      console.log(resp.data)
+    })
+  }
 
   return (
     <div className="d-flex">
@@ -46,6 +64,7 @@ function UserEditProfile() {
           <div className="user-header">
             <h2>USER PROFILE</h2>
           </div>
+          <form action="/upload" method="POST" encType="multipart/form-data">
           <div className="user-profilePic-sec d-flex">
           {inputImage ? (
               <div className="user-profilePic">
@@ -56,7 +75,7 @@ function UserEditProfile() {
               />
             </div>
               ):            <div className="user-profilePic">
-              <img src={profilePic} />
+              <img src={userData?.avatar} />
             </div>}
 
             <label htmlFor="imageUpload" className="user-dp-btn">
@@ -66,7 +85,7 @@ function UserEditProfile() {
               type="file"
               accept="image/*"
               id="imageUpload"
-              name="img"
+              name="avatar"
               className="input-field"
               hidden
               onChange={HandleImage}
@@ -117,8 +136,10 @@ function UserEditProfile() {
               />
             </label>
           </div>
+</form>
 
-          <Button className="edit-user-profile-btn">Update Profile</Button>
+
+          <Button className="edit-user-profile-btn" onClick={()=>UpdateProfile()}>Update Profile</Button>
         </div>
       </div>
     </div>
