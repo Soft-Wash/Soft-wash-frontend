@@ -34,17 +34,10 @@ export default function Orders() {
   }, []);
 
 
-  const status={
-    status:"Confirmed"
-  }
-
   const getPLacedOrder = () => {
+    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/order/${UserId}/orderstatus/user`, {
-        data: {
-          status: "order placed",
-        },
-      })
+      .get(`${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=order placed`)
       .then((resp) => {
         console.log(resp.data);
         setorderplaced(resp.data);
@@ -55,29 +48,71 @@ export default function Orders() {
   };
   
 
-  const getConfirmedOrder = async () => {
-    try {
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/order/${UserId}/orderstatus/user`, status);
-      console.log(response.data);
-      setOrderConfirmed(response.data);
-    } catch (error) {
-      console.error("Error fetching confirmed orders:", error);
-    }
-  };
-  
-
-  
-
-  const getRecievedOrder = () => {
+  const getConfirmedOrder = ()=>{
+    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/order/${UserId}/orderstatus/user`, {
-        status: "recieved",
-      })
+      .get(`${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=Confirmed`)
       .then((resp) => {
         console.log(resp.data);
-        setOrderRecieved(resp.data);
+        setorderplaced(resp.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching placed orders:", error);
       });
-  };
+  }
+
+  const RecievedOrder = ()=>{
+    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=Recieved`)
+      .then((resp) => {
+        console.log(resp.data);
+        setorderplaced(resp.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching placed orders:", error);
+      });
+  }
+
+
+  const CleaningOrder = ()=>{
+    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=Cleaning`)
+      .then((resp) => {
+        console.log(resp.data);
+        setorderplaced(resp.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching placed orders:", error);
+      });
+  }
+
+  const ReadyOrder = ()=>{
+    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=Ready`)
+      .then((resp) => {
+        console.log(resp.data);
+        setorderplaced(resp.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching placed orders:", error);
+      });
+  }
+
+  const ShippedOrder = ()=>{
+    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=Shipped`)
+      .then((resp) => {
+        console.log(resp.data);
+        setorderplaced(resp.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching placed orders:", error);
+      });
+  }
 
   return (
     <>
@@ -112,7 +147,7 @@ export default function Orders() {
                       <Nav.Link
                         eventKey="second"
                         className="text-black"
-                        onClick={getPLacedOrder}
+                        onClick={()=>getPLacedOrder()}
                       >
                         Order Placed
                       </Nav.Link>
@@ -123,22 +158,22 @@ export default function Orders() {
                       </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey="fourth" className="text-black">
+                      <Nav.Link eventKey="fourth" className="text-black" onClick={()=>RecievedOrder()}>
                         Received
                       </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey="fifth" className="text-black">
+                      <Nav.Link eventKey="fifth" className="text-black" onClick={()=>CleaningOrder()}>
                         Cleaning
                       </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey="sixth" className="text-black">
+                      <Nav.Link eventKey="sixth" className="text-black" onClick={()=>ReadyOrder()}>
                         Ready
                       </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey="seventh" className="text-black">
+                      <Nav.Link eventKey="seventh" className="text-black" onClick={()=>ShippedOrder()}>
                         Shipped
                       </Nav.Link>
                     </Nav.Item>
