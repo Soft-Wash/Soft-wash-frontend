@@ -73,7 +73,9 @@ import SupCreateLeave from "./components/SupervisorComponents/SupCreateLeave";
 import EditExpenseSup from "./pages/SupervisorPage/EditEpenseSup";
 import SalesReportSup from "./pages/SupervisorPage/SalesReportSup";
 import ExpenseReportSup from "./pages/SupervisorPage/ExpenseReportSup";
-
+import TaskFreeEmployees from "./pages/Admin/TaskFreeEmployees";
+import UserDashboard from "./pages/user/UserDashboard";
+import UserEditProfile from "./components/UserDashboard/UserEditProfile";
 
 
  
@@ -113,10 +115,12 @@ function App() {
         <Route path="/iventry" element={<Iventry/>}/>
         <Route path="/cartpayment" element={<CartPayment/>}/>
         <Route path="/paymenthistory" element={<PaymentHistory/>}/>
+        <Route path="/paymenthistory" element={<Dashboard/>}/>
+        <Route path="/usereditprofile/:_id" element={<UserEditProfile/>}/>
 
         {/* Front desk */}
           <Route path="/frontdesk" element={<Login/>} />
-          <Route path="/frontdesk/dash" element={<Dashboard/>} />
+          <Route path="/userdashboard" element={<UserDashboard/>} />
          
 
         {/* WASHMAN ROUTES */}
@@ -152,6 +156,8 @@ function App() {
         <Route path="/tasktable" element={<TaskTable/>}/>
         <Route path="/singletaskpage/:_id" element={<SingleTaskPage/>}/>
         <Route path="/createOrder" element={<CreateOrder/>}/>
+        <Route path="/taskfreeemployee" element={<TaskFreeEmployees/>}/>
+        
 
 
         {/* SUPERVISOR ROUTES */}

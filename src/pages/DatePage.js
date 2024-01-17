@@ -64,7 +64,7 @@ const handleDeliveryOption = () => {
                     <SelectedCart />
                 </div>
             </div>
-            <div className='d-flex justify-content-center mt-4'>
+            <div className='date-page-brts-div d-flex justify-content-center mt-'>
                 <Link to="/ClothesSelection">
                 <Button variant="light" border="primary" >Previous</Button>
                 </Link>

@@ -1,0 +1,41 @@
+.icon-container{
+  display: flex;
+  background-color: white;
+  height: 100px;
+  width: 200px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.userdash-container{
+  padding-left: 20px;
+  padding-top: 30px;
+  overflow: scroll;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(215, 215, 215);
+  }
+
+
+.userdash-innerd1{
+  display: flex;
+  align-items: center;
+}
+
+.userdash-innerd2{
+  align-items: center;
+  margin-left: 10px;
+  margin: auto 0;
+}
+
+.userdash-innerd2 p{
+  margin: 0 ;
+  font-size: 18px;
+  font-weight: bold;
+  color:black;
+}
+
+.userdash_grid_container{
+   display: grid;
+   grid-template-columns: repeat(4,1fr);
+}

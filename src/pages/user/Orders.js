@@ -1,6 +1,5 @@
 import Sidebar from "../../components/OrdersPage/Sidebar";
 import { Container, Row, Col, Nav } from "react-bootstrap";
-
 import "../../styles/UserProfile.css";
 import Tab from "react-bootstrap/Tab";
 import OrderProp from "../../components/OrdersPage/OrderProp";
@@ -19,10 +18,10 @@ export default function Orders() {
 
 
   useEffect(() => {
-    const userId = JSON.parse(localStorage.getItem("UserId"));
+    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     setUserId(userId);
 
-    axiosInstance.get(`/order/${userId}/allorders`).then((resp) => {
+    axiosInstance.get(`/order/${userId._id}/allorders`).then((resp) => {
       // console.log(resp.data);
       setuserOrders(resp.data);
       const pickUpDate = resp.data.schedule_date;
@@ -34,7 +33,6 @@ export default function Orders() {
     });
   }, []);
 
-  console.log(UserId)
 
   const status={
     status:"Confirmed"
@@ -87,7 +85,6 @@ export default function Orders() {
         <div>
           <Sidebar />
         </div>
-        <div></div>
         <Container className="myorders-container m-5 ms-5">
           <div className="mx-0 mb-4 w-75 d-flex justify-content-between">
             <div>
