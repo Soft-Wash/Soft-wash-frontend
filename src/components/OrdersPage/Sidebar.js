@@ -17,6 +17,9 @@ function Sidebar (){
             <Link exact to="/" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="table">Home</CDBSidebarMenuItem>
             </Link>
+            <Link exact to="/userdashboard" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="table">Dashboard</CDBSidebarMenuItem>
+            </Link>
             <Link exact to="/user-profile" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">My Profile</CDBSidebarMenuItem>
             </Link>
@@ -24,10 +27,10 @@ function Sidebar (){
               <CDBSidebarMenuItem icon="chart-line">My Orders</CDBSidebarMenuItem>
             </Link>
 
-            <Link exact to="/ClothesSelection" target="_blank" activeClassName="activeClicked">
+            <Link exact to="/ClothesSelection" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">Create Order</CDBSidebarMenuItem>
             </Link>
-            <Link exact to="/hero404" target="_blank" activeClassName="activeClicked">
+            <Link exact to="" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">Order History</CDBSidebarMenuItem>
             </Link>
             <Link exact to="/paymenthistory" activeClassName="activeClicked">
