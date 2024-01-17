@@ -120,6 +120,7 @@ function App() {
 
         {/* Front desk */}
           <Route path="/frontdesk" element={<Login/>} />
+          <Route path="/frontdesk/dash" element={<Dashboard/>} />
           <Route path="/userdashboard" element={<UserDashboard/>} />
          
 
