@@ -49,7 +49,7 @@ function PaymentHistory() {
           <div>
             <select
               name="statusOrder"
-              className="select-dropdown2"
+              className="select-dropdown02"
               id=""
               onChange={(e) => HandleSelectTag(e)}
             >
