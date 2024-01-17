@@ -31,7 +31,7 @@ function UserDashboard() {
       )
       .then((resp) => {
         console.log(resp.data);
-        paymentLength(resp.data);
+        setpaymentLength(resp.data);
       });
   }
 
