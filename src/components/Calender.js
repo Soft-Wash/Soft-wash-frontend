@@ -49,14 +49,14 @@ function Calender() {
             minDate={new Date()}
           />         
 
-          <div className="mx-5" style={{display: "flex", flexDirection: "column"}}>
-            <Button className="booking-time-btn px-5" 
+          <div className="mx-2" style={{display: "flex", flexDirection: "column"}}>
+            <Button className="booking-time-btn" 
             variant={activeBtn === 1 ? 'primary' : 'light'}
             onClick={() => handleBtnClick(1,"08:00 - 10:00 AM")}
             >
               08:00 - 10:00 AM
             </Button>
-            <Button className="booking-time-btn px-5 my-3" 
+            <Button className="booking-time-btn my-3" 
             variant={activeBtn === 2 ? 'primary' : 'light'}
             onClick={() => handleBtnClick(2,"04:00 - 07:00 PM")}
             >
