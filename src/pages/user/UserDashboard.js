@@ -8,6 +8,7 @@ import axios from "axios";
 
 function UserDashboard() {
   const [orders, setOrders] = useState();
+  const [paymentLength,setpaymentLength]=useState()
 
 
 
@@ -18,8 +19,24 @@ function UserDashboard() {
     });
   }
 
-  useEffect(() => {
+  const getPayment=()=>{
+    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
 
+    axios
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/payments/userpayments/transaction`,
+        {
+          params: { id: userId._id},
+        }
+      )
+      .then((resp) => {
+        console.log(resp.data);
+        setpaymentLength(resp.data);
+      });
+  }
+
+  useEffect(() => {
+    getPayment()
     GetUserOrders()
   }, []);
 
@@ -46,7 +63,7 @@ function UserDashboard() {
               </div>
               <div className="userdash-innerd2">
                 <p>Payments</p>
-                <p>0</p>
+                <p>{paymentLength?.length || 0}</p>
               </div>
             </div>
           </div>
