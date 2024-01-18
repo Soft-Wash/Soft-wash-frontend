@@ -134,7 +134,7 @@ export default function Orders() {
             </div>
           </div>
           <Row>
-            <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+            <Tab.Container id="left-tabs-example" defaultActiveKey="first" style={{ borderBottom: "none" }}>
               <Row>
                 <Col lg={12}>
                   <Nav variant="pills" className="flex-row text-black">
@@ -180,8 +180,8 @@ export default function Orders() {
                   </Nav>
                 </Col>
               </Row>
-              <Row>
-                <Tab.Content>
+              <Row style={{ border: "none" }}>
+                <Tab.Content style={{border:"none"}}>
                   <Tab.Pane eventKey="first" style={{ border: "none" }}>
                     {userOrders &&
                       userOrders.map((item) => (
@@ -191,10 +191,10 @@ export default function Orders() {
                           address={item.deliveryAddress[0].FullAddress}
                           price={item.subtotal}
                           status={item.status}
-                        />
+                          style={{ borderBottom: "none" }}/>
                       ))}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="second">
+                  <Tab.Pane eventKey="second" style={{ border: "none" }}>
                     {orderplaced &&
                       orderplaced.map((item) => (
                         <OrderProp
@@ -206,9 +206,9 @@ export default function Orders() {
                         />
                       ))}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="third">
-                  {orderplaced &&
-                      orderplaced?.map((item) => (
+                  <Tab.Pane eventKey="third" style={{ border: "none" }}>
+                  {orderConfirmed &&
+                      orderConfirmed?.map((item) => (
                         <OrderProp
                           id={item._id}
                           pickup={item.pickuptime}
@@ -218,53 +218,11 @@ export default function Orders() {
                         />
                       ))}
                   </Tab.Pane>
-                  <Tab.Pane eventKey="fourth">
-                  {orderplaced &&
-                      orderplaced?.map((item) => (
-                        <OrderProp
-                          id={item._id}
-                          pickup={item.pickuptime}
-                          address={item.deliveryAddress[0].FullAddress}
-                          price={item.subtotal}
-                          status={item.status}
-                        />
-                      ))}
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="fifth">
-                  {orderplaced &&
-                      orderplaced?.map((item) => (
-                        <OrderProp
-                          id={item._id}
-                          pickup={item.pickuptime}
-                          address={item.deliveryAddress[0].FullAddress}
-                          price={item.subtotal}
-                          status={item.status}
-                        />
-                      ))}
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="sixth">
-                  {orderplaced &&
-                      orderplaced?.map((item) => (
-                        <OrderProp
-                          id={item._id}
-                          pickup={item.pickuptime}
-                          address={item.deliveryAddress[0].FullAddress}
-                          price={item.subtotal}
-                          status={item.status}
-                        />
-                      ))}
-                  </Tab.Pane>
-                  <Tab.Pane eventKey="seventh">
-                  {orderplaced &&
-                      orderplaced?.map((item) => (
-                        <OrderProp
-                          id={item._id}
-                          pickup={item.pickuptime}
-                          address={item.deliveryAddress[0].FullAddress}
-                          price={item.subtotal}
-                          status={item.status}
-                        />
-                      ))}
+                  <Tab.Pane eventKey="fourth" style={{ border: "none" }}></Tab.Pane>
+                  <Tab.Pane eventKey="fifth" style={{ border: "none" }}></Tab.Pane>
+                  <Tab.Pane eventKey="sixth" style={{ border: "none" }}></Tab.Pane>
+                  <Tab.Pane eventKey="seventh" style={{ border: "none" }}>
+                  <OrderProp/>
                   </Tab.Pane>
                 </Tab.Content>
               </Row>

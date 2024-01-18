@@ -41,6 +41,9 @@ function SupervisorSideBar() {
                     <NavLink exact to="/supexpensereport" activeClassName="activeClicked">
                         <CDBSidebarMenuItem icon="chart-line">Expense Report</CDBSidebarMenuItem>
                     </NavLink>
+                    <NavLink exact to="/suptaskworkflow" activeClassName="activeClicked">
+                        <CDBSidebarMenuItem icon="chart-line">Task Workflow</CDBSidebarMenuItem>
+                    </NavLink>
                 </CDBSidebarMenu>
             </CDBSidebarContent>
     

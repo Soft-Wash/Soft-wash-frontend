@@ -12,6 +12,7 @@ import SupervisorCarousel from "../../components/SupervisorComponents/Supervisor
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { axiosInstance } from "../../services/AxiosInstance";
+import SupDashChart from "../../components/SupervisorComponents/SupDashChart";
 
 function SupervisorDash() {
 
@@ -72,7 +73,6 @@ function SupervisorDash() {
 
     const FrontDesk = getEmployeesId("frontdesk");
     const washman = getEmployeesId("washman");
-    
     
     
   return (
@@ -181,7 +181,8 @@ function SupervisorDash() {
                 </section1>
                 <section2 className="visuals d-flex ">
                     <div className="Left" style={{width:"90%", gap:"10px"}}>
-                        <InventoryChart/>
+                        {/* <InventoryChart/> */}
+                        <SupDashChart/>
                        
                     </div>
                     <div className="Right" >
