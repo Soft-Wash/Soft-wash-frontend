@@ -218,11 +218,13 @@ function SelectedCart({ initialQuantity }) {
                       <Accordion.Body key={item._id}>
                         <div className="cart-item1 GreyBorderB" style={{position:"relative"}}>
                           <div className="button-container">
-                            <ClothAccordian className="buttns"
-                              img={item.img}
-                              name={item.name}
-                              price={item.price}
-                            />
+                            <div>
+                              <ClothAccordian className="buttns"
+                                img={item.img}
+                                name={item.name}
+                                price={item.price}
+                              />
+                            </div>
                             <div className="ve-buttons">
                               <button
                                 className="-ve"
