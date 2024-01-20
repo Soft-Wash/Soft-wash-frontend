@@ -40,7 +40,7 @@ export default function WashmanProp(props) {
           <div className="m-auto w-25 h-25 bg-white rounded ">
             <h4 className="w-100 mx-auto ">Assign Task</h4>
             <form onSubmit={(e) => handleSubmit(e.target)} className="h-75 d-flex flex-column justify-content-evenly">
-              <input type="text" placeholder="Task Id"/>
+              <input type="text" placeholder="Task Id" className="rounded"/>
               <button className="btn btn-md btn-outline-primary rounded">Assign</button>
             </form>
           </div>

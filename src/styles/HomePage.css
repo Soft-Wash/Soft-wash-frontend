@@ -182,7 +182,7 @@
   };
   .sm-center{
     text-align: center;
-    background-color: red
+    background-color: red;
   }
 
 
@@ -190,6 +190,10 @@
 @media (max-width: 425px){
   .app-small{
     left:0px !important;
+  }
+  .next-btn-sm{
+    margin-left: "-20px";
+    color: "black";
   }
 
   .sec-sm-img{
@@ -215,7 +219,13 @@
     top:-20px !important;
   }
   .neg-top-30{
-    top:-20px !important;
+    top:-30px !important;
+  }
+  .neg-top-35{
+    top:-35px !important;
+  }
+  .neg-top-40{
+    top:-40px !important;
   }
   .mt-sm{
     margin-top: -5px !important;
@@ -223,6 +233,10 @@
 
   .ml-sm{
     margin-left: 200px !important;
+  }
+
+  .mobile-margin-top-20{
+    margin-top: "20px"
   }
 }
 
