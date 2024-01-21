@@ -1,16 +1,22 @@
 import '../../src/styles/UserProfile.css';
 import '../../src/styles/DashboardContact.css'
-import UserDashboardNav from "../components/UserDashboard/UserDashboardNav";
 import UserSidebar from "../components/UserDashboard/UserSidebar";
-import UserProfileBody from '../components/UserDashboard/UserProfileBody';
 import UserDashboardContactBody from '../components/UserDashboard/UserDashboardContactBody';
+import UserSidebarTablet from '../components/UserSidebarTablet';
+
 
 
 function UserDashboardContactPage(){
+
     return(
-        <div className='d-flex'>
-            <UserSidebar />
-            <UserDashboardContactBody />
+        <div>            
+           <div>
+                <UserSidebarTablet />
+           </div>
+            <div className='d-flex'>
+                <UserSidebar />
+                <UserDashboardContactBody />
+            </div>
         </div>
     )
 }

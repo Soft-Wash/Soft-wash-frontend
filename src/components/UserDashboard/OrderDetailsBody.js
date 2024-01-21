@@ -102,26 +102,26 @@ function OrderDetailsBody() {
           <p>N{orderdetails?.subtotal}</p>
         </div>
         <div className="progress1">
-        {orderStatusArray.map((status, index) => (
-          <div className="progress_content" key={index}>
-            <div
-              className={`progress_circle ${
-                indexFound >= index ? "progress-fill" : null
-              }`}
-            >
-              {indexFound >= index && (
-                <FaCheck className="progress-check" />
-              )}
+          {orderStatusArray.map((status, index) => (
+            <div className="progress_content" key={index}>
+              <div
+                className={`progress_circle ${
+                  indexFound >= index ? "progress-fill" : null
+                }`}
+              >
+                {indexFound >= index && (
+                  <FaCheck className="progress-check" />
+                )}
+              </div>
+              <div
+                className={`progress_bar1 ${
+                  indexFound >= index ? "progress_bar_active" : null
+                }`}
+              ></div>
+              <p className="status-description">{status}</p>
             </div>
-            <div
-              className={`progress_bar1 ${
-                indexFound >= index ? "progress_bar_active" : null
-              }`}
-            ></div>
-            <p className="status-description">{status}</p>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
       </div>
     </div>
   );

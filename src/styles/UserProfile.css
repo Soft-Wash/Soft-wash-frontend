@@ -101,11 +101,11 @@
     height: 100vh;
 }
 
-.usereditprofile_input{
-    width: 670px;
-    height: 35px;
-    padding: 10px;
-    border: none;
-    border-radius: 3px;
-    background-color: rgb(243, 243, 243);
+
+
+@media (max-width: 770px){
+    .user-page-content{
+        width: 90%;
+        
+    }
 }
