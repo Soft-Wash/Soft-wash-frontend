@@ -73,9 +73,14 @@ import SupCreateLeave from "./components/SupervisorComponents/SupCreateLeave";
 import EditExpenseSup from "./pages/SupervisorPage/EditEpenseSup";
 import SalesReportSup from "./pages/SupervisorPage/SalesReportSup";
 import ExpenseReportSup from "./pages/SupervisorPage/ExpenseReportSup";
-import TaskFreeEmployees from "./pages/Admin/TaskFreeEmployees";
-import UserDashboard from "./pages/user/UserDashboard";
+import SupTaskWorkflow from "./pages/SupervisorPage/SupTaskWorkflow";
+import SupCreateTask from "./pages/SupervisorPage/SupCreateTask";
+import SupTaskTable from "./pages/SupervisorPage/SupTaskTable";
+import SupSingleTask from "./components/SupervisorComponents/SupSingleTask";
 import UserEditProfile from "./components/UserDashboard/UserEditProfile";
+import UserDashboard from "./pages/user/UserDashboard";
+
+
 
 
  
@@ -157,7 +162,7 @@ function App() {
         <Route path="/tasktable" element={<TaskTable/>}/>
         <Route path="/singletaskpage/:_id" element={<SingleTaskPage/>}/>
         <Route path="/createOrder" element={<CreateOrder/>}/>
-        <Route path="/taskfreeemployee" element={<TaskFreeEmployees/>}/>
+        {/* <Route path="/taskfreeemployee" element={<TaskFreeEmployees/>}/> */}
         
 
 
@@ -173,7 +178,10 @@ function App() {
         <Route path ="/SupCreateLeave" element ={<SupCreateLeave/>}/>
         <Route path="/supsalesreport" element={<SalesReportSup/>}/>
         <Route path="/supexpensereport" element={<ExpenseReportSup/>}/>
-
+        <Route path="/suptaskworkflow" element={<SupTaskWorkflow/>}/>
+        <Route path="/SupCreateTask" element={<SupCreateTask/>}/>
+        <Route path="/SupTaskTable" element={<SupTaskTable/>}/>
+        <Route path="/SupSingleTask/:_id" element ={<SupSingleTask/>}/>
        
 
         {/* EMPLOYEE LOGIN */}

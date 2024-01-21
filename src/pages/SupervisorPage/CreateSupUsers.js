@@ -6,6 +6,9 @@ import { registerUser } from "../../services/register";
 import { variableManager } from "../../context/VariablesContext";
 import { Loader } from "../../common/Loader";
 import axios from "axios";
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { axiosInstance } from "../../services/AxiosInstance";
 
 export default function CreatesupUsers() {
@@ -65,6 +68,7 @@ export default function CreatesupUsers() {
       .then((resp) => {
         console.log(resp.data);
         navigate('/SupervisorDash')
+        toast.success("Employee Created Succesfully")
       })
       .catch((error) => {
         console.log(error.message);
@@ -73,6 +77,8 @@ export default function CreatesupUsers() {
   }
 
   return (
+    <>
+    <ToastContainer/>
     <div className="signup-container">
       <div className="banner-section">
         <center className="logo-section">
@@ -186,10 +192,7 @@ export default function CreatesupUsers() {
                 </option>
                 {branches &&
                   branches.map((item) => (
-                    <option 
-                    key={item._d} 
-                    value={item._id} 
-                    disabled={item.name !== "Wuse-2-Soft-Wash"}>
+                    <option key={item._d} value={item._id}>
                       {item.name}
                     </option>
                   ))}
@@ -271,6 +274,7 @@ export default function CreatesupUsers() {
       </div>
       <Loader color="primary" size="lg" show={loading} />
     </div>
+    </>
   );
 }
 

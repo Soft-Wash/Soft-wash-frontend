@@ -20,12 +20,13 @@
 .button-container {
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
+  justify-content: space-between;
 }
 
 .ve-buttons {
   display: flex;
   position: absolute;
+  top: 50px;
   right: 50px;
 }
 
@@ -42,9 +43,11 @@
 }
 
 
-.price{
-  font-size: 2rem;
+.NamePrice{
+  margin-left: 20px;
 }
+
+
 
 
 
@@ -52,17 +55,32 @@
 @media only screen and (max-width: 600px) {
   /* Styles for buttons on mobile screens */
   .button-container {
-    flex-direction: column;
+    /* flex-direction: column; */
+    display: block;
   }
+
+  .ImageContainer{
+    margin-left: -10px;
+  }
+
+  .Image img{
+    width: 60px;
+    height: 60px;
+  }
+
+  .NamePrice{
+    margin-left: 10px;
+  }
+
   .price
   .name{
-    font-size: 1.9rem;
+    font-size: 1rem;
   }
 
   .ve-buttons {
-    flex-direction: column;
-    margin-top: 10px;
-    right: 10px;
+    /* flex-direction: column; */
+    margin-top: -20px;
+    right: -8px;
     
   }
   .-ve,
@@ -74,7 +92,7 @@
     border: none;
     text-align: center;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 10px;
     border-radius: 0;
     height: 30px;
   }
