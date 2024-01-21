@@ -49,7 +49,7 @@ function WashmanOrdersBody(){
                                 <th>S/No</th>
                                 <th>Order ID</th>
                                 <th>Task Status</th>
-                                <th>Due Date</th>
+                                {/* <th>Due Date</th> */}
                             </tr>
                         </thead>
                         <tbody>

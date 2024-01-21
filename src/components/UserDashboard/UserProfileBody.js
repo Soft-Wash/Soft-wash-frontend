@@ -35,14 +35,10 @@ function UserProfileBody() {
           <div className="user-profile-field">
             <h4>Full Name</h4>
             <h4>{userData?.fullName}</h4>
-          </div>
-          {/* <div className="user-profile-field">
-            <h4>Last Name</h4>
-            <h4>Scott</h4>
-          </div> */}
+          </div>          
           <div className="user-profile-field">
             <h4>Phone</h4>
-            <h4>{userData.phone}</h4>
+            {/* <h4>{userData.phone}</h4> */}
           </div>
           <div className="user-profile-field">
             <h4>Email</h4>

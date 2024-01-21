@@ -96,3 +96,12 @@
     overflow: scroll;
     height: 100vh;
 }
+
+
+
+@media (max-width: 770px){
+    .user-page-content{
+        width: 90%;
+        
+    }
+}
