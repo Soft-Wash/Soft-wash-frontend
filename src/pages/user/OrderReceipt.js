@@ -84,7 +84,7 @@ export default function OrderReceipt() {
     <>
       <Banner />
       <ThankYou />
-      <Container className="mx-auto mb-5 shadow w-50 rounded-5 p-4 px-4">
+      <div  className="mx-auto mb-5 shadow rounded-5 p-4 px-4 col col-lg-5 col-xs-8" >
   {paymentStatus?.data?.status === "success" ? (
     <div>
       {/* Display details for successful payment */}
@@ -125,7 +125,8 @@ export default function OrderReceipt() {
     <p className="pendingpayment-ptag">Payment Failed. Please try again or choose another payment method. <br /> <Link to={`/paymentpage/${userData?._id}`}>back</Link></p>
   ) : paymentStatus?.data?.status === "abandoned" ? (
     <p className="pendingpayment-ptag">Payment Abandoned. Please review your order and try again.</p>
-  ) : newpaymentType === "payWithCash" ? (    <div>
+  ) : newpaymentType === "payWithCash" ? (   
+    <div>
     {/* Display details for successful payment */}
     <div className="d-flex justify-content-between gap-3 mb-2">
       <div lg={3}>
@@ -159,10 +160,11 @@ export default function OrderReceipt() {
         <p>₦{userData?.subtotal}</p>
       </div>
     </div>
-  </div>) : (
+  </div>
+  ) : (
     <p className="pendingpayment-ptag">Loading...</p>
   )}
-</Container>
+</div>
 
       <Row className="mb-5"></Row>
 

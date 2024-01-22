@@ -41,10 +41,10 @@ const orderDetails = JSON.parse(localStorage.getItem('orderDetails'))
 
   return (
     <>
-    <Row sm={10} className="mx-auto mb-5 shadow col-6 col-md-10 rounded-5 p-4 px-4" >
+    <Row sm={10} xs="auto" className="mx-auto mb-5 shadow col-6 col-md-10 rounded-5 p-4 px-4" >
     <Row className="d-flex justify-content-between gap-3 mb-2">
         <Col lg={3}>
-        <h5>Order Id</h5>
+        <h5 classname="text-danger">Order Id</h5>
         </Col>
         <Col lg={3} >
         <p>{userData?._id}</p>
