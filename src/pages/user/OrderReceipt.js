@@ -84,7 +84,7 @@ export default function OrderReceipt() {
     <>
       <Banner />
       <ThankYou />
-      <div  className="mx-auto mb-5 shadow rounded-5 p-4 px-4 col col-lg-5 col-xs-8" >
+      <div  className="mx-2 mb-5 shadow rounded-5 p-4 px-4 col col-lg-5 col-xs-8" >
   {paymentStatus?.data?.status === "success" ? (
     <div>
       {/* Display details for successful payment */}
