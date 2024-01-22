@@ -201,7 +201,7 @@ function AddressInfo() {
           </Row>
           <Row className="border border-2 shadow-sm rounded py-4">
             <Accordion defaultActiveKey="0">
-              <Accordion.Item eventKey="1">
+              <Accordion.Item eventKey="1"> 
                 <Accordion.Header>Add Address</Accordion.Header>
                 <Accordion.Body>
                   <Row>
@@ -370,14 +370,14 @@ function AddressInfo() {
         </Col>
       </Row>
 
-      <Container className="d-flex justify-content-center w-100 text-center my-5">
+      <Container className="d-flex justify-content-center gap-3 w-100 text-center my-5">
         <Col lg={4} md={5} sm={5}>
           <Link to="/date">
             <Button
               variant="outline-primary"
-              className="me-auto w-75 text-center"
+              className="mx-auto px-3 w-100 text-center"
             >
-              Prev
+              Previous
             </Button>
           </Link>
         </Col>
@@ -385,7 +385,7 @@ function AddressInfo() {
           {/* <Link to="/PaymentPage"> */}
           <Button
             variant="primary"
-            className={`me-auto w-75 text-center `}
+            className={`mx-auto px-4 w-100 text-center `}
             onClick={postOrderAddress}
           >
             Next
