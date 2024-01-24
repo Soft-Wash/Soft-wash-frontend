@@ -63,7 +63,7 @@
 }
 .progress_content:not(:last-child) .progress_bar1 {
   height: 5px;
-  width: 51%;
+  width:62%;
   background-color: #dedede;
   position: absolute;
   top: 22%;
@@ -88,4 +88,72 @@
 
 .status-description {
   font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width: 1026px){
+  .progress_content:not(:last-child) .progress_bar1 {
+    width: 45%;    
+  }
+  .status-description {
+    font-size: 13px;
+  }
+}
+
+@media(max-width: 770px){
+  .progress_circle {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .progress_content:not(:last-child) .progress_bar1 {
+    width: 47%;
+    top: 18%;    
+  }
+  .progress-check {
+    font-size: 20px !important;
+  }
+}
+
+@media(max-width: 427px){
+  .progress_circle {
+    width: 30px !important;
+    height: 30px !important;
+  }
+  .progress-check {
+    font-size: 17px !important;
+  }
+  .status-description {
+    font-size: 10px;
+  }
+}
+
+@media(max-width: 322px){
+  .progress_circle {
+    width: 25px !important;
+    height: 25px !important;
+  }
+  .progress-check {
+    font-size: 14px !important;
+  }
+  .progress_content:not(:last-child) .progress_bar1 {
+    width: 42%;
+    top: 18%;    
+  }
+  .status-description {
+    font-size: 9px;
+  }
 }

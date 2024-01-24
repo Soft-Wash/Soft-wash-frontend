@@ -17,7 +17,7 @@ function UserSidebarTablet(){
     return(
         <div className='user-dashboard-nav' >
                 <Navbar expand={expand} className="bg-body-tertiary mb-3">
-                    <Container fluid >
+                    <Container fluid  className="back-gd">
                         <Navbar.Brand href="#" className='user-tablet-logo '>SOFTWASH</Navbar.Brand>
                         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
                         <Navbar.Offcanvas
@@ -26,7 +26,7 @@ function UserSidebarTablet(){
                         aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
                         placement="end"
                         >
-                        <Offcanvas.Header closeButton>
+                        <Offcanvas.Header closeButton >
                             <Offcanvas.Title className='user-tablet-logo' id={`offcanvasNavbarLabel-expand-${expand}`}>
                             SOFTWASH
                             </Offcanvas.Title>

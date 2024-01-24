@@ -93,7 +93,7 @@
     
     .user-dashboard-nav .navbar,
     .user-dashboard-nav  .back-gd {
-        background-color: rgb(11,9,9) !important; 
+        background-color: rgb(248,249,250) !important; 
     }
   
     .user-tablet-logo{
@@ -103,8 +103,6 @@
     }
     .user-dashboard-nav .navbar-toggler {
         border: none; 
-        background-color: rgb(13,202,240);
-        /* color: rgb(13,202,240); */
     }
     .user-dashboard-nav .navbar-toggler:hover {
         border: none; 
