@@ -295,10 +295,10 @@ const postOrder = async () => {
                            </div>
                         </div>
                         
-              <div className="PrevNextBtnRight">
+              {/* <div className="PrevNextBtnRight">
                 <button className="btn btn-outline-primary  ">Prev</button>
                 <button className="btn btn-info">Confirm</button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

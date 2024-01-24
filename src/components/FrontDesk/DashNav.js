@@ -7,14 +7,14 @@ import "../../styles/orderNavigation.css";
 function DashNav() {
   return (
     <div
-      className="user-dashboard-nav  bg-body-white shadow-sm px-4"
+      className="w-100  bg-body-white shadow-sm px-4 d-flex justify-content-between"
       style={{ height: "55px" }}
     >
-      <div className=" mx-auto w-100 ">
+      <div className="my-auto ">
         <img src={logo} alt="logo" className="img-fluid my-auto" />
       </div>
 
-      <div className="d-flex ">
+      <div className="d-flex my-auto ">
         <div
           className=" position-relative fs-6"
           style={{ top: "0px", right: "0px", height: "20px", width: "40px" , marginTop: "-5px" }}
@@ -47,12 +47,12 @@ function DashNav() {
             >
               <img
                 src={user}
-                alt={"desk"}
+                alt={"profile"}
                 className="fluid img-fluid rounded-circle"
                 style={{ width: "40px", height: "40px", marginTop: "-14px" }}
               />
             </Dropdown.Toggle>
-            <Dropdown.Menu className="mt-4 me-2" style={{marginLeft: "-110px"}}>
+            <Dropdown.Menu className="mt-2 me-2" style={{marginLeft: "-110px"}}>
               <Dropdown.Item href="#">Profile</Dropdown.Item>
               <Dropdown.Item href="#">Logout</Dropdown.Item>
             </Dropdown.Menu>

@@ -44,23 +44,22 @@ function ClothAccordian(prop,{initialQuantity}) {
 
   return (
     <div>
-                    <div className="container">
-                        <div className="">
-                          <div className="d-flex align-items-center ">
-                            <div>
-                              <img
-                                className="Imgselection"
-                                src={prop.img}
-                                alt="Native"
-                              />
-                            </div>
-                            <div className="mx-5">
-                              <h5>{prop.name}</h5>
-                              <span>&#8358;{`${prop.price} / per piece`}</span>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
+        <div className="">
+          <div className="ImageContainer">
+            <div className="d-flex align-items-center ">
+              <div className="Image">
+                <img
+                  className="Imgselection"
+                  src={prop.img}
+                  alt="Native"/>
+              </div>
+              <div className="NamePrice">
+                <h6>{prop.name}</h6>
+                <span>&#8358;{`${prop.price} / per piece`}</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
     </div>
   );

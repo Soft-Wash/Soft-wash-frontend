@@ -21,7 +21,9 @@ function AddressInfo() {
   const [selectedItems, setSelectedItems] = useState();
   const [selectedDate, setSelectedDate] = useState();
   const [clicked, setClicked] = useState(false);
-  const [err, setErr] = useState(false)
+  const [err, setErr] = useState(false);
+  const [customerDetails, setcustomerDetails] = useState();
+  const [customerAddress, setcustomerAddress] = useState();
 
   const getQuantity = () => {
     const clothQuantity = localStorage.getItem("clothQuantity");
@@ -36,12 +38,13 @@ function AddressInfo() {
     axios
       .put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
       .then((resp) => {
-        localStorage.setItem('softCart', JSON.stringify(resp.data))
+        localStorage.setItem("softCart", JSON.stringify(resp.data));
         setSelectedItems(resp.data);
       });
   };
 
   useEffect(() => {
+    CheckUserAddress();
     getQuantity();
     const calenderSelectedTime = localStorage.getItem("calenderSelectedTime");
     const parsedCalenderSelectedTime = calenderSelectedTime
@@ -69,10 +72,8 @@ function AddressInfo() {
     SearchedAddress: "",
     AddressType: "",
   });
-  
-  
-  const handleChange = (e) => {
 
+  const handleChange = (e) => {
     const value =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
 
@@ -81,27 +82,27 @@ function AddressInfo() {
     } else {
       setSelectedAddress({ ...selectedAddress, [e.target.name]: value });
     }
-    
   };
 
-
-  
-  
-  
   function postOrderAddress() {
-       if(selectedAddress.contactNumber === "" || selectedAddress.FullAddress === "" || selectedAddress.SearchedAddress === "" || selectedAddress.AddressType === ""){
-      setErr(true)
-      return
+    if (
+      selectedAddress.contactNumber === "" ||
+      selectedAddress.FullAddress === "" ||
+      selectedAddress.SearchedAddress === "" ||
+      selectedAddress.AddressType === ""
+    ) {
+      setErr(true);
+      return;
     }
 
     const customer_id = localStorage.getItem("softwashLoginUser");
     const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
-    
-    console.log(selectedAddress)
+
+    console.log(selectedAddress);
 
     let orderPostObj = {
       customer_id: parsedCustomerData?._id,
-      branch_id:"655debc4ec7b0b6e0f591bf7",
+      branch_id: "655debc4ec7b0b6e0f591bf7",
       deliveryAddress: selectedAddress,
       pickuptime: selectedTime,
       schedule_date: selectedDate,
@@ -116,6 +117,7 @@ function AddressInfo() {
       localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
       navigate(`/paymentpage/${orderId}`);
     });
+    UpdateUserAddress();
   }
 
   useEffect(() => {
@@ -125,6 +127,37 @@ function AddressInfo() {
     }
   }, []);
 
+  const UpdateUserAddress = () => {
+    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
+    axiosInstance
+      .put(`/users/${userId._id}/update`, {
+        address: selectedAddress.FullAddress,
+      })
+      .then((resp) => {});
+  };
+
+  const CheckUserAddress = () => {
+    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
+    axiosInstance.get(`/users/${userId._id}`).then((resp) => {
+      setcustomerDetails(resp.data);
+    });
+  };
+
+  const handleCustomerAddress = (e) => {
+    setClicked(true);
+    if (e && e.target) {
+      const value =
+        e.target.type === "checkbox"
+          ? e.target.checked
+          : e.target.type === "file"
+          ? e.target.file[0]
+          : e.target.value;
+      setcustomerAddress({ ...customerAddress, address: e.target.name });
+    }
+  };
+
+  console.log(customerAddress);
+
   return (
     <Container>
       <Row className="justify-content-between">
@@ -133,42 +166,42 @@ function AddressInfo() {
             <h4 className="text-primary mb-3 fw-semibold ps-2 text-capitalize">
               Choose your address
             </h4>
-            {selectedAddress.FullAddress.length ?(
-             <div
-              className={`w-100 d-flex justify-content-between gap-3 shadow-sm rounded py-4 mx-auto mx-0 ps-4 ${
-                clicked
-                  ? "border bg-primary-subtle  shadow-sm border border-primary border-2 "
-                  : null
-              }`}
-              style={{ width: "90%" }}
-            >
-              <Form.Check
-                type="radio"
-                aria-label="radio 1"
-                onClick={() => setClicked(true)}
-              />
-              <Row className="w-100">
-                <p className="w-100 text-black fs-5 fw-semibold my-auto ">
-              {selectedAddress?.FullAddress}
-                </p>
-              </Row>
-              <BsFillTrashFill
-                className="me-2 p-1 h-100 my-auto  border border-info rounded-circle text-info"
-                style={{ width: "30px", heigth: "auto" }}
-              />
-            </div> 
-            ):(
-              <p style={{margin:"10px"}}>No Address Added Yet!</p>
+            {customerDetails?.address?.length ? (
+              <div
+                className={`w-100 d-flex justify-content-between gap-3 shadow-sm rounded py-4 mx-auto mx-0 ps-4 ${
+                  clicked
+                    ? "border bg-primary-subtle  shadow-sm border border-primary border-2 "
+                    : null
+                }`}
+                style={{ width: "90%" }}
+              >
+                <Form.Check
+                  type="radio"
+                  aria-label="radio 1"
+                  name="address"
+                  value={customerDetails?.address}
+                  onChange={() => handleCustomerAddress()}
+                />
+                <Row className="w-100">
+                  <p className="w-100 text-black fs-5 fw-semibold my-auto ">
+                    {customerDetails?.address}
+                  </p>
+                </Row>
+                <BsFillTrashFill
+                  className="me-2 p-1 h-100 my-auto  border border-info rounded-circle text-info"
+                  style={{ width: "30px", heigth: "auto" }}
+                />
+              </div>
+            ) : (
+              <p style={{ margin: "10px" }}>No Address Added Yet!</p>
             )}
-
-
           </div>
           <Row className="w-100 text-center my-4">
             <h3>Or</h3>
           </Row>
           <Row className="border border-2 shadow-sm rounded py-4">
             <Accordion defaultActiveKey="0">
-              <Accordion.Item eventKey="1">
+              <Accordion.Item eventKey="1"> 
                 <Accordion.Header>Add Address</Accordion.Header>
                 <Accordion.Body>
                   <Row>
@@ -182,7 +215,15 @@ function AddressInfo() {
                         value={selectedAddress.contactNumber}
                       />
                     </InputGroup>
-                    <p className={`text-danger fw-semibold ${(err === true && selectedAddress.contactNumber === "") ? "" : "d-none" }`}>Field Required</p>
+                    <p
+                      className={`text-danger fw-semibold ${
+                        err === true && selectedAddress.contactNumber === ""
+                          ? ""
+                          : "d-none"
+                      }`}
+                    >
+                      Field Required
+                    </p>
                   </Row>
                   <Row>
                     <InputGroup className="mb-3">
@@ -195,7 +236,15 @@ function AddressInfo() {
                         value={selectedAddress.FullAddress}
                       />
                     </InputGroup>
-                     <p className={`text-danger fw-semibold ${(err === true && selectedAddress.FullAddress === "") ? "" : "d-none" }`}>Field Required</p>
+                    <p
+                      className={`text-danger fw-semibold ${
+                        err === true && selectedAddress.FullAddress === ""
+                          ? ""
+                          : "d-none"
+                      }`}
+                    >
+                      Field Required
+                    </p>
                   </Row>
 
                   <Row>
@@ -217,7 +266,15 @@ function AddressInfo() {
                         value={selectedAddress.SearchedAddress}
                       />
                     </InputGroup>
-                     <p className={`text-danger fw-semibold ${(err === true && selectedAddress.SearchedAddress === "") ? "" : "d-none" }`}>Field Required</p>
+                    <p
+                      className={`text-danger fw-semibold ${
+                        err === true && selectedAddress.SearchedAddress === ""
+                          ? ""
+                          : "d-none"
+                      }`}
+                    >
+                      Field Required
+                    </p>
                   </Row>
                   <Row>
                     <img src={mapSample} alt="maps" />
@@ -231,7 +288,9 @@ function AddressInfo() {
                           aria-label="radio 1"
                           onChange={handleChange}
                           name="AddressTypeHome"
-                          checked={selectedAddress.AddressType === 'AddressTypeHome'}
+                          checked={
+                            selectedAddress.AddressType === "AddressTypeHome"
+                          }
                         />
                         <Form.Label>Home</Form.Label>
                       </Form.Group>
@@ -241,7 +300,9 @@ function AddressInfo() {
                           aria-label="radio 1"
                           onChange={handleChange}
                           name="AddressTypeWork"
-                          checked={selectedAddress.AddressType === 'AddressTypeWork'}
+                          checked={
+                            selectedAddress.AddressType === "AddressTypeWork"
+                          }
                         />
                         <Form.Label>Work</Form.Label>
                       </Form.Group>
@@ -251,11 +312,21 @@ function AddressInfo() {
                           aria-label="radio 1"
                           onChange={handleChange}
                           name="AddressTypeOther"
-                          checked={selectedAddress.AddressType === 'AddressTypeOther'}
+                          checked={
+                            selectedAddress.AddressType === "AddressTypeOther"
+                          }
                         />
                         <Form.Label>Other</Form.Label>
                       </Form.Group>
-                      <p className={`text-danger fw-semibold ${(err === true && selectedAddress.AddressType === "") ? "" : "d-none" }`}>Field Required</p>
+                      <p
+                        className={`text-danger fw-semibold ${
+                          err === true && selectedAddress.AddressType === ""
+                            ? ""
+                            : "d-none"
+                        }`}
+                      >
+                        Field Required
+                      </p>
                     </Row>
                   </Row>
                 </Accordion.Body>
@@ -299,14 +370,14 @@ function AddressInfo() {
         </Col>
       </Row>
 
-      <Container className="d-flex justify-content-center w-100 text-center my-5">
+      <Container className="d-flex justify-content-center gap-3 w-100 text-center my-5">
         <Col lg={4} md={5} sm={5}>
           <Link to="/date">
             <Button
               variant="outline-primary"
-              className="me-auto w-75 text-center"
+              className="mx-auto px-3 w-100 text-center"
             >
-              Prev
+              Previous
             </Button>
           </Link>
         </Col>
@@ -314,7 +385,7 @@ function AddressInfo() {
           {/* <Link to="/PaymentPage"> */}
           <Button
             variant="primary"
-            className={`me-auto w-75 text-center `}
+            className={`mx-auto px-4 w-100 text-center `}
             onClick={postOrderAddress}
           >
             Next
@@ -325,6 +396,5 @@ function AddressInfo() {
     </Container>
   );
 }
-
 
 export default AddressInfo;

@@ -48,7 +48,7 @@ function SelectedCart() {
         <div>
           <Accordion defaultActiveKey="0">
             <Accordion.Item eventKey="0">
-              <Accordion.Header>Mens Wear</Accordion.Header>
+              <Accordion.Header>Mini Cart</Accordion.Header>
               <Accordion.Body>
                 {selectedItems && selectedItems.map((item)=>(
                                   <div className="cart-item" key={item._id}>

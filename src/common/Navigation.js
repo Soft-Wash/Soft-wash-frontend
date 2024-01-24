@@ -71,15 +71,6 @@ function Navigation() {
                 Shop
               </Link>
             </Nav.Link>
-            {userLoggedIn ? (
-              <Nav.Link>
-                <Link className="howitworks-link" to="/my-orders">
-                  My-orders
-                </Link>
-              </Nav.Link>
-            ) : (
-              ""
-            )}
           </Nav>
           {userLoggedIn ? (
             <div className="my-auto">
@@ -118,7 +109,16 @@ function Navigation() {
                     />
                   </Dropdown.Toggle>
                   <Dropdown.Menu className="mt-4">
-                    <Dropdown.Item href="#">Profile</Dropdown.Item>
+                    <Dropdown.Item >
+                      <Link className="navigation_link">
+                      Profile
+                      </Link>
+                      </Dropdown.Item>
+                      <Dropdown.Item >
+                      <Link to="userdashboard" className="navigation_link">
+                      Dashboard
+                      </Link>
+                      </Dropdown.Item>
                     <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>

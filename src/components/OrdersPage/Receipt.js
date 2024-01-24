@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import image from '../../assets/Orders/thanks-icon.png'
-import { Row,  } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
@@ -41,15 +41,15 @@ const orderDetails = JSON.parse(localStorage.getItem('orderDetails'))
 
   return (
     <>
-    <Container className="mx-auto mb-5 shadow w-50 rounded-5 p-4 px-4" >
-    <div className="d-flex justify-content-between gap-3 mb-2">
-        <div lg={3}>
-        <h5>Order Id</h5>
-        </div>
-        <div lg={3} >
+    <Row sm={10} xs="auto" className="mx-auto mb-5 shadow col-6 col-md-10 rounded-5 p-4 px-4" >
+    <Row className="d-flex justify-content-between gap-3 mb-2">
+        <Col lg={3}>
+        <h5 classname="text-danger">Order Id</h5>
+        </Col>
+        <Col lg={3} >
         <p>{userData?._id}</p>
-        </div>
-    </div>
+        </Col>
+    </Row>
     <div className="d-flex justify-content-between gap-3 mb-2">
         <div lg={3}>
         <h5>Pickup Date</h5>
@@ -74,7 +74,7 @@ const orderDetails = JSON.parse(localStorage.getItem('orderDetails'))
         <p>₦{userData?.subtotal}</p>
         </div>
     </div>
-    </Container>
+    </Row>
     <Row className="mb-5"></Row>
     </>
   );

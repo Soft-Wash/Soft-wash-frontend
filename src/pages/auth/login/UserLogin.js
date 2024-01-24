@@ -60,7 +60,7 @@ export default function Login() {
         setLoading(false);
         if(data){
           toast.success("Login Successful")
-          navigate('/')
+          navigate('/userdashboard')
         } else if(error){
           toast.error("Incorrect Email Or Password");
         }

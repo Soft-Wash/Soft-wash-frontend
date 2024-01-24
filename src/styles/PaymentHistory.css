@@ -48,11 +48,16 @@
   border: 1px solid grey;
 }
 
-.select-dropdown2{
-  width: 170px;
+.select-dropdown02{
+  width: 200px;
   border: 1px solid grey;
 }
 
+
+
+.action-buttons-btn1{
+  margin-left: 10px;
+}
 
 .payment-content-status-th button{
   white-space: nowrap;
@@ -65,43 +70,19 @@
 
 }
 
-
-
 .pending-color {
   background-color: yellow; 
 }
 
-.processing-color {
-  background-color: orange; 
+.failed-color {
+  background-color: red; 
 }
 
-.shipped-color {
-  background-color: rgb(0, 68, 255); 
-}
-
-.confirmed-color {
+.success-color {
   background-color: rgb(93, 217, 93); 
 }
 
-.received-color{
-  background-color: purple;
-}
 
-.order-placed{
-  background-color: rgb(127, 127, 127);
-}
-
-.Cleaning-color{
-  background-color: rgb(240, 163, 8); 
-}
-
-.ready-color{
-background-color: green;
-}
-
-.delivered-color{
-  background-color: rgb(11, 20, 185); 
-}
 
 .payment-content-select-div{
   display: flex;
