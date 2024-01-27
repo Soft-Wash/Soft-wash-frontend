@@ -17,8 +17,16 @@
 }
 .user-dashboard-nav-links{
     text-decoration: none;
-    padding-top: 20px;
     color: rgb(13, 202, 240);
+}
+.user-dashboard-nav-tabs{
+    padding: 10px 20px;
+}
+.user-dashboard-nav-tabs:hover {
+    background-color: whitesmoke;
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
+    /* color: White; */
 }
 
 
@@ -67,9 +75,7 @@
 
 @media(max-width: 770px) {
     .dashboard-bg{
-        /* width: 100%; */
         height: 250vh;
-        /* padding-top: 50px; */
     }
     .user-dashboard-contact-content{
         width: 450px;
@@ -77,18 +83,13 @@
     }
     .user-dashboard-contact-info{
         width: 90%;
-        /* padding: 15px; */
         margin-top: 10px;
-        /* display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        background-color: rgb(245,246,254); */
     }
     .user-dashboard-nav{
         display: block;
     }
     .user-sidebar-div{
-        display: none;
+        display: none !important;
     }
     
     .user-dashboard-nav .navbar,

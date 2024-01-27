@@ -6,7 +6,7 @@
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 13px;
-    min-width: 400px;
+    min-width: 250px;
     border-radius: 5px 5px 0 0;
     overflow: hidden;
     box-shadow: 0 0 10px 2px gainsboro;
@@ -43,9 +43,21 @@
 
 
 
+@media(max-width: 1024px){
+    .washman-content-table th,
+    .washman-content-table td{
+        padding: 10px 10px;
+        font-size: 12px;
+    }
+}
 
-
-
+@media(max-width: 770px){
+    .washman-content-table th,
+    .washman-content-table td{
+        padding: 10px 4px;
+        font-size: 12px;
+    }
+}
 
 
 

@@ -55,8 +55,8 @@ function WashmanOrdersBody(){
                         <tbody>
                             {tasks.map((task, index) => (
                                 <tr key={task._id}>
-                                <th>{index + 1}</th>
-                                <th>
+                                <td>{index + 1}</td>
+                                <td>
                                     {task.order_id.map((order) => (
                                         <div>
                                             <Link to={`/washman-single-order/${order._id}`} className="washman-table-link">
@@ -64,9 +64,9 @@ function WashmanOrdersBody(){
                                             </Link>
                                         </div>
                                     ))}
-                                </th>                                
-                                <th>{task.status}</th>
-                                <th>{task.schedule_date}</th>
+                                </td>                                
+                                <td>{task.status}</td>
+                                {/* <td>{task.schedule_date}</td>                                 */}
                             </tr>                                    
                             ))}
                         </tbody>

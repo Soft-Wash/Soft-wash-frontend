@@ -39,3 +39,16 @@
    display: grid;
    grid-template-columns: repeat(4,1fr);
 }
+
+
+
+@media(max-width: 770px) {
+    
+  .user-dashboard-nav{
+      display: block;
+  }
+  .user-sidebar-div{
+      display: none !important;
+  }    
+  
+}
