@@ -17,7 +17,7 @@ function UserSidebarTablet(){
     return(
         <div className='user-dashboard-nav' >
                 <Navbar expand={expand} className="bg-body-tertiary mb-3">
-                    <Container fluid >
+                    <Container fluid  className="back-gd">
                         <Navbar.Brand href="#" className='user-tablet-logo '>SOFTWASH</Navbar.Brand>
                         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
                         <Navbar.Offcanvas
@@ -26,28 +26,48 @@ function UserSidebarTablet(){
                         aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
                         placement="end"
                         >
-                        <Offcanvas.Header closeButton>
+                        <Offcanvas.Header closeButton >
                             <Offcanvas.Title className='user-tablet-logo' id={`offcanvasNavbarLabel-expand-${expand}`}>
                             SOFTWASH
                             </Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body >
                             <Nav className="justify-content-end flex-grow-1 pe-3">              
-                                <Link exact to="/"  className='user-dashboard-nav-links'>
-                                    Home
-                                </Link>
-                                <Link exact to="/dashboard-contact-us"  className='user-dashboard-nav-links'>
-                                    User Dashboard
-                                </Link>
-                                <Link exact to="/user-profile"  className='user-dashboard-nav-links'>
-                                    User Profile
-                                </Link>
-                                <Link exact to="/order-details"  className='user-dashboard-nav-links'>
-                                    Order Details
-                                </Link>
-                                <Link exact to="/wishlist"  className='user-dashboard-nav-links'>
-                                    Wishlist
-                                </Link>                
+                                <div className='user-dashboard-nav-tabs'>
+                                    <Link exact to="/"  className='user-dashboard-nav-links'>
+                                        Home
+                                    </Link>
+                                </div>
+                                <div className='user-dashboard-nav-tabs'>
+                                    <Link exact to="/userdashboard"  className='user-dashboard-nav-links'>
+                                        Dashboard
+                                    </Link>
+                                </div>
+                                <div className='user-dashboard-nav-tabs'>
+                                    <Link exact to="/dashboard-contact-us"  className='user-dashboard-nav-links'>
+                                        Contact Us
+                                    </Link>
+                                </div>
+                                <div className='user-dashboard-nav-tabs'>
+                                    <Link exact to="/user-profile"  className='user-dashboard-nav-links'>
+                                        My Profile
+                                    </Link>
+                                </div>
+                                <div className='user-dashboard-nav-tabs'>
+                                    <Link exact to="/my-orders"  className='user-dashboard-nav-links'>
+                                        My Order 
+                                    </Link>
+                                </div>
+                                <div className='user-dashboard-nav-tabs'>
+                                    <Link exact to="/ClothesSelection"  className='user-dashboard-nav-links'>
+                                        Create Order
+                                    </Link> 
+                                </div>        
+                                <div className='user-dashboard-nav-tabs'>
+                                    <Link exact to="/paymenthistory"  className='user-dashboard-nav-links'>
+                                        Payment History
+                                    </Link> 
+                                </div>      
                             </Nav>
                         </Offcanvas.Body>
                         </Navbar.Offcanvas>

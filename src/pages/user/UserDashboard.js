@@ -1,10 +1,12 @@
 import Sidebar from "../../components/OrdersPage/Sidebar";
 import { FaClipboardList, FaListAlt } from "react-icons/fa";
 import "../../styles/UserDashboard.css";
+import '../../styles/DashboardContact.css';
 import { useEffect } from "react";
 import { axiosInstance } from "../../services/AxiosInstance";
 import { useState } from "react";
 import axios from "axios";
+import UserSidebarTablet from "../../components/UserSidebarTablet";
 
 function UserDashboard() {
   const [orders, setOrders] = useState();
@@ -42,8 +44,13 @@ function UserDashboard() {
 
   return (
     <div>
+      <div>
+        <UserSidebarTablet />
+      </div>
       <div className="d-flex">
-        <Sidebar />
+        <div className="user-sidebar-div">
+          <Sidebar />
+        </div>
         <div className="userdash-container">
           <h3>Dashboard</h3>
           <hr />

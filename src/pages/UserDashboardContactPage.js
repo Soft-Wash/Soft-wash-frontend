@@ -3,6 +3,8 @@ import '../../src/styles/DashboardContact.css'
 import UserSidebar from "../components/UserDashboard/UserSidebar";
 import UserDashboardContactBody from '../components/UserDashboard/UserDashboardContactBody';
 import UserSidebarTablet from '../components/UserSidebarTablet';
+import Sidebar from '../components/OrdersPage/Sidebar';
+
 
 
 
@@ -14,7 +16,7 @@ function UserDashboardContactPage(){
                 <UserSidebarTablet />
            </div>
             <div className='d-flex'>
-                <UserSidebar />
+                <Sidebar />
                 <UserDashboardContactBody />
             </div>
         </div>

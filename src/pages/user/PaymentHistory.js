@@ -1,8 +1,10 @@
 import Sidebar from "../../components/OrdersPage/Sidebar";
 import "../../styles/PaymentHistory.css";
+import '../../styles/DashboardContact.css';
 import { axiosInstance } from "../../services/AxiosInstance";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import UserSidebarTablet from "../../components/UserSidebarTablet";
 
 function PaymentHistory() {
   const [paymentHistory, setPaymentHistory] = useState();
@@ -43,8 +45,13 @@ function PaymentHistory() {
 
   return (
     <div>
+      <div>
+        <UserSidebarTablet />
+      </div>
       <div className="d-flex">
-        <Sidebar />
+        <div className="user-sidebar-div">
+          <Sidebar />
+        </div>
         <div className="payment-content">
           <div>
             <select
