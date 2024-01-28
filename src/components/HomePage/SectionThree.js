@@ -71,12 +71,12 @@ export default function SectionThree() {
             sm={12}
             md={12}
             lg={7}
-            className="mt-4 d-flex align-items-center d-md-flex overflow-x-hidden"
+            className="mt-4 d-flex align-items-center d-md-flex overflow-x-hidden position-relative"
           >
-            <Col md={1} sm={1} className="d-flex align-items-center relative">
+            <Col md={1} sm={1} className="d-flex align-items-center position-absolute z-1">
               <Button
                 variant="info text-white"
-                className=""
+                className="border border-black"
                 onClick={() => {
                   setCount(count > 0 ? --count : count);
                   // console.log(count)
@@ -160,9 +160,10 @@ export default function SectionThree() {
               </Row>
             </Col>
 
-            <Col md={1} sm={2} className="next-btn-sm">
+            <Col md={1} sm={2} className="next-btn-sm position-absolute z-1 margin-end-0">
               <Button
                 variant="info text-white"
+                className="border border-black"
                 onClick={() => {
                   setCount(count < 3 ? ++count : count);
                   setProgress(progress <= 66.7 ? progress + 33.3 : progress);

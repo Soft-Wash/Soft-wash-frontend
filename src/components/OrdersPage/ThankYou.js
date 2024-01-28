@@ -15,7 +15,7 @@ function ThankYou() {
         <h4 className="mx-auto" style={{width:"auto"}}>Thank you for choosing us!</h4>
     </Row>
     <Row>
-        <p className="mx-auto" style={{width:"auto"}}>Your pickup has been confirmed</p>
+        <p className="mx-auto" style={{width:"auto"}}>Your Order has been confirmed</p>
     </Row>
     </Container>
     </>

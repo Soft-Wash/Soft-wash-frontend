@@ -76,7 +76,7 @@
 }
 
 .scale-out {
-  animation: scaleIn .3s ease-in-out forwards;
+  animation: scaleIn 0.1s ease-in forwards;
   opacity: 0;
 }
 
@@ -250,4 +250,8 @@
 
 .slick-next:before, .slick-prev:before{
   display: none
+}
+
+.margin-end-0{
+  right: 10% !important;
 }
