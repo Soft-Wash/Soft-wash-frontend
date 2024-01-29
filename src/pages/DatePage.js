@@ -44,7 +44,6 @@ const handleDeliveryOption = () => {
 
     if (deliveryOption && deliveryDate) {
         navigate('/address');
-        console.log('here')
     } else {
         toast.error('Select Service & Date ');
     }

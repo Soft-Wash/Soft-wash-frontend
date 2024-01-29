@@ -61,7 +61,6 @@ function PaymentPage() {
   }
 
 
-
       // Calculate Sub Total
       const [subTotal, setSubtotal] = useState()
       const [deliveryFee, setDeliveryFee] = useState()
