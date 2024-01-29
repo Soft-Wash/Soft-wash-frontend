@@ -17,15 +17,17 @@ function SelectedCart() {
     const values = Object.values(clothQuantities);
     arrayObj = keys;
     let mainArr = keys.map((key, index) => ({ id: key, quantity: values[index] }));
-    console.log(mainArr)
     axios.put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
     .then((resp) => {
+      console.log(resp.data)
       setSelectedItems(resp.data)
       selectedItems && console.log(selectedItems)
       selectedItems && sessionStorage.setItem('softCart', JSON.stringify(selectedItems))
      })
 
   };
+
+
 
   useEffect(() => {
     getQuantity()

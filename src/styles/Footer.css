@@ -18,6 +18,10 @@
   margin-right: 20px;
 }
 
+.footer-buttonn{
+  white-space: nowrap;
+}
+
 @media (min-width: 768px) {
   .cloth-title-div p{
     white-space: normal;
