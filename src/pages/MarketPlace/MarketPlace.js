@@ -79,7 +79,7 @@ function MarketPlace() {
       <Container>
         <div>
           <p>
-            shop / <span className="fw-bold">Laundry</span>{" "}
+           <span Link="">shop</span>  / <span className="fw-bold">Laundry</span>{" "}
           </p>
         </div>
 

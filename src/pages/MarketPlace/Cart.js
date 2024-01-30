@@ -17,14 +17,14 @@ function Cart() {
 
   const GetCartItems = () => {
     const CustomerData = JSON.parse(localStorage.getItem("softwashLoginUser"));
-    const Customer_id = CustomerData._id;
+    const Customer_id = CustomerData?._id;
 
     axiosInstance
       .get(`/cart/customer?customer_id=${Customer_id}`)
       .then((resp) => {
         const initialQuantity = {};
         resp.data.forEach((item) => {
-          initialQuantity[item.product_id._id] = item.quantity;
+          initialQuantity[item?.product_id?._id] = item?.quantity;
         });
         setclothQuantity(initialQuantity);
         console.log(resp.data);
@@ -93,7 +93,6 @@ function Cart() {
 
     setTimeout(() => {
       axiosInstance.put(`/cart/${itemId}/update`, Quantity).then((resp) => {
-        console.log(resp.data);
       });
     }, 30000);
   };
