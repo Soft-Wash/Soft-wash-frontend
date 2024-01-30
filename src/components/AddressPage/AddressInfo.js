@@ -29,6 +29,8 @@ function AddressInfo() {
 
   useEffect(() => {
     CheckUserAddress();
+    const clothArray = JSON.parse(localStorage.getItem("softCart"))
+    console.log(clothArray)
     const calenderSelectedTime = localStorage.getItem("calenderSelectedTime");
     const parsedCalenderSelectedTime = calenderSelectedTime
       ? JSON.parse(calenderSelectedTime)
@@ -45,7 +47,7 @@ function AddressInfo() {
     if (parsedClothQuantity) {
       let keys = Object.keys(parsedClothQuantity);
       const values = Object.values(parsedClothQuantity);
-      setClothIds(keys);
+      setClothIds(clothArray);
     }
   }, []);
 

@@ -22,7 +22,7 @@ function SelectedCart() {
       console.log(resp.data)
       setSelectedItems(resp.data)
       selectedItems && console.log(selectedItems)
-      selectedItems && sessionStorage.setItem('softCart', JSON.stringify(selectedItems))
+      selectedItems && localStorage.setItem('softCart', JSON.stringify(selectedItems))
      })
 
   };
@@ -56,7 +56,7 @@ function SelectedCart() {
                                   <div className="cart-item" key={item._id}>
                                   <div className="d-flex justify-content-between">
                                     <h5>{item.name}</h5>
-                                    <h5>{item.price}</h5>
+                                    <h5>{`N${(item.quantity * item.price).toFixed(2)}`}</h5>
                                   </div>
                                   <p>{`${item.quantity} x ${item.price} / per piece`}</p>
                                 </div>  
