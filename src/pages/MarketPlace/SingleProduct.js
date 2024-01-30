@@ -22,17 +22,20 @@ import Footer from "../../common/Footer";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { axiosInstance } from "../../services/AxiosInstance";
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function SingleProduct() {
   const [togglereview, setToggleReview] = useState(false);
   const [shopItems, setshopItems] = useState();
   const [moreProduct, setmoreProduct] = useState();
   const productId = useParams();
-  const [clothQuantity,setclothQuantity] =useState({})
+  const [clothQuantity, setclothQuantity] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
 
   const id = productId.productId;
-  console.log(id)
+  console.log(id);
 
   const reviewToggleFunc = () => {
     setToggleReview(!togglereview);
@@ -50,57 +53,60 @@ function SingleProduct() {
 
   const sliceData = moreProduct?.slice(1, 3);
 
+  const increment = (itemId) => {
+    const updatedQuantity = { ...clothQuantity };
+    updatedQuantity[itemId] = (updatedQuantity[itemId] || 0) + 1;
+    setclothQuantity(updatedQuantity);
+  };
 
-  const increment=(itemId)=>{
-const updatedQuantity = {...clothQuantity}
-updatedQuantity[itemId] = (updatedQuantity[itemId] || 0)+1
-setclothQuantity(updatedQuantity)
-  }
+  const decrement = (itemId) => {
+    const updatedQuantity = { ...clothQuantity };
+    updatedQuantity[itemId] = Math.max((updatedQuantity[itemId] || 0) - 1, 0);
+    setclothQuantity(updatedQuantity);
+  };
 
-  const decrement=(itemId)=>{
-   const updatedQuantity = {...clothQuantity}
-    updatedQuantity[itemId] = Math.max((updatedQuantity[itemId] || 0)-1,0)
-    setclothQuantity(updatedQuantity)
-      }
+  const addToCart = () => {
+    const CustomerData = JSON.parse(localStorage.getItem("softwashLoginUser"));
+    console.log(CustomerData);
+    const Customer_id = CustomerData._id;
+    const quantity = parseInt(clothQuantity[shopItems?._id], 10);
 
-      const  addToCart=()=>{
-        const CustomerData = JSON.parse(localStorage.getItem('softwashLoginUser'))
-        console.log(CustomerData)
-        const Customer_id = CustomerData._id
-        const quantity = parseInt(clothQuantity[shopItems?._id], 10);
+    if (isNaN(quantity) || quantity < 1) {
+      setErrorMessage("Please add a quantity");
+      return;
+    }
 
-        if (isNaN(quantity) || quantity < 1) {
-          setErrorMessage('Please add a quantity');
-          return; 
+    const cartData = {
+      product_id: shopItems?._id,
+      quantity: clothQuantity[shopItems?._id] || 0,
+      customer_id: Customer_id,
+    };
+
+    console.log(cartData);
+
+    axiosInstance
+      .post("/cart/create", cartData)
+      .then((resp) => {
+        console.log(resp.data);
+        toast.success("item added to cart");
+      })
+      .catch((error) => {
+        console.error("Error adding item to cart:", error);
+        if (error.response) {
+          const status = error.response.status;
+          if (status === 400) {
+            toast.error("item already in cart");
+          } else {
+            toast.error("Unexpected error occurred. Please try again later.");
+          }
         }
-
-        const cartData = {
-          product_id: shopItems?._id,
-          quantity: clothQuantity[shopItems?._id] || 0,
-          customer_id:Customer_id
-        };
-
-
-        console.log(cartData)
-
-        
-        axiosInstance.post('/cart/create',cartData)
-        .then((resp)=>{
-          console.log(resp.data)
-        })
-        .catch((error) => {
-          console.error("Error adding item to cart:", error);
-          setErrorMessage("Item already in the cart.");
-        });
-        
-      }
-
-
+      });
+  };
 
   return (
     <div>
-<Navigation/>
-
+      <ToastContainer position="top-center" />
+      <Navigation />
       <Container className="mt-5">
         <Row>
           <Col className="singleproduct-item">
@@ -116,14 +122,28 @@ setclothQuantity(updatedQuantity)
 
             <div className="d-flex mt-5">
               <div className="cart-inpt-div d-flex">
-                <button className="cart-inpt-div-btn1 bg-info"onClick={() => decrement(shopItems?._id)}>-</button>
-                <input type="text" className="cart-input" value={clothQuantity[shopItems?._id] || 0}/>
-                <button className="cart-inpt-div-btn2 bg-info" onClick={() => increment(shopItems?._id)}>+</button>
+                <button
+                  className="cart-inpt-div-btn1 bg-info"
+                  onClick={() => decrement(shopItems?._id)}
+                >
+                  -
+                </button>
+                <input
+                  type="text"
+                  className="cart-input"
+                  value={clothQuantity[shopItems?._id] || 0}
+                />
+                <button
+                  className="cart-inpt-div-btn2 bg-info"
+                  onClick={() => increment(shopItems?._id)}
+                >
+                  +
+                </button>
               </div>
               <Button
                 variant="secondary"
                 className="cart-button2 bg-info border-0 rounded-0"
-                onClick={()=>addToCart()}
+                onClick={() => addToCart()}
               >
                 Add to Cart
               </Button>{" "}
