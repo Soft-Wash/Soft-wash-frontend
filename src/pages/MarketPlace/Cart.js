@@ -175,6 +175,10 @@ useEffect(()=>{
                     className="cart-item-img"
                     alt=""
                   />
+                  <div className="product_name_div">
+                  <h6 className="product_name">{item?.product_id?.name}</h6>
+                  </div>
+
                   <h6 className="item-name">
                     <span className="mobile-totalprice">
                       {" "}

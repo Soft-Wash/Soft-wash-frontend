@@ -17,6 +17,9 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { axiosInstance } from "../../services/AxiosInstance";
 import Navigation from "../../common/MarketPlaceNavbar/Navigation";
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function MarketPlace() {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -36,20 +39,26 @@ function MarketPlace() {
   const  addToCart=(item_id)=>{
     const CustomerData = JSON.parse(localStorage.getItem('softwashLoginUser'))
     const Customer_id = CustomerData._id
-
     const cartData = {
       product_id: item_id,
       quantity:1,
       customer_id:Customer_id
     };
-
-    
     axiosInstance.post('/cart/create',cartData)
     .then((resp)=>{
       console.log(resp.data)
+      toast.success("item added to cart")
     })
     .catch((error) => {
       console.error("Error adding item to cart:", error);
+      if (error.response){
+        const status = error.response.status;
+        if(status === 400){
+          toast.error('item already in cart')
+        }else{
+          toast.error("Unexpected error occurred. Please try again later.")
+        }
+      }
 
     });
     
@@ -61,6 +70,7 @@ function MarketPlace() {
 
   return (
     <div>
+            <ToastContainer position="top-center" />
 <Navigation/>
 
       <Container className="text-center mt-5">
