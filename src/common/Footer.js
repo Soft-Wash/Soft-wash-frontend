@@ -50,7 +50,7 @@ function Footer() {
           <div className="d-flex  align-items-center">
             <input type="text" className="w-75 p-2 border rounded " placeholder="Email adress" />
             <div className="footer-buttonn-div">
-            <Button className="footer-buttonn border-0">Send Email</Button>{' '}
+            <Button className="footer-buttonn border-0">Submit</Button>{' '}
             </div>
   
           </div>
@@ -62,7 +62,7 @@ function Footer() {
         <hr className="footer-bottom-line" />
           <div className="d-flex justify-content-between pt-3 pb-5 mobile-flex-row">
             <div className="">
-            <p>© 2021 Wash it Laundry Private Limited.</p>
+            <p>© 2021 Soft Wash Laundry Private Limited.</p>
             </div>
 
           <div className="d-flex">
