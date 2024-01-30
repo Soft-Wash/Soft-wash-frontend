@@ -22,7 +22,7 @@ function SelectedCart() {
       console.log(resp.data)
       setSelectedItems(resp.data)
       selectedItems && console.log(selectedItems)
-      selectedItems && sessionStorage.setItem('softCart', JSON.stringify(selectedItems))
+      selectedItems && localStorage.setItem('softCart', JSON.stringify(selectedItems))
      })
 
   };
