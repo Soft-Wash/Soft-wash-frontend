@@ -62,6 +62,11 @@ export default function OrderReceipt() {
       });
   }
 
+  const handlePrint = () => {
+    // alert("Your trying to print")
+    window.print();
+  };
+
   useEffect(() => {
     let intervalId;
 
@@ -117,6 +122,14 @@ export default function OrderReceipt() {
                 <p>₦{userData?.subtotal}</p>
               </div>
             </div>
+            <div className="d-flex justify-content-between gap-3 ">
+              <div lg={3}>
+                <h5>Payment Status</h5>
+              </div>
+              <div lg={3}>
+                <p>{userData?.payment_status}</p>
+              </div>
+            </div>
           </div>
         ) : paymentStatus?.data?.status === "failed" ? (
           <p className="pendingpayment-ptag">
@@ -162,6 +175,14 @@ export default function OrderReceipt() {
                 <p>₦{userData?.subtotal}</p>
               </div>
             </div>
+            <div className="d-flex justify-content-between gap-3 ">
+              <div lg={3}>
+                <h5>Payment Status</h5>
+              </div>
+              <div lg={3}>
+                <p>{userData?.payment_status}</p>
+              </div>
+            </div>
           </div>
         ) : (
           <p className="pendingpayment-ptag">Loading...</p>
@@ -171,20 +192,31 @@ export default function OrderReceipt() {
       <Row className="mb-5"></Row>
 
       <Container className="mt-5 pt-4 d-flex justify-content-center w-100 text-center my-5 gap-3">
-        <Col lg={4} md={5} sm={5}>
+        <Col lg={2} md={5} sm={4} className="d-print-none">
           <Link to="/">
             <Button
               variant="outline-primary"
-              className="me-auto w-100 text-center"
+              className="me-auto w-100 text-center "
             >
               Back Home
             </Button>
           </Link>
         </Col>
-        <Col lg={4} md={5} sm={5}>
+        <Col lg={2} md={5} sm={4} className="d-print-none">
+          <Link to="#print">
+            <Button
+              variant="outline-primary"
+              className="me-auto w-100 text-center "
+              onClick={() => handlePrint()}
+            >
+              Print Receipt
+            </Button>
+          </Link>
+        </Col>
+        <Col lg={2} md={5} sm={4} className="d-print-none">
           <Button
             variant="primary"
-            className="me-auto w-100 text-center"
+            className="me-auto w-100 text-center "
             onClick={Tonavigate}
           >
             Check order update
