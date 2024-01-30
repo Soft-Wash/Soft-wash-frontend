@@ -30,6 +30,7 @@ function CartPayment() {
   const [tax, setTax] = useState();
   const [total, setTotal] = useState();
   const [cartItems,setcartItems]=useState()
+  const navigate = useNavigate()
   function calcSubTotal() {
     const cartTotal = JSON.parse(localStorage.getItem('cartTotal'))
     
@@ -87,13 +88,15 @@ function CartPayment() {
 
 
   const postOrder = () => {
-
     const paymentType = JSON.parse(localStorage.getItem("paymentType"));
     const deliveryAddy = JSON.parse(localStorage.getItem("shopDeliveryAddress"));
     if (!paymentType) {
       toast.error("Select Payment Method");
       console.log(paymentMethod)
       return; 
+    }else if(!deliveryAddy){
+      toast.error("Select delivery address");
+      return
     }
     const customer_id = localStorage.getItem("softwashLoginUser");
     const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
@@ -109,6 +112,11 @@ function CartPayment() {
     .then((resp)=>{
       console.log(resp.data)
       toast.success('order created succesful')
+      setTimeout(() => {
+        navigate("/shop")
+      }, 5000);
+ 
+      
       
     })
 

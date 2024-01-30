@@ -12,22 +12,22 @@ function Cart() {
   const [cartItems, setcartItems] = useState([]);
   const [clothQuantity, setclothQuantity] = useState({});
   const [updatedCart, setupdatedCart] = useState([]);
-  const [totalprice,setTotalprice]=useState()
-  const Cart_Array = []
+  const [totalprice, setTotalprice] = useState();
+  const Cart_Array = [];
 
   const GetCartItems = () => {
     const CustomerData = JSON.parse(localStorage.getItem("softwashLoginUser"));
-    const Customer_id = CustomerData._id;
+    const Customer_id = CustomerData?._id;
 
     axiosInstance
       .get(`/cart/customer?customer_id=${Customer_id}`)
       .then((resp) => {
         const initialQuantity = {};
         resp.data.forEach((item) => {
-          initialQuantity[item.product_id._id] = item.quantity;
+          initialQuantity[item?.product_id?._id] = item?.quantity;
         });
         setclothQuantity(initialQuantity);
-        console.log(resp.data)
+        console.log(resp.data);
         setcartItems(resp.data);
       });
   };
@@ -45,32 +45,27 @@ function Cart() {
     const Quantity = {
       quantity: UpdatedQuantity,
     };
-   
-    console.log(UpdatedQuantity)
-  
+
+    console.log(UpdatedQuantity);
+
     setcartItems((prevCartItems) => {
       const updatedCartItems = prevCartItems.map((item) =>
         item.product_id._id === itemId
-          ? { ...item, quantity: UpdatedQuantity } 
+          ? { ...item, quantity: UpdatedQuantity }
           : item
       );
-      console.log(updatedCartItems)
-  
-      setcartItems(updatedCartItems);
+      console.log(updatedCartItems);
 
+      setcartItems(updatedCartItems);
     });
 
-    console.log(cartItems)
+    console.log(cartItems);
 
-    setTimeout(()=>{
-  axiosInstance.put(`/cart/${itemId}/update`, Quantity).then((resp) => {     
-      console.log(resp.data)
-
-     });
-    },30000)
-
-  
-
+    setTimeout(() => {
+      axiosInstance.put(`/cart/${itemId}/update`, Quantity).then((resp) => {
+        console.log(resp.data);
+      });
+    }, 30000);
   };
 
   const decrement = (itemId) => {
@@ -86,28 +81,21 @@ function Cart() {
     setcartItems((prevCartItems) => {
       const updatedCartItems = prevCartItems.map((item) =>
         item.product_id._id === itemId
-          ? { ...item, quantity: UpdatedQuantity } 
+          ? { ...item, quantity: UpdatedQuantity }
           : item
       );
-      console.log(updatedCartItems)
-  
-      setcartItems(updatedCartItems);
+      console.log(updatedCartItems);
 
+      setcartItems(updatedCartItems);
     });
 
-    console.log(cartItems)
+    console.log(cartItems);
 
-    
-
-    setTimeout(()=>{
-      axiosInstance.put(`/cart/${itemId}/update`, Quantity).then((resp) => {     
-          console.log(resp.data)
-    
-         });
-        },30000)
-
+    setTimeout(() => {
+      axiosInstance.put(`/cart/${itemId}/update`, Quantity).then((resp) => {
+      });
+    }, 30000);
   };
-
 
   const DeleteCartItem = (itemId) => {
     console.log(itemId);
@@ -124,24 +112,22 @@ function Cart() {
       });
   };
 
+  
+
   const CalculateTotal = (cartItems) => {
     const total = cartItems.reduce((accumulator, cartItem) => {
       const price = cartItem.product_id.price || 0;
       const itemTotal = cartItem.quantity * price;
       return accumulator + itemTotal;
     }, 0);
-    setTotalprice(total)
-localStorage.setItem('cartTotal',JSON.stringify(total))
+    setTotalprice(total);
+    localStorage.setItem("cartTotal", JSON.stringify(total));
     return total;
-
   };
-  
-  
-useEffect(()=>{
-  const result = CalculateTotal(cartItems);
-},[cartItems])
 
-
+  useEffect(() => {
+    const result = CalculateTotal(cartItems);
+  }, [cartItems]);
 
   return (
     <div>
@@ -176,7 +162,7 @@ useEffect(()=>{
                     alt=""
                   />
                   <div className="product_name_div">
-                  <h6 className="product_name">{item?.product_id?.name}</h6>
+                    <h6 className="product_name">{item?.product_id?.name}</h6>
                   </div>
 
                   <h6 className="item-name">
@@ -220,7 +206,7 @@ useEffect(()=>{
                     </p>
                   </div>
                   <p className="total-price fw-bold">
-                    &#8358; {item.product_id.price}
+                    &#8358;  {`${(clothQuantity[item.product_id._id] * item.product_id.price).toFixed(2)}`} 
                   </p>
                   <p
                     className="remove2-cart"
@@ -250,14 +236,13 @@ useEffect(()=>{
           <div className="sub-total-div-inner2 col col-12 col-md-6 col-lg-6 ">
             <h4>Subtotal:&#8358; {totalprice}</h4>
             <Link to="/cartpayment">
-            <Button
-              variant="secondary"
-              className="checkout-button bg-info border-0"
-            >
-              Checkout
-            </Button>{" "}
+              <Button
+                variant="secondary"
+                className="checkout-button bg-info border-0"
+              >
+                Checkout
+              </Button>{" "}
             </Link>
-
           </div>
         </div>
       </Container>
