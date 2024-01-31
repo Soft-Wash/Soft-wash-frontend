@@ -175,7 +175,7 @@ function SupervisorDash() {
                       <div className="AllUsers sup-Card washman-grey">
                           <FaRegUser className="supervisor-dashboard-icons "/>
                           <div>
-                              <h5>All Users</h5>
+                              <h5>Employees</h5>
                               <h5> {Employees?.length}</h5>
                           </div>
                       </div>
