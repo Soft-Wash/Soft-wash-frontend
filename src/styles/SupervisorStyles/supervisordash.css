@@ -59,6 +59,10 @@
     font-size: 40px;
     margin-right: 15px;
 }
+.supervisor-dashboard-icons-Big{
+    font-size: 80px;
+    margin-right: 15px;
+}
 
 .Sup-HeadCard {
     display: flex;

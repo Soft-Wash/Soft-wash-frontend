@@ -1,6 +1,9 @@
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 import "../../styles/SupervisorStyles/supervisordash.css";
 import { FaClipboardList, FaListAlt, FaRegUser} from "react-icons/fa";
+import { RiMoneyDollarCircleLine } from "react-icons/ri";
+import { MdOutlineAttachMoney } from "react-icons/md";
+import { LuAnchor } from "react-icons/lu";
 import { FaChalkboardUser } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import { BiCaretUp,BiCaretDown   } from "react-icons/bi";
@@ -270,21 +273,22 @@ function SupervisorDash() {
                 </section1>
                 <section2 className="HeaderCards-Container mb-4">
                     <div className=" AllOrder sup-Card2 washman-purple">
-                        <FaClipboardList className="supervisor-dashboard-icons "/>
+                        <MdOutlineAttachMoney className="supervisor-dashboard-icons-Big "/>
                         <div>
                             <h5>Total Sales</h5>
                             <h5>{totalAmount}</h5>
                         </div>
                     </div>
                     <div className="AllUsers sup-Card2 washman-green">
-                        <FaRegUser className="supervisor-dashboard-icons "/>
+                        <LuAnchor className="supervisor-dashboard-icons-Big "/>
                         <div>
                             <h5>Total Expense</h5>
                             <h5> {totalexpense}</h5>
                         </div>
                     </div>
                     <div className="FrontDesk sup-Card2 washman-blue">
-                        <FaChalkboardUser className="supervisor-dashboard-icons "/>
+                        <RiMoneyDollarCircleLine className="supervisor-dashboard-icons-Big "/>
+                        
                         <div>
                             <h5>Total Revenue</h5>
                             <h5> {totalrevenue}</h5>
