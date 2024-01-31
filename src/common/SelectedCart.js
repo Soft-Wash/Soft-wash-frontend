@@ -17,15 +17,17 @@ function SelectedCart() {
     const values = Object.values(clothQuantities);
     arrayObj = keys;
     let mainArr = keys.map((key, index) => ({ id: key, quantity: values[index] }));
-    console.log(mainArr)
     axios.put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
     .then((resp) => {
+      console.log(resp.data)
       setSelectedItems(resp.data)
       selectedItems && console.log(selectedItems)
-      selectedItems && sessionStorage.setItem('softCart', JSON.stringify(selectedItems))
+      selectedItems && localStorage.setItem('softCart', JSON.stringify(selectedItems))
      })
 
   };
+
+
 
   useEffect(() => {
     getQuantity()
@@ -54,7 +56,7 @@ function SelectedCart() {
                                   <div className="cart-item" key={item._id}>
                                   <div className="d-flex justify-content-between">
                                     <h5>{item.name}</h5>
-                                    <h5>{item.price}</h5>
+                                    <h5>{`N${(item.quantity * item.price).toFixed(2)}`}</h5>
                                   </div>
                                   <p>{`${item.quantity} x ${item.price} / per piece`}</p>
                                 </div>  

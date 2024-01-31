@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 import {Loader} from "../../common/Loader"
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios"
 
 
 
@@ -33,6 +34,8 @@ function SelectedCart({ initialQuantity }) {
   const [heavyWash, SetHeavyWash] = useState();
   const [ladiesWear, SetLadiesWear] = useState();
   const navigate = useNavigate()
+  const [selectedItems, setSelectedItems] = useState();
+  let arrayObj = [];
 
 
   const [clothQuantity, setClothQuantity] = useState(() => {
@@ -82,11 +85,6 @@ function SelectedCart({ initialQuantity }) {
   };
 
 
-
-
-  useEffect(() => {
-    // HandleLocalSave()
-  }, [clothQuantity]);
 
   useEffect(() => {
 
@@ -194,7 +192,6 @@ function SelectedCart({ initialQuantity }) {
 
       setLoading(false)
   }, []);
-
 
 
   return (

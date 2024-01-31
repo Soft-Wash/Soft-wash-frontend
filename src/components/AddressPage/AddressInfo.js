@@ -11,6 +11,7 @@ import { axiosInstance } from "../../services/AxiosInstance";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BsFillTrashFill } from "react-icons/bs";
+import SelectedCart from "../../common/SelectedCart";
 
 function AddressInfo() {
   const [selectedTime, setSelectedTime] = useState();
@@ -18,34 +19,18 @@ function AddressInfo() {
   const [clothIds, setClothIds] = useState();
   let arrayObj = [];
   const navigate = useNavigate();
-  const [selectedItems, setSelectedItems] = useState();
   const [selectedDate, setSelectedDate] = useState();
   const [clicked, setClicked] = useState(false);
   const [err, setErr] = useState(false);
   const [customerDetails, setcustomerDetails] = useState();
   const [customerAddress, setcustomerAddress] = useState();
 
-  const getQuantity = () => {
-    const clothQuantity = localStorage.getItem("clothQuantity");
-    const clothQuantities = JSON.parse(clothQuantity);
-    const keys = Object.keys(clothQuantities);
-    const values = Object.values(clothQuantities);
-    arrayObj = keys;
-    let mainArr = keys.map((key, index) => ({
-      id: key,
-      quantity: values[index],
-    }));
-    axios
-      .put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
-      .then((resp) => {
-        localStorage.setItem("softCart", JSON.stringify(resp.data));
-        setSelectedItems(resp.data);
-      });
-  };
+
 
   useEffect(() => {
     CheckUserAddress();
-    getQuantity();
+    const clothArray = JSON.parse(localStorage.getItem("softCart"))
+    console.log(clothArray)
     const calenderSelectedTime = localStorage.getItem("calenderSelectedTime");
     const parsedCalenderSelectedTime = calenderSelectedTime
       ? JSON.parse(calenderSelectedTime)
@@ -62,7 +47,7 @@ function AddressInfo() {
     if (parsedClothQuantity) {
       let keys = Object.keys(parsedClothQuantity);
       const values = Object.values(parsedClothQuantity);
-      setClothIds(keys);
+      setClothIds(clothArray);
     }
   }, []);
 
@@ -334,40 +319,9 @@ function AddressInfo() {
             </Accordion>
           </Row>
         </Col>
-
-        <Col
-          lg={4}
-          md={12}
-          sm={12}
-          className="border border-2 shadow-sm pb-3 mt-3"
-        >
-          <div className="d-flex justify-content-between  mt-3 mx-auto">
-            <h4 className="text-primary my-auto col-lg-6">Selected Items</h4>
-            <Button variant="primary" className="w-25 my-auto  col-lg-3">
-              Edit
-            </Button>
-            {/* </Col> */}
+          <div className="select-pickup-type date-body-right">
+          <SelectedCart/>
           </div>
-          <hr />
-          <h5 className="text-capitalize ms-1">dry wash</h5>
-          <Accordion defaultActiveKey="0">
-            <Accordion.Item eventKey="0">
-              <Accordion.Header>Mens Wear</Accordion.Header>
-              <Accordion.Body>
-                {selectedItems &&
-                  selectedItems.map((item) => (
-                    <div className="cart-item" key={item._id}>
-                      <div className="d-flex justify-content-between">
-                        <h5>{item.name}</h5>
-                        <h5>{item.price}</h5>
-                      </div>
-                      <p>{`${item.quantity} x ${item.price} / per piece`}</p>
-                    </div>
-                  ))}
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
-        </Col>
       </Row>
 
       <Container className="d-flex justify-content-center gap-3 w-100 text-center my-5">
