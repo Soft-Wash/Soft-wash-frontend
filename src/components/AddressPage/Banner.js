@@ -7,10 +7,15 @@ function Banner(){
     return(
         <div className="booking-banner-section mt-2">
             <Container>
-                <div className="booking-banner">                    
+                <div className="booking-banner d-print-none">                    
                 </div>
                 <div className="booking-banner-info">
-                    <div className="banner-logo-circle">
+                    <div className="mt-5 d-none d-print-block">
+                        <div className="mt-5">
+                            <img src={logo} alt="" />
+                        </div>                        
+                    </div>
+                    <div className="banner-logo-circle d-print-none">
                         <div className="banner-logo">
                             <img src={logo} alt="" />
                         </div>                        
