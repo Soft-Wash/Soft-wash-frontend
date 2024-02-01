@@ -3,11 +3,9 @@ import '../../src/styles/DashboardContact.css';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
-
 import { Link } from 'react-router-dom';
-
 import Offcanvas from 'react-bootstrap/Offcanvas';
-
+import { HouseFill, DashSquareFill, PhoneFill, PersonFill, ListCheck, ListTask } from 'react-bootstrap-icons';
 
 
 function UserSidebarTablet(){
@@ -35,37 +33,37 @@ function UserSidebarTablet(){
                             <Nav className="justify-content-end flex-grow-1 pe-3">              
                                 <div className='user-dashboard-nav-tabs'>
                                     <Link exact to="/"  className='user-dashboard-nav-links'>
-                                        Home
+                                        <HouseFill className='user-tablet-icons'/>Home
                                     </Link>
                                 </div>
                                 <div className='user-dashboard-nav-tabs'>
                                     <Link exact to="/userdashboard"  className='user-dashboard-nav-links'>
-                                        Dashboard
+                                        <DashSquareFill className='user-tablet-icons'/>Dashboard
                                     </Link>
                                 </div>
                                 <div className='user-dashboard-nav-tabs'>
                                     <Link exact to="/dashboard-contact-us"  className='user-dashboard-nav-links'>
-                                        Contact Us
+                                        <PhoneFill className='user-tablet-icons'/>Contact Us
                                     </Link>
                                 </div>
                                 <div className='user-dashboard-nav-tabs'>
                                     <Link exact to="/user-profile"  className='user-dashboard-nav-links'>
-                                        My Profile
+                                        <PersonFill className='user-tablet-icons'/>My Profile
                                     </Link>
                                 </div>
                                 <div className='user-dashboard-nav-tabs'>
                                     <Link exact to="/my-orders"  className='user-dashboard-nav-links'>
-                                        My Order 
+                                        <ListCheck className='user-tablet-icons'/>My Order 
                                     </Link>
                                 </div>
                                 <div className='user-dashboard-nav-tabs'>
                                     <Link exact to="/ClothesSelection"  className='user-dashboard-nav-links'>
-                                        Create Order
+                                        <ListTask className='user-tablet-icons'/>Create Order
                                     </Link> 
                                 </div>        
                                 <div className='user-dashboard-nav-tabs'>
                                     <Link exact to="/paymenthistory"  className='user-dashboard-nav-links'>
-                                        Payment History
+                                        <ListTask className='user-tablet-icons'/>Payment History
                                     </Link> 
                                 </div>      
                             </Nav>
