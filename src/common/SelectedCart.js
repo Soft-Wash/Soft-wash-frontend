@@ -39,7 +39,7 @@ function SelectedCart() {
 
 
   return (
-    <Container fluid>
+    <Container>
       <div className="">
         <div className="d-flex justify-content-between border-bottom pb-3">
           <h3 className="date-headers">Selected Items</h3>
@@ -55,8 +55,8 @@ function SelectedCart() {
                 {selectedItems && selectedItems.map((item)=>(
                                   <div className="cart-item" key={item._id}>
                                   <div className="d-flex justify-content-between">
-                                    <h5 className="fs-6">{item.name}</h5>
-                                    <h5 className="fs-6">{`N${(item.quantity * item.price).toFixed(2)}`}</h5>
+                                    <h5>{item.name}</h5>
+                                    <h5>{`N${(item.quantity * item.price).toFixed(2)}`}</h5>
                                   </div>
                                   <p>{`${item.quantity} x ${item.price} / per piece`}</p>
                                 </div>  
