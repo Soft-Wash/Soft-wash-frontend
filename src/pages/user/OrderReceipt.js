@@ -127,7 +127,7 @@ export default function OrderReceipt() {
                 <h5>Payment Status</h5>
               </div>
               <div lg={3}>
-                <p>{userData?.payment_status}</p>
+                <p>{paymentStatus?.data.status}</p>
               </div>
             </div>
           </div>

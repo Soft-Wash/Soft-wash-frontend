@@ -101,7 +101,7 @@ export default function SectionThree() {
               />
               {/* </Col> */}
               <Row>
-                <Container className=" d-flex justify-content-center gap-5 mt-3 position-relative ">
+              <Container className=" d-flex justify-content-center gap-5 mt-3 position-relative ">
                   <Col
                     className={`duration-500 border border-4 ${"border-info"}  text-center rounded-circle bg-white size-sm-30px`}
                     style={{ height: "60px", width: "auto" }}
@@ -147,7 +147,7 @@ export default function SectionThree() {
 
                 <Col
                   lg={12}
-                  className="px-4 position-relative neg-top-35 "
+                  className="px-4 position-relative neg-top-50 "
                   style={{ top: "-55px", zIndex: "-1", width: "100%" }}
                 >
                   <ProgressBar

@@ -39,7 +39,7 @@ function SelectedCart() {
 
 
   return (
-    <Container>
+    <Container fluid>
       <div className="">
         <div className="d-flex justify-content-between border-bottom pb-3">
           <h3 className="date-headers">Selected Items</h3>
