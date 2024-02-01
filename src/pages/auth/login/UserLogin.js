@@ -60,7 +60,7 @@ export default function Login() {
         setLoading(false);
         if(data){
           toast.success("Login Successful")
-          navigate('/userdashboard')
+          navigate('/')
         } else if(error){
           toast.error("Incorrect Email Or Password");
         }
@@ -158,7 +158,7 @@ export default function Login() {
         <div className="banner-section">
           <center className="logo-sectio">{/* <h5>Eventbux</h5> */}</center>
   
-          <div className="welcome-section">
+          <div className="welcome-section blur">
             <center>
               <p className="note text-light">New here?</p>
               <p className="welcome">Join Us Today!</p>
