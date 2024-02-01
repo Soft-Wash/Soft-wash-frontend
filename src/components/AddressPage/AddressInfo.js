@@ -145,9 +145,9 @@ function AddressInfo() {
 
   return (
     <Container>
-      <Row lg={12} className="">
-        <Col lg={8} md={12} sm={12}>
-          <div className="w-100 border border-2 shadow-sm rounded py-4 px-3 ">
+      <Row className="justify-content-between">
+        <Col lg={7} md={12} sm={12}>
+          <div className="w-100 border border-2 shadow-sm rounded py-4 px-3">
             <h4 className="text-primary mb-3 fw-semibold ps-2 text-capitalize">
               Choose your address
             </h4>
@@ -184,7 +184,7 @@ function AddressInfo() {
           <Row className="w-100 text-center my-4">
             <h3>Or</h3>
           </Row>
-          <Row className="border border-2 shadow-sm rounded py-4 mx-1">
+          <Row className="border border-2 shadow-sm rounded py-4">
             <Accordion defaultActiveKey="0">
               <Accordion.Item eventKey="1"> 
                 <Accordion.Header>Add Address</Accordion.Header>
@@ -319,13 +319,13 @@ function AddressInfo() {
             </Accordion>
           </Row>
         </Col>
-          <div className="select-pickup-type date-body-right mx-1">
+          <div className="select-pickup-type date-body-right">
           <SelectedCart/>
           </div>
       </Row>
 
       <Container className="d-flex justify-content-center gap-3 w-100 text-center my-5">
-        <Col lg={2} md={5} sm={5}>
+        <Col lg={4} md={5} sm={5}>
           <Link to="/date">
             <Button
               variant="outline-primary"
@@ -335,7 +335,7 @@ function AddressInfo() {
             </Button>
           </Link>
         </Col>
-        <Col lg={2} md={5} sm={5}>
+        <Col lg={4} md={5} sm={5}>
           {/* <Link to="/PaymentPage"> */}
           <Button
             variant="primary"

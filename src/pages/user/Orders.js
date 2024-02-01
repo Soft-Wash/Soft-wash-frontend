@@ -122,12 +122,12 @@ export default function Orders() {
         <div>
           <UserSidebarTablet />
         </div>
-        <div className="d-flex w-100">
+        <div className="d-flex">
           <div className="user-sidebar-div">
             <Sidebar />
           </div>
-          <Container fluid className="myorders-container margin-small-10 w-100">
-            <div className="mx-0 mb-4 w-100 d-flex justify-content-between">
+          <Container className="myorders-container m-5 ms-5">
+            <div className="mx-0 mb-4 w-75 d-flex justify-content-between">
               <div>
                 <h4>My Orders</h4>
               </div>
