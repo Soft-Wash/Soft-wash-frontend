@@ -12,7 +12,7 @@ import { FiChevronDown } from "react-icons/fi";
 import { FiHeart } from "react-icons/fi";
 import Footer from "../../common/Footer";
 import { Link } from "react-router-dom";
-import axios from "axios"
+import axios from "axios";
 
 import { useState } from "react";
 import { useEffect } from "react";
@@ -25,15 +25,19 @@ import "react-toastify/dist/ReactToastify.css";
 function MarketPlace() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [wishlistItems, setWishlistItems] = useState([]);
-  const [buttonClicked, setbuttonClicked]= useState()
+  const [buttonClicked, setbuttonClicked] = useState();
+  const [deleteId, setDeleteId] = useState();
+  const [addcolor, setAddcolor] = useState(false);
 
   const [shopItems, setshopItems] = useState();
-  let wishlist_id = ""
-
+  let wishlist_id = "";
 
   useEffect(() => {
-    const user_id = JSON.parse(localStorage.getItem('softwashLoginUser'));
-    axios.get(`${process.env.REACT_APP_BASE_URL}/wishlist/user/wishlist?user_id=${user_id._id}`)
+    const user_id = JSON.parse(localStorage.getItem("softwashLoginUser"));
+    axios
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/wishlist/user/wishlist?user_id=${user_id._id}`
+      )
       .then((resp) => {
         console.log(resp.data);
         setWishlistItems(resp.data);
@@ -42,7 +46,6 @@ function MarketPlace() {
         console.error("Error fetching wishlist items:", error);
       });
     axiosInstance.get("/product/").then((resp) => {
-      console.log(resp.data);
       setshopItems(resp.data);
     });
   }, []);
@@ -75,61 +78,44 @@ function MarketPlace() {
   };
 
   const AddWishlist = (product_id) => {
-    console.log(product_id, "here");
-    const user_id = JSON.parse(localStorage.getItem('softwashLoginUser'));
+    const user_id = JSON.parse(localStorage.getItem("softwashLoginUser"));
     const wishlistObj = {
       user_id: user_id._id,
-      product: product_id
+      product: product_id,
     };
-        axios.post(`${process.env.REACT_APP_BASE_URL}/wishlist/create`, wishlistObj)
-          .then((resp) => {
-            console.log(resp.data);
-            setWishlistItems((prevItems) => [...prevItems, product_id]);
-            toast.success('item added to wishlist')
-          }).catch((error) => {
-            console.error("Error adding item to wishlist:", error);
-            if (error.response) {
-              const status = error.response.status;
-              if (status === 400) {
-                toast.error("item already in wishlist");
-              } else {
-                toast.error("Unexpected error occurred. Please try again later.");
-              }
-            }
-          })
-  }
-  
-
-
-  const removeWishlistItem = (product_id) => {
-    axiosInstance.get('/wishlist/')
-    .then((resp)=> {
-      console.log(resp.data)
-
-      const wishlist_id = resp?.data?._id
-      console.log(wishlist_id)
-    //  const _id =wishlist_id.find((wihslist)=> wihslist.product.includes(product_id))._id
-    //  console.log('wishlist_id:', _id);
-    //   console.log(wishlist_id)
-    //   if(_id){
-    //     return axiosInstance.delete(`/wishlist/${product_id}/delete`)
-    //   }
-
-
-    })
-    .then((resp)=>{
-      console.log(resp.data)
-    })
-    setWishlistItems((prevItems) => prevItems.filter((item) => item !== product_id));
-
+    axios
+      .post(`${process.env.REACT_APP_BASE_URL}/wishlist/create`, wishlistObj)
+      .then((resp) => {
+        setWishlistItems((prevItems) => [...prevItems, product_id]);
+        toast.success("item added to wishlist");
+      })
+      .catch((error) => {
+        if (error.response) {
+          const status = error.response.status;
+          if (status === 400) {
+            axiosInstance
+              .delete(
+                `/wishlist/delete?product=${product_id}&user=${user_id._id}`
+              )
+              .then((resp) => {
+                setWishlistItems((prevItems) =>
+                  prevItems.filter((item) => item._id !== product_id._id)
+                );
+              });
+            toast.error("item removed from wishlist");
+          } else {
+            toast.error("Unexpected error occurred. Please try again later.");
+          }
+        }
+      });
   };
 
-  const isInWishlist = (productId) => {
-    return wishlistItems.includes(productId);
+  const isInWishlist = (wishlistItems_id) => {
+    let x= wishlistItems?.map(
+      (item) => item?.product?._id === wishlistItems_id
+    );
+    return x.includes(true);
   };
-
-  
-
 
   return (
     <div>
@@ -194,13 +180,12 @@ function MarketPlace() {
                   className="item-card border text-center mt-4"
                   style={{ height: "350px" }}
                 >
-                  <FiHeart className={`cart-icon02 ${isInWishlist(item._id) ? 'wishlist_active' : ''}`}  onClick={() => {
-                    if (isInWishlist(item._id)) {
-                      removeWishlistItem(item._id);
-                    } else {
-                      AddWishlist(item._id);
-                    }
-                  }}/>
+                  <FiHeart
+                    className={`cart-icon02 ${
+                      isInWishlist(item._id)? "wishlist_active" : ""
+                    }`}
+                    onClick={() => AddWishlist(item._id)}
+                  />
                   <img src={item.img} className="item-image  mt-5" alt="" />
                   <Link
                     to={`/singleproduct/${item._id}`}
