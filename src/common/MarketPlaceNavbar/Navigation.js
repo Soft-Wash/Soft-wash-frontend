@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Nav from "react-bootstrap/Nav";
-import { FiSearch, FiUser, FiShoppingCart } from "react-icons/fi";
+import { FiSearch, FiUser, FiShoppingCart,FiHeart } from "react-icons/fi";
 import "../../styles/MarketPlace.css";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { FiChevronDown } from "react-icons/fi";
@@ -48,6 +48,9 @@ function Navigation(){
                 <Nav.Link to="/cart">
                   <Link to="/cart" className="color-dark-link">
                   <FiShoppingCart className="fs-4 " />
+                  </Link>
+                  <Link to="/wishlist">
+                  <FiHeart className="wishlist_icon" />
                   </Link>
 
                 </Nav.Link>
