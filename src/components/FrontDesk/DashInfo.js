@@ -97,6 +97,11 @@ export default function DashInfo() {
     }
   };
 
+  const assignTask = (id) => {
+    // alert(id)
+    // console.log(e.parentElement.parentElement.parentElement.name)
+  };
+
   useEffect(() => {
     getOrders();
     getPendingPayments();
@@ -221,7 +226,9 @@ export default function DashInfo() {
                 <WashmanProp
                   name={washman.fullName}
                   status={washman.task}
+                  id={washman.id}
                   key={index}
+                  onClick={() => assignTask(washman.id)}
                 />
               ))
             ) : (
