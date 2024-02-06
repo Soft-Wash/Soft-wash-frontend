@@ -101,10 +101,6 @@
     height: 100vh;
 }
 
-.margin-small-10{
-    margin: 50px;
-}
-
 
 
 @media (max-width: 770px){
@@ -112,10 +108,4 @@
         width: 90%;
         
     }
-}
-
-@media (max-width: 425px) {
-    .margin-small-10{
-        margin: 0px;
-      }
 }

@@ -71,12 +71,12 @@ export default function SectionThree() {
             sm={12}
             md={12}
             lg={7}
-            className="mt-4 d-flex align-items-center d-md-flex overflow-x-hidden position-relative"
+            className="mt-4 d-flex align-items-center d-md-flex overflow-x-hidden"
           >
-            <Col md={1} sm={1} className="d-flex align-items-center position-absolute z-1">
+            <Col md={1} sm={1} className="d-flex align-items-center relative">
               <Button
                 variant="info text-white"
-                className="border border-black"
+                className=""
                 onClick={() => {
                   setCount(count > 0 ? --count : count);
                   // console.log(count)
@@ -101,7 +101,7 @@ export default function SectionThree() {
               />
               {/* </Col> */}
               <Row>
-              <Container className=" d-flex justify-content-center gap-5 mt-3 position-relative ">
+                <Container className=" d-flex justify-content-center gap-5 mt-3 position-relative ">
                   <Col
                     className={`duration-500 border border-4 ${"border-info"}  text-center rounded-circle bg-white size-sm-30px`}
                     style={{ height: "60px", width: "auto" }}
@@ -147,7 +147,7 @@ export default function SectionThree() {
 
                 <Col
                   lg={12}
-                  className="px-4 position-relative neg-top-50 "
+                  className="px-4 position-relative neg-top-35 "
                   style={{ top: "-55px", zIndex: "-1", width: "100%" }}
                 >
                   <ProgressBar
@@ -160,10 +160,9 @@ export default function SectionThree() {
               </Row>
             </Col>
 
-            <Col md={1} sm={2} className="next-btn-sm position-absolute z-1 margin-end-0">
+            <Col md={1} sm={2} className="next-btn-sm">
               <Button
                 variant="info text-white"
-                className="border border-black"
                 onClick={() => {
                   setCount(count < 3 ? ++count : count);
                   setProgress(progress <= 66.7 ? progress + 33.3 : progress);
