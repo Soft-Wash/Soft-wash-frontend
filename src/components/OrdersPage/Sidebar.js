@@ -6,9 +6,9 @@ import { Link, NavLink } from 'react-router-dom';
 function Sidebar (){
     return (
         <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
-          <CDBSidebar textColor="rgb(13,202,240)" backgroundColor="rgb(11,9,9)">
+          <CDBSidebar textColor="black" backgroundColor="white">
             <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-              <Link to="/" className="text-decoration-none" style={{ color: 'inherit' }}>
+              <Link to="/" className="text-decoration-none" style={{ color: 'black' }}>
                 SOFTWASH 
               </Link>
             </CDBSidebarHeader>

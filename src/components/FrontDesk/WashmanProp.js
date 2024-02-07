@@ -1,7 +1,10 @@
 import { Col, Row } from "react-bootstrap";
 import img1 from "../../assets/washman-pic.jpg";
+import { useState } from "react";
+import { BsXLg } from "react-icons/bs";
 
 export default function WashmanProp(props) {
+  const [assign, setAssign] = useState(false)
 
   const handleSubmit = () => {
 
@@ -24,6 +27,7 @@ export default function WashmanProp(props) {
           <small className="text-lighter lh-1 my-auto">{props.name || "Dambola Segun (Stain spec.)"}</small>
         </div>
         <Col
+        onClick = {(e) => setAssign(true)}
           lg={3}
           className={` badge ${
             props.status == "free"
@@ -36,15 +40,23 @@ export default function WashmanProp(props) {
           </small>
         </Col>
 
-        <Row className="position-absolute bg-secondary opacity-25 top-0 start-0" style={{height:"100dvh", width:"100dvw"}}>
+        {
+          assign == true ?
+          (
+            <Row className="position-absolute bg-secondary opacity-50 top-0 start-0" style={{height:"100dvh", width:"100dvw"}}>
           <div className="m-auto w-25 h-25 bg-white rounded ">
+            <div className="d-flex">
             <h4 className="w-100 mx-auto ">Assign Task</h4>
-            <form onSubmit={(e) => handleSubmit(e.target)} className="h-75 d-flex flex-column justify-content-evenly">
-              <input type="text" placeholder="Task Id" className="rounded"/>
+            {/* <BsXLg/> */}
+            </div>
+            <form onSubmit={(e) => handleSubmit(e.target.id)} className="h-75 d-flex flex-column justify-content-evenly">
+              <input type="text" placeholder="Task Id" className="rounded ps-2"/>
               <button className="btn btn-md btn-outline-primary rounded">Assign</button>
             </form>
           </div>
         </Row>
+          ) : null
+        }
       </div>
     </>
   );

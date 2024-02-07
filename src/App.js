@@ -80,6 +80,8 @@ import SupSingleTask from "./components/SupervisorComponents/SupSingleTask";
 import UserEditProfile from "./components/UserDashboard/UserEditProfile";
 import UserDashboard from "./pages/user/UserDashboard";
 import { ChakraProvider } from '@chakra-ui/react'
+import WashmanRequestSuppliesPage from "./pages/Washman Pages/WashmanRequestSuppliesPage";
+
 
 
 
@@ -138,6 +140,7 @@ function App() {
         <Route path="/washman-single-order/:_id" element={<WashmanSingleOrderPage/>}/>
         <Route path="/washman-edit-profile" element={<WashmanEditProfilePage/>}/>
         <Route path="/washman-leave" element={<WashmanLeavePage />}/>
+        <Route path="/washman-request-supplies" element={<WashmanRequestSuppliesPage />}/>
         
 
         {/* Admin Routes */}
