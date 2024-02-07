@@ -16,7 +16,7 @@
 .user-page-content{
     width: 70%;
     margin: auto;
-    margin-top: 30px;
+    /* margin-top: 30px; */
     padding: 20px;
     border-radius: 10px;
     background-color: white;
@@ -101,7 +101,10 @@
     height: 100vh;
 }
 
-
+.user-tablet-icons{
+    font-size: 20px;
+    margin-right: 20px;
+}
 
 @media (max-width: 770px){
     .user-page-content{
