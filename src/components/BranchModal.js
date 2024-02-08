@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -17,14 +18,6 @@ function BranchModal({isOpen,onClose,SaveBranch,getBranch}){
   const [branch_id, setbranch_id] = useState();
   const Navigate = useNavigate();
 
-  // const [show, setShow] = useState(false);
-
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
-
-  // const handleBranch = (e) => {
-  //   setbranch_id(e.target.value);
-  // };
 
   useEffect(() => {
     axiosInstance.get("/branch/").then((resp) => {
