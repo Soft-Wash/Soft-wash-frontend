@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../common/Loader';
 
 
 
@@ -51,6 +52,7 @@ const handleDeliveryOption = () => {
 
     return(
        <div>
+
             <ToastContainer position="top-center" />
             <BookingBanner />
             <Container className='datepage-container'>

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useState,useContext } from 'react';
 import{handleLogin} from '../../../services/Login'
 import { variableManager } from '../../../context/VariablesContext';
-import{Loader} from "../../../common/Loader"
+// import{Loader} from "../../../common/Loader"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -173,7 +173,7 @@ export default function Login() {
           </div>
             <center className="copyright">Copyright © 2023</center>
         </div>
-        <Loader color="primary" size="lg" show={loading} /> 
+        {/* <Loader color="primary" size="lg" show={loading} />  */}
       </div>
       </>
     );

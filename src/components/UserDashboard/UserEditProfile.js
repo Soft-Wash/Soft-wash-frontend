@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "../../components/OrdersPage/Sidebar";
 import { axiosInstance } from "../../services/AxiosInstance";
+import UserSidebarTablet from "../UserSidebarTablet";
 
 function UserEditProfile() {
   const [userData, setUserData] = useState();
@@ -57,6 +58,10 @@ function UserEditProfile() {
   }
 
   return (
+    <div>
+    <div>
+    <UserSidebarTablet />
+</div>
     <div className="d-flex">
       <Sidebar />
       <div className="user-dashboard-bg">
@@ -143,6 +148,8 @@ function UserEditProfile() {
         </div>
       </div>
     </div>
+    </div>
+
   );
 }
 

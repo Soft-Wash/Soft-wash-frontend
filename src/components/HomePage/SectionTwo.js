@@ -6,9 +6,17 @@ import Col from "react-bootstrap/Col";
 // import Button from "react-bootstrap/Button";
 import image2 from "../../assets/HomePage/images/about-img.png";
 import image3 from "../../assets/HomePage/images/services-img.png";
+import BranchModal from "../BranchModal";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export default function SectionTwo() {
+
+
+
+
   return (
+
     <div className="sec-2-bg mb-5 py-4" >
       <Container fluid className="">
         <Row className="py-5 h-100">

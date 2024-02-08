@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useState,useContext } from 'react';
 import{handleLogin} from '../../services/EmployeeLoginService'
 import { variableManager } from '../../context/VariablesContext';
-import{Loader} from "../../common/Loader"
+import Loader from "../../common/Loader"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

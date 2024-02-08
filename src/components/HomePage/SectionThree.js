@@ -10,6 +10,8 @@ import image2 from "../../assets/HomePage/images/work-step2.png";
 import image3 from "../../assets/HomePage/images/work-step3.png";
 import image4 from "../../assets/HomePage/images/work-step4.png";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import BranchModal from "../BranchModal";
 
 export default function SectionThree() {
   let [count, setCount] = useState(0);
@@ -17,18 +19,39 @@ export default function SectionThree() {
   const [progress, setProgress] = useState(0);
 
   const Navigate = useNavigate();
-  const userDetails = JSON.parse(localStorage.getItem("softwashLoginUser"));
 
-  function checkLogin() {
-    if (!userDetails) {
+  const [showModal, setShowModal] = useState(false);
+  const [branch_id, setbranch_id] = useState();
+
+
+
+  function handleSchedulePickup() {
+    const userToken = JSON.parse(localStorage.getItem("softwashLoginToken"));
+    if (!userToken) {
       Navigate("/userLogin");
     } else {
-      Navigate("/ClothesSelection");
+      handleShow();
     }
   }
 
+
+
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
+  const handleSaveBranch = (branchId) => {
+    setbranch_id(branchId);
+    handleClose();
+  };
+
   return (
     <div className="sec-3-bg my-5 px-5 py-5 mw-100 overflow-hidden p-none-sm">
+            <ToastContainer position="top-center" />
+      <BranchModal
+isOpen={showModal} 
+onClose={handleClose}
+SaveBranch={handleSaveBranch} 
+/>
       <Container className="container03">
         <Row className=" align-items-center">
           <Col
@@ -59,7 +82,7 @@ export default function SectionThree() {
                     variant="outline-info textwhite-hover"
                     className=" mt-4"
                     size="lg"
-                    onClick={checkLogin}
+                    onClick={handleSchedulePickup}
                   >
                     GET SERVICE NOW
                   </Button>{" "}
