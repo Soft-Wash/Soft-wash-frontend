@@ -58,6 +58,10 @@ function UserEditProfile() {
   }
 
   return (
+    <div>
+    <div>
+    <UserSidebarTablet />
+</div>
     <div className="d-flex">
       <div className='user-sidebar-div'>
         <Sidebar />
@@ -151,6 +155,8 @@ function UserEditProfile() {
         </div>
       </div>
     </div>
+    </div>
+
   );
 }
 

@@ -82,12 +82,13 @@ function AddressInfo() {
 
     const customer_id = localStorage.getItem("softwashLoginUser");
     const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
+    const branch_id = JSON.parse(localStorage.getItem('branch_id'))
 
     console.log(selectedAddress);
 
     let orderPostObj = {
       customer_id: parsedCustomerData?._id,
-      branch_id: "655debc4ec7b0b6e0f591bf7",
+      branch_id: branch_id,
       deliveryAddress: selectedAddress,
       pickuptime: selectedTime,
       schedule_date: selectedDate,

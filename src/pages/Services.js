@@ -15,19 +15,36 @@ import Footer from "../common/Footer";
 import { useState,useEffect } from "react";
 import HeaderBanner from "../common/HeaderBanner";
 import { useNavigate } from "react-router-dom";
+import BranchModal from "../components/BranchModal";
 
 function Services() {
 
   const Navigate = useNavigate()
   const userToken = JSON.parse(localStorage.getItem("softwashLoginToken"))
+  const [showModal, setShowModal] = useState(false);
+  const [branch_id, setbranch_id] = useState();
 
-function checkLogin(){
-  if (!userToken){
-    Navigate('/userLogin')
-  } else{
-    Navigate('/ClothesSelection')
+
+
+  function handleSchedulePickup() {
+    const userToken = JSON.parse(localStorage.getItem("softwashLoginToken"));
+    if (!userToken) {
+      Navigate("/userLogin");
+    } else {
+      handleShow();
+    }
   }
-}
+
+
+
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
+  const handleSaveBranch = (branchId) => {
+    setbranch_id(branchId);
+    handleClose();
+  };
+
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
@@ -39,6 +56,11 @@ function checkLogin(){
   return (
     <div>
       <Navigation />
+      <BranchModal
+isOpen={showModal} 
+onClose={handleClose}
+SaveBranch={handleSaveBranch} 
+/>
       <HeaderBanner
       pageTitle="Services"
       currentPage="Services"/>
@@ -122,7 +144,7 @@ function checkLogin(){
                 time while we take care of your laundry needs.
               </p>
               <div>
-                <Button variant="info" className=" text-white" size="lg" onClick={checkLogin}>
+                <Button variant="info" className=" text-white" size="lg" onClick={handleSchedulePickup}>
                   SCHEDULE PICKUP
                 </Button>{" "}
               </div>

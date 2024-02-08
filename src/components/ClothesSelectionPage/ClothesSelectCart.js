@@ -13,7 +13,7 @@ import { variableManager } from "../../context/VariablesContext";
 import ClothAccordian from "./ClothAccordian";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import {Loader} from "../../common/Loader"
+import Loader from "../../common/Loader"
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios"

@@ -1,6 +1,5 @@
 import '../../src/styles/UserProfile.css';
 import '../../src/styles/UserOrderDetails.css';
-import UserDashboardNav from "../components/UserDashboard/UserDashboardNav";
 import Sidebar from "../components/OrdersPage/Sidebar";
 import UserProfileBody from '../components/UserDashboard/UserProfileBody';
 import UserSidebarTablet from '../components/UserSidebarTablet';

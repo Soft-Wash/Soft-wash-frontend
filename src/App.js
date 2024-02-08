@@ -79,6 +79,7 @@ import SupTaskTable from "./pages/SupervisorPage/SupTaskTable";
 import SupSingleTask from "./components/SupervisorComponents/SupSingleTask";
 import UserEditProfile from "./components/UserDashboard/UserEditProfile";
 import UserDashboard from "./pages/user/UserDashboard";
+import { ChakraProvider } from '@chakra-ui/react'
 import WashmanRequestSuppliesPage from "./pages/Washman Pages/WashmanRequestSuppliesPage";
 
 
@@ -91,6 +92,7 @@ import WashmanRequestSuppliesPage from "./pages/Washman Pages/WashmanRequestSupp
 function App() {
   return (
 <>  
+<ChakraProvider>
   <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage/>} />
@@ -126,7 +128,7 @@ function App() {
         <Route path="/usereditprofile/:_id" element={<UserEditProfile/>}/>
 
         {/* Front desk */}
-          <Route path="/frontdesk" element={<Login/>} />
+          <Route path="/employeelogin" element={<Login/>} />
           <Route path="/frontdesk/dash" element={<Dashboard/>} />
           <Route path="/userdashboard" element={<UserDashboard/>} />
          
@@ -193,6 +195,7 @@ function App() {
 
       </Routes>
     </BrowserRouter>
+    </ChakraProvider>
 </>
 
 

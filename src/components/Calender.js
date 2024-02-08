@@ -4,8 +4,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from "react-time-picker";
 import { Button, Container } from "react-bootstrap";
 import { useEffect } from "react";
+import Loader from "../common/Loader"
 
-function Calender() {
+function Calender({onLoadingChange}) {
   const [startDate, setStartDate] = useState(() => {
     const storedDate = localStorage.getItem("calenderStartDate");
     return storedDate ? new Date(JSON.parse(storedDate)) : new Date();
@@ -31,12 +32,17 @@ function Calender() {
   const[activeBtn, setActiveBtn] = useState(1);
 
   const handleBtnClick = (btnNo,time) => {
+    onLoadingChange(true); 
       setActiveBtn(btnNo)
       handleTimeChange(time)
+      setTimeout(() => {
+        onLoadingChange(false); // Set loading to false after some time (simulation)
+      }, 1000);
   }
   
   return (
     <Container>
+
       <div className="custom-calendar-container select-pickup-type">
         <h3 className="date-headers">
           When would you like your order to be ready?
