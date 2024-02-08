@@ -128,7 +128,7 @@ function App() {
         <Route path="/usereditprofile/:_id" element={<UserEditProfile/>}/>
 
         {/* Front desk */}
-          <Route path="/frontdesk" element={<Login/>} />
+          <Route path="/employeelogin" element={<Login/>} />
           <Route path="/frontdesk/dash" element={<Dashboard/>} />
           <Route path="/userdashboard" element={<UserDashboard/>} />
          
