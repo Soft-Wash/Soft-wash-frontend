@@ -113,6 +113,13 @@
     margin-right: 20px;
 }
 
+
+
+.user-sidebar-hover:hover{
+    background-color: whitesmoke;
+}
+
+
 @media (max-width: 770px){
     .user-page-content{
         width: 90%;
