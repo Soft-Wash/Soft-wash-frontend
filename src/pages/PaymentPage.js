@@ -96,9 +96,7 @@ function handlePaymentPage(e) {
       ? e.target.file[0]
       : e.target.value;
 
-  setpaymentMethod ({
-    ...paymentMethod, payment_method: e.target.name
-  });
+  setpaymentMethod (e.target.name);
 }
 
 console.log(paymentMethod)
@@ -198,7 +196,7 @@ const postOrder = async () => {
                         id="flexRadioDefault1"
                         // value={paymentMethod}
                         onChange={(e)=>handlePaymentPage(e)}
-                        checked={paymentMethod.payment_method === "payWithCard"}
+                        checked={paymentMethod === "payWithCard"}
                       />
                       <label class="form-check-label" for="flexRadioDefault1">
                         Pay With Card
@@ -226,7 +224,7 @@ const postOrder = async () => {
                         id="flexRadioDefault1"
                         // value={paymentMethod}
                         onChange={(e)=>handlePaymentPage(e)}
-                        checked={paymentMethod.payment_method === "payWithCash"}
+                        checked={paymentMethod === "payWithCash"}
                       />
                       <label
                         className="form-check-label"
