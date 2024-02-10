@@ -151,21 +151,31 @@
   .status-description {
     font-size: 8px;
   }
+  .order-header h4{
+    font-size: 16px;
+  }
+  .order-field h3 {
+    font-size: 14px;
+    margin-right: 10px;
+  }
+  .order-field p {
+    font-size: 14px;
+  }
 }
 
 @media(max-width: 322px){
   .progress_circle {
-    width: 25px !important;
-    height: 25px !important;
+    width: 18px !important;
+    height: 18px !important;
   }
   .progress-check {
-    font-size: 14px !important;
+    font-size: 10px !important;
   }
   .progress_content:not(:last-child) .progress_bar1 {
-    width: 42%;
-    top: 18%;    
+    width: 40%;
+    top: 12%;    
   }
   .status-description {
-    font-size: 8px;
+    font-size: 6px;
   }
 }

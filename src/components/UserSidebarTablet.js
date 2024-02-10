@@ -42,27 +42,27 @@ function UserSidebarTablet(){
                                     </Link>
                                 </div>
                                 <div className='user-dashboard-nav-tabs'>
-                                    <Link exact to="/dashboard-contact-us"  className='user-dashboard-nav-links'>
+                                    <Link exact to="/dashboard-contact-us"  className='user-dashboard-nav-links d-flex'>
                                         <PhoneFill className='user-tablet-icons'/>Contact Us
                                     </Link>
                                 </div>
                                 <div className='user-dashboard-nav-tabs'>
-                                    <Link exact to="/user-profile"  className='user-dashboard-nav-links'>
+                                    <Link exact to="/user-profile"  className='user-dashboard-nav-links d-flex'>
                                         <PersonFill className='user-tablet-icons'/>My Profile
                                     </Link>
                                 </div>
                                 <div className='user-dashboard-nav-tabs'>
-                                    <Link exact to="/my-orders"  className='user-dashboard-nav-links'>
+                                    <Link exact to="/my-orders"  className='user-dashboard-nav-links d-flex'>
                                         <ListCheck className='user-tablet-icons'/>My Order 
                                     </Link>
                                 </div>
                                 <div className='user-dashboard-nav-tabs'>
-                                    <Link exact to="/ClothesSelection"  className='user-dashboard-nav-links'>
+                                    <Link exact to="/ClothesSelection"  className='user-dashboard-nav-links d-flex'>
                                         <ListTask className='user-tablet-icons'/>Create Order
                                     </Link> 
                                 </div>        
                                 <div className='user-dashboard-nav-tabs'>
-                                    <Link exact to="/paymenthistory"  className='user-dashboard-nav-links'>
+                                    <Link exact to="/paymenthistory"  className='user-dashboard-nav-links d-flex'>
                                         <ListTask className='user-tablet-icons'/>Payment History
                                     </Link> 
                                 </div>      

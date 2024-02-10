@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { registerUser } from "../../services/register";
 import { variableManager } from "../../context/VariablesContext";
-import { Loader } from "../../common/Loader";
+// import { Loader } from "../../common/Loader";
 import axios from "axios";
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
@@ -272,7 +272,7 @@ export default function CreatesupUsers() {
           </form>
         </div>
       </div>
-      <Loader color="primary" size="lg" show={loading} />
+      {/* <Loader color="primary" size="lg" show={loading} /> */}
     </div>
     </>
   );
