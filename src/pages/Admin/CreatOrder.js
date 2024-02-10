@@ -17,11 +17,12 @@ function CreateOrder() {
   const [smShow, setSmShow] = useState(false);
   const [clothDetails, setClothDetails] = useState();
   const [customerDetails, setcustomerDetails] = useState();
-  const [clothId, setClothId] = useState();
+  const [clothId, setClothId] = useState([]);
   const [createdOrder, setcreatedOrder] = useState();
   const [sheduleDate, setsheduleDate] = useState();
   const [clothName, setclothName] = useState();
   const [clothPrice, setclothPrice] = useState();
+  const [selectedItems,setSelectedItems]= useState()
   const [deliveryAddress, setdeliveryAddress] = useState({
     FullAddress: "",
   });
@@ -60,6 +61,8 @@ function CreateOrder() {
     });
   };
 
+  console.log(clothId)
+
   const handleCustomerData = (e) => {
     const value = e.target.value;
     setcustomerDetails({
@@ -71,7 +74,7 @@ function CreateOrder() {
 
   const getClothDetails = (id, name, price) => {
     if (!clothId?.includes(id)) {
-      setClothId([id]);
+      setClothId(()=> [...clothId, id]);
       setclothName(name);
       setclothPrice(price);
     } else {
@@ -79,12 +82,21 @@ function CreateOrder() {
     }
   };
 
+  const UpdateClothQuant=()=>{
+    axios.put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, clothId)
+    .then((resp) => {
+      console.log(resp.data)
+      setSelectedItems(resp.data)
+      selectedItems && console.log(selectedItems)
+     })
+  }
+
+  
   useEffect(() => {
     let isMounted = true;
 
-    if (clothId && isMounted) {
+    if (clothId?.length > 0 && isMounted) {
       const existingCloth = MiniClothCart.find((item) => item._id === clothId);
-
       if (existingCloth) {
         return toast.error("item already in cart");
       } else {
@@ -112,9 +124,6 @@ function CreateOrder() {
 
 
 
-
-  console.log(MiniClothCart);
-
   const handleTimeChange = (time) => {
     setSelectedTime(time);
   };
@@ -140,7 +149,7 @@ function CreateOrder() {
     subtotal: totalPrice,
   };
 
-  console.log(OrderDetails);
+  // console.log(OrderDetails);
 
   const CreateOrder = () => {
     if (
