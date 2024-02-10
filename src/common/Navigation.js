@@ -99,7 +99,7 @@ function Navigation() {
                 >
                   <Dropdown.Toggle
                     id="dropdown-autoclose-true"
-                    className="bg-transparent text-black border-0 p-0"
+                    className="bg-transparent text-black border-0 p-0 d-flex align-items-center"
                   >
                     <img
                       src={img}

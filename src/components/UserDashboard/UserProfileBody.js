@@ -75,10 +75,6 @@ function UserProfileBody() {
             <h4>Address</h4>
             <h4>{userData?.address}</h4>
           </div>
-          {/* <div className="user-profile-field">
-            <h4>Verified</h4>
-            <h4>{userData?.isVerified}</h4>
-          </div> */}
          </div>
         <Link to={`/usereditprofile/${userData?._id}`}  className="user-form-link">
           <Button className="edit-user-profile-btn">Edit Profile</Button>
