@@ -36,7 +36,7 @@ function Calender({onLoadingChange}) {
       setActiveBtn(btnNo)
       handleTimeChange(time)
       setTimeout(() => {
-        onLoadingChange(false); // Set loading to false after some time (simulation)
+        onLoadingChange(false);
       }, 1000);
   }
   
