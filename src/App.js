@@ -191,7 +191,7 @@ function App() {
 
         {/* EMPLOYEE LOGIN */}
 
-        <Route path ="/EmployeeLogin" element ={<EmployeeLogin/>}/>
+        <Route path ="/employeeLogin" element ={<EmployeeLogin/>}/>
 
       </Routes>
     </BrowserRouter>

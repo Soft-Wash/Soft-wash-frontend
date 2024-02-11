@@ -65,7 +65,7 @@ function UserProfileBody() {
           </div>          
           <div className="user-profile-field">
             <h4>Phone</h4>
-            {/* <h4>{userData.phone}</h4> */}
+            <h4>{userData?.phone}</h4>
           </div>
           <div className="user-profile-field">
             <h4>Email</h4>
@@ -74,10 +74,6 @@ function UserProfileBody() {
           <div className="user-profile-field">
             <h4>Address</h4>
             <h4>{userData?.address}</h4>
-          </div>
-          <div className="user-profile-field">
-            <h4>Verified</h4>
-            <h4>{userData?.isVerified}</h4>
           </div>
          </div>
         <Link to={`/usereditprofile/${userData?._id}`}  className="user-form-link">

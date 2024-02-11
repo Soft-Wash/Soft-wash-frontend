@@ -26,7 +26,7 @@ function UserDashboard() {
 
     axios
       .get(
-        `${process.env.REACT_APP_BASE_URL}/payments/userpayments/transaction`,
+        `${process.env.REACT_APP_BASE_URL}/payments/all/userpayments`,
         {
           params: { id: userId._id},
         }

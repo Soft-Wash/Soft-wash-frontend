@@ -1,7 +1,7 @@
 import Sidebar from "../../components/OrdersPage/Sidebar";
 import { Container, Row, Col, Nav } from "react-bootstrap";
 import "../../styles/UserProfile.css";
-import '../../styles/DashboardContact.css';
+import "../../styles/DashboardContact.css";
 import Tab from "react-bootstrap/Tab";
 import OrderProp from "../../components/OrdersPage/OrderProp";
 import { useEffect } from "react";
@@ -12,109 +12,113 @@ import UserSidebarTablet from "../../components/UserSidebarTablet";
 
 export default function Orders() {
   const [userOrders, setuserOrders] = useState();
-  const [orderplaced, setorderplaced] = useState();
+  const [orders, setOrders] = useState();
   const [UserId, setUserId] = useState();
   const [pickUpDateValue, setpickUpDate] = useState();
-  const [orderRecieved,setOrderRecieved] = useState()
-  const [orderConfirmed,setOrderConfirmed] = useState()
 
 
-  useEffect(() => {
+  const showAll = ()=>{
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
-    setUserId(userId);
+    console.log('clciked')
 
     axiosInstance.get(`/order/${userId._id}/allorders`).then((resp) => {
-      // console.log(resp.data);
-      setuserOrders(resp.data);
+      setOrders(resp.data);
       const pickUpDate = resp.data.schedule_date;
       const latestDate = new Date(pickUpDate);
       const options = { year: "numeric", month: "long", day: "numeric" };
       const pickUpDateValue = latestDate.toLocaleDateString("en-US", options);
-      // console.log(pickUpDateValue);
       setpickUpDate(pickUpDateValue);
     });
-  }, []);
-
+  }
 
   const getPLacedOrder = () => {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=order placed`)
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=order placed`
+      )
       .then((resp) => {
-        console.log(resp.data);
-        setorderplaced(resp.data);
+        setOrders(resp.data);
       })
       .catch((error) => {
         console.error("Error fetching placed orders:", error);
       });
   };
-  
 
-  const getConfirmedOrder = ()=>{
+  const getConfirmedOrder = () => {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=Confirmed`)
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=Confirmed`
+      )
       .then((resp) => {
-        console.log(resp.data);
-        setorderplaced(resp.data);
+        setOrders(resp.data);
       })
       .catch((error) => {
         console.error("Error fetching placed orders:", error);
       });
-  }
+  };
 
-  const RecievedOrder = ()=>{
+  const RecievedOrder = () => {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=Recieved`)
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=Recieved`
+      )
       .then((resp) => {
         console.log(resp.data);
-        setorderplaced(resp.data);
+        setOrders(resp.data);
       })
       .catch((error) => {
         console.error("Error fetching placed orders:", error);
       });
-  }
+  };
 
-
-  const CleaningOrder = ()=>{
+  const CleaningOrder = () => {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=Cleaning`)
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=Cleaning`
+      )
       .then((resp) => {
-        console.log(resp.data);
-        setorderplaced(resp.data);
+        setOrders(resp.data);
       })
       .catch((error) => {
         console.error("Error fetching placed orders:", error);
       });
-  }
+  };
 
-  const ReadyOrder = ()=>{
+  const ReadyOrder = () => {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=Ready`)
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=Ready`
+      )
       .then((resp) => {
-        console.log(resp.data);
-        setorderplaced(resp.data);
+        setOrders(resp.data);
       })
       .catch((error) => {
         console.error("Error fetching placed orders:", error);
       });
-  }
+  };
 
-  const ShippedOrder = ()=>{
+  const ShippedOrder = () => {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=Shipped`)
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=Shipped`
+      )
       .then((resp) => {
-        console.log(resp.data);
-        setorderplaced(resp.data);
+        setOrders(resp.data);
       })
       .catch((error) => {
         console.error("Error fetching placed orders:", error);
       });
-  }
+  };
+
+  useEffect(() => {
+    showAll()
+  }, []);
 
   return (
     <>
@@ -140,12 +144,16 @@ export default function Orders() {
               </div>
             </div>
             <Row>
-              <Tab.Container id="left-tabs-example" defaultActiveKey="first" style={{ borderBottom: "none" }}>
+              <Tab.Container
+                id="left-tabs-example"
+                defaultActiveKey="first"
+                style={{ borderBottom: "none" }}
+              >
                 <Row>
                   <Col lg={12}>
                     <Nav variant="pills" className="flex-row text-black">
                       <Nav.Item>
-                        <Nav.Link eventKey="first" className="text-black">
+                        <Nav.Link eventKey="first" className="text-black" onClick={()=> showAll()}>
                           Show all
                         </Nav.Link>
                       </Nav.Item>
@@ -153,56 +161,81 @@ export default function Orders() {
                         <Nav.Link
                           eventKey="second"
                           className="text-black"
-                          onClick={()=>getPLacedOrder()}
+                          onClick={() => getPLacedOrder()}
                         >
                           Order Placed
                         </Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
-                        <Nav.Link eventKey="third" className="text-black" onClick={()=>getConfirmedOrder()}>
+                        <Nav.Link
+                          eventKey="third"
+                          className="text-black"
+                          onClick={() => getConfirmedOrder()}
+                        >
                           Confirmed
                         </Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
-                        <Nav.Link eventKey="fourth" className="text-black" onClick={()=>RecievedOrder()}>
+                        <Nav.Link
+                          eventKey="fourth"
+                          className="text-black"
+                          onClick={() => RecievedOrder()}
+                        >
                           Received
                         </Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
-                        <Nav.Link eventKey="fifth" className="text-black" onClick={()=>CleaningOrder()}>
+                        <Nav.Link
+                          eventKey="fifth"
+                          className="text-black"
+                          onClick={() => CleaningOrder()}
+                        >
                           Cleaning
                         </Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
-                        <Nav.Link eventKey="sixth" className="text-black" onClick={()=>ReadyOrder()}>
+                        <Nav.Link
+                          eventKey="sixth"
+                          className="text-black"
+                          onClick={() => ReadyOrder()}
+                        >
                           Ready
                         </Nav.Link>
                       </Nav.Item>
                       <Nav.Item>
-                        <Nav.Link eventKey="seventh" className="text-black" onClick={()=>ShippedOrder()}>
+                        <Nav.Link
+                          eventKey="seventh"
+                          className="text-black"
+                          onClick={() => ShippedOrder()}
+                        >
                           Shipped
                         </Nav.Link>
                       </Nav.Item>
                     </Nav>
                   </Col>
                 </Row>
-                <Row style={{ border: "none" }}>
-                  <Tab.Content style={{border:"none"}}>
+                <Row style={{ border: "none" }} className="text-center">
+                  <Tab.Content style={{ border: "none" }}>
                     <Tab.Pane eventKey="first" style={{ border: "none" }}>
-                      {userOrders &&
-                        userOrders.map((item) => (
+                      {orders?.length > 0 ? (
+                        orders.map((item) => (
                           <OrderProp
                             id={item._id}
                             pickup={item.pickuptime}
                             address={item.deliveryAddress[0].FullAddress}
                             price={item.subtotal}
                             status={item.status}
-                            style={{ borderBottom: "none" }}/>
-                        ))}
+                          />
+                        ))
+                      ) : (
+                        <p classNamer="text-center fw-bold">
+                          No Data Available
+                        </p>
+                      )}
                     </Tab.Pane>
                     <Tab.Pane eventKey="second" style={{ border: "none" }}>
-                      {orderplaced &&
-                        orderplaced.map((item) => (
+                      {orders?.length > 0 ? (
+                        orders.map((item) => (
                           <OrderProp
                             id={item._id}
                             pickup={item.pickuptime}
@@ -210,11 +243,16 @@ export default function Orders() {
                             price={item.subtotal}
                             status={item.status}
                           />
-                        ))}
+                        ))
+                      ) : (
+                        <p classNamer="text-center fw-bold">
+                          No Data Available
+                        </p>
+                      )}
                     </Tab.Pane>
                     <Tab.Pane eventKey="third" style={{ border: "none" }}>
-                    {orderConfirmed &&
-                        orderConfirmed?.map((item) => (
+                      {orders?.length > 0 ? (
+                        orders.map((item) => (
                           <OrderProp
                             id={item._id}
                             pickup={item.pickuptime}
@@ -222,13 +260,80 @@ export default function Orders() {
                             price={item.subtotal}
                             status={item.status}
                           />
-                        ))}
+                        ))
+                      ) : (
+                        <p classNamer="text-center fw-bold">
+                          No Data Available
+                        </p>
+                      )}
                     </Tab.Pane>
-                    <Tab.Pane eventKey="fourth" style={{ border: "none" }}></Tab.Pane>
-                    <Tab.Pane eventKey="fifth" style={{ border: "none" }}></Tab.Pane>
-                    <Tab.Pane eventKey="sixth" style={{ border: "none" }}></Tab.Pane>
+                    <Tab.Pane eventKey="fourth" style={{ border: "none" }}>
+                      {orders?.length > 0 ? (
+                        orders.map((item) => (
+                          <OrderProp
+                            id={item._id}
+                            pickup={item.pickuptime}
+                            address={item.deliveryAddress[0].FullAddress}
+                            price={item.subtotal}
+                            status={item.status}
+                          />
+                        ))
+                      ) : (
+                        <p classNamer="text-center fw-bold">
+                          No Data Available
+                        </p>
+                      )}
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="fifth" style={{ border: "none" }}>
+                      {orders?.length > 0 ? (
+                        orders.map((item) => (
+                          <OrderProp
+                            id={item._id}
+                            pickup={item.pickuptime}
+                            address={item.deliveryAddress[0].FullAddress}
+                            price={item.subtotal}
+                            status={item.status}
+                          />
+                        ))
+                      ) : (
+                        <p classNamer="text-center fw-bold">
+                          No Data Available
+                        </p>
+                      )}
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="sixth" style={{ border: "none" }}>
+                      {orders?.length > 0 ? (
+                        orders.map((item) => (
+                          <OrderProp
+                            id={item._id}
+                            pickup={item.pickuptime}
+                            address={item.deliveryAddress[0].FullAddress}
+                            price={item.subtotal}
+                            status={item.status}
+                          />
+                        ))
+                      ) : (
+                        <p classNamer="text-center fw-bold">
+                          No Data Available
+                        </p>
+                      )}
+                    </Tab.Pane>
                     <Tab.Pane eventKey="seventh" style={{ border: "none" }}>
-                    <OrderProp/>
+                      {orders?.length > 0 ? (
+                        orders.map((item) => (
+                          <OrderProp
+                            id={item._id}
+                            pickup={item.pickuptime}
+                            address={item.deliveryAddress[0].FullAddress}
+                            price={item.subtotal}
+                            status={item.status}
+                          />
+                        ))
+                      ) : (
+                        <p classNamer="text-center fw-bold mt-5">
+                          No Data Available
+                        </p>
+                      )}
                     </Tab.Pane>
                   </Tab.Content>
                 </Row>
