@@ -9,65 +9,28 @@ import itemImg3 from "../../assets/MarketPlace/Images/1509621985884_sptows2785_a
 import itemImg4 from "../../assets/MarketPlace/Images/1516383180440_spxty4380_waw_multi-purpose_soap_250_g_180x2x2.jpg";
 import itemImg5 from "../../assets/MarketPlace/Images/Afer-Ironing-Board-Maxi-130-x-47-cm-Supermart-ng-9833_180x2x.jpg";
 import itemImg6 from "../../assets/MarketPlace/Images/1465908830684_spxspy1512_nittol_anti-bacterial_multi-purpose_soap_150_g_180x2x2.jpg";
-import itemImg7 from "../../assets/MarketPlace/Images/cloth-hangers-prices-in-lagos-nigeria-75x75.jpg";
-import itemImg8 from "../../assets/MarketPlace/Images/cloth-pegs-and-clips-75x75.jpg";
-import itemImg9 from "../../assets/MarketPlace/Images/laundry-finishing-tables-lagos-nigeria.jpg";
 import { FiHeart } from "react-icons/fi";
 import Button from "react-bootstrap/Button";
 import Footer from "../../common/Footer";
+import axios from "axios";
+import { useEffect,useState } from "react";
 
 function Wishlist() {
+  const [wishlist,setWishlist] = useState()
 
-  const mockData = [
-    {
-      name: "Klin Detergent",
-      description:
-        "Experience the cleaning power of Klin Detergent, a trusted solution for tackling tough stains and keeping your clothes fresh and vibrant. Our detergent is specially formulated to provide effective cleaning and fabric care. Say goodbye to stubborn stains and hello to clean, crisp clothing. Available at an affordable price of $3.00.",
-      price: "$3.00",
-      image: itemImg1,
-    },
-    {
-      name: "WAW Detergent",
-      description:
-        "Experience the cleaning power of Klin Detergent, a trusted solution for tackling tough stains and keeping your clothes fresh and vibrant. Our detergent is specially formulated to provide effective cleaning and fabric care. Say goodbye to stubborn stains and hello to clean, crisp clothing. Available at an affordable price of $3.00.",
-      price: "$3.00",
-      image: itemImg2,
-    },
-    {
-      name: "Arial Detergent",
-      description:
-        "Experience the cleaning power of Klin Detergent, a trusted solution for tackling tough stains and keeping your clothes fresh and vibrant. Our detergent is specially formulated to provide effective cleaning and fabric care. Say goodbye to stubborn stains and hello to clean, crisp clothing. Available at an affordable price of $3.00.",
-      price: "$3.00",
-      image: itemImg3,
-    },
+  const getWishList = ()=>{
+    const user = JSON.parse(localStorage.getItem("softwashLoginUser"));
+    axios.get(`${process.env.REACT_APP_BASE_URL}/wishlist/user/wishlist?user_id=${user?._id}`)
+    .then((resp)=> {
+      console.log(resp.data)
+      setWishlist(resp.data)
 
-    {
-      name: "Klin Detergent",
-      description:
-        "Experience the cleaning power of Klin Detergent, a trusted solution for tackling tough stains and keeping your clothes fresh and vibrant. Our detergent is specially formulated to provide effective cleaning and fabric care. Say goodbye to stubborn stains and hello to clean, crisp clothing. Available at an affordable price of $3.00.",
-      price: "$3.00",
-      image: itemImg4,
-    },
-    {
-      name: "WAW SOAP",
-      description:
-        "Experience the cleaning power of Klin Detergent, a trusted solution for tackling tough stains and keeping your clothes fresh and vibrant. Our detergent is specially formulated to provide effective cleaning and fabric care. Say goodbye to stubborn stains and hello to clean, crisp clothing. Available at an affordable price of $3.00.",
-      price: "$3.00",
-      image: itemImg5,
-    },
-    {
-      name: "Klin Detergent",
-      description:
-        "Experience the cleaning power of Klin Detergent, a trusted solution for tackling tough stains and keeping your clothes fresh and vibrant. Our detergent is specially formulated to provide effective cleaning and fabric care. Say goodbye to stubborn stains and hello to clean, crisp clothing. Available at an affordable price of $3.00.",
-      price: "$3.00",
-      image: itemImg6,
-    },
+    })
+  }
 
-  ];
-
-  const slicedData = mockData.splice(1, 3);
-
-
+  useEffect(()=>{
+    getWishList()
+  },[])
 
   return (
     <div>
@@ -75,25 +38,35 @@ function Wishlist() {
       <Container className="text-center text-secondary pt-5">
         <h1>Wishlist</h1>
         <p>
-          To save your wishlist please <span><Link className="link02">login</Link> </span> or <span><Link className="link02">Sign up</Link> </span>.
-          <p className="mt-3"><FaRegShareSquare/> share wishlist</p>
+          To save your wishlist please{" "}
+          <span>
+            <Link className="link02">login</Link>{" "}
+          </span>{" "}
+          or{" "}
+          <span>
+            <Link className="link02">Sign up</Link>{" "}
+          </span>
+          .
+          <p className="mt-3">
+            <FaRegShareSquare /> share wishlist
+          </p>
         </p>
       </Container>
 
       <Container>
         <Row>
-          {slicedData &&
-            slicedData.map((item) => (
-              <Col xs={12} sm={12} md={4} lg={4} xl={3} key={item.name}>
+          {wishlist &&
+            wishlist.map((item) => (
+              <Col xs={12} sm={12} md={4} lg={4} xl={3} key={item._id}>
                 <Link to="/singleproduct">
                   <Card
                     className="item-card border text-center mt-4"
                     style={{ height: "350px" }}
                   >
                     <FiHeart className="cart-icon02" />
-                    <img src={item.image} className="item-image  mt-5" alt="" />
-                    <h5 className="name-tag mt-1">{item.name}</h5>
-                    <p className="price-tag fs-4 m-0"> &#8358; 4,650</p>
+                    <img src={item.product.img} className="item-image  mt-5" alt="" />
+                    <h5 className="name-tag mt-1">{item.product.name}</h5>
+                    <p className="price-tag fs-4 m-0"> &#8358;{item.product.price}</p>
                     <div>
                       <Button
                         variant="secondary"
@@ -108,7 +81,7 @@ function Wishlist() {
             ))}
         </Row>
       </Container>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

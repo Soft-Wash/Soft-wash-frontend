@@ -91,7 +91,7 @@ function Navigation() {
                     3
                   </small>
 
-                  <BsBell className=" fs-4 mr-0" />
+                  <BsBell className="fs-4 mr-0" />
                 </div>
                 <Dropdown
                   className="d-inline mx-2 my-auto"
