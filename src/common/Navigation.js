@@ -110,7 +110,7 @@ function Navigation() {
                   </Dropdown.Toggle>
                   <Dropdown.Menu className="mt-4">
                     <Dropdown.Item >
-                      <Link className="navigation_link">
+                      <Link className="navigation_link" to="/user-profile">
                       Profile
                       </Link>
                       </Dropdown.Item>
