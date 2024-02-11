@@ -15,24 +15,21 @@ export default function Orders() {
   const [orders, setOrders] = useState();
   const [UserId, setUserId] = useState();
   const [pickUpDateValue, setpickUpDate] = useState();
-  const [orderRecieved, setOrderRecieved] = useState();
-  const [orderConfirmed, setOrderConfirmed] = useState();
 
-  useEffect(() => {
+
+  const showAll = ()=>{
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
-    setUserId(userId);
+    console.log('clciked')
 
     axiosInstance.get(`/order/${userId._id}/allorders`).then((resp) => {
-      // console.log(resp.data);
-      setuserOrders(resp.data);
+      setOrders(resp.data);
       const pickUpDate = resp.data.schedule_date;
       const latestDate = new Date(pickUpDate);
       const options = { year: "numeric", month: "long", day: "numeric" };
       const pickUpDateValue = latestDate.toLocaleDateString("en-US", options);
-      // console.log(pickUpDateValue);
       setpickUpDate(pickUpDateValue);
     });
-  }, []);
+  }
 
   const getPLacedOrder = () => {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
@@ -41,7 +38,6 @@ export default function Orders() {
         `${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=order placed`
       )
       .then((resp) => {
-        console.log(resp.data);
         setOrders(resp.data);
       })
       .catch((error) => {
@@ -56,7 +52,6 @@ export default function Orders() {
         `${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=Confirmed`
       )
       .then((resp) => {
-        console.log(resp.data);
         setOrders(resp.data);
       })
       .catch((error) => {
@@ -86,7 +81,6 @@ export default function Orders() {
         `${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=Cleaning`
       )
       .then((resp) => {
-        console.log(resp.data);
         setOrders(resp.data);
       })
       .catch((error) => {
@@ -101,7 +95,6 @@ export default function Orders() {
         `${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=Ready`
       )
       .then((resp) => {
-        console.log(resp.data);
         setOrders(resp.data);
       })
       .catch((error) => {
@@ -116,13 +109,16 @@ export default function Orders() {
         `${process.env.REACT_APP_BASE_URL}/order/orderstatus/user?id=${userId._id}&status=Shipped`
       )
       .then((resp) => {
-        console.log(resp.data);
         setOrders(resp.data);
       })
       .catch((error) => {
         console.error("Error fetching placed orders:", error);
       });
   };
+
+  useEffect(() => {
+    showAll()
+  }, []);
 
   return (
     <>
@@ -157,7 +153,7 @@ export default function Orders() {
                   <Col lg={12}>
                     <Nav variant="pills" className="flex-row text-black">
                       <Nav.Item>
-                        <Nav.Link eventKey="first" className="text-black">
+                        <Nav.Link eventKey="first" className="text-black" onClick={()=> showAll()}>
                           Show all
                         </Nav.Link>
                       </Nav.Item>
