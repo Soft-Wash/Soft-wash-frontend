@@ -78,18 +78,6 @@ function CreateOrder() {
 
 
 
-
-  // const UpdateClothQuantity =()=>{
-  //   const keys = Object.keys(clothQuantity);
-  //   const values = Object.values(clothQuantity);
-  //   const mainArr = keys.map((key,index)=>({id:keys,quantity:values[index]}))
-  //   axios.put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
-  //   .then((resp) => {
-  //     setSelectedItems(resp.data)
-
-  //    })
-  // }
-
   
   useEffect(() => {
     let isMounted = true;
@@ -122,7 +110,6 @@ function CreateOrder() {
     }
   }
 
-  console.log(clothQuantity)
 
   const handleTimeChange = (time) => {
     setSelectedTime(time);
@@ -160,8 +147,6 @@ function CreateOrder() {
         schedule_date: sheduleDate,
         subtotal: totalPrice,
       };
-      // console.log(OrderDetails);
-
       if (
         OrderDetails.clothtype_ids === undefined ||
         OrderDetails.pickuptime === undefined ||
@@ -176,7 +161,6 @@ function CreateOrder() {
         axios
           .post(`${process.env.REACT_APP_BASE_URL}/order/create`, OrderDetails)
           .then((resp) => {
-            console.log(resp.data);
             setcreatedOrder(resp.data);
             toast.success("Order created successfully");
             setMiniClothCart([])
@@ -187,13 +171,17 @@ function CreateOrder() {
           });
       }
 
-     })
-
-
-
-  
+     })  
 
   };
+
+  const ClearOrderDetails=()=>{
+    setMiniClothCart([])
+    setclothQuantity(0)
+    setClothDetails("")
+    setsheduleDate("");
+
+  }
 
   const Creatuser = () => {
     axiosInstance.post("/users/auth/register", customerDetails).then((resp) => {
@@ -483,7 +471,7 @@ function CreateOrder() {
                     >
                       Save And Continue
                     </button>
-                    <button className="save-continue-btn2">Clear All</button>
+                    <button className="save-continue-btn2" onClick={()=>ClearOrderDetails()}>Clear All</button>
                     <div className="total-div">
                       <h4>
                         Total: <span>{totalPrice}</span>
