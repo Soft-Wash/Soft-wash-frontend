@@ -81,6 +81,7 @@ import UserEditProfile from "./components/UserDashboard/UserEditProfile";
 import UserDashboard from "./pages/user/UserDashboard";
 import { ChakraProvider } from '@chakra-ui/react'
 import WashmanRequestSuppliesPage from "./pages/Washman Pages/WashmanRequestSuppliesPage";
+import TaskFreeEmployees from "./pages/Admin/TaskFreeEmployees";
 
 
 
@@ -167,7 +168,7 @@ function App() {
         <Route path="/tasktable" element={<TaskTable/>}/>
         <Route path="/singletaskpage/:_id" element={<SingleTaskPage/>}/>
         <Route path="/createOrder" element={<CreateOrder/>}/>
-        {/* <Route path="/taskfreeemployee" element={<TaskFreeEmployees/>}/> */}
+        <Route path="/taskfreeemployee" element={<TaskFreeEmployees/>}/>
         
 
 
