@@ -99,6 +99,8 @@
 .myorders-container{
     overflow: scroll;
     height: 100vh;
+    background-color: whitesmoke;
+    padding: 30px;
 }
 
 .user-tablet-icons{

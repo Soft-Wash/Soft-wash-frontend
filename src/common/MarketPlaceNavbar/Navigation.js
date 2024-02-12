@@ -31,27 +31,28 @@ function Navigation(){
                 navbarScroll
               
               >
-                <Nav.Link href="/" className="text-dark">
+                <Nav.Link to="/" className="text-dark">
                   Home
                 </Nav.Link>
+
                 <NavDropdown
                   title={<FiUser className="fs-4 text-dark" />}
                   className="d-flex"
                   id="navbarScrollingDropdown"
                 >
-                  <NavDropdown.Item href="#action3">
+                  <NavDropdown.Item>
                     Transaction History
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action4">
                     Print Invoice
                   </NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link to="/cart" className="d-flex">
+                <Nav.Link  className="d-flex">
                   <Link to="/cart" className="color-dark-link">
-                  <FiShoppingCart className="fs-4 " />
+                  <FiShoppingCart className="fs-4"/>
                   </Link>
                   <Link to="/wishlist">
-                  <FiHeart className="wishlist_icon" />
+                  <FiHeart className="wishlist_icon"/>
                   </Link>
 
                 </Nav.Link>

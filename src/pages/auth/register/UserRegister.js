@@ -49,17 +49,6 @@ export default function Signup() {
       } 
     }
 
-    // async function handleSubmit(payload) {
-    //   setLoading(true);
-    //   const {data,error} = await registerUser(payload);
-    //   setLoading(false);
-    //   if(data){
-    //     toast.success("Login Successful")
-    //     setUser(data);
-    //     navigate('/UserLogin')
-    //   }
-    //   console.log(data?data:error);
-    // } 
     async function handleSubmit(payload) {
       setLoading(true);
       try {
@@ -76,7 +65,6 @@ export default function Signup() {
           console.log("Unexpected response from the server:", data);
         }
     
-        console.log("Data:", data);
         console.log("Error:", error);
       } catch (e) {
         console.error("An unexpected error occurred:", e);
