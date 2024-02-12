@@ -35,23 +35,19 @@ function CreateOrder() {
     return storedTime ? JSON.parse(storedTime) : "";
   });
 
-  const customerId = JSON.parse(localStorage.getItem("UserId"));
+
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   useEffect(() => {
     let isMounted = true;
-
     axiosInstance.get("cloth/").then((resp) => {
       if (isMounted) {
         setclothTypes(resp.data);
       }
     });
-
-    return () => {
-      isMounted = false;
-    };
+    return 
   }, []);
 
   const handleInputChange = (e) => {
@@ -60,8 +56,6 @@ function CreateOrder() {
       serviceType: e.target.name,
     });
   };
-
-  console.log(clothId)
 
   const handleCustomerData = (e) => {
     const value = e.target.value;
@@ -74,7 +68,7 @@ function CreateOrder() {
 
   const getClothDetails = (id, name, price) => {
     if (!clothId?.includes(id)) {
-      setClothId(()=> [...clothId, id]);
+      setClothId((prev)=> [ id]);
       setclothName(name);
       setclothPrice(price);
     } else {
@@ -82,20 +76,29 @@ function CreateOrder() {
     }
   };
 
-  const UpdateClothQuant=()=>{
-    axios.put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, clothId)
-    .then((resp) => {
-      console.log(resp.data)
-      setSelectedItems(resp.data)
-      selectedItems && console.log(selectedItems)
-     })
-  }
+
+
+
+  // const UpdateClothQuantity =()=>{
+  //   const keys = Object.keys(clothQuantity);
+  //   const values = Object.values(clothQuantity);
+  //   const mainArr = keys.map((key,index)=>({id:keys,quantity:values[index]}))
+  //   axios.put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
+  //   .then((resp) => {
+  //     setSelectedItems(resp.data)
+
+  //    })
+  // }
 
   
   useEffect(() => {
     let isMounted = true;
+    AddClothesToContent()
+    return 
+  }, [clothId]);
 
-    if (clothId?.length > 0 && isMounted) {
+  const AddClothesToContent=()=>{
+    if (clothId?.length > 0) {
       const existingCloth = MiniClothCart.find((item) => item._id === clothId);
       if (existingCloth) {
         return toast.error("item already in cart");
@@ -117,12 +120,9 @@ function CreateOrder() {
         ]);
       }
     }
-    return () => {
-      isMounted = false;
-    };
-  }, [clothId]);
+  }
 
-
+  console.log(clothQuantity)
 
   const handleTimeChange = (time) => {
     setSelectedTime(time);
@@ -139,41 +139,60 @@ function CreateOrder() {
     handleTimeChange(time);
   };
 
-  const OrderDetails = {
-    customer_id: customerId,
-    clothtype_ids: clothId,
-    pickuptime: selectedTime,
-    deliveryAddress: deliveryAddress,
-    delivery_type: clothDetails?.serviceType,
-    schedule_date: sheduleDate,
-    subtotal: totalPrice,
-  };
 
-  // console.log(OrderDetails);
+
+
 
   const CreateOrder = () => {
-    if (
-      OrderDetails.clothtype_ids === undefined ||
-      OrderDetails.pickuptime === undefined ||
-      OrderDetails.deliveryAddress === undefined ||
-      OrderDetails.schedule_date === undefined
-    ) {
-      toast.error("Please select all fields");
-    } else if (!customerDetails || Object.keys(customerDetails).length === 0) {
-      toast.error("please create a customer");
-    } else {
-      axios
-        .post(`${process.env.REACT_APP_BASE_URL}/order/create`, OrderDetails)
-        .then((resp) => {
-          console.log(resp.data);
-          setcreatedOrder(resp.data);
-          toast.success("Order created successfully");
-        })
-        .catch((error) => {
-          console.error("Error creating order:", error);
-          toast.error("Failed to create order");
-        });
-    }
+    const customerId = JSON.parse(localStorage.getItem("softwashLoginUser"));
+    const keys = Object.keys(clothQuantity);
+    const values = Object.values(clothQuantity);
+    const mainArr = keys.map((key,index)=>({id:key,quantity:values[index]}))
+    axios.put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
+    .then((resp) => {
+      setSelectedItems(resp.data)
+      const OrderDetails = {
+        customer_id: customerId?._id,
+        clothtype_ids: resp.data,
+        pickuptime: selectedTime,
+        deliveryAddress: deliveryAddress,
+        delivery_type: clothDetails?.serviceType,
+        schedule_date: sheduleDate,
+        subtotal: totalPrice,
+      };
+      // console.log(OrderDetails);
+
+      if (
+        OrderDetails.clothtype_ids === undefined ||
+        OrderDetails.pickuptime === undefined ||
+        OrderDetails.deliveryAddress === undefined ||
+        OrderDetails.schedule_date === undefined
+      ) {
+        toast.error("Please select all fields");
+      } else if (!customerDetails || Object.keys(customerDetails).length === 0) {
+        toast.error("please create a customer");
+      } else {
+  
+        axios
+          .post(`${process.env.REACT_APP_BASE_URL}/order/create`, OrderDetails)
+          .then((resp) => {
+            console.log(resp.data);
+            setcreatedOrder(resp.data);
+            toast.success("Order created successfully");
+            setMiniClothCart([])
+          })
+          .catch((error) => {
+            console.error("Error creating order:", error);
+            toast.error("Failed to create order");
+          });
+      }
+
+     })
+
+
+
+  
+
   };
 
   const Creatuser = () => {
