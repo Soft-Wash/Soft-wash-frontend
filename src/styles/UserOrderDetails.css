@@ -130,12 +130,7 @@
 
 @media(max-width: 427px){
   .user-dashboard-contact-body {
-    /* width: 80%;
-    margin: auto;
-    margin-top: 10px; */
     padding: 25px 10px;
-    /* border-radius: 30px;
-    background-color: white; */
   }
   .progress_circle {
     width: 25px !important;

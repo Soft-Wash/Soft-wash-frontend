@@ -79,7 +79,7 @@ import SupTaskTable from "./pages/SupervisorPage/SupTaskTable";
 import SupSingleTask from "./components/SupervisorComponents/SupSingleTask";
 import UserEditProfile from "./components/UserDashboard/UserEditProfile";
 import UserDashboard from "./pages/user/UserDashboard";
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react';
 import WashmanRequestSuppliesPage from "./pages/Washman Pages/WashmanRequestSuppliesPage";
 
 

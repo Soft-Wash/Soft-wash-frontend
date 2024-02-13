@@ -16,29 +16,49 @@ function WashmanSingleOrderBody() {
   );
 
   const [selectedOption, setSelectedOption] = useState("Order Placed");
-  const [order, setOrder] = useState(null);
+  // const [order, setOrder] = useState(null);
+  const [task, setTask] = useState(null);
   const [indexFound, setIndexFound] = useState(0);
 
   const { _id } = useParams();
 
-  const orderStatusArray = [
-    "Order Placed",
-    "Confirmed",
-    "Received",
-    "Cleaning",
-    "Ready",
-    "Shipped",
-    "Delivered",
+  // const orderStatusArray = [
+  //   "Order Placed",
+  //   "Confirmed",
+  //   "Received",
+  //   "Cleaning",
+  //   "Ready",
+  //   "Shipped",
+  //   "Delivered",
+  // ];
+
+  const taskStatusArray = [
+    "pending",
+    "inprogress",
+    "completed",
   ];
 
   useEffect(() => {
+    // axios
+    //   .get(`${process.env.REACT_APP_BASE_URL}/order/${_id}/order`)
+    //   .then((resp) => {
+    //     console.log(resp);
+    //     setOrder(resp.data);
+    //     setIndexFound(orderStatusArray.indexOf(resp.data.status));
+    //     console.log(orderStatusArray.indexOf(resp.data.status));
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error fetching order:", error);
+    //   });
+
+
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/order/${_id}/order`)
+    .get(`${process.env.REACT_APP_BASE_URL}/task/${_id}/task`)
       .then((resp) => {
-        console.log(resp);
-        setOrder(resp.data);
-        setIndexFound(orderStatusArray.indexOf(resp.data.status));
-        console.log(orderStatusArray.indexOf(resp.data.status));
+        setTask(resp.data);
+        console.log(resp.data)
+        setIndexFound(taskStatusArray.indexOf(resp.data.status));
+        console.log(taskStatusArray.indexOf(resp.data.status));
       })
       .catch((error) => {
         console.error("Error fetching order:", error);
@@ -47,20 +67,35 @@ function WashmanSingleOrderBody() {
 
 
 
+  // const handleSeleectChange = async (e) => {
+  //   setSelectedOption(e.target.value);
+
+  //     console.log(selectedOption);
+  //     axios
+  //       .put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
+  //         status: selectedOption,
+  //         branch_id: "655debc4ec7b0b6e0f591bf7",
+  //       })
+  //       .then((resp) => {
+  //         console.log(resp.data);
+	// 				setIndexFound(orderStatusArray.indexOf(selectedOption));
+  //         localStorage.setItem("orderProgress", progress);
+  //       });
+  
+  // };
+
   const handleSeleectChange = async (e) => {
     setSelectedOption(e.target.value);
-
-      console.log(selectedOption);
       axios
-        .put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
+        .put(`${process.env.REACT_APP_BASE_URL}/task/${_id}/update`, {
           status: selectedOption,
-          branch_id: "655debc4ec7b0b6e0f591bf7",
+          // branch_id: "655debc4ec7b0b6e0f591bf7",
         })
         .then((resp) => {
-          console.log(resp.data);
-					setIndexFound(orderStatusArray.indexOf(selectedOption));
+          setIndexFound(taskStatusArray.indexOf(selectedOption));
           localStorage.setItem("orderProgress", progress);
         });
+        console.log(selectedOption)
   
   };
 
@@ -71,8 +106,8 @@ function WashmanSingleOrderBody() {
           <h2>ORDER DETAILS</h2>
         </div>
         <div className="washman-single-order-content">
-          {order &&
-            Object.entries(order).map(([key, value]) =>
+          {task &&
+            Object.entries(task).map(([key, value]) =>
               typeof value === "string" ? (
                 <div key={key} className="washman-profile-field">
                   <h4>{key}</h4>
@@ -87,13 +122,9 @@ function WashmanSingleOrderBody() {
               <option value="" hidden>
                 Select Status
               </option>
-              <option value="Order Placed">ORDER PLACED</option>
-              <option value="Confirmed">CONFIRMED</option>
-              <option value="Received">RECEIVED</option>
-              <option value="Cleaning">CLEANING</option>
-              <option value="Ready">READY</option>
-              <option value="Shipped">SHIPPED</option>
-              <option value="Delivered">DELIVERED</option>
+              <option value="pending">PENDING</option>
+              <option value="inprogress">INPROGRESS</option>
+              <option value="completed">COMPLETED</option>              
             </select>
           </div>
         </div>
@@ -104,8 +135,8 @@ function WashmanSingleOrderBody() {
           Update Order
         </Button>
       </div>
-      <div className="progress">
-        {orderStatusArray.map((status, index) => (
+      <div className="progress" style={{width: "22%"}}>
+        {taskStatusArray.map((status, index) => (
           <div className="progress_content" key={index}>
             <div
               className={`progress_circle ${

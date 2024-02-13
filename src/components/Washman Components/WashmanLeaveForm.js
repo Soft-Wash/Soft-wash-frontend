@@ -14,7 +14,7 @@ function WashmanLeaveForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log("here")
     if (email === "" || fullName=== "" || reasons=== "") {
       setErr(true);
     } else {
@@ -22,11 +22,16 @@ function WashmanLeaveForm() {
       const body = {
         email: email,
         fullName: fullName,
+        // employee_id: fullName,
+        // branch_id: fullName,
+        // startDate: startDate,
+        // endDate: endDate,
         reasons: reasons
       };
+      console.log(body)
       try {
         const resp = await axios.post(
-          `${process.env.REACT_APP_BASE_URL}/leave/`,
+          `${process.env.REACT_APP_BASE_URL}/leave/create`,
           body
         );
         console.log(resp.data);

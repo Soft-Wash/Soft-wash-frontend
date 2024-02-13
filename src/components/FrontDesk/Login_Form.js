@@ -41,6 +41,7 @@ function LoginForm() {
             navigate("/SupervisorDash");
             break;
           case "washman":
+            // console.log("hi")
             navigate("/washman-dashboard");
             break;
           default:

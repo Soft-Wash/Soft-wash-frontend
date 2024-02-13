@@ -17,7 +17,7 @@ function WashmanOrdersBody(){
     const washmanID = "655e49bad160aea8372bde1d";
 
     useEffect(() => {
-        const fetchOrders = async () => {
+        const fetchTasks = async () => {
             try{
                 setLoading(true);
                 setError(null);
@@ -33,7 +33,7 @@ function WashmanOrdersBody(){
             }
         }
 
-        fetchOrders();
+        fetchTasks();
     }, [tasks])
 
     return(
@@ -47,7 +47,7 @@ function WashmanOrdersBody(){
                         <thead>
                             <tr>
                                 <th>S/No</th>
-                                <th>Order ID</th>
+                                <th>Task ID</th>
                                 <th>Task Status</th>
                                 {/* <th>Due Date</th> */}
                             </tr>
@@ -57,16 +57,15 @@ function WashmanOrdersBody(){
                                 <tr key={task._id}>
                                 <td>{index + 1}</td>
                                 <td>
-                                    {task.order_id.map((order) => (
+                                    {/* {task.map((order) => ( */}
                                         <div>
-                                            <Link to={`/washman-single-order/${order._id}`} className="washman-table-link">
-                                                {order._id}
+                                            <Link to={`/washman-single-order/${task._id}`} className="washman-table-link">
+                                                {task._id}
                                             </Link>
                                         </div>
-                                    ))}
+                                    {/* ))} */}
                                 </td>                                
-                                <td>{task.status}</td>
-                                {/* <td>{task.schedule_date}</td>                                 */}
+                                <td>{task.status}</td>                                
                             </tr>                                    
                             ))}
                         </tbody>
