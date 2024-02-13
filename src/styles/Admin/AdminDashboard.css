@@ -107,3 +107,8 @@ background-color: rgb(215, 215, 215);
   width: 150px;
   border: 1px solid grey;
 }
+
+.dashboard_select{
+  width: 180px;
+  border: 1px solid grey;
+}

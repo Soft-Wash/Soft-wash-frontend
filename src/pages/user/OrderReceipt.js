@@ -84,6 +84,7 @@ export default function OrderReceipt() {
     <>
       <Banner />
       <ThankYou />
+      <div className="center_div">
       <div  className="mx-2 mb-5 shadow rounded-5 p-4 px-4 col col-lg-5 col-xs-8" >
   {paymentStatus?.data?.status === "success" ? (
     <div>
@@ -127,7 +128,6 @@ export default function OrderReceipt() {
     <p className="pendingpayment-ptag">Payment Abandoned. Please review your order and try again.</p>
   ) : newpaymentType === "payWithCash" ? (   
     <div>
-    {/* Display details for successful payment */}
     <div className="d-flex justify-content-between gap-3 mb-2">
       <div lg={3}>
         <h5>Order Id</h5>
@@ -165,6 +165,8 @@ export default function OrderReceipt() {
     <p className="pendingpayment-ptag">Loading...</p>
   )}
 </div>
+      </div>
+
 
       <Row className="mb-5"></Row>
 

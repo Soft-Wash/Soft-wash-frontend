@@ -43,7 +43,8 @@ function ExpenseCategory() {
     .then((resp)=>{
       setExpenseResp(resp.data)
       toast.success('Expense category succesful')
-      console.log(resp.data)
+      handleClose()
+
     })
   }
 
@@ -55,6 +56,10 @@ function ExpenseCategory() {
       prevItems.filter((item) => item._id !== _id)
     );
     })
+  }
+
+  const EditExpenseCat=()=>{
+    
   }
 
 
@@ -96,7 +101,7 @@ function ExpenseCategory() {
               </Form>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="info text-white" onClick={postExpense}>
+              <Button variant="info text-white" onClick={()=>postExpense()}>
                 Sumit
               </Button>
             </Modal.Footer>

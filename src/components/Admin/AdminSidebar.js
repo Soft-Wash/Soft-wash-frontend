@@ -19,7 +19,7 @@ function AdminSidebar(){
             <NavLink exact to="/admindashboard" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/profile" activeClassName="activeClicked">
+            <NavLink exact to="/employeeprofile" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/registeremployee" activeClassName="activeClicked">

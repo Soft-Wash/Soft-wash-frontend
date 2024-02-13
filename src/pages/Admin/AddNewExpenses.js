@@ -21,6 +21,8 @@ function AddNewExpenses() {
     setExpenseDetails({ ...expenseDetails, [e.target.name]: value});
   };
 
+  console.log(expenseDetails)
+
   const postExpense=()=>{
     axiosInstance.post('/expense/create',expenseDetails)
     .then((resp)=>{

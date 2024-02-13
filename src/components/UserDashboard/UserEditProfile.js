@@ -7,6 +7,7 @@ import axios from "axios";
 import Sidebar from "../../components/OrdersPage/Sidebar";
 import { axiosInstance } from "../../services/AxiosInstance";
 import UserSidebarTablet from "../UserSidebarTablet";
+import "../../styles/UserProfile.css"
 
 function UserEditProfile() {
   const [userData, setUserData] = useState();
@@ -59,9 +60,6 @@ function UserEditProfile() {
 
   return (
     <div>
-    <div>
-    <UserSidebarTablet />
-</div>
     <div className="d-flex">
       <div className='user-sidebar-div'>
         <Sidebar />
@@ -102,8 +100,8 @@ function UserEditProfile() {
                 onChange={HandleImage}
               />
             </div>
-            <div>
-              <label htmlFor="">
+            <div className="edit_input_divs">
+              <label htmlFor="" className="edit_input_divs">
                 Full Name <br />
                 <input
                   type="text"
@@ -114,7 +112,7 @@ function UserEditProfile() {
                 />
               </label>{" "}
               <br /> <br />
-              <label htmlFor="">
+              <label htmlFor="" className="edit_input_divs">
                 Phone <br />
                 <input
                   type="text"
@@ -125,7 +123,7 @@ function UserEditProfile() {
                 />
               </label>{" "}
               <br /> <br />
-              <label htmlFor="">
+              <label htmlFor="" className="edit_input_divs">
                 Email <br />
                 <input
                   type="text"
@@ -136,7 +134,7 @@ function UserEditProfile() {
                 />
               </label>{" "}
               <br /> <br />
-              <label htmlFor="">
+              <label htmlFor="" className="edit_input_divs">
                 Address <br />
                 <input
                   type="text"

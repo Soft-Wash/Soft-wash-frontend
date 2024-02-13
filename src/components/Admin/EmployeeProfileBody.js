@@ -1,23 +1,21 @@
 import { Button } from "react-bootstrap";
 import "../../styles/Washman Styles/WashmanProfile.css";
-import profilePic from "../../assets/images/bovi.jpeg";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 
-function UserProfileBody() {
+function EmployeeProfileBody() {
   const [userData, setUserData] = useState();
   const [realImage,setRealImage]=useState()
   const [inputImage,setinputImage]=useState()
   const backend = "http://localhost:8003/"
 
   useEffect(() => {
-    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
+    const userId = JSON.parse(localStorage.getItem("softwashEmployeeLogin"));
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/users/${userId._id}`)
+      .get(`${process.env.REACT_APP_BASE_URL}/employees/${userId}`)
       .then((resp) => {
-        console.log(resp.data);
         setUserData(resp.data)
       });
   }, []);
@@ -29,9 +27,6 @@ function UserProfileBody() {
       const imageUrl = URL.createObjectURL(file)
       setRealImage(file)
       setinputImage(imageUrl)
-      console.log(file)
-      
-
     }
 
   }
@@ -64,8 +59,8 @@ function UserProfileBody() {
             <h4>{userData?.fullName}</h4>
           </div>          
           <div className="user-profile-field">
-            <h4>Phone</h4>
-            <h4>{userData?.phone}</h4>
+            <h4>Age</h4>
+            <h4>{userData?.age}</h4>
           </div>
           <div className="user-profile-field">
             <h4>Email</h4>
@@ -75,8 +70,12 @@ function UserProfileBody() {
             <h4>Address</h4>
             <h4>{userData?.address}</h4>
           </div>
+          <div className="user-profile-field">
+            <h4>Role</h4>
+            <h4>{userData?.role?.name}</h4>
+          </div>
          </div>
-        <Link to={`/usereditprofile/${userData?._id}`}  className="user-form-link">
+        <Link to={`/employeeeditprofile/${userData?._id}`}  className="user-form-link">
           <Button className="edit-user-profile-btn">Edit Profile</Button>
         </Link>
       </div>
@@ -86,4 +85,4 @@ function UserProfileBody() {
   );
 }
 
-export default UserProfileBody;
+export default EmployeeProfileBody;

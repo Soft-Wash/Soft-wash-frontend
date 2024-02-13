@@ -90,6 +90,7 @@ body {
     position: relative;
 }
 
-.conatiner_overlay{
-    
+.center_div{
+display: flex;
+justify-content: center;
 }

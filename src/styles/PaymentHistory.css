@@ -7,6 +7,7 @@
   overflow: scroll;
   height: 100vh;
   width: 100vw;
+  background-color: whitesmoke;
 }  
   .payment-content-table{
     border-collapse: collapse;

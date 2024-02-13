@@ -41,11 +41,6 @@ function Sidebar (){
               </Link>
             </div>
             <div className='user-sidebar-hover'>
-              <Link exact to="" activeClassName="activeClicked" className='user-sidebar-hover'>
-                <CDBSidebarMenuItem icon="chart-line">Order History</CDBSidebarMenuItem>
-              </Link>
-            </div>
-            <div className='user-sidebar-hover'>
               <Link exact to="/paymenthistory" activeClassName="activeClicked" className='user-sidebar-hover'>
                 <CDBSidebarMenuItem icon="chart-line">Payment History</CDBSidebarMenuItem>
               </Link>

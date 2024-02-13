@@ -32,13 +32,15 @@ function Calender({onLoadingChange}) {
   const[activeBtn, setActiveBtn] = useState(1);
 
   const handleBtnClick = (btnNo,time) => {
-    onLoadingChange(true); 
       setActiveBtn(btnNo)
       handleTimeChange(time)
       setTimeout(() => {
         onLoadingChange(false);
       }, 1000);
   }
+
+
+
   
   return (
     <Container>

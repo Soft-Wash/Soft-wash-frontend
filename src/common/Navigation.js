@@ -91,7 +91,7 @@ function Navigation() {
                     3
                   </small>
 
-                  <BsBell className=" fs-4 mr-0" />
+                  <BsBell className="fs-4 mr-0" />
                 </div>
                 <Dropdown
                   className="d-inline mx-2 my-auto"
@@ -99,7 +99,7 @@ function Navigation() {
                 >
                   <Dropdown.Toggle
                     id="dropdown-autoclose-true"
-                    className="bg-transparent text-black border-0 p-0"
+                    className="bg-transparent text-black border-0 p-0 d-flex align-items-center"
                   >
                     <img
                       src={img}
@@ -110,7 +110,7 @@ function Navigation() {
                   </Dropdown.Toggle>
                   <Dropdown.Menu className="mt-4">
                     <Dropdown.Item >
-                      <Link className="navigation_link">
+                      <Link className="navigation_link" to="/user-profile">
                       Profile
                       </Link>
                       </Dropdown.Item>
