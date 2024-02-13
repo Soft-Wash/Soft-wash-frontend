@@ -84,7 +84,6 @@ function Wishlist() {
           {wishlist &&
             wishlist.map((item) => (
               <Col xs={12} sm={12} md={4} lg={4} xl={3} key={item._id}>
-                <Link to="/singleproduct">
                   <Card
                     className="item-card border text-center mt-4"
                     style={{ height: "350px" }}
@@ -103,7 +102,6 @@ function Wishlist() {
                       </Button>{" "}
                     </div>
                   </Card>
-                </Link>
               </Col>
             ))}
         </Row>

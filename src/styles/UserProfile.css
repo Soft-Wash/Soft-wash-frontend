@@ -6,6 +6,7 @@
     height: 100vh;
     padding-top: 70px;
     padding-left: 30px;
+    overflow: scroll;
 }
 
 .user-page-content{
@@ -99,6 +100,8 @@
 .myorders-container{
     overflow: scroll;
     height: 100vh;
+    background-color: whitesmoke;
+    padding: 30px;
 }
 
 .user-tablet-icons{

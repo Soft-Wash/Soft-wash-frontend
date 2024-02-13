@@ -84,8 +84,6 @@ function AddressInfo() {
     const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
     const branch_id = JSON.parse(localStorage.getItem('branch_id'))
 
-    console.log(selectedAddress);
-
     let orderPostObj = {
       customer_id: parsedCustomerData?._id,
       branch_id: branch_id,
@@ -97,7 +95,6 @@ function AddressInfo() {
 
     console.log(orderPostObj);
     axiosInstance.post("/order/create", orderPostObj).then((resp) => {
-      console.log(resp.data);
       const orderId = resp.data._id;
       localStorage.setItem("RecentOrder", JSON.stringify(resp.data));
       localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
@@ -141,8 +138,6 @@ function AddressInfo() {
       setcustomerAddress({ ...customerAddress, address: e.target.name });
     }
   };
-
-  console.log(customerAddress);
 
   return (
     <Container>
