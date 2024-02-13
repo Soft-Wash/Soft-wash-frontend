@@ -57,7 +57,6 @@ import EditCustomer from "./pages/Admin/EditCustomer";
 import CreateLeave from "./pages/Admin/CreateLeave";
 import CreateSupUsers from "./pages/SupervisorPage/CreateSupUsers";
 import SupOrderTable from "./pages/SupervisorPage/SupOrderTable";
-import EmployeeLogin from "./pages/EmployeePage/EmployeeLogin";
 import SupervisorExpense from "./pages/SupervisorPage/SupervisorExpense";
 import CreateExpenseSup from "./pages/SupervisorPage/CreateExpenseSup";
 import WorkFlowTask from "./pages/Admin/WorkFlowTask";
@@ -81,6 +80,9 @@ import UserEditProfile from "./components/UserDashboard/UserEditProfile";
 import UserDashboard from "./pages/user/UserDashboard";
 import { ChakraProvider } from '@chakra-ui/react';
 import WashmanRequestSuppliesPage from "./pages/Washman Pages/WashmanRequestSuppliesPage";
+import TaskFreeEmployees from "./pages/Admin/TaskFreeEmployees";
+import EmployeeProfile from "./pages/Admin/EmployeeProfile";
+import EmployeeEditProfile from "./pages/Admin/EmployeeEditProfile";
 
 
 
@@ -128,7 +130,6 @@ function App() {
         <Route path="/usereditprofile/:_id" element={<UserEditProfile/>}/>
 
         {/* Front desk */}
-          <Route path="/employeelogin" element={<Login/>} />
           <Route path="/frontdesk/dash" element={<Dashboard/>} />
           <Route path="/userdashboard" element={<UserDashboard/>} />
          
@@ -167,7 +168,9 @@ function App() {
         <Route path="/tasktable" element={<TaskTable/>}/>
         <Route path="/singletaskpage/:_id" element={<SingleTaskPage/>}/>
         <Route path="/createOrder" element={<CreateOrder/>}/>
-        {/* <Route path="/taskfreeemployee" element={<TaskFreeEmployees/>}/> */}
+        <Route path="/taskfreeemployee" element={<TaskFreeEmployees/>}/>
+        <Route path="/employeeprofile" element={<EmployeeProfile/>}/>
+        <Route path="/employeeeditprofile/:id" element={<EmployeeEditProfile/>}/>
         
 
 
@@ -189,9 +192,9 @@ function App() {
         <Route path="/SupSingleTask/:_id" element ={<SupSingleTask/>}/>
        
 
-        {/* EMPLOYEE LOGIN */}
+{/* employee login */}
+<Route path="/employeelogin" element={<Login/>} />
 
-        <Route path ="/EmployeeLogin" element ={<EmployeeLogin/>}/>
 
       </Routes>
     </BrowserRouter>

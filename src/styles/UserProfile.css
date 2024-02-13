@@ -1,22 +1,16 @@
 
 
-
-
-
-
-
-
-
-
 .user-dashboard-bg{
     width: 100vw;
     background-color: whitesmoke;
+    height: 100vh;
+    padding-top: 70px;
+    padding-left: 30px;
+    overflow: scroll;
 }
 
 .user-page-content{
-    width: 70%;
-    margin: auto;
-    margin-top: 30px;
+    width: 60%;
     padding: 20px;
     border-radius: 10px;
     background-color: white;
@@ -78,7 +72,7 @@
 
 .usereditprofile_input{
     background-color: rgb(246, 246, 246);
-    width: 660px;
+    width: 100%;
     padding: 5px;
 }
 
@@ -106,11 +100,17 @@
 .myorders-container{
     overflow: scroll;
     height: 100vh;
+    background-color: whitesmoke;
+    padding: 30px;
 }
 
 .user-tablet-icons{
     font-size: 20px;
     margin-right: 20px;
+}
+
+.edit_input_divs{
+    width: 100%;
 }
 
 

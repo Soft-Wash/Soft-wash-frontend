@@ -30,6 +30,7 @@ function LoginForm() {
         logBody
       );
       if (resp.data.message === "login successful") {
+        localStorage.setItem('softwashEmployeeLogin',JSON.stringify(resp.data.noPasswordUser._id))
         switch (resp.data.noPasswordUser.role.name) {
           case "frontdesk":
             navigate("/frontdesk/dash");
@@ -56,7 +57,6 @@ function LoginForm() {
       }
     } catch (e) {
       console.log({ e });
-      // Handle error, maybe display an error message
     }
   };
   return (

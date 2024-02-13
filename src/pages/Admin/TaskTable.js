@@ -1,16 +1,14 @@
 import WorkFlowSideBar from "../../components/Admin/WorkFlowSideBar";
-import "../../styles/Admin/TaskTable.css"
-import {useEffect,useState} from "react"
-import {Link} from "react-router-dom"
+import "../../styles/Admin/TaskTable.css";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
-function TaskTable(){
-
+function TaskTable() {
   const [orders, setOrders] = useState();
   const [selectedOption, setSelectedOption] = useState("pending");
   const [statusSelect, setStatusSelect] = useState();
   const [statusData, setStatusData] = useState();
-
 
   const handleSelectChange = (e) => {
     if (e.target.name.startsWith("statusOrder")) {
@@ -25,10 +23,14 @@ function TaskTable(){
   }, [statusSelect]);
 
   const getOrderStatus = () => {
-    axios.get(`${process.env.REACT_APP_BASE_URL}/task/status?status=${statusSelect}`).then((resp) => {
-      console.log(resp.data);
-      setStatusData(resp.data);
-    });
+    axios
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/task/status?status=${statusSelect}`
+      )
+      .then((resp) => {
+        console.log(resp.data);
+        setStatusData(resp.data);
+      });
   };
 
   const getStatusColorClass = (status) => {
@@ -44,10 +46,10 @@ function TaskTable(){
     }
   };
 
-  return(
+  return (
     <div>
       <div className="d-flex">
-        <WorkFlowSideBar/>
+        <WorkFlowSideBar />
         <div className="tasktable-div">
           <div>
             <select
@@ -78,7 +80,7 @@ function TaskTable(){
               </tr>
             </thead>
             <tbody>
-              {statusData?.length<1 ? (
+              {statusData?.length < 1 ? (
                 <tr>
                   <td colSpan="6" className="no-data-message">
                     No data available
@@ -90,16 +92,28 @@ function TaskTable(){
                   <tr key={item._id}>
                     <th>{item?._id?.substring(0, item?._id?.length / 2)}</th>
                     <th>
-        {item?.order_id?.map((orderId) => (
-          <div key={orderId._id}>
-            {orderId?._id?.substring(0, orderId?._id?.length / 2)}
-          </div>
-        ))}
-      </th>
+                      {item?.order_id?.map((orderId) => (
+                        <div key={orderId._id}>
+                          {orderId?._id?.substring(0, orderId?._id?.length / 2)}
+                        </div>
+                      ))}
+                    </th>
                     <th>{item?.order_id?.customer_id?.fullName}</th>
                     <th>{item?.employee_id?.fullName}</th>
-                    <th>{new Date(item?.startDate).toLocaleDateString('en-Gb',{day:'numeric',month:'short',year:'numeric'})}</th>
-                    <th>{new Date(item?.endDate).toLocaleDateString('en-Gb',{day:'numeric',month:'short',year:'numeric'})}</th>
+                    <th>
+                      {new Date(item?.startDate).toLocaleDateString("en-Gb", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </th>
+                    <th>
+                      {new Date(item?.endDate).toLocaleDateString("en-Gb", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </th>
                     <th className="tasktbale-status-th">
                       <button
                         className={`status-button ${getStatusColorClass(
@@ -127,7 +141,7 @@ function TaskTable(){
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default TaskTable;
