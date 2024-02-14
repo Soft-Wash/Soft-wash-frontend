@@ -12,10 +12,11 @@ function AdminDashboard() {
   const [dayorder, setdayorder] = useState();
   const [Employees, setEmployees] = useState();
   const [Customers, setCustomers] = useState();
+  const [todayAllOrders,setTodayAllOrders]=useState()
 
   async function getEmployees() {
     try {
-      console.log(process.env.REACT_APP_BASE_URL)
+      console.log(process.env.REACT_APP_BASE_URL);
       const response = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/employees/`
       );
@@ -42,6 +43,23 @@ function AdminDashboard() {
   const washman = getEmployeesId("washman");
   const supervisors = getEmployeesId("supervisor");
 
+  const getOrderBranch = (id) => {
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/order/day?branch_id=${id}`)
+      .then((resp) => {
+        setdayorder(resp.data);
+      });
+  };
+
+  const getAllTodayOrders=()=>{
+    axios
+    .get(`${process.env.REACT_APP_BASE_URL}/order/allbranches/day`)
+    .then((resp) => {
+      console.log(resp.data)
+      setTodayAllOrders(resp.data);
+    });
+  }
+
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/order/`).then((resp) => {
       setorders(resp.data);
@@ -50,13 +68,12 @@ function AdminDashboard() {
       setbranches(resp.data);
       localStorage.setItem("branches", JSON.stringify(resp.data));
     });
-    axios.get(`${process.env.REACT_APP_BASE_URL}/order/day`).then((resp) => {
-      setdayorder(resp.data);
-    });
+
     axios.get(`${process.env.REACT_APP_BASE_URL}/users/`).then((resp) => {
       setCustomers(resp.data);
     });
     getEmployees();
+    getAllTodayOrders()
   }, []);
 
   return (
@@ -125,10 +142,9 @@ function AdminDashboard() {
               </div>
               <div className="icon-container-innerd2">
                 <Link className="order-dashboard-link" to={`/admincustomer`}>
-                <p>Customers</p>
-                <p>{Customers?.length}</p>
+                  <p>Customers</p>
+                  <p>{Customers?.length}</p>
                 </Link>
-
               </div>
             </div>
             <div className="icon-container">
@@ -146,7 +162,7 @@ function AdminDashboard() {
               </div>
               <div className="icon-container-innerd2 ">
                 <p>Today Orders</p>
-                <p>{dayorder?.length}</p>
+                <p>{todayAllOrders?.length}</p>
               </div>
             </div>
             <div className="icon-container mb-3">
@@ -164,8 +180,23 @@ function AdminDashboard() {
           </div>
 
           <h4 className="">Today order </h4>
+          <div>
+            <select
+              name=""
+              id=""
+              className="dashboard_select"
+              onChange={(e) => getOrderBranch(e.target.value)}
+            >
+              <option value="" hidden>
+                Select barnch
+              </option>
+              {branches &&
+                branches.map((item) => (
+                  <option value={item._id}>{item.name}</option>
+                ))}
+            </select>
+          </div>
           <div className="admindashboard-ordertable-div">
-            <div></div>
             <table className="admindashboard-content-table">
               <thead>
                 <tr>

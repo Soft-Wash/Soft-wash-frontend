@@ -110,6 +110,7 @@ useEffect(() => {
 
 const postOrder = async () => {
   try {
+    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     const deliveryType = JSON.parse(localStorage.getItem('deliveryType'));
     const key = Object.keys(deliveryType);
     const stringDeliveryType = key.join('');
@@ -135,6 +136,7 @@ const postOrder = async () => {
     const data = {
       email: orderData?.customer_id?.email,
       amount: orderDetails?.subtotal,
+      user_id:userId._id,
       metadata: {
         order_id: orderData?._id,
         branch_id: orderData?.branch_id,

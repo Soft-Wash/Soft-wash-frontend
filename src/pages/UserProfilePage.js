@@ -16,7 +16,7 @@ function UserProfilePage(){
                 <div className='user-sidebar-div'>
                     <Sidebar /> 
                 </div>          
-                <UserProfileBody />
+                <UserProfileBody/>
             </div>
         </div>
     )

@@ -34,6 +34,9 @@ function Calender({onLoadingChange}) {
   const handleBtnClick = (btnNo,time) => {
       setActiveBtn(btnNo)
       handleTimeChange(time)
+      setTimeout(() => {
+        onLoadingChange(false);
+      }, 1000);
   }
 
 
