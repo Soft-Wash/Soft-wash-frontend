@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -14,49 +17,52 @@ function LoginForm() {
 
   const handleLogin = async () => {
     if (email === "" || password === "") {
-      setErr = true;
+      setErr(true);
       return;
     }
     const logBody = {
       email: email,
-      password: password,
-      role: role,
+      password: password
     };
     console.log(logBody);
     try {
+      console.log('here')
       let resp = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/auth/user/login`,
+        `${process.env.REACT_APP_BASE_URL}/auth/employee/login`,
         logBody
       );
-      console.log(resp.data.message, resp.data.noPasswordUser.role);
-
-      if (
-        resp.data.message == "login successful" &&
-        resp.data.noPasswordUser.role == "frontdesk"
-      ) {
-        // alert("should navigate")
-        navigate("/frontdesk/dash");
-      } 
-       else if (
-        resp.data.message == "login successful" &&
-        resp.data.noPasswordUser.role == "supervisor"
-      ) {
-        alert("should navigate")
-        navigate("/frontdesk/dash");
-      } 
-      else {
-        setAuth(false);
-        setTimeout(() => {
-          setAuth(true);
-        }, 3000);
+      if (resp.data.message === "login successful") {
+        localStorage.setItem('softwashEmployeeLogin',JSON.stringify(resp.data.noPasswordUser._id))
+        switch (resp.data.noPasswordUser.role.name) {
+          case "frontdesk":
+            navigate("/frontdesk/dash");
+            break;
+          case "admin":
+            navigate("/admindashboard");
+            break;
+          case "supervisor":
+            navigate("/SupervisorDash");
+            break;
+          case "washman":
+            navigate("/washman-dashboard");
+            break;
+          default:
+            setAuth(false);
+            setTimeout(() => {
+              setAuth(true);
+            }, 3000);
+            break;
+        }
+      } else {
+        toast.error("operation failed")
       }
     } catch (e) {
       console.log({ e });
     }
   };
-
   return (
     <>
+          <ToastContainer position="top-center" />
       <div
         className={`${
           !auth ? "show" : "hide"

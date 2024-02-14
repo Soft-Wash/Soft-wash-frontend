@@ -8,7 +8,7 @@
 }
 
 .userdash-container{
-  padding-left: 20px;
+  padding-left: 10px;
   padding-top: 30px;
   overflow: scroll;
   width: 100vw;
@@ -49,6 +49,17 @@
   }
   .user-sidebar-div{
       display: none !important;
-  }    
+  } 
+  
+  .icon-container{
+    height: 90px;
+    width: 180px;
+  }
+
+  .userdash_grid_container{
+    gap: 10px;
+  }
+
+
   
 }

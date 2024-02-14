@@ -25,9 +25,6 @@ import "react-toastify/dist/ReactToastify.css";
 function MarketPlace() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [wishlistItems, setWishlistItems] = useState([]);
-  const [buttonClicked, setbuttonClicked] = useState();
-  const [deleteId, setDeleteId] = useState();
-  const [addcolor, setAddcolor] = useState(false);
 
   const [shopItems, setshopItems] = useState();
   let wishlist_id = "";

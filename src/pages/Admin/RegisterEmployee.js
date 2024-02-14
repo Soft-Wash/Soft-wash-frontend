@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { registerUser } from "../../services/register";
 import { variableManager } from "../../context/VariablesContext";
-import { Loader } from "../../common/Loader";
+// import { Loader } from "../../common/Loader";
 import axios from "axios";
 import { axiosInstance } from "../../services/AxiosInstance";
 
@@ -186,7 +186,7 @@ export default function Signup() {
                 </option>
                 {branches &&
                   branches.map((item) => (
-                    <option key={item._d} value={item._id}>
+                    <option key={item._id} value={item._id}>
                       {item.name}
                     </option>
                   ))}
@@ -264,7 +264,7 @@ export default function Signup() {
           </form>
         </div>
       </div>
-      <Loader color="primary" size="lg" show={loading} />
+      {/* <Loader color="primary" size="lg" show={loading} /> */}
     </div>
   );
 }

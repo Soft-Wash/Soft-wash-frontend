@@ -16,7 +16,7 @@ function Navigation(){
     <div>
       <Container fluid className="nav-container pt-4">
         <Navbar expand="lg" className="bg-body-tertiary">
-          <Container>
+          <Container className="d-flex align-items-center">
             <Navbar.Brand >
               <Link to="/shop">
               <img src={Logo} alt="" />
@@ -26,31 +26,33 @@ function Navigation(){
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
               <Nav
-                className="me-auto my-2 my-lg-0"
+                className="me-auto my-2 my-lg-0 d-flex align-items-center"
                 style={{ maxHeight: "100px" }}
                 navbarScroll
+              
               >
-                <Nav.Link href="/" className="text-dark">
+                <Nav.Link to="/" className="text-dark">
                   Home
                 </Nav.Link>
-                {/* <Nav.Link href="#action2"></Nav.Link> */}
+
                 <NavDropdown
                   title={<FiUser className="fs-4 text-dark" />}
+                  className="d-flex"
                   id="navbarScrollingDropdown"
                 >
-                  <NavDropdown.Item href="#action3">
+                  <NavDropdown.Item>
                     Transaction History
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action4">
                     Print Invoice
                   </NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link to="/cart">
+                <Nav.Link  className="d-flex">
                   <Link to="/cart" className="color-dark-link">
-                  <FiShoppingCart className="fs-4 " />
+                  <FiShoppingCart className="fs-4"/>
                   </Link>
                   <Link to="/wishlist">
-                  <FiHeart className="wishlist_icon" />
+                  <FiHeart className="wishlist_icon"/>
                   </Link>
 
                 </Nav.Link>

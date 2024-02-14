@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useState,useContext } from 'react';
 import { registerUser } from '../../../services/register';
 import { variableManager } from '../../../context/VariablesContext';
-import {Loader} from "../../../common/Loader"
+// import {Loader} from "../../../common/Loader"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -49,17 +49,6 @@ export default function Signup() {
       } 
     }
 
-    // async function handleSubmit(payload) {
-    //   setLoading(true);
-    //   const {data,error} = await registerUser(payload);
-    //   setLoading(false);
-    //   if(data){
-    //     toast.success("Login Successful")
-    //     setUser(data);
-    //     navigate('/UserLogin')
-    //   }
-    //   console.log(data?data:error);
-    // } 
     async function handleSubmit(payload) {
       setLoading(true);
       try {
@@ -76,7 +65,6 @@ export default function Signup() {
           console.log("Unexpected response from the server:", data);
         }
     
-        console.log("Data:", data);
         console.log("Error:", error);
       } catch (e) {
         console.error("An unexpected error occurred:", e);
@@ -234,7 +222,7 @@ export default function Signup() {
             </form>
           </div>
         </div>
-        <Loader color="primary" size="lg" show={loading} /> 
+        {/* <Loader color="primary" size="lg" show={loading} />  */}
       </div>
       </>
     );

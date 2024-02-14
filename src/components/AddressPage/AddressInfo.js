@@ -82,12 +82,11 @@ function AddressInfo() {
 
     const customer_id = localStorage.getItem("softwashLoginUser");
     const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
-
-    console.log(selectedAddress);
+    const branch_id = JSON.parse(localStorage.getItem('branch_id'))
 
     let orderPostObj = {
       customer_id: parsedCustomerData?._id,
-      branch_id: "655debc4ec7b0b6e0f591bf7",
+      branch_id: branch_id,
       deliveryAddress: selectedAddress,
       pickuptime: selectedTime,
       schedule_date: selectedDate,
@@ -96,7 +95,6 @@ function AddressInfo() {
 
     console.log(orderPostObj);
     axiosInstance.post("/order/create", orderPostObj).then((resp) => {
-      console.log(resp.data);
       const orderId = resp.data._id;
       localStorage.setItem("RecentOrder", JSON.stringify(resp.data));
       localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
@@ -140,8 +138,6 @@ function AddressInfo() {
       setcustomerAddress({ ...customerAddress, address: e.target.name });
     }
   };
-
-  console.log(customerAddress);
 
   return (
     <Container>

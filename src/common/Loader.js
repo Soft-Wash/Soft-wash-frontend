@@ -1,33 +1,23 @@
-import React from "react";
-import { Spinner, Modal } from "react-bootstrap";
+// LoadingScreen.js
+import React from 'react';
+import { Box, Spinner, Text } from '@chakra-ui/react';
 
-export function Loader({ color = "primary", size = "lg", show = false }) {
-  const modalStyle = {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100vw",
-    height: "100vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "transparent", 
-    border: "none", 
-    boxShadow: "none", 
-  };
-
-  const modalBodyStyle = {
-    backgroundColor: "transparent", 
-    border: "none", 
-    boxShadow: "none", 
-  };
-
-
+export const Loader = () => {
   return (
-    <Modal show={show} centered style={modalStyle}>
-      <Modal.Body className="text-center" style={modalBodyStyle}>
-        <Spinner variant={color} size={size} animation="border" />
-      </Modal.Body>
-    </Modal>
+    <Box
+      height="100vh"
+      width="100vw"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      flexDirection="column"
+    >
+      <Spinner size="xl" color="blue.500" thickness="4px" />
+      <Text mt={4} fontSize="lg" color="gray.600">
+        Loading...
+      </Text>
+    </Box>
   );
-}
+};
+
+export default Loader;

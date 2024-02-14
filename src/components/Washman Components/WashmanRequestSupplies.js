@@ -1,17 +1,34 @@
 import Form from "react-bootstrap/Form";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
-
+import axios from 'axios';
 
 
 function WashmanRequestSuppliesBody(){
 
-    const [email, setEmail] = useState("");
+    const [quantity, setQuantity] = useState("");
     const [item, setItem] = useState("");
-
+    const [itemsList, setItemsList] = useState([]);
     const [err, setErr] = useState(false);
     const Navigate = useNavigate();
+
+    useEffect(() => {
+      
+      const fetchItems = async () => {
+        try{
+            
+            const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/items/`)
+            setItemsList(response.data)
+            console.log(itemsList)
+        }
+        catch (error) {
+            setErr(error.message || 'An error occurred while fetching orders.');
+        }         
+      }
+      fetchItems();
+    }, [])
+
 
     return(
         <div className="washman-bg">
@@ -23,7 +40,7 @@ function WashmanRequestSuppliesBody(){
           <Form className="centralize  mt-4">
             <Form.Group className="washman-edit-profile-input">
               <Form.Label
-                htmlFor="formBasicEmail"
+                htmlFor="quantity"
                 className="reset-input-headers"
               >
                 Item
@@ -34,27 +51,30 @@ function WashmanRequestSuppliesBody(){
                 onChange={(e) => setItem(e.target.value)}
               >
                 <option value="">Select Item</option>
-                <option value="detergent">Detergent</option>
-                <option value="starch">Starch</option>               
+                {itemsList.map((item, index) => (
+                  <option key={index} value={item.name}>{item.name}</option>
+                ))}
+                {/* <option value="detergent">Detergent</option> */}
+                {/* <option value="starch">Starch</option>                */}
               </select>
 
               <Form.Label
-                htmlFor="formBasicEmail"
+                htmlFor="item"
                 className="reset-input-headers"
               >
                 Current Quantity
               </Form.Label>
               <Form.Control
-                type="email"
+                type="number"
                 placeholder=""
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
               />
 
               
 
-              {err && email === "" ? (
-                <span className="reset-err-msg">Kindly enter your email</span>
+              {err && (quantity === "" || item==="") ? (
+                <span className="reset-err-msg">Kindly enter current quantity</span>
               ) : null}
             </Form.Group>
 
