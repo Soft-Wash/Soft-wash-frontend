@@ -2,6 +2,7 @@ import { Container, Row } from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import Button from 'react-bootstrap/Button';
 import { FaTwitter,FaInstagram,FaFacebook } from "react-icons/fa";
+import {Link} from "react-router-dom" 
 
 
 function Footer() {
@@ -17,8 +18,19 @@ function Footer() {
             <Col xs={6} md={4} className="services-col text-start">
               <div className="" >
               <h4 className="fw-bold fs-5">Services</h4>
-              <li>Home</li>
-              <li>Washing</li>
+              <li>
+                <Link to="/">
+                Home
+                </Link>
+
+
+              </li>
+              <li> 
+                <Link to="/ourservices">
+                Washing
+                </Link>
+   
+                </li>
               <li>Dry Clean</li>
               <li>Wash & Fold</li>
               </div>
@@ -27,7 +39,12 @@ function Footer() {
             <Col xs={6} md={4} className="services-col ">
             <h4 className="fw-bold fs-5">About</h4>
               <li>Contact Us</li>
-              <li>About Us</li>
+              <li>
+                <Link to="/about">
+                About Us
+                </Link>
+  
+                </li>
               <li>Terms & Condition</li>
               <li>Privacy & Policy</li>
             </Col>
@@ -35,7 +52,12 @@ function Footer() {
             <Col xs={6} md={4} className="services-col mobile-margin-top">
             <h4 className="fw-bold fs-5">Contact</h4>
               <li>Contact Us</li>
-              <li>About Us</li>
+              <li>
+                <Link to="/about">
+                About Us
+                </Link>
+  
+                </li>
               <li>Terms & Condition</li>
             </Col>
             </Row>
