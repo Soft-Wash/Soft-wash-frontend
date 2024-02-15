@@ -36,7 +36,6 @@ function MarketPlace() {
         `${process.env.REACT_APP_BASE_URL}/wishlist/user/wishlist?user_id=${user_id._id}`
       )
       .then((resp) => {
-        console.log(resp.data);
         setWishlistItems(resp.data);
       })
       .catch((error) => {
@@ -58,7 +57,6 @@ function MarketPlace() {
     axiosInstance
       .post("/cart/create", cartData)
       .then((resp) => {
-        console.log(resp.data);
         toast.success("item added to cart");
       })
       .catch((error) => {

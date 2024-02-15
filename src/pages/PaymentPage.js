@@ -124,7 +124,6 @@ const postOrder = async () => {
 
     const paymentkey = Object.values(paymentType);
     const stringPaymentType = paymentkey.join('');
-    console.log(stringPaymentType)
 
     const orderDetails = {
       subtotal: total,

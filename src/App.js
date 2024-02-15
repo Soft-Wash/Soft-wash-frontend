@@ -83,6 +83,7 @@ import WashmanRequestSuppliesPage from "./pages/Washman Pages/WashmanRequestSupp
 import TaskFreeEmployees from "./pages/Admin/TaskFreeEmployees";
 import EmployeeProfile from "./pages/Admin/EmployeeProfile";
 import EmployeeEditProfile from "./pages/Admin/EmployeeEditProfile";
+import ShopReciept from "./pages/MarketPlace/ShopReciept"
 
 
 
@@ -171,6 +172,7 @@ function App() {
         <Route path="/taskfreeemployee" element={<TaskFreeEmployees/>}/>
         <Route path="/employeeprofile" element={<EmployeeProfile/>}/>
         <Route path="/employeeeditprofile/:id" element={<EmployeeEditProfile/>}/>
+        <Route path="/shopreciept/:id" element={<ShopReciept/>}/>
         
 
 
