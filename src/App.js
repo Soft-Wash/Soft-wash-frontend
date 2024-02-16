@@ -78,11 +78,15 @@ import SupTaskTable from "./pages/SupervisorPage/SupTaskTable";
 import SupSingleTask from "./components/SupervisorComponents/SupSingleTask";
 import UserEditProfile from "./components/UserDashboard/UserEditProfile";
 import UserDashboard from "./pages/user/UserDashboard";
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react';
 import WashmanRequestSuppliesPage from "./pages/Washman Pages/WashmanRequestSuppliesPage";
 import TaskFreeEmployees from "./pages/Admin/TaskFreeEmployees";
 import EmployeeProfile from "./pages/Admin/EmployeeProfile";
 import EmployeeEditProfile from "./pages/Admin/EmployeeEditProfile";
+import ShopReciept from "./pages/MarketPlace/ShopReciept"
+import ShopOrderDetailsPage from "./pages/ShopOrderDetailsPage";
+import ShopOrders from "./pages/user/ShopOrders";
+import WashmanProfilePage1 from "./pages/Washman Pages/WashmanProfilePage1";
 
 
 
@@ -135,7 +139,7 @@ function App() {
          
 
         {/* WASHMAN ROUTES */}
-        <Route path="/washman-profile" element={<WashmanProfilePage/>}/>
+        <Route path="/washman-profile" element={<WashmanProfilePage1/>}/>
         <Route path="/washman-orders" element={<WashmanOrdersPage/>}/>
         <Route path="/washman-dashboard" element={<WashmanDashboardPage/>}/>
         <Route path="/washman-single-order/:_id" element={<WashmanSingleOrderPage/>}/>
@@ -171,6 +175,9 @@ function App() {
         <Route path="/taskfreeemployee" element={<TaskFreeEmployees/>}/>
         <Route path="/employeeprofile" element={<EmployeeProfile/>}/>
         <Route path="/employeeeditprofile/:id" element={<EmployeeEditProfile/>}/>
+        <Route path="/shopreciept/:id" element={<ShopReciept/>}/>
+        <Route path="/shoporderdetails" element={<ShopOrderDetailsPage/>}/>
+        <Route path="/shoporders" element={<ShopOrders/>}/>
         
 
 

@@ -44,6 +44,7 @@ function LoginForm() {
             navigate("/SupervisorDash");
             break;
           case "washman":
+            console.log("Navigating to washman dashboard");
             navigate("/washman-dashboard");
             break;
           default:
@@ -60,6 +61,8 @@ function LoginForm() {
       console.log({ e });
     }
   };
+
+  
   return (
     <>
           <ToastContainer position="top-center" />

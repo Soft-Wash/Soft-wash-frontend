@@ -31,7 +31,7 @@ function Sidebar (){
             </div>
             <div className='user-sidebar-hover'>
               <Link exact to="/my-orders" activeClassName="activeClicked" className='user-sidebar-hover'>
-                <CDBSidebarMenuItem icon="chart-line">My Orders</CDBSidebarMenuItem>
+                <CDBSidebarMenuItem icon="chart-line">Laundry Orders</CDBSidebarMenuItem>
               </Link>
             </div>
 
@@ -43,6 +43,11 @@ function Sidebar (){
             <div className='user-sidebar-hover'>
               <Link exact to="/paymenthistory" activeClassName="activeClicked" className='user-sidebar-hover'>
                 <CDBSidebarMenuItem icon="chart-line">Payment History</CDBSidebarMenuItem>
+              </Link>
+            </div>
+            <div className='user-sidebar-hover'>
+              <Link exact to="/shoporders" activeClassName="activeClicked" className='user-sidebar-hover'>
+                <CDBSidebarMenuItem icon="chart-line">Shop Orders</CDBSidebarMenuItem>
               </Link>
             </div>
           </CDBSidebarMenu>

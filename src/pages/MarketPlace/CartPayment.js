@@ -48,11 +48,9 @@ function CartPayment() {
     calcSubTotal();
     const customer_id = localStorage.getItem("softwashLoginUser");
     const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
-    console.log(parsedCustomerData._id)
     axiosInstance
       .get(`/cart/customer?customer_id=${parsedCustomerData._id}`)
       .then((resp) => {
-        console.log(resp.data)
         setcartItems(resp.data);
       });
   }, []);
@@ -79,46 +77,82 @@ function CartPayment() {
     localStorage.setItem("paymentType", JSON.stringify(paymentMethod));
     localStorage.setItem("shopDeliveryAddress", JSON.stringify(selectedAddress));
 
-    console.log(paymentMethod); 
   }, [paymentMethod,selectedAddress]);
 
   const CartIds = cartItems?.map((item)=> item = item._id)
-  console.log(CartIds)
 
 
 
-  const postOrder = () => {
+  const postOrder = async () => {
     const paymentType = JSON.parse(localStorage.getItem("paymentType"));
     const deliveryAddy = JSON.parse(localStorage.getItem("shopDeliveryAddress"));
     if (!paymentType) {
       toast.error("Select Payment Method");
-      console.log(paymentMethod)
       return; 
     }else if(!deliveryAddy){
       toast.error("Select delivery address");
       return
+    }else{
+      const paymentkey = Object.values(paymentType);
+      const stringPaymentType = paymentkey.join('');
+      console.log(stringPaymentType)
+      const branch_id = JSON.parse(localStorage.getItem('branch_id'))
+      const customer_id = localStorage.getItem("softwashLoginUser");
+      const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
+      const OrderDetails = {
+        customer_id:parsedCustomerData._id,
+        cart_ids:CartIds,
+        total:total,
+        delivery_fee:1500,
+        delivery_address:selectedAddress,
+        payment_type:stringPaymentType,
+      }
+      const data = {
+        email: parsedCustomerData?.email,
+        amount: total,
+        user_id:parsedCustomerData._id,
+        metadata: {
+          branch_id:branch_id
+        },
+      };
+  
+      console.log(OrderDetails)
+      const payment_url = `${process.env.REACT_APP_BASE_URL}/payments/initiate-payment`;
+      const response = await axios.post(payment_url, data);
+      if (response?.data.data.paymentLink && stringPaymentType === "payWithCard" ) {
+        window.open(response?.data.data.paymentLink.data.authorization_url, '_blank');
+        console.log(response?.data?.data?.body?.reference)
+        localStorage.setItem("ShopPayment_reference",JSON.stringify(response?.data?.data?.body?.reference))
+        axiosInstance.post('/cartorder/create',OrderDetails )
+        .then((resp)=>{
+          console.log(resp.data)
+          toast.success('order created succesful')
+          localStorage.setItem('CartOrderDetails', JSON.stringify(resp.data));
+          setTimeout(() => {
+            navigate(`/shopreciept/${resp.data._id}`)
+          }, 5000);     
+        })
+        .catch((error)=>{
+          console.log(error)
+          toast.error(error.response.message)
+        })
+      }else{
+        axiosInstance.post('/cartorder/create',OrderDetails )
+        .then((resp)=>{
+          console.log(resp.data)
+          toast.success('order created succesful')
+          localStorage.setItem('CartOrderDetails', JSON.stringify(resp.data));
+          setTimeout(() => {
+            navigate(`/shopreciept/${resp.data._id}`)
+          }, 5000);     
+        })
+        .catch((error)=>{
+          console.log(error)
+          toast.error(error.response.message)
+        })
+      }
     }
-    const customer_id = localStorage.getItem("softwashLoginUser");
-    const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
-    const OrderDetails = {
-      customer_id:parsedCustomerData._id,
-      cart_ids:CartIds,
-      total:total,
-      delivery_fee:1500,
-      delivery_address:selectedAddress
-    }
-    console.log(OrderDetails)
-    axiosInstance.post('/cartorder/create',OrderDetails )
-    .then((resp)=>{
-      console.log(resp.data)
-      toast.success('order created succesful')
-      setTimeout(() => {
-        navigate("/shop")
-      }, 5000);
  
-      
-      
-    })
 
   };
 
@@ -127,7 +161,6 @@ function CartPayment() {
       <BookingBanner />
       <ToastContainer position="top-center" />
       <div className="container">
-        {/* <EmixNav/> */}
         <div className="p-3">
           <div className="payOps row">
             <div className="payOpsLeft col md-12">

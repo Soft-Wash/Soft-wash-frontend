@@ -3,7 +3,6 @@ import Banner from "../../components/AddressPage/Banner";
 import ThankYou from "../../components/OrdersPage/ThankYou";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import image from "../../assets/Orders/thanks-icon.png";
 import { Row } from "react-bootstrap";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -30,7 +29,6 @@ export default function OrderReceipt() {
     axiosInstance.get(`/payments/getstatus?reference=${ref}`)
     .then((resp)=>{
       setPaymentStatus(resp.data)
-
     })
     .catch((error)=>{
       console.log(error.message)

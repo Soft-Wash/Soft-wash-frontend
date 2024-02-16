@@ -32,12 +32,12 @@ function UserSidebarTablet(){
                         <Offcanvas.Body >
                             <Nav className="justify-content-end flex-grow-1 pe-3">              
                                 <div className='user-dashboard-nav-tabs'>
-                                    <Link exact to="/"  className='user-dashboard-nav-links'>
+                                    <Link exact to="/"  className='user-dashboard-nav-links d-flex'>
                                         <HouseFill className='user-tablet-icons'/>Home
                                     </Link>
                                 </div>
                                 <div className='user-dashboard-nav-tabs'>
-                                    <Link exact to="/userdashboard"  className='user-dashboard-nav-links'>
+                                    <Link exact to="/userdashboard"  className='user-dashboard-nav-links d-flex'>
                                         <DashSquareFill className='user-tablet-icons'/>Dashboard
                                     </Link>
                                 </div>
@@ -53,7 +53,7 @@ function UserSidebarTablet(){
                                 </div>
                                 <div className='user-dashboard-nav-tabs'>
                                     <Link exact to="/my-orders"  className='user-dashboard-nav-links d-flex'>
-                                        <ListCheck className='user-tablet-icons'/>My Order 
+                                        <ListCheck className='user-tablet-icons'/>Laundry Order 
                                     </Link>
                                 </div>
                                 <div className='user-dashboard-nav-tabs'>
@@ -66,6 +66,11 @@ function UserSidebarTablet(){
                                         <ListTask className='user-tablet-icons'/>Payment History
                                     </Link> 
                                 </div>      
+                                <div className='user-dashboard-nav-tabs'>
+                                    <Link exact to="/shoporders"  className='user-dashboard-nav-links d-flex'>
+                                        <ListTask className='user-tablet-icons'/>Shop Orders 
+                                    </Link> 
+                                </div>   
                             </Nav>
                         </Offcanvas.Body>
                         </Navbar.Offcanvas>
