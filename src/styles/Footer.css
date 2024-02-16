@@ -4,6 +4,10 @@
   white-space: nowrap;
 }
 
+.services-col li{
+  cursor: pointer;
+}
+
 
 .footer-buttonn-div{
   margin-left: 10px;
