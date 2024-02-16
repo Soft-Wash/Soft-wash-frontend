@@ -11,7 +11,6 @@ import axios from "axios";
 function Cart() {
   const [cartItems, setcartItems] = useState([]);
   const [clothQuantity, setclothQuantity] = useState({});
-  const [updatedCart, setupdatedCart] = useState([]);
   const [totalprice, setTotalprice] = useState();
   const Cart_Array = [];
 
@@ -19,8 +18,10 @@ function Cart() {
     const CustomerData = JSON.parse(localStorage.getItem("softwashLoginUser"));
     const Customer_id = CustomerData?._id;
 
-    axiosInstance
-      .get(`/cart/customer?customer_id=${Customer_id}`)
+    axios
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/cart/customer?customer_id=${Customer_id}`
+      )
       .then((resp) => {
         const initialQuantity = {};
         resp.data.forEach((item) => {
@@ -29,6 +30,9 @@ function Cart() {
         setclothQuantity(initialQuantity);
         console.log(resp.data);
         setcartItems(resp.data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 
@@ -46,24 +50,19 @@ function Cart() {
       quantity: UpdatedQuantity,
     };
 
-    console.log(UpdatedQuantity);
-
     setcartItems((prevCartItems) => {
       const updatedCartItems = prevCartItems.map((item) =>
         item.product_id._id === itemId
           ? { ...item, quantity: UpdatedQuantity }
           : item
       );
-      console.log(updatedCartItems);
 
       setcartItems(updatedCartItems);
     });
 
-    console.log(cartItems);
 
     setTimeout(() => {
       axiosInstance.put(`/cart/${itemId}/update`, Quantity).then((resp) => {
-        console.log(resp.data);
       });
     }, 30000);
   };
@@ -84,16 +83,11 @@ function Cart() {
           ? { ...item, quantity: UpdatedQuantity }
           : item
       );
-      console.log(updatedCartItems);
 
       setcartItems(updatedCartItems);
     });
-
-    console.log(cartItems);
-
     setTimeout(() => {
-      axiosInstance.put(`/cart/${itemId}/update`, Quantity).then((resp) => {
-      });
+      axiosInstance.put(`/cart/${itemId}/update`, Quantity).then((resp) => {});
     }, 30000);
   };
 
@@ -102,7 +96,6 @@ function Cart() {
     axios
       .delete(`${process.env.REACT_APP_BASE_URL}/cart/${itemId}/delete`)
       .then((resp) => {
-        console.log(resp.data);
         setcartItems((prevItems) =>
           prevItems.filter((item) => item._id !== itemId)
         );
@@ -111,8 +104,6 @@ function Cart() {
         console.error("Error deleting item from cart:", error);
       });
   };
-
-  
 
   const CalculateTotal = (cartItems) => {
     const total = cartItems.reduce((accumulator, cartItem) => {
@@ -150,7 +141,7 @@ function Cart() {
             <p className="cart-total">Total</p>
           </div>
         </div>
-        {cartItems &&
+        {cartItems?.length > 0 ? (
           cartItems.map((item, index) => (
             <div key={index}>
               <hr className="lin01" />
@@ -206,7 +197,10 @@ function Cart() {
                     </p>
                   </div>
                   <p className="total-price fw-bold">
-                    &#8358;  {`${(clothQuantity[item.product_id._id] * item.product_id.price).toFixed(2)}`} 
+                    &#8358;{" "}
+                    {`${(
+                      clothQuantity[item.product_id._id] * item.product_id.price
+                    ).toFixed(2)}`}
                   </p>
                   <p
                     className="remove2-cart"
@@ -217,7 +211,10 @@ function Cart() {
                 </div>
               </div>
             </div>
-          ))}
+          ))
+        ) : (
+          <p className="text-center fw-bold">No item avaialable in Cart</p>
+        )}
 
         <hr className="lin02" />
         <div className="sub-total-div row">

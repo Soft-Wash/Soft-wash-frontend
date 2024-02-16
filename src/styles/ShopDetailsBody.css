@@ -1,0 +1,181 @@
+.dashboard-bg {
+  width: 100%;
+  height: 100vh;
+  padding-top: 15px;
+  background-color: rgb(245, 246, 254);
+  padding-bottom: 20px;
+  overflow: scroll;
+}
+.order-details-tag {
+  margin-left: 50px;
+}
+.user-dashboard-contact-body {
+  width: 80%;
+  margin: auto;
+  margin-top: 10px;
+  padding: 25px;
+  border-radius: 30px;
+  background-color: white;
+}
+.order-header {
+  display: flex;
+  margin: 15px 0;
+}
+.green-icon {
+  font-size: 30px;
+  margin-right: 20px;
+  color: rgb(9, 179, 9);
+}
+.order-field {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid gainsboro;
+}
+.order-field h3 {
+  font-size: 17px;
+}
+.progress-bar-ckeck {
+  color: rgb(13, 202, 240);
+}
+
+.progress001 {
+  width: 70%;
+  margin: 20px auto;
+  display: flex;
+  height: auto;
+  background: none;
+}
+.progress_content {
+  width: 100%;
+  display: grid;
+  position: relative;
+}
+.progress_circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid green;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.progress_content:not(:last-child) .progress_bar1 {
+  height: 5px;
+  width:62%;
+  background-color: #dedede;
+  position: absolute;
+  top: 25%;
+  right: 0;
+}
+.progress_circle.active {
+  background-color: green;
+  border: 1px solid green;
+}
+.progress_bar_active {
+  background: green !important;
+}
+
+.progress-check {
+  font-size: 25px;
+  color: white;
+}
+
+.progress-fill {
+  background: green;
+}
+
+.status-description {
+  font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width: 1026px){
+  .progress_content:not(:last-child) .progress_bar1 {
+    width: 45%;    
+  }
+  .status-description {
+    font-size: 13px;
+  }
+}
+
+@media(max-width: 770px){
+  .progress_circle {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .progress_content:not(:last-child) .progress_bar1 {
+    width: 47%;
+    top: 18%;    
+  }
+  .progress-check {
+    font-size: 20px !important;
+  }
+}
+
+@media(max-width: 427px){
+  .user-dashboard-contact-body {
+    /* width: 80%;
+    margin: auto;
+    margin-top: 10px; */
+    padding: 25px 10px;
+    /* border-radius: 30px;
+    background-color: white; */
+  }
+  .progress_circle {
+    width: 25px !important;
+    height: 25px !important;
+  }
+  .progress_content:not(:last-child) .progress_bar1 {
+    width: 37%;
+    top: 18%;    
+  }
+  .progress-check {
+    font-size: 14px !important;
+  }
+  .status-description {
+    font-size: 8px;
+  }
+  .order-header h4{
+    font-size: 16px;
+  }
+  .order-field h3 {
+    font-size: 14px;
+    margin-right: 10px;
+  }
+  .order-field p {
+    font-size: 14px;
+  }
+}
+
+@media(max-width: 322px){
+  .progress_circle {
+    width: 18px !important;
+    height: 18px !important;
+  }
+  .progress-check {
+    font-size: 10px !important;
+  }
+  .progress_content:not(:last-child) .progress_bar1 {
+    width: 40%;
+    top: 12%;    
+  }
+  .status-description {
+    font-size: 6px;
+  }
+}
