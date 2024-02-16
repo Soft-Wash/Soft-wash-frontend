@@ -35,7 +35,7 @@ export default function ShopOrders() {
     const status = "order placed"
     axios
       .get(
-        `${process.env.REACT_APP_BASE_URL}/cartorder/status/user?customer_id=${userId._id}&status=${status}`
+        `${process.env.REACT_APP_BASE_URL}/cartorder/userorders?customer_id=${userId._id}&status=${status}`
       )
       .then((resp) => {
         setOrders(resp.data);
@@ -50,7 +50,7 @@ export default function ShopOrders() {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     axios
       .get(
-        `${process.env.REACT_APP_BASE_URL}/cartorder/status/user?customer_id=${userId._id}&status=Confirmed`
+        `${process.env.REACT_APP_BASE_URL}/cartorder/userorders?customer_id=${userId._id}&status=Confirmed`
       )
       .then((resp) => {
         setOrders(resp.data);
@@ -65,7 +65,7 @@ export default function ShopOrders() {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     axios
       .get(
-        `${process.env.REACT_APP_BASE_URL}/cartorder/status/user?customer_id=${userId._id}&status=Shipped`
+        `${process.env.REACT_APP_BASE_URL}/cartorder/userorders?customer_id=${userId._id}&status=Shipped`
       )
       .then((resp) => {
         setOrders(resp.data);
