@@ -16,21 +16,12 @@ function WashmanSingleOrderBody() {
   );
 
   const [selectedOption, setSelectedOption] = useState("Order Placed");
-  // const [order, setOrder] = useState(null);
   const [task, setTask] = useState(null);
   const [indexFound, setIndexFound] = useState(0);
 
   const { _id } = useParams();
 
-  // const orderStatusArray = [
-  //   "Order Placed",
-  //   "Confirmed",
-  //   "Received",
-  //   "Cleaning",
-  //   "Ready",
-  //   "Shipped",
-  //   "Delivered",
-  // ];
+
 
   const taskStatusArray = [
     "pending",
@@ -38,21 +29,9 @@ function WashmanSingleOrderBody() {
     "completed",
   ];
 
-  useEffect(() => {
-    // axios
-    //   .get(`${process.env.REACT_APP_BASE_URL}/order/${_id}/order`)
-    //   .then((resp) => {
-    //     console.log(resp);
-    //     setOrder(resp.data);
-    //     setIndexFound(orderStatusArray.indexOf(resp.data.status));
-    //     console.log(orderStatusArray.indexOf(resp.data.status));
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error fetching order:", error);
-    //   });
-
-
-    axios
+  useEffect(() => { 
+    const getSingleTask = () => {
+      axios
     .get(`${process.env.REACT_APP_BASE_URL}/task/${_id}/task`)
       .then((resp) => {
         setTask(resp.data);
@@ -63,33 +42,19 @@ function WashmanSingleOrderBody() {
       .catch((error) => {
         console.error("Error fetching order:", error);
       });
+    }
+    getSingleTask();
   }, []);
 
 
 
-  // const handleSeleectChange = async (e) => {
-  //   setSelectedOption(e.target.value);
-
-  //     console.log(selectedOption);
-  //     axios
-  //       .put(`${process.env.REACT_APP_BASE_URL}/order/${_id}/update`, {
-  //         status: selectedOption,
-  //         branch_id: "655debc4ec7b0b6e0f591bf7",
-  //       })
-  //       .then((resp) => {
-  //         console.log(resp.data);
-	// 				setIndexFound(orderStatusArray.indexOf(selectedOption));
-  //         localStorage.setItem("orderProgress", progress);
-  //       });
   
-  // };
 
   const handleSeleectChange = async (e) => {
     setSelectedOption(e.target.value);
       axios
         .put(`${process.env.REACT_APP_BASE_URL}/task/${_id}/update`, {
           status: selectedOption,
-          // branch_id: "655debc4ec7b0b6e0f591bf7",
         })
         .then((resp) => {
           setIndexFound(taskStatusArray.indexOf(selectedOption));

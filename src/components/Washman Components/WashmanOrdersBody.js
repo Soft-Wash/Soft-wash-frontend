@@ -8,15 +8,23 @@ function WashmanOrdersBody(){
 
 
     const [tasks, setTasks] = useState([]);
-
-
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
 
-    const washmanID = "655e49bad160aea8372bde1d";
+    const [washmanID, setWashmanID] = useState("")
+
 
     useEffect(() => {
+        const getID = () =>{
+            const storedUserId = localStorage.getItem("softwashEmployeeLogin");
+            if (storedUserId) {
+                setWashmanID(JSON.parse(storedUserId));
+            }
+            console.log(washmanID)
+          }
+          getID();
+
         const fetchTasks = async () => {
             try{
                 setLoading(true);
@@ -32,8 +40,10 @@ function WashmanOrdersBody(){
                 setLoading(false);
             }
         }
-
-        fetchTasks();
+        if(washmanID){
+            fetchTasks();
+          }
+        
     }, [tasks])
 
     return(
@@ -49,7 +59,8 @@ function WashmanOrdersBody(){
                                 <th>S/No</th>
                                 <th>Task ID</th>
                                 <th>Task Status</th>
-                                {/* <th>Due Date</th> */}
+                                <th>Task Type</th>
+                                <th>Message</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,15 +68,15 @@ function WashmanOrdersBody(){
                                 <tr key={task._id}>
                                 <td>{index + 1}</td>
                                 <td>
-                                    {/* {task.map((order) => ( */}
-                                        <div>
-                                            <Link to={`/washman-single-order/${task._id}`} className="washman-table-link">
-                                                {task._id}
-                                            </Link>
-                                        </div>
-                                    {/* ))} */}
+                                    <div>
+                                        <Link to={`/washman-single-order/${task._id}`} className="washman-table-link">
+                                            {task._id}
+                                        </Link>
+                                    </div>
                                 </td>                                
-                                <td>{task.status}</td>                                
+                                <td>{task.status}</td>    
+                                <td>{task.taskType}</td>  
+                                <td>{task.note}</td>          
                             </tr>                                    
                             ))}
                         </tbody>

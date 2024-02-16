@@ -83,6 +83,7 @@ import WashmanRequestSuppliesPage from "./pages/Washman Pages/WashmanRequestSupp
 import TaskFreeEmployees from "./pages/Admin/TaskFreeEmployees";
 import EmployeeProfile from "./pages/Admin/EmployeeProfile";
 import EmployeeEditProfile from "./pages/Admin/EmployeeEditProfile";
+import WashmanProfilePage1 from "./pages/Washman Pages/WashmanProfilePage1";
 
 
 
@@ -135,7 +136,7 @@ function App() {
          
 
         {/* WASHMAN ROUTES */}
-        <Route path="/washman-profile" element={<WashmanProfilePage/>}/>
+        <Route path="/washman-profile" element={<WashmanProfilePage1/>}/>
         <Route path="/washman-orders" element={<WashmanOrdersPage/>}/>
         <Route path="/washman-dashboard" element={<WashmanDashboardPage/>}/>
         <Route path="/washman-single-order/:_id" element={<WashmanSingleOrderPage/>}/>

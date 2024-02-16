@@ -115,6 +115,14 @@
 }
 
 @media(max-width: 770px){
+  .user-dashboard-contact-body {
+    width: 90%;
+    /* margin: auto;
+    margin-top: 10px;
+    padding: 25px;
+    border-radius: 30px;
+    background-color: white; */
+  }
   .progress_circle {
     width: 40px !important;
     height: 40px !important;
@@ -137,7 +145,7 @@
     height: 25px !important;
   }
   .progress_content:not(:last-child) .progress_bar1 {
-    width: 37%;
+    width: 47%;
     top: 18%;    
   }
   .progress-check {
@@ -167,7 +175,7 @@
     font-size: 10px !important;
   }
   .progress_content:not(:last-child) .progress_bar1 {
-    width: 40%;
+    width: 47%;
     top: 12%;    
   }
   .status-description {

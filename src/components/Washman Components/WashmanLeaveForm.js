@@ -1,5 +1,6 @@
+import "../../styles/Washman Styles/WashmanLeaveForm.css";
 import { Button } from "react-bootstrap";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
@@ -9,24 +10,67 @@ function WashmanLeaveForm() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [reasons, setReasons] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [err, setErr] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("");
   const Navigate = useNavigate();
+
+
+  const [washman, setWashman] = useState({});
+    const [error, setError] = useState("");
+
+
+
+    const [washmanID, setWashmanID] = useState("")
+    const branchID = "655deba5ec7b0b6e0f591bf5"
+
+    useEffect(() => {
+      const getID = () =>{
+        const storedUserId = localStorage.getItem("softwashEmployeeLogin");
+        if (storedUserId) {
+            setWashmanID(JSON.parse(storedUserId));
+        }
+        console.log(washmanID)
+        }
+        getID();    
+
+        const fetchWashman = async () =>{          
+            try{
+                const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/employees/${washmanID}`)
+                setWashman(response.data);
+                console.log(response.data);                
+            }
+            catch (error) {
+                setError(error.message || 'An error occurred while fetching Washman.');
+            } 
+        }  
+
+        if(washmanID){
+          fetchWashman();
+        }
+    }, [])
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("here")
-    if (email === "" || fullName=== "" || reasons=== "") {
+    setFullName(washman.fullName);
+    setEmail(washman.email)
+    // console.log("here")
+    if (email === "" || fullName=== "" || reasons=== "" || selectedOption=== "" || startDate=== "" || endDate=== "") {
       setErr(true);
     } else {
       setErr(false);
       const body = {
-        email: email,
         fullName: fullName,
-        // employee_id: fullName,
-        // branch_id: fullName,
-        // startDate: startDate,
-        // endDate: endDate,
-        reasons: reasons
+        email: email,
+        reasons: reasons,
+        employee_id: washmanID,
+        branch_id: branchID,
+        startDate: startDate,
+        endDate: endDate,
+        reasons: reasons,
+        leaveType: selectedOption,
       };
       console.log(body)
       try {
@@ -55,10 +99,10 @@ function WashmanLeaveForm() {
               </Form.Label>
               <Form.Control
                 type="text"
-                placeholder=""
-                value={fullName}
+                placeholder={washman.fullName}
+                value={washman.fullName}
                 onChange={(e) => setFullName(e.target.value)}
-              />
+                />
               {err && fullName === "" ? (
                 <span className="reset-err-msg">Kindly enter your Full Name</span>
               ) : null}
@@ -69,8 +113,8 @@ function WashmanLeaveForm() {
               </Form.Label>
               <Form.Control
                 type="email"
-                placeholder=""
-                value={email}
+                placeholder={washman.email}
+                value={washman.email}
                 onChange={(e) => setEmail(e.target.value)}
               />
               {err && email === "" ? (
@@ -88,6 +132,44 @@ function WashmanLeaveForm() {
               />
               {err && reasons === "" ? (
                 <span className="reset-err-msg">Kindly enter your Reason For Leave</span>
+              ) : null}
+
+              <select  className="reset-input-headers" onChange={(e) => setSelectedOption(e.target.value)}>
+                <option value="" hidden>
+                  Select Status
+                </option>
+                <option value="annual">ANNUAL</option>
+                <option value="burial">BURIAL</option>
+                <option value="sick">SICK</option>   
+                <option value="wedding">WEDDING</option>              
+                <option value="patarnity">PATARNITY</option>              
+                <option value="matarnity">MATARNITY</option>                          
+            </select>
+                
+              <Form.Label htmlFor="startDate" className="reset-input-headers">
+                Start Date
+              </Form.Label>
+              <Form.Control
+                type="date"
+                placeholder=""
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+              {err && startDate === "" ? (
+                <span className="reset-err-msg">Kindly enter the date you wish to start your Leave</span>
+              ) : null}
+
+              <Form.Label htmlFor="endDate" className="reset-input-headers">
+                End Date
+              </Form.Label>
+              <Form.Control
+                type="date"
+                placeholder=""
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+              />
+              {err && endDate === "" ? (
+                <span className="reset-err-msg">Kindly enter the date you wish to end your Leave</span>
               ) : null}
             </Form.Group>
 

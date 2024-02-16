@@ -32,12 +32,12 @@ function UserSidebarTablet(){
                         <Offcanvas.Body >
                             <Nav className="justify-content-end flex-grow-1 pe-3">              
                                 <div className='user-dashboard-nav-tabs'>
-                                    <Link exact to="/"  className='user-dashboard-nav-links'>
+                                    <Link exact to="/"  className='user-dashboard-nav-links d-flex'>
                                         <HouseFill className='user-tablet-icons'/>Home
                                     </Link>
                                 </div>
                                 <div className='user-dashboard-nav-tabs'>
-                                    <Link exact to="/userdashboard"  className='user-dashboard-nav-links'>
+                                    <Link exact to="/userdashboard"  className='user-dashboard-nav-links d-flex'>
                                         <DashSquareFill className='user-tablet-icons'/>Dashboard
                                     </Link>
                                 </div>
