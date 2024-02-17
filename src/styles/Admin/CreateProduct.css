@@ -1,0 +1,84 @@
+.product_content{
+  background-color: rgb(240, 240, 240);
+  padding: 20px;
+  width: 100%;
+}
+
+.product_content_line{
+  width: 100%;
+  border-top: none;
+  border-bottom: 2px solid grey;
+}
+
+.Create_table_content{
+  background-color: white;
+  /* height: auto; */
+  width: 100%;
+  min-height: 500px;
+  padding: 20px;
+}
+
+.create_details_div{
+  background-color: white;
+  height: auto;
+  width: 100%;
+  box-shadow: 2px 2px 4px 4px rgb(224, 224, 224);
+
+}
+
+.Product_details_div_header{
+  background-color: rgb(13,202,240);
+  height: 45px;
+  padding: 10px;
+}
+
+.Product_details_div_header p{
+  color: white;
+  font-weight: bold;
+}
+
+.product_details_div_form{
+  padding: 20px;
+}
+
+.product_details_div_form_innerd{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.product_details_div_form_innerd input:not(:last-child) {
+  width: 450px;
+  border: 1px solid grey;
+}
+
+.product_details_div_form_innerd_inpt3 {
+  width: 450px;
+  border: none;
+}
+
+
+.product_details_div_form_innerd_inpt1,
+.product_details_div_form_innerd_inpt2{
+  width: 450px;
+  border: 1px solid grey;
+}
+
+.product_details_div_form_innerd select{
+  width: 450px;
+  border: 1px solid grey;
+}
+
+
+.product_details_div_form_innerd_textarea{
+  border: 1px solid grey;
+}
+
+.product_details_div_form_btn{
+  margin-top: 10px;
+  background-color: rgb(13,202,240);
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: white;
+}
