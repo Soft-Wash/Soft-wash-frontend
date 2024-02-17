@@ -17,7 +17,6 @@ function EmployeeProfileBody() {
       .get(`${process.env.REACT_APP_BASE_URL}/employees/${userId}`)
       .then((resp) => {
         setUserData(resp.data)
-        console.log(resp.data)
       });
   }, []);
 
