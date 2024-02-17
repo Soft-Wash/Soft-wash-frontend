@@ -23,14 +23,14 @@ function WashmanDashboardBody(){
             }
             console.log(washmanID)
           }
-          getID();
+          
 
         const getAllTasks = async () => {
             const resp = await axios.get(`${process.env.REACT_APP_BASE_URL}/task/employee/${washmanID}/tasks`);
             setTasks(resp.data);
             console.log(resp.data);
         }        
-
+        getID();
         if(washmanID){
             getAllTasks();
           }

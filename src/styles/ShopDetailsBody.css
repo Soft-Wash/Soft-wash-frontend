@@ -142,7 +142,7 @@
     height: 25px !important;
   }
   .progress_content:not(:last-child) .progress_bar1 {
-    width: 37%;
+    width: 45%;
     top: 18%;    
   }
   .progress-check {

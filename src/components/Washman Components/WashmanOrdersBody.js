@@ -23,7 +23,7 @@ function WashmanOrdersBody(){
             }
             console.log(washmanID)
           }
-          getID();
+          
 
         const fetchTasks = async () => {
             try{
@@ -40,11 +40,12 @@ function WashmanOrdersBody(){
                 setLoading(false);
             }
         }
+        getID();
         if(washmanID){
             fetchTasks();
           }
         
-    }, [tasks])
+    }, [])
 
     return(
         <div className="washman-bg">
