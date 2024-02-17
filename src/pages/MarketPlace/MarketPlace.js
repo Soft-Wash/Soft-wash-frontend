@@ -186,9 +186,9 @@ function MarketPlace() {
                     to={`/singleproduct/${item._id}`}
                     className="sibglepagelink"
                   >
-                    <h5 className="name-tag mt-1">{item.name}</h5>
+                    <h5 className="name-tag mt-1">{item?.name}</h5>
                   </Link>
-                  <p className="price-tag fs-4 m-0"> &#8358; 4,650</p>
+                  <p className="price-tag fs-4 m-0"> &#8358; {item?.price}</p>
                   <div>
                     <Button
                       variant="secondary"

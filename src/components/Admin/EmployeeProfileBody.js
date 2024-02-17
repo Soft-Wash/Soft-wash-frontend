@@ -9,7 +9,7 @@ function EmployeeProfileBody() {
   const [userData, setUserData] = useState();
   const [realImage,setRealImage]=useState()
   const [inputImage,setinputImage]=useState()
-  const backend = "http://localhost:8003/"
+  const backend = "http://localhost:8003/uploads/"
 
   useEffect(() => {
     const userId = JSON.parse(localStorage.getItem("softwashEmployeeLogin"));
@@ -21,15 +21,6 @@ function EmployeeProfileBody() {
   }, []);
 
 
-  const HandleImage=(e)=>{
-    const file = e.target.files[0]
-    if(file){
-      const imageUrl = URL.createObjectURL(file)
-      setRealImage(file)
-      setinputImage(imageUrl)
-    }
-
-  }
 
   return (
 
@@ -42,16 +33,8 @@ function EmployeeProfileBody() {
           <div className="user-profilePic">
             <img src={`${backend}${userData?.avatar}`}/>
           </div>
-          <label htmlFor="imageUpload" className="user-dp-btn">Change Photo</label>
-          <input
-                    type="file"
-                    accept="image/*"
-                    id="imageUpload"
-                    name="img"
-                    className="input-field"
-                    hidden
-                    onChange={HandleImage}
-                  />
+          <button  className="user-dp-btn">Change Photo</button>
+
         </div>
         <div>
           <div className="user-profile-field">
