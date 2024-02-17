@@ -1,14 +1,3 @@
-/* .dashboard-bg{
-    width: 100%;
-    height: 180vh;
-    padding-top: 50px;
-} */
-/* .user-dashboard-contact-body{
-    width: 90%;
-    margin: auto;
-    background-color: white;
-} */
-
 
 .user-dashboard-nav{
     display: none;
@@ -28,8 +17,6 @@
     border-top-left-radius: 8px;
     /* color: White; */
 }
-
-
 
 
 .user-dashboard-contact-content{
@@ -62,15 +49,6 @@
 .user-contact-text{
     width: 60%;
 }
-
-
-
-
-
-
-
-
-
 
 
 @media(max-width: 770px) {
