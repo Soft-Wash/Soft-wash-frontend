@@ -30,7 +30,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    background-color: rgb(245,246,254);
+    background-color: whitesmoke;
 }
 .user-dashboard-icon-div{
     width: 70px;
