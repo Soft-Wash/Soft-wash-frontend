@@ -25,7 +25,7 @@ import "react-toastify/dist/ReactToastify.css";
 function MarketPlace() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [wishlistItems, setWishlistItems] = useState([]);
-  const backend = 'http://localhost:8003'
+  const backend = "http://localhost:8003/uploads/"
 
   const [shopItems, setshopItems] = useState();
   let wishlist_id = "";
@@ -181,7 +181,7 @@ function MarketPlace() {
                     }`}
                     onClick={() => AddWishlist(item._id)}
                   />
-                  <img src={item.img} className="item-image  mt-5" alt="" />
+                  <img src={`${backend}${item.img}`} className="item-image  mt-5" alt="" />
                   <Link
                     to={`/singleproduct/${item._id}`}
                     className="sibglepagelink"
