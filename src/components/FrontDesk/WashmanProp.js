@@ -1,26 +1,22 @@
-import { Col, Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import img1 from "../../assets/washman-pic.jpg";
 import { useState } from "react";
 
-export default function WashmanProp({props, onClick}) {
-  const [assign, setAssign] = useState(false);
+export default function WashmanProp(props) {
+  // const [assign, setAssign] = useState(false);
+  const [orderId, setOrderId] = useState();
 
-  const handleSubmit = (e) => {
-    // alert(e);
-    console.log(e.target)
-  };
-  const assignTask = (e) => {
-    console.log(e)
-    // console.log(e.parentElement.parentElement.parentElement.name)
+  const handleClick = () => {
+    props.handleClick(orderId);
   };
 
   return (
     <>
-      <div className="d-flex justify-content-between mb-4" >
+      <div className="d-flex justify-content-between mb-4">
         <div className="rounded-circle my-auto" style={{ width: "30px" }}>
           <img
-            // src={props.image || img1}
-            alt={"washman user"}
+            src={props.image || img1}
+            alt={"washman"}
             className="img-fluid rounded-circle my-auto"
             style={{ width: "30px", height: "auto" }}
           />
@@ -36,15 +32,15 @@ export default function WashmanProp({props, onClick}) {
         <Col lg={3}>
           <button
             className={` badge border-0 ${
-              props.status == "free"
+              props.status === "free"
                 ? "bg-success-subtle text-success"
                 : "bg-warning-subtle text-warning"
-            } my-1 `} 
+            } my-1 `}
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
           >
             <small
-              onClick = {onClick}
+              // onClick={handleClick}
               className="my-auto"
               style={{ width: "20px", overflow: "hidden" }}
             >
@@ -75,10 +71,12 @@ export default function WashmanProp({props, onClick}) {
               <div class="modal-body">
                 <form>
                   <div class="mb-3">
-                    <label htmlfor="recipient-name" class="col-form-label">
+                    <label htmlFor="recipient-name" class="col-form-label">
                       Order ID:
                     </label>
                     <input
+                      value={orderId}
+                      onChange={(e) => setOrderId(e.target.value)}
                       type="text"
                       class="form-control"
                       id="recipient-name"
@@ -86,7 +84,7 @@ export default function WashmanProp({props, onClick}) {
                     />
                   </div>
                   <div class="mb-3">
-                    <label htmlfor="message-text" class="col-form-label">
+                    <label htmlFor="message-text" class="col-form-label">
                       Additional Info:
                     </label>
                     <textarea class="form-control" id="message-text"></textarea>
@@ -104,7 +102,7 @@ export default function WashmanProp({props, onClick}) {
                 <button
                   type="button"
                   class="btn btn-primary"
-                  onClick={(e) => handleSubmit(e)}
+                  onClick={() => handleClick()}
                 >
                   Assign
                 </button>

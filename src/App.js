@@ -87,6 +87,7 @@ import ShopReciept from "./pages/MarketPlace/ShopReciept"
 import ShopOrderDetailsPage from "./pages/ShopOrderDetailsPage";
 import ShopOrders from "./pages/user/ShopOrders";
 import WashmanProfilePage1 from "./pages/Washman Pages/WashmanProfilePage1";
+import FrontdeskAssignTask from "./pages/FrontDesk/AssignTask";
 
 
 
@@ -136,6 +137,9 @@ function App() {
         {/* Front desk */}
           <Route path="/frontdesk/dash" element={<Dashboard/>} />
           <Route path="/userdashboard" element={<UserDashboard/>} />
+          <Route path="/frontdesk/assign-task" element={<FrontdeskAssignTask/>} />
+          <Route path="/frontdesk/inventory"  />
+          <Route path="/frontdesk/reviews"  />
          
 
         {/* WASHMAN ROUTES */}
