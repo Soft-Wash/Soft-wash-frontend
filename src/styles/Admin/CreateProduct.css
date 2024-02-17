@@ -75,10 +75,10 @@
 }
 
 .product_details_div_form_btn{
-  margin-top: 10px;
   background-color: rgb(13,202,240);
   padding: 5px;
   padding-left: 20px;
   padding-right: 20px;
   color: white;
+  margin: 20px;
 }

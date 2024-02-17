@@ -25,6 +25,7 @@ import "react-toastify/dist/ReactToastify.css";
 function MarketPlace() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [wishlistItems, setWishlistItems] = useState([]);
+  const backend = 'http://localhost:8003'
 
   const [shopItems, setshopItems] = useState();
   let wishlist_id = "";
@@ -135,7 +136,6 @@ function MarketPlace() {
 
         <hr />
       </Container>
-
       <Container className="mt-5">
         <Row className="justify-content-between">
           <Col sm={6} md={6} lg={6}>
