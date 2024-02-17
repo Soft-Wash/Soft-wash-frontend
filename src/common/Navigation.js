@@ -10,22 +10,36 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import { BsBell } from "react-icons/bs";
-import img from "../assets/icons/linkedin.png";
+import { axiosInstance } from "../services/AxiosInstance";
+const backend = "http://localhost:8003/uploads/"
 
 function Navigation() {
   const OrderDetails = JSON.parse(localStorage.getItem("orderDetails"));
   const [userLoggedIn, setUserLoggedIn] = useState();
+  const [userImage, setUserImage] = useState();
+  const navigate = useNavigate();
+
   useEffect(() => {
+    const userImage = JSON.parse(localStorage.getItem("softwashLoginUser"));
     const userToken = JSON.parse(localStorage.getItem("softwashLoginToken"));
     setUserLoggedIn(userToken);
+    userData()
   }, []);
-  const navigate = useNavigate();
+
 
   const handleLogout = () => {
     // Clear local storage
     localStorage.clear();
     navigate("/");
   };
+
+  const userData=()=>{
+    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
+    axiosInstance.get(`/users/${userId._id}`)
+    .then((resp)=>{
+      setUserImage(resp.data);
+    })
+  }
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -102,23 +116,27 @@ function Navigation() {
                     className="bg-transparent text-black border-0 p-0 d-flex align-items-center"
                   >
                     <img
-                      src={img}
+                      src={
+                        userImage && userImage?.avatar
+                          ? backend+userImage?.avatar
+                          : `https://ui-avatars.com/api/?name=${userImage?.fullName}&size=128`
+                      }
                       alt="profile"
-                      className="img-fluid "
+                      className="border_raduis img-fluid"
                       style={{ height: "36px", width: "auto" }}
                     />
                   </Dropdown.Toggle>
                   <Dropdown.Menu className="mt-4">
-                    <Dropdown.Item >
+                    <Dropdown.Item>
                       <Link className="navigation_link" to="/user-profile">
-                      Profile
+                        Profile
                       </Link>
-                      </Dropdown.Item>
-                      <Dropdown.Item >
+                    </Dropdown.Item>
+                    <Dropdown.Item>
                       <Link to="userdashboard" className="navigation_link">
-                      Dashboard
+                        Dashboard
                       </Link>
-                      </Dropdown.Item>
+                    </Dropdown.Item>
                     <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>

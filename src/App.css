@@ -94,3 +94,7 @@ body {
 display: flex;
 justify-content: center;
 }
+
+.border_raduis{
+    border-radius: 50%;
+}

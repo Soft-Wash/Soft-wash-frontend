@@ -10,14 +10,13 @@ function UserProfileBody() {
   const [userData, setUserData] = useState();
   const [realImage,setRealImage]=useState()
   const [inputImage,setinputImage]=useState()
-  const backend = "http://localhost:8003/"
+  const backend = "http://localhost:8003/uploads/"
 
   useEffect(() => {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/users/${userId._id}`)
       .then((resp) => {
-        console.log(resp.data);
         setUserData(resp.data)
       });
   }, []);
@@ -29,7 +28,6 @@ function UserProfileBody() {
       const imageUrl = URL.createObjectURL(file)
       setRealImage(file)
       setinputImage(imageUrl)
-      console.log(file)
       
 
     }

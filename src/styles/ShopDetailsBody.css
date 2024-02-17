@@ -130,10 +130,10 @@
 
 @media(max-width: 427px){
   .user-dashboard-contact-body {
-    /* width: 80%;
-    margin: auto;
+    width: 90%;
+    /* margin: auto;
     margin-top: 10px; */
-    padding: 25px 10px;
+    /* padding: 25px 10px; */
     /* border-radius: 30px;
     background-color: white; */
   }
@@ -142,7 +142,7 @@
     height: 25px !important;
   }
   .progress_content:not(:last-child) .progress_bar1 {
-    width: 37%;
+    width: 47%;
     top: 18%;    
   }
   .progress-check {
