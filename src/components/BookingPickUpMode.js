@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
+import Loader from "../common/Loader"
 
 
 
@@ -31,6 +32,7 @@ function BookingPickUpMode() {
 
   return (
     <Container>
+
       <div className="booking-pickup-mode select-pickup-type">
         <h3 className="section-header">Which service do you require?</h3>
         <Form>

@@ -8,12 +8,12 @@
 }
 
 .userdash-container{
-  padding-left: 20px;
+  padding-left: 10px;
   padding-top: 30px;
   overflow: scroll;
   width: 100vw;
   height: 100vh;
-  background-color: rgb(215, 215, 215);
+  background-color: whitesmoke;
   }
 
 
@@ -49,6 +49,17 @@
   }
   .user-sidebar-div{
       display: none !important;
-  }    
+  } 
+  
+  .icon-container{
+    height: 90px;
+    width: 180px;
+  }
+
+  .userdash_grid_container{
+    gap: 10px;
+  }
+
+
   
 }

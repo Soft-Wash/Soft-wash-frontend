@@ -6,11 +6,19 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "../../components/OrdersPage/Sidebar";
 import { axiosInstance } from "../../services/AxiosInstance";
+import UserSidebarTablet from "../UserSidebarTablet";
+import "../../styles/UserProfile.css"
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 function UserEditProfile() {
   const [userData, setUserData] = useState();
   const [realImage, setRealImage] = useState();
   const [inputImage, setinputImage] = useState();
+  const backend = "http://localhost:8003/uploads/"
 
 
   useEffect(() => {
@@ -18,7 +26,6 @@ function UserEditProfile() {
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/users/${userId._id}`)
       .then((resp) => {
-        console.log(resp.data);
         setUserData(resp.data);
       });
   }, []);
@@ -28,18 +35,15 @@ function UserEditProfile() {
     setUserData({ ...userData, [e.target.name]: value });
   };
 
-  console.log(userData)
-
   const HandleImage = (e) => {
     const file = e.target.files[0];
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setRealImage(file);
       setinputImage(imageUrl);
-      console.log(file);
     }
   };
-  console.log(realImage)
+
 
   const UpdateProfile=()=>{
     const formData = new FormData()
@@ -48,101 +52,116 @@ function UserEditProfile() {
    formData.append('email', userData.email)
    formData.append('address', userData.address)
    formData.append('avatar', realImage)
-   console.log([...formData.entries()]);
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     axiosInstance.put(`users/${userId._id}/update`,formData)
     .then((resp)=>{
-      console.log(resp.data)
+      toast.success("updated successfully")
+
     })
   }
 
   return (
+    <div>
+             <ToastContainer position="top-center" />
     <div className="d-flex">
-      <Sidebar />
-      <div className="user-dashboard-bg">
-        <div className="user-page-content">
-          <div className="user-header">
-            <h2>USER PROFILE</h2>
-          </div>
-          <form action="/upload" method="POST" encType="multipart/form-data">
-          <div className="user-profilePic-sec d-flex">
-          {inputImage ? (
-              <div className="user-profilePic">
-              <img
-                src={inputImage}
-                alt="Uploaded"
-                className="uploaded-image"
+      <div className='user-sidebar-div'>
+        <Sidebar />
+      </div>
+      <div>
+        <div className='user-dashboard-nav'>
+        <UserSidebarTablet />
+        </div>
+        <div className="user-dashboard-bg">
+          <div className="user-page-content">
+            <div className="user-header">
+              <h2>USER PROFILE</h2>
+            </div>
+            <form action="/upload" method="POST" encType="multipart/form-data">
+            <div className="user-profilePic-sec d-flex">
+            {inputImage ? (
+                <div className="user-profilePic">
+                <img
+                  src={inputImage}
+                  alt="Uploaded"
+                  className="uploaded-image"
+                />
+              </div>
+                ):            <div className="user-profilePic">
+                <img                       src={
+                        userData && userData?.avatar
+                          ? backend+userData?.avatar
+                          : `https://ui-avatars.com/api/?name=${userData?.fullName}&size=128`
+                      } />
+              </div>}
+
+              <label htmlFor="imageUpload" className="user-dp-btn">
+                Change Photo
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                id="imageUpload"
+                name="avatar"
+                className="input-field"
+                hidden
+                onChange={HandleImage}
               />
             </div>
-              ):            <div className="user-profilePic">
-              <img src={userData?.avatar} />
-            </div>}
+            <div className="edit_input_divs">
+              <label htmlFor="" className="edit_input_divs">
+                Full Name <br />
+                <input
+                  type="text"
+                  className="usereditprofile_input"
+                  value={userData?.fullName}
+                  name="fullName"
+                  onChange={HandleInputChange}
+                />
+              </label>{" "}
+              <br /> <br />
+              <label htmlFor="" className="edit_input_divs">
+                Phone <br />
+                <input
+                  type="text"
+                  className="usereditprofile_input"
+                  value={userData?.phone}
+                  name="phone"
+                  onChange={HandleInputChange}
+                />
+              </label>{" "}
+              <br /> <br />
+              <label htmlFor="" className="edit_input_divs">
+                Email <br />
+                <input
+                  type="text"
+                  className="usereditprofile_input"
+                  value={userData?.email}
+                  name="email"
+                  onChange={HandleInputChange}
+                />
+              </label>{" "}
+              <br /> <br />
+              <label htmlFor="" className="edit_input_divs">
+                Address <br />
+                <input
+                  type="text"
+                  className="usereditprofile_input"
+                  value={userData?.address}
+                  name="email"
+                  onChange={HandleInputChange}
+                />
+              </label>
+            </div>
+  </form>
 
-            <label htmlFor="imageUpload" className="user-dp-btn">
-              Change Photo
-            </label>
-            <input
-              type="file"
-              accept="image/*"
-              id="imageUpload"
-              name="avatar"
-              className="input-field"
-              hidden
-              onChange={HandleImage}
-            />
+
+            <Button className="edit-user-profile-btn" onClick={()=>UpdateProfile()}>Update Profile</Button>
           </div>
-          <div>
-            <label htmlFor="">
-              Full Name <br />
-              <input
-                type="text"
-                className="usereditprofile_input"
-                value={userData?.fullName}
-                name="fullName"
-                onChange={HandleInputChange}
-              />
-            </label>{" "}
-            <br /> <br />
-            <label htmlFor="">
-              Phone <br />
-              <input
-                type="text"
-                className="usereditprofile_input"
-                value={userData?.phone}
-                name="phone"
-                onChange={HandleInputChange}
-              />
-            </label>{" "}
-            <br /> <br />
-            <label htmlFor="">
-              Email <br />
-              <input
-                type="text"
-                className="usereditprofile_input"
-                value={userData?.email}
-                name="email"
-                onChange={HandleInputChange}
-              />
-            </label>{" "}
-            <br /> <br />
-            <label htmlFor="">
-              Address <br />
-              <input
-                type="text"
-                className="usereditprofile_input"
-                value={userData?.address}
-                name="email"
-                onChange={HandleInputChange}
-              />
-            </label>
-          </div>
-</form>
-
-
-          <Button className="edit-user-profile-btn" onClick={()=>UpdateProfile()}>Update Profile</Button>
         </div>
       </div>
     </div>
+    </div>
+
   );
 }
 

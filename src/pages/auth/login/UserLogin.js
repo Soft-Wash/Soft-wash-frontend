@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useState,useContext } from 'react';
 import{handleLogin} from '../../../services/Login'
 import { variableManager } from '../../../context/VariablesContext';
-import{Loader} from "../../../common/Loader"
+// import{Loader} from "../../../common/Loader"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -60,7 +60,7 @@ export default function Login() {
         setLoading(false);
         if(data){
           toast.success("Login Successful")
-          navigate('/userdashboard')
+          navigate('/')
         } else if(error){
           toast.error("Incorrect Email Or Password");
         }
@@ -158,7 +158,7 @@ export default function Login() {
         <div className="banner-section">
           <center className="logo-sectio">{/* <h5>Eventbux</h5> */}</center>
   
-          <div className="welcome-section">
+          <div className="welcome-section blur">
             <center>
               <p className="note text-light">New here?</p>
               <p className="welcome">Join Us Today!</p>
@@ -173,7 +173,7 @@ export default function Login() {
           </div>
             <center className="copyright">Copyright © 2023</center>
         </div>
-        <Loader color="primary" size="lg" show={loading} /> 
+        {/* <Loader color="primary" size="lg" show={loading} />  */}
       </div>
       </>
     );

@@ -10,14 +10,13 @@ function UserProfileBody() {
   const [userData, setUserData] = useState();
   const [realImage,setRealImage]=useState()
   const [inputImage,setinputImage]=useState()
-  const backend = "http://localhost:8003/"
+  const backend = "http://localhost:8003/uploads/"
 
   useEffect(() => {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/users/${userId._id}`)
       .then((resp) => {
-        console.log(resp.data);
         setUserData(resp.data)
       });
   }, []);
@@ -29,7 +28,6 @@ function UserProfileBody() {
       const imageUrl = URL.createObjectURL(file)
       setRealImage(file)
       setinputImage(imageUrl)
-      console.log(file)
       
 
     }
@@ -45,7 +43,11 @@ function UserProfileBody() {
         </div>
         <div className="user-profilePic-sec d-flex">
           <div className="user-profilePic">
-            <img src={`${backend}${userData?.avatar}`}/>
+            <img                       src={
+                        userData && userData?.avatar
+                          ? backend+userData?.avatar
+                          : `https://ui-avatars.com/api/?name=${userData?.fullName}&size=128`
+                      }/>
           </div>
           <label htmlFor="imageUpload" className="user-dp-btn">Change Photo</label>
           <input
@@ -65,7 +67,7 @@ function UserProfileBody() {
           </div>          
           <div className="user-profile-field">
             <h4>Phone</h4>
-            {/* <h4>{userData.phone}</h4> */}
+            <h4>{userData?.phone}</h4>
           </div>
           <div className="user-profile-field">
             <h4>Email</h4>
@@ -74,10 +76,6 @@ function UserProfileBody() {
           <div className="user-profile-field">
             <h4>Address</h4>
             <h4>{userData?.address}</h4>
-          </div>
-          <div className="user-profile-field">
-            <h4>Verified</h4>
-            <h4>{userData?.isVerified}</h4>
           </div>
          </div>
         <Link to={`/usereditprofile/${userData?._id}`}  className="user-form-link">

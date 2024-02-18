@@ -96,9 +96,7 @@ function handlePaymentPage(e) {
       ? e.target.file[0]
       : e.target.value;
 
-  setpaymentMethod ({
-    ...paymentMethod, payment_method: e.target.name
-  });
+  setpaymentMethod (e.target.name);
 }
 
 console.log(paymentMethod)
@@ -112,6 +110,7 @@ useEffect(() => {
 
 const postOrder = async () => {
   try {
+    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     const deliveryType = JSON.parse(localStorage.getItem('deliveryType'));
     const key = Object.keys(deliveryType);
     const stringDeliveryType = key.join('');
@@ -125,7 +124,6 @@ const postOrder = async () => {
 
     const paymentkey = Object.values(paymentType);
     const stringPaymentType = paymentkey.join('');
-    console.log(stringPaymentType)
 
     const orderDetails = {
       subtotal: total,
@@ -137,6 +135,7 @@ const postOrder = async () => {
     const data = {
       email: orderData?.customer_id?.email,
       amount: orderDetails?.subtotal,
+      user_id:userId._id,
       metadata: {
         order_id: orderData?._id,
         branch_id: orderData?.branch_id,
@@ -198,7 +197,7 @@ const postOrder = async () => {
                         id="flexRadioDefault1"
                         // value={paymentMethod}
                         onChange={(e)=>handlePaymentPage(e)}
-                        checked={paymentMethod.payment_method === "payWithCard"}
+                        checked={paymentMethod === "payWithCard"}
                       />
                       <label class="form-check-label" for="flexRadioDefault1">
                         Pay With Card
@@ -226,7 +225,7 @@ const postOrder = async () => {
                         id="flexRadioDefault1"
                         // value={paymentMethod}
                         onChange={(e)=>handlePaymentPage(e)}
-                        checked={paymentMethod.payment_method === "payWithCash"}
+                        checked={paymentMethod === "payWithCash"}
                       />
                       <label
                         className="form-check-label"

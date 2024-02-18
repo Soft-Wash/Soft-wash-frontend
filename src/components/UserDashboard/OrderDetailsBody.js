@@ -70,7 +70,7 @@ function OrderDetailsBody() {
         </div>
         <Accordion defaultActiveKey="0">
           <Accordion.Item eventKey="0">
-            <Accordion.Header>Mens Wear</Accordion.Header>
+            <Accordion.Header>Mini Wear</Accordion.Header>
             <Accordion.Body>
               {orderdetails?.clothtype_ids &&
                 orderdetails?.clothtype_ids.map((item) => (

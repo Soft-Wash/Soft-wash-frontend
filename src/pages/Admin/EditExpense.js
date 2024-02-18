@@ -4,6 +4,9 @@ import { useParams } from "react-router-dom";
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 import { axiosInstance } from "../../services/AxiosInstance";
 import "../../styles/Admin/EditExpense.css";
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function EditExpense() {
   const [paramsData,setParamsData]=useState()
@@ -44,6 +47,7 @@ axiosInstance.get(`/expense/${_id}`)
   const postExpense = () => {
     axiosInstance.put(`/expense/${_id}/update`, paramsData).then((resp) => {
       console.log(resp.data);
+      toast.success('update succesful')
     });
   };
 
@@ -53,6 +57,7 @@ axiosInstance.get(`/expense/${_id}`)
 
   return (
     <div>
+            <ToastContainer position="top-center" />
       <div className="edit-expenses-container d-flex">
         <AdminSidebar />
         <div className="edit-expenses-container-innerd">

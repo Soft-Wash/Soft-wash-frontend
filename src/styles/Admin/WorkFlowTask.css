@@ -4,7 +4,7 @@
   overflow: scroll;
   width: 100vw;
   height: 100vh;
-  background-color: rgb(215, 215, 215);
+  background-color: rgb(217, 217, 217);
   }
 
   .dashboard-line{
@@ -31,6 +31,7 @@
     align-items: center;
     margin-left: 10px;
     margin: auto 0;
+
   }
   
   .workflow-container-innerd1{

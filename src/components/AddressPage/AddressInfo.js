@@ -30,7 +30,6 @@ function AddressInfo() {
   useEffect(() => {
     CheckUserAddress();
     const clothArray = JSON.parse(localStorage.getItem("softCart"))
-    console.log(clothArray)
     const calenderSelectedTime = localStorage.getItem("calenderSelectedTime");
     const parsedCalenderSelectedTime = calenderSelectedTime
       ? JSON.parse(calenderSelectedTime)
@@ -82,21 +81,19 @@ function AddressInfo() {
 
     const customer_id = localStorage.getItem("softwashLoginUser");
     const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
-
-    console.log(selectedAddress);
+    const branch_id = JSON.parse(localStorage.getItem('branch_id'))
 
     let orderPostObj = {
       customer_id: parsedCustomerData?._id,
-      branch_id: "655debc4ec7b0b6e0f591bf7",
-      deliveryAddress: selectedAddress,
+      branch_id: branch_id,
+      deliveryAddress: customerAddress?customerAddress:selectedAddress,
       pickuptime: selectedTime,
       schedule_date: selectedDate,
       clothtype_ids: clothIds,
     };
 
-    console.log(orderPostObj);
+
     axiosInstance.post("/order/create", orderPostObj).then((resp) => {
-      console.log(resp.data);
       const orderId = resp.data._id;
       localStorage.setItem("RecentOrder", JSON.stringify(resp.data));
       localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
@@ -137,11 +134,10 @@ function AddressInfo() {
           : e.target.type === "file"
           ? e.target.file[0]
           : e.target.value;
-      setcustomerAddress({ ...customerAddress, address: e.target.name });
+      setcustomerAddress({ ...customerAddress, address: e.target.value });
     }
   };
 
-  console.log(customerAddress);
 
   return (
     <Container>
@@ -165,7 +161,7 @@ function AddressInfo() {
                   aria-label="radio 1"
                   name="address"
                   value={customerDetails?.address}
-                  onChange={() => handleCustomerAddress()}
+                  onChange={(e) => handleCustomerAddress(e)}
                 />
                 <Row className="w-100">
                   <p className="w-100 text-black fs-5 fw-semibold my-auto ">

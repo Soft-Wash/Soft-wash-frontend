@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from "react-time-picker";
 import { Button, Container } from "react-bootstrap";
 import { useEffect } from "react";
+import Loader from "../common/Loader"
 
 function Calender() {
   const [startDate, setStartDate] = useState(() => {
@@ -34,9 +35,13 @@ function Calender() {
       setActiveBtn(btnNo)
       handleTimeChange(time)
   }
+
+
+
   
   return (
     <Container>
+
       <div className="custom-calendar-container select-pickup-type">
         <h3 className="date-headers">
           When would you like your order to be ready?
