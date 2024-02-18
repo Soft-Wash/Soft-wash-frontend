@@ -7,18 +7,23 @@ import Footer from "../../common/Footer";
 import { axiosInstance } from "../../services/AxiosInstance";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Cart() {
   const [cartItems, setcartItems] = useState([]);
   const [clothQuantity, setclothQuantity] = useState({});
   const [totalprice, setTotalprice] = useState();
   const Cart_Array = [];
+  const navigate = useNavigate()
 
   const GetCartItems = () => {
     const CustomerData = JSON.parse(localStorage.getItem("softwashLoginUser"));
     const Customer_id = CustomerData?._id;
-
-    axios
+    if(Customer_id){
+      axios
       .get(
         `${process.env.REACT_APP_BASE_URL}/cart/customer?customer_id=${Customer_id}`
       )
@@ -34,6 +39,7 @@ function Cart() {
       .catch((error) => {
         console.log(error);
       });
+    }
   };
 
   useEffect(() => {
@@ -116,12 +122,21 @@ function Cart() {
     return total;
   };
 
+  const NavigateToCheckout=()=>{
+    if(cartItems.length>0){
+      navigate("/cartpayment")
+    }else{
+toast.error("please login")
+    }
+  }
+
   useEffect(() => {
     const result = CalculateTotal(cartItems);
   }, [cartItems]);
 
   return (
     <div>
+                  <ToastContainer position="top-center" />
       <Navigation />
       <Container className="cart-container mt-5">
         <h3>Shopping Cart</h3>
@@ -232,14 +247,13 @@ function Cart() {
           </div>
           <div className="sub-total-div-inner2 col col-12 col-md-6 col-lg-6 ">
             <h4>Subtotal:&#8358; {totalprice}</h4>
-            <Link to="/cartpayment">
               <Button
                 variant="secondary"
                 className="checkout-button bg-info border-0"
+                onClick={()=>NavigateToCheckout()}
               >
                 Checkout
               </Button>{" "}
-            </Link>
           </div>
         </div>
       </Container>

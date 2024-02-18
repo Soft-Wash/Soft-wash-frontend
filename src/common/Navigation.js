@@ -23,7 +23,9 @@ function Navigation() {
     const userImage = JSON.parse(localStorage.getItem("softwashLoginUser"));
     const userToken = JSON.parse(localStorage.getItem("softwashLoginToken"));
     setUserLoggedIn(userToken);
-    userData()
+    if(userToken){
+      userData()
+    }
   }, []);
 
 
@@ -35,7 +37,7 @@ function Navigation() {
 
   const userData=()=>{
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
-    axiosInstance.get(`/users/${userId._id}`)
+    axiosInstance.get(`/users/${userId?._id}`)
     .then((resp)=>{
       setUserImage(resp.data);
     })
