@@ -115,7 +115,7 @@ export default function Signup() {
         <div className="form-section">
           <div className="content">
             <center className='mt-4'>
-              <h4>Create Account</h4>
+              <h4 className='mt-5'>Create Account</h4>
               <div className="icons-section">
                 <div className="icon">
                   <img src={facebook} alt="facebook" />
@@ -131,11 +131,10 @@ export default function Signup() {
             </center>
   
             <center
-              className="for-mobile note pointer"
-              onClick={() => navigate("UserLogin")}
+              className="NewToSoftWash"
+              onClick={() => navigate("/UserLogin")}
             >
-              Already have an acccount?{" "}
-              <span className=" mt-3  fw-bolder">Login</span>
+              Already have an acccount?<small className='text-primary fw-bold'>Login</small>
             </center>
   
             <form>

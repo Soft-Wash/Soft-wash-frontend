@@ -80,6 +80,15 @@ import SupSingleTask from "./components/SupervisorComponents/SupSingleTask";
 import UserEditProfile from "./components/UserDashboard/UserEditProfile";
 import UserDashboard from "./pages/user/UserDashboard";
 
+import SupplierDash from "./pages/Supplier/SupplierDash";
+import SupplierExpenses from "./pages/Supplier/SupplierExpenses";
+import DeliveryReport from "./pages/Supplier/DeliveryReport";
+import SupplierOrderReport from "./pages/Supplier/SupplierOrderReport";
+import SupplierNewExpense from "./pages/Supplier/SupplierNewExpense";
+import SupplyOrder from "./pages/Supplier/SupplyOrder";
+import SupplierLog from "./pages/Supplier/SupplierLog"
+
+
 
 
 
@@ -112,7 +121,7 @@ function App() {
          <Route path="/shop" element={<MarketPlace/>} />
          <Route path="/singleproduct/:productId" element={<SingleProduct/>} />
          <Route path="/wishlist" element={<Wishlist/>} />
-         <Route path="/cart" element={<Cart/>} />
+        <Route path="/cart" element={<Cart/>} />
         <Route path="/my-orders" element={<Orders/>}/>
         <Route path="/order-receipt" element={<OrderReceipt/>}/>
         <Route path="/my-orders/" element={<Orders/>}/>
@@ -187,6 +196,22 @@ function App() {
         {/* EMPLOYEE LOGIN */}
 
         <Route path ="/EmployeeLogin" element ={<EmployeeLogin/>}/>
+
+
+        {/* SUPPLIER ROUTE */}
+        <Route path="/SupplierDash" element={<SupplierDash/>}/>
+        <Route path="/SupplierExpenses" element={<SupplierExpenses/>}/>
+        <Route path="/DeliveryReport" element={<DeliveryReport/>}/>
+        <Route path="/SupplierOrderReport" element={<SupplierOrderReport/>}/>
+        <Route path="/SupplierNewExpense" element={<SupplierNewExpense/>}/>
+        <Route path="/SupplyOrder" element={<SupplyOrder/>}/>
+        <Route path="/SupplierLog" element={<SupplierLog/>}/>
+
+
+        
+
+
+
 
       </Routes>
     </BrowserRouter>

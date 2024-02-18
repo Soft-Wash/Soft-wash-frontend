@@ -1,10 +1,11 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
 
-function LoginForm() {
+function SupplierLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState(false);
@@ -19,11 +20,11 @@ function LoginForm() {
     const logBody = {
       email: email,
       password: password,
-      role: "frontDesk",
+      role: "supplier",
     };
     try {
       let resp = await axios.post(
-        // `${process.env.REACT_APP_BASE_URL}/auth/user/login`,
+        `${process.env.REACT_APP_BASE_URL}/auth/user/login`,
         logBody
       );
       if (
@@ -53,7 +54,7 @@ function LoginForm() {
       </div>
       <Form className="border rounded p-5">
         <Form.Text className="fw-bold fs-5 col-12 d-flex justify-content-center mb-5">
-          Front Desk Login
+          Supplier Login
         </Form.Text>
         <Form.Group className="mb-3  " controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
@@ -91,4 +92,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default SupplierLogin;
