@@ -17,7 +17,7 @@ function AdminSidebar(){
             <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
             <NavLink exact to="/admindashboard" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Dashboard</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="tachometer-alt">Dashboard</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/employeeprofile" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>

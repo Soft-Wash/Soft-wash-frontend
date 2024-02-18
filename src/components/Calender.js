@@ -6,7 +6,7 @@ import { Button, Container } from "react-bootstrap";
 import { useEffect } from "react";
 import Loader from "../common/Loader"
 
-function Calender({onLoadingChange}) {
+function Calender() {
   const [startDate, setStartDate] = useState(() => {
     const storedDate = localStorage.getItem("calenderStartDate");
     return storedDate ? new Date(JSON.parse(storedDate)) : new Date();
@@ -34,9 +34,6 @@ function Calender({onLoadingChange}) {
   const handleBtnClick = (btnNo,time) => {
       setActiveBtn(btnNo)
       handleTimeChange(time)
-      setTimeout(() => {
-        onLoadingChange(false);
-      }, 1000);
   }
 
 

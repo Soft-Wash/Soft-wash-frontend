@@ -13,10 +13,12 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
+
 function UserEditProfile() {
   const [userData, setUserData] = useState();
   const [realImage, setRealImage] = useState();
   const [inputImage, setinputImage] = useState();
+  const backend = "http://localhost:8003/uploads/"
 
 
   useEffect(() => {
@@ -85,7 +87,11 @@ function UserEditProfile() {
                 />
               </div>
                 ):            <div className="user-profilePic">
-                <img src={userData?.avatar} />
+                <img                       src={
+                        userData && userData?.avatar
+                          ? backend+userData?.avatar
+                          : `https://ui-avatars.com/api/?name=${userData?.fullName}&size=128`
+                      } />
               </div>}
 
               <label htmlFor="imageUpload" className="user-dp-btn">

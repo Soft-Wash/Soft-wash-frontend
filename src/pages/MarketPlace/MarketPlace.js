@@ -13,7 +13,6 @@ import { FiHeart } from "react-icons/fi";
 import Footer from "../../common/Footer";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
 import { useState } from "react";
 import { useEffect } from "react";
 import { axiosInstance } from "../../services/AxiosInstance";
@@ -34,7 +33,7 @@ function MarketPlace() {
     const user_id = JSON.parse(localStorage.getItem("softwashLoginUser"));
     axios
       .get(
-        `${process.env.REACT_APP_BASE_URL}/wishlist/user/wishlist?user_id=${user_id._id}`
+        `${process.env.REACT_APP_BASE_URL}/wishlist/user/wishlist?user_id=${user_id?._id}`
       )
       .then((resp) => {
         setWishlistItems(resp.data);
@@ -49,12 +48,15 @@ function MarketPlace() {
 
   const addToCart = (item_id) => {
     const CustomerData = JSON.parse(localStorage.getItem("softwashLoginUser"));
-    const Customer_id = CustomerData._id;
+    const Customer_id = CustomerData?._id;
     const cartData = {
       product_id: item_id,
       quantity: 1,
       customer_id: Customer_id,
     };
+    if(!cartData.customer_id){
+      return toast.error("please login")
+    }
     axiosInstance
       .post("/cart/create", cartData)
       .then((resp) => {
@@ -76,9 +78,13 @@ function MarketPlace() {
   const AddWishlist = (product_id) => {
     const user_id = JSON.parse(localStorage.getItem("softwashLoginUser"));
     const wishlistObj = {
-      user_id: user_id._id,
+      user_id: user_id?._id,
       product: product_id,
     };
+    if(!wishlistObj.user_id){
+      return toast.error("please login")
+      
+    }
     axios
       .post(`${process.env.REACT_APP_BASE_URL}/wishlist/create`, wishlistObj)
       .then((resp) => {
