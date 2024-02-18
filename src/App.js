@@ -1,4 +1,5 @@
 import "./App.css";
+import { TaskContextProvider } from "./context/TaskContext";
 // import ScrollToTop from "./utils/ScrollToTop";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UserLogin from "./pages/auth/login/UserLogin";
@@ -83,6 +84,7 @@ import WashmanRequestSuppliesPage from "./pages/Washman Pages/WashmanRequestSupp
 import TaskFreeEmployees from "./pages/Admin/TaskFreeEmployees";
 import EmployeeProfile from "./pages/Admin/EmployeeProfile";
 import EmployeeEditProfile from "./pages/Admin/EmployeeEditProfile";
+import { TaskContext } from "./context/TaskContext";
 
 
 
@@ -94,7 +96,9 @@ import EmployeeEditProfile from "./pages/Admin/EmployeeEditProfile";
 function App() {
   return (
 <>  
+
 <ChakraProvider>
+<TaskContextProvider>
   <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage/>} />
@@ -198,7 +202,9 @@ function App() {
 
       </Routes>
     </BrowserRouter>
+    </TaskContextProvider>
     </ChakraProvider>
+    
 </>
 
 
