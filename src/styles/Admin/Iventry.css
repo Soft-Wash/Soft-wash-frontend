@@ -60,3 +60,15 @@ right: 10px;
   .bicart-icon2{
     color: red;
   }
+
+  .chart_container{
+    background-color: white;
+    height: 450px;
+    width: 95%;
+    padding: 20px;
+  }
+
+  .primary{
+    background-color:  rgb(13,202,240);
+    color: white;
+  }

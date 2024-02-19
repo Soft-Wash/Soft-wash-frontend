@@ -183,6 +183,7 @@ function Leave() {
                             <div>
                               <input
                                 type="text"
+                                className="date-container-innerd-inpt1"
                                 value={new Date(
                                   item?.startDate
                                 ).toLocaleDateString("en-GB", {
@@ -205,6 +206,7 @@ function Leave() {
                             <div>
                               <input
                                 type="text"
+                                className="date-container-innerd-inpt2"
                                 value={new Date(
                                   item?.endDate
                                 ).toLocaleDateString("en-GB", {

@@ -22,17 +22,17 @@
 .leave-process-div{
   display: flex;
 
-
 }
 
 .leave-process-div p{
  padding: 30px;
  margin-bottom: 0;
+
 }
 
 .leave-process-div-p{
-  padding: 30px;
-  margin-bottom: 0;
+  /* padding: 30px; */
+  /* margin-bottom: 0; */
   border-bottom: 3px solid black;
  }
 
@@ -103,6 +103,11 @@
   border-bottom: 2px solid rgb(49, 49, 49);
   width: 60px;
   margin-bottom: 0;
+}
+
+.date-container-innerd-inpt1,
+.date-container-innerd-inpt2{
+  text-align: center;
 }
 
 .date-container{
@@ -225,14 +230,13 @@ margin-bottom: 0;
   .card-textinput{
     width: 285px;
     min-height: 140px;
-    padding-left: 10px;
     border: none;
   }
 
   .card-textinput::placeholder{
     vertical-align: top;
     text-align: start; 
-    padding-top: 10px; 
+
   }
 
   .admin-content-table{

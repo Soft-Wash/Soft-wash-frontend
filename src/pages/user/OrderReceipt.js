@@ -17,6 +17,8 @@ export default function OrderReceipt() {
   const [pickUpDateValue, setpickUpDate] = useState();
   const { orderId } = useParams();
   const navigate = useNavigate();
+  const [GetPaymentStatus,setGetPaymentStatus]=useState()
+  let intervalId;
 
   const paymentWithCard = JSON.parse(localStorage.getItem("paymentType"));
   const paymentType = Object.values(paymentWithCard);
@@ -39,11 +41,12 @@ export default function OrderReceipt() {
   console.log(paymentStatus)
 
   function getOrderDetails() {
-    const orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
+
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/order`)
       .then((resp) => {
         setUserData(resp.data);
+        console.log(resp.data)
         const pickUpDate = resp.data.schedule_date;
         const latestDate = new Date(pickUpDate);
         const options = { year: "numeric", month: "long", day: "numeric" };
@@ -68,8 +71,19 @@ export default function OrderReceipt() {
       });
   }
 
+  const updatePaymentStatus=()=>{
+    axios.put(`${process.env.REACT_APP_BASE_URL}/order/${userData?._id}/update`,{payment_status:paymentStatus?.data?.status})
+    .then((resp)=>{
+      console.log(resp.data)
+      setGetPaymentStatus(resp.data)
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+  }
+
   useEffect(() => {
-    let intervalId;
+
     getOrderDetails();
 
     if (newpaymentType === "payWithCard") {
@@ -84,6 +98,15 @@ export default function OrderReceipt() {
     // Return cleanup function
     return () => clearInterval(intervalId);
   }, [newpaymentType]); // Include newpaymentType in the dependency array
+
+
+  useEffect(() => {
+    if (paymentStatus?.data?.status === "success") {
+      updatePaymentStatus();
+      clearInterval(intervalId);
+    }
+
+  }, [paymentStatus]);
 
   return (
     <>
@@ -123,6 +146,14 @@ export default function OrderReceipt() {
                 </div>
                 <div lg={3}>
                   <p>₦{userData?.subtotal}</p>
+                </div>
+              </div>
+              <div className="d-flex justify-content-between gap-3 ">
+                <div lg={3}>
+                  <h5>Payment Status</h5>
+                </div>
+                <div lg={3}>
+                  <p>{GetPaymentStatus?.data?.payment_status}</p>
                 </div>
               </div>
             </div>
