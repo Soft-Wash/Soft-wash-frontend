@@ -16,6 +16,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { axiosInstance } from "../../services/AxiosInstance";
 import SupDashChart from "../../components/SupervisorComponents/SupDashChart";
+import SupNotification from "../../components/SupervisorComponents/SupNotification";
 
 function SupervisorDash() {
 
@@ -166,7 +167,15 @@ function SupervisorDash() {
             {/* <AdminSidebar/> */}
             <SupervisorSideBar/>
             <div className="supervisor-container">
-                <h4 className="">Good {timeOfDay}! Supervisor</h4>
+              <div>
+                <div className="NotificationPanel">
+                  <h4 className="">Good {timeOfDay}! Supervisor</h4>
+                  <SupNotification/>
+                </div>
+                <div>
+                 
+                </div>
+              </div>
                 <hr className="dashboard-line" />
     
                 <section1 className="HeaderCards-Container mb-3">

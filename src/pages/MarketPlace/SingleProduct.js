@@ -25,6 +25,7 @@ import { axiosInstance } from "../../services/AxiosInstance";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 function SingleProduct() {
   const [togglereview, setToggleReview] = useState(false);
@@ -33,9 +34,11 @@ function SingleProduct() {
   const productId = useParams();
   const [clothQuantity, setclothQuantity] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
+  const [wishlistItems, setWishlistItems] = useState([]);
+  const backend = "http://localhost:8003/uploads/"
 
   const id = productId.productId;
-  console.log(id);
+
 
   const reviewToggleFunc = () => {
     setToggleReview(!togglereview);
@@ -68,22 +71,22 @@ function SingleProduct() {
   const addToCart = () => {
     const CustomerData = JSON.parse(localStorage.getItem("softwashLoginUser"));
     console.log(CustomerData);
-    const Customer_id = CustomerData._id;
+    const Customer_id = CustomerData?._id;
     const quantity = parseInt(clothQuantity[shopItems?._id], 10);
 
     if (isNaN(quantity) || quantity < 1) {
       setErrorMessage("Please add a quantity");
       return;
     }
-
     const cartData = {
       product_id: shopItems?._id,
       quantity: clothQuantity[shopItems?._id] || 0,
       customer_id: Customer_id,
     };
 
-    console.log(cartData);
-
+    if(!cartData.customer_id){
+     return toast.error("please logiin")
+    }
     axiosInstance
       .post("/cart/create", cartData)
       .then((resp) => {
@@ -103,6 +106,51 @@ function SingleProduct() {
       });
   };
 
+
+  const AddWishlist = (product_id) => {
+    const user_id = JSON.parse(localStorage.getItem("softwashLoginUser"));
+    const wishlistObj = {
+      user_id: user_id?._id,
+      product: product_id,
+    };
+    if(!wishlistObj.user_id){
+      return toast.error("please login")
+      
+    }
+    axios
+      .post(`${process.env.REACT_APP_BASE_URL}/wishlist/create`, wishlistObj)
+      .then((resp) => {
+        setWishlistItems((prevItems) => [...prevItems, product_id]);
+        toast.success("item added to wishlist");
+      })
+      .catch((error) => {
+        if (error.response) {
+          const status = error.response.status;
+          if (status === 400) {
+            axiosInstance
+              .delete(
+                `/wishlist/delete?product=${product_id}&user=${user_id._id}`
+              )
+              .then((resp) => {
+                setWishlistItems((prevItems) =>
+                  prevItems.filter((item) => item._id !== product_id._id)
+                );
+              });
+            toast.error("item removed from wishlist");
+          } else {
+            toast.error("Unexpected error occurred. Please try again later.");
+          }
+        }
+      });
+  };
+
+  const isInWishlist = (wishlistItems_id) => {
+    let x= wishlistItems?.map(
+      (item) => item?.product?._id === wishlistItems_id
+    );
+    return x.includes(true);
+  };
+
   return (
     <div>
       <ToastContainer position="top-center" />
@@ -110,7 +158,7 @@ function SingleProduct() {
       <Container className="mt-5">
         <Row>
           <Col className="singleproduct-item">
-            <img src={shopItems?.img} alt="" />
+            <img src={`${backend}${shopItems?.img}`} alt="" />
           </Col>
           <Col>
             <p>Canoe / laundry</p>
@@ -151,7 +199,10 @@ function SingleProduct() {
             {errorMessage && <p className="error-message">{errorMessage}</p>}
 
             <div className="d-flex  mt-5">
-              <FiHeart className="wishlist-icon" />
+              <FiHeart className={`wishlist-icon ${
+                      isInWishlist(shopItems?._id)? "wishlist_active" : ""
+                    }`}
+                    onClick={() => AddWishlist(shopItems?._id)} />
               <p className="wishlist-ptag">Add to Wishlist</p>
             </div>
             <hr />
@@ -293,9 +344,9 @@ function SingleProduct() {
                   style={{ height: "350px" }}
                 >
                   <FiHeart className="cart-icon02" />
-                  <img src={item.img} className="item-image  mt-5" alt="" />
+                  <img  src={`${backend}${shopItems?.img}`} className="item-image  mt-5" alt="" />
                   <h5 className="name-tag mt-1">{item.name}</h5>
-                  <p className="price-tag fs-4 m-0"> &#8358; 4,650</p>
+                  <p className="price-tag fs-4 m-0"> &#8358; {item.price}</p>
                   <div>
                     <Button
                       variant="secondary"

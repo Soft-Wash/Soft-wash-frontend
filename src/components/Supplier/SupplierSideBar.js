@@ -1,10 +1,9 @@
-// import "../../styles/Washman Styles/WashmanSidebar.css"
 import React from 'react';
 import { CDBSidebar, CDBSidebarContent, CDBSidebarFooter, CDBSidebarHeader, CDBSidebarMenu, CDBSidebarMenuItem,} from 'cdbreact';
 import { NavLink } from 'react-router-dom';
 
 
-function WorkFlowSideBar(){
+function SupplierSideBar(){
     return (
         <div className='washman-sidebar' style={{display: 'flex', height: '100vh', overflow: 'scroll initial'}} >
           <CDBSidebar className='washman-sidebar-content' textColor="rgb(13,202,240)" backgroundColor="#333">
@@ -16,20 +15,27 @@ function WorkFlowSideBar(){
 
             <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink exact to="/admindashboard" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="tachometer-alt">Main Dashboard</CDBSidebarMenuItem>
+            <NavLink exact to="/supplierDash" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/workflowtask" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="list-alt">Task View</CDBSidebarMenuItem>
+            <NavLink exact to="/profile" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/taskfreeemployee" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user-check">Available Employee</CDBSidebarMenuItem>
+           
+            <NavLink exact to="/supplierExpenses" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line">Expenses</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/tasktable" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="tasks">All Task</CDBSidebarMenuItem>
+            <NavLink exact to="/deliveryReport" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line">Delivery Report</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/createtask" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="plus-circle">Create Task</CDBSidebarMenuItem>
+            <NavLink exact to="/supplierOrderReport" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line">Order Report</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/supplyorder" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line">Supply Order</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/supplierLog" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line">Login</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
@@ -50,4 +56,4 @@ function WorkFlowSideBar(){
 }
 
 
-export default WorkFlowSideBar;
+export default SupplierSideBar;

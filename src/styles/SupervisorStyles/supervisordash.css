@@ -11,7 +11,14 @@
 .dashboard-line{
     width: 100%;
     border-bottom: 1px solid black;
-    }
+}
+
+.NotificationPanel{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 30px;
+    align-items: center;
+}
       
 .HeaderCards-Container{
     /* display: grid;

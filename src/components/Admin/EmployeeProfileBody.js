@@ -9,7 +9,7 @@ function EmployeeProfileBody() {
   const [userData, setUserData] = useState();
   const [realImage,setRealImage]=useState()
   const [inputImage,setinputImage]=useState()
-  const backend = "http://localhost:8003/"
+  const backend = "http://localhost:8003/uploads/"
 
   useEffect(() => {
     const userId = JSON.parse(localStorage.getItem("softwashEmployeeLogin"));
@@ -17,19 +17,13 @@ function EmployeeProfileBody() {
       .get(`${process.env.REACT_APP_BASE_URL}/employees/${userId}`)
       .then((resp) => {
         setUserData(resp.data)
-      });
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
   }, []);
 
 
-  const HandleImage=(e)=>{
-    const file = e.target.files[0]
-    if(file){
-      const imageUrl = URL.createObjectURL(file)
-      setRealImage(file)
-      setinputImage(imageUrl)
-    }
-
-  }
 
   return (
 
@@ -40,18 +34,14 @@ function EmployeeProfileBody() {
         </div>
         <div className="user-profilePic-sec d-flex">
           <div className="user-profilePic">
-            <img src={`${backend}${userData?.avatar}`}/>
+            <img                       src={
+                        userData && userData?.avatar
+                          ? backend+userData?.avatar
+                          : `https://ui-avatars.com/api/?name=${userData?.fullName}&size=128`
+                      }/>
           </div>
-          <label htmlFor="imageUpload" className="user-dp-btn">Change Photo</label>
-          <input
-                    type="file"
-                    accept="image/*"
-                    id="imageUpload"
-                    name="img"
-                    className="input-field"
-                    hidden
-                    onChange={HandleImage}
-                  />
+          <button  className="user-dp-btn">Change Photo</button>
+
         </div>
         <div>
           <div className="user-profile-field">

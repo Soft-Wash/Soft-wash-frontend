@@ -167,6 +167,10 @@
     margin-bottom: 40px;
 }
 
+.NewToSoftWash{
+    display: none;
+}
+
 /* //LOGIN CONTAINER  */
 
 .for-mobile {
@@ -252,7 +256,8 @@
     
 
     .banner-section {
-    width: 100%;
+        /* display: none; */
+        width: 100%;
     }
 
     
@@ -279,14 +284,22 @@
     
     
     }
+    .banner-section{
+        display: none !important;
+    }
 
     .login-label{
     margin-left: -220px;
-    /* text-align: start; */
+    
     }
     .login-labell{
 
         justify-content: space-around !important;
+    }
+
+    .NewToSoftWash{
+        display: contents;
+        /* display: flex; */
     }
   }
   

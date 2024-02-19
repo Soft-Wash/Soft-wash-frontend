@@ -43,7 +43,11 @@ function UserProfileBody() {
         </div>
         <div className="user-profilePic-sec d-flex">
           <div className="user-profilePic">
-            <img src={`${backend}${userData?.avatar}`}/>
+            <img                       src={
+                        userData && userData?.avatar
+                          ? backend+userData?.avatar
+                          : `https://ui-avatars.com/api/?name=${userData?.fullName}&size=128`
+                      }/>
           </div>
           <label htmlFor="imageUpload" className="user-dp-btn">Change Photo</label>
           <input
