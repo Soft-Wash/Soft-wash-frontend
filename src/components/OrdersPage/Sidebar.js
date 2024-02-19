@@ -2,6 +2,7 @@ import React from 'react';
 import { CDBSidebar, CDBSidebarContent, CDBSidebarFooter, CDBSidebarHeader, CDBSidebarMenu, CDBSidebarMenuItem,} from 'cdbreact';
 import { Link, NavLink } from 'react-router-dom';
 import "../../styles/UserProfile.css"
+import { HouseFill, DashSquareFill, PhoneFill, PersonFill, ListCheck, ListTask } from 'react-bootstrap-icons';
 
 function Sidebar (){
     return (
@@ -16,12 +17,12 @@ function Sidebar (){
           <CDBSidebarMenu>
             <div className='user-sidebar-hover'>
               <Link exact to="/" activeClassName="activeClicked" >
-                <CDBSidebarMenuItem icon="table">Home</CDBSidebarMenuItem>
+                <CDBSidebarMenuItem icon="home">Home</CDBSidebarMenuItem>
               </Link>
             </div>
             <div className='user-sidebar-hover'>
               <Link exact to="/userdashboard" activeClassName="activeClicked" className='user-sidebar-hover'>
-                <CDBSidebarMenuItem icon="table">Dashboard</CDBSidebarMenuItem>
+                <CDBSidebarMenuItem icon="tachometer-alt">Dashboard</CDBSidebarMenuItem>
               </Link>
             </div>
             <div className='user-sidebar-hover'>
@@ -31,18 +32,28 @@ function Sidebar (){
             </div>
             <div className='user-sidebar-hover'>
               <Link exact to="/my-orders" activeClassName="activeClicked" className='user-sidebar-hover'>
-                <CDBSidebarMenuItem icon="chart-line">My Orders</CDBSidebarMenuItem>
+                <CDBSidebarMenuItem icon="shopping-cart">Laundry Orders</CDBSidebarMenuItem>
               </Link>
             </div>
 
             <div className='user-sidebar-hover'>
               <Link exact to="/ClothesSelection" activeClassName="activeClicked" className='user-sidebar-hover'>
-                <CDBSidebarMenuItem icon="chart-line">Create Order</CDBSidebarMenuItem>
+                <CDBSidebarMenuItem icon="plus-circle">Create Order</CDBSidebarMenuItem>
               </Link>
             </div>
             <div className='user-sidebar-hover'>
               <Link exact to="/paymenthistory" activeClassName="activeClicked" className='user-sidebar-hover'>
-                <CDBSidebarMenuItem icon="chart-line">Payment History</CDBSidebarMenuItem>
+                <CDBSidebarMenuItem icon="money-check-alt">Payment History</CDBSidebarMenuItem>
+              </Link>
+            </div>
+            <div className='user-sidebar-hover'>
+              <Link exact to="/shoporders" activeClassName="activeClicked" className='user-sidebar-hover'>
+                <CDBSidebarMenuItem icon="shopping-cart">Shop Orders</CDBSidebarMenuItem>
+              </Link>
+            </div>
+            <div className='user-sidebar-hover'>
+              <Link exact to="/dashboard-contact-us" activeClassName="activeClicked" className='user-sidebar-hover'>
+                <CDBSidebarMenuItem icon="info-circle">About Us</CDBSidebarMenuItem>
               </Link>
             </div>
           </CDBSidebarMenu>

@@ -1,4 +1,4 @@
-import "../../styles/UserOrderDetails.css";
+import "../../styles/ShopDetailsBody.css";
 import {
   FaCircleInfo,
   FaHotTubPerson,
@@ -7,9 +7,9 @@ import {
 import Accordion from "react-bootstrap/Accordion";
 import { FaCheck } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { axiosInstance } from "../../services/AxiosInstance";
+import axios from "axios";
 
-function OrderDetailsBody() {
+function ShopDetailsBody() {
 
   const [orderdetails, setorderDetails] = useState();
   const [pickUpDateValue, setpickUpDate] = useState();
@@ -17,27 +17,20 @@ function OrderDetailsBody() {
   const orderStatusArray = [
     "Order Placed",
     "Confirmed",
-    "Received",
-    "Cleaning",
-    "Ready",
     "Shipped",
     "Delivered",
   ];
 
 
   useEffect(() => {
-    const orderId = JSON.parse(localStorage.getItem("OrderDetailsId"));
-    axiosInstance.get(`/order/${orderId}/order`).then((resp) => {
+    const orderplaced = "order placed"
+    const cartOrderId = JSON.parse(localStorage.getItem("CartOrderDetailsId"));
+    axios.get(`${process.env.REACT_APP_BASE_URL}/cartorder/${cartOrderId}/cartorder`).then((resp) => {
       console.log(resp.data);
       const statusIndex = orderStatusArray.indexOf(resp.data.status);
       setIndexFound(statusIndex >= 0 ? statusIndex : 0);
       console.log(resp.data.status)
       setorderDetails(resp.data);
-      const pickUpDate = resp.data.schedule_date;
-      const latestDate = new Date(pickUpDate);
-      const options = { year: "numeric", month: "long", day: "numeric" };
-      const pickUpDateValue = latestDate.toLocaleDateString("en-US", options);
-      setpickUpDate(pickUpDateValue);
     });
   }, []);
 
@@ -54,11 +47,11 @@ function OrderDetailsBody() {
         </div>
         <div className="order-field">
           <h3>Order Id </h3>
-          <p>{orderdetails?._id.substring(0, orderdetails?._id.length / 2)}</p>
+          <p>{orderdetails?._id?.substring(0, orderdetails?._id?.length / 2)}</p>
         </div>
         <div className="order-field">
-          <h3>Pickup Date & Time </h3>
-          <p>{`${pickUpDateValue} ${orderdetails?.pickuptime}`}</p>
+          <h3>Pickup Duration </h3>
+          <p>3-4 working days</p>
         </div>
         <div className="order-field">
           <h3>Status</h3>
@@ -72,14 +65,14 @@ function OrderDetailsBody() {
           <Accordion.Item eventKey="0">
             <Accordion.Header>Mini Wear</Accordion.Header>
             <Accordion.Body>
-              {orderdetails?.clothtype_ids &&
-                orderdetails?.clothtype_ids.map((item) => (
+              {orderdetails?.cart_ids &&
+                orderdetails?.cart_ids.map((item) => (
                   <div className="cart-item">
                     <div className="d-flex justify-content-between">
-                      <h5>{item.name}</h5>
-                      <h5>N{item.price}</h5>
+                      <h5>{item.product_id.name}</h5>
+                      <h5>N{item.product_id.price}</h5>
                     </div>
-                    <p>{`2 x N${item?.price} / per piece`}</p>
+                    <p>{`2 x N${item.product_id.price} / per piece`}</p>
                   </div>
                 ))}
             </Accordion.Body>
@@ -91,7 +84,7 @@ function OrderDetailsBody() {
         </div>
         <div className="order-field">
           <h3>Sub-total Price</h3>
-          <p>N{orderdetails?.subtotal}</p>
+          <p>N{orderdetails?.total}</p>
         </div>
         <div className="order-field">
           <h3>VAT</h3>
@@ -99,9 +92,9 @@ function OrderDetailsBody() {
         </div>
         <div className="order-field">
           <h3>Total</h3>
-          <p>N{orderdetails?.subtotal}</p>
+          <p>N{orderdetails?.total}</p>
         </div>
-        <div className="progress1">
+        <div className="progress001">
           {orderStatusArray.map((status, index) => (
             <div className="progress_content" key={index}>
               <div
@@ -127,4 +120,4 @@ function OrderDetailsBody() {
   );
 }
 
-export default OrderDetailsBody;
+export default ShopDetailsBody;

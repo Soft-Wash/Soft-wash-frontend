@@ -72,7 +72,7 @@
 }
 
 .pending-color {
-  background-color: yellow; 
+  background-color: rgb(255, 132, 0); 
 }
 
 .failed-color {
@@ -92,4 +92,20 @@
 
 .action-btn-div {
   justify-content: center;
+}
+
+@media(max-width: 1024px){
+  .payment-content-table th,
+  .payment-content-table td{
+      padding: 10px 10px;
+      font-size: 12px;
+  }
+}
+
+@media(max-width: 770px){
+  .payment-content-table th,
+  .payment-content-tabletd{
+      padding: 10px 4px;
+      font-size: 12px;
+  }
 }

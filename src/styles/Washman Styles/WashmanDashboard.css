@@ -2,12 +2,14 @@
 width: 100%;
 margin: 20px 0;
 display: flex;
-justify-content: space-between;
+justify-content: space-around;
+flex-wrap: wrap;
 }
 .washman-card{
-width: 32%;
+width: 45%;
 height: 150px;
 padding: 10px;
+margin-bottom: 20px;
 border-radius: 10px;
 display: flex;
 align-items: center;
@@ -18,6 +20,7 @@ color: white;
     margin-right: 15px;
 }
 .washman-blue{
+    /* border: 3px solid rgb(13,202,240); */
     background-color: rgb(13,202,240);
 }
 .washman-purple{

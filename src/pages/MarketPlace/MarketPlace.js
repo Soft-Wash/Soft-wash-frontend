@@ -13,7 +13,6 @@ import { FiHeart } from "react-icons/fi";
 import Footer from "../../common/Footer";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
 import { useState } from "react";
 import { useEffect } from "react";
 import { axiosInstance } from "../../services/AxiosInstance";
@@ -25,6 +24,7 @@ import "react-toastify/dist/ReactToastify.css";
 function MarketPlace() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [wishlistItems, setWishlistItems] = useState([]);
+  const backend = "http://localhost:8003/uploads/"
 
   const [shopItems, setshopItems] = useState();
   let wishlist_id = "";
@@ -33,10 +33,9 @@ function MarketPlace() {
     const user_id = JSON.parse(localStorage.getItem("softwashLoginUser"));
     axios
       .get(
-        `${process.env.REACT_APP_BASE_URL}/wishlist/user/wishlist?user_id=${user_id._id}`
+        `${process.env.REACT_APP_BASE_URL}/wishlist/user/wishlist?user_id=${user_id?._id}`
       )
       .then((resp) => {
-        console.log(resp.data);
         setWishlistItems(resp.data);
       })
       .catch((error) => {
@@ -49,16 +48,18 @@ function MarketPlace() {
 
   const addToCart = (item_id) => {
     const CustomerData = JSON.parse(localStorage.getItem("softwashLoginUser"));
-    const Customer_id = CustomerData._id;
+    const Customer_id = CustomerData?._id;
     const cartData = {
       product_id: item_id,
       quantity: 1,
       customer_id: Customer_id,
     };
+    if(!cartData.customer_id){
+      return toast.error("please login")
+    }
     axiosInstance
       .post("/cart/create", cartData)
       .then((resp) => {
-        console.log(resp.data);
         toast.success("item added to cart");
       })
       .catch((error) => {
@@ -77,9 +78,13 @@ function MarketPlace() {
   const AddWishlist = (product_id) => {
     const user_id = JSON.parse(localStorage.getItem("softwashLoginUser"));
     const wishlistObj = {
-      user_id: user_id._id,
+      user_id: user_id?._id,
       product: product_id,
     };
+    if(!wishlistObj.user_id){
+      return toast.error("please login")
+      
+    }
     axios
       .post(`${process.env.REACT_APP_BASE_URL}/wishlist/create`, wishlistObj)
       .then((resp) => {
@@ -137,7 +142,6 @@ function MarketPlace() {
 
         <hr />
       </Container>
-
       <Container className="mt-5">
         <Row className="justify-content-between">
           <Col sm={6} md={6} lg={6}>
@@ -183,14 +187,14 @@ function MarketPlace() {
                     }`}
                     onClick={() => AddWishlist(item._id)}
                   />
-                  <img src={item.img} className="item-image  mt-5" alt="" />
+                  <img src={`${backend}${item.img}`} className="item-image  mt-5" alt="" />
                   <Link
                     to={`/singleproduct/${item._id}`}
                     className="sibglepagelink"
                   >
-                    <h5 className="name-tag mt-1">{item.name}</h5>
+                    <h5 className="name-tag mt-1">{item?.name}</h5>
                   </Link>
-                  <p className="price-tag fs-4 m-0"> &#8358; 4,650</p>
+                  <p className="price-tag fs-4 m-0"> &#8358; {item?.price}</p>
                   <div>
                     <Button
                       variant="secondary"

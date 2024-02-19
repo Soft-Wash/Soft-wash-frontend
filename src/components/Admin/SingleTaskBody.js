@@ -87,7 +87,7 @@ function SingleTaskBody() {
           className="edit-washman-profile-btn"
           onClick={handleSeleectChange}
         >
-          Update Order
+          Update Task
         </Button>
       </div>
       <div className="progress2">

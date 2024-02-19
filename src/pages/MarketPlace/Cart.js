@@ -7,20 +7,26 @@ import Footer from "../../common/Footer";
 import { axiosInstance } from "../../services/AxiosInstance";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Cart() {
   const [cartItems, setcartItems] = useState([]);
   const [clothQuantity, setclothQuantity] = useState({});
-  const [updatedCart, setupdatedCart] = useState([]);
   const [totalprice, setTotalprice] = useState();
   const Cart_Array = [];
+  const navigate = useNavigate()
 
   const GetCartItems = () => {
     const CustomerData = JSON.parse(localStorage.getItem("softwashLoginUser"));
     const Customer_id = CustomerData?._id;
-
-    axiosInstance
-      .get(`/cart/customer?customer_id=${Customer_id}`)
+    if(Customer_id){
+      axios
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/cart/customer?customer_id=${Customer_id}`
+      )
       .then((resp) => {
         const initialQuantity = {};
         resp.data.forEach((item) => {
@@ -29,7 +35,11 @@ function Cart() {
         setclothQuantity(initialQuantity);
         console.log(resp.data);
         setcartItems(resp.data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
+    }
   };
 
   useEffect(() => {
@@ -46,24 +56,19 @@ function Cart() {
       quantity: UpdatedQuantity,
     };
 
-    console.log(UpdatedQuantity);
-
     setcartItems((prevCartItems) => {
       const updatedCartItems = prevCartItems.map((item) =>
         item.product_id._id === itemId
           ? { ...item, quantity: UpdatedQuantity }
           : item
       );
-      console.log(updatedCartItems);
 
       setcartItems(updatedCartItems);
     });
 
-    console.log(cartItems);
 
     setTimeout(() => {
       axiosInstance.put(`/cart/${itemId}/update`, Quantity).then((resp) => {
-        console.log(resp.data);
       });
     }, 30000);
   };
@@ -84,16 +89,11 @@ function Cart() {
           ? { ...item, quantity: UpdatedQuantity }
           : item
       );
-      console.log(updatedCartItems);
 
       setcartItems(updatedCartItems);
     });
-
-    console.log(cartItems);
-
     setTimeout(() => {
-      axiosInstance.put(`/cart/${itemId}/update`, Quantity).then((resp) => {
-      });
+      axiosInstance.put(`/cart/${itemId}/update`, Quantity).then((resp) => {});
     }, 30000);
   };
 
@@ -102,7 +102,6 @@ function Cart() {
     axios
       .delete(`${process.env.REACT_APP_BASE_URL}/cart/${itemId}/delete`)
       .then((resp) => {
-        console.log(resp.data);
         setcartItems((prevItems) =>
           prevItems.filter((item) => item._id !== itemId)
         );
@@ -111,8 +110,6 @@ function Cart() {
         console.error("Error deleting item from cart:", error);
       });
   };
-
-  
 
   const CalculateTotal = (cartItems) => {
     const total = cartItems.reduce((accumulator, cartItem) => {
@@ -125,12 +122,21 @@ function Cart() {
     return total;
   };
 
+  const NavigateToCheckout=()=>{
+    if(cartItems.length>0){
+      navigate("/cartpayment")
+    }else{
+toast.error("please login")
+    }
+  }
+
   useEffect(() => {
     const result = CalculateTotal(cartItems);
   }, [cartItems]);
 
   return (
     <div>
+                  <ToastContainer position="top-center" />
       <Navigation />
       <Container className="cart-container mt-5">
         <h3>Shopping Cart</h3>
@@ -150,7 +156,7 @@ function Cart() {
             <p className="cart-total">Total</p>
           </div>
         </div>
-        {cartItems &&
+        {cartItems?.length > 0 ? (
           cartItems.map((item, index) => (
             <div key={index}>
               <hr className="lin01" />
@@ -206,7 +212,10 @@ function Cart() {
                     </p>
                   </div>
                   <p className="total-price fw-bold">
-                    &#8358;  {`${(clothQuantity[item.product_id._id] * item.product_id.price).toFixed(2)}`} 
+                    &#8358;{" "}
+                    {`${(
+                      clothQuantity[item.product_id._id] * item.product_id.price
+                    ).toFixed(2)}`}
                   </p>
                   <p
                     className="remove2-cart"
@@ -217,7 +226,10 @@ function Cart() {
                 </div>
               </div>
             </div>
-          ))}
+          ))
+        ) : (
+          <p className="text-center fw-bold">No item avaialable in Cart</p>
+        )}
 
         <hr className="lin02" />
         <div className="sub-total-div row">
@@ -235,14 +247,13 @@ function Cart() {
           </div>
           <div className="sub-total-div-inner2 col col-12 col-md-6 col-lg-6 ">
             <h4>Subtotal:&#8358; {totalprice}</h4>
-            <Link to="/cartpayment">
               <Button
                 variant="secondary"
                 className="checkout-button bg-info border-0"
+                onClick={()=>NavigateToCheckout()}
               >
                 Checkout
               </Button>{" "}
-            </Link>
           </div>
         </div>
       </Container>

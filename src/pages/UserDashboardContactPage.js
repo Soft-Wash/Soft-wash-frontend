@@ -16,7 +16,9 @@ function UserDashboardContactPage(){
                 <UserSidebarTablet />
            </div>
             <div className='d-flex'>
-                <Sidebar />
+            <div className='user-sidebar-div'>
+                    <Sidebar />
+                </div>
                 <UserDashboardContactBody />
             </div>
         </div>

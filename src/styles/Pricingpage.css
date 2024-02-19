@@ -34,6 +34,10 @@
   color: white;
 }
 
+.price-container img{
+margin: 0 auto;
+}
+
 .cloth-title-div ul {
   display: flex;
 }

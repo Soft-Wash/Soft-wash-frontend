@@ -15,71 +15,53 @@ export default function OrderReceipt() {
   const [userData, setUserData] = useState();
   const [paymentStatus, setPaymentStatus] = useState();
   const [pickUpDateValue, setpickUpDate] = useState();
-  const { orderId } = useParams();
+  const orderId = useParams();
   const navigate = useNavigate();
 
   const paymentWithCard = JSON.parse(localStorage.getItem("paymentType"));
   const paymentType = Object.values(paymentWithCard);
   const newpaymentType = paymentType.join("");
- 
 
   function getPaymentStatus() {
-    const ref = JSON.parse(localStorage.getItem("payment_reference"));
+    const ref = JSON.parse(localStorage.getItem("ShopPayment_reference"));
     axiosInstance
       .get(`/payments/getstatus?reference=${ref}`)
       .then((resp) => {
-        // console.log(resp.data)
-        setPaymentStatus(resp.data);
+        console.log(resp.data)
+        setPaymentStatus(resp.data.data);
       })
       .catch((error) => {
         console.log(error.message);
       });
   }
 
-  console.log(paymentStatus)
-
   function getOrderDetails() {
-    const orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
+    console.log(orderId.id);
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/order`)
+      .get(
+        `${process.env.REACT_APP_BASE_URL}/cartorder/${orderId.id}/cartorder`
+      )
       .then((resp) => {
         setUserData(resp.data);
-        const pickUpDate = resp.data.schedule_date;
-        const latestDate = new Date(pickUpDate);
-        const options = { year: "numeric", month: "long", day: "numeric" };
-        const pickUpDateValue = latestDate.toLocaleDateString("en-US", options);
+        console.log(resp.data)
         setpickUpDate(pickUpDateValue);
-      })
-      .catch((error)=>{
-        console.log(error)
-      })
+      });
   }
 
   function Tonavigate() {
-    axios
-      .get(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/order`)
-      .then((resp) => {
-        console.log(resp.data);
-        setUserData(resp.data);
-        const userId = resp.data.customer_id._id;
-        console.log(userId);
-        localStorage.setItem("UserId", JSON.stringify(userId));
-        navigate(`/my-orders`);
-      });
+      navigate(`/userdashboard`);
   }
 
   useEffect(() => {
     let intervalId;
-    getOrderDetails();
 
     if (newpaymentType === "payWithCard") {
       intervalId = setInterval(() => {
         getPaymentStatus();
       }, 5000);
-    }else{
-      console.log('else')
     }
 
+    getOrderDetails();
 
     // Return cleanup function
     return () => clearInterval(intervalId);
@@ -91,8 +73,9 @@ export default function OrderReceipt() {
       <ThankYou />
       <div className="center_div">
         <div className="mx-2 mb-5 shadow rounded-5 p-4 px-4 col col-lg-5 col-xs-8">
-          {paymentStatus?.data?.status === "success" ? (
+          {paymentStatus?.status === "success" ? (
             <div>
+              {/* Display details for successful payment */}
               <div className="d-flex justify-content-between gap-3 mb-2">
                 <div lg={3}>
                   <h5>Order Id</h5>
@@ -103,18 +86,18 @@ export default function OrderReceipt() {
               </div>
               <div className="d-flex justify-content-between gap-3 mb-2">
                 <div lg={3}>
-                  <h5>Pickup Date</h5>
+                  <h5>Pickup duration</h5>
                 </div>
                 <div lg={3}>
-                  <p>{pickUpDateValue}</p>
+                  <p>3-4 days </p>
                 </div>
               </div>
               <div className="d-flex justify-content-between gap-3 mb-2">
                 <div lg={3}>
-                  <h5>Pickup time</h5>
+                  <h5>Payment_status</h5>
                 </div>
                 <div lg={3}>
-                  <p>{userData?.pickuptime}</p>
+                  <p>{paymentStatus?.status || "pending"}</p>
                 </div>
               </div>
               <div className="d-flex justify-content-between gap-3 ">
@@ -122,21 +105,22 @@ export default function OrderReceipt() {
                   <h5>Final Amount</h5>
                 </div>
                 <div lg={3}>
-                  <p>₦{userData?.subtotal}</p>
+                  <p>₦{userData?.total}</p>
                 </div>
               </div>
             </div>
-          ) : paymentStatus?.data?.status === "failed" ? (
+          ) : paymentStatus?.status === "failed" ? (
             <p className="pendingpayment-ptag">
               Payment Failed. Please try again or choose another payment method.{" "}
               <br /> <Link to={`/paymentpage/${userData?._id}`}>back</Link>
             </p>
-          ) : paymentStatus?.data?.status === "abandoned" ? (
+          ) : paymentStatus?.status === "abandoned" ? (
             <p className="pendingpayment-ptag">
               Payment Abandoned. Please review your order and try again.
             </p>
           ) : newpaymentType === "payWithCash" ? (
             <div>
+              {/* Display details for cash payment */}
               <div className="d-flex justify-content-between gap-3 mb-2">
                 <div lg={3}>
                   <h5>Order Id</h5>
@@ -147,18 +131,18 @@ export default function OrderReceipt() {
               </div>
               <div className="d-flex justify-content-between gap-3 mb-2">
                 <div lg={3}>
-                  <h5>Pickup Date</h5>
+                  <h5>Pickup duration</h5>
                 </div>
                 <div lg={3}>
-                  <p>{pickUpDateValue}</p>
+                  <p>3-4 days </p>
                 </div>
               </div>
               <div className="d-flex justify-content-between gap-3 mb-2">
                 <div lg={3}>
-                  <h5>Pickup time</h5>
+                  <h5>Payment_status</h5>
                 </div>
                 <div lg={3}>
-                  <p>{userData?.pickuptime}</p>
+                  <p>{paymentStatus?.status || "pending"}</p>
                 </div>
               </div>
               <div className="d-flex justify-content-between gap-3 ">
@@ -166,7 +150,7 @@ export default function OrderReceipt() {
                   <h5>Final Amount</h5>
                 </div>
                 <div lg={3}>
-                  <p>₦{userData?.subtotal}</p>
+                  <p>₦{userData?.total}</p>
                 </div>
               </div>
             </div>
@@ -180,12 +164,12 @@ export default function OrderReceipt() {
 
       <Container className="mt-5 pt-4 d-flex justify-content-center w-100 text-center my-5">
         <Col lg={4} md={5} sm={5}>
-          <Link to="/">
+          <Link to="/shop">
             <Button
               variant="outline-primary"
               className="me-auto w-75 text-center"
             >
-              Back Home
+              Continue Shopping
             </Button>
           </Link>
         </Col>

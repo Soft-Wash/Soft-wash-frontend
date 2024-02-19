@@ -17,19 +17,19 @@ function WorkFlowSideBar(){
             <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
             <NavLink exact to="/admindashboard" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="columns">Main Dashboard</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="tachometer-alt">Main Dashboard</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/workflowtask" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="chart-line">Task View</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="list-alt">Task View</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/taskfreeemployee" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="chart-line">Available Employee</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="user-check">Available Employee</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/tasktable" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="chart-line">All Task</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="tasks">All Task</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/createtask" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="chart-line">Create Task</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="plus-circle">Create Task</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>

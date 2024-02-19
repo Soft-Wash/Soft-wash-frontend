@@ -31,22 +31,6 @@ function Navigation(){
                 navbarScroll
               
               >
-                <Nav.Link to="/" className="text-dark">
-                  Home
-                </Nav.Link>
-
-                <NavDropdown
-                  title={<FiUser className="fs-4 text-dark" />}
-                  className="d-flex"
-                  id="navbarScrollingDropdown"
-                >
-                  <NavDropdown.Item>
-                    Transaction History
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="#action4">
-                    Print Invoice
-                  </NavDropdown.Item>
-                </NavDropdown>
                 <Nav.Link  className="d-flex">
                   <Link to="/cart" className="color-dark-link">
                   <FiShoppingCart className="fs-4"/>

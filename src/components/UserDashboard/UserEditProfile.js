@@ -8,11 +8,17 @@ import Sidebar from "../../components/OrdersPage/Sidebar";
 import { axiosInstance } from "../../services/AxiosInstance";
 import UserSidebarTablet from "../UserSidebarTablet";
 import "../../styles/UserProfile.css"
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 function UserEditProfile() {
   const [userData, setUserData] = useState();
   const [realImage, setRealImage] = useState();
   const [inputImage, setinputImage] = useState();
+  const backend = "http://localhost:8003/uploads/"
 
 
   useEffect(() => {
@@ -20,7 +26,6 @@ function UserEditProfile() {
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/users/${userId._id}`)
       .then((resp) => {
-        console.log(resp.data);
         setUserData(resp.data);
       });
   }, []);
@@ -30,18 +35,15 @@ function UserEditProfile() {
     setUserData({ ...userData, [e.target.name]: value });
   };
 
-  console.log(userData)
-
   const HandleImage = (e) => {
     const file = e.target.files[0];
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setRealImage(file);
       setinputImage(imageUrl);
-      console.log(file);
     }
   };
-  console.log(realImage)
+
 
   const UpdateProfile=()=>{
     const formData = new FormData()
@@ -50,16 +52,17 @@ function UserEditProfile() {
    formData.append('email', userData.email)
    formData.append('address', userData.address)
    formData.append('avatar', realImage)
-   console.log([...formData.entries()]);
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     axiosInstance.put(`users/${userId._id}/update`,formData)
     .then((resp)=>{
-      console.log(resp.data)
+      toast.success("updated successfully")
+
     })
   }
 
   return (
     <div>
+             <ToastContainer position="top-center" />
     <div className="d-flex">
       <div className='user-sidebar-div'>
         <Sidebar />
@@ -84,7 +87,11 @@ function UserEditProfile() {
                 />
               </div>
                 ):            <div className="user-profilePic">
-                <img src={userData?.avatar} />
+                <img                       src={
+                        userData && userData?.avatar
+                          ? backend+userData?.avatar
+                          : `https://ui-avatars.com/api/?name=${userData?.fullName}&size=128`
+                      } />
               </div>}
 
               <label htmlFor="imageUpload" className="user-dp-btn">
