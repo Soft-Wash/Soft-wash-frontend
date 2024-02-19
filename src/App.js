@@ -1,4 +1,5 @@
 import "./App.css";
+import { TaskContextProvider } from "./context/TaskContext";
 // import ScrollToTop from "./utils/ScrollToTop";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UserLogin from "./pages/auth/login/UserLogin";
@@ -88,6 +89,7 @@ import ShopOrderDetailsPage from "./pages/ShopOrderDetailsPage";
 import ShopOrders from "./pages/user/ShopOrders";
 import WashmanProfilePage1 from "./pages/Washman Pages/WashmanProfilePage1";
 import CreatProduct from "./pages/Admin/CreateProduct"
+import { TaskContext } from "./context/TaskContext";
 
 
 import SupplierDash from "./pages/Supplier/SupplierDash";
@@ -108,7 +110,9 @@ import SupplierLog from "./pages/Supplier/SupplierLog"
 function App() {
   return (
 <>  
+
 <ChakraProvider>
+<TaskContextProvider>
   <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage/>} />
@@ -232,7 +236,9 @@ function App() {
 
       </Routes>
     </BrowserRouter>
+    </TaskContextProvider>
     </ChakraProvider>
+    
 </>
 
 
