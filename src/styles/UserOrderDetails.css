@@ -146,7 +146,7 @@
   }
   .progress_content:not(:last-child) .progress_bar1 {
     width: 47%;
-    top: 18%;    
+    top: 18%;
   }
   .progress-check {
     font-size: 14px !important;

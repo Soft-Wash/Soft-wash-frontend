@@ -25,7 +25,6 @@ function Leave() {
   const [rejectedReason,setrejectedReason]=useState({
     status:"rejected",
     adminApproval:"rejected"
-
   })
 
   function ToggleTextArea2() {

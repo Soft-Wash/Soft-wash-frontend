@@ -41,6 +41,7 @@ function WashmanOrdersBody(){
             }
         }
         getID();
+        
         if(washmanID){
             fetchTasks();
           }
