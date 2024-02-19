@@ -106,8 +106,12 @@
 
 
 @media(max-width: 1026px){
+  .progress_circle {
+    z-index: 4;
+  }
   .progress_content:not(:last-child) .progress_bar1 {
-    width: 45%;    
+    width: 45%;   
+    z-index: 2; 
   }
   .status-description {
     font-size: 13px;
