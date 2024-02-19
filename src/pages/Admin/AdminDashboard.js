@@ -55,7 +55,6 @@ function AdminDashboard() {
     axios
     .get(`${process.env.REACT_APP_BASE_URL}/order/allbranches/day`)
     .then((resp) => {
-      console.log(resp.data)
       setTodayAllOrders(resp.data);
     });
   }
