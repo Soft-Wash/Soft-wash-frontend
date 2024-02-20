@@ -1,5 +1,5 @@
 import "../../styles/Washman Styles/WashmanLeaveForm.css";
-import { Button } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
@@ -18,12 +18,15 @@ function WashmanLeaveForm() {
 
 
   const [washman, setWashman] = useState({});
+  const [branchID, setBranchID] = useState("")
     const [error, setError] = useState("");
 
 
 
     const [washmanID, setWashmanID] = useState("")
-    const branchID = "655deba5ec7b0b6e0f591bf5"
+    // const branchID = "655deba5ec7b0b6e0f591bf5"
+
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
       const getID = () =>{
@@ -39,7 +42,9 @@ function WashmanLeaveForm() {
             try{
                 const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/employees/${washmanID}`)
                 setWashman(response.data);
-                console.log(response.data);                
+                console.log(response.data);    
+                setBranchID(response.data.branch);
+                console.log(branchID);            
             }
             catch (error) {
                 setError(error.message || 'An error occurred while fetching Washman.');
@@ -49,41 +54,59 @@ function WashmanLeaveForm() {
         if(washmanID){
           fetchWashman();
         }
-    }, [])
+    }, [washmanID, branchID])
 
+
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFullName(washman.fullName);
-    setEmail(washman.email)
-    // console.log("here")
-    if (email === "" || fullName=== "" || reasons=== "" || selectedOption=== "" || startDate=== "" || endDate=== "") {
-      setErr(true);
-    } else {
-      setErr(false);
-      const body = {
-        fullName: fullName,
-        email: email,
-        reasons: reasons,
-        employee_id: washmanID,
-        branch_id: branchID,
-        startDate: startDate,
-        endDate: endDate,
-        reasons: reasons,
-        leaveType: selectedOption,
-      };
-      console.log(body)
-      try {
-        const resp = await axios.post(
-          `${process.env.REACT_APP_BASE_URL}/leave/create`,
-          body
-        );
-        console.log(resp.data);
-      } catch (error) {
-        console.log(error);
+    setEmail(washman.email);
+  
+
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/leave/employee/${washmanID}`);
+      const leaveApplications = response.data;
+      
+
+      const hasPendingLeave = leaveApplications.some(application => application.status === 'pending');
+  
+      if (hasPendingLeave) {
+        setShowModal(true);
+      } else {
+        if (email === "" || fullName === "" || reasons === "" || selectedOption === "" || startDate === "" || endDate === "") {
+          setErr(true);
+        } else {
+          setErr(false);
+          const body = {
+            fullName: fullName,
+            email: email,
+            reasons: reasons,
+            employee_id: washmanID,
+            branch_id: branchID,
+            startDate: startDate,
+            endDate: endDate,
+            leaveType: selectedOption,
+          };
+          console.log(body);
+          try {
+            const resp = await axios.post(
+              `${process.env.REACT_APP_BASE_URL}/leave/create`,
+              body
+            );
+            console.log(resp.data);
+          } catch (error) {
+            console.log(error);
+          }
+        }
       }
+    } catch (error) {
+      console.log(error);
     }
   };
+  
+
 
   return (
     <div className="washman-bg">
@@ -179,6 +202,24 @@ function WashmanLeaveForm() {
           </Form>
         </div>
       </div>
+
+      {/* Modal for pending leave application */}
+      {/* <div  */}
+      <Modal show={showModal} onHide={() => setShowModal(false)} className="washman-modal">
+        <Modal.Header closeButton>
+          <Modal.Title>Pending Leave Application</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          You have a pending leave application. You cannot apply for new leave
+          until the pending application is resolved.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      {/* </div> */}
     </div>
   );
 }
