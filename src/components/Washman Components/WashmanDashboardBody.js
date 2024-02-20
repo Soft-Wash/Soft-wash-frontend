@@ -36,7 +36,7 @@ function WashmanDashboardBody(){
           }
         
 
-    }, [])
+    }, [washmanID])
     
     const pendingTaskCount = tasks.filter(task => task.status === "pending").length;
 

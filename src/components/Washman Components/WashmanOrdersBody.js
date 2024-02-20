@@ -44,9 +44,8 @@ function WashmanOrdersBody(){
         
         if(washmanID){
             fetchTasks();
-          }
-        
-    }, [])
+          }        
+    }, [washmanID])
 
     return(
         <div className="washman-bg">
