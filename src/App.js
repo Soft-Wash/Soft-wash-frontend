@@ -1,4 +1,5 @@
 import "./App.css";
+import { TaskContextProvider } from "./context/TaskContext";
 // import ScrollToTop from "./utils/ScrollToTop";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UserLogin from "./pages/auth/login/UserLogin";
@@ -89,6 +90,21 @@ import ShopOrders from "./pages/user/ShopOrders";
 import WashmanProfilePage1 from "./pages/Washman Pages/WashmanProfilePage1";
 import FrontdeskAssignTask from "./pages/FrontDesk/AssignTask";
 import CreatProduct from "./pages/Admin/CreateProduct"
+import { TaskContext } from "./context/TaskContext";
+
+
+import SupplierDash from "./pages/Supplier/SupplierDash";
+import SupplierExpenses from "./pages/Supplier/SupplierExpenses";
+import DeliveryReport from "./pages/Supplier/DeliveryReport";
+import SupplierOrderReport from "./pages/Supplier/SupplierOrderReport";
+import SupplierNewExpense from "./pages/Supplier/SupplierNewExpense";
+import SupplyOrder from "./pages/Supplier/SupplyOrder";
+import SupplierLog from "./pages/Supplier/SupplierLog"
+
+import PayRoll from "./pages/Admin/PayRoll";
+import PayRollTable from "./pages/Admin/PayRollTable";
+import Loader from "./components/Loader/Loader";
+
 
 
 
@@ -100,10 +116,13 @@ import CreatProduct from "./pages/Admin/CreateProduct"
 function App() {
   return (
 <>  
+
 <ChakraProvider>
+<TaskContextProvider>
   <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage/>} />
+        {/* <Route path="/" element={<Loader/>} /> */}
         <Route path="/address" element={<AddressPage/>} />
         <Route path="/UserLogin" element={<UserLogin/>}/>
         <Route path="/UserRegister" element={<UserRegister/>}/>
@@ -124,7 +143,7 @@ function App() {
          <Route path="/shop" element={<MarketPlace/>} />
          <Route path="/singleproduct/:productId" element={<SingleProduct/>} />
          <Route path="/wishlist" element={<Wishlist/>} />
-         <Route path="/cart" element={<Cart/>} />
+        <Route path="/cart" element={<Cart/>} />
         <Route path="/my-orders" element={<Orders/>}/>
         <Route path="/order-receipt" element={<OrderReceipt/>}/>
         <Route path="/my-orders/" element={<Orders/>}/>
@@ -145,7 +164,7 @@ function App() {
 
         {/* WASHMAN ROUTES */}
         <Route path="/washman-profile" element={<WashmanProfilePage1/>}/>
-        <Route path="/washman-orders" element={<WashmanOrdersPage/>}/>
+        <Route path="/washman-tasks" element={<WashmanOrdersPage/>}/>
         <Route path="/washman-dashboard" element={<WashmanDashboardPage/>}/>
         <Route path="/washman-single-order/:_id" element={<WashmanSingleOrderPage/>}/>
         <Route path="/washman-edit-profile" element={<WashmanEditProfilePage/>}/>
@@ -184,6 +203,8 @@ function App() {
         <Route path="/shoporderdetails" element={<ShopOrderDetailsPage/>}/>
         <Route path="/shoporders" element={<ShopOrders/>}/>
         <Route path="/createproduct" element={<CreatProduct/>}/>
+        <Route path="/payroll" element={<PayRoll/>}/>
+        <Route path="/payrolltable" element={<PayRollTable/>}/>
         
 
 
@@ -209,9 +230,27 @@ function App() {
 <Route path="/employeelogin" element={<Login/>} />
 
 
+
+        {/* SUPPLIER ROUTE */}
+        <Route path="/SupplierDash" element={<SupplierDash/>}/>
+        <Route path="/SupplierExpenses" element={<SupplierExpenses/>}/>
+        <Route path="/DeliveryReport" element={<DeliveryReport/>}/>
+        <Route path="/SupplierOrderReport" element={<SupplierOrderReport/>}/>
+        <Route path="/SupplierNewExpense" element={<SupplierNewExpense/>}/>
+        <Route path="/SupplyOrder" element={<SupplyOrder/>}/>
+        <Route path="/SupplierLog" element={<SupplierLog/>}/>
+
+
+        
+
+
+
+
       </Routes>
     </BrowserRouter>
+    </TaskContextProvider>
     </ChakraProvider>
+    
 </>
 
 

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { axiosInstance } from "../../services/AxiosInstance";
 import axios from "axios";
+import { FaBell } from "react-icons/fa6";
 
 function AdminDashboard() {
   const [branches, setbranches] = useState();
@@ -55,7 +56,6 @@ function AdminDashboard() {
     axios
     .get(`${process.env.REACT_APP_BASE_URL}/order/allbranches/day`)
     .then((resp) => {
-      console.log(resp.data)
       setTodayAllOrders(resp.data);
     });
   }
@@ -81,7 +81,11 @@ function AdminDashboard() {
       <div className="d-flex">
         <AdminSidebar />
         <div className="admin-container">
+          <div className="notifi_div">
           <h4 className="">Dashboard </h4>
+<FaBell className="notifi_icon"/>
+          </div>
+
           <hr className="dashboard-line" />
           <div className="category-container">
             <div className="icon-container mb-3">

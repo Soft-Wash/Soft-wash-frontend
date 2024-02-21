@@ -13,40 +13,49 @@ import { axiosInstance } from "../../services/AxiosInstance";
 export default function OrderReceipt() {
   const options = { day: "numeric", month: "long" };
   const [userData, setUserData] = useState();
-  const [paymentStatus,setPaymentStatus]=useState()
+  const [paymentStatus, setPaymentStatus] = useState();
   const [pickUpDateValue, setpickUpDate] = useState();
   const { orderId } = useParams();
   const navigate = useNavigate();
+  const [GetPaymentStatus,setGetPaymentStatus]=useState()
+  let intervalId;
 
-  const paymentWithCard = JSON.parse(localStorage.getItem("paymentType"))
+  const paymentWithCard = JSON.parse(localStorage.getItem("paymentType"));
   const paymentType = Object.values(paymentWithCard);
-  const newpaymentType = paymentType.join('')
+  const newpaymentType = paymentType.join("");
+ 
 
-
-
-  function getPaymentStatus(){
-    const ref =  JSON.parse(localStorage.getItem("payment_reference"))
-    axiosInstance.get(`/payments/getstatus?reference=${ref}`)
-    .then((resp)=>{
-      setPaymentStatus(resp.data)
-    })
-    .catch((error)=>{
-      console.log(error.message)
-    })
+  function getPaymentStatus() {
+    const ref = JSON.parse(localStorage.getItem("payment_reference"));
+    axiosInstance
+      .get(`/payments/getstatus?reference=${ref}`)
+      .then((resp) => {
+        // console.log(resp.data)
+        setPaymentStatus(resp.data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   }
 
+  console.log(paymentStatus)
+
   function getOrderDetails() {
-    const orderDetails = JSON.parse(localStorage.getItem("orderDetails"));
+
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/order`)
       .then((resp) => {
         setUserData(resp.data);
+        console.log(resp.data)
         const pickUpDate = resp.data.schedule_date;
         const latestDate = new Date(pickUpDate);
         const options = { year: "numeric", month: "long", day: "numeric" };
         const pickUpDateValue = latestDate.toLocaleDateString("en-US", options);
         setpickUpDate(pickUpDateValue);
-      });
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
   }
 
   function Tonavigate() {
@@ -62,134 +71,146 @@ export default function OrderReceipt() {
       });
   }
 
+  const updatePaymentStatus=()=>{
+    axios.put(`${process.env.REACT_APP_BASE_URL}/order/${userData?._id}/update`,{payment_status:paymentStatus?.data?.status})
+    .then((resp)=>{
+      console.log(resp.data)
+      setGetPaymentStatus(resp.data)
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+  }
+
   const handlePrint = () => {
     // alert("Your trying to print")
     window.print();
   };
 
   useEffect(() => {
-    let intervalId;
-  
+
+    getOrderDetails();
+
     if (newpaymentType === "payWithCard") {
       intervalId = setInterval(() => {
         getPaymentStatus();
       }, 5000);
+    }else{
+      console.log('else')
     }
-  
-    getOrderDetails();
-  
+
+
     // Return cleanup function
     return () => clearInterval(intervalId);
   }, [newpaymentType]); // Include newpaymentType in the dependency array
-  
+
+
+  useEffect(() => {
+    if (paymentStatus?.data?.status === "success") {
+      updatePaymentStatus();
+      clearInterval(intervalId);
+    }
+
+  }, [paymentStatus]);
 
   return (
     <>
       <Banner />
       <ThankYou />
-      <div className="mx-auto mb-5 shadow rounded-5 p-4 px-4 col col-lg-5 col-xs-8">
-        {paymentStatus?.data?.status === "success" ? (
-          <div>
-            {/* Display details for successful payment */}
-            <div className="d-flex justify-content-between gap-3 mb-2">
-              <div lg={3}>
-                <h5>Order Id</h5>
+      <div className="center_div">
+        <div className="mx-2 mb-5 shadow rounded-5 p-4 px-4 col col-lg-5 col-xs-8">
+          {paymentStatus?.data?.status === "success" ? (
+            <div>
+              <div className="d-flex justify-content-between gap-3 mb-2">
+                <div lg={3}>
+                  <h5>Order Id</h5>
+                </div>
+                <div lg={3}>
+                  <p>{userData?._id}</p>
+                </div>
               </div>
-              <div lg={3}>
-                <p>{userData?._id}</p>
+              <div className="d-flex justify-content-between gap-3 mb-2">
+                <div lg={3}>
+                  <h5>Pickup Date</h5>
+                </div>
+                <div lg={3}>
+                  <p>{pickUpDateValue}</p>
+                </div>
               </div>
-            </div>
-            <div className="d-flex justify-content-between gap-3 mb-2">
-              <div lg={3}>
-                <h5>Pickup Date</h5>
+              <div className="d-flex justify-content-between gap-3 mb-2">
+                <div lg={3}>
+                  <h5>Pickup time</h5>
+                </div>
+                <div lg={3}>
+                  <p>{userData?.pickuptime}</p>
+                </div>
               </div>
-              <div lg={3}>
-                <p>{pickUpDateValue}</p>
+              <div className="d-flex justify-content-between gap-3 ">
+                <div lg={3}>
+                  <h5>Final Amount</h5>
+                </div>
+                <div lg={3}>
+                  <p>₦{userData?.subtotal}</p>
+                </div>
               </div>
-            </div>
-            <div className="d-flex justify-content-between gap-3 mb-2">
-              <div lg={3}>
-                <h5>Pickup time</h5>
-              </div>
-              <div lg={3}>
-                <p>{userData?.pickuptime}</p>
-              </div>
-            </div>
-            <div className="d-flex justify-content-between gap-3 ">
-              <div lg={3}>
-                <h5>Final Amount</h5>
-              </div>
-              <div lg={3}>
-                <p>₦{userData?.subtotal}</p>
-              </div>
-            </div>
-            <div className="d-flex justify-content-between gap-3 ">
-              <div lg={3}>
-                <h5>Payment Status</h5>
-              </div>
-              <div lg={3}>
-                <p>{paymentStatus?.data.status}</p>
-              </div>
-            </div>
-          </div>
-        ) : paymentStatus?.data?.status === "failed" ? (
-          <p className="pendingpayment-ptag">
-            Payment Failed. Please try again or choose another payment method.{" "}
-            <br /> <Link to={`/paymentpage/${userData?._id}`}>back</Link>
-          </p>
-        ) : paymentStatus?.data?.status === "abandoned" ? (
-          <p className="pendingpayment-ptag">
-            Payment Abandoned. Please review your order and try again.
-          </p>
-        ) : newpaymentType === "payWithCash" ? (
-          <div>
-            {/* Display details for successful payment */}
-            <div className="d-flex justify-content-between gap-3 mb-2">
-              <div lg={3}>
-                <h5>Order Id</h5>
-              </div>
-              <div lg={3}>
-                <p>{userData?._id}</p>
+              <div className="d-flex justify-content-between gap-3 ">
+                <div lg={3}>
+                  <h5>Payment Status</h5>
+                </div>
+                <div lg={3}>
+                  <p>{GetPaymentStatus?.data?.payment_status}</p>
+                </div>
               </div>
             </div>
-            <div className="d-flex justify-content-between gap-3 mb-2">
-              <div lg={3}>
-                <h5>Pickup Date</h5>
+          ) : paymentStatus?.data?.status === "failed" ? (
+            <p className="pendingpayment-ptag">
+              Payment Failed. Please try again or choose another payment method.{" "}
+              <br /> <Link to={`/paymentpage/${userData?._id}`}>back</Link>
+            </p>
+          ) : paymentStatus?.data?.status === "abandoned" ? (
+            <p className="pendingpayment-ptag">
+              Payment Abandoned. Please review your order and try again.
+            </p>
+          ) : newpaymentType === "payWithCash" ? (
+            <div>
+              <div className="d-flex justify-content-between gap-3 mb-2">
+                <div lg={3}>
+                  <h5>Order Id</h5>
+                </div>
+                <div lg={3}>
+                  <p>{userData?._id}</p>
+                </div>
               </div>
-              <div lg={3}>
-                <p>{pickUpDateValue}</p>
+              <div className="d-flex justify-content-between gap-3 mb-2">
+                <div lg={3}>
+                  <h5>Pickup Date</h5>
+                </div>
+                <div lg={3}>
+                  <p>{pickUpDateValue}</p>
+                </div>
+              </div>
+              <div className="d-flex justify-content-between gap-3 mb-2">
+                <div lg={3}>
+                  <h5>Pickup time</h5>
+                </div>
+                <div lg={3}>
+                  <p>{userData?.pickuptime}</p>
+                </div>
+              </div>
+              <div className="d-flex justify-content-between gap-3 ">
+                <div lg={3}>
+                  <h5>Final Amount</h5>
+                </div>
+                <div lg={3}>
+                  <p>₦{userData?.subtotal}</p>
+                </div>
               </div>
             </div>
-            <div className="d-flex justify-content-between gap-3 mb-2">
-              <div lg={3}>
-                <h5>Pickup time</h5>
-              </div>
-              <div lg={3}>
-                <p>{userData?.pickuptime}</p>
-              </div>
-            </div>
-            <div className="d-flex justify-content-between gap-3 ">
-              <div lg={3}>
-                <h5>Final Amount</h5>
-              </div>
-              <div lg={3}>
-                <p>₦{userData?.subtotal}</p>
-              </div>
-            </div>
-            <div className="d-flex justify-content-between gap-3 ">
-              <div lg={3}>
-                <h5>Payment Status</h5>
-              </div>
-              <div lg={3}>
-                <p>{userData?.payment_status}</p>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <p className="pendingpayment-ptag">Loading...</p>
-        )}
+          ) : (
+            <p className="pendingpayment-ptag">Loading...</p>
+          )}
+        </div>
       </div>
-
 
       <Row className="mb-5"></Row>
 

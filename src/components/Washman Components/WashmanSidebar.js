@@ -86,7 +86,7 @@ function WashmanSidebar (){
               </Link>
             </div>
             <div className='washman-sidebar-hover'>
-              <Link exact to="/washman-orders" activeClassName="activeClicked" className='washman-sidebar-hover'>
+              <Link exact to="/washman-tasks" activeClassName="activeClicked" className='washman-sidebar-hover'>
                 <CDBSidebarMenuItem icon="chart-line"> My Tasks</CDBSidebarMenuItem>
               </Link>
             </div>
@@ -100,11 +100,11 @@ function WashmanSidebar (){
                 <CDBSidebarMenuItem icon="chart-line">Leave Application</CDBSidebarMenuItem>
               </Link>
             </div>
-            <div className='washman-sidebar-hover'>
+            {/* <div className='washman-sidebar-hover'>
               <Link exact to="/washman-leave" activeClassName="activeClicked" className='washman-sidebar-hover'>
                 <CDBSidebarMenuItem icon="chart-line">My Items</CDBSidebarMenuItem>
               </Link>
-            </div>
+            </div> */}
 
             {/* <div className='washman-sidebar-hover'>
               <Link exact to="/paymenthistory" activeClassName="activeClicked" className='washman-sidebar-hover'>

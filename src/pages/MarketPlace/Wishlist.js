@@ -18,12 +18,16 @@ function Wishlist() {
 
   const getWishList = ()=>{
     const user = JSON.parse(localStorage.getItem("softwashLoginUser"));
-    axios.get(`${process.env.REACT_APP_BASE_URL}/wishlist/user/wishlist?user_id=${user?._id}`)
-    .then((resp)=> {
-      console.log(resp.data)
-      setWishlist(resp.data)
-
-    })
+    if(user?._id){
+      axios.get(`${process.env.REACT_APP_BASE_URL}/wishlist/user/wishlist?user_id=${user?._id}`)
+      .then((resp)=> {
+        console.log(resp.data)
+        setWishlist(resp.data)
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
+    }
   }
 
   const addToCart = (item_id) => {
@@ -66,23 +70,22 @@ function Wishlist() {
         <p>
           To save your wishlist please{" "}
           <span>
-            <Link className="link02">login</Link>{" "}
+            <Link to="UserLogin" className="link02">login</Link>{" "}
           </span>{" "}
           or{" "}
           <span>
-            <Link className="link02">Sign up</Link>{" "}
+            <Link to="UserRegister" className="link02">Sign up</Link>{" "}
           </span>
           .
           <p className="mt-3">
-            <FaRegShareSquare /> share wishlist
+            <FaRegShareSquare className="text-center"/> share wishlist
           </p>
         </p>
       </Container>
 
       <Container>
         <Row>
-          {wishlist &&
-            wishlist.map((item) => (
+          {wishlist?.length > 0 ?(wishlist.map((item) => (
               <Col xs={12} sm={12} md={4} lg={4} xl={3} key={item._id}>
                   <Card
                     className="item-card border text-center mt-4"
@@ -103,7 +106,10 @@ function Wishlist() {
                     </div>
                   </Card>
               </Col>
-            ))}
+            ))):(
+              <p className="text-center fw-bold">No item avaialable in Wishlist</p>
+            )}
+
         </Row>
       </Container>
       <Footer />
