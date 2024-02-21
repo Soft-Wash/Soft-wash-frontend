@@ -7,6 +7,7 @@ import axios from "axios";
 import Loader from "../Loader/Loader";
 
 
+
 function WashmanLeaveForm() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -43,7 +44,7 @@ function WashmanLeaveForm() {
 
         const fetchWashman = async () =>{          
             try{
-                setLoading(true)
+                // setLoading(true);
                 const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/employees/${washmanID}`)
                 setWashman(response.data);
                 console.log(response.data);    
@@ -68,46 +69,48 @@ function WashmanLeaveForm() {
     setFullName(washman.fullName);
     setEmail(washman.email);
   
-
-    try {
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/leave/employee/${washmanID}`);
-      const leaveApplications = response.data;
-      
-
-      const hasPendingLeave = leaveApplications.some(application => application.status === 'pending');
+    if(email === "" || fullName === "" || reasons === "" || selectedOption === "" || startDate === "" || endDate === ""){
+      setErr(true);
+    }else{
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/leave/employee/${washmanID}`);
+        const leaveApplications = response.data;
+        
   
-      if (hasPendingLeave) {
-        setShowModal(true);
-      } else {
-        if (email === "" || fullName === "" || reasons === "" || selectedOption === "" || startDate === "" || endDate === "") {
-          setErr(true);
+        const hasPendingLeave = leaveApplications.some(application => application.status === 'pending');
+    
+        if (hasPendingLeave) {
+          setShowModal(true);
         } else {
-          setErr(false);
-          const body = {
-            fullName: fullName,
-            email: email,
-            reasons: reasons,
-            employee_id: washmanID,
-            branch_id: branchID,
-            startDate: startDate,
-            endDate: endDate,
-            leaveType: selectedOption,
-          };
-          console.log(body);
-          try {
-            const resp = await axios.post(
-              `${process.env.REACT_APP_BASE_URL}/leave/create`,
-              body
-            );
-            console.log(resp.data);
-          } catch (error) {
-            console.log(error);
+            setErr(false);
+            const body = {
+              fullName: fullName,
+              email: email,
+              reasons: reasons,
+              employee_id: washmanID,
+              branch_id: branchID,
+              startDate: startDate,
+              endDate: endDate,
+              leaveType: selectedOption,
+            };
+            console.log(body);
+            try {
+              const resp = await axios.post(
+                `${process.env.REACT_APP_BASE_URL}/leave/create`,
+                body
+              );
+              console.log(resp.data);
+            } catch (error) {
+              console.log(error);
+            }
           }
-        }
+  
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
+
+    
   };
   
 
@@ -122,7 +125,7 @@ function WashmanLeaveForm() {
       <div>
         <Form className="centralize  mt-4" onSubmit={handleSubmit}>
           <Form.Group className="washman-edit-profile-input">
-            <Form.Label htmlFor="fullName" className="reset-input-headers">
+            <Form.Label htmlFor="fullName" className="washman-leave-inputs">
               Full Name
             </Form.Label>
             <Form.Control
@@ -136,7 +139,7 @@ function WashmanLeaveForm() {
             ) : null}
             
 
-            <Form.Label htmlFor="email" className="reset-input-headers">
+            <Form.Label htmlFor="email" className="washman-leave-inputs">
               Email address
             </Form.Label>
             <Form.Control
@@ -149,7 +152,7 @@ function WashmanLeaveForm() {
               <span className="reset-err-msg">Kindly enter your email</span>
             ) : null}
 
-            <Form.Label htmlFor="reasons" className="reset-input-headers">
+            <Form.Label htmlFor="reasons" className="washman-leave-inputs">
               Reasons
             </Form.Label>
             <Form.Control
@@ -162,7 +165,7 @@ function WashmanLeaveForm() {
               <span className="reset-err-msg">Kindly enter your Reason For Leave</span>
             ) : null}
 
-            <select  className="reset-input-headers" onChange={(e) => setSelectedOption(e.target.value)}>
+            <select  className="washman-leave-select-tag washman-leave-inputs" onChange={(e) => setSelectedOption(e.target.value)}>
               <option value="" hidden>
                 Select Status
               </option>
@@ -174,7 +177,7 @@ function WashmanLeaveForm() {
               <option value="matarnity">MATARNITY</option>                          
           </select>
               
-            <Form.Label htmlFor="startDate" className="reset-input-headers">
+            <Form.Label htmlFor="startDate" className="washman-leave-inputs">
               Start Date
             </Form.Label>
             <Form.Control
@@ -187,7 +190,7 @@ function WashmanLeaveForm() {
               <span className="reset-err-msg">Kindly enter the date you wish to start your Leave</span>
             ) : null}
 
-            <Form.Label htmlFor="endDate" className="reset-input-headers">
+            <Form.Label htmlFor="endDate" className="washman-leave-inputs">
               End Date
             </Form.Label>
             <Form.Control
@@ -206,7 +209,8 @@ function WashmanLeaveForm() {
           </Button>
         </Form>
       </div>
-    </div>}
+    </div>
+      }
 
       {/* Modal for pending leave application */}
       {/* <div  */}
