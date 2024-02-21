@@ -124,12 +124,6 @@ function Iventry() {
                 <p> Growth</p>
                 <p>{growth || 0}</p>
               </div>
-              {/* <div className="state-percent-divv">
-                <BiCaretUp className="bicart-icon" />
-                <p className="state-percent-divv-p">
-                  {Math.round(growthPercentage * 100) / 100}%
-                </p>
-              </div> */}
             </div>
             <div className="icon-container mb-3">
               <div className="icon-container-innerd1">
@@ -141,10 +135,6 @@ function Iventry() {
                   <p>{pending?.length > 0 || 0}</p>
                 </Link>
               </div>
-              {/* <div className="state-percent-divv2">
-                <BiCaretDown className="bicart-icon2" />
-                <p className="state-percent-divv2-p">35.2%</p>
-              </div> */}
             </div>
             <div className="icon-container mb-3">
               <div className="icon-container-innerd1">
@@ -156,10 +146,6 @@ function Iventry() {
                   <p>{month || 0}</p>
                 </Link>
               </div>
-              {/* <div className="state-percent-divv2">
-                <BiCaretDown className="bicart-icon2" />
-                <p className="state-percent-divv2-p">35.2%</p>
-              </div> */}
             </div>
 
             <div className="icon-container mb-3">
@@ -172,10 +158,6 @@ function Iventry() {
                   <p>{paymentStatus || 0}</p>
                 </Link>
               </div>
-              {/* <div className="state-percent-divv2">
-                <BiCaretDown className="bicart-icon2" />
-                <p className="state-percent-divv2-p">{((paymentStatus / monthBefore) * 100).toFixed(2)}%</p>
-              </div> */}
             </div>
           </div>
           <div className="chart_container">
