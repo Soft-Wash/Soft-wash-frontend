@@ -206,10 +206,9 @@ function WashmanLeaveForm() {
           </Button>
         </Form>
       </div>
-    </div>}
+      </div>}
 
-      {/* Modal for pending leave application */}
-      {/* <div  */}
+      
       <Modal show={showModal} onHide={() => setShowModal(false)} className="washman-modal">
         <Modal.Header closeButton>
           <Modal.Title>Pending Leave Application</Modal.Title>
@@ -224,7 +223,7 @@ function WashmanLeaveForm() {
           </Button>
         </Modal.Footer>
       </Modal>
-      {/* </div> */}
+      
     </div>
   );
 }

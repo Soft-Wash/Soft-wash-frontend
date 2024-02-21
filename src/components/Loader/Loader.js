@@ -7,16 +7,6 @@ function Loader(){
     return(
         <div className="loader-content">
             <div className="loader">
-            {/* <BallTriangle
-            height={100}
-            width={100}
-            radius={5}
-            color="rgb(33,28,106)"
-            ariaLabel="ball-triangle-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-            /> */}
                 <MutatingDots
                 visible={true}
                 height="100"
