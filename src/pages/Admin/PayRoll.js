@@ -7,17 +7,31 @@ import axios from "axios";
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from "react-router-dom";
 
 
 function PayRoll(){
 const [monthlyPR,setMonthlyPR]=useState([])
 const [prData,setPrData]=useState()
+const [employees,setEmployees]=useState()
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const currentMonthIndex = new Date().getMonth();
+const [amount,setAmount]=useState()
+
+
 
 const getMinthlyPr=()=>{
   axios.get(`${process.env.REACT_APP_BASE_URL}/payroll/payroll/current-month`)
   .then((resp)=>{
     console.log(resp.data)
     setMonthlyPR(resp.data)
+})
+}
+
+const getEmployee=()=>{
+  axios.get(`${process.env.REACT_APP_BASE_URL}/employees/`)
+  .then((resp)=>{
+    setEmployees(resp.data)
 })
 }
 const handleInputs=(e)=>{
@@ -27,10 +41,39 @@ const handleInputs=(e)=>{
 
 console.log(prData)
 
+const CreatePayRoll=()=>{
+  axios.post(`${process.env.REACT_APP_BASE_URL}/payroll/payroll/create`,prData)
+  .then((resp)=>{
+    console.log(resp.data)
+      toast.success("payment succesfull")
+})
+.catch((error)=>{
+  console.log(error)
+  if(error.response.data.code === 400){
+    toast.error(error.response.data.msg)
+  }
+})
+}
 
+const getAmount=()=>{
+  axios.get(`${process.env.REACT_APP_BASE_URL}/payroll/`)
+  .then((resp)=>{
+    console.log(resp.data)
+    const amountPrice = resp.data.map((amount)=> amount.amount)
+    console.log(amountPrice)
+    // const total = amountPrice.reduce((curr,arr)=> curr + arr,0)
+    const total = amountPrice.reduce((acc,curr)=> acc + curr,0);
+    console.log(total)
+    
+    setAmount(total)
+})
+}
 
 useEffect(()=>{
   getMinthlyPr()
+  getEmployee()
+  getAmount()
+  
 },[])
 
 
@@ -48,7 +91,10 @@ useEffect(()=>{
                 <FaClipboardList className="clipboard_card_icon" />
               </div>
               <div className="Card_div_innerd2">
+                <Link to="/payrolltable">
                 <p>Current_Month</p>
+                </Link>
+ 
                 <p>{monthlyPR?.length || 0}</p>
               </div>
             </div>
@@ -58,7 +104,7 @@ useEffect(()=>{
               </div>
               <div className="Card_div_innerd2">
                 <p>Amount</p>
-                <p>0</p>
+                <p>{amount || 0}</p>
               </div>
             </div>
         </div>
@@ -74,14 +120,17 @@ useEffect(()=>{
                     <br />
                     <select
                       type="text"
-                      name="User_id"
+                      name="user_id"
                       className="payroll_details_div_form_innerd1_inpt2"
                       onChange={handleInputs}
                       placeholder="Employee Name"
                     >
                       <option value="" hidden>Select Employee </option>
-                      <option value="annual">Annual</option>
+                      {employees && employees.map((item)=>(
+                   <option value={item?._id}>{item?.fullName}</option>
 
+                      ))}
+   
                     </select>
                   </label>
                   <label htmlFor="" className="leavetype-label">
@@ -94,7 +143,8 @@ useEffect(()=>{
                       onChange={handleInputs}
                       placeholder="Month"
                     >
-                      <option value="sick">Sick</option>
+                      <option value="" hidden>Select Month</option>
+                      <option value={months[currentMonthIndex]}>{months[currentMonthIndex]}</option>
 
                     </select>
                   </label>
@@ -104,7 +154,7 @@ useEffect(()=>{
                     Amount  <br />
                     <input
                       type="text"
-                      name="startDate"
+                      name="amount"
                       className="payroll_details_div_form_innerd1_inpt1"
                       onChange={handleInputs}
                     />
@@ -113,7 +163,7 @@ useEffect(()=>{
               </div>
             </div>
 
-            <button className="submit-button" >
+            <button className="submit-button" onClick={()=>CreatePayRoll()}>
               Sumit
             </button>
           </div>
