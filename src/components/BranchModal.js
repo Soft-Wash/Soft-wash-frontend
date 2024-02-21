@@ -38,7 +38,7 @@ function BranchModal({isOpen,onClose,SaveBranch,getBranch}){
 
   return(
     <div>
-        <Modal show={isOpen} onHide={onClose}>
+        <Modal show={isOpen} onHide={onClose} position="top-center">
           <Modal.Header closeButton>
             <Modal.Title>Select Branch</Modal.Title>
           </Modal.Header>

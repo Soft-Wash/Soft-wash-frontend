@@ -99,7 +99,11 @@ import SupplierOrderReport from "./pages/Supplier/SupplierOrderReport";
 import SupplierNewExpense from "./pages/Supplier/SupplierNewExpense";
 import SupplyOrder from "./pages/Supplier/SupplyOrder";
 import SupplierLog from "./pages/Supplier/SupplierLog"
+
+import PayRoll from "./pages/Admin/PayRoll";
+import PayRollTable from "./pages/Admin/PayRollTable";
 import Loader from "./components/Loader/Loader";
+
 
 
 
@@ -195,6 +199,8 @@ function App() {
         <Route path="/shoporderdetails" element={<ShopOrderDetailsPage/>}/>
         <Route path="/shoporders" element={<ShopOrders/>}/>
         <Route path="/createproduct" element={<CreatProduct/>}/>
+        <Route path="/payroll" element={<PayRoll/>}/>
+        <Route path="/payrolltable" element={<PayRollTable/>}/>
         
 
 
