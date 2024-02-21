@@ -9,7 +9,9 @@ export function TaskContextProvider ({ children }) {
     const [employeetasks, setEmployeetasks] = useState([]);
 
     const getallEmployeetasks = () => {
-        const washmanID = "655e49bad160aea8372bde1d";
+        const washmanID =   "655e49bad160aea8372bde1d";
+      
+        // localStorage.getItem("branch_id");
 
         axios.get(`${process.env.REACT_APP_BASE_URL}/task/employee/${washmanID}/tasks`)
         .then(response => {
@@ -29,7 +31,7 @@ export function TaskContextProvider ({ children }) {
     return (
         <TaskContext.Provider value={{
              employeetasks, 
-             getallEmployeetasks,
+            //  getallEmployeetasks,
              setEmployeetasks,
 
              
