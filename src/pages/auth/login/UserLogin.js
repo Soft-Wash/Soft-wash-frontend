@@ -145,11 +145,11 @@ export default function Login() {
                  Sign In
                   </button>
               </div>
-  
+          
               <center
-                className="for-mobile note pointer"
+                className="NewToSoftWash"
                 onClick={() => navigate("/UserRegister")}>
-               New User?  <span className=" mt-3  fw-bolder">Signup Here</span>
+               New User?  <span className=" mt-3 text-primary fw-bold">Signup Here</span>
               </center>
             </form>
           </div>

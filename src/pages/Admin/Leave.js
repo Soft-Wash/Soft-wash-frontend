@@ -25,7 +25,6 @@ function Leave() {
   const [rejectedReason,setrejectedReason]=useState({
     status:"rejected",
     adminApproval:"rejected"
-
   })
 
   function ToggleTextArea2() {
@@ -183,6 +182,7 @@ function Leave() {
                             <div>
                               <input
                                 type="text"
+                                className="date-container-innerd-inpt1"
                                 value={new Date(
                                   item?.startDate
                                 ).toLocaleDateString("en-GB", {
@@ -205,6 +205,7 @@ function Leave() {
                             <div>
                               <input
                                 type="text"
+                                className="date-container-innerd-inpt2"
                                 value={new Date(
                                   item?.endDate
                                 ).toLocaleDateString("en-GB", {

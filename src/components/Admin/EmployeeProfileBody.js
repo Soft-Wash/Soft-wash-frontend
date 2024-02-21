@@ -17,7 +17,10 @@ function EmployeeProfileBody() {
       .get(`${process.env.REACT_APP_BASE_URL}/employees/${userId}`)
       .then((resp) => {
         setUserData(resp.data)
-      });
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
   }, []);
 
 
@@ -31,7 +34,11 @@ function EmployeeProfileBody() {
         </div>
         <div className="user-profilePic-sec d-flex">
           <div className="user-profilePic">
-            <img src={`${backend}${userData?.avatar}`}/>
+            <img                       src={
+                        userData && userData?.avatar
+                          ? backend+userData?.avatar
+                          : `https://ui-avatars.com/api/?name=${userData?.fullName}&size=128`
+                      }/>
           </div>
           <button  className="user-dp-btn">Change Photo</button>
 

@@ -59,6 +59,9 @@ function AdminSidebar(){
             <NavLink exact to="/workflowtask" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="tasks">WorkFlow Task</CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/payroll" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="tasks">Pay Roll</CDBSidebarMenuItem>
+            </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
     
