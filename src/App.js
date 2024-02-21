@@ -99,8 +99,11 @@ import SupplierOrderReport from "./pages/Supplier/SupplierOrderReport";
 import SupplierNewExpense from "./pages/Supplier/SupplierNewExpense";
 import SupplyOrder from "./pages/Supplier/SupplyOrder";
 import SupplierLog from "./pages/Supplier/SupplierLog"
+
 import PayRoll from "./pages/Admin/PayRoll";
 import PayRollTable from "./pages/Admin/PayRollTable";
+import Loader from "./components/Loader/Loader";
+
 
 
 
@@ -118,6 +121,7 @@ function App() {
   <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage/>} />
+        {/* <Route path="/" element={<Loader/>} /> */}
         <Route path="/address" element={<AddressPage/>} />
         <Route path="/UserLogin" element={<UserLogin/>}/>
         <Route path="/UserRegister" element={<UserRegister/>}/>
@@ -156,7 +160,7 @@ function App() {
 
         {/* WASHMAN ROUTES */}
         <Route path="/washman-profile" element={<WashmanProfilePage1/>}/>
-        <Route path="/washman-orders" element={<WashmanOrdersPage/>}/>
+        <Route path="/washman-tasks" element={<WashmanOrdersPage/>}/>
         <Route path="/washman-dashboard" element={<WashmanDashboardPage/>}/>
         <Route path="/washman-single-order/:_id" element={<WashmanSingleOrderPage/>}/>
         <Route path="/washman-edit-profile" element={<WashmanEditProfilePage/>}/>

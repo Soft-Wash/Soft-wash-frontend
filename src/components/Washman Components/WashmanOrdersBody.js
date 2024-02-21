@@ -3,12 +3,13 @@ import "../../styles/Washman Styles/WashmanOrder.css"
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Loader from "../Loader/Loader";
 
 function WashmanOrdersBody(){
 
 
     const [tasks, setTasks] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
 
@@ -44,12 +45,12 @@ function WashmanOrdersBody(){
         
         if(washmanID){
             fetchTasks();
-          }
-        
-    }, [])
+          }        
+    }, [washmanID])
 
     return(
         <div className="washman-bg">
+            {loading? <Loader /> :  
             <div className="washman-page-content">
                 <div className="washman-header">
                     <h2>WASHMAN ORDERS</h2>
@@ -84,7 +85,8 @@ function WashmanOrdersBody(){
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div>}
+            
         </div>
     )
 }
