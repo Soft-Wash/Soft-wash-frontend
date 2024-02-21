@@ -112,3 +112,14 @@ background-color: rgb(215, 215, 215);
   width: 180px;
   border: 1px solid grey;
 }
+
+.notifi_div{
+  display: flex;
+  justify-content: space-between;
+  padding-right: 20px;
+}
+
+.notifi_icon{
+  font-size: 25px;
+  
+}

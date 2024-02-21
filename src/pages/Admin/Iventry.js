@@ -19,6 +19,7 @@ function Iventry() {
   const status2 = "pending";
   const [dates, setDates] = useState(getDefaultDateRange("monthly"));
   const [ordersChart, setOrdersChart] = useState([]);
+  const [expense,setExpense]=useState()
 
   const ChartOrders = () => {
     const queryParams = new URLSearchParams({
@@ -39,22 +40,6 @@ function Iventry() {
       });
   };
 
-  const MonthlyEarnings = () => {
-    axios
-      .get(
-        `${process.env.REACT_APP_BASE_URL}/order/paymentstatus/completed?payment_status=${status}`
-      )
-      .then((resp) => {
-        console.log(resp.data);
-        setPaymentStatus(resp.data);
-        const sortedOrders = resp.data.map((price) => price.subtotal);
-        const filteredUndefined = sortedOrders.filter(
-          (subtotal) => subtotal !== undefined
-        );
-        const total = filteredUndefined.reduce((acc, curr) => acc + curr, 0);
-        setPaymentStatus(total);
-      });
-  };
 
   const monthBefore = () => {
     axios
@@ -71,7 +56,6 @@ function Iventry() {
 
   const lastMonthSales = () => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/order/month`).then((resp) => {
-      console.log(resp.data)
       const totalSales = resp.data.map((sales) => sales.subtotal);
       const filteredUndefined = totalSales.filter(
         (subtotal) => subtotal !== undefined
@@ -85,7 +69,7 @@ function Iventry() {
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/order/status?status=${status2}`)
       .then((resp) => {
-        console.log(resp.data);
+        // console.log(resp.data);
         setPending(resp.data);
       });
   };
@@ -93,7 +77,20 @@ function Iventry() {
   const TotalGrowth = () => {
     setGrowth(month - monthbefore);
     setGrowthPercentage(((month - monthbefore) / monthbefore) * 100);
+    setPaymentStatus(month-expense)
   };
+
+  const Expenses =()=>{
+    axios
+    .get(`${process.env.REACT_APP_BASE_URL}/expense/`)
+    .then((resp) => {
+      // console.log(resp.data);
+      const totalEx = resp.data.map((amt)=>amt.amount)
+      const total = totalEx.reduce((acc,curr)=> acc + curr,0);
+      console.log(total)
+      setExpense(total);
+    });
+  }
 
   useEffect(() => {
     TotalGrowth();
@@ -102,8 +99,9 @@ function Iventry() {
   useEffect(() => {
     lastMonthSales();
     monthBefore();
-    MonthlyEarnings();
+    // MonthlyEarnings();
     DeclinedOrders();
+    Expenses()
   }, []);
 
   useEffect(() => {
@@ -126,12 +124,6 @@ function Iventry() {
                 <p> Growth</p>
                 <p>{growth || 0}</p>
               </div>
-              <div className="state-percent-divv">
-                <BiCaretUp className="bicart-icon" />
-                <p className="state-percent-divv-p">
-                  {Math.round(growthPercentage * 100) / 100}%
-                </p>
-              </div>
             </div>
             <div className="icon-container mb-3">
               <div className="icon-container-innerd1">
@@ -142,10 +134,6 @@ function Iventry() {
                   <p> Declined Orders</p>
                   <p>{pending?.length > 0 || 0}</p>
                 </Link>
-              </div>
-              <div className="state-percent-divv2">
-                <BiCaretDown className="bicart-icon2" />
-                <p className="state-percent-divv2-p">35.2%</p>
               </div>
             </div>
             <div className="icon-container mb-3">
@@ -158,10 +146,6 @@ function Iventry() {
                   <p>{month || 0}</p>
                 </Link>
               </div>
-              <div className="state-percent-divv2">
-                <BiCaretDown className="bicart-icon2" />
-                <p className="state-percent-divv2-p">35.2%</p>
-              </div>
             </div>
 
             <div className="icon-container mb-3">
@@ -173,10 +157,6 @@ function Iventry() {
                   <p>Monthly Earning</p>
                   <p>{paymentStatus || 0}</p>
                 </Link>
-              </div>
-              <div className="state-percent-divv2">
-                <BiCaretDown className="bicart-icon2" />
-                <p className="state-percent-divv2-p">35.2%</p>
               </div>
             </div>
           </div>

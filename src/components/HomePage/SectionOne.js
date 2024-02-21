@@ -47,7 +47,7 @@ function SectionOne() {
 
   return (
     <div className="sec-1-bg py-4">
-      <ToastContainer position="top-center" />
+      <ToastContainer position="top-center"/>
       <>
 <BranchModal
 isOpen={showModal} 
