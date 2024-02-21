@@ -75,7 +75,7 @@ a {
 
 .modal {
 	/* position: absolute; */
-	top: -12%;
+	top: -13%;
 	left: 37%;
 	right: 0;
 	bottom: 0;
@@ -87,8 +87,8 @@ a {
 
 .modal-container {
 	max-height: 50vh;
+	min-height: 50vh;
 	width: 360px;
-	max-width: 600px;
 	margin-left: 0px;
 	margin-right: 25px;
 	background-color: #fff;

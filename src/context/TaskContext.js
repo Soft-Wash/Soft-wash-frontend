@@ -28,7 +28,9 @@ export function TaskContextProvider ({ children }) {
 
     return (
         <TaskContext.Provider value={{
-             employeetasks, getallEmployeetasks,
+             employeetasks, 
+             getallEmployeetasks,
+             setEmployeetasks,
 
              
              }}>
