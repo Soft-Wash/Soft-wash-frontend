@@ -27,7 +27,7 @@ function WashmanLeaveForm() {
 
 
 
-    const [washmanID, setWashmanID] = useState("")
+    const [washmanID, setWashmanID] = useState("");
     // const branchID = "655deba5ec7b0b6e0f591bf5"
 
     const [showModal, setShowModal] = useState(false);
