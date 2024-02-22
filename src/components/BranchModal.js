@@ -12,19 +12,22 @@ import Loader from "./Loader/Loader";
 
 
 
-function BranchModal({isOpen,onClose,SaveBranch,setLoading}){
+function BranchModal({isOpen,onClose,SaveBranch}){
 
   const userToken = JSON.parse(localStorage.getItem("softwashLoginToken"));
   const [branches, setbranches] = useState();
   const [branch_id, setbranch_id] = useState();
+  const [loading,setLoading]=useState(false)
   const Navigate = useNavigate();
 
   
 
 
   useEffect(() => {
+    setLoading(true)
     axiosInstance.get("/branch/").then((resp) => {
       setbranches(resp.data);
+      setLoading(false)
     }).catch((error)=>{
       console.log(error)
       toast.error(error?.message)
@@ -45,7 +48,7 @@ function BranchModal({isOpen,onClose,SaveBranch,setLoading}){
   return(
     <div>
    <Modal show={isOpen} onHide={onClose} position="top-center">
-          <Modal.Header closeButton>
+    {loading? <Loader/> :    <>       <Modal.Header closeButton>
             <Modal.Title>Select Branch</Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -66,7 +69,8 @@ function BranchModal({isOpen,onClose,SaveBranch,setLoading}){
             <Button variant="primary" onClick={saveBranch}>
               Save Changes
             </Button>
-          </Modal.Footer>
+          </Modal.Footer> </>}
+
         </Modal>
 
     </div>
