@@ -15,6 +15,8 @@ function SelectedCart() {
     const clothQuantities = JSON.parse(clothQuantity);
     const keys = Object.keys(clothQuantities);
     const values = Object.values(clothQuantities);
+    // let sum = 0;
+    // 0 += Number(item.quantity * item.price)
     arrayObj = keys;
     let mainArr = keys.map((key, index) => ({
       id: key,
@@ -28,8 +30,26 @@ function SelectedCart() {
       });
   };
 
+        // Calculate Sub Total
+        const [subTotal, setSubtotal] = useState()
+        const [total, setTotal] = useState()
+        function calcSubTotal(arr){
+            let sub_total = 0;
+            let deliveryFee = 1500
+            arr?.map((item) => {
+                let item_price = parseInt(item.price) * item.quantity
+                sub_total += item_price
+                const total =sub_total + deliveryFee 
+                setTotal(total)
+            })
+            setSubtotal(sub_total)
+        
+        }
+
+
   useEffect(() => {
     getQuantity();
+    calcSubTotal(JSON.parse(localStorage.getItem('softCart')))
   }, []);
 
   return (
@@ -56,8 +76,13 @@ function SelectedCart() {
                         ).toFixed(2)}`}</h5>
                       </div>
                       <p>{`${item.quantity} x ${item.price} / per piece`}</p>
+                     
                     </div>
                   ))}
+                   <div className="d-flex justify-content-between">
+                        <b className="fs-6">Sub Total: </b>
+                        <b className="fs-6">{subTotal}</b>
+                      </div>
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
