@@ -59,11 +59,12 @@ export default function DashInfo() {
   //   },
   // ]);
   const [loading, setLoading] = useState(true);
+  let orderId;
 
   const getOrders = async () => {
     try {
       let resp = await axios.get(`${process.env.REACT_APP_BASE_URL}/order/day`);
-    // console.log(resp)
+    console.log(resp.data)
     setDayOrderCount(resp.data.length);
     setDayOrders(resp.data);
     setLoading(false)
@@ -87,13 +88,23 @@ export default function DashInfo() {
       );
       setWashmen(resp.data);
       console.log(resp.data)
-      // this.setAllWashmen({
-      //   allWashmen: resp.data
-      // }, () => {
-      //   console.log(this.state.allWashmen)
-      // })
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleSubmit = async (id, orderId) => {
+    const body = {
+      order_id: orderId, 
+      employee_id: id
+    }
+    console.log(body)
+    
+    try {
+      const resp = await axios.post(`${process.env.REACT_APP_BASE_URL}/task/create`, body)
+      console.log(resp)
+    } catch (error) {
+      console.log(error)
     }
   };
 
@@ -105,7 +116,7 @@ export default function DashInfo() {
 
   return (
     // <>
-    <div className="w-100 bg-secondary-subtle px-3">
+    <div className="w-100 bg-secondary-subtle px-3" style={{height: "92dvh"}}>
       <h3 className="text-black fs-5 fw-semibold w-100  my-3">Welcome</h3>
 
       <Row className="px-3 mb-3 gap-3">
@@ -200,7 +211,7 @@ export default function DashInfo() {
 
         <Col className="border bg-white rounded-4 " lg={5}></Col>
 
-        <Col className="border bg-white rounded-4 overflow-y-scroll">
+        <Col className="border bg-white rounded-4 overflow-y-scroll" style={{height: "63dvh"}}>
           <Row className=" pt-2 pb-2 fw-bold justify-content-between">
             <Col
               lg={11}
@@ -217,11 +228,17 @@ export default function DashInfo() {
           {
             washmen &&
             washmen.length > 0 ? (
-              washmen.map((washman, index) => (
+              washmen.map((washman) => (
                 <WashmanProp
-                  name={washman.fullName}
-                  status={washman.task}
-                  key={index}
+                  name={washman?.fullName}
+                  status={washman?.task}
+                  id={washman?._id}
+                  key={washman?._id}
+                  // onClick={() => assignTask(washman?._id)}
+                  handleClick = {order => {
+                    let orderId = order;
+                    handleSubmit(washman?._id, orderId)
+                  }}
                 />
               ))
             ) : (

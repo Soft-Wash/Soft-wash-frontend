@@ -82,6 +82,11 @@ export default function OrderReceipt() {
     })
   }
 
+  const handlePrint = () => {
+    // alert("Your trying to print")
+    window.print();
+  };
+
   useEffect(() => {
 
     getOrderDetails();
@@ -209,8 +214,8 @@ export default function OrderReceipt() {
 
       <Row className="mb-5"></Row>
 
-      <Container className="mt-5 pt-4 d-flex justify-content-center w-100 text-center my-5">
-        <Col lg={4} md={5} sm={5}>
+      <Container className="mt-5 pt-4 d-flex justify-content-center w-75 text-center my-5 gap-3">
+        <Col lg={2} md={5} sm={4} className="d-print-none">
           <Link to="/">
             <Button
               variant="outline-primary"
@@ -220,7 +225,18 @@ export default function OrderReceipt() {
             </Button>
           </Link>
         </Col>
-        <Col lg={4} md={5} sm={5}>
+        <Col lg={2} md={5} sm={4} className="d-print-none">
+          <Link to="#print">
+            <Button
+              variant="outline-primary"
+              className="me-auto w-100 text-center "
+              onClick={() => handlePrint()}
+            >
+              Print Receipt
+            </Button>
+          </Link>
+        </Col>
+        <Col lg={2} md={5} sm={4} className="d-print-none">
           <Button
             variant="primary"
             className="me-auto w-75 text-center"
