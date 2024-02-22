@@ -10,36 +10,42 @@ import UserSidebarTablet from "../../components/UserSidebarTablet";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "../../components/Loader/Loader";
 
 function UserDashboard() {
   const [orders, setOrders] = useState();
   const [paymentLength, setpaymentLength] = useState();
+  const [loading,setLoading]=useState(true)
 
   const GetUserOrders = () => {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
+
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/order/${userId._id}/allorders`)
       .then((resp) => {
         setOrders(resp.data);
+        setLoading(false)
       })
       .catch((error) => {
         toast.error(error.message);
+        setLoading(false)
       });
   };
 
   const getPayment = () => {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
-
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/payments/all/userpayments`, {
         params: { id: userId._id },
       })
       .then((resp) => {
         console.log(resp.data);
+        setLoading(false)
         setpaymentLength(resp.data);
       })
       .catch((error) => {
         toast.error(error.message);
+        setLoading(false)
       });;
   };
 
@@ -58,7 +64,7 @@ function UserDashboard() {
         <div className="user-sidebar-div">
           <Sidebar />
         </div>
-        <div className="userdash-container">
+        {loading? <Loader/> :  <div className="userdash-container">
           <h3>Dashboard</h3>
           <hr />
           <div className="userdash_grid_container">
@@ -81,7 +87,8 @@ function UserDashboard() {
               </div>
             </div>
           </div>
-        </div>
+        </div>}
+
       </div>
     </div>
   );

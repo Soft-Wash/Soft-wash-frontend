@@ -53,6 +53,7 @@ export default function Orders() {
       )
       .then((resp) => {
         setOrders(resp.data);
+        console.log(resp.data)
       })
       .catch((error) => {
         console.error("Error fetching placed orders:", error);
