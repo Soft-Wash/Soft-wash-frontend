@@ -103,6 +103,7 @@ import SupplierLog from "./pages/Supplier/SupplierLog"
 import PayRoll from "./pages/Admin/PayRoll";
 import PayRollTable from "./pages/Admin/PayRollTable";
 import Loader from "./components/Loader/Loader";
+import Review from "./pages/Admin/Reviews";
 
 
 
@@ -201,6 +202,7 @@ function App() {
         <Route path="/createproduct" element={<CreatProduct/>}/>
         <Route path="/payroll" element={<PayRoll/>}/>
         <Route path="/payrolltable" element={<PayRollTable/>}/>
+        <Route path="/reviews" element={<Review/>}/>
         
 
 

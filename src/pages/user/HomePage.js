@@ -6,19 +6,25 @@ import SectionFour from "../../components/HomePage/SectionFour";
 import SectionFive from "../../components/HomePage/SectionFive";
 import SectionSeven from "../../components/HomePage/SectionSeven";
 import Footer from "../../common/Footer";
+import Loader from "../../components/Loader/Loader";
+import { useState } from "react";
 
 function Home() {
+const [loading,setLoading] = useState(false)
+
   return (
     <div>
+
       <Navigation />
-      <SectionOne />
+      <SectionOne  
+       />
       <SectionTwo />
       <SectionThree />
       <SectionFour />
       <SectionFive />
       <SectionSeven />
       <Footer />
-      {/* <SectionSix /> */}
+
     </div>
   );
 }

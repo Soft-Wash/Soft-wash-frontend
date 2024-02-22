@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from "react-time-picker";
 import { Button, Container } from "react-bootstrap";
 import { useEffect } from "react";
-import Loader from "../common/Loader"
+import Loader from "../components/Loader/Loader"
 
 function Calender() {
   const [startDate, setStartDate] = useState(() => {

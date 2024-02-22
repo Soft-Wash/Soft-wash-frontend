@@ -7,9 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { useState,useContext } from 'react';
 import{handleLogin} from '../../../services/Login'
 import { variableManager } from '../../../context/VariablesContext';
-// import{Loader} from "../../../common/Loader"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from '../../../components/Loader/Loader';
 
 export default function Login() {
     const navigate = useNavigate();
@@ -70,7 +70,7 @@ export default function Login() {
     return (
       <>
       <ToastContainer position="top-center" />
-      <div className="signup-container login-container">
+      {loading? <Loader/> :       <div className="signup-container login-container">
         <div className="form-section">
           <div className="content">
             <center className="text-center mb-5 p-2">
@@ -173,8 +173,8 @@ export default function Login() {
           </div>
             <center className="copyright">Copyright © 2023</center>
         </div>
-        {/* <Loader color="primary" size="lg" show={loading} />  */}
-      </div>
+      </div>}
+
       </>
     );
   }
