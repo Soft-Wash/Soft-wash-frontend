@@ -9,12 +9,16 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { axiosInstance } from "../../services/AxiosInstance";
+import Loader from '../../components/Loader/Loader'; 
+
 
 export default function OrderReceipt() {
   const options = { day: "numeric", month: "long" };
   const [userData, setUserData] = useState();
   const [paymentStatus, setPaymentStatus] = useState();
   const [pickUpDateValue, setpickUpDate] = useState();
+  const [loading,setLoading] = useState(false);
+  
   const { orderId } = useParams();
   const navigate = useNavigate();
   const [GetPaymentStatus,setGetPaymentStatus]=useState()
@@ -26,11 +30,11 @@ export default function OrderReceipt() {
  
 
   function getPaymentStatus() {
+  
     const ref = JSON.parse(localStorage.getItem("payment_reference"));
     axiosInstance
       .get(`/payments/getstatus?reference=${ref}`)
       .then((resp) => {
-        // console.log(resp.data)
         setPaymentStatus(resp.data);
       })
       .catch((error) => {
@@ -41,12 +45,13 @@ export default function OrderReceipt() {
   console.log(paymentStatus)
 
   function getOrderDetails() {
+    setLoading(true)
 
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/order`)
       .then((resp) => {
         setUserData(resp.data);
-        console.log(resp.data)
+        setLoading(false)
         const pickUpDate = resp.data.schedule_date;
         const latestDate = new Date(pickUpDate);
         const options = { year: "numeric", month: "long", day: "numeric" };
@@ -72,9 +77,11 @@ export default function OrderReceipt() {
   }
 
   const updatePaymentStatus=()=>{
+    setLoading(true)
     axios.put(`${process.env.REACT_APP_BASE_URL}/order/${userData?._id}/update`,{payment_status:paymentStatus?.data?.status})
     .then((resp)=>{
       console.log(resp.data)
+      setLoading(false)
       setGetPaymentStatus(resp.data)
     })
     .catch((error)=>{
@@ -115,11 +122,12 @@ export default function OrderReceipt() {
 
   return (
     <>
-      <Banner />
+    {loading?<Loader/>:<>      <Banner />
       <ThankYou />
       <div className="center_div">
         <div className="mx-2 mb-5 shadow rounded-5 p-4 px-4 col col-lg-5 col-xs-8">
-          {paymentStatus?.data?.status === "success" ? (
+          {
+          paymentStatus?.data?.status === "success" ? (
             <div>
               <div className="d-flex justify-content-between gap-3 mb-2">
                 <div lg={3}>
@@ -165,7 +173,17 @@ export default function OrderReceipt() {
           ) : paymentStatus?.data?.status === "failed" ? (
             <p className="pendingpayment-ptag">
               Payment Failed. Please try again or choose another payment method.{" "}
-              <br /> <Link to={`/paymentpage/${userData?._id}`}>back</Link>
+              <br /> <Link to={`/paymentpage/${userData?._id}`} className="btn-primary"> 
+              <Col lg={5} md={5} sm={4} className="d-print-none mt-1 mx-auto">
+              <Button
+              variant="outline-primary"
+              className="me-auto w-75 text-center"
+              onClick={Tonavigate}
+              >
+                Try Again
+              </Button>
+            </Col>
+          </Link>
             </p>
           ) : paymentStatus?.data?.status === "abandoned" ? (
             <p className="pendingpayment-ptag">
@@ -205,9 +223,16 @@ export default function OrderReceipt() {
                   <p>₦{userData?.subtotal}</p>
                 </div>
               </div>
+              <div className="d-flex justify-content-between gap-3 ">
+                <div lg={3}>
+                  <h5>payment_status</h5>
+                </div>
+                <div lg={3}>
+                  <p>{userData?.payment_status}</p>
+                </div>
+              </div>
             </div>
-          ) : (
-            <p className="pendingpayment-ptag">Loading...</p>
+          ) : (<p className="text-center">Loading... </p>
           )}
         </div>
       </div>
@@ -245,7 +270,8 @@ export default function OrderReceipt() {
             Check order update
           </Button>
         </Col>
-      </Container>
+      </Container></>}
+
     </>
   );
 }
