@@ -27,11 +27,8 @@ function UserProfileBody() {
     if(file){
       const imageUrl = URL.createObjectURL(file)
       setRealImage(file)
-      setinputImage(imageUrl)
-      
-
+      setinputImage(imageUrl)   
     }
-
   }
 
   return (
