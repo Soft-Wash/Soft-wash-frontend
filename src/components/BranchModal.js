@@ -8,21 +8,27 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "./Loader/Loader";
 
 
 
-function BranchModal({isOpen,onClose,SaveBranch,getBranch}){
+function BranchModal({isOpen,onClose,SaveBranch,setLoading}){
 
   const userToken = JSON.parse(localStorage.getItem("softwashLoginToken"));
   const [branches, setbranches] = useState();
   const [branch_id, setbranch_id] = useState();
   const Navigate = useNavigate();
 
+  
+
 
   useEffect(() => {
     axiosInstance.get("/branch/").then((resp) => {
       setbranches(resp.data);
-    });
+    }).catch((error)=>{
+      console.log(error)
+      toast.error(error?.message)
+    })
   }, []);
 
   const saveBranch = () => {
@@ -38,7 +44,7 @@ function BranchModal({isOpen,onClose,SaveBranch,getBranch}){
 
   return(
     <div>
-        <Modal show={isOpen} onHide={onClose} position="top-center">
+   <Modal show={isOpen} onHide={onClose} position="top-center">
           <Modal.Header closeButton>
             <Modal.Title>Select Branch</Modal.Title>
           </Modal.Header>
@@ -62,6 +68,7 @@ function BranchModal({isOpen,onClose,SaveBranch,getBranch}){
             </Button>
           </Modal.Footer>
         </Modal>
+
     </div>
   )
 }

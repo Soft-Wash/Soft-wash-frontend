@@ -35,6 +35,8 @@ function SingleProduct() {
   const [clothQuantity, setclothQuantity] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
   const [wishlistItems, setWishlistItems] = useState([]);
+  const [reviewData,setReviewData]=useState([
+  ])
   const backend = "http://localhost:8003/uploads/"
 
   const id = productId.productId;
@@ -150,6 +152,33 @@ function SingleProduct() {
     );
     return x.includes(true);
   };
+
+  const HandleReview=(e)=>{
+    const value =e.target.value 
+    setReviewData({ ...reviewData, [e.target.name]:value})
+      }
+    
+      console.log(reviewData)
+    
+      const createReview=()=>{
+        const orderId = JSON.parse(localStorage.getItem("OrderDetailsId"));
+        const user_id = JSON.parse(localStorage.getItem("softwashLoginUser"))
+        const ReviewDetails = {
+          user_id:user_id._id,
+          order_id:orderId,
+          name:reviewData?.name,
+          message:reviewData.message
+        }
+    
+    axios.post(`${process.env.REACT_APP_BASE_URL}/review/review/create`,ReviewDetails)
+    .then((resp)=>{
+      toast.success('review created')
+    })
+    .catch((error)=>{
+      toast.error(error.message)
+      console.log(error.message)
+    })
+      }
 
   return (
     <div>
@@ -290,7 +319,9 @@ function SingleProduct() {
                 <input
                   type="text"
                   className="review-inpt"
+                  name="name"
                   placeholder="Enter Your Name"
+                  onChange={HandleReview}
                 />
               </label>
               <label className="label01" htmlFor="">
@@ -299,30 +330,25 @@ function SingleProduct() {
                   type="text"
                   className="review-inpt"
                   placeholder="Email"
+                  onChange={HandleReview}
+                  name="email"
                 />
               </label>
-              <p className="mt-3">Rating</p>
-              <p></p>
-              <label className="label01" htmlFor="">
-                Review <br />
-                <input
-                  type="text"
-                  className="review-inpt"
-                  placeholder="Give your review a title"
-                />
-              </label>
+
               <label className="label01" htmlFor="">
                 Body of review <br />
                 <textarea
-                  name=""
+                  name="message"
                   id=""
                   cols="30"
                   rows="10"
                   className="review-textarea"
+                  onChange={HandleReview}
+
                 ></textarea>
               </label>
               <div className="review-btn-div">
-                <Button variant="secondary" className="review-btn bg-info">
+                <Button variant="secondary" className="review-btn bg-info" onClick={()=>createReview()}>
                   Submit Review
                 </Button>{" "}
               </div>

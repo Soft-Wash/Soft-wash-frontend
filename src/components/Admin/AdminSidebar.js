@@ -60,7 +60,10 @@ function AdminSidebar(){
               <CDBSidebarMenuItem icon="tasks">WorkFlow Task</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/payroll" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="tasks">Pay Roll</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="file-invoice-dollar">Pay Roll</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/reviews" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="star">Reviews</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
