@@ -5,13 +5,8 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import image1 from "../../assets/HomePage/images/hero-img.png";
 import "../../styles/HomePage.css";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Modal from "react-bootstrap/Modal";
-import axios from "axios";
-import { axiosInstance } from "../../services/AxiosInstance";
-import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BranchModal from "../BranchModal";
@@ -53,6 +48,7 @@ function SectionOne() {
 isOpen={showModal} 
 onClose={handleClose}
 SaveBranch={handleSaveBranch} 
+
 />
       </>
       <Container className=" container01 ">

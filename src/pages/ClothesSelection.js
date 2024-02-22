@@ -4,18 +4,15 @@ import BookingBanner from '../components/BookingBanner'
 import ClothesSelectCart from '../components/ClothesSelectionPage/ClothesSelectCart'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import  Loader  from '../common/Loader';
+
 import { useState } from 'react';
 
 function ClothesSelection() {
   const [isLoading, setIsLoading] = useState(true);
 
-  // const handleLoadingChange = (loadingStatus) => {
-  //   setIsLoading(loadingStatus);
-  // };
+
   return (
     <div className='container position_re'>
-      {/* {isLoading &&  <Loader />} */}
 
         <BookingBanner/>
         <ClothesSelectCart/>
