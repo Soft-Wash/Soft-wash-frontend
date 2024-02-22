@@ -90,6 +90,42 @@
   font-weight: bold;
 }
 
+.review_div{
+  margin-top: 50px;
+}
+
+
+.order_reviewcard{
+  height: 100px;
+  border-radius: 0;
+  display: flex;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+
+.order_container{
+  min-height: 450px;
+  padding-bottom: 10px;
+  border: 1px solid rgb(220, 220, 220);
+  border-top: none;
+  width: 80%;
+}
+
+.order_review_inpt{
+  width: 700px;
+  padding: 5px;
+  border: 1px solid rgb(220, 220, 220);
+}
+
+
+.order_review_textarea{
+  width: 700px;
+  border: 1px solid rgb(220, 220, 220);
+}
+
 
 
 
@@ -138,6 +174,7 @@
   .progress-check {
     font-size: 20px !important;
   }
+
 }
 
 @media(max-width: 427px){
@@ -168,6 +205,7 @@
   .order-field p {
     font-size: 14px;
   }
+
 }
 
 @media(max-width: 322px){
@@ -184,5 +222,13 @@
   }
   .status-description {
     font-size: 6px;
+  }
+
+  .order_review_inpt{
+    width: 500px;
+  }
+
+  .order_review_textarea{
+    width: 500px;
   }
 }
