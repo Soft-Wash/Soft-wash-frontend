@@ -32,7 +32,7 @@ function SupNotification() {
             {notificationCount > 0 && <span className="notification-count">{notificationCount}</span>}
 
             {showModal && (
-                <div className="modal" onClick={handleCloseModal}>
+                <div className="modal_container" onClick={handleCloseModal}>
                     <article className="modal-container" onClick={(e) => e.stopPropagation()}>
                         <header className="modal-container-header">
                             <h3 className="modal-container-title">
