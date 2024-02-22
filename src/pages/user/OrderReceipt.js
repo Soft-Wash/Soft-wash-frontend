@@ -236,7 +236,7 @@ export default function OrderReceipt() {
             </Button>
           </Link>
         </Col>
-        <Col lg={2} md={5} sm={4} className="d-print-none">
+        <Col lg={3} md={5} sm={4} className="d-print-none">
           <Button
             variant="primary"
             className="me-auto w-75 text-center"
