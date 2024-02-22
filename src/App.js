@@ -120,8 +120,8 @@ function App() {
 <TaskContextProvider>
   <BrowserRouter>
       <Routes>
-        {/* <Route path="/" element={<HomePage/>} /> */}
-        <Route path="/" element={<Loader/>} />
+        <Route path="/" element={<HomePage/>} />
+        {/* <Route path="/" element={<Loader/>} /> */}
         <Route path="/address" element={<AddressPage/>} />
         <Route path="/UserLogin" element={<UserLogin/>}/>
         <Route path="/UserRegister" element={<UserRegister/>}/>
