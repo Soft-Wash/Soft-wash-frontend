@@ -17,6 +17,7 @@ import axios from 'axios';
 import { axiosInstance } from "../../services/AxiosInstance";
 import SupDashChart from "../../components/SupervisorComponents/SupDashChart";
 import SupNotification from "../../components/SupervisorComponents/SupNotification";
+import Loader from "../../components/Loader/Loader"
 
 function SupervisorDash() {
 
@@ -28,8 +29,10 @@ function SupervisorDash() {
   const [expense, setExpense] = useState();
   const [totalexpense, setTotalexpense] = useState();
   const [totalrevenue, setTotalrevenue] = useState();
+  const [loading, setLoading] = useState(false);
 
     const getTimeOfDay = () => {
+      // setLoading(true);
         const currentHour = moment().hour();
     
         if (currentHour >= 5 && currentHour < 12) {
@@ -49,15 +52,19 @@ function SupervisorDash() {
 
     const targetBranchId = '655debc4ec7b0b6e0f591bf7'; 
     useEffect(() => {
+      setLoading(true);
       axiosInstance.get("/order/").then((resp) => {
         const filteredOrders = resp.data.filter(item => item?.branch_id?._id === targetBranchId);
         setOrders(filteredOrders);
+        setLoading(false);
       });
 
       const fetchEmployees = async () => {
+        // setLoading(true);
         try {
           const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/employees?branchId=${targetBranchId}`);
           setEmployees(response.data);
+          // setLoading(false);
         } catch (error) {
           console.error('Error fetching employees:', error);
         }
@@ -66,6 +73,7 @@ function SupervisorDash() {
       // GET ALL TRANSACTIONS
 
       const fetchTransactions = async () => {
+        // setLoading(true);
         try {
           const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/transactions`);
           
@@ -90,6 +98,7 @@ function SupervisorDash() {
       // GET ALL EXPENSE
 
       const fetchExpense = async () => {
+        // setLoading(true);
         try {
           const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/expense`);
       
@@ -116,6 +125,7 @@ function SupervisorDash() {
   
   
       if (targetBranchId) {
+        // setLoading(true);
         fetchEmployees();
         fetchTransactions();
         fetchExpense()
@@ -166,6 +176,7 @@ function SupervisorDash() {
         <div className="d-flex">
             {/* <AdminSidebar/> */}
             <SupervisorSideBar/>
+            {loading ? <Loader/>: 
             <div className="supervisor-container">
               <div>
                 <div className="NotificationPanel">
@@ -335,8 +346,8 @@ function SupervisorDash() {
                         <SupervisorTeam/>
                     </div>
                 </section3>
-                
-            </div>
+
+            </div>}
         </div>
     </div>
   )

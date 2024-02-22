@@ -4,6 +4,7 @@ import {useEffect,useState} from "react"
 import {Link} from "react-router-dom"
 import axios from "axios";
 import SupervisorSideBar from "../../components/SupervisorComponents/SupervisorSideBar";
+import Loader from "../../components/Loader/Loader"
 
 function SupTaskTable(){
 
@@ -11,10 +12,12 @@ function SupTaskTable(){
   const [selectedOption, setSelectedOption] = useState("pending");
   const [statusSelect, setStatusSelect] = useState();
   const [statusData, setStatusData] = useState();
+  const [loading, setLoading] = useState();
 
 
   const handleSelectChange = (e) => {
     if (e.target.name.startsWith("statusOrder")) {
+      
       setStatusSelect(e.target.value);
     } else {
       setSelectedOption(e.target.value);
@@ -26,7 +29,9 @@ function SupTaskTable(){
   }, [statusSelect]);
 
   const getOrderStatus = () => {
+    // setLoading(true);
     axios.get(`${process.env.REACT_APP_BASE_URL}/task/status?status=${statusSelect}`).then((resp) => {
+      setLoading(false)
       console.log(resp.data);
       setStatusData(resp.data);
     });
@@ -49,6 +54,7 @@ function SupTaskTable(){
     <div>
       <div className="d-flex">
         <SupervisorSideBar/>
+        {loading ? <Loader/> :
         <div className="tasktable-div">
           <h4 className="mb-4">Task Table</h4>
           <hr className="dashboard-line mb-5" />
@@ -127,7 +133,7 @@ function SupTaskTable(){
               )}
             </tbody>
           </table>
-        </div>
+        </div>}
       </div>
     </div>
   )

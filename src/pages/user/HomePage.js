@@ -12,7 +12,7 @@ function Home() {
     <div>
       <Navigation />
       <SectionOne />
-      <SectionTwo />
+      {/* <SectionTwo /> */}
       <SectionThree />
       <SectionFour />
       <SectionFive />
