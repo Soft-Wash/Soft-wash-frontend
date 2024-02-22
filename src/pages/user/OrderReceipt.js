@@ -22,11 +22,17 @@ export default function OrderReceipt() {
   const { orderId } = useParams();
   const navigate = useNavigate();
   const [GetPaymentStatus,setGetPaymentStatus]=useState()
+  const [newpaymentType,setNewpaymentType]=useState()
   let intervalId;
 
-  const paymentWithCard = JSON.parse(localStorage.getItem("paymentType"));
-  const paymentType = Object.values(paymentWithCard);
-  const newpaymentType = paymentType.join("");
+  useEffect(()=>{
+    const paymentWithCard = JSON.parse(localStorage.getItem("paymentType"));
+    const paymentType = Object.values(paymentWithCard);
+   setNewpaymentType(paymentType.join(""));
+  },[])
+
+  console.log(newpaymentType)
+
  
 
   function getPaymentStatus() {
@@ -42,7 +48,6 @@ export default function OrderReceipt() {
       });
   }
 
-  console.log(paymentStatus)
 
   function getOrderDetails() {
     setLoading(true)
@@ -106,9 +111,9 @@ export default function OrderReceipt() {
       console.log('else')
     }
 
-
-    // Return cleanup function
-    return () => clearInterval(intervalId);
+if(paymentStatus?.data?.status === "success"){
+  return () => clearInterval(intervalId);
+}
   }, [newpaymentType]); // Include newpaymentType in the dependency array
 
 
@@ -122,7 +127,7 @@ export default function OrderReceipt() {
 
   return (
     <>
-    {loading?<Loader/>:<>      <Banner />
+    <>      <Banner />
       <ThankYou />
       <div className="center_div">
         <div className="mx-2 mb-5 shadow rounded-5 p-4 px-4 col col-lg-5 col-xs-8">
@@ -270,7 +275,7 @@ export default function OrderReceipt() {
             Check order update
           </Button>
         </Col>
-      </Container></>}
+      </Container></>
 
     </>
   );
