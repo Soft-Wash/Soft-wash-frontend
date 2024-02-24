@@ -91,6 +91,7 @@ import WashmanProfilePage1 from "./pages/Washman Pages/WashmanProfilePage1";
 import FrontdeskAssignTask from "./pages/FrontDesk/AssignTask";
 import CreatProduct from "./pages/Admin/CreateProduct"
 import { TaskContext } from "./context/TaskContext";
+import SupNotificationTaskTable from "./components/SupervisorComponents/SupNotificationTaskTable";
 
 
 import SupplierDash from "./pages/Supplier/SupplierDash";
@@ -225,6 +226,7 @@ function App() {
         <Route path="/suptaskworkflow" element={<SupTaskWorkflow/>}/>
         <Route path="/SupCreateTask" element={<SupCreateTask/>}/>
         <Route path="/SupTaskTable" element={<SupTaskTable/>}/>
+        <Route path="/SupNotificationTasktable" element={<SupNotificationTaskTable/>}/>
         <Route path="/SupSingleTask/:_id" element ={<SupSingleTask/>}/>
        
 

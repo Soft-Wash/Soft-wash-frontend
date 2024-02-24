@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "./Loader/Loader";
+import "../styles/BranchModal.css";
 
 
 
@@ -47,7 +48,7 @@ function BranchModal({isOpen,onClose,SaveBranch}){
 
   return(
     <div>
-   <Modal show={isOpen} onHide={onClose} position="top-center">
+   <Modal show={isOpen} onHide={onClose} position="top-center" className="ModContainer">
     {loading? <Loader/> :    <>       <Modal.Header closeButton>
             <Modal.Title>Select Branch</Modal.Title>
           </Modal.Header>

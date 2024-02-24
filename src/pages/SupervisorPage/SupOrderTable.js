@@ -4,32 +4,42 @@ import "../../styles/SupervisorStyles/Supordertable.css";
 import { axiosInstance } from "../../services/AxiosInstance";
 import { useState } from "react";
 import { Link } from "react-router-dom"
+import Loader from "../../components/Loader/Loader"
 
 function SupOrderTable() {
   const [orders, setOrders] = useState();
   const [selectedOption, setSelectedOption] = useState("All Orders");
   const [statusSelect, setStatusSelect] = useState();
   const [statusData, setStatusData] = useState();
+  const [loading, setLoading] = useState();
 
 
 
   const fetchData = () => {
     if (selectedOption === "All Orders") {
+      setLoading(true)
       axiosInstance.get("/order").then((resp) => {
         setOrders(resp.data);
+        setLoading(false);
       });
     } else if(selectedOption==="Daily Orders"){
+      setLoading(true)
       axiosInstance.get("/order/day").then((resp) => {
         setOrders(resp.data);
+        setLoading(false);
       });
     } else if(selectedOption==="Weekly Orders"){
+      setLoading(true)
       axiosInstance.get("/order/week").then((resp) => {
         setOrders(resp.data);
+        setLoading(false);
         
       });
     } else if(selectedOption==="Monthly Orders"){
+      setLoading(true)
       axiosInstance.get("/order/month").then((resp) => {
         setOrders(resp.data);
+        setLoading(false);
       });
     }
   };
@@ -72,6 +82,7 @@ function SupOrderTable() {
     <div>
       <div className="d-flex">
         <SupervisorSideBar />
+        {loading ? <Loader/> :
         <div className="ordertable-div">
           <div>
             <select name="" className="select-dropdown" id="" onChange={handleSelectChange}>
@@ -126,7 +137,7 @@ function SupOrderTable() {
                 ))}
             </tbody>
           </table>
-        </div>
+        </div>}
       </div>
     </div>
   );
