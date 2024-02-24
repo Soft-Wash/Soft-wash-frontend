@@ -160,8 +160,7 @@ function SupervisorDash() {
           (employee) =>
             employee.role.name.toLowerCase() === roleName.toLowerCase()
         );
-        const roleIds = employeesWithRole.map((employee) => employee.role._id);
-        return roleIds;
+        return employeesWithRole.map((employee) => employee.role._id);
       } else {
         return [];
       }
@@ -170,6 +169,7 @@ function SupervisorDash() {
     const FrontDesk = getEmployeesId("frontdesk");
     const washman = getEmployeesId("washman");
     
+    const totalEmployees = FrontDesk.length + washman.length; 
     
   return (
     <div>
@@ -201,8 +201,8 @@ function SupervisorDash() {
                       <div className="AllUsers sup-Card washman-grey">
                           <FaRegUser className="supervisor-dashboard-icons "/>
                           <div>
-                              <h5>All Users</h5>
-                              <h5> {Employees?.length}</h5>
+                              <h5>Employees</h5>
+                              <h5> {totalEmployees}</h5>
                           </div>
                       </div>
                     </div>
