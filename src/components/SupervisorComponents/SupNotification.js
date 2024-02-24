@@ -65,16 +65,17 @@ function SupNotification() {
                 {employeetasks.length > 0 ? (
                     <ul>
                         {employeetasks.map((task, index) => (
-                            <li key={index} onClick={() => handleTaskClick(index, task._id)}>
+                            <li key={index}>
                                 <h2>{task.taskType}</h2>
                                 <p>Status: {task.status}</p>
                                 <p> Start Date: {task.startDate}</p>
                                 <p>End Date: {task.endDate}</p>
+                                <p onClick={() => handleTaskClick(index, task._id)}>View Details</p>
                             </li>
                         ))}
                     </ul>
                 ) : (
-                    <p>Empty !</p>
+                    <p>Empty</p>
                 )}
             </section>
         </article>

@@ -1,0 +1,49 @@
+.review_content{
+  margin: 0;
+margin-right: 0;
+  width: 90%;
+  height: 100vh;
+  overflow: scroll;
+  background-color: rgb(240, 240, 240);
+  padding: 20px;
+}
+
+.review_hr{
+  width: 100%;
+  border-bottom:1px solid grey ;
+}
+
+
+.review_table{
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 13px;
+  min-width: 500px;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 10px 2px gainsboro;
+  margin-top: 80px;
+}
+.review_table thead tr{
+  width: 100%;
+  text-align: left;
+  font-weight: bold;
+  background-color: rgb(13,202,240);
+  color: white;
+}
+
+.review_table th,
+.review_table td{
+  padding: 20px 15px;
+  border-right: 1px solid gray;
+}
+.review_table tbody tr{
+  border-bottom: 1px solid grey;
+
+}
+.review_table tbody tr:nth-of-type(even){
+  background-color: rgb(230, 230, 230);
+}
+.review_table tbody tr:last-of-type{
+  border-bottom: 3px solid rgb(13,202,240);
+}

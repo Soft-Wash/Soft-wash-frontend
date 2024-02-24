@@ -88,6 +88,7 @@ import ShopReciept from "./pages/MarketPlace/ShopReciept"
 import ShopOrderDetailsPage from "./pages/ShopOrderDetailsPage";
 import ShopOrders from "./pages/user/ShopOrders";
 import WashmanProfilePage1 from "./pages/Washman Pages/WashmanProfilePage1";
+import FrontdeskAssignTask from "./pages/FrontDesk/AssignTask";
 import CreatProduct from "./pages/Admin/CreateProduct"
 import { TaskContext } from "./context/TaskContext";
 import SupNotificationTaskTable from "./components/SupervisorComponents/SupNotificationTaskTable";
@@ -104,6 +105,7 @@ import SupplierLog from "./pages/Supplier/SupplierLog"
 import PayRoll from "./pages/Admin/PayRoll";
 import PayRollTable from "./pages/Admin/PayRollTable";
 import Loader from "./components/Loader/Loader";
+import Review from "./pages/Admin/Reviews";
 
 
 
@@ -157,6 +159,9 @@ function App() {
         {/* Front desk */}
           <Route path="/frontdesk/dash" element={<Dashboard/>} />
           <Route path="/userdashboard" element={<UserDashboard/>} />
+          <Route path="/frontdesk/assign-task" element={<FrontdeskAssignTask/>} />
+          <Route path="/frontdesk/inventory"  />
+          <Route path="/frontdesk/reviews"  />
          
 
         {/* WASHMAN ROUTES */}
@@ -202,6 +207,7 @@ function App() {
         <Route path="/createproduct" element={<CreatProduct/>}/>
         <Route path="/payroll" element={<PayRoll/>}/>
         <Route path="/payrolltable" element={<PayRollTable/>}/>
+        <Route path="/reviews" element={<Review/>}/>
         
 
 

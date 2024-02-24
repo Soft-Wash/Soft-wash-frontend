@@ -1,19 +1,14 @@
 import { Container } from "react-bootstrap";
 import React, { useEffect } from "react";
-import Button from "react-bootstrap/Button";
 import Accordion from "react-bootstrap/Accordion";
-import Native from "../../assets/images/Native.png";
-import ClothesSelectCounter from "./ClothesSelectCounter";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import ClothesSelectcart from "../../styles/ClothesSelectcart.css";
 import { axiosInstance } from "../../services/AxiosInstance";
 import { useState } from "react";
 import { variableManager } from "../../context/VariablesContext";
 import ClothAccordian from "./ClothAccordian";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import Loader from "../../common/Loader"
+import Loader from "../Loader/Loader"
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios"
@@ -197,7 +192,7 @@ function SelectedCart({ initialQuantity }) {
   return (
     <div>
       {loading?(
-                <Loader color="primary" size="lg" show={loading} />
+                <Loader/>
       ):(
 <>
       <Tabs defaultActiveKey="profile" id="justify-tab-example" className="mb-3 gap-3 justify-content-center" style={{borderBottom:"none"}}>
