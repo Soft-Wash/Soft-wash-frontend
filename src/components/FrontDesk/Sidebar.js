@@ -29,7 +29,7 @@ export default function Sidebar() {
 
   return (
     <div
-      className=" list-unstyled border border-top-0 pt-4"
+      className=" list-unstyled pt-4"
       style={{ width: "50px", height: "80vh" }}
     >
       <li className="flex gap-4 mb-4">

@@ -106,6 +106,7 @@ function LoginForm() {
             className={`${err ? "border border-danger" : null}`}
             value={role}
           >
+            <option value="">Select Role</option>
             <option value="frontdesk">FrontDesk</option>
             <option value="supervisor">Supervisor</option>
             <option value="admin">Admin</option>
