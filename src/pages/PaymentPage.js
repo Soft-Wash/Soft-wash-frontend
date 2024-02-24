@@ -30,10 +30,16 @@ function PaymentPage() {
   const [paymentMethod,setpaymentMethod]= useState(()=>{
     const storedPayment = localStorage.getItem('paymentType')
     return storedPayment?JSON.parse(storedPayment): ""
-
   });
-
-  
+  const [customerDetails, setcustomerDetails] = useState();
+  const [clothIds, setClothIds] = useState();
+  const [selectedAddress, setSelectedAddress] = useState({
+    contactNumber: "",
+    FullAddress: "",
+    SearchedAddress: "",
+    AddressType: "",
+  });
+  const [customerAddress, setcustomerAddress] = useState();  
   const options = { day: "numeric", month: "long" };
   let orderDetails = {};
   const navigate = useNavigate();
@@ -47,19 +53,21 @@ function PaymentPage() {
   }
 
   function GetUserDetails() {
-    axios
-      .get(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/order`)
-      .then((resp) => {
-        setorderData(resp.data);
-        const pickUpDate = resp.data.schedule_date;
-        const latestDate = new Date(pickUpDate);
-        const options = { day: "numeric", month: "long" };
-        const pickUpDateValue = latestDate?.toDateString("en-US", options);
+    const Date = JSON.parse(localStorage.getItem("calenderStartDate"))
+    const Time = JSON.parse(localStorage.getItem("calenderSelectedTime"))
+    console.log(Date)
+    // axios
+    //   .get(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/order`)
+      // .then((resp) => {
+        // setorderData(resp.data);
+        // const pickUpDate = resp.data.schedule_date;
+        // const latestDate = new Date(Date);
+        // const options = { day: "numeric", month: "long" }
+        console.log(pickUpDateValue)
         setpickUpDate(pickUpDateValue);
-      });
+      // });
 
   }
-
 
       // Calculate Sub Total
       const [subTotal, setSubtotal] = useState()
@@ -106,66 +114,118 @@ useEffect(() => {
 }, [paymentMethod]);
 
 
+const CheckUserAddress = () => {
+  const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
+  axiosInstance.get(`/users/${userId._id}`).then((resp) => {
+    setcustomerDetails(resp.data);
+  });
+};
+
+
+
+
 
 
 const postOrder = async () => {
+
+  const customer_id = localStorage.getItem("softwashLoginUser");
+  const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
+  const branch_id = JSON.parse(localStorage.getItem('branch_id'))
+  // let orderPostObj = {
+  //   customer_id: parsedCustomerData?._id,
+  //   branch_id: branch_id,
+  //   deliveryAddress: customerAddress?customerAddress:selectedAddress,
+  //   pickuptime: selectedTime,
+  //   schedule_date: selectedDate,
+  //   clothtype_ids: clothIds,
+  // };
   try {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     const deliveryType = JSON.parse(localStorage.getItem('deliveryType'));
     const key = Object.keys(deliveryType);
     const stringDeliveryType = key.join('');
-
     const paymentType = JSON.parse(localStorage.getItem('paymentType'));
 
     if (!paymentType) {
       toast.error('Select Payment Method');
       return; 
-    }
 
+    }
     const paymentkey = Object.values(paymentType);
     const stringPaymentType = paymentkey.join('');
-
     const orderDetails = {
       subtotal: total,
       delivery_type: stringDeliveryType,
       payment_method: stringPaymentType,
+      customer_id: parsedCustomerData?._id,
+      branch_id: branch_id,
+      deliveryAddress: customerAddress?customerAddress:selectedAddress,
+      pickuptime: selectedTime,
+      schedule_date: selectedDate,
+      clothtype_ids: clothIds,
     };
 
-    const payment_url = `${process.env.REACT_APP_BASE_URL}/payments/initiate-payment`;
-    const data = {
-      email: orderData?.customer_id?.email,
-      amount: orderDetails?.subtotal,
-      user_id:userId._id,
-      metadata: {
-        order_id: orderData?._id,
-        branch_id: orderData?.branch_id,
-      },
-    };
-    const response = await axios.post(payment_url, data);
+    console.log(orderDetails)
 
-    if (response?.data.data.paymentLink && stringPaymentType === "payWithCard" ) {
-      window.open(response?.data.data.paymentLink.data.authorization_url, '_blank');
-      localStorage.removeItem('RecentOrder');
-      console.log(response?.data?.data?.body?.reference)
-      localStorage.setItem("payment_reference",JSON.stringify(response?.data?.data?.body?.reference))
+    // const payment_url = `${process.env.REACT_APP_BASE_URL}/payments/initiate-payment`;
+    // const data = {
+    //   email: orderData?.customer_id?.email,
+    //   amount: orderDetails?.subtotal,
+    //   user_id:userId._id,
+    //   metadata: {
+    //     order_id: orderData?._id,
+    //     branch_id: orderData?.branch_id,
+    //   },
+    // };
+    // const response = await axios.post(payment_url, data);
 
-      const resp = await axios.put(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/update`, orderDetails);
-      setuserOrder(resp.data);
-      localStorage.setItem('orderDetails', JSON.stringify(resp.data));
-      navigate(`/order-receipt/${orderId}`);
+    // if (response?.data.data.paymentLink && stringPaymentType === "payWithCard" ) {
+    //   window.open(response?.data.data.paymentLink.data.authorization_url, '_blank');
+    //   localStorage.removeItem('RecentOrder');
+    //   console.log(response?.data?.data?.body?.reference)
+    //   localStorage.setItem("payment_reference",JSON.stringify(response?.data?.data?.body?.reference))
+
+    //   const resp = await axios.put(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/update`, orderDetails);
+    //   setuserOrder(resp.data);
+    //   localStorage.setItem('orderDetails', JSON.stringify(resp.data));
+    //   navigate(`/order-receipt/${orderId}`);
 
   
-    }else{
-      const resp = await axios.put(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/update`, orderDetails);
-      setuserOrder(resp.data);
-      navigate(`/order-receipt/${orderId}`);
-    }
+    // }else{
+    //   const resp = await axios.put(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/update`, orderDetails);
+    //   setuserOrder(resp.data);
+    //   navigate(`/order-receipt/${orderId}`);
+    // }
   } catch (error) {
     // Handle errors here
     console.error(error);
     setFormErrorMessage('An error occurred in the payment transaction.');
   }
 };
+
+
+useEffect(() => {
+  CheckUserAddress();
+  const clothArray = JSON.parse(localStorage.getItem("softCart"))
+  const calenderSelectedTime = localStorage.getItem("calenderSelectedTime");
+  const parsedCalenderSelectedTime = calenderSelectedTime
+    ? JSON.parse(calenderSelectedTime)
+    : null;
+  setSelectedTime(parsedCalenderSelectedTime);
+  const calenderSetDate = localStorage.getItem("calenderStartDate");
+  const storedDate = new Date(JSON.parse(calenderSetDate));
+  const parsedCalenderSetDate = storedDate;
+  setSelectedDate(parsedCalenderSetDate);
+  const clothQuantity = localStorage.getItem("clothQuantity");
+  const parsedClothQuantity = clothQuantity
+    ? JSON.parse(clothQuantity)
+    : null;
+  if (parsedClothQuantity) {
+    let keys = Object.keys(parsedClothQuantity);
+    const values = Object.values(parsedClothQuantity);
+    setClothIds(clothArray);
+  }
+}, []);
 
 
 

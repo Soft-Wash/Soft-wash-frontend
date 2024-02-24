@@ -2,21 +2,11 @@ import "../../styles/Loader Style/Loader.css"
 import React from "react";
 import { Audio, BallTriangle, MutatingDots } from 'react-loader-spinner';
 
-
-function Loader(){
-    return(
-        <div className="loader-content">
-            <div className="loader">
-            {/* <BallTriangle
-            height={100}
-            width={100}
-            radius={5}
-            color="rgb(33,28,106)"
-            ariaLabel="ball-triangle-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-            /> */}
+function MiniLoader(){
+  return(
+    <div>
+        <div className="loader-content2">
+            <div className="loader2">
                 <MutatingDots
                 visible={true}
                 height="100"
@@ -28,9 +18,11 @@ function Loader(){
                 wrapperStyle={{}}
                 wrapperClass=""
                 />
+
             </div>
         </div>
-    )
+    </div>
+  )
 }
 
-export default Loader;
+export default MiniLoader;

@@ -127,7 +127,7 @@ if(paymentStatus?.data?.status === "success"){
 
   return (
     <>
-    <>      <Banner />
+    <> <Banner />
       <ThankYou />
       <div className="center_div">
         <div className="mx-2 mb-5 shadow rounded-5 p-4 px-4 col col-lg-5 col-xs-8">
