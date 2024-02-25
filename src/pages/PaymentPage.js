@@ -12,10 +12,12 @@ import { useParams } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from "../components/Loader/Loader"
 
 
 
 function PaymentPage() {
+  const [isloading,setIsLoading]=useState(true)
   const [selectedTime, setSelectedTime] = useState();
   const [selectedDate, setSelectedDate] = useState();
   const [selectedQuantity, setSelectedQuantity] = useState();
@@ -33,14 +35,14 @@ function PaymentPage() {
   });
   const [customerDetails, setcustomerDetails] = useState();
   const [clothIds, setClothIds] = useState();
+  const [deliveryAddy,setDeliveryAddy]=useState()
   const [selectedAddress, setSelectedAddress] = useState({
     contactNumber: "",
     FullAddress: "",
     SearchedAddress: "",
     AddressType: "",
   });
-  const [customerAddress, setcustomerAddress] = useState();  
-  const options = { day: "numeric", month: "long" };
+
   let orderDetails = {};
   const navigate = useNavigate();
   const { orderId } = useParams();
@@ -53,20 +55,21 @@ function PaymentPage() {
   }
 
   function GetUserDetails() {
-    const Date = JSON.parse(localStorage.getItem("calenderStartDate"))
+    const CustomerAddress = JSON.parse(localStorage.getItem("selectedAddress"))
+    setDeliveryAddy(CustomerAddress)
+    const DateString = JSON.parse(localStorage.getItem("calenderStartDate"))
     const Time = JSON.parse(localStorage.getItem("calenderSelectedTime"))
-    console.log(Date)
-    // axios
-    //   .get(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/order`)
-      // .then((resp) => {
-        // setorderData(resp.data);
-        // const pickUpDate = resp.data.schedule_date;
-        // const latestDate = new Date(Date);
-        // const options = { day: "numeric", month: "long" }
-        console.log(pickUpDateValue)
-        setpickUpDate(pickUpDateValue);
-      // });
+    if (Date) {
+      const latestDate = new Date(DateString);
+      const options = { day: "numeric", month: "long" };
+      const pickupValue = latestDate.toLocaleDateString("en-US", options);
+      setpickUpDate(pickupValue);
+      setIsLoading(false)
+  } else {
+      console.error("Invalid date string");
+  }
 
+ 
   }
 
       // Calculate Sub Total
@@ -107,7 +110,7 @@ function handlePaymentPage(e) {
   setpaymentMethod (e.target.name);
 }
 
-console.log(paymentMethod)
+
 
 useEffect(() => {
   localStorage.setItem("paymentType", JSON.stringify(paymentMethod));
@@ -129,73 +132,70 @@ const CheckUserAddress = () => {
 const postOrder = async () => {
 
   const customer_id = localStorage.getItem("softwashLoginUser");
+  if(!customer_id){
+    return toast.error("please Login")
+
+  }
   const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
   const branch_id = JSON.parse(localStorage.getItem('branch_id'))
-  // let orderPostObj = {
-  //   customer_id: parsedCustomerData?._id,
-  //   branch_id: branch_id,
-  //   deliveryAddress: customerAddress?customerAddress:selectedAddress,
-  //   pickuptime: selectedTime,
-  //   schedule_date: selectedDate,
-  //   clothtype_ids: clothIds,
-  // };
+  const CustomerAddress = JSON.parse(localStorage.getItem("selectedAddress"))
+  console.log(CustomerAddress)
   try {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     const deliveryType = JSON.parse(localStorage.getItem('deliveryType'));
-    const key = Object.keys(deliveryType);
-    const stringDeliveryType = key.join('');
     const paymentType = JSON.parse(localStorage.getItem('paymentType'));
-
     if (!paymentType) {
       toast.error('Select Payment Method');
       return; 
-
     }
     const paymentkey = Object.values(paymentType);
     const stringPaymentType = paymentkey.join('');
     const orderDetails = {
       subtotal: total,
-      delivery_type: stringDeliveryType,
+      delivery_type: deliveryType,
       payment_method: stringPaymentType,
       customer_id: parsedCustomerData?._id,
       branch_id: branch_id,
-      deliveryAddress: customerAddress?customerAddress:selectedAddress,
+      deliveryAddress: CustomerAddress?CustomerAddress:selectedAddress,
       pickuptime: selectedTime,
       schedule_date: selectedDate,
       clothtype_ids: clothIds,
     };
-
     console.log(orderDetails)
+    const orderResponse = await axios.post(`${process.env.REACT_APP_BASE_URL}/order/create`,orderDetails)
+    console.log(orderResponse?.data)
+    const payment_url = `${process.env.REACT_APP_BASE_URL}/payments/initiate-payment`;
+    const data = {
+      email: userId?.email,
+      amount: orderDetails?.subtotal,
+      user_id:userId._id,
+      metadata: {
+        order_id: orderResponse?.data?._id,
+        branch_id: orderDetails?.branch_id,
+      },
+    };
+    console.log(data)
+    const response = await axios.post(payment_url, data);
+    if (response?.data.data.paymentLink && stringPaymentType === "payWithCard" ) {
+      window.open(response?.data.data.paymentLink.data.authorization_url, '_blank');
+      localStorage.removeItem('RecentOrder');
+      // localStorage.removeItem('clothQuantity');
+      localStorage.removeItem('calenderStartDate');
+      localStorage.removeItem('calenderSelectedTime');
+      console.log(response?.data?.data?.body?.reference)
+      localStorage.setItem("payment_reference",JSON.stringify(response?.data?.data?.body?.reference))
 
-    // const payment_url = `${process.env.REACT_APP_BASE_URL}/payments/initiate-payment`;
-    // const data = {
-    //   email: orderData?.customer_id?.email,
-    //   amount: orderDetails?.subtotal,
-    //   user_id:userId._id,
-    //   metadata: {
-    //     order_id: orderData?._id,
-    //     branch_id: orderData?.branch_id,
-    //   },
-    // };
-    // const response = await axios.post(payment_url, data);
-
-    // if (response?.data.data.paymentLink && stringPaymentType === "payWithCard" ) {
-    //   window.open(response?.data.data.paymentLink.data.authorization_url, '_blank');
-    //   localStorage.removeItem('RecentOrder');
-    //   console.log(response?.data?.data?.body?.reference)
-    //   localStorage.setItem("payment_reference",JSON.stringify(response?.data?.data?.body?.reference))
-
-    //   const resp = await axios.put(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/update`, orderDetails);
-    //   setuserOrder(resp.data);
-    //   localStorage.setItem('orderDetails', JSON.stringify(resp.data));
-    //   navigate(`/order-receipt/${orderId}`);
+      const resp = await axios.post(`${process.env.REACT_APP_BASE_URL}/order/create`, orderDetails);
+      setuserOrder(resp.data);
+      localStorage.setItem('orderDetails', JSON.stringify(resp.data));
+      navigate(`/order-receipt/${orderResponse?.data?._id}`);
 
   
-    // }else{
-    //   const resp = await axios.put(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/update`, orderDetails);
-    //   setuserOrder(resp.data);
-    //   navigate(`/order-receipt/${orderId}`);
-    // }
+    }else{
+      const resp = await axios.post(`${process.env.REACT_APP_BASE_URL}/order/create`, orderDetails);
+      setuserOrder(resp.data);
+      navigate(`/order-receipt/${orderResponse.data._id}`);
+    }
   } catch (error) {
     // Handle errors here
     console.error(error);
@@ -232,8 +232,8 @@ useEffect(() => {
 
   return (
     <div>
-      <BookingBanner />
-      <ToastContainer position="top-center" />
+            <ToastContainer position="top-center" />
+      {isloading?<Loader/>:<>      <BookingBanner />
       <div className="container">
         {/* <EmixNav/> */}
         <div className="p-3">
@@ -304,7 +304,7 @@ useEffect(() => {
                     <h5 class="TextColor pt-3 fw-5">Pick Up Information</h5>
                     <div className="Address py-3">
                       <h6 className="fw-bold">Pic-Up Address</h6>
-                      <p>{orderData?.deliveryAddress[0]?.FullAddress}</p>
+                      <p>{deliveryAddy?.FullAddress}</p>
                       <Link to="/address">
                         <button className="btn btn-outline-primary px-5 ">
                           Change
@@ -352,11 +352,6 @@ useEffect(() => {
                                 <div><h4>₦{total || "0.00"}</h4> </div>
                            </div>
                         </div>
-                        
-              {/* <div className="PrevNextBtnRight">
-                <button className="btn btn-outline-primary  ">Prev</button>
-                <button className="btn btn-info">Confirm</button>
-              </div> */}
             </div>
           </div>
         </div>
@@ -370,7 +365,8 @@ useEffect(() => {
                   <button className="confirm-button btn btn-primary px-5" onClick={postOrder}>
                     Confirm
                   </button>
-                </div>
+                </div></>}
+
     </div>
   );
 }
