@@ -80,7 +80,6 @@ function CreateOrder() {
   };
 
   useEffect(() => {
-    let isMounted = true;
     AddClothesToContent();
     return;
   }, [clothId]);
