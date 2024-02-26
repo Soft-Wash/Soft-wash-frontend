@@ -140,7 +140,7 @@ function App() {
          <Route path="/dashboard-contact-us" element={<UserDashboardContactPage />} />
          <Route path="/order-details" element={<UserOrderDetailsPage />} />
          <Route path="/ClothesSelection" element={<ClothesSelection/>}/>
-        <Route path="/PaymentPage/:orderId" element={<PaymentPage/>}/>
+        <Route path="/PaymentPage" element={<PaymentPage/>}/>
          <Route path="/pricing" element={<PricingPage />} />
          <Route path="/ourservices" element={<Services/>} />
          <Route path="/about" element={<About/>} />

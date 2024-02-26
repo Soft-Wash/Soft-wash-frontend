@@ -53,7 +53,7 @@ function SupervisorDash() {
 
     
     useEffect(() => {
-      // setLoading(true);
+      setLoading(true);
       axiosInstance.get("/order/").then((resp) => {
         const filteredOrders = resp.data.filter(item => item?.branch_id?._id === targetBranchId);
         setOrders(filteredOrders);

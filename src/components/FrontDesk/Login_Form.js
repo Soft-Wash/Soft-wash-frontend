@@ -32,8 +32,8 @@ function LoginForm() {
         logBody
       );
       if (resp.data.message === "login successful") {
-        localStorage.setItem('softwashEmployeeLogin',JSON.stringify
-        (resp.data.noPasswordUser._id))
+        toast.success("Sign Up succesfull")
+        localStorage.setItem('softwashEmployeeLogin',JSON.stringify(resp.data.noPasswordUser._id))
         switch (resp.data.noPasswordUser.role.name) {
           case "frontdesk":
             navigate("/frontdesk/dash");
@@ -99,26 +99,11 @@ function LoginForm() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicText">
-          <Form.Label>Role</Form.Label>
-          <Form.Select
-            onChange={(e) => setRole(e.target.value)}
-            placeholder="Role"
-            className={`${err ? "border border-danger" : null}`}
-            value={role}
-          >
-            <option value="frontdesk">FrontDesk</option>
-            <option value="supervisor">Supervisor</option>
-            <option value="admin">Admin</option>
-            <option value="supplier">Supplier</option>
-            <option value="washman">Washman</option>
-          </Form.Select>
-        </Form.Group>
         <Button
           variant="primary"
           type="button"
           className={` col-12 ${
-            email === "" || password === "" || role === "" ? "disabled" : null
+            email === "" || password === "" ? "disabled" : null
           }`}
           onClick={handleLogin}
         >

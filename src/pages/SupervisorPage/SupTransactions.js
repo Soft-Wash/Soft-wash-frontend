@@ -9,7 +9,7 @@ function SupTransactions() {
 
   useEffect(() => {
     const fetchTransactions = async () => {
-      setLoading(true);
+    //   setLoading(true);
       try {
         const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/transactions`);
         console.log(response.data.data.transactions);
@@ -36,28 +36,31 @@ function SupTransactions() {
             <table className="ordertbale-content-table">
               <thead>
                 <tr>
-                  <th>Id</th>
-                  <th>Name</th>
-                  <th>Amount</th>
-                  <th>Channel</th>
-                  <th>Email</th>
-                  <th>IP Address</th>
-                  <th>Status</th>
-                  <th>Transaction Date</th>
+                    <th>Transaction Date</th>
+                    <th>Full Name</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Channel</th>
+                    <th>Currency</th>
+                    <th>Email</th>
+                    <th>IP Address</th>
+                    <th>Transaction ID</th>
                 </tr>
               </thead>
               <tbody>
-                {transactions.map((item) => (
-                  <tr key={item._id}>
-                    <td>{item._id}</td>
-                    <td>{item.fullName}</td>
+              {transactions.map((item) => (
+                  <tr key={item.user_id ? item.user_id.fullName : 'N/A'}>
+                    <td>{new Date(item.paidAt).toLocaleString()}</td>
+                     <td>{item.user_id ? item.user_id.fullName : 'N/A'}</td>
                     <td>{item.amount}</td>
+                    <td>{item.status}</td>
                     <td>{item.channel}</td>
+                    <td>{item.currency}</td>
                     <td>{item.email}</td>
                     <td>{item.ipAddress}</td>
-                    <td>{item.status}</td>
-                    <td>{item.paidAt}</td>
-                  </tr>
+                    <td>{item.transactionId}</td>
+                   
+                </tr>
                 ))}
               </tbody>
             </table>
