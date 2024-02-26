@@ -98,26 +98,11 @@ function LoginForm() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicText">
-          <Form.Label>Role</Form.Label>
-          <Form.Select
-            onChange={(e) => setRole(e.target.value)}
-            placeholder="Role"
-            className={`${err ? "border border-danger" : null}`}
-            value={role}
-          >
-            <option value="frontdesk">FrontDesk</option>
-            <option value="supervisor">Supervisor</option>
-            <option value="admin">Admin</option>
-            <option value="supplier">Supplier</option>
-            <option value="washman">Washman</option>
-          </Form.Select>
-        </Form.Group>
         <Button
           variant="primary"
           type="button"
           className={` col-12 ${
-            email === "" || password === "" || role === "" ? "disabled" : null
+            email === "" || password === "" ? "disabled" : null
           }`}
           onClick={handleLogin}
         >
