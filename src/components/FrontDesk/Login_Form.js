@@ -32,6 +32,7 @@ function LoginForm() {
         logBody
       );
       if (resp.data.message === "login successful") {
+        toast.success("Sign Up succesfull")
         localStorage.setItem('softwashEmployeeLogin',JSON.stringify(resp.data.noPasswordUser._id))
         switch (resp.data.noPasswordUser.role.name) {
           case "frontdesk":
