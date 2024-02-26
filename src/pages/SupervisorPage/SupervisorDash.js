@@ -33,7 +33,6 @@ function SupervisorDash() {
   const targetBranchId = '655debc4ec7b0b6e0f591bf7'; 
 
     const getTimeOfDay = () => {
-      // setLoading(true);
         const currentHour = moment().hour();
     
         if (currentHour >= 5 && currentHour < 12) {
@@ -54,11 +53,19 @@ function SupervisorDash() {
     
     useEffect(() => {
       setLoading(true);
-      axiosInstance.get("/order/").then((resp) => {
-        const filteredOrders = resp.data.filter(item => item?.branch_id?._id === targetBranchId);
-        setOrders(filteredOrders);
+      axiosInstance.get("/order/", {
+        params: {
+          branchId: targetBranchId 
+        }
+      }).then((resp) => {
+        setOrders(resp.data);
         setLoading(false);
+      }).catch(error => {
+        console.error('Error fetching orders:', error.message);
+        setLoading(false); // Ensure loading state is updated even in case of errors
       });
+    }, [targetBranchId]);
+    
 
       const fetchEmployees = async (targetBranchId) => {
         // setLoading(true);
@@ -110,7 +117,6 @@ function SupervisorDash() {
 
       
         } catch (error) {
-          // Handle errors (e.g., network issues, server errors)
           console.error('Error fetching transactions:', error.message);
         }
       };
@@ -122,14 +128,11 @@ function SupervisorDash() {
         fetchTransactions();
         fetchExpense()
       }
-    }, [targetBranchId]);
+    
 
     useEffect(() => {
       // Calculate totalAmount whenever transactions state changes
       if (transactions) {
-        // const updatedTotalAmount = transactions.reduce((sum, transaction) => sum + transaction.amount, 0);
-        // setTotalamount(updatedTotalAmount);
-        // console.log(updatedTotalAmount);
         const totalAmount = transactions.reduce((sum, transaction) => sum + transaction.amount, 0);
           setTotalamount(totalAmount);
 
@@ -171,7 +174,6 @@ function SupervisorDash() {
   return (
     <div>
         <div className="d-flex">
-            {/* <AdminSidebar/> */}
             <SupervisorSideBar/>
             {loading ? <Loader/>: 
             <div className="supervisor-container">
@@ -263,29 +265,14 @@ function SupervisorDash() {
                             <h5> {totalrevenue}</h5>
                         </div>
                     </div>
-                    {/* <div className="Washman sup-Card washman-blue">
-                        <FaChalkboardUser className="supervisor-dashboard-icons "/>
-                        <div>
-                            <h5>Washman</h5>
-                            <h5>{washman?.length || 0}</h5>
-                        </div>
-                    </div> */}
-                    {/* <div className="Inventory sup-Card washman-green">
-                        <FaChalkboardUser className="supervisor-dashboard-icons "/>
-                        <div>
-                            <h5>Inventory</h5>
-                            <h5>3</h5>
-                        </div>
-                    </div> */}
+                  
                 </section2>
                 <section3 className="visuals d-flex ">
                     <div className="Left" style={{width:"90%", gap:"10px"}}>
-                        {/* <InventoryChart/> */}
                         <SupDashChart/>
                        
                     </div>
                     <div className="Right" >
-                        {/* <SupervisorCarousel/> */}
                         <SupervisorTeam/>
                     </div>
                 </section3>
