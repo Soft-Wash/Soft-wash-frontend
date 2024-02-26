@@ -9,7 +9,7 @@ function SupTransactions() {
 
   useEffect(() => {
     const fetchTransactions = async () => {
-    //   setLoading(true);
+      setLoading(true);
       try {
         const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/transactions`);
         console.log(response.data.data.transactions);
