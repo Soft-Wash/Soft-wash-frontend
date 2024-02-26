@@ -64,20 +64,23 @@ function SupNotification() {
             <section className="modal-container-body rtf">
                 {employeetasks.length > 0 ? (
                     <ul>
-                        {employeetasks.map((task, index) => (
-                            <li key={index}>
-                                <h2>{task.taskType}</h2>
-                                <p>Status: {task.status}</p>
-                                <p> Start Date: {task.startDate}</p>
-                                <p>End Date: {task.endDate}</p>
-                                <p onClick={() => handleTaskClick(index, task._id)}>View Details</p>
-                            </li>
-                        ))}
+                    {employeetasks.map((task, index) => (
+                        <a key={index} href={`#`} onClick={() => handleTaskClick(index, task._id)}>
+                        <li>
+                            <h2>{task.taskType}</h2>
+                            <p>Status: {task.status}</p>
+                            <p>Start Date: {task.startDate}</p>
+                            <p>End Date: {task.endDate}</p>
+                            <p onClick={(e) => e.preventDefault()}>View Details</p>
+                        </li>
+                        </a>
+                    ))}
                     </ul>
                 ) : (
                     <p>Empty</p>
                 )}
             </section>
+
         </article>
     </div>
 )}

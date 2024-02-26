@@ -76,6 +76,7 @@ import ExpenseReportSup from "./pages/SupervisorPage/ExpenseReportSup";
 import SupTaskWorkflow from "./pages/SupervisorPage/SupTaskWorkflow";
 import SupCreateTask from "./pages/SupervisorPage/SupCreateTask";
 import SupTaskTable from "./pages/SupervisorPage/SupTaskTable";
+import SupEmployees from "./pages/SupervisorPage/SupEmployees";
 import SupSingleTask from "./components/SupervisorComponents/SupSingleTask";
 import UserEditProfile from "./components/UserDashboard/UserEditProfile";
 import UserDashboard from "./pages/user/UserDashboard";
@@ -106,6 +107,7 @@ import PayRoll from "./pages/Admin/PayRoll";
 import PayRollTable from "./pages/Admin/PayRollTable";
 import Loader from "./components/Loader/Loader";
 import Review from "./pages/Admin/Reviews";
+import SupTransactions from "./pages/SupervisorPage/SupTransactions";
 
 
 
@@ -228,6 +230,8 @@ function App() {
         <Route path="/SupTaskTable" element={<SupTaskTable/>}/>
         <Route path="/SupNotificationTasktable" element={<SupNotificationTaskTable/>}/>
         <Route path="/SupSingleTask/:_id" element ={<SupSingleTask/>}/>
+        <Route path="/SupEmployees" element={<SupEmployees/>}/>
+        <Route path ="/SupTransactions" element={<SupTransactions/>}/>
        
 
 {/* employee login */}

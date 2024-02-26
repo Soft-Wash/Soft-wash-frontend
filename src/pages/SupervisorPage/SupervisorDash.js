@@ -30,9 +30,9 @@ function SupervisorDash() {
   const [totalexpense, setTotalexpense] = useState();
   const [totalrevenue, setTotalrevenue] = useState();
   const [loading, setLoading] = useState(false);
+  const targetBranchId = '655debc4ec7b0b6e0f591bf7'; 
 
     const getTimeOfDay = () => {
-      // setLoading(true);
         const currentHour = moment().hour();
     
         if (currentHour >= 5 && currentHour < 12) {
@@ -50,19 +50,28 @@ function SupervisorDash() {
 
     const [error, setError] = useState(null);
 
-    const targetBranchId = '655debc4ec7b0b6e0f591bf7'; 
+    
     useEffect(() => {
       setLoading(true);
-      axiosInstance.get("/order/").then((resp) => {
-        const filteredOrders = resp.data.filter(item => item?.branch_id?._id === targetBranchId);
-        setOrders(filteredOrders);
+      axiosInstance.get("/order/", {
+        params: {
+          branchId: targetBranchId 
+        }
+      }).then((resp) => {
+        setOrders(resp.data);
         setLoading(false);
+      }).catch(error => {
+        console.error('Error fetching orders:', error.message);
+        setLoading(false); // Ensure loading state is updated even in case of errors
       });
+    }, [targetBranchId]);
+    
 
-      const fetchEmployees = async () => {
+      const fetchEmployees = async (targetBranchId) => {
         // setLoading(true);
         try {
           const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/employees?branchId=${targetBranchId}`);
+          console.log(response.data)
           setEmployees(response.data);
           // setLoading(false);
         } catch (error) {
@@ -79,17 +88,7 @@ function SupervisorDash() {
           
         console.log(response.data.data.transactions)
           setTransactions(response.data.data.transactions)
-          // const transactions = response.data.data.transactions;
-          
-
-          // const totalAmount = transactions.reduce((sum, transaction) => sum + transaction.amount, 0);
-          // setTotalamount(totalAmount);
-
-          // console.log(totalAmount);
-
-      
         } catch (error) {
-          // Handle errors (e.g., network issues, server errors)
           console.error('Error fetching transactions:', error.message);
         }
       };
@@ -118,7 +117,6 @@ function SupervisorDash() {
 
       
         } catch (error) {
-          // Handle errors (e.g., network issues, server errors)
           console.error('Error fetching transactions:', error.message);
         }
       };
@@ -126,18 +124,15 @@ function SupervisorDash() {
   
       if (targetBranchId) {
         // setLoading(true);
-        fetchEmployees();
+        fetchEmployees(targetBranchId);
         fetchTransactions();
         fetchExpense()
       }
-    }, [targetBranchId]);
+    
 
     useEffect(() => {
       // Calculate totalAmount whenever transactions state changes
       if (transactions) {
-        // const updatedTotalAmount = transactions.reduce((sum, transaction) => sum + transaction.amount, 0);
-        // setTotalamount(updatedTotalAmount);
-        // console.log(updatedTotalAmount);
         const totalAmount = transactions.reduce((sum, transaction) => sum + transaction.amount, 0);
           setTotalamount(totalAmount);
 
@@ -160,21 +155,25 @@ function SupervisorDash() {
           (employee) =>
             employee.role.name.toLowerCase() === roleName.toLowerCase()
         );
-        const roleIds = employeesWithRole.map((employee) => employee.role._id);
-        return roleIds;
+        return employeesWithRole.map((employee) => ({
+          fullName: employee.fullName,
+          role: employee.role.name,
+          id: employee._id
+        }));
       } else {
         return [];
       }
     };
 
     const FrontDesk = getEmployeesId("frontdesk");
+    console.log(FrontDesk)
     const washman = getEmployeesId("washman");
     
+    const totalEmployees = FrontDesk.length + washman.length; 
     
   return (
     <div>
         <div className="d-flex">
-            {/* <AdminSidebar/> */}
             <SupervisorSideBar/>
             {loading ? <Loader/>: 
             <div className="supervisor-container">
@@ -198,13 +197,15 @@ function SupervisorDash() {
                               <h5>{orders?.length}</h5>
                           </div>
                       </Link>
-                      <div className="AllUsers sup-Card washman-grey">
-                          <FaRegUser className="supervisor-dashboard-icons "/>
-                          <div>
-                              <h5>All Users</h5>
-                              <h5> {Employees?.length}</h5>
-                          </div>
-                      </div>
+                      <Link to="/SupEmployees">
+                        <div className="AllUsers sup-Card washman-grey">
+                            <FaRegUser className="supervisor-dashboard-icons "/>
+                            <div>
+                                <h5>Employees</h5>
+                                <h5> {totalEmployees}</h5>
+                            </div>
+                        </div>
+                      </Link>
                     </div>
                     <div className="Pair1">
                       <div className="FrontDesk sup-Card washman-grey">
@@ -223,6 +224,7 @@ function SupervisorDash() {
                       </div>
                     </div>
                     <div className="Pair1">
+                      <Link to="/SupTransactions">
                       <div className="Inventory sup-Card washman-green">
                           <FaChalkboardUser className="supervisor-dashboard-icons "/>
                           <div>
@@ -230,6 +232,7 @@ function SupervisorDash() {
                               <h5>{transactions?.length}</h5>
                           </div>
                       </div>
+                      </Link>
                       <div className="Inventory sup-Card washman-green">
                           <FaChalkboardUser className="supervisor-dashboard-icons "/>
                           <div>
@@ -238,64 +241,6 @@ function SupervisorDash() {
                           </div>
                       </div>
                     </div>
-                    {/* <div className="icon-container mb-3">
-                        <div className="icon-container-innerd1">
-                        <FaClipboardList className="clipboard-icon"/>
-                        </div>
-                        <div className="icon-container-innerd2">
-                        <Link className="order-dashboard-link">
-                        <p> Declined Orders</p>
-                            <p>0</p>
-                        </Link>
-
-                        </div>
-                        <div className="state-percent-divv2">
-                        <BiCaretDown className="bicart-icon2"/>
-                        <p className="state-percent-divv2-p">35.2%</p>
-                        </div>
-                    </div>
-                    <div className="icon-container mb-3">
-                        <div className="icon-container-innerd1">
-                        <FaClipboardList className="clipboard-icon"/>
-                        </div>
-                        <div className="icon-container-innerd2">
-                        <Link  className="order-dashboard-link" >
-                        <p>Total Sales</p>
-                            <p>0</p>
-                        </Link>
-
-                        </div>
-                        <div className="state-percent-divv2">
-                        <BiCaretDown className="bicart-icon2"/>
-                        <p className="state-percent-divv2-p">35.2%</p>
-                        </div>
-                    </div>
-
-                    <div className="icon-container mb-3">
-                        <div className="icon-container-innerd1">
-                        <FaClipboardList className="clipboard-icon"/>
-                        </div>
-                        <div className="icon-container-innerd2">
-                        <Link  className="order-dashboard-link" >
-                        <p>Total Earnings</p>
-                            <p>0</p>
-                        </Link>
-
-                        </div>
-                        <div className="state-percent-divv2">
-                        <BiCaretDown className="bicart-icon2"/>
-                        <p className="state-percent-divv2-p">35.2%</p>
-                        </div>
-                    </div>
-                    <div className="icon-container mb-3">
-                        <div className="icon-container-innerd1">
-                        <FaClipboardList className="clipboard-icon"/>
-                        </div>
-                        <div className="icon-container-innerd2">
-                            <p>Growth</p>
-                            <p>0</p>
-                        </div>
-                    </div>   */}
                 </section1>
                 <section2 className="HeaderCards-Container mb-4">
                     <div className=" AllOrder sup-Card2 washman-purple">
@@ -320,29 +265,14 @@ function SupervisorDash() {
                             <h5> {totalrevenue}</h5>
                         </div>
                     </div>
-                    {/* <div className="Washman sup-Card washman-blue">
-                        <FaChalkboardUser className="supervisor-dashboard-icons "/>
-                        <div>
-                            <h5>Washman</h5>
-                            <h5>{washman?.length || 0}</h5>
-                        </div>
-                    </div> */}
-                    {/* <div className="Inventory sup-Card washman-green">
-                        <FaChalkboardUser className="supervisor-dashboard-icons "/>
-                        <div>
-                            <h5>Inventory</h5>
-                            <h5>3</h5>
-                        </div>
-                    </div> */}
+                  
                 </section2>
                 <section3 className="visuals d-flex ">
                     <div className="Left" style={{width:"90%", gap:"10px"}}>
-                        {/* <InventoryChart/> */}
                         <SupDashChart/>
                        
                     </div>
                     <div className="Right" >
-                        {/* <SupervisorCarousel/> */}
                         <SupervisorTeam/>
                     </div>
                 </section3>
