@@ -27,28 +27,28 @@ function AddressInfo() {
 
 
 
-  useEffect(() => {
-    CheckUserAddress();
-    const clothArray = JSON.parse(localStorage.getItem("softCart"))
-    const calenderSelectedTime = localStorage.getItem("calenderSelectedTime");
-    const parsedCalenderSelectedTime = calenderSelectedTime
-      ? JSON.parse(calenderSelectedTime)
-      : null;
-    setSelectedTime(parsedCalenderSelectedTime);
-    const calenderSetDate = localStorage.getItem("calenderStartDate");
-    const storedDate = new Date(JSON.parse(calenderSetDate));
-    const parsedCalenderSetDate = storedDate;
-    setSelectedDate(parsedCalenderSetDate);
-    const clothQuantity = localStorage.getItem("clothQuantity");
-    const parsedClothQuantity = clothQuantity
-      ? JSON.parse(clothQuantity)
-      : null;
-    if (parsedClothQuantity) {
-      let keys = Object.keys(parsedClothQuantity);
-      const values = Object.values(parsedClothQuantity);
-      setClothIds(clothArray);
-    }
-  }, []);
+  // useEffect(() => {
+  //   CheckUserAddress();
+  //   const clothArray = JSON.parse(localStorage.getItem("softCart"))
+  //   const calenderSelectedTime = localStorage.getItem("calenderSelectedTime");
+  //   const parsedCalenderSelectedTime = calenderSelectedTime
+  //     ? JSON.parse(calenderSelectedTime)
+  //     : null;
+  //   setSelectedTime(parsedCalenderSelectedTime);
+  //   const calenderSetDate = localStorage.getItem("calenderStartDate");
+  //   const storedDate = new Date(JSON.parse(calenderSetDate));
+  //   const parsedCalenderSetDate = storedDate;
+  //   setSelectedDate(parsedCalenderSetDate);
+  //   const clothQuantity = localStorage.getItem("clothQuantity");
+  //   const parsedClothQuantity = clothQuantity
+  //     ? JSON.parse(clothQuantity)
+  //     : null;
+  //   if (parsedClothQuantity) {
+  //     let keys = Object.keys(parsedClothQuantity);
+  //     const values = Object.values(parsedClothQuantity);
+  //     setClothIds(clothArray);
+  //   }
+  // }, []);
 
   const [selectedAddress, setSelectedAddress] = useState({
     contactNumber: "",
@@ -82,24 +82,17 @@ function AddressInfo() {
     const customer_id = localStorage.getItem("softwashLoginUser");
     const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
     const branch_id = JSON.parse(localStorage.getItem('branch_id'))
-
-    let orderPostObj = {
-      customer_id: parsedCustomerData?._id,
-      branch_id: branch_id,
-      deliveryAddress: customerAddress?customerAddress:selectedAddress,
-      pickuptime: selectedTime,
-      schedule_date: selectedDate,
-      clothtype_ids: clothIds,
-    };
+    localStorage.setItem("customerAddress",JSON.stringify(customerAddress))
+    localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
 
 
-    axiosInstance.post("/order/create", orderPostObj).then((resp) => {
-      const orderId = resp.data._id;
-      localStorage.setItem("RecentOrder", JSON.stringify(resp.data));
-      localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
-      navigate(`/paymentpage/${orderId}`);
-    });
-    UpdateUserAddress();
+    // axiosInstance.post("/order/create", orderPostObj).then((resp) => {
+    //   const orderId = resp.data._id;
+
+
+    // });
+
+     navigate(`/paymentpage`);
   }
 
   useEffect(() => {
@@ -109,21 +102,6 @@ function AddressInfo() {
     }
   }, []);
 
-  const UpdateUserAddress = () => {
-    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
-    axiosInstance
-      .put(`/users/${userId._id}/update`, {
-        address: selectedAddress.FullAddress,
-      })
-      .then((resp) => {});
-  };
-
-  const CheckUserAddress = () => {
-    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
-    axiosInstance.get(`/users/${userId._id}`).then((resp) => {
-      setcustomerDetails(resp.data);
-    });
-  };
 
   const handleCustomerAddress = (e) => {
     setClicked(true);
