@@ -94,7 +94,6 @@ function PaymentPage() {
   useEffect(() => {
     getLocalStorageData();
     GetUserDetails();
-     // Calculate sub total
      calcSubTotal(JSON.parse(localStorage.getItem('softCart')))
   }, []);
 
@@ -116,26 +115,13 @@ useEffect(() => {
   localStorage.setItem("paymentType", JSON.stringify(paymentMethod));
 }, [paymentMethod]);
 
-
-const CheckUserAddress = () => {
-  const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
-  axiosInstance.get(`/users/${userId._id}`).then((resp) => {
-    setcustomerDetails(resp.data);
-  });
-};
-
-
-
-
-
-
 const postOrder = async () => {
 
   const customer_id = localStorage.getItem("softwashLoginUser");
   if(!customer_id){
-    return toast.error("please Login")
-
+    navigate("/UserLogin")
   }
+  
   const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
   const branch_id = JSON.parse(localStorage.getItem('branch_id'))
   const CustomerAddress = JSON.parse(localStorage.getItem("selectedAddress"))
@@ -181,7 +167,7 @@ const postOrder = async () => {
       localStorage.removeItem('RecentOrder');
       // localStorage.removeItem('clothQuantity');
       localStorage.removeItem('calenderStartDate');
-      localStorage.removeItem('calenderSelectedTime');
+      // localStorage.removeItem('calenderSelectedTime');
       console.log(response?.data?.data?.body?.reference)
       localStorage.setItem("payment_reference",JSON.stringify(response?.data?.data?.body?.reference))
 
@@ -205,7 +191,6 @@ const postOrder = async () => {
 
 
 useEffect(() => {
-  CheckUserAddress();
   const clothArray = JSON.parse(localStorage.getItem("softCart"))
   const calenderSelectedTime = localStorage.getItem("calenderSelectedTime");
   const parsedCalenderSelectedTime = calenderSelectedTime
@@ -228,7 +213,17 @@ useEffect(() => {
 }, []);
 
 
-
+const UpdateUserAddress = () => {
+  const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
+  const storedAddress = JSON.parse(localStorage.getItem("selectedAddress"));
+  axiosInstance
+    .put(`/users/${userId?._id}/update`, {
+      address: storedAddress?.FullAddress,
+    })
+    .then((resp) => {
+      console.log(resp.data)
+    });
+};
 
   return (
     <div>

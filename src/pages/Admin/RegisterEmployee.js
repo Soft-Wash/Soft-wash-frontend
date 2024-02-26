@@ -7,6 +7,7 @@ import { variableManager } from "../../context/VariablesContext";
 // import { Loader } from "../../common/Loader";
 import axios from "axios";
 import { axiosInstance } from "../../services/AxiosInstance";
+import AdminSidebar from "../../components/Admin/AdminSidebar";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -73,28 +74,13 @@ export default function Signup() {
   }
 
   return (
-    <div className="signup-container">
-      <div className="banner-section">
-        <center className="logo-section">
-          <h1>SOFT WASH</h1>
-        </center>
-
-        <div className="welcome-section">
-          <center>
-            <p className="welcome">Welcome Back!</p>
-            <p className="note text-light pointer">
-              Already have an account? Sign In to stay connected.
-            </p>
-
-            <div className="button-section">
-              <button onClick={() => navigate("/UserLogin")}>Sign In</button>
-            </div>
-          </center>
-        </div>
-        <center className="copyright">Copyright © 2023</center>
-      </div>
-
-      <div className="form-section">
+    <div className="d-flex">
+<AdminSidebar/>
+<div className="form_container">
+  <h3>Register User</h3>
+  <hr className="form_container_hr" />
+  
+<div className="form-section">
         <div className="content">
           <center
             className="for-mobile note pointer"
@@ -264,6 +250,9 @@ export default function Signup() {
           </form>
         </div>
       </div>
+</div>
+
+
       {/* <Loader color="primary" size="lg" show={loading} /> */}
     </div>
   );

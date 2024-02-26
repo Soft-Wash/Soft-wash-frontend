@@ -91,7 +91,7 @@ function AddressInfo() {
 
 
     // });
-    UpdateUserAddress();
+
      navigate(`/paymentpage`);
   }
 
@@ -102,21 +102,6 @@ function AddressInfo() {
     }
   }, []);
 
-  const UpdateUserAddress = () => {
-    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
-    axiosInstance
-      .put(`/users/${userId._id}/update`, {
-        address: selectedAddress.FullAddress,
-      })
-      .then((resp) => {});
-  };
-
-  // const CheckUserAddress = () => {
-  //   const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
-  //   axiosInstance.get(`/users/${userId._id}`).then((resp) => {
-  //     setcustomerDetails(resp.data);
-  //   });
-  // };
 
   const handleCustomerAddress = (e) => {
     setClicked(true);

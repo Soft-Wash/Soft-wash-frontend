@@ -17,18 +17,6 @@ function SectionOne() {
   const [branch_id, setbranch_id] = useState();
 
 
-
-  function handleSchedulePickup() {
-    const userToken = JSON.parse(localStorage.getItem("softwashLoginToken"));
-    if (!userToken) {
-      Navigate("/userLogin");
-    } else {
-      handleShow();
-    }
-  }
-
-
-
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
 
@@ -37,19 +25,15 @@ function SectionOne() {
     handleClose();
   };
 
-  
-
-
   return (
     <div className="sec-1-bg py-4">
-      <ToastContainer position="top-center"/>
+      <ToastContainer position="top-center" />
       <>
-<BranchModal
-isOpen={showModal} 
-onClose={handleClose}
-SaveBranch={handleSaveBranch} 
-
-/>
+        <BranchModal
+          isOpen={showModal}
+          onClose={handleClose}
+          SaveBranch={handleSaveBranch}
+        />
       </>
       <Container className=" container01 ">
         <Row className="pt-5 align-items-center">
@@ -69,7 +53,7 @@ SaveBranch={handleSaveBranch}
                   variant="outline-info"
                   className="textwhite-hover mt-4"
                   size="lg"
-                  onClick={handleSchedulePickup}
+                  onClick={()=>handleShow()}
                 >
                   SCHEDULE PICKUP
                 </Button>{" "}
