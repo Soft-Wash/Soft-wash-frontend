@@ -32,7 +32,8 @@ function LoginForm() {
         logBody
       );
       if (resp.data.message === "login successful") {
-        localStorage.setItem('softwashEmployeeLogin',JSON.stringify(resp.data.noPasswordUser._id))
+        localStorage.setItem('softwashEmployeeLogin',JSON.stringify
+        (resp.data.noPasswordUser._id))
         switch (resp.data.noPasswordUser.role.name) {
           case "frontdesk":
             navigate("/frontdesk/dash");

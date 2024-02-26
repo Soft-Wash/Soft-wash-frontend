@@ -7,6 +7,8 @@ export const TaskContext = createContext({});
 export function TaskContextProvider ({ children }) {
     
     const [employeetasks, setEmployeetasks] = useState([]);
+    const [orders, setOrders] = useState([]);
+    const targetBranchId = '655debc4ec7b0b6e0f591bf7';
 
     const getallEmployeetasks = () => {
         const washmanID =   "655e49bad160aea8372bde1d";
@@ -24,6 +26,22 @@ export function TaskContextProvider ({ children }) {
         });
     };
 
+    const getAllOrders = () =>{
+        axiosInstance.get("/order/").then((resp) => {
+            const filteredOrders = resp.data.filter(item => item?.branch_id?._id === targetBranchId);
+            console.log("Filtered Orders:", filteredOrders);
+            setOrders(filteredOrders);
+        }).catch(error => {
+            console.error("Error fetching data:", error);
+        });
+
+    }
+
+    
+    useEffect(() =>{
+        getAllOrders();
+    }, []);
+
 
     useEffect(() =>{
         getallEmployeetasks();
@@ -34,6 +52,8 @@ export function TaskContextProvider ({ children }) {
              employeetasks, 
             //  getallEmployeetasks,
              setEmployeetasks,
+             getAllOrders,
+             orders, setOrders,
 
              
              }}>
