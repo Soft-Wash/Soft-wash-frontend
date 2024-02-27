@@ -41,12 +41,16 @@ function PayRoll() {
   const getEmployee = () => {
     axios.get(`${process.env.REACT_APP_BASE_URL}/employees/`).then((resp) => {
       setEmployees(resp.data);
+    }).catch((error)=>{
+      console.log(error)
     });
   };
+
   const handleInputs = (e) => {
     const value = e.target.value;
     setPrData({ ...prData, [e.target.name]: value });
   };
+  
   const CreatePayRoll = () => {
     const formData = new FormData;
     formData.append("user_id",prData.user_id)
