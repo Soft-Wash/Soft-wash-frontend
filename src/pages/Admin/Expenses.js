@@ -5,12 +5,15 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { axiosInstance } from "../../services/AxiosInstance";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 function Expenses() {
   const [expenses, setExpenses] = useState();
+  const [categoryType, setCategoryType] = useState();
 
   useEffect(() => {
     axiosInstance.get("/expense/").then((resp) => {
+      console.log(resp.data);
       setExpenses(resp.data);
     });
   }, []);
@@ -26,13 +29,48 @@ function Expenses() {
     }
   };
 
-  const DeleteExpense = (_id) => {
-    axiosInstance.delete(`/expense/${_id}/delete`).then((resp) => {
-      console.log(resp.data);
-      setExpenses((prevItems) => prevItems.filter((item) => item._id !== _id));
-      toast.success("Expense deleted succesful");
-    });
+  const GetCategory = () => {
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/expensecategory/`)
+      .then((resp) => {
+        setCategoryType(resp.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
+
+  const DeleteExpense = (_id) => {
+    axiosInstance
+      .delete(`/expense/${_id}/delete`)
+      .then((resp) => {
+        console.log(resp.data);
+        setExpenses((prevItems) =>
+          prevItems.filter((item) => item._id !== _id)
+        );
+        toast.success("Expense deleted succesful");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const filterExpense = (value) => {
+    console.log(value);
+    axiosInstance
+      .get(`/expense/category/search?category=${value}`)
+      .then((resp) => {
+        console.log(resp.data);
+        setExpenses(resp.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    GetCategory();
+  }, []);
 
   return (
     <div>
@@ -50,14 +88,32 @@ function Expenses() {
             <hr className="expenses-hr" />
             <div className="expenses-table-content">
               <div className="show-container">
-                <p className="show-container-p1">Show</p>
-                <select name="" id="">
-                  <option value="10">10</option>
-                  <option value="25">25</option>
-                  <option value="50">50</option>
-                  <option value="100">100</option>
-                </select>
-                <p className="show-container-p2">entries</p>
+                <div className="d-flex">
+                  <p className="show-container-p1">Show</p>
+                  <select name="" id="">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                  <p className="show-container-p2">entries</p>
+                </div>
+                <div className="d-flex">
+                  <select
+                    name=""
+                    id=""
+                    className="category_select"
+                    onChange={(e) => filterExpense(e.target.value)}
+                  >
+                    <option value="" hidden>
+                      Select Category
+                    </option>
+                    {categoryType &&
+                      categoryType.map((item) => (
+                        <option value={item?._id}>{item?.name}</option>
+                      ))}
+                  </select>
+                </div>
               </div>
               <div className="table-content">
                 <table className="expenses-content-table">
@@ -66,34 +122,34 @@ function Expenses() {
                       <th>S No</th>
                       <th>Date</th>
                       <th>Amount</th>
-                      <th>Towards</th>
+                      <th>category</th>
                       <th>Tax Include?</th>
                       <th>Payment Method</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {expenses &&
+                    {expenses.length > 0? 
                       expenses.map((item) => (
-                        <tr key={item._id}>
+                        <tr key={item?._id}>
                           <th>1</th>
-                          <th>{item.date}</th>
-                          <th>{item.amount}</th>
+                          <th>{item?.date}</th>
+                          <th>{item?.amount}</th>
 
-                          <th>{item.category}</th>
+                          <th>{item?.category?.name}</th>
                           <th>
                             <button
                               className={`tax-include-btn1 ${getStatusColorClass(
                                 item?.tax_include
                               )}`}
                             >
-                              {item.tax_include}
+                              {item?.tax_include}
                             </button>
                           </th>
-                          <th>{item.payment_method}</th>
+                          <th>{item?.payment_method}</th>
                           <th>
                             <div className="d-flex">
-                              <Link to={`/editexpense/${item._id}`}>
+                              <Link to={`/editexpense/${item?._id}`}>
                                 <button className="action-buttons-btn1">
                                   Edit
                                 </button>
@@ -101,14 +157,18 @@ function Expenses() {
 
                               <button
                                 className="action-buttons-btn2"
-                                onClick={() => DeleteExpense(item._id)}
+                                onClick={() => DeleteExpense(item?._id)}
                               >
                                 Delete
                               </button>
                             </div>
                           </th>
                         </tr>
-                      ))}
+                      )) :                 <tr>
+                      <td colSpan="6" className="no-data-message">
+                        No data available
+                      </td>
+                    </tr>}
                   </tbody>
                 </table>
                 <p>showing 1 0f 1 of 1 entries</p>
