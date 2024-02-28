@@ -38,6 +38,16 @@ function Calender() {
 
 
 
+  const disabledDates = () => {
+    const today = new Date();
+    const maxDate = new Date(today);
+    maxDate.setDate(today.getDate() + 3);
+    return maxDate;
+  };
+
+
+
+
   
   return (
     <Container>
@@ -51,7 +61,8 @@ function Calender() {
             className="react-datepicker__calendar form-control border-primary"
             selected={startDate}
             onChange={(date) => setStartDate(date)}
-            minDate={new Date()}
+            minDate={disabledDates()}
+            // maxDate={}
           />         
 
           <div className="mx-2" style={{display: "flex", flexDirection: "column"}}>
