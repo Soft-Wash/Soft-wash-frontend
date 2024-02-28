@@ -37,7 +37,7 @@ function DatePage() {
 
     return(
        <div>
-
+            <>
             <ToastContainer position="top-center" />
             <BookingBanner />
             <Container className='datepage-container'>
