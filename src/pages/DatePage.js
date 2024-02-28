@@ -56,6 +56,7 @@ const handleDeliveryOption = () => {
             <ToastContainer position="top-center" />
             <BookingBanner />
             <Container className='datepage-container'>
+            <h4>Kindly note,that all orders take a minimum of two days to process and complete</h4>
             <div className='date-body justify-content-between'>
                 <div className='date-body-left'>
                     <BookingPickUpMode />
