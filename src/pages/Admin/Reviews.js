@@ -46,10 +46,10 @@ function Review() {
                   </tr>
                 ) : (
                   review && review.map((item) => (
-                    <tr key={item._id}>
-                      <th>{item.user_id.fullName}</th>
-                      <th>{item.order_id._id}</th>
-                      <th>{item.message}</th>
+                    <tr key={item?._id}>
+                      <th>{item?.user_id?.fullName}</th>
+                      <th>{item?.order_id?._id}</th>
+                      <th>{item?.message}</th>
                     </tr>
                   ))
                 )}

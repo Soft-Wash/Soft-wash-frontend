@@ -42,25 +42,20 @@ export default function Login() {
           
         }
       }
-      // function handleValidation() {
-      //   const {  email, password } = loginDetails;
-      //   if ( !email && !password) {
-      //     toast.error("Incorrect Credentials")
-      //     setEmpty(true);
-      //   } else {
-      //     handleLoginSubmit(loginDetails);
-      //     console.log(loginDetails)
-          
-      //   }
-      // }
 
       async function handleLoginSubmit(payload){
+        const processingOrder=JSON.parse(localStorage.getItem("paymentType"))
         setLoading(true)
         const {data,error} = await handleLogin(payload);
         setLoading(false);
         if(data){
           toast.success("Login Successful")
-          navigate('/')
+          if(processingOrder){
+            navigate('/paymentpage')
+          }else{
+            navigate('/')
+          }
+
         } else if(error){
           toast.error("Incorrect Email Or Password");
         }
