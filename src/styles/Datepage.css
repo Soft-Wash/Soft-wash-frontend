@@ -63,7 +63,13 @@
     color: rgb(0,131,255);
     font-size: 20px;
 }
-
+.datepage-container h4{
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+.booking-pickup-mode h3{
+    font-size: 20px;
+}
 .select-pickup-type{
     padding: 20px;
     margin-bottom: 30px;
