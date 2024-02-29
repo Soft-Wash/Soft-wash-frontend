@@ -9,6 +9,7 @@ import axios from "axios";
 
 function AddNewExpenses() {
   const [expenseDetails, setExpenseDetails] = useState({});
+  const [categoryType,setCategoryType]=useState()
   const [branch,setBranch]=useState()
 
   const HandleExpense = (e) => {
@@ -30,8 +31,14 @@ function AddNewExpenses() {
       console.log(error)
     });
   }
-
-  console.log(expenseDetails);
+  const GetCategory=()=>{
+    axios.get(`${process.env.REACT_APP_BASE_URL}/expensecategory/`)
+    .then((resp)=>{
+      setCategoryType(resp.data)
+    }).catch((error)=>{
+      console.log(error)
+    })
+  }
 
   const postExpense = () => {
     const formData = new FormData();
@@ -45,12 +52,14 @@ function AddNewExpenses() {
     formData.append("branch", expenseDetails.branch);
 
     axiosInstance.post("/expense/create", formData).then((resp) => {
+      console.log(resp.data)
       toast.success("Expense created succesful");
     });
   };
 
   useEffect(()=>{
     getBranch()
+    GetCategory()
   },[])
 
   return (
@@ -100,10 +109,11 @@ function AddNewExpenses() {
                       <option value="" hidden>
                         select category
                       </option>
-                      <option value="fuel">fuel</option>
-                      <option value="rent">rent</option>
-                      <option value="chemical">chemical</option>
-                      <option value="detergent">detergent</option>
+                      {categoryType && categoryType.map((item)=>(
+                      <option value={item._id}>{item.name}</option>
+                      ))}
+
+
                     </select>
                   </label>
                   <label htmlFor="" className="checkbox-label2">
