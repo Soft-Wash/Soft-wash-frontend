@@ -25,14 +25,15 @@ function CreateOrder() {
   const [clothPrice, setclothPrice] = useState();
   const [selectedItems, setSelectedItems] = useState();
   const [filteredResult, setfilteredResult] = useState();
+  const [selectedUser,setSelectedUser]=useState()
   const [deliveryAddress, setdeliveryAddress] = useState({
     FullAddress: "",
   });
   const [clothQuantity, setclothQuantity] = useState(0);
   const [MiniClothCart, setMiniClothCart] = useState([]);
   const [totalPrice, settotalPrice] = useState();
-  const [fullName, setFullName] = useState();
   const [isModal, setIsModal] = useState(false);
+  const [createdUser,setCreatedUser]=useState()
 
   const [selectedTime, setSelectedTime] = useState(() => {
     const storedTime = localStorage.getItem("AdminSelectedTime");
@@ -79,7 +80,6 @@ function CreateOrder() {
   };
 
   useEffect(() => {
-    let isMounted = true;
     AddClothesToContent();
     return;
   }, [clothId]);
@@ -137,7 +137,7 @@ function CreateOrder() {
       .then((resp) => {
         setSelectedItems(resp.data);
         const OrderDetails = {
-          customer_id: customerId?._id,
+          customer_id: selectedUser?selectedUser:createdUser?._id,
           clothtype_ids: resp.data,
           pickuptime: selectedTime,
           deliveryAddress: deliveryAddress,
@@ -153,8 +153,7 @@ function CreateOrder() {
         ) {
           toast.error("Please select all fields");
         } else if (
-          !customerDetails ||
-          Object.keys(customerDetails).length === 0
+          OrderDetails.customer_id === undefined
         ) {
           toast.error("please create a customer");
         } else {
@@ -186,6 +185,7 @@ function CreateOrder() {
   const Creatuser = () => {
     axiosInstance.post("/users/auth/register", customerDetails).then((resp) => {
       toast.success("user created succesfully");
+      setCreatedUser(resp.data)
       setTimeout(() => {
         handleClose();
       }, 1000);
@@ -222,20 +222,26 @@ function CreateOrder() {
     settotalPrice(total);
   };
 
-  console.log(fullName);
 
   const handleSearch = (name) => {
     axiosInstance
       .get(`/users/users/search?fullName=${name}`)
       .then((resp) => {
         setfilteredResult(resp.data);
-        console.log(resp.data);
         setIsModal(true);
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
+  const handleFoundUser=(id)=>{
+    setSelectedUser(id)
+    toast.success("customer selected")
+    setIsModal(false)
+  }
+
+  console.log(selectedUser)
 
   useEffect(() => {
     calculateQuantity(MiniClothCart);
@@ -406,13 +412,13 @@ function CreateOrder() {
                     <div className="Bisearch_icon_div">
                       <BiSearch className="Bisearch_icon" />
                     </div>
-                    {filteredResult?.length > 0? (
+                    {isModal? (
                       <div className="search_display_card">
                         <div>
                           {filteredResult?.length > 0 ? (
                             filteredResult &&
                             filteredResult.map((item) => (
-                              <p>{item?.fullName} </p>
+                              <p onClick={()=>handleFoundUser(item?._id)}>{item?.fullName} </p>
                             ))
                           ) : (
                             <p>User not</p>
@@ -484,6 +490,7 @@ function CreateOrder() {
                                 <input
                                   type="text"
                                   value={clothQuantity[item?._id] || 0}
+                                  className="quantity_amount"
                                 />
                               </div>
                               <div className="cart-card2-thead-btn-div">

@@ -255,6 +255,7 @@ padding: 0;
 
 .cart-card2-thead-th3-innerd{
   position: relative;
+  z-index: 1;
 }
 
 
@@ -331,18 +332,32 @@ padding: 0;
 }
 
 .search_display_card{
-  height: 500px;
+  max-height: 500px;
   width: 300px;
     overflow: scroll;
-  padding: 20px;
+  padding: 10px;
   background-color: white;
-  box-shadow: 1px 2px 3px 2px rgb(242, 242, 242);
+  box-shadow: 3px 1px 1px 2px rgb(234, 234, 234);
   position: absolute;
-  margin-top: 10px;
+  margin-top: 5px;
+  z-index: 3;
 
 }
 
+.quantity_amount{
+  z-index: 2;
+}
+
 .search_display_card p{
-  border-bottom: 1px solid black;
+  /* border-bottom: 1px solid black; */
+  padding: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  color: rgb(106, 106, 106);
+
+}
+
+.search_display_card p:hover{
+  background-color: rgb(230, 230, 230);
 }
 

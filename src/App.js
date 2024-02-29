@@ -118,15 +118,17 @@ import SupTransactions from "./pages/SupervisorPage/SupTransactions";
 
 
 function App() {
+
+  const [notificationCount,setnotificationCount]=useState()
   return (
 <>  
 
 <ChakraProvider>
 <TaskContextProvider>
+  {/* <NotificationContext> */}
   <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage/>} />
-        {/* <Route path="/" element={<Loader/>} /> */}
         <Route path="/address" element={<AddressPage/>} />
         <Route path="/UserLogin" element={<UserLogin/>}/>
         <Route path="/UserRegister" element={<UserRegister/>}/>
@@ -234,8 +236,8 @@ function App() {
         <Route path ="/SupTransactions" element={<SupTransactions/>}/>
        
 
-{/* employee login */}
-<Route path="/employeelogin" element={<Login/>} />
+        {/* employee login */}
+        <Route path="/employeelogin" element={<Login/>} />
 
 
 
@@ -256,6 +258,8 @@ function App() {
 
       </Routes>
     </BrowserRouter>
+  {/* </NotificationContext> */}
+
     </TaskContextProvider>
     </ChakraProvider>
     

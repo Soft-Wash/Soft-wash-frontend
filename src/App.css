@@ -98,3 +98,43 @@ justify-content: center;
 .border_raduis{
     border-radius: 50%;
 }
+
+
+.color-dark-link{
+    position: relative;
+}
+
+.cart_count{
+margin: 0 auto;
+font-weight: bold;
+color: white;
+padding-top: 0;
+font-size: 12px;
+}
+
+.cart_count_div{
+    border: 1px solid rgb(206, 15, 15);
+    background-color: rgb(206, 15, 15);
+    border-radius: 50%;
+    position: absolute;
+    top: -12px;
+    left: 11px;
+    padding-left: 5px;
+    padding-right: 5px;
+    
+}
+
+.wishlistheart_link{
+    position: relative;
+}
+
+.wishlist_count{
+    border: 1px solid rgb(206, 15, 15);
+    background-color: rgb(206, 15, 15);
+    border-radius: 50%;
+    position: absolute;
+    top: -12px;
+    left: 24px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
