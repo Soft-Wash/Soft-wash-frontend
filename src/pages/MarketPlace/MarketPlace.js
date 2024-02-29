@@ -20,11 +20,13 @@ import Navigation from "../../common/MarketPlaceNavbar/Navigation";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useContext } from "react";
 
 function MarketPlace() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [wishlistItems, setWishlistItems] = useState([]);
   const backend = "http://localhost:8003/uploads/"
+
 
   const [shopItems, setshopItems] = useState();
   let wishlist_id = "";

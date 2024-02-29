@@ -18,6 +18,7 @@ function Cart() {
   const [totalprice, setTotalprice] = useState();
   const Cart_Array = [];
   const navigate = useNavigate()
+  const backend = "http://localhost:8003/uploads/"
 
   const GetCartItems = () => {
     const CustomerData = JSON.parse(localStorage.getItem("softwashLoginUser"));
@@ -113,8 +114,8 @@ function Cart() {
 
   const CalculateTotal = (cartItems) => {
     const total = cartItems.reduce((accumulator, cartItem) => {
-      const price = cartItem.product_id.price || 0;
-      const itemTotal = cartItem.quantity * price;
+      const price = cartItem?.product_id?.price || 0;
+      const itemTotal = cartItem?.quantity * price;
       return accumulator + itemTotal;
     }, 0);
     setTotalprice(total);
@@ -161,9 +162,9 @@ toast.error("please login")
             <div key={index}>
               <hr className="lin01" />
               <div className="items-div d-flex row">
-                <div className="d-flex col">
+                <div className="d-flex col text-center">
                   <img
-                    src={item.product_id.img}
+                    src={`${backend}${item?.product_id?.img}`}
                     className="cart-item-img"
                     alt=""
                   />
@@ -174,19 +175,19 @@ toast.error("please login")
                   <h6 className="item-name">
                     <span className="mobile-totalprice">
                       {" "}
-                      <p>&#8358; {item.product_id.price}</p>
+                      <p>&#8358; {item?.product_id?.price}</p>
                     </span>
                   </h6>
                 </div>
                 <div className="price-quantity-div d-flex col">
                   <p className="current-price fw-bold">
-                    &#8358; {item.product_id.price}
+                    &#8358; {item?.product_id?.price}
                   </p>
                   <div className="price-quantity-div-inner">
                     <div className="cart-inpt-div d-flex">
                       <button
                         className="cart-inpt-div-btn1 bg-info"
-                        onClick={() => decrement(item.product_id._id)}
+                        onClick={() => decrement(item?.product_id?._id)}
                       >
                         -
                       </button>
@@ -194,19 +195,19 @@ toast.error("please login")
                         type="text"
                         className="cart-input"
                         value={
-                          clothQuantity[item.product_id._id] || item.quantity
+                          clothQuantity[item?.product_id?._id] || item?.quantity
                         }
                       />
                       <button
                         className="cart-inpt-div-btn2 bg-info"
-                        onClick={() => increment(item.product_id._id)}
+                        onClick={() => increment(item?.product_id?._id)}
                       >
                         +
                       </button>
                     </div>
                     <p
                       className="remove-cart"
-                      onClick={() => DeleteCartItem(item._id)}
+                      onClick={() => DeleteCartItem(item?._id)}
                     >
                       Remove
                     </p>
@@ -214,12 +215,12 @@ toast.error("please login")
                   <p className="total-price fw-bold">
                     &#8358;{" "}
                     {`${(
-                      clothQuantity[item.product_id._id] * item.product_id.price
+                      clothQuantity[item?.product_id?._id] * item?.product_id?.price
                     ).toFixed(2)}`}
                   </p>
                   <p
                     className="remove2-cart"
-                    onClick={() => DeleteCartItem(item._id)}
+                    onClick={() => DeleteCartItem(item?._id)}
                   >
                     Remove
                   </p>
