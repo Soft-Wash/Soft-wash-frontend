@@ -52,7 +52,7 @@ function SupervisorDash() {
 
     
     useEffect(() => {
-      setLoading(true);
+      // setLoading(true);
       axiosInstance.get("/order/", {
         params: {
           branchId: targetBranchId 
@@ -67,66 +67,120 @@ function SupervisorDash() {
     }, [targetBranchId]);
     
 
-      const fetchEmployees = async (targetBranchId) => {
-        // setLoading(true);
-        try {
-          const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/employees?branchId=${targetBranchId}`);
-          console.log(response.data)
-          setEmployees(response.data);
-          // setLoading(false);
-        } catch (error) {
-          console.error('Error fetching employees:', error);
-        }
-      };
+    useEffect(() =>{
+      try {
+       axios.get(`${process.env.REACT_APP_BASE_URL}/employees?branchId=${targetBranchId}`)
+       .then((resp) =>{
+        console.log(resp.data)
+        setEmployees(resp.data);
+       })
+      
+      } catch (error) {
+        console.error('Error fetching employees:', error);
+      }
+    },[])
+
+      // const fetchEmployees = async (targetBranchId) => {
+      //   setLoading(true);
+      //   try {
+      //     const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/employees?branchId=${targetBranchId}`);
+      //     console.log(response.data)
+      //     setEmployees(response.data);
+      //     // setLoading(false);
+      //   } catch (error) {
+      //     console.error('Error fetching employees:', error);
+      //   }
+      // };
 
       // GET ALL TRANSACTIONS
 
-      const fetchTransactions = async () => {
-        // setLoading(true);
+      useEffect(() =>{
         try {
-          const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/transactions`);
+          axios.get(`${process.env.REACT_APP_BASE_URL}/transactions`)
+          .then((response) =>{
+            console.log(response.data.data.transactions)
+            setTransactions(response.data.data.transactions)
+          })
+          } catch (error) {
+            console.error('Error fetching transactions:', error.message);
+          }
+      },[]);
+
+      // const fetchTransactions = async () => {
+      //   // setLoading(true);
+      //   try {
+      //     const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/transactions`);
           
-        console.log(response.data.data.transactions)
-          setTransactions(response.data.data.transactions)
-        } catch (error) {
-          console.error('Error fetching transactions:', error.message);
-        }
-      };
+      //   console.log(response.data.data.transactions)
+      //     setTransactions(response.data.data.transactions)
+      //   } catch (error) {
+      //     console.error('Error fetching transactions:', error.message);
+      //   }
+      // };
 
 
       // GET ALL EXPENSE
 
-      const fetchExpense = async () => {
-        // setLoading(true);
-        try {
-          const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/expense`);
-      
-          // console.log(response.data)
-          setExpense(response.data)
-         
-          if (Array.isArray(response.data)) {
-            const totalExpense = response.data.reduce((sum, expense) => {
-              // Ensure amount is a number before adding to the sum
-              const expenseAmount = typeof expense.amount === 'number' ? expense.amount : 0;
-              return sum + expenseAmount;
-            }, 0);
-      
-            setTotalexpense(totalExpense);
-            console.log(totalExpense);
-          }
+      useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/expense`);
+                
+                console.log(response.data);
+                setExpense(response.data);
+                
+                if (Array.isArray(response.data)) {
+                    const totalExpense = response.data.reduce((sum, expense) => {
+                        // Ensure amount is a number before adding to the sum
+                        const expenseAmount = typeof expense.amount === 'number' ? expense.amount : 0;
+                        return sum + expenseAmount;
+                    }, 0);
+                    
+                    setTotalexpense(totalExpense);
+                    console.log(totalExpense);
+                }
+            } catch (error) {
+                console.error('Error fetching transactions:', error.message);
+            }
+        };
+    
+        fetchData();
+    }, []);
+    
 
-      
-        } catch (error) {
-          console.error('Error fetching transactions:', error.message);
-        }
-      };
+
+
+      // useEffect(() =>{
+
+      //     try {
+      //       const response = axios.get(`${process.env.REACT_APP_BASE_URL}/expense`);
+        
+      //       console.log(response.data)
+      //       setExpense(response.data)
+           
+      //       if (Array.isArray(response.data)) {
+      //         const totalExpense = response.data.reduce((sum, expense) => {
+      //           // Ensure amount is a number before adding to the sum
+      //           const expenseAmount = typeof expense.amount === 'number' ? expense.amount : 0;
+      //           return sum + expenseAmount;
+      //         }, 0);
+        
+      //         setTotalexpense(totalExpense);
+      //         console.log(totalExpense);
+      //       }
+  
+        
+      //     } catch (error) {
+      //       console.error('Error fetching transactions:', error.message);
+      //     }
+        
+      // },[])
+     
   
   
       if (targetBranchId) {
-        // setLoading(true);
-        fetchEmployees(targetBranchId);
-        fetchTransactions();
-        fetchExpense()
+  
+       
       }
     
 
@@ -166,7 +220,7 @@ function SupervisorDash() {
     };
 
     const FrontDesk = getEmployeesId("frontdesk");
-    console.log(FrontDesk)
+    // console.log(FrontDesk)
     const washman = getEmployeesId("washman");
     
     const totalEmployees = FrontDesk.length + washman.length; 
