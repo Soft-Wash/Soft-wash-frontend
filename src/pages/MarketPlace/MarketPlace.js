@@ -20,12 +20,14 @@ import Navigation from "../../common/MarketPlaceNavbar/Navigation";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useContext } from "react";
+import Loader from "../../components/Loader/Loader";
+
 
 function MarketPlace() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [wishlistItems, setWishlistItems] = useState([]);
   const backend = "http://localhost:8003/uploads/"
+  const [loading,setLoading]=useState(true)
 
 
   const [shopItems, setshopItems] = useState();
@@ -45,6 +47,7 @@ function MarketPlace() {
       });
     axiosInstance.get("/product/").then((resp) => {
       setshopItems(resp.data);
+      setLoading(false)
     });
   }, []);
 
@@ -124,94 +127,95 @@ function MarketPlace() {
   return (
     <div>
       <ToastContainer position="top-center" />
-      <Navigation />
+      {loading? <Loader/>:<>      <Navigation />
 
-      <Container className="text-center mt-5">
-        <h1 className="fs-1 fw-bold">POPULAR</h1>
-      </Container>
-      <Container>
-        <div>
-          <p>
-            <Link className="navigation_link2" to="/">
-              <span>home</span>{" "}
+<Container className="text-center mt-5">
+  <h1 className="fs-1 fw-bold">POPULAR</h1>
+</Container>
+<Container>
+  <div>
+    <p>
+      <Link className="navigation_link2" to="/">
+        <span>home</span>{" "}
+      </Link>
+      /{" "}
+      <Link to="/shop" className="navigation_link2">
+        <span className="fw-bold">shop</span>
+      </Link>
+    </p>
+  </div>
+
+  <hr />
+</Container>
+<Container className="mt-5">
+  <Row className="justify-content-between">
+    <Col sm={6} md={6} lg={6}>
+      <div className="select-tag-div">
+        <p className="sort-bestselling">Availability:</p>
+        <select name="" className="select-tag" id="">
+          <option className="" value="All">
+            All
+          </option>
+          <option value="in Stock">in Stock</option>
+          <option value="Out of Stock">Out of Stock</option>
+        </select>
+      </div>
+    </Col>
+    <Col sm={6} md={6} lg={6}>
+      <div className="d-flex ">
+        <p className="sort">Sorted by:</p>
+
+        <select name="" className="select-tag" id="">
+          <option className="" value="All">
+            Best Selling
+          </option>
+          <option value="in Stock">Aphabetically, A-Z</option>
+          <option value="Out of Stock">Aphabetically, Z-A</option>
+        </select>
+      </div>
+    </Col>
+  </Row>
+</Container>
+
+<Container>
+  <Row>
+    {shopItems &&
+      shopItems.map((item) => (
+        <Col xs={12} sm={12} md={4} lg={4} xl={3} key={item.name}>
+          <Card
+            className="item-card border text-center mt-4"
+            style={{ height: "350px" }}
+          >
+            <FiHeart
+              className={`cart-icon02 ${
+                isInWishlist(item._id)? "wishlist_active" : ""
+              }`}
+              onClick={() => AddWishlist(item._id)}
+            />
+            <img src={`${backend}${item.img}`} className="item-image  mt-5" alt="" />
+            <Link
+              to={`/singleproduct/${item._id}`}
+              className="sibglepagelink"
+            >
+              <h5 className="name-tag mt-1">{item?.name}</h5>
             </Link>
-            /{" "}
-            <Link to="/shop" className="navigation_link2">
-              <span className="fw-bold">shop</span>
-            </Link>
-          </p>
-        </div>
-
-        <hr />
-      </Container>
-      <Container className="mt-5">
-        <Row className="justify-content-between">
-          <Col sm={6} md={6} lg={6}>
-            <div className="select-tag-div">
-              <p className="sort-bestselling">Availability:</p>
-              <select name="" className="select-tag" id="">
-                <option className="" value="All">
-                  All
-                </option>
-                <option value="in Stock">in Stock</option>
-                <option value="Out of Stock">Out of Stock</option>
-              </select>
+            <p className="price-tag fs-4 m-0"> &#8358; {item?.price}</p>
+            <div>
+              <Button
+                variant="secondary"
+                className="cart-button bg-info border-0 w-75 rounded-0"
+                onClick={() => addToCart(item._id)}
+              >
+                Add to Cart
+              </Button>{" "}
             </div>
-          </Col>
-          <Col sm={6} md={6} lg={6}>
-            <div className="d-flex ">
-              <p className="sort">Sorted by:</p>
+          </Card>
+        </Col>
+      ))}
+  </Row>
+</Container>
+<Footer /></> }
 
-              <select name="" className="select-tag" id="">
-                <option className="" value="All">
-                  Best Selling
-                </option>
-                <option value="in Stock">Aphabetically, A-Z</option>
-                <option value="Out of Stock">Aphabetically, Z-A</option>
-              </select>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-
-      <Container>
-        <Row>
-          {shopItems &&
-            shopItems.map((item) => (
-              <Col xs={12} sm={12} md={4} lg={4} xl={3} key={item.name}>
-                <Card
-                  className="item-card border text-center mt-4"
-                  style={{ height: "350px" }}
-                >
-                  <FiHeart
-                    className={`cart-icon02 ${
-                      isInWishlist(item._id)? "wishlist_active" : ""
-                    }`}
-                    onClick={() => AddWishlist(item._id)}
-                  />
-                  <img src={`${backend}${item.img}`} className="item-image  mt-5" alt="" />
-                  <Link
-                    to={`/singleproduct/${item._id}`}
-                    className="sibglepagelink"
-                  >
-                    <h5 className="name-tag mt-1">{item?.name}</h5>
-                  </Link>
-                  <p className="price-tag fs-4 m-0"> &#8358; {item?.price}</p>
-                  <div>
-                    <Button
-                      variant="secondary"
-                      className="cart-button bg-info border-0 w-75 rounded-0"
-                      onClick={() => addToCart(item._id)}
-                    >
-                      Add to Cart
-                    </Button>{" "}
-                  </div>
-                </Card>
-              </Col>
-            ))}
-        </Row>
-      </Container>
-      <Footer />
     </div>
   );
 }

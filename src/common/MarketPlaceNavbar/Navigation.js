@@ -13,6 +13,7 @@ import { useContext } from "react";
 
 function Navigation() {
   const { cartNotific } = useContext(TaskContext);
+  const { wishlist } = useContext(TaskContext);
   // const cartCount = notification?.length || 0;
 
   return (
@@ -43,8 +44,14 @@ function Navigation() {
                           </div>
                         )}
                   </Link>
-                  <Link to="/wishlist">
-                    <FiHeart className="wishlist_icon" />
+                  <Link to="/wishlist" className="wishlistheart_link">
+                    <FiHeart className="wishlist_icon"/>
+                    {wishlist && wishlist.length> 0 && (
+                    <div className="wishlist_count">
+                    <p className="cart_count">{wishlist?.length}</p>
+                  </div>
+                    )}
+
                   </Link>
                 </Nav.Link>
               </Nav>

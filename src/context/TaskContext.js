@@ -7,6 +7,7 @@ export const TaskContext = createContext({});
 export function TaskContextProvider({ children }) {
   const [employeetasks, setEmployeetasks] = useState([]);
   const [cartNotific,setCartNotific]=useState()
+  const [wishlist,setWishlist]=useState()
 
   const getallEmployeetasks = () => {
     const washmanID = "655e49bad160aea8372bde1d";
@@ -33,10 +34,27 @@ export function TaskContextProvider({ children }) {
       });
   };
 
+  const GetWishlist=()=>{
+    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
+    axios
+    .get(`${process.env.REACT_APP_BASE_URL}/wishlist/user/wishlist?user_id=${userId._id}`)
+    .then((response) => {
+        setWishlist(response.data);
+        
+    })
+    .catch((error) => {
+      console.error("Error fetching employee tasks:", error);
+    });
+
+  }
+
   useEffect(() => {
     getallEmployeetasks();
     cartNotification()
+    GetWishlist()
   }, []);
+
+  
 
   return (
     <TaskContext.Provider
@@ -44,7 +62,8 @@ export function TaskContextProvider({ children }) {
         employeetasks,
         getallEmployeetasks,
         cartNotification,
-        cartNotific
+        cartNotific,
+        wishlist
       }}
     >
       {children}
