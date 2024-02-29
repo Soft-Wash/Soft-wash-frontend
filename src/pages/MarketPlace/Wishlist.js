@@ -17,7 +17,8 @@ import Loader from "../../components/Loader/Loader";
 function Wishlist() {
   const [wishlist, setWishlist] = useState();
   const [loading, setLoading] = useState(true);
-  const backend = "http://localhost:8003/uploads/"
+  const [wishlistItems, setWishlistItems] = useState([]);
+  const backend = "http://localhost:8003/uploads/";
 
   const getWishList = () => {
     const user = JSON.parse(localStorage.getItem("softwashLoginUser"));
@@ -57,6 +58,47 @@ function Wishlist() {
           const status = error.response.status;
           if (status === 400) {
             toast.error("item already in cart");
+          } else {
+            toast.error("Unexpected error occurred. Please try again later.");
+          }
+        }
+      });
+  };
+
+  const isInWishlist = (wishlistItems_id) => {
+    let x = wishlist?.map((item) => item?.product?._id === wishlistItems_id);
+    return x.includes(true);
+  };
+
+  const AddWishlist = (product_id) => {
+    const user_id = JSON.parse(localStorage.getItem("softwashLoginUser"));
+    const wishlistObj = {
+      user_id: user_id?._id,
+      product: product_id,
+    };
+    if (!wishlistObj.user_id) {
+      return toast.error("please login");
+    }
+    axios
+      .post(`${process.env.REACT_APP_BASE_URL}/wishlist/create`, wishlistObj)
+      .then((resp) => {
+        setWishlistItems((prevItems) => [...prevItems, product_id]);
+        toast.success("item added to wishlist");
+      })
+      .catch((error) => {
+        if (error.response) {
+          const status = error.response.status;
+          if (status === 400) {
+            axiosInstance
+              .delete(
+                `/wishlist/delete?product=${product_id}&user=${user_id._id}`
+              )
+              .then((resp) => {
+                setWishlistItems((prevItems) =>
+                  prevItems.filter((item) => item._id !== product_id._id)
+                );
+              });
+            toast.error("item removed from wishlist");
           } else {
             toast.error("Unexpected error occurred. Please try again later.");
           }
@@ -107,7 +149,12 @@ function Wishlist() {
                       className="item-card border text-center mt-4"
                       style={{ height: "350px" }}
                     >
-                      <FiHeart className="cart-icon02" />
+                      <FiHeart
+                        className={`cart-icon02 ${
+                          isInWishlist(item?.product?._id) ? "wishlist_active" : ""
+                        }`}
+                        onClick={() => AddWishlist(item?._id)}
+                      />
                       <img
                         src={`${backend}${item?.product?.img}`}
                         className="item-image  mt-5"
