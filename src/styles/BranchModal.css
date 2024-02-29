@@ -1,0 +1,12 @@
+.ModContainer{
+  margin-top: auto;
+  margin-left:auto;
+   
+}
+
+@media(max-width: 770px) {
+    .ModContainer{
+        margin-top: auto;
+        margin-left:auto;
+    }
+}
