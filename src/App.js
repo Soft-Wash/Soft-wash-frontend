@@ -76,6 +76,7 @@ import ExpenseReportSup from "./pages/SupervisorPage/ExpenseReportSup";
 import SupTaskWorkflow from "./pages/SupervisorPage/SupTaskWorkflow";
 import SupCreateTask from "./pages/SupervisorPage/SupCreateTask";
 import SupTaskTable from "./pages/SupervisorPage/SupTaskTable";
+import SupEmployees from "./pages/SupervisorPage/SupEmployees";
 import SupSingleTask from "./components/SupervisorComponents/SupSingleTask";
 import UserEditProfile from "./components/UserDashboard/UserEditProfile";
 import UserDashboard from "./pages/user/UserDashboard";
@@ -91,6 +92,7 @@ import WashmanProfilePage1 from "./pages/Washman Pages/WashmanProfilePage1";
 import FrontdeskAssignTask from "./pages/FrontDesk/AssignTask";
 import CreatProduct from "./pages/Admin/CreateProduct"
 import { TaskContext } from "./context/TaskContext";
+import SupNotificationTaskTable from "./components/SupervisorComponents/SupNotificationTaskTable";
 
 
 import SupplierDash from "./pages/Supplier/SupplierDash";
@@ -105,7 +107,8 @@ import PayRoll from "./pages/Admin/PayRoll";
 import PayRollTable from "./pages/Admin/PayRollTable";
 import Loader from "./components/Loader/Loader";
 import Review from "./pages/Admin/Reviews";
-
+import SupTransactions from "./pages/SupervisorPage/SupTransactions";
+import {useState} from 'react';
 
 
 
@@ -115,15 +118,17 @@ import Review from "./pages/Admin/Reviews";
 
 
 function App() {
+
+  const [notificationCount,setnotificationCount]=useState()
   return (
 <>  
 
 <ChakraProvider>
 <TaskContextProvider>
+  {/* <NotificationContext> */}
   <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage/>} />
-        {/* <Route path="/" element={<Loader/>} /> */}
         <Route path="/address" element={<AddressPage/>} />
         <Route path="/UserLogin" element={<UserLogin/>}/>
         <Route path="/UserRegister" element={<UserRegister/>}/>
@@ -137,7 +142,7 @@ function App() {
          <Route path="/dashboard-contact-us" element={<UserDashboardContactPage />} />
          <Route path="/order-details" element={<UserOrderDetailsPage />} />
          <Route path="/ClothesSelection" element={<ClothesSelection/>}/>
-        <Route path="/PaymentPage/:orderId" element={<PaymentPage/>}/>
+        <Route path="/PaymentPage" element={<PaymentPage/>}/>
          <Route path="/pricing" element={<PricingPage />} />
          <Route path="/ourservices" element={<Services/>} />
          <Route path="/about" element={<About/>} />
@@ -225,11 +230,14 @@ function App() {
         <Route path="/suptaskworkflow" element={<SupTaskWorkflow/>}/>
         <Route path="/SupCreateTask" element={<SupCreateTask/>}/>
         <Route path="/SupTaskTable" element={<SupTaskTable/>}/>
+        <Route path="/SupNotificationTasktable" element={<SupNotificationTaskTable/>}/>
         <Route path="/SupSingleTask/:_id" element ={<SupSingleTask/>}/>
+        <Route path="/SupEmployees" element={<SupEmployees/>}/>
+        <Route path ="/SupTransactions" element={<SupTransactions/>}/>
        
 
-{/* employee login */}
-<Route path="/employeelogin" element={<Login/>} />
+        {/* employee login */}
+        <Route path="/employeelogin" element={<Login/>} />
 
 
 
@@ -250,6 +258,8 @@ function App() {
 
       </Routes>
     </BrowserRouter>
+  {/* </NotificationContext> */}
+
     </TaskContextProvider>
     </ChakraProvider>
     

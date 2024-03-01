@@ -21,7 +21,7 @@ function SupervisorSideBar() {
                         <CDBSidebarMenuItem icon="table">View Orders</CDBSidebarMenuItem>
                     </NavLink>
                     <NavLink exact to="/CreatesupUsers" activeClassName="activeClicked">
-                        <CDBSidebarMenuItem icon="user">Create User</CDBSidebarMenuItem>
+                        <CDBSidebarMenuItem icon="user">Create Employee</CDBSidebarMenuItem>
                     </NavLink>
                     {/* <NavLink exact to="/tables" activeClassName="activeClicked">
                         <CDBSidebarMenuItem icon="table">Manage Payments</CDBSidebarMenuItem>

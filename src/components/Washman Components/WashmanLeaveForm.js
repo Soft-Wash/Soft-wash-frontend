@@ -27,10 +27,10 @@ function WashmanLeaveForm() {
 
 
 
-    const [washmanID, setWashmanID] = useState("")
-    // const branchID = "655deba5ec7b0b6e0f591bf5"
-
-    const [showModal, setShowModal] = useState(false);
+    const [washmanID, setWashmanID] = useState("");
+    const [showRejectionModal, setShowRejectionModal] = useState(false);
+    const [showSubmissionModal, setShowSubmissionModal] = useState(false);
+    // const [unresolvedLeave, setUnresolvedLeave] = useState()
 
     useEffect(() => {
       const getID = () =>{
@@ -44,8 +44,9 @@ function WashmanLeaveForm() {
 
         const fetchWashman = async () =>{          
             try{
-                // setLoading(true);
+                setLoading(true);
                 const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/employees/${washmanID}`)
+                setLoading(false);
                 setWashman(response.data);
                 console.log(response.data);    
                 setBranchID(response.data.branch);
@@ -59,7 +60,7 @@ function WashmanLeaveForm() {
         if(washmanID){
           fetchWashman();
         }
-    }, [washmanID, branchID])
+    }, [washmanID])
 
 
   
@@ -75,13 +76,15 @@ function WashmanLeaveForm() {
       try {
         const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/leave/employee/${washmanID}`);
         const leaveApplications = response.data;
-        
+        console.log(leaveApplications)
   
         const hasPendingLeave = leaveApplications.some(application => application.status === 'pending');
-    
+        console.log(hasPendingLeave);
+
         if (hasPendingLeave) {
-          setShowModal(true);
-        } else {
+          setShowRejectionModal(true);
+        } 
+        else {
             setErr(false);
             const body = {
               fullName: fullName,
@@ -99,6 +102,7 @@ function WashmanLeaveForm() {
                 `${process.env.REACT_APP_BASE_URL}/leave/create`,
                 body
               );
+              setShowSubmissionModal(true);
               console.log(resp.data);
             } catch (error) {
               console.log(error);
@@ -169,12 +173,12 @@ function WashmanLeaveForm() {
               <option value="" hidden>
                 Select Status
               </option>
-              <option value="annual">ANNUAL</option>
-              <option value="burial">BURIAL</option>
-              <option value="sick">SICK</option>   
-              <option value="wedding">WEDDING</option>              
-              <option value="patarnity">PATARNITY</option>              
-              <option value="matarnity">MATARNITY</option>                          
+              <option value="annual">Annual</option>
+              <option value="burial">Burial</option>
+              <option value="sick">Sick</option>   
+              <option value="wedding">Wedding</option>              
+              <option value="patarnity">Paternity</option>              
+              <option value="matarnity">Maternity</option>                          
           </select>
               
             <Form.Label htmlFor="startDate" className="washman-leave-inputs">
@@ -209,12 +213,44 @@ function WashmanLeaveForm() {
           </Button>
         </Form>
       </div>
+       {/* Submission Modal */}
+      {/* <div className="washman-modal"> */}
+      <Modal show={showSubmissionModal} onHide={() => setShowSubmissionModal(false)} className="washman-modal">
+        <Modal.Header closeButton>
+          <Modal.Title>Leave Submitted Successfully</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Your leave application has been submitted successfully.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowSubmissionModal(false)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      {/* </div> */}
+
+      {/* Rejection Modal */}
+      {/* <div className="washman-modal"> */}
+      <Modal show={showRejectionModal} onHide={() => setShowRejectionModal(false)} className="washman-modal">
+        <Modal.Header closeButton>
+          <Modal.Title>Unable to Submit Leave</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          You have a pending leave application. You cannot apply for new leave until the pending application is resolved.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowRejectionModal(false)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      {/* </div> */}
     </div>
       }
 
-      {/* Modal for pending leave application */}
-      {/* <div  */}
-      <Modal show={showModal} onHide={() => setShowModal(false)} className="washman-modal">
+      
+      {/* <Modal show={showModal} onHide={() => setShowModal(false)} className="washman-modal">
         <Modal.Header closeButton>
           <Modal.Title>Pending Leave Application</Modal.Title>
         </Modal.Header>
@@ -227,8 +263,10 @@ function WashmanLeaveForm() {
             Close
           </Button>
         </Modal.Footer>
-      </Modal>
-      {/* </div> */}
+      </Modal> */}
+
+     
+      
     </div>
   );
 }

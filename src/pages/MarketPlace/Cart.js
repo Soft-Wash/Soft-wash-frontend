@@ -11,34 +11,38 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "../../components/Loader/Loader";
 
 function Cart() {
   const [cartItems, setcartItems] = useState([]);
   const [clothQuantity, setclothQuantity] = useState({});
   const [totalprice, setTotalprice] = useState();
   const Cart_Array = [];
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const backend = "http://localhost:8003/uploads/";
+  const [loading, setLoading] = useState(true);
 
   const GetCartItems = () => {
     const CustomerData = JSON.parse(localStorage.getItem("softwashLoginUser"));
     const Customer_id = CustomerData?._id;
-    if(Customer_id){
+    if (Customer_id) {
       axios
-      .get(
-        `${process.env.REACT_APP_BASE_URL}/cart/customer?customer_id=${Customer_id}`
-      )
-      .then((resp) => {
-        const initialQuantity = {};
-        resp.data.forEach((item) => {
-          initialQuantity[item?.product_id?._id] = item?.quantity;
+        .get(
+          `${process.env.REACT_APP_BASE_URL}/cart/customer?customer_id=${Customer_id}`
+        )
+        .then((resp) => {
+          const initialQuantity = {};
+          resp.data.forEach((item) => {
+            initialQuantity[item?.product_id?._id] = item?.quantity;
+          });
+          setclothQuantity(initialQuantity);
+          console.log(resp.data);
+          setcartItems(resp.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
         });
-        setclothQuantity(initialQuantity);
-        console.log(resp.data);
-        setcartItems(resp.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
     }
   };
 
@@ -66,10 +70,8 @@ function Cart() {
       setcartItems(updatedCartItems);
     });
 
-
     setTimeout(() => {
-      axiosInstance.put(`/cart/${itemId}/update`, Quantity).then((resp) => {
-      });
+      axiosInstance.put(`/cart/${itemId}/update`, Quantity).then((resp) => {});
     }, 30000);
   };
 
@@ -113,8 +115,8 @@ function Cart() {
 
   const CalculateTotal = (cartItems) => {
     const total = cartItems.reduce((accumulator, cartItem) => {
-      const price = cartItem.product_id.price || 0;
-      const itemTotal = cartItem.quantity * price;
+      const price = cartItem?.product_id?.price || 0;
+      const itemTotal = cartItem?.quantity * price;
       return accumulator + itemTotal;
     }, 0);
     setTotalprice(total);
@@ -122,13 +124,13 @@ function Cart() {
     return total;
   };
 
-  const NavigateToCheckout=()=>{
-    if(cartItems.length>0){
-      navigate("/cartpayment")
-    }else{
-toast.error("please login")
+  const NavigateToCheckout = () => {
+    if (cartItems.length > 0) {
+      navigate("/cartpayment");
+    } else {
+      toast.error("please login");
     }
-  }
+  };
 
   useEffect(() => {
     const result = CalculateTotal(cartItems);
@@ -136,8 +138,8 @@ toast.error("please login")
 
   return (
     <div>
-                  <ToastContainer position="top-center" />
-      <Navigation />
+      <ToastContainer position="top-center" />
+      {loading? <Loader/>:<>      <Navigation />
       <Container className="cart-container mt-5">
         <h3>Shopping Cart</h3>
         <p className="mt-4">
@@ -161,9 +163,9 @@ toast.error("please login")
             <div key={index}>
               <hr className="lin01" />
               <div className="items-div d-flex row">
-                <div className="d-flex col">
+                <div className="d-flex col text-center">
                   <img
-                    src={item.product_id.img}
+                    src={`${backend}${item?.product_id?.img}`}
                     className="cart-item-img"
                     alt=""
                   />
@@ -174,19 +176,19 @@ toast.error("please login")
                   <h6 className="item-name">
                     <span className="mobile-totalprice">
                       {" "}
-                      <p>&#8358; {item.product_id.price}</p>
+                      <p>&#8358; {item?.product_id?.price}</p>
                     </span>
                   </h6>
                 </div>
                 <div className="price-quantity-div d-flex col">
                   <p className="current-price fw-bold">
-                    &#8358; {item.product_id.price}
+                    &#8358; {item?.product_id?.price}
                   </p>
                   <div className="price-quantity-div-inner">
                     <div className="cart-inpt-div d-flex">
                       <button
                         className="cart-inpt-div-btn1 bg-info"
-                        onClick={() => decrement(item.product_id._id)}
+                        onClick={() => decrement(item?.product_id?._id)}
                       >
                         -
                       </button>
@@ -194,19 +196,19 @@ toast.error("please login")
                         type="text"
                         className="cart-input"
                         value={
-                          clothQuantity[item.product_id._id] || item.quantity
+                          clothQuantity[item?.product_id?._id] || item?.quantity
                         }
                       />
                       <button
                         className="cart-inpt-div-btn2 bg-info"
-                        onClick={() => increment(item.product_id._id)}
+                        onClick={() => increment(item?.product_id?._id)}
                       >
                         +
                       </button>
                     </div>
                     <p
                       className="remove-cart"
-                      onClick={() => DeleteCartItem(item._id)}
+                      onClick={() => DeleteCartItem(item?._id)}
                     >
                       Remove
                     </p>
@@ -214,12 +216,13 @@ toast.error("please login")
                   <p className="total-price fw-bold">
                     &#8358;{" "}
                     {`${(
-                      clothQuantity[item.product_id._id] * item.product_id.price
+                      clothQuantity[item?.product_id?._id] *
+                      item?.product_id?.price
                     ).toFixed(2)}`}
                   </p>
                   <p
                     className="remove2-cart"
-                    onClick={() => DeleteCartItem(item._id)}
+                    onClick={() => DeleteCartItem(item?._id)}
                   >
                     Remove
                   </p>
@@ -247,17 +250,18 @@ toast.error("please login")
           </div>
           <div className="sub-total-div-inner2 col col-12 col-md-6 col-lg-6 ">
             <h4>Subtotal:&#8358; {totalprice}</h4>
-              <Button
-                variant="secondary"
-                className="checkout-button bg-info border-0"
-                onClick={()=>NavigateToCheckout()}
-              >
-                Checkout
-              </Button>{" "}
+            <Button
+              variant="secondary"
+              className="checkout-button bg-info border-0"
+              onClick={() => NavigateToCheckout()}
+            >
+              Checkout
+            </Button>{" "}
           </div>
         </div>
       </Container>
-      <Footer />
+      <Footer /></>}
+
     </div>
   );
 }

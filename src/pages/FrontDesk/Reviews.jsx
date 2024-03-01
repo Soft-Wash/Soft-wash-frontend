@@ -1,35 +1,42 @@
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 import "../../styles/Admin/Reviews.css";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { axiosInstance } from "../../services/AxiosInstance";
+import { toast } from "react-toastify";
+import Table from 'react-bootstrap/Table'
+import Sidebar from "../../components/FrontDesk/Sidebar";
 
-function Review() {
-  const [review, setReview] = useState();
+export default function ReviewPage() {
+  const [reviews, setReviews] = useState();
 
-  const getReview = () => {
+  const getReviews = () => {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
-    axios
-      .get(
-        `${process.env.REACT_APP_BASE_URL}/review/`
-      )
-      .then((resp) => {
-        setReview(resp.data);
-      });
+
+    axiosInstance.get(`${process.env.REACT_APP_BASE_URL}/review/`).then((resp => {
+      console.log(resp.data)
+      setReviews(resp.data)
+      if (!resp.data) {
+        toast.error('Reviews download Failed')
+      }
+    }))
   };
 
   useEffect(() => {
-    getReview();
+    getReviews();
   }, []);
 
+
+
+
   return (
-    <div>
+    <>
       <div className="d-flex">
-        <AdminSidebar />
+        <Sidebar />
         <div className="review_content">
           <h4>Reviews</h4>
           <hr className="review_hr" />
           <div className="review_table_div">
-            <table className="review_table">
+            <Table className="review_table">
               <thead>
                 <tr>
                   <th>fullName</th>
@@ -38,28 +45,26 @@ function Review() {
                 </tr>
               </thead>
               <tbody>
-                {review?.length < 0 ? (
+                {reviews?.length < 0 ? (
                   <tr>
                     <td colSpan="6" className="no-data-message">
                       No data available
                     </td>
                   </tr>
                 ) : (
-                  review && review.map((item) => (
+                  reviews?.map((item) => (
                     <tr key={item?._id}>
-                      <th>{item?.user_id?.fullName}</th>
-                      <th>{item?.order_id?._id}</th>
-                      <th>{item?.message}</th>
+                      <td>{item?.user_id.fullName}</td>
+                      <td>{item?.order_id?._id || 'null'}</td>
+                      <td>{item?.message}</td>
                     </tr>
                   ))
                 )}
               </tbody>
-            </table>
+            </Table>
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-export default Review;
+    </>
+  )
+};

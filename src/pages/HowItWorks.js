@@ -20,10 +20,14 @@ function HowItWorks (){
                 <div className="custom-bg-color">
                     <SubNav />
                 </div>
-            <HowWeWorkBanner />      
+            <HowWeWorkBanner /> 
+            <h3 className='hww-pic-desc'>All you need to do is bag Up your Clothes for laundry</h3>     
             <HowWeWorkProp image={img1} />
+            <h3 className='hww-pic-desc'>Representatives of our team of staff comes and pick them up</h3> 
             <HowWeWorkProp image={img2} />     
+            <h3 className='hww-pic-desc'>We meticulously wash, iron, dry and fold your clothes within a minimum of two days</h3> 
             <HowWeWorkProp image={img3} />
+            <h3 className='hww-pic-desc'>We deliver back to you at your desired location and swiftly.</h3> 
             <HowWeWorkProp image={img4} /> 
             <Footer />
         </div>
