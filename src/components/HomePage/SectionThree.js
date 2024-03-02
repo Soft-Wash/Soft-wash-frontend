@@ -47,11 +47,11 @@ export default function SectionThree() {
   return (
     <div className="sec-3-bg my-5 px-5 py-5 mw-100 overflow-hidden p-none-sm">
             <ToastContainer position="top-center" />
-      <BranchModal
+      < BranchModal
 isOpen={showModal} 
 onClose={handleClose}
 SaveBranch={handleSaveBranch} 
-/>
+ style={{marginTop:"80px"}}/>
       <Container className="container03">
         <Row className=" align-items-center">
           <Col

@@ -76,6 +76,7 @@ import ExpenseReportSup from "./pages/SupervisorPage/ExpenseReportSup";
 import SupTaskWorkflow from "./pages/SupervisorPage/SupTaskWorkflow";
 import SupCreateTask from "./pages/SupervisorPage/SupCreateTask";
 import SupTaskTable from "./pages/SupervisorPage/SupTaskTable";
+import SupEmployees from "./pages/SupervisorPage/SupEmployees";
 import SupSingleTask from "./components/SupervisorComponents/SupSingleTask";
 import UserEditProfile from "./components/UserDashboard/UserEditProfile";
 import UserDashboard from "./pages/user/UserDashboard";
@@ -91,6 +92,7 @@ import WashmanProfilePage1 from "./pages/Washman Pages/WashmanProfilePage1";
 import FrontdeskAssignTask from "./pages/FrontDesk/AssignTask";
 import CreatProduct from "./pages/Admin/CreateProduct"
 import { TaskContext } from "./context/TaskContext";
+import SupNotificationTaskTable from "./components/SupervisorComponents/SupNotificationTaskTable";
 
 
 import SupplierDash from "./pages/Supplier/SupplierDash";
@@ -105,7 +107,9 @@ import PayRoll from "./pages/Admin/PayRoll";
 import PayRollTable from "./pages/Admin/PayRollTable";
 import Loader from "./components/Loader/Loader";
 import Review from "./pages/Admin/Reviews";
-import { useState } from "react";
+import SupTransactions from "./pages/SupervisorPage/SupTransactions";
+import {useState} from "react"
+
 
 
 
@@ -227,11 +231,14 @@ function App() {
         <Route path="/suptaskworkflow" element={<SupTaskWorkflow/>}/>
         <Route path="/SupCreateTask" element={<SupCreateTask/>}/>
         <Route path="/SupTaskTable" element={<SupTaskTable/>}/>
+        <Route path="/SupNotificationTasktable" element={<SupNotificationTaskTable/>}/>
         <Route path="/SupSingleTask/:_id" element ={<SupSingleTask/>}/>
+        <Route path="/SupEmployees" element={<SupEmployees/>}/>
+        <Route path ="/SupTransactions" element={<SupTransactions/>}/>
        
 
-{/* employee login */}
-<Route path="/employeelogin" element={<Login/>} />
+        {/* employee login */}
+        <Route path="/employeelogin" element={<Login/>} />
 
 
 

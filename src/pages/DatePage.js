@@ -35,22 +35,21 @@ function DatePage() {
     }
   };
 
-  return (
-    <div>
-   
-        <>
-          {" "}
-          <ToastContainer position="top-center" />
-          <BookingBanner />
-          <Container className="datepage-container">
-            <div className="date-body justify-content-between">
-              <div className="date-body-left">
-                <BookingPickUpMode />
-                <Calender />
-              </div>
-              <div className="select-pickup-type date-body-right">
-                <SelectedCart  />
-              </div>
+    return(
+       <div>
+            <>
+            <ToastContainer position="top-center" />
+            <BookingBanner />
+            <Container className='datepage-container'>
+            <h4>Kindly note,that all orders take a minimum of two days to process and complete</h4>
+            <div className='date-body justify-content-between'>
+                <div className='date-body-left'>
+                    <BookingPickUpMode />
+                    <Calender />
+                </div>
+                <div className='select-pickup-type date-body-right'>
+                    <SelectedCart />
+                </div>
             </div>
             <div className="date-page-brts-div d-flex justify-content-center mt-">
               <Link to="/ClothesSelection">
