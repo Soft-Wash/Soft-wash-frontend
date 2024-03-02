@@ -241,9 +241,7 @@ export default function OrderReceipt() {
               </div>
             </div>
           </div>
-        ) : (
-          <p className="text-center">Loading... </p>
-        )}
+        ):""}
       </div>
     </div>
     <Row className="mb-5"></Row>

@@ -70,40 +70,22 @@ function Wishlist() {
     return x.includes(true);
   };
 
-  const AddWishlist = (product_id) => {
+  const DeleteWishlist = (product_id) => {
     const user_id = JSON.parse(localStorage.getItem("softwashLoginUser"));
-    const wishlistObj = {
-      user_id: user_id?._id,
-      product: product_id,
-    };
-    if (!wishlistObj.user_id) {
-      return toast.error("please login");
-    }
+    console.log(user_id._id,product_id)
     axios
-      .post(`${process.env.REACT_APP_BASE_URL}/wishlist/create`, wishlistObj)
-      .then((resp) => {
-        setWishlistItems((prevItems) => [...prevItems, product_id]);
-        toast.success("item added to wishlist");
-      })
-      .catch((error) => {
-        if (error.response) {
-          const status = error.response.status;
-          if (status === 400) {
-            axiosInstance
-              .delete(
-                `/wishlist/delete?product=${product_id}&user=${user_id._id}`
-              )
-              .then((resp) => {
-                setWishlistItems((prevItems) =>
-                  prevItems.filter((item) => item._id !== product_id._id)
-                );
-              });
-            toast.error("item removed from wishlist");
-          } else {
-            toast.error("Unexpected error occurred. Please try again later.");
-          }
-        }
-      });
+    .get(
+      `${process.env.REACT_APP_BASE_URL}/wishlist/delete/?user=${user_id?._id}&product=${product_id}`
+    )
+    .then((resp) => {
+      console.log(resp.data);
+      setWishlist(resp.data);
+      toast.success("item removed")
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
   };
 
   useEffect(() => {
@@ -153,7 +135,7 @@ function Wishlist() {
                         className={`cart-icon02 ${
                           isInWishlist(item?.product?._id) ? "wishlist_active" : ""
                         }`}
-                        onClick={() => AddWishlist(item?._id)}
+                        onClick={() => DeleteWishlist(item?._id)}
                       />
                       <img
                         src={`${backend}${item?.product?.img}`}
