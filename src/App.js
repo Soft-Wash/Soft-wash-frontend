@@ -76,6 +76,7 @@ import ExpenseReportSup from "./pages/SupervisorPage/ExpenseReportSup";
 import SupTaskWorkflow from "./pages/SupervisorPage/SupTaskWorkflow";
 import SupCreateTask from "./pages/SupervisorPage/SupCreateTask";
 import SupTaskTable from "./pages/SupervisorPage/SupTaskTable";
+import SupEmployees from "./pages/SupervisorPage/SupEmployees";
 import SupSingleTask from "./components/SupervisorComponents/SupSingleTask";
 import UserEditProfile from "./components/UserDashboard/UserEditProfile";
 import UserDashboard from "./pages/user/UserDashboard";
@@ -88,8 +89,10 @@ import ShopReciept from "./pages/MarketPlace/ShopReciept"
 import ShopOrderDetailsPage from "./pages/ShopOrderDetailsPage";
 import ShopOrders from "./pages/user/ShopOrders";
 import WashmanProfilePage1 from "./pages/Washman Pages/WashmanProfilePage1";
+import FrontdeskAssignTask from "./pages/FrontDesk/AssignTask";
 import CreatProduct from "./pages/Admin/CreateProduct"
 import { TaskContext } from "./context/TaskContext";
+import SupNotificationTaskTable from "./components/SupervisorComponents/SupNotificationTaskTable";
 
 
 import SupplierDash from "./pages/Supplier/SupplierDash";
@@ -100,6 +103,13 @@ import SupplyReceipt from "./pages/Supplier/SupplyReceipt";
 import SupplyOrder from "./pages/Supplier/SupplyOrder";
 import SupplierLog from "./pages/Supplier/SupplierLog"
 
+import PayRoll from "./pages/Admin/PayRoll";
+import PayRollTable from "./pages/Admin/PayRollTable";
+import Loader from "./components/Loader/Loader";
+import Review from "./pages/Admin/Reviews";
+import SupTransactions from "./pages/SupervisorPage/SupTransactions";
+
+
 
 
 
@@ -108,11 +118,14 @@ import SupplierLog from "./pages/Supplier/SupplierLog"
 
 
 function App() {
+
+  const [notificationCount,setnotificationCount]=useState()
   return (
 <>  
 
 <ChakraProvider>
 <TaskContextProvider>
+  {/* <NotificationContext> */}
   <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage/>} />
@@ -129,7 +142,7 @@ function App() {
          <Route path="/dashboard-contact-us" element={<UserDashboardContactPage />} />
          <Route path="/order-details" element={<UserOrderDetailsPage />} />
          <Route path="/ClothesSelection" element={<ClothesSelection/>}/>
-        <Route path="/PaymentPage/:orderId" element={<PaymentPage/>}/>
+        <Route path="/PaymentPage" element={<PaymentPage/>}/>
          <Route path="/pricing" element={<PricingPage />} />
          <Route path="/ourservices" element={<Services/>} />
          <Route path="/about" element={<About/>} />
@@ -150,11 +163,14 @@ function App() {
         {/* Front desk */}
           <Route path="/frontdesk/dash" element={<Dashboard/>} />
           <Route path="/userdashboard" element={<UserDashboard/>} />
+          <Route path="/frontdesk/assign-task" element={<FrontdeskAssignTask/>} />
+          <Route path="/frontdesk/inventory"  />
+          <Route path="/frontdesk/reviews"  />
          
 
         {/* WASHMAN ROUTES */}
         <Route path="/washman-profile" element={<WashmanProfilePage1/>}/>
-        <Route path="/washman-orders" element={<WashmanOrdersPage/>}/>
+        <Route path="/washman-tasks" element={<WashmanOrdersPage/>}/>
         <Route path="/washman-dashboard" element={<WashmanDashboardPage/>}/>
         <Route path="/washman-single-order/:_id" element={<WashmanSingleOrderPage/>}/>
         <Route path="/washman-edit-profile" element={<WashmanEditProfilePage/>}/>
@@ -193,6 +209,9 @@ function App() {
         <Route path="/shoporderdetails" element={<ShopOrderDetailsPage/>}/>
         <Route path="/shoporders" element={<ShopOrders/>}/>
         <Route path="/createproduct" element={<CreatProduct/>}/>
+        <Route path="/payroll" element={<PayRoll/>}/>
+        <Route path="/payrolltable" element={<PayRollTable/>}/>
+        <Route path="/reviews" element={<Review/>}/>
         
 
 
@@ -211,11 +230,14 @@ function App() {
         <Route path="/suptaskworkflow" element={<SupTaskWorkflow/>}/>
         <Route path="/SupCreateTask" element={<SupCreateTask/>}/>
         <Route path="/SupTaskTable" element={<SupTaskTable/>}/>
+        <Route path="/SupNotificationTasktable" element={<SupNotificationTaskTable/>}/>
         <Route path="/SupSingleTask/:_id" element ={<SupSingleTask/>}/>
+        <Route path="/SupEmployees" element={<SupEmployees/>}/>
+        <Route path ="/SupTransactions" element={<SupTransactions/>}/>
        
 
-{/* employee login */}
-<Route path="/employeelogin" element={<Login/>} />
+        {/* employee login */}
+        <Route path="/employeelogin" element={<Login/>} />
 
 
 
@@ -229,6 +251,8 @@ function App() {
         <Route path="/SupplierLog" element={<SupplierLog/>}/>
       </Routes>
     </BrowserRouter>
+  {/* </NotificationContext> */}
+
     </TaskContextProvider>
     </ChakraProvider>
     

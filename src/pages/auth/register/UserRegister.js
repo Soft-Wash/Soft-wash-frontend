@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useState,useContext } from 'react';
 import { registerUser } from '../../../services/register';
 import { variableManager } from '../../../context/VariablesContext';
-// import {Loader} from "../../../common/Loader"
+import Loader from '../../../components/Loader/Loader';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -77,7 +77,7 @@ export default function Signup() {
     return (
       <>
       <ToastContainer position="top-center" />
-      <div className="signup-container">
+      {loading? <Loader/>:       <div className="signup-container">
         <div className="banner-section">
           <center className="logo-section">
             <h1>SOFT WASH</h1>
@@ -221,8 +221,8 @@ export default function Signup() {
             </form>
           </div>
         </div>
-        {/* <Loader color="primary" size="lg" show={loading} />  */}
-      </div>
+      </div>}
+
       </>
     );
   }

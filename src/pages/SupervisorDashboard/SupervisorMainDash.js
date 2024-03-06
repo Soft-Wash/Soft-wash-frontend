@@ -1,6 +1,5 @@
 // import React, { useState } from "react";
 import React, { useState, useEffect } from 'react';
-
 import { Link } from "react-router-dom";
 import moment from 'moment';
 import SupervisorMain from "../../styles/SupervisorMain.css"
@@ -36,7 +35,6 @@ function SupervisorMainDash() {
   const timeOfDay = getTimeOfDay();
   
   return (
-  
     <div class="container-fluid">
       <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-grey" style={{backgroundColor:"#ECF0F5"}}>

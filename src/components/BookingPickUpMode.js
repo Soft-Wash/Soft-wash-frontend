@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
-import Loader from "../common/Loader"
+import Loader from "../components/Loader/Loader"
 
 
 

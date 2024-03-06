@@ -7,9 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { useState,useContext } from 'react';
 import{handleLogin} from '../../../services/Login'
 import { variableManager } from '../../../context/VariablesContext';
-// import{Loader} from "../../../common/Loader"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from '../../../components/Loader/Loader';
 
 export default function Login() {
     const navigate = useNavigate();
@@ -42,25 +42,20 @@ export default function Login() {
           
         }
       }
-      // function handleValidation() {
-      //   const {  email, password } = loginDetails;
-      //   if ( !email && !password) {
-      //     toast.error("Incorrect Credentials")
-      //     setEmpty(true);
-      //   } else {
-      //     handleLoginSubmit(loginDetails);
-      //     console.log(loginDetails)
-          
-      //   }
-      // }
 
       async function handleLoginSubmit(payload){
+        const processingOrder=JSON.parse(localStorage.getItem("paymentType"))
         setLoading(true)
         const {data,error} = await handleLogin(payload);
         setLoading(false);
         if(data){
           toast.success("Login Successful")
-          navigate('/')
+          if(processingOrder){
+            navigate('/paymentpage')
+          }else{
+            navigate('/')
+          }
+
         } else if(error){
           toast.error("Incorrect Email Or Password");
         }
@@ -70,7 +65,7 @@ export default function Login() {
     return (
       <>
       <ToastContainer position="top-center" />
-      <div className="signup-container login-container">
+      {loading? <Loader/> :       <div className="signup-container login-container">
         <div className="form-section">
           <div className="content">
             <center className="text-center mb-5 p-2">
@@ -173,8 +168,8 @@ export default function Login() {
           </div>
             <center className="copyright">Copyright © 2023</center>
         </div>
-        {/* <Loader color="primary" size="lg" show={loading} />  */}
-      </div>
+      </div>}
+
       </>
     );
   }

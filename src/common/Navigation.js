@@ -11,40 +11,44 @@ import { useNavigate } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import { BsBell } from "react-icons/bs";
 import { axiosInstance } from "../services/AxiosInstance";
-const backend = "http://localhost:8003/uploads/"
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Navigation() {
   const OrderDetails = JSON.parse(localStorage.getItem("orderDetails"));
   const [userLoggedIn, setUserLoggedIn] = useState();
   const [userImage, setUserImage] = useState();
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const backend = "http://localhost:8003/uploads/";
 
   useEffect(() => {
     const userImage = JSON.parse(localStorage.getItem("softwashLoginUser"));
     const userToken = JSON.parse(localStorage.getItem("softwashLoginToken"));
     setUserLoggedIn(userToken);
-    if(userToken){
-      userData()
+    if (userToken) {
+      userData();
     }
   }, []);
 
-
   const handleLogout = () => {
-    // Clear local storage
-    localStorage.clear();
-    navigate("/");
+    const logOut = localStorage.clear();
+    if (logOut) {
+      toast.success("logout successful");
+      navigate("/");
+    }
   };
 
-  const userData=()=>{
+  const userData = () => {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
-    axiosInstance.get(`/users/${userId?._id}`)
-    .then((resp)=>{
+    axiosInstance.get(`/users/${userId?._id}`).then((resp) => {
       setUserImage(resp.data);
-    })
-  }
+    });
+  };
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
+      <ToastContainer position="top-center" />
       <Container fluid>
         <Navbar.Brand href="/" className="fw-bold">
           SOFT-WASH
@@ -101,12 +105,11 @@ function Navigation() {
                   }}
                 >
                   <small
-                    className=" d-flex align-items-center p-1 position-absolute bg-danger text-white fs-6 rounded-circle border border-white"
+                    className=" d-flex align-items-center p-1 position-absolute  text-info fs-6 rounded-circle border border-info text-bold"
                     style={{ top: "-4px", right: "9px", height: "20px" }}
                   >
-                    3
+                    2
                   </small>
-
                   <BsBell className="fs-4 mr-0" />
                 </div>
                 <Dropdown
@@ -120,7 +123,7 @@ function Navigation() {
                     <img
                       src={
                         userImage && userImage?.avatar
-                          ? backend+userImage?.avatar
+                          ? backend + userImage?.avatar
                           : `https://ui-avatars.com/api/?name=${userImage?.fullName}&size=128`
                       }
                       alt="profile"
@@ -139,7 +142,9 @@ function Navigation() {
                         Dashboard
                       </Link>
                     </Dropdown.Item>
-                    <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                    <Dropdown.Item onClick={() => handleLogout()}>
+                      Logout
+                    </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </div>

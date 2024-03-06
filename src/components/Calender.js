@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from "react-time-picker";
 import { Button, Container } from "react-bootstrap";
 import { useEffect } from "react";
-import Loader from "../common/Loader"
+import Loader from "../components/Loader/Loader"
 
 function Calender() {
   const [startDate, setStartDate] = useState(() => {
@@ -38,6 +38,15 @@ function Calender() {
 
 
 
+  const disabledDates = () => {
+    const today = new Date();
+    const maxDate = new Date(today);
+    maxDate.setDate(today.getDate() + 3);
+    return maxDate;
+  };
+
+
+
   
   return (
     <Container>
@@ -51,7 +60,8 @@ function Calender() {
             className="react-datepicker__calendar form-control border-primary"
             selected={startDate}
             onChange={(date) => setStartDate(date)}
-            minDate={new Date()}
+            minDate={disabledDates()}
+            // maxDate={}
           />         
 
           <div className="mx-2" style={{display: "flex", flexDirection: "column"}}>

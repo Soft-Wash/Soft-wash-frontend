@@ -1,0 +1,15 @@
+.washman-modal{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.washman-leave-select-tag{
+    width: 100%;
+    padding: 6px 0;
+    border-radius: 4px;
+    border: 1px solid gainsboro;
+}
+.washman-leave-inputs{
+    margin-top: 20px;
+}

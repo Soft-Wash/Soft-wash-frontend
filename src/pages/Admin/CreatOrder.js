@@ -10,6 +10,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BiSearch } from "react-icons/bi";
 
 function CreateOrder() {
   const [clothTypes, setclothTypes] = useState();
@@ -22,20 +23,22 @@ function CreateOrder() {
   const [sheduleDate, setsheduleDate] = useState();
   const [clothName, setclothName] = useState();
   const [clothPrice, setclothPrice] = useState();
-  const [selectedItems,setSelectedItems]= useState()
+  const [selectedItems, setSelectedItems] = useState();
+  const [filteredResult, setfilteredResult] = useState();
+  const [selectedUser,setSelectedUser]=useState()
   const [deliveryAddress, setdeliveryAddress] = useState({
     FullAddress: "",
   });
   const [clothQuantity, setclothQuantity] = useState(0);
   const [MiniClothCart, setMiniClothCart] = useState([]);
   const [totalPrice, settotalPrice] = useState();
+  const [isModal, setIsModal] = useState(false);
+  const [createdUser,setCreatedUser]=useState()
 
   const [selectedTime, setSelectedTime] = useState(() => {
     const storedTime = localStorage.getItem("AdminSelectedTime");
     return storedTime ? JSON.parse(storedTime) : "";
   });
-
-
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -47,7 +50,7 @@ function CreateOrder() {
         setclothTypes(resp.data);
       }
     });
-    return 
+    return;
   }, []);
 
   const handleInputChange = (e) => {
@@ -68,7 +71,7 @@ function CreateOrder() {
 
   const getClothDetails = (id, name, price) => {
     if (!clothId?.includes(id)) {
-      setClothId((prev)=> [ id]);
+      setClothId((prev) => [id]);
       setclothName(name);
       setclothPrice(price);
     } else {
@@ -76,16 +79,12 @@ function CreateOrder() {
     }
   };
 
-
-
-  
   useEffect(() => {
-    let isMounted = true;
-    AddClothesToContent()
-    return 
+    AddClothesToContent();
+    return;
   }, [clothId]);
 
-  const AddClothesToContent=()=>{
+  const AddClothesToContent = () => {
     if (clothId?.length > 0) {
       const existingCloth = MiniClothCart.find((item) => item._id === clothId);
       if (existingCloth) {
@@ -108,8 +107,7 @@ function CreateOrder() {
         ]);
       }
     }
-  }
-
+  };
 
   const handleTimeChange = (time) => {
     setSelectedTime(time);
@@ -126,66 +124,68 @@ function CreateOrder() {
     handleTimeChange(time);
   };
 
-
-
-
-
   const CreateOrder = () => {
     const customerId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     const keys = Object.keys(clothQuantity);
     const values = Object.values(clothQuantity);
-    const mainArr = keys.map((key,index)=>({id:key,quantity:values[index]}))
-    axios.put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
-    .then((resp) => {
-      setSelectedItems(resp.data)
-      const OrderDetails = {
-        customer_id: customerId?._id,
-        clothtype_ids: resp.data,
-        pickuptime: selectedTime,
-        deliveryAddress: deliveryAddress,
-        delivery_type: clothDetails?.serviceType,
-        schedule_date: sheduleDate,
-        subtotal: totalPrice,
-      };
-      if (
-        OrderDetails.clothtype_ids === undefined ||
-        OrderDetails.pickuptime === undefined ||
-        OrderDetails.deliveryAddress === undefined ||
-        OrderDetails.schedule_date === undefined
-      ) {
-        toast.error("Please select all fields");
-      } else if (!customerDetails || Object.keys(customerDetails).length === 0) {
-        toast.error("please create a customer");
-      } else {
-  
-        axios
-          .post(`${process.env.REACT_APP_BASE_URL}/order/create`, OrderDetails)
-          .then((resp) => {
-            setcreatedOrder(resp.data);
-            toast.success("Order created successfully");
-            setMiniClothCart([])
-          })
-          .catch((error) => {
-            console.error("Error creating order:", error);
-            toast.error("Failed to create order");
-          });
-      }
-
-     })  
-
+    const mainArr = keys.map((key, index) => ({
+      id: key,
+      quantity: values[index],
+    }));
+    axios
+      .put(`${process.env.REACT_APP_BASE_URL}/cloth/updatequantity`, mainArr)
+      .then((resp) => {
+        setSelectedItems(resp.data);
+        const OrderDetails = {
+          customer_id: selectedUser?selectedUser:createdUser?._id,
+          clothtype_ids: resp.data,
+          pickuptime: selectedTime,
+          deliveryAddress: deliveryAddress,
+          delivery_type: clothDetails?.serviceType,
+          schedule_date: sheduleDate,
+          subtotal: totalPrice,
+        };
+        if (
+          OrderDetails.clothtype_ids === undefined ||
+          OrderDetails.pickuptime === undefined ||
+          OrderDetails.deliveryAddress === undefined ||
+          OrderDetails.schedule_date === undefined
+        ) {
+          toast.error("Please select all fields");
+        } else if (
+          OrderDetails.customer_id === undefined
+        ) {
+          toast.error("please create a customer");
+        } else {
+          axios
+            .post(
+              `${process.env.REACT_APP_BASE_URL}/order/create`,
+              OrderDetails
+            )
+            .then((resp) => {
+              setcreatedOrder(resp.data);
+              toast.success("Order created successfully");
+              setMiniClothCart([]);
+            })
+            .catch((error) => {
+              console.error("Error creating order:", error);
+              toast.error("Failed to create order");
+            });
+        }
+      });
   };
 
-  const ClearOrderDetails=()=>{
-    setMiniClothCart([])
-    setclothQuantity(0)
-    setClothDetails("")
+  const ClearOrderDetails = () => {
+    setMiniClothCart([]);
+    setclothQuantity(0);
+    setClothDetails("");
     setsheduleDate("");
-
-  }
+  };
 
   const Creatuser = () => {
     axiosInstance.post("/users/auth/register", customerDetails).then((resp) => {
       toast.success("user created succesfully");
+      setCreatedUser(resp.data)
       setTimeout(() => {
         handleClose();
       }, 1000);
@@ -221,6 +221,27 @@ function CreateOrder() {
 
     settotalPrice(total);
   };
+
+
+  const handleSearch = (name) => {
+    axiosInstance
+      .get(`/users/users/search?fullName=${name}`)
+      .then((resp) => {
+        setfilteredResult(resp.data);
+        setIsModal(true);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleFoundUser=(id)=>{
+    setSelectedUser(id)
+    toast.success("customer selected")
+    setIsModal(false)
+  }
+
+  console.log(selectedUser)
 
   useEffect(() => {
     calculateQuantity(MiniClothCart);
@@ -381,12 +402,41 @@ function CreateOrder() {
               </div>
               <div className="cloth-card-div2">
                 <div className="cloth-card-div2-innerd1">
-                  <div>
-                    <input type="text" placeholder="Enter Customer Name" />
+                  <div className="Bisearch_input_div">
+                    <input
+                      type="text"
+                      placeholder="Search Customer Name"
+                      onChange={(e) => handleSearch(e.target.value)}
+                      className="Bisearch_input"
+                    />
+                    <div className="Bisearch_icon_div">
+                      <BiSearch className="Bisearch_icon" />
+                    </div>
+                    {isModal? (
+                      <div className="search_display_card">
+                        <div>
+                          {filteredResult?.length > 0 ? (
+                            filteredResult &&
+                            filteredResult.map((item) => (
+                              <p onClick={()=>handleFoundUser(item?._id)}>{item?.fullName} </p>
+                            ))
+                          ) : (
+                            <p>User not</p>
+                          )}
+                        </div>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </div>
 
                   <div>
-                    <button onClick={handleShow}>+Add</button>
+                    <button
+                      onClick={() => handleShow()}
+                      className="create_customer"
+                    >
+                      +Create
+                    </button>
                   </div>
                 </div>
 
@@ -440,6 +490,7 @@ function CreateOrder() {
                                 <input
                                   type="text"
                                   value={clothQuantity[item?._id] || 0}
+                                  className="quantity_amount"
                                 />
                               </div>
                               <div className="cart-card2-thead-btn-div">
@@ -471,7 +522,12 @@ function CreateOrder() {
                     >
                       Save And Continue
                     </button>
-                    <button className="save-continue-btn2" onClick={()=>ClearOrderDetails()}>Clear All</button>
+                    <button
+                      className="save-continue-btn2"
+                      onClick={() => ClearOrderDetails()}
+                    >
+                      Clear All
+                    </button>
                     <div className="total-div">
                       <h4>
                         Total: <span>{totalPrice}</span>

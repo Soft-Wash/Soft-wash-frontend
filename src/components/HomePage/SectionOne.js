@@ -5,13 +5,8 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import image1 from "../../assets/HomePage/images/hero-img.png";
 import "../../styles/HomePage.css";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Modal from "react-bootstrap/Modal";
-import axios from "axios";
-import { axiosInstance } from "../../services/AxiosInstance";
-import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import BranchModal from "../BranchModal";
@@ -22,18 +17,6 @@ function SectionOne() {
   const [branch_id, setbranch_id] = useState();
 
 
-
-  function handleSchedulePickup() {
-    const userToken = JSON.parse(localStorage.getItem("softwashLoginToken"));
-    if (!userToken) {
-      Navigate("/userLogin");
-    } else {
-      handleShow();
-    }
-  }
-
-
-
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
 
@@ -42,18 +25,15 @@ function SectionOne() {
     handleClose();
   };
 
-  
-
-
   return (
     <div className="sec-1-bg py-4">
       <ToastContainer position="top-center" />
       <>
-<BranchModal
-isOpen={showModal} 
-onClose={handleClose}
-SaveBranch={handleSaveBranch} 
-/>
+        <BranchModal
+          isOpen={showModal}
+          onClose={handleClose}
+          SaveBranch={handleSaveBranch}
+        />
       </>
       <Container className=" container01 ">
         <Row className="pt-5 align-items-center">
@@ -73,7 +53,7 @@ SaveBranch={handleSaveBranch}
                   variant="outline-info"
                   className="textwhite-hover mt-4"
                   size="lg"
-                  onClick={handleSchedulePickup}
+                  onClick={()=>handleShow()}
                 >
                   SCHEDULE PICKUP
                 </Button>{" "}

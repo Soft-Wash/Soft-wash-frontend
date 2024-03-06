@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
   const [err, setErr] = useState(false);
   const [auth, setAuth] = useState(true);
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ function LoginForm() {
       email: email,
       password: password
     };
+    console.log(logBody);
     try {
       console.log('here')
       let resp = await axios.post(
@@ -30,6 +32,7 @@ function LoginForm() {
         logBody
       );
       if (resp.data.message === "login successful") {
+        toast.success("Sign Up succesfull")
         localStorage.setItem('softwashEmployeeLogin',JSON.stringify(resp.data.noPasswordUser._id))
         switch (resp.data.noPasswordUser.role.name) {
           case "frontdesk":
@@ -73,7 +76,7 @@ function LoginForm() {
       </div>
       <Form className="border rounded p-5">
         <Form.Text className="fw-bold fs-5 col-12 d-flex justify-content-center mb-5">
-          Login Employee
+          Employee Login
         </Form.Text>
         <Form.Group className="mb-3  " controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>

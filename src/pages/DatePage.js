@@ -1,61 +1,47 @@
-import '../styles/Datepage.css'
-import BookingPickUpMode from '../components/BookingPickUpMode';
-import Calender from '../components/Calender';
-import SelectedCart from '../common/SelectedCart';
-import { Container } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
-import BookingBanner from '../components/BookingBanner';
-import React, { useState } from 'react';
-import { toast } from 'react-toastify';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
-import Loader from '../common/Loader';
+import "../styles/Datepage.css";
+import BookingPickUpMode from "../components/BookingPickUpMode";
+import Calender from "../components/Calender";
+import SelectedCart from "../common/SelectedCart";
+import { Container } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+import BookingBanner from "../components/BookingBanner";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+import Loader from "../components/Loader/Loader";
+
+function DatePage() {
+  const navigate = useNavigate();
 
 
-
-
-function DatePage (){
-    const navigate = useNavigate();
-    const [isOptionSelected, setIsOptionSelected] = useState(false);
-
-//     const deliveryType = JSON.parse(localStorage.getItem('deliveryType'))
-//     console.log(deliveryType)
-
-    
-//   if (!deliveryType || Object.keys(deliveryType).length === 0) {
-//     // alert('Select payment type before confirming the order.');
-//     toast.error('Select Service Required')
-    
-//     return; 
-
-//   }
-
-function DeliveryType() {
+  function DeliveryType() {
     const deliveryOption = JSON.parse(localStorage.getItem("deliveryType"));
     const deliveryDate = JSON.parse(localStorage.getItem("calenderStartDate"));
     // const deliveryTime = JSON.parse(localStorage.getItem("calenderSelectedTime"));
-    return { deliveryOption, deliveryDate};
-}
+    return { deliveryOption, deliveryDate };
+  }
 
-const handleDeliveryOption = () => {
+  const handleDeliveryOption = () => {
     const deliveryOption = DeliveryType().deliveryOption;
-    const deliveryDate = DeliveryType().deliveryDate
+    const deliveryDate = DeliveryType().deliveryDate;
 
     if (deliveryOption && deliveryDate) {
-        navigate('/address');
+      navigate("/address");
     } else {
-        toast.error('Select Service & Date ');
+      toast.error("Select Service & Date ");
     }
-};
+  };
 
     return(
        <div>
-
+            <>
             <ToastContainer position="top-center" />
             <BookingBanner />
             <Container className='datepage-container'>
+            <h4>Kindly note,that all orders take a minimum of two days to process and complete</h4>
             <div className='date-body justify-content-between'>
                 <div className='date-body-left'>
                     <BookingPickUpMode />
@@ -65,18 +51,25 @@ const handleDeliveryOption = () => {
                     <SelectedCart />
                 </div>
             </div>
-            <div className='date-page-brts-div d-flex justify-content-center mt-'>
-                <Link to="/ClothesSelection">
-                <Button variant="light" border="primary" >Previous</Button>
-                </Link>
-                <Button className='px-4 mx-3' variant="primary" onClick ={handleDeliveryOption}>Next</Button>
+            <div className="date-page-brts-div d-flex justify-content-center mt-">
+              <Link to="/ClothesSelection">
+                <Button variant="light" border="primary">
+                  Previous
+                </Button>
+              </Link>
+              <Button
+                className="px-4 mx-3"
+                variant="primary"
+                onClick={handleDeliveryOption}
+              >
+                Next
+              </Button>
             </div>
-            </Container>
-            
-            
-       </div> 
-    )
+          </Container>
+        </>
+    
+    </div>
+  );
 }
-
 
 export default DatePage;

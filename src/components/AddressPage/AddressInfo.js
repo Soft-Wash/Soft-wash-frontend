@@ -27,28 +27,28 @@ function AddressInfo() {
 
 
 
-  useEffect(() => {
-    CheckUserAddress();
-    const clothArray = JSON.parse(localStorage.getItem("softCart"))
-    const calenderSelectedTime = localStorage.getItem("calenderSelectedTime");
-    const parsedCalenderSelectedTime = calenderSelectedTime
-      ? JSON.parse(calenderSelectedTime)
-      : null;
-    setSelectedTime(parsedCalenderSelectedTime);
-    const calenderSetDate = localStorage.getItem("calenderStartDate");
-    const storedDate = new Date(JSON.parse(calenderSetDate));
-    const parsedCalenderSetDate = storedDate;
-    setSelectedDate(parsedCalenderSetDate);
-    const clothQuantity = localStorage.getItem("clothQuantity");
-    const parsedClothQuantity = clothQuantity
-      ? JSON.parse(clothQuantity)
-      : null;
-    if (parsedClothQuantity) {
-      let keys = Object.keys(parsedClothQuantity);
-      const values = Object.values(parsedClothQuantity);
-      setClothIds(clothArray);
-    }
-  }, []);
+  // useEffect(() => {
+  //   CheckUserAddress();
+  //   const clothArray = JSON.parse(localStorage.getItem("softCart"))
+  //   const calenderSelectedTime = localStorage.getItem("calenderSelectedTime");
+  //   const parsedCalenderSelectedTime = calenderSelectedTime
+  //     ? JSON.parse(calenderSelectedTime)
+  //     : null;
+  //   setSelectedTime(parsedCalenderSelectedTime);
+  //   const calenderSetDate = localStorage.getItem("calenderStartDate");
+  //   const storedDate = new Date(JSON.parse(calenderSetDate));
+  //   const parsedCalenderSetDate = storedDate;
+  //   setSelectedDate(parsedCalenderSetDate);
+  //   const clothQuantity = localStorage.getItem("clothQuantity");
+  //   const parsedClothQuantity = clothQuantity
+  //     ? JSON.parse(clothQuantity)
+  //     : null;
+  //   if (parsedClothQuantity) {
+  //     let keys = Object.keys(parsedClothQuantity);
+  //     const values = Object.values(parsedClothQuantity);
+  //     setClothIds(clothArray);
+  //   }
+  // }, []);
 
   const [selectedAddress, setSelectedAddress] = useState({
     contactNumber: "",
@@ -82,24 +82,17 @@ function AddressInfo() {
     const customer_id = localStorage.getItem("softwashLoginUser");
     const parsedCustomerData = customer_id ? JSON.parse(customer_id) : null;
     const branch_id = JSON.parse(localStorage.getItem('branch_id'))
-
-    let orderPostObj = {
-      customer_id: parsedCustomerData?._id,
-      branch_id: branch_id,
-      deliveryAddress: customerAddress?customerAddress:selectedAddress,
-      pickuptime: selectedTime,
-      schedule_date: selectedDate,
-      clothtype_ids: clothIds,
-    };
+    localStorage.setItem("customerAddress",JSON.stringify(customerAddress))
+    localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
 
 
-    axiosInstance.post("/order/create", orderPostObj).then((resp) => {
-      const orderId = resp.data._id;
-      localStorage.setItem("RecentOrder", JSON.stringify(resp.data));
-      localStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
-      navigate(`/paymentpage/${orderId}`);
-    });
-    UpdateUserAddress();
+    // axiosInstance.post("/order/create", orderPostObj).then((resp) => {
+    //   const orderId = resp.data._id;
+
+
+    // });
+
+     navigate(`/paymentpage`);
   }
 
   useEffect(() => {
@@ -109,21 +102,6 @@ function AddressInfo() {
     }
   }, []);
 
-  const UpdateUserAddress = () => {
-    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
-    axiosInstance
-      .put(`/users/${userId._id}/update`, {
-        address: selectedAddress.FullAddress,
-      })
-      .then((resp) => {});
-  };
-
-  const CheckUserAddress = () => {
-    const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
-    axiosInstance.get(`/users/${userId._id}`).then((resp) => {
-      setcustomerDetails(resp.data);
-    });
-  };
 
   const handleCustomerAddress = (e) => {
     setClicked(true);
@@ -141,9 +119,9 @@ function AddressInfo() {
 
   return (
     <Container>
-      <Row className="justify-content-between">
-        <Col lg={7} md={12} sm={12}>
-          <div className="w-100 border border-2 shadow-sm rounded py-4 px-3">
+       <Row lg={12} className="">
+        <Col lg={8} md={12} sm={12}>
+          <div className="w-100 border border-2 shadow-sm rounded py-4 px-3 ">
             <h4 className="text-primary mb-3 fw-semibold ps-2 text-capitalize">
               Choose your address
             </h4>
@@ -180,7 +158,7 @@ function AddressInfo() {
           <Row className="w-100 text-center my-4">
             <h3>Or</h3>
           </Row>
-          <Row className="border border-2 shadow-sm rounded py-4">
+          <Row className="border border-2 shadow-sm rounded py-4 mx-1">
             <Accordion defaultActiveKey="0">
               <Accordion.Item eventKey="1"> 
                 <Accordion.Header>Add Address</Accordion.Header>
@@ -315,13 +293,13 @@ function AddressInfo() {
             </Accordion>
           </Row>
         </Col>
-          <div className="select-pickup-type date-body-right">
+        <div className="select-pickup-type date-body-right mx-1">
           <SelectedCart/>
           </div>
       </Row>
 
       <Container className="d-flex justify-content-center gap-3 w-100 text-center my-5">
-        <Col lg={4} md={5} sm={5}>
+        <Col lg={2} md={5} sm={5}>
           <Link to="/date">
             <Button
               variant="outline-primary"
@@ -331,7 +309,7 @@ function AddressInfo() {
             </Button>
           </Link>
         </Col>
-        <Col lg={4} md={5} sm={5}>
+        <Col lg={2} md={5} sm={5}>
           {/* <Link to="/PaymentPage"> */}
           <Button
             variant="primary"

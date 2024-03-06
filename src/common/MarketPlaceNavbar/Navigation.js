@@ -4,24 +4,27 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Nav from "react-bootstrap/Nav";
-import { FiSearch, FiUser, FiShoppingCart,FiHeart } from "react-icons/fi";
+import { FiSearch, FiUser, FiShoppingCart, FiHeart } from "react-icons/fi";
 import "../../styles/MarketPlace.css";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { FiChevronDown } from "react-icons/fi";
 import Navbar from "react-bootstrap/Navbar";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
+import { TaskContext } from "../../context/TaskContext";
+import { useContext } from "react";
 
-function Navigation(){
-  return(
+function Navigation() {
+  const { cartNotific } = useContext(TaskContext);
+  const { wishlist } = useContext(TaskContext);
+  // const cartCount = notification?.length || 0;
+
+  return (
     <div>
       <Container fluid className="nav-container pt-4">
         <Navbar expand="lg" className="bg-body-tertiary">
           <Container className="d-flex align-items-center">
-            <Navbar.Brand >
+            <Navbar.Brand>
               <Link to="/shop">
-              <img src={Logo} alt="" />
+                <img src={Logo} alt="" />
               </Link>
-
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
@@ -29,16 +32,27 @@ function Navigation(){
                 className="me-auto my-2 my-lg-0 d-flex align-items-center"
                 style={{ maxHeight: "100px" }}
                 navbarScroll
-              
               >
-                <Nav.Link  className="d-flex">
+                <Nav.Link className="d-flex">
                   <Link to="/cart" className="color-dark-link">
-                  <FiShoppingCart className="fs-4"/>
+                    <FiShoppingCart className="fs-4" />
+                    {cartNotific &&
+                      cartNotific?.length >
+                        0 && (
+                          <div className="cart_count_div">
+                            <p className="cart_count">{cartNotific?.length}</p>
+                          </div>
+                        )}
                   </Link>
-                  <Link to="/wishlist">
-                  <FiHeart className="wishlist_icon"/>
-                  </Link>
+                  <Link to="/wishlist" className="wishlistheart_link">
+                    <FiHeart className="wishlist_icon"/>
+                    {wishlist && wishlist.length> 0 && (
+                    <div className="wishlist_count">
+                    <p className="cart_count">{wishlist?.length}</p>
+                  </div>
+                    )}
 
+                  </Link>
                 </Nav.Link>
               </Nav>
               <Form className="d-flex">
@@ -56,9 +70,8 @@ function Navigation(){
           </Container>
         </Navbar>
       </Container>
-
     </div>
-  )
+  );
 }
 
 export default Navigation;

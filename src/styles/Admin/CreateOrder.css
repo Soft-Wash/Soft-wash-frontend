@@ -255,6 +255,7 @@ padding: 0;
 
 .cart-card2-thead-th3-innerd{
   position: relative;
+  z-index: 1;
 }
 
 
@@ -282,6 +283,13 @@ padding: 0;
 
 }
 
+.create_customer{
+  padding: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color:rgb(13, 202, 240) ;
+}
+
 .save-continue-btn2{
   padding: 5px;
   padding-left: 10px;
@@ -304,3 +312,52 @@ padding: 0;
   color: black;
   border-radius: 3px;
 }
+
+.Bisearch_input{
+
+}
+
+.Bisearch_icon{
+  font-size: 20px;
+}
+
+.Bisearch_input_div{
+  position: relative;
+}
+
+.Bisearch_icon_div{
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+}
+
+.search_display_card{
+  max-height: 500px;
+  width: 300px;
+    overflow: scroll;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 3px 1px 1px 2px rgb(234, 234, 234);
+  position: absolute;
+  margin-top: 5px;
+  z-index: 3;
+
+}
+
+.quantity_amount{
+  z-index: 2;
+}
+
+.search_display_card p{
+  /* border-bottom: 1px solid black; */
+  padding: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  color: rgb(106, 106, 106);
+
+}
+
+.search_display_card p:hover{
+  background-color: rgb(230, 230, 230);
+}
+
