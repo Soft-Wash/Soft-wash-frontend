@@ -108,6 +108,7 @@ import PayRollTable from "./pages/Admin/PayRollTable";
 import Loader from "./components/Loader/Loader";
 import Review from "./pages/Admin/Reviews";
 import SupTransactions from "./pages/SupervisorPage/SupTransactions";
+import { useState } from "react";
 
 
 
@@ -119,7 +120,7 @@ import SupTransactions from "./pages/SupervisorPage/SupTransactions";
 
 function App() {
 
-  const [notificationCount,setnotificationCount]=useState()
+  const [notificationCount,setnotificationCount]= useState()
   return (
 <>  
 
