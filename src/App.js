@@ -93,10 +93,10 @@ import { TaskContext } from "./context/TaskContext";
 
 
 import SupplierDash from "./pages/Supplier/SupplierDash";
-import SupplierExpenses from "./pages/Supplier/SupplierExpenses";
+import Supply from "./pages/Supplier/Supply";
 import DeliveryReport from "./pages/Supplier/DeliveryReport";
 import SupplierOrderReport from "./pages/Supplier/SupplierOrderReport";
-import SupplierNewExpense from "./pages/Supplier/SupplierNewExpense";
+import SupplyReceipt from "./pages/Supplier/SupplyReceipt";
 import SupplyOrder from "./pages/Supplier/SupplyOrder";
 import SupplierLog from "./pages/Supplier/SupplierLog"
 
@@ -221,19 +221,12 @@ function App() {
 
         {/* SUPPLIER ROUTE */}
         <Route path="/SupplierDash" element={<SupplierDash/>}/>
-        <Route path="/SupplierExpenses" element={<SupplierExpenses/>}/>
+        <Route path="/Supply" element={<Supply/>}/>
         <Route path="/DeliveryReport" element={<DeliveryReport/>}/>
         <Route path="/SupplierOrderReport" element={<SupplierOrderReport/>}/>
-        <Route path="/SupplierNewExpense" element={<SupplierNewExpense/>}/>
+        <Route path="/supplyreceipt" element={<SupplyReceipt/>}/>
         <Route path="/SupplyOrder" element={<SupplyOrder/>}/>
         <Route path="/SupplierLog" element={<SupplierLog/>}/>
-
-
-        
-
-
-
-
       </Routes>
     </BrowserRouter>
     </TaskContextProvider>
