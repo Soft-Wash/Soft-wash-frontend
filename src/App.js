@@ -96,10 +96,10 @@ import SupNotificationTaskTable from "./components/SupervisorComponents/SupNotif
 
 
 import SupplierDash from "./pages/Supplier/SupplierDash";
-import SupplierExpenses from "./pages/Supplier/SupplierExpenses";
+import Supply from "./pages/Supplier/Supply";
 import DeliveryReport from "./pages/Supplier/DeliveryReport";
 import SupplierOrderReport from "./pages/Supplier/SupplierOrderReport";
-import SupplierNewExpense from "./pages/Supplier/SupplierNewExpense";
+import SupplyReceipt from "./pages/Supplier/SupplyReceipt";
 import SupplyOrder from "./pages/Supplier/SupplyOrder";
 import SupplierLog from "./pages/Supplier/SupplierLog"
 
@@ -108,6 +108,7 @@ import PayRollTable from "./pages/Admin/PayRollTable";
 import Loader from "./components/Loader/Loader";
 import Review from "./pages/Admin/Reviews";
 import SupTransactions from "./pages/SupervisorPage/SupTransactions";
+import { useState } from "react";
 
 
 
@@ -119,7 +120,7 @@ import SupTransactions from "./pages/SupervisorPage/SupTransactions";
 
 function App() {
 
-  const [notificationCount,setnotificationCount]=useState()
+  const [notificationCount,setnotificationCount]= useState()
   return (
 <>  
 
@@ -243,19 +244,12 @@ function App() {
 
         {/* SUPPLIER ROUTE */}
         <Route path="/SupplierDash" element={<SupplierDash/>}/>
-        <Route path="/SupplierExpenses" element={<SupplierExpenses/>}/>
+        <Route path="/Supply" element={<Supply/>}/>
         <Route path="/DeliveryReport" element={<DeliveryReport/>}/>
         <Route path="/SupplierOrderReport" element={<SupplierOrderReport/>}/>
-        <Route path="/SupplierNewExpense" element={<SupplierNewExpense/>}/>
+        <Route path="/supplyreceipt" element={<SupplyReceipt/>}/>
         <Route path="/SupplyOrder" element={<SupplyOrder/>}/>
         <Route path="/SupplierLog" element={<SupplierLog/>}/>
-
-
-        
-
-
-
-
       </Routes>
     </BrowserRouter>
   {/* </NotificationContext> */}

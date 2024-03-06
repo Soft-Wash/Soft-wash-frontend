@@ -2,9 +2,25 @@ import SupplierSideBar from "../../components/Supplier/SupplierSideBar";
 import React from 'react';
 import "../../styles/Admin/AdminDashboard.css";
 import { FaClipboardList, FaListAlt } from "react-icons/fa";
+import { axiosInstance } from '../../services/AxiosInstance';
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+
+
 function SupplierDash (){
+  const [supplies, setSupplies] = useState([]);
+  // const [dayorder, setdayorder] = useState();
+
+  // Fetch all supplies from your API endpoint
+useEffect(() => {
+  axiosInstance
+    .get('http://localhost:8003/supplies/')
+    .then((response) => setSupplies(response.data))
+    .catch((error) => console.error('Error fetching items:', error));
+}, []);
+
+
+
     return(
         <div>
         <div className="d-flex">
@@ -29,9 +45,9 @@ function SupplierDash (){
               </div>
 
               <div className="icon-container-innerd2">
-                <Link className="order-dashboard-link" to="/ordertable">
+                <Link className="order-dashboard-link">
                   <p>Orders</p>
-                  {/* <p>{orders?.length}</p> */}
+                  <p>{supplies?.length}</p>
                 </Link>
               </div>
             </div>
@@ -54,7 +70,7 @@ function SupplierDash (){
                 <FaClipboardList className="clipboard-icon" />
               </div>
               <div className="icon-container-innerd2">
-                <p>Available For Delivery</p>
+                <p>............</p>
                 {/* <p>{branches?.length}</p> */}
               </div>
             </div>
@@ -67,35 +83,36 @@ function SupplierDash (){
             <table className="admindashboard-content-table">
               <thead>
                 <tr>
-                  <th>Order Id</th>
+                  {/* <th>Order Id</th> */}
                   <th>Branch</th>
-                  <th>Customer</th>
-                  <th>Addresss</th>
-                  <th>SubTotal</th>
-                  <th>Status</th>
+                  <th>Description</th>
+                  <th>Month</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Name</th>
                 </tr>
               </thead>
-              {/* <tbody>
-                {dayorder?.length < 1 ? (
+              <tbody>
+                {supplies?.length < 1 ? (
                   <tr>
                     <td colSpan="6" className="no-data-message">
                       No data available
                     </td>
                   </tr>
                 ) : (
-                  dayorder &&
-                  dayorder.map((item) => (
-                    <tr key={item._id}>
-                      <th>{item._id.substring(0, item._id.length / 2)}</th>
-                      <th>{item?.branch_id?.name}</th>
-                      <th>{item?.customer_id?.fullName}</th>
-                      <th>{item?.deliveryAddress[0]?.FullAddress}</th>
-                      <th>{item?.subtotal}</th>
-                      <th>{item?.status}</th>
+                  supplies &&
+                  supplies.map((supplies) => (
+                    <tr key={supplies._id}>
+                      <th>{supplies?.branch_id?.name}</th>
+                      <th>{supplies.notes}</th>
+                      <th>{supplies.supply_name}</th>
+                      <th>{supplies.quantity}</th>
+                      <th>₦{supplies.unit_price}</th>
+                      <th>{supplies?.supplier_id?.fullName}</th>
                     </tr>
                   ))
                 )}
-              </tbody> */}
+              </tbody>
             </table>
           </div>
         </div>
