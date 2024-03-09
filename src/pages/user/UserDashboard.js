@@ -27,7 +27,6 @@ function UserDashboard() {
         setLoading(false)
       })
       .catch((error) => {
-        toast.error(error.message);
         setLoading(false)
       });
   };

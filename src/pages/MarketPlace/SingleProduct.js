@@ -148,7 +148,7 @@ function SingleProduct() {
 
   const isInWishlist = (wishlistItems_id) => {
     let x= wishlistItems?.map(
-      (item) => item?.product?._id === wishlistItems_id
+      (item) => item?._id === wishlistItems_id
     );
     return x.includes(true);
   };
@@ -190,7 +190,7 @@ function SingleProduct() {
             <img src={`${backend}${shopItems?.img}`} alt="" />
           </Col>
           <Col>
-            <p>Canoe / laundry</p>
+            <p>{`${shopItems?.name} / laundry`}</p>
             <p className="fs-2">{shopItems?.name}</p>
             <div className="d-flex">
               <h5 className="fs-3 text-success">&#8358;{shopItems?.price}</h5>
@@ -371,8 +371,8 @@ function SingleProduct() {
                 >
                   <FiHeart className="cart-icon02" />
                   <img  src={`${backend}${shopItems?.img}`} className="item-image  mt-5" alt="" />
-                  <h5 className="name-tag mt-1">{item.name}</h5>
-                  <p className="price-tag fs-4 m-0"> &#8358; {item.price}</p>
+                  <h5 className="name-tag mt-1">{item?.name}</h5>
+                  <p className="price-tag fs-4 m-0"> &#8358; {item?.price}</p>
                   <div>
                     <Button
                       variant="secondary"

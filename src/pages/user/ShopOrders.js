@@ -9,6 +9,9 @@ import { axiosInstance } from "../../services/AxiosInstance";
 import { useState } from "react";
 import axios from "axios";
 import UserSidebarTablet from "../../components/UserSidebarTablet";
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ShopOrders() {
   const [userOrders, setuserOrders] = useState();
@@ -16,33 +19,37 @@ export default function ShopOrders() {
   const [UserId, setUserId] = useState();
   const [pickUpDateValue, setpickUpDate] = useState();
 
-
-  const showAll = ()=>{
+  const showAll = () => {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
-    axiosInstance.get(`/cartorder/${userId._id}/allorders`).then((resp) => {
-      setOrders(resp.data);
-      console.log(resp.data)
-      const pickUpDate = resp.data.schedule_date;
-      const latestDate = new Date(pickUpDate);
-      const options = { year: "numeric", month: "long", day: "numeric" };
-      const pickUpDateValue = latestDate.toLocaleDateString("en-US", options);
-      setpickUpDate(pickUpDateValue);
-    });
-  }
+    axiosInstance
+      .get(`/cartorder/${userId._id}/allorders`)
+      .then((resp) => {
+        setOrders(resp.data);
+        console.log(resp.data);
+        const pickUpDate = resp.data.schedule_date;
+        const latestDate = new Date(pickUpDate);
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        const pickUpDateValue = latestDate.toLocaleDateString("en-US", options);
+        setpickUpDate(pickUpDateValue);
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
 
   const getPLacedOrder = () => {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
-    const status = "order placed"
+    const status = "order placed";
     axios
       .get(
         `${process.env.REACT_APP_BASE_URL}/cartorder/userorders?customer_id=${userId._id}&status=${status}`
       )
       .then((resp) => {
         setOrders(resp.data);
-        console.log(resp.data)
+        console.log(resp.data);
       })
       .catch((error) => {
-        console.error("Error fetching placed orders:", error);
+        toast.error(error.message);
       });
   };
 
@@ -56,10 +63,9 @@ export default function ShopOrders() {
         setOrders(resp.data);
       })
       .catch((error) => {
-        console.error("Error fetching placed orders:", error);
+        toast.error(error.message);
       });
   };
-
 
   const ShippedOrder = () => {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
@@ -71,16 +77,17 @@ export default function ShopOrders() {
         setOrders(resp.data);
       })
       .catch((error) => {
-        console.error("Error fetching placed orders:", error);
+        toast.error(error.message);
       });
   };
 
   useEffect(() => {
-    showAll()
+    showAll();
   }, []);
 
   return (
     <>
+      <ToastContainer position="top-center" />
       <div>
         <div>
           <UserSidebarTablet />
@@ -112,7 +119,11 @@ export default function ShopOrders() {
                   <Col lg={12}>
                     <Nav variant="pills" className="flex-row text-black">
                       <Nav.Item>
-                        <Nav.Link eventKey="first" className="text-black" onClick={()=> showAll()}>
+                        <Nav.Link
+                          eventKey="first"
+                          className="text-black"
+                          onClick={() => showAll()}
+                        >
                           Show all
                         </Nav.Link>
                       </Nav.Item>
@@ -153,7 +164,7 @@ export default function ShopOrders() {
                         orders.map((item) => (
                           <ShopOrderProp
                             id={item?._id}
-                            pickup={'3-4 days'}
+                            pickup={"3-4 days"}
                             address={item?.delivery_address}
                             price={item?.total}
                             status={item?.status}
@@ -170,7 +181,7 @@ export default function ShopOrders() {
                         orders.map((item) => (
                           <ShopOrderProp
                             id={item?._id}
-                            pickup={'3-4 days'}
+                            pickup={"3-4 days"}
                             address={item?.delivery_address}
                             price={item?.total}
                             status={item?.status}
@@ -187,7 +198,7 @@ export default function ShopOrders() {
                         orders.map((item) => (
                           <ShopOrderProp
                             id={item?._id}
-                            pickup={'3-4 days'}
+                            pickup={"3-4 days"}
                             address={item?.delivery_address}
                             price={item?.total}
                             status={item?.status}
@@ -204,7 +215,7 @@ export default function ShopOrders() {
                         orders.map((item) => (
                           <ShopOrderProp
                             id={item?._id}
-                            pickup={'3-4 days'}
+                            pickup={"3-4 days"}
                             address={item?.delivery_address}
                             price={item?.total}
                             status={item?.status}
