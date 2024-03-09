@@ -32,6 +32,7 @@ export default function OrderReceipt() {
       .get(`/payments/getstatus?reference=${ref}`)
       .then((resp) => {
         setPaymentStatus(resp.data);
+        updatePaymentStatus()
         console.log(resp.data)
         setIsLoading(false);
       })
@@ -98,6 +99,8 @@ export default function OrderReceipt() {
         getPaymentStatus();
   }, []); 
 
+
+
   // useEffect(() => {
   //   if (paymentStatus?.data?.status === "success") {
   //     updatePaymentStatus();
@@ -154,7 +157,7 @@ export default function OrderReceipt() {
                 <h5>Payment Status</h5>
               </div>
               <div lg={3}>
-                <p>{GetPaymentStatus?.data?.payment_status}</p>
+                <p>{paymentStatus?.data?.status}</p>
               </div>
             </div>
           </div>
