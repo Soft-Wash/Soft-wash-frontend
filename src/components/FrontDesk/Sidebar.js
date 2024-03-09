@@ -1,11 +1,11 @@
 import { Tooltip } from "bootstrap";
 import {
   BsColumnsGap,
-  BsCalendar4,
   BsCalendar2Plus,
   BsBox,
   BsChatSquareText,
-  BsPower,
+  BsBagPlus,
+  BsPower
 } from "react-icons/bs";
 import { useState, useEffect, UseNavigate } from "react";
 import { useNavigate } from "react-router-dom";
@@ -81,10 +81,25 @@ export default function Sidebar() {
           className="position-relative"
           onMouseOver={() => setToolTip(4)}
           onMouseLeave={hideToolTip}
+          onClick={() => navigate('/frontdesk/order-supplies')}
+        >
+          <BsBagPlus className="col-12 fs-5"/>
+          {toolTip === 4 && (
+            <div className="position-absolute  top-0 start-100 p-2 bg-secondary text-white  duration-500">
+              Make Order
+            </div>
+          )}
+        </span>
+      </li>
+      <li className="flex gap-4 mb-4">
+        <span
+          className="position-relative"
+          onMouseOver={() => setToolTip(5)}
+          onMouseLeave={hideToolTip}
           onClick={() => navigate('/frontdesk/reviews')}
         >
           <BsChatSquareText className="col-12 fs-5" />
-          {toolTip === 4 && (
+          {toolTip === 5 && (
             <div className="position-absolute  top-0 start-100 p-2 bg-secondary text-white  duration-500">
               Reviews
             </div>
@@ -99,11 +114,11 @@ export default function Sidebar() {
       >
         <span
           className="position-relative"
-          onMouseOver={() => setToolTip(5)}
+          onMouseOver={() => setToolTip(6)}
           onMouseLeave={hideToolTip}
         >
           <BsPower className="col-12 fs-5" />
-          {toolTip === 5 && (
+          {toolTip === 6 && (
             <div className="position-absolute  top-0 start-100 p-2 bg-secondary text-white  duration-500">
               Logout
             </div>

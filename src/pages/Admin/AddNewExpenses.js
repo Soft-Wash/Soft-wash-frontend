@@ -205,7 +205,7 @@ function AddNewExpenses() {
             </div>
 
             <button className="submit-button" onClick={postExpense}>
-              Sumit
+              Submit
             </button>
           </div>
         </div>

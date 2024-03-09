@@ -20,7 +20,7 @@ function DeliveryReport() {
     const { startDate, endDate } = reporData;
 
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/cartorder/shop/sales/report`, {
+      .get(`${process.env.REACT_APP_BASE_URL}/supplies/`, {
         params: {
           startDate,
           endDate,
@@ -84,17 +84,17 @@ function DeliveryReport() {
                 </select>
                 <p className="show-container-p2">entries</p>
               </div>
-              <div className="table-content">
-                <table className="sales-content-table">
+              <div className="table-content w-100">
+                <table className="sales-content-table border w-100">
                   <thead>
                     <tr>
-                      <th>S No</th>
+                      <th>ID</th>
                       <th>Date</th>
                       <th>Customer</th>
-                      <th>Subtotal</th>
-                      <th>Discount</th>
-                      <th>Tax Amount</th>
-                      <th>Gross Amount</th>
+                      <th>Branch</th>
+                      <th>Description</th>
+                      <th>Delivered</th>
+                      <th>Supplier</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -108,14 +108,13 @@ function DeliveryReport() {
                       salesReportData &&
                       salesReportData.map((item) => (
                         <tr key={item._id}>
-                          <th>1</th>
-                          <th>{new Date(item?.date_created).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</th>
-                          <th>{item?.customer_id.fullName}</th>
-
-                          <th>{item?.total}</th>
-                          <th>{item?.discount || "Nil"}</th>
-                          <th>{item?.tax_amount || "N10"}</th>
-                          <th>{item?.total}</th>
+                        <td>{item._id}</td>
+                          <td>{new Date(item.dateCreated).toLocaleDateString('en-GB', {day: 'numeric',month: 'short',year: 'numeric'})}</td>
+                          <td>{item?.buyer_id?.fullName}</td>
+                          <td>{item?.branch_id?.name}</td>
+                          <td>{item?.description}</td>
+                          <td>{`${item?.received}`}</td>
+                          <td>{item?.supplier_id?.fullName}</td>
                         </tr>
                       ))
                     )}

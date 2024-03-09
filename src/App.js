@@ -109,6 +109,7 @@ import Loader from "./components/Loader/Loader";
 import Review from "./pages/Admin/Reviews";
 import SupTransactions from "./pages/SupervisorPage/SupTransactions";
 import {useState} from 'react';
+import GetSupplies from "./pages/FrontDesk/GetSupplies";
 
 
 
@@ -164,6 +165,7 @@ function App() {
           <Route path="/frontdesk/dash" element={<Dashboard/>} />
           <Route path="/userdashboard" element={<UserDashboard/>} />
           <Route path="/frontdesk/assign-task" element={<FrontdeskAssignTask/>} />
+          <Route path="/frontdesk/order-supplies" element={<GetSupplies/>}  />
           <Route path="/frontdesk/inventory"  />
           <Route path="/frontdesk/reviews"  />
          
