@@ -26,7 +26,7 @@ export function TaskContextProvider({ children }) {
   const cartNotification = () => {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/cart/customer?customer_id=${userId._id}`)
+      .get(`${process.env.REACT_APP_BASE_URL}/cart/customer?customer_id=${userId?._id}`)
       .then((response) => {
         setCartNotific(response.data);
       })
@@ -38,7 +38,7 @@ export function TaskContextProvider({ children }) {
   const GetWishlist=()=>{
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     axios
-    .get(`${process.env.REACT_APP_BASE_URL}/wishlist/user/wishlist?user_id=${userId._id}`)
+    .get(`${process.env.REACT_APP_BASE_URL}/wishlist/user/wishlist?user_id=${userId?._id}`)
     .then((response) => {
         setWishlist(response.data);
         

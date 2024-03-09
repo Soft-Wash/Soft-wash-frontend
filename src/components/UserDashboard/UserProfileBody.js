@@ -1,10 +1,12 @@
 import { Button } from "react-bootstrap";
 import "../../styles/Washman Styles/WashmanProfile.css";
-import profilePic from "../../assets/images/bovi.jpeg";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "../Loader/Loader";
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function UserProfileBody() {
   const [userData, setUserData] = useState();
@@ -20,6 +22,8 @@ function UserProfileBody() {
       .then((resp) => {
         setUserData(resp.data);
         setLoading(false);
+      }).catch((error)=>{
+        toast.error(error.message)
       });
   }, []);
 
@@ -34,6 +38,7 @@ function UserProfileBody() {
 
   return (
     <div className="user-dashboard-bg">
+                  <ToastContainer position="top-center" />
       {loading ? (
         <Loader />
       ) : (

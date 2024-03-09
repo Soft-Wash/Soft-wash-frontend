@@ -11,6 +11,9 @@ import { FaChevronRight } from "react-icons/fa";
 import { axiosInstance } from "../services/AxiosInstance";
 import axios from "axios";
 import Loader from "../components/Loader/Loader";
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function PricingPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -22,6 +25,8 @@ function PricingPage() {
       console.log(resp.data);
       setServices(resp.data);
       setLoading(false)
+    }).catch((error)=>{
+      toast.error(error.message)
     });
   };
   useEffect(() => {
@@ -48,6 +53,7 @@ function PricingPage() {
 
   return (
     <div>
+                  <ToastContainer position="top-center" />
       {loading ? (
         <Loader />
       ) : (

@@ -164,6 +164,7 @@ const postOrder = async () => {
     const response = await axios.post(payment_url, data);
     if (response?.data.data.paymentLink && stringPaymentType === "payWithCard" ) {
       window.open(response?.data.data.paymentLink.data.authorization_url, '_blank');
+      localStorage.setItem('order_id', JSON.stringify(orderResponse?.data?._id));
       localStorage.removeItem('RecentOrder');
       // localStorage.removeItem('clothQuantity');
       localStorage.removeItem('calenderStartDate');
@@ -174,7 +175,8 @@ const postOrder = async () => {
       const resp = await axios.post(`${process.env.REACT_APP_BASE_URL}/order/create`, orderDetails);
       setuserOrder(resp.data);
       localStorage.setItem('orderDetails', JSON.stringify(resp.data));
-      navigate(`/order-receipt/${orderResponse?.data?._id}`);
+
+      // navigate(`/order-receipt/${orderResponse?.data?._id}`);
 
   
     }else{

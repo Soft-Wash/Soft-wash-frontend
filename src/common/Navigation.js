@@ -13,10 +13,9 @@ import { BsBell } from "react-icons/bs";
 import { axiosInstance } from "../services/AxiosInstance";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Loader from "../components/Loader/Loader";
+
 
 function Navigation() {
-  const OrderDetails = JSON.parse(localStorage.getItem("orderDetails"));
   const [userLoggedIn, setUserLoggedIn] = useState();
   const [userImage, setUserImage] = useState();
   const [loading, setLoading] = useState(true);
@@ -24,7 +23,6 @@ function Navigation() {
   const backend = "http://localhost:8003/uploads/";
 
   useEffect(() => {
-    const userImage = JSON.parse(localStorage.getItem("softwashLoginUser"));
     const userToken = JSON.parse(localStorage.getItem("softwashLoginToken"));
     setUserLoggedIn(userToken);
     if (userToken) {
@@ -44,6 +42,7 @@ function Navigation() {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     axiosInstance.get(`/users/${userId?._id}`).then((resp) => {
       setUserImage(resp.data);
+    }).catch((error)=>{
     });
   };
 

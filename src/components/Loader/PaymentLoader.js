@@ -19,8 +19,11 @@ function PaymentLoader(){
                 wrapperClass=""
                 />
 
+
             </div>
+
         </div>
+        <p className="text-center">Please this might take a some time, verifying payment status</p>
     </div>
   )
 }
