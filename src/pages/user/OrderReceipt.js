@@ -88,17 +88,15 @@ export default function OrderReceipt() {
   };
 
   useEffect(() => {
-    getOrderDetails();
-        getPaymentStatus();
+    if(newpaymentType === "PayWithCard"){
+      getPaymentStatus();
+      getOrderDetails();
+    }else{
+      getOrderDetails();
+    }
   }, []); 
 
 
-
-  // useEffect(() => {
-  //   if (paymentStatus?.data?.status === "success") {
-  //     updatePaymentStatus();
-  //   }
-  // }, []);
 
   useEffect(() => {
     const paymentWithCard = JSON.parse(localStorage.getItem("paymentType"));
