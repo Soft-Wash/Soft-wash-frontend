@@ -27,7 +27,7 @@ import UserDashboardContactPage from "./pages/UserDashboardContactPage";
 import UserOrderDetailsPage from "./pages/UserOrderDetailsPage";
 import VariablesContext from "./context/VariablesContext";
 import Dashboard from "./pages/FrontDesk/Dashboard";
-import Login from "./pages/FrontDesk/Login";
+import Login from "./components/FrontDesk/Login_Form";
 import WashmanProfilePage from "./components/Washman Components/WashmanProfileBody"
 import WashmanOrdersPage from "./pages/Washman Pages/WashmanOrdersPage";
 import WashmanDashboardPage from "./pages/Washman Pages/WashmanDashboardPage";
@@ -108,8 +108,8 @@ import PayRollTable from "./pages/Admin/PayRollTable";
 import Loader from "./components/Loader/Loader";
 import Review from "./pages/Admin/Reviews";
 import SupTransactions from "./pages/SupervisorPage/SupTransactions";
-import { useState } from "react";
-
+import {useState} from 'react';
+import GetSupplies from "./pages/FrontDesk/GetSupplies";
 
 
 
@@ -166,6 +166,7 @@ function App() {
           <Route path="/frontdesk/dash" element={<Dashboard/>} />
           <Route path="/userdashboard" element={<UserDashboard/>} />
           <Route path="/frontdesk/assign-task" element={<FrontdeskAssignTask/>} />
+          <Route path="/frontdesk/order-supplies" element={<GetSupplies/>}  />
           <Route path="/frontdesk/inventory"  />
           <Route path="/frontdesk/reviews"  />
          

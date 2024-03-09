@@ -9,6 +9,8 @@ import axios from "axios";
 import Sidebar from "../../components/FrontDesk/Sidebar";
 import DashNav from "../../components/FrontDesk/DashNav";
 import { useNavigate } from "react-router-dom";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 export default function FrontdeskAssignTask() {
   const [taskDetails, setTaskDetails] = useState({});
@@ -50,7 +52,6 @@ export default function FrontdeskAssignTask() {
     });
   };
 
-  //   console.log(taskDetails);
 
   const CreateTask = () => {
     setClicked(true);
@@ -70,22 +71,22 @@ export default function FrontdeskAssignTask() {
       <DashNav />
       <div className="d-flex">
         <Sidebar />
-        <div className="new-task-container-innerd ">
-          <h4>Create Task</h4>
+        <div className="w-100  p-4" style={{height:"85dvh"}}>
+          <h4 className="ps-2 pt-2">Assign order</h4>
           <hr className="addtask-hr" />
-          <div className="addtask-table-content rounded">
-            <div className="addtask-details-div rounded">
-              <div className="task-details-div-header rounded-top">
+          <div className="rounded border pb-4">
+              <div className="bg-info rounded-top ps-2 py-2 pb-0 fs-4 text-white fw-semibold">
                 <p> Task form</p>
               </div>
-              <div className="task-details-div-form">
-                <div className="task-details-div-form-innerd1">
-                  <label htmlFor="">
+              <div className=" w-100 mx-auto  p-4">
+                <Row  className="  w-100 justify-content-between">
+                  <Col lg={5}>
+                   <label htmlFor="" className="w-100">
                     Employees <br />
                     <select
                       name="employee_id"
                       id=""
-                      className="task-details-div-form-innerd1-selct1"
+                      className=" border border-secondary rounded w-100 p-2"
                       onChange={HandleTask}
                     >
                       <option value="" hidden>
@@ -99,16 +100,18 @@ export default function FrontdeskAssignTask() {
                         ))}
                     </select>
                   </label>
-                  <label htmlFor="" className="order-label">
+                  </Col>
+                  <Col lg={5}>
+                  <label htmlFor="" className="w-100">
                     Orders <br />
                     <select
                       name="order_id"
                       id=""
-                      className="task-details-div-form-innerd1-selct1"
+                      className=" border border-secondary rounded w-100 p-2"
                       onChange={HandleTask}
                     >
                       <option value="" hidden>
-                        Select category
+                        Select order
                       </option>
                       {allOrders &&
                         allOrders.map((item) => (
@@ -116,34 +119,40 @@ export default function FrontdeskAssignTask() {
                         ))}
                     </select>
                   </label>
-                </div>
-                <div className="task-details-div-form-innerd2">
-                  <label htmlFor="" className="">
+                  </Col>
+                </Row>
+                <Row  className="  w-100 justify-content-between">
+                  <Col lg={5}>
+                  <label htmlFor="" className="w-100">
                     Start Date <br />
                     <input
-                      className="form-data-inpt2"
+                      className=" border border-secondary rounded w-100 p-2"
                       type="date"
                       name="startDate"
                       onChange={HandleTask}
                     />
                   </label>
-                  <label htmlFor="" className="order-label">
+                  </Col>
+                  <Col lg={5}>
+                  <label htmlFor="" className="w-100">
                     End Date <br />
                     <input
-                      className="form-data-inpt2"
+                      className=" border border-secondary rounded w-100 p-2"
                       type="date"
                       name="endDate"
                       onChange={HandleTask}
                     />
                   </label>
-                </div>
-                <div className="task-details-div-form-innerd2">
-                  <label htmlFor="">
+                  </Col>
+                </Row>
+                <Row>
+                <Col lg={5}>
+                   <label htmlFor="" className="w-100">
                     Task Type <br />
                     <select
                       name="taskType"
                       id=""
-                      className="task-details-div-form-innerd1-selct1"
+                      className=" border border-secondary rounded w-100 p-2"
                       onChange={HandleTask}
                     >
                       <option value="" hidden>
@@ -155,27 +164,26 @@ export default function FrontdeskAssignTask() {
                       <option value="Delivery">Delivery</option>
                     </select>
                   </label>
-                </div>
-
-                <div className="`note-div">
-                  <label htmlFor="">
+                  </Col>
+                </Row>
+                
+                <div className="`note-div  w-100">
+                  <label htmlFor="" className="w-100">
                     Note <br />
                     <textarea
-                      className="note-div-textarea"
+                      className="w-100 h-3 border border-secondary rounded note-text"
                       name="note"
                       id=""
-                      cols="30"
-                      rows="10"
+                      rows="5"
                       onChange={HandleTask}
                     ></textarea>
                   </label>
                 </div>
               </div>
-            </div>
 
             <button
               type="button"
-              className={`submit-button`}
+              className={` btn btn-md btn-info rounded ms-3`}
               {...(clicked === true ?{ disabled: true} : null)}
               onClick={CreateTask}
             >

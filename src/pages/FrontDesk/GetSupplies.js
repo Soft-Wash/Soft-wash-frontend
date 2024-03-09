@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import SupplierSideBar from "../../components/Supplier/SupplierSideBar";
+import Sidebar from "../../components/FrontDesk/Sidebar";
 import "../../styles/Supplierstyle/SupplyOrder.css";
 import Button from "react-bootstrap/Button";
 import { axiosInstance } from "../../services/AxiosInstance";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import DashNav from "../../components/FrontDesk/DashNav";
 
-function SupplyOrder() {
+export default function GetSupplies() {
   const [branches, setBranches] = useState([]);
   const [supplyDetails, setSupplyDetails] = useState();
   const [supplierData, setSupplierData] = useState([]);
@@ -73,8 +74,9 @@ function SupplyOrder() {
   return (
     <div>
       <ToastContainer position="top-center" />
+      <DashNav />
       <div className="d-flex">
-        <SupplierSideBar />
+        <Sidebar />
         <form className="supplyordercontainer" onSubmit={handleSubmit}>
           <div className="input-group input-group-sm mb-3 mt-5">
             <label>suppliers</label>
@@ -135,5 +137,3 @@ function SupplyOrder() {
     </div>
   );
 }
-
-export default SupplyOrder;
