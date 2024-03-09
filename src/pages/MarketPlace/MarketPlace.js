@@ -48,6 +48,8 @@ function MarketPlace() {
     axiosInstance.get("/product/").then((resp) => {
       setshopItems(resp.data);
       setLoading(false)
+    }).catch((error)=>{
+      toast.error(error.message)
     });
   }, []);
 
@@ -188,9 +190,9 @@ function MarketPlace() {
           >
             <FiHeart
               className={`cart-icon02 ${
-                isInWishlist(item._id)? "wishlist_active" : ""
+                isInWishlist(item?._id)? "wishlist_active" : ""
               }`}
-              onClick={() => AddWishlist(item._id)}
+              onClick={() => AddWishlist(item?._id)}
             />
             <img src={`${backend}${item.img}`} className="item-image  mt-5" alt="" />
             <Link

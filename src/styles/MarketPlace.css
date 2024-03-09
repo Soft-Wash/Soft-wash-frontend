@@ -71,6 +71,7 @@
   top: 70%;
   right: 25%;
   left: 25%;
+  font-size: 15px;
 
 }
 
@@ -80,6 +81,7 @@
   right: 25%;
   left: 25%;
   white-space:wrap;
+  font-size: 15px;
 }
 
 .select-tag{
@@ -119,6 +121,8 @@
 .wishlist_active{
   color: red;
 }
+
+
   
 
 

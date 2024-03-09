@@ -22,17 +22,18 @@ function BranchModal({isOpen,onClose,SaveBranch}){
   const Navigate = useNavigate();
 
   
-
+const branchDetails=()=>{
+  setLoading(true)
+  axiosInstance.get("/branch/").then((resp) => {
+    setbranches(resp.data);
+    setLoading(false)
+  }).catch((error)=>{
+    toast.error(error?.message)
+  })
+}
 
   useEffect(() => {
-    setLoading(true)
-    axiosInstance.get("/branch/").then((resp) => {
-      setbranches(resp.data);
-      setLoading(false)
-    }).catch((error)=>{
-      console.log(error)
-      toast.error(error?.message)
-    })
+    branchDetails()
   }, []);
 
   const saveBranch = () => {
@@ -48,6 +49,7 @@ function BranchModal({isOpen,onClose,SaveBranch}){
 
   return(
     <div>
+                  <ToastContainer position="top-center" />
    <Modal show={isOpen} onHide={onClose} position="top-center" className="ModContainer">
     {loading? <Loader/> :    <>       <Modal.Header closeButton>
             <Modal.Title>Select Branch</Modal.Title>

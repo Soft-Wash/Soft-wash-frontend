@@ -17,7 +17,8 @@ import Loader from "../../components/Loader/Loader";
 function Wishlist() {
   const [wishlist, setWishlist] = useState();
   const [loading, setLoading] = useState(true);
-  const backend = "http://localhost:8003/uploads/"
+  const [wishlistItems, setWishlistItems] = useState([]);
+  const backend = "http://localhost:8003/uploads/";
 
   const getWishList = () => {
     const user = JSON.parse(localStorage.getItem("softwashLoginUser"));
@@ -64,6 +65,29 @@ function Wishlist() {
       });
   };
 
+  const isInWishlist = (wishlistItems_id) => {
+    let x = wishlist?.map((item) => item?.product?._id === wishlistItems_id);
+    return x.includes(true);
+  };
+
+  const DeleteWishlist = (product_id) => {
+    const user_id = JSON.parse(localStorage.getItem("softwashLoginUser"));
+    console.log(user_id._id,product_id)
+    axios
+    .get(
+      `${process.env.REACT_APP_BASE_URL}/wishlist/delete/?user=${user_id?._id}&product=${product_id}`
+    )
+    .then((resp) => {
+      console.log(resp.data);
+      setWishlist(resp.data);
+      toast.success("item removed")
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  };
+
   useEffect(() => {
     getWishList();
   }, []);
@@ -107,7 +131,12 @@ function Wishlist() {
                       className="item-card border text-center mt-4"
                       style={{ height: "350px" }}
                     >
-                      <FiHeart className="cart-icon02" />
+                      <FiHeart
+                        className={`cart-icon02 ${
+                          isInWishlist(item?.product?._id) ? "wishlist_active" : ""
+                        }`}
+                        onClick={() => DeleteWishlist(item?._id)}
+                      />
                       <img
                         src={`${backend}${item?.product?.img}`}
                         className="item-image  mt-5"

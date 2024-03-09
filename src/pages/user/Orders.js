@@ -9,6 +9,9 @@ import { axiosInstance } from "../../services/AxiosInstance";
 import { useState } from "react";
 import axios from "axios";
 import UserSidebarTablet from "../../components/UserSidebarTablet";
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Orders() {
   const [userOrders, setuserOrders] = useState();
@@ -28,6 +31,8 @@ export default function Orders() {
       const options = { year: "numeric", month: "long", day: "numeric" };
       const pickUpDateValue = latestDate.toLocaleDateString("en-US", options);
       setpickUpDate(pickUpDateValue);
+    }).catch((error)=>{
+      toast.error(error.message)
     });
   }
 
@@ -41,7 +46,7 @@ export default function Orders() {
         setOrders(resp.data);
       })
       .catch((error) => {
-        console.error("Error fetching placed orders:", error);
+toast.error(error.message)
       });
   };
 
@@ -56,7 +61,7 @@ export default function Orders() {
         console.log(resp.data)
       })
       .catch((error) => {
-        console.error("Error fetching placed orders:", error);
+        toast.error(error.message)
       });
   };
 
@@ -71,7 +76,7 @@ export default function Orders() {
         setOrders(resp.data);
       })
       .catch((error) => {
-        console.error("Error fetching placed orders:", error);
+        toast.error(error.message)
       });
   };
 
@@ -85,7 +90,7 @@ export default function Orders() {
         setOrders(resp.data);
       })
       .catch((error) => {
-        console.error("Error fetching placed orders:", error);
+        toast.error(error.message)
       });
   };
 
@@ -99,7 +104,7 @@ export default function Orders() {
         setOrders(resp.data);
       })
       .catch((error) => {
-        console.error("Error fetching placed orders:", error);
+        toast.error(error.message)
       });
   };
 
@@ -113,7 +118,7 @@ export default function Orders() {
         setOrders(resp.data);
       })
       .catch((error) => {
-        console.error("Error fetching placed orders:", error);
+        toast.error(error.message)
       });
   };
 
@@ -123,6 +128,7 @@ export default function Orders() {
 
   return (
     <>
+                <ToastContainer position="top-center" />
       <div>
         <div>
           <UserSidebarTablet />

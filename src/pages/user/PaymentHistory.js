@@ -5,6 +5,9 @@ import { axiosInstance } from "../../services/AxiosInstance";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import UserSidebarTablet from "../../components/UserSidebarTablet";
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function PaymentHistory() {
   const [paymentHistory, setPaymentHistory] = useState();
@@ -13,8 +16,6 @@ function PaymentHistory() {
   const HandleSelectTag = (e) => {
     const value = e.target.value;
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
-    console.log(userId._id);
-    console.log(value);
 
     axios
       .get(
@@ -27,7 +28,9 @@ function PaymentHistory() {
         console.log(status);
         console.log(resp.data);
         setPaymentHistory(resp.data);
-      });
+      }).catch((error)=>{
+        toast.error(error.message)
+      })
   };
 
   const getStatusColorClass = (status) => {
@@ -45,6 +48,7 @@ function PaymentHistory() {
 
   return (
     <div>
+                  <ToastContainer position="top-center" />
       <div>
         <UserSidebarTablet />
       </div>

@@ -14,7 +14,6 @@ import { useContext } from "react";
 function Navigation() {
   const { cartNotific } = useContext(TaskContext);
   const { wishlist } = useContext(TaskContext);
-  // const cartCount = notification?.length || 0;
 
   return (
     <div>

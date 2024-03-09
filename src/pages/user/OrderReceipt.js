@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { axiosInstance } from "../../services/AxiosInstance";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../components/Loader/PaymentLoader";
 
 export default function OrderReceipt() {
   const options = { day: "numeric", month: "long" };
@@ -23,17 +23,19 @@ export default function OrderReceipt() {
   const navigate = useNavigate();
   const [GetPaymentStatus, setGetPaymentStatus] = useState();
   const [newpaymentType, setNewpaymentType] = useState(null);
-  let intervalId;
 
-  // console.log(newpaymentType);
 
   function getPaymentStatus() {
     const ref = JSON.parse(localStorage.getItem("payment_reference"));
+    console.log(ref)
+
     axiosInstance
       .get(`/payments/getstatus?reference=${ref}`)
       .then((resp) => {
         setPaymentStatus(resp.data);
+        updatePaymentStatus()
         console.log(resp.data)
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log(error.message);
@@ -41,8 +43,10 @@ export default function OrderReceipt() {
   }
 
   function getOrderDetails() {
+    const order_id = JSON.parse(localStorage.getItem("order_id"))
+    console.log(order_id)
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/order`)
+      .get(`${process.env.REACT_APP_BASE_URL}/order/${order_id}/order`)
       .then((resp) => {
         setUserData(resp.data);
         console.log(resp.data)
@@ -59,16 +63,9 @@ export default function OrderReceipt() {
   }
 
   function Tonavigate() {
-    axios
-      .get(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/order`)
-      .then((resp) => {
-        console.log(resp.data);
-        setUserData(resp.data);
-        const userId = resp.data.customer_id._id;
-        console.log(userId);
-        localStorage.setItem("UserId", JSON.stringify(userId));
+        localStorage.setItem("UserId", JSON.stringify(userData?.customer_id?._id));
         navigate(`/my-orders`);
-      });
+  
   }
 
   const updatePaymentStatus = () => {
@@ -92,37 +89,24 @@ export default function OrderReceipt() {
   };
 
   useEffect(() => {
-    getOrderDetails();
-
-    if (newpaymentType === "payWithCard") {
-      intervalId = setInterval(() => {
-        getPaymentStatus();
-      }, 5000);
-    } else {
-      console.log("else");
+    console.log(newpaymentType)
+    if(newpaymentType === "PayWithCard"){
+      getPaymentStatus();
+      getOrderDetails();
+    }else{
+      getOrderDetails();
     }
+  }, []); 
 
-    if (paymentStatus?.data?.status === "success") {
-      return () => clearInterval(intervalId);
-    }
-  }, []); // Include newpaymentType in the dependency array
 
-  useEffect(() => {
-    if (paymentStatus?.data?.status === "success") {
-      updatePaymentStatus();
-      clearInterval(intervalId);
-    }
-  }, []);
 
   useEffect(() => {
     const paymentWithCard = JSON.parse(localStorage.getItem("paymentType"));
     setNewpaymentType(paymentWithCard);
-    console.log(paymentWithCard)
   }, []);
 
   return (
-    <> {isLoading? <Loader/> :   <>
-    {" "}
+    <> {isLoading? <Loader/> : <>
     <Banner />
     <ThankYou />
     <div className="center_div">
@@ -166,38 +150,10 @@ export default function OrderReceipt() {
                 <h5>Payment Status</h5>
               </div>
               <div lg={3}>
-                <p>{GetPaymentStatus?.data?.payment_status}</p>
+                <p>{paymentStatus?.data?.status}</p>
               </div>
             </div>
           </div>
-        ) : paymentStatus?.data?.status === "failed" ? (
-          <p className="pendingpayment-ptag">
-            Payment Failed. Please try again or choose another payment
-            method. <br />{" "}
-            <Link
-              to={`/paymentpage/${userData?._id}`}
-              className="btn-primary"
-            >
-              <Col
-                lg={5}
-                md={5}
-                sm={4}
-                className="d-print-none mt-1 mx-auto"
-              >
-                <Button
-                  variant="outline-primary"
-                  className="me-auto w-75 text-center"
-                  onClick={Tonavigate}
-                >
-                  Try Again
-                </Button>
-              </Col>
-            </Link>
-          </p>
-        ) : paymentStatus?.data?.status === "abandoned" ? (
-          <p className="pendingpayment-ptag">
-            Payment Abandoned. Please review your order and try again.
-          </p>
         ) : newpaymentType === "payWithCash" ? (
           <div>
             <div className="d-flex justify-content-between gap-3 mb-2">
@@ -241,9 +197,7 @@ export default function OrderReceipt() {
               </div>
             </div>
           </div>
-        ) : (
-          <p className="text-center">Loading... </p>
-        )}
+        ):""}
       </div>
     </div>
     <Row className="mb-5"></Row>
