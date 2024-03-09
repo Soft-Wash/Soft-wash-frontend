@@ -1,86 +1,132 @@
-import SupplierSideBar from "../../components/Supplier/SupplierSideBar";
-import "../../styles/Supplierstyle/SupplyOrder.css";
-import Button from "react-bootstrap/Button";
-import { useState } from "react";
-import { useEffect } from "react";
-import { axiosInstance } from "../../services/AxiosInstance";
-import { toast } from "react-toastify";
+import React, { useState, useEffect } from 'react';
+import SupplierSideBar from '../../components/Supplier/SupplierSideBar';
+import '../../styles/Supplierstyle/SupplyOrder.css';
+import Button from 'react-bootstrap/Button';
+import { axiosInstance } from '../../services/AxiosInstance';
+import { toast } from 'react-toastify';
 
 function SupplyOrder() {
-    const [branch, setBranch] = useState("");
-    const [productName, setProductName] = useState("");
-    const [productPrice, setProductPrice] = useState("");
-    const [productQuantity, setProductQuantity] = useState("");
-    const [err, setErr] = useState(false);
-
-    // Function to handle form submission
-    const handleSubmit = (e) => {
-        e.preventDefault(); // Prevent the default form submission behavior
-        if (branch === "" || productName === "" || productPrice === "" || productQuantity === "") {
-            setErr(true);
-            return;
-        }
-        let users = {
-            branch: branch,
-            productName: productName,
-            productPrice: productPrice,
-            productQuantity: productQuantity,
-            date: new Date().toLocaleString(),
-        };
-
-        // fetch("http://159.65.21.42:9000/register", {
-        //     method: "POST",
-        //     headers: { "Content-Type": "Application/json" },
-        //     body: JSON.stringify(users),
-        // })
-        //     .then((resp) => resp.json())
-        //     .then((contact) => {
-        //         alert("User Created");
-        //         console.log(contact);
-        //     })
-        //     .catch((err) => console.log(err));
+  const [branches, setBranches] = useState([]);
+  const [supplyDetails,setSupplyDetails]=useState();
+  const [supplierData, setSupplierData] = useState([]);
+  const [selectedSupplier, setSelectedSupplier] = useState('');
+  const [description, setDescription] = useState('');
+  const [err, setErr] = useState(false);
 
 
 
+  // Fetch branch from your API endpoint
+  useEffect(() => {
+    axiosInstance
+      .get('http://localhost:8003/branch/')
+      .then((response) => setBranches(response.data))
+      .catch((error) => console.error('Error fetching branches:', error));
+  }, []);
+
+  const handleInputs=(e)=>{
+    setSupplyDetails(e)
+  }
+
+ 
+
+  // Fetch supplier from your API endpoint
+  useEffect(() => {
+    axiosInstance
+      .get('http://localhost:8003/suppliers/')
+      .then((response) =>{
+        setSupplierData(response.data.data)
+        console.log(response.data)
+      })
+      .catch((error) => console.error('Error fetching suppliers:', error));
+  }, []);
+  const handleSelect=(e)=>{
+    setSelectedSupplier(e)
+  }
+  // const handleSupplierChange = (event) => {
+  //   setSelectedSupplier(event.target.value);
+  // };
+
+  
+
+
+  // console.log(supplierDetails)
+
+
+
+  // Function to handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = {
+      supplierData: supplierData,
+      branches: branches,
+      description: description,
     };
 
-    return (
-        <div>
-            <div className="d-flex">
-                <SupplierSideBar />
-                <form className="supplyordercontainer" onSubmit={handleSubmit}>
-                    
-                    <div className="input-group input-group-sm mb-3">
-                        <label htmlFor="">Branch</label>
-                        <input type="text" className="supplyorderInput" value={branch} onChange={(e) => setBranch(e.target.value)} />
-                        {err === true && branch === "" ? <span>Branch Required</span> : null}
-                    </div>
+    // Make the POST request
+    fetch('http://localhost:8003/supplies/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  };
 
-                    <div className="input-group input-group-sm mb-3">
-                        <label htmlFor="">Product Name</label>
-                        <input type="text" className="supplyorderInput" value={productName} onChange={(e) => setProductName(e.target.value)} />
-                        {err === true && productName === "" ? <span>Product Name is Required</span> : null}
-                    </div>
+  return (
+    <div>
+      <div className="d-flex">
+        <SupplierSideBar />
+        <form className="supplyordercontainer" onSubmit={handleSubmit}>
 
-                    <div className="input-group input-group-sm mb-3">
-                        <label htmlFor="">Product Price</label>
-                        <input type="text" className="supplyorderInput" value={productPrice} onChange={(e) => setProductPrice(e.target.value)} />
-                        {err === true && productPrice === "" ? <span>Product Price is Required</span> : null}
-                    </div>
+        <div className='input-group input-group-sm mb-3 mt-5'>
+            <label>suppliers</label>
+            <select className="supplyorderInput border rounded ps-2" 
+             onChange={(e) => handleInputs(e.target.value)}>
+              {supplierData && supplierData.map((supply) => (
+                <option key={supply?._id} value={supply?._id}>{supply?.fullName}</option>
+              ))}
+            </select>
+          </div>
 
-                    <div className="input-group input-group-sm mb-3">
-                        <label htmlFor="">Product Quantity</label>
-                        <input type="text" className="supplyorderInput" value={productQuantity} onChange={(e) => setProductQuantity(e.target.value)} />
-                        {err === true && productQuantity === "" ? <span>Product Quantity Required</span> : null}
-                    </div>
 
-                    <Button variant="info text-white">
-                          Supply
-                    </Button>
-                </form>
-            </div>
-        </div>
-    );
+          <div className='input-group input-group-sm mb-3 mt-5'>
+            <label>Branches</label>
+            <select className="supplyorderInput border rounded ps-2" 
+             onChange={(e) => handleSelect(e.target.value)}>
+              {branches && branches.map((branch) => (
+                <option key={branch?._id} value={branch?._id}>{branch?.name}</option>
+              ))}
+            </select>
+          </div>
+
+
+          <div>
+            <textarea name=""
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            placeholder='Description.......'
+            className='border rounded px-2 w-100'
+              id="" 
+              cols="30"
+              rows="10">
+            </textarea>
+          </div>
+
+          <Button variant="info text-white" type="submit">
+            Supply
+          </Button>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default SupplyOrder;
