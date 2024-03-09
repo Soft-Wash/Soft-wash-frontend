@@ -4,6 +4,7 @@ import axios from "axios";
 
 export const TaskContext = createContext({});
 
+
 export function TaskContextProvider({ children }) {
   const [employeetasks, setEmployeetasks] = useState([]);
   const [cartNotific,setCartNotific]=useState()
@@ -47,16 +48,12 @@ export function TaskContextProvider({ children }) {
     });
 
   }
-  
 
-      
 
   useEffect(() => {
     getallEmployeetasks();
     cartNotification()
     GetWishlist()
-
-    
   }, []);
 
   
@@ -74,4 +71,5 @@ export function TaskContextProvider({ children }) {
       {children}
     </TaskContext.Provider>
   );
+
   }
