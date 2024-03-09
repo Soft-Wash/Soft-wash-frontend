@@ -4,7 +4,6 @@ import axios from "axios";
 
 export const TaskContext = createContext({});
 
-
 export function TaskContextProvider({ children }) {
   const [employeetasks, setEmployeetasks] = useState([]);
   const [cartNotific,setCartNotific]=useState()
@@ -48,11 +47,24 @@ export function TaskContextProvider({ children }) {
     });
 
   }
+  
+      const getAllOrders = () =>{
+        axiosInstance.get("/order/").then((resp) => {
+            const filteredOrders = resp.data.filter(item => item?.branch_id?._id === targetBranchId);
+            console.log("Filtered Orders:", filteredOrders);
+            setOrders(filteredOrders);
+        }).catch(error => {
+            console.error("Error fetching data:", error);
+        });
+
+    }
+      
 
   useEffect(() => {
     getallEmployeetasks();
     cartNotification()
     GetWishlist()
+     getAllOrders();
   }, []);
 
   
@@ -70,5 +82,3 @@ export function TaskContextProvider({ children }) {
       {children}
     </TaskContext.Provider>
   );
-
-  }

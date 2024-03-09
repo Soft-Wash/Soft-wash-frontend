@@ -22,8 +22,8 @@ function SupplierSideBar(){
               <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
             </NavLink>
            
-            <NavLink exact to="/supplierExpenses" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="chart-line">Expenses</CDBSidebarMenuItem>
+            <NavLink exact to="/supply" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="chart-line">Supply</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/deliveryReport" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">Delivery Report</CDBSidebarMenuItem>
