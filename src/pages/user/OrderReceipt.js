@@ -62,16 +62,9 @@ export default function OrderReceipt() {
   }
 
   function Tonavigate() {
-    axios
-      .get(`${process.env.REACT_APP_BASE_URL}/order/${orderId}/order`)
-      .then((resp) => {
-        console.log(resp.data);
-        setUserData(resp.data);
-        const userId = resp.data.customer_id._id;
-        console.log(userId);
-        localStorage.setItem("UserId", JSON.stringify(userId));
+        localStorage.setItem("UserId", JSON.stringify(userData?.customer_id?._id));
         navigate(`/my-orders`);
-      });
+  
   }
 
   const updatePaymentStatus = () => {
