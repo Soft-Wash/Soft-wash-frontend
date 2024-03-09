@@ -27,6 +27,7 @@ export default function OrderReceipt() {
 
   function getPaymentStatus() {
     const ref = JSON.parse(localStorage.getItem("payment_reference"));
+    console.log(ref)
 
     axiosInstance
       .get(`/payments/getstatus?reference=${ref}`)
@@ -88,6 +89,7 @@ export default function OrderReceipt() {
   };
 
   useEffect(() => {
+    console.log(newpaymentType)
     if(newpaymentType === "PayWithCard"){
       getPaymentStatus();
       getOrderDetails();
