@@ -13,7 +13,7 @@ function SupplyOrder() {
   const [supplierData, setSupplierData] = useState([]);
   const [selectedSupplier, setSelectedSupplier] = useState("");
   const [description, setDescription] = useState("");
-  // const [completed, setCompleted] = useState(false);
+  const [completed, setCompleted] = useState(false);
 
   // Fetch branch from your API endpoint
   useEffect(() => {
@@ -39,16 +39,16 @@ function SupplyOrder() {
 
   // Function to handle form submission
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     const castOuterQuotes = (str) => {
-      return str.slice(1, -1)
-    }
+      return str.slice(1, -1);
+    };
 
     const formData = {
       supplier_id: supplyDetails,
       branch_id: selectedSupplier,
-      buyer_id: castOuterQuotes(localStorage.getItem('softwashEmployeeLogin')),
+      buyer_id: castOuterQuotes(localStorage.getItem("softwashEmployeeLogin")),
       description: description,
     };
 
@@ -62,11 +62,15 @@ function SupplyOrder() {
         setDescription("");
         setBranches("");
         setSupplierData("");
+        setCompleted(false);
         toast.success("Supply order successful");
       })
       .catch((error) => {
         console.log(error);
         toast.error("An error occurre");
+        setTimeout(() => {
+          setCompleted(false);
+        }, 4000);
       });
   };
 
@@ -125,10 +129,22 @@ function SupplyOrder() {
             ></textarea>
           </div>
 
-          <Button variant="info text-white" type="submit"
-          // onClick = {() => setCompleted(true)}
+          <Button
+            variant="info text-white"
+            type="submit"
+            className="position-relative d-flex gap-2"
+            onClick={() => {
+              setCompleted(true);
+              handleSubmit();
+            }}
+            disabled = {completed}
           >
-            Supply
+            <div class={`text-center h-50 ${completed ? "" : "d-none"}`} >
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+            <p>Supply</p>
           </Button>
         </form>
       </div>
