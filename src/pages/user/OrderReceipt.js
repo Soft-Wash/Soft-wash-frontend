@@ -90,13 +90,13 @@ export default function OrderReceipt() {
 
   useEffect(() => {
     console.log(newpaymentType)
-    if(newpaymentType === "PayWithCard"){
+    // if(newpaymentType === "PayWithCard"){
       getPaymentStatus();
       console.log("calling")
       getOrderDetails();
-    }else{
+    // }else{
       getOrderDetails();
-    }
+    // }
   }, []); 
 
 
