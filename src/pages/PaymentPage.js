@@ -171,14 +171,10 @@ const postOrder = async () => {
       // localStorage.removeItem('calenderSelectedTime');
       console.log(response?.data?.data?.body?.reference)
       localStorage.setItem("payment_reference",JSON.stringify(response?.data?.data?.body?.reference))
-
       const resp = await axios.post(`${process.env.REACT_APP_BASE_URL}/order/create`, orderDetails);
       setuserOrder(resp.data);
       localStorage.setItem('orderDetails', JSON.stringify(resp.data));
-
       // navigate(`/order-receipt/${orderResponse?.data?._id}`);
-
-  
     }else{
       const resp = await axios.post(`${process.env.REACT_APP_BASE_URL}/order/create`, orderDetails);
       setuserOrder(resp.data);

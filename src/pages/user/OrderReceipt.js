@@ -92,6 +92,7 @@ export default function OrderReceipt() {
     console.log(newpaymentType)
     if(newpaymentType === "PayWithCard"){
       getPaymentStatus();
+      console.log("calling")
       getOrderDetails();
     }else{
       getOrderDetails();
