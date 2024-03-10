@@ -14,7 +14,7 @@ import Loader from "../../components/Loader/PaymentLoader";
 export default function OrderReceipt() {
   const options = { day: "numeric", month: "long" };
   const [userData, setUserData] = useState();
-  const [paymentStatus, setPaymentStatus] = useState();
+  const [paymentStatus, setPaymentStatus] = useState("pending");
   const [pickUpDateValue, setpickUpDate] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
