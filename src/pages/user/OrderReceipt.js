@@ -207,7 +207,7 @@ export default function OrderReceipt() {
         <Link to="/">
           <Button
             variant="outline-primary"
-            className="me-auto w-75 text-center"
+            className="nowrapp me-auto w-75 text-center"
           >
             Back Home
           </Button>
@@ -217,7 +217,7 @@ export default function OrderReceipt() {
         <Link to="#print">
           <Button
             variant="outline-primary"
-            className="me-auto w-100 text-center "
+            className="nowrapp me-auto w-100 text-center "
             onClick={() => handlePrint()}
           >
             Print Receipt
@@ -227,7 +227,7 @@ export default function OrderReceipt() {
       <Col lg={3} md={5} sm={4} className="d-print-none">
         <Button
           variant="primary"
-          className="me-auto w-75 text-center"
+          className="nowrapp me-auto w-75 text-center"
           onClick={Tonavigate}
         >
           Check order update

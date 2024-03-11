@@ -50,6 +50,8 @@ function OrderDetailsBody() {
       const options = { year: "numeric", month: "long", day: "numeric" };
       const pickUpDateValue = latestDate.toLocaleDateString("en-US", options);
       setpickUpDate(pickUpDateValue);
+    }).catch((error)=>{
+      toast.error(error.message)
     });
   }, []);
 
@@ -173,8 +175,9 @@ axios.post(`${process.env.REACT_APP_BASE_URL}/review/review/create`,ReviewDetail
         </Card>
         {togglereview ? (
           <Container className="order_container">
-            <p>Write a Review</p>
+            <p className="review_desc">Write a Review</p>
             <form action="">
+              {/* <div className="review_flex_div"> */}
               <label className="" htmlFor="">
                 Name <br />
                 <input
@@ -195,6 +198,8 @@ axios.post(`${process.env.REACT_APP_BASE_URL}/review/review/create`,ReviewDetail
                   onChange={HandleReview}
                 />
               </label>
+              {/* </div> */}
+
               <label className="label01" htmlFor="">
                 Body of review <br />
                 <textarea

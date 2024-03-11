@@ -105,6 +105,11 @@
   margin: 0 auto;
 }
 
+.review_flex_div{
+  display: flex;
+  width: 100%;
+}
+
 
 .order_container{
   min-height: 450px;
@@ -155,6 +160,8 @@
 }
 
 @media(max-width: 770px){
+
+
   .user-dashboard-contact-body {
     width: 90%;
     /* margin: auto;
@@ -175,9 +182,25 @@
     font-size: 20px !important;
   }
 
+  .review_desc{
+    font-size: 13px;
+  }
 }
 
 @media(max-width: 427px){
+
+  .review_desc{
+    font-size: 13px;
+  }
+
+  .order_review_inpt{
+    width: 270px;
+  }
+
+  .order_review_textarea{
+    width: 270px;
+  }
+
   .user-dashboard-contact-body {
     padding: 25px 10px;
   }
@@ -225,10 +248,65 @@
   }
 
   .order_review_inpt{
-    width: 500px;
+    width: 270px;
   }
 
   .order_review_textarea{
+    width: 270px;
+  }
+  .order_review_textarea{
     width: 500px;
   }
+}
+
+@media(max-width: 375px){
+  .progress_circle {
+    width: 18px !important;
+    height: 18px !important;
+  }
+  .progress-check {
+    font-size: 10px !important;
+  }
+  .progress_content:not(:last-child) .progress_bar1 {
+    width: 47%;
+    top: 12%;    
+  }
+  .status-description {
+    font-size: 6px;
+  }
+
+  .order_review_inpt{
+    width: 250px;
+  }
+
+  .order_review_textarea{
+    width: 250px;
+  }
+
+}
+
+@media(max-width: 320px){
+  .progress_circle {
+    width: 18px !important;
+    height: 18px !important;
+  }
+  .progress-check {
+    font-size: 10px !important;
+  }
+  .progress_content:not(:last-child) .progress_bar1 {
+    width: 47%;
+    top: 12%;    
+  }
+  .status-description {
+    font-size: 6px;
+  }
+
+  .order_review_inpt{
+    width: 210px;
+  }
+
+  .order_review_textarea{
+    width: 210px;
+  }
+
 }
