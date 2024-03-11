@@ -20,7 +20,7 @@ function Cart() {
   const Cart_Array = [];
   const navigate = useNavigate();
   const backend = "http://localhost:8003/uploads/";
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const GetCartItems = () => {
     const CustomerData = JSON.parse(localStorage.getItem("softwashLoginUser"));

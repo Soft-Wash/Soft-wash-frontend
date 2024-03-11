@@ -16,7 +16,7 @@ import Loader from "../../components/Loader/Loader";
 
 function Wishlist() {
   const [wishlist, setWishlist] = useState();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [wishlistItems, setWishlistItems] = useState([]);
   const backend = "http://localhost:8003/uploads/";
 
