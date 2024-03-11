@@ -260,7 +260,7 @@
 }
 
 @media(max-width: 375px){
-  .progress_circle {
+  /* .progress_circle {
     width: 18px !important;
     height: 18px !important;
   }
@@ -270,7 +270,7 @@
   .progress_content:not(:last-child) .progress_bar1 {
     width: 47%;
     top: 12%;    
-  }
+  } */
   .status-description {
     font-size: 6px;
   }
@@ -286,7 +286,7 @@
 }
 
 @media(max-width: 320px){
-  .progress_circle {
+  /* .progress_circle {
     width: 18px !important;
     height: 18px !important;
   }
@@ -296,7 +296,7 @@
   .progress_content:not(:last-child) .progress_bar1 {
     width: 47%;
     top: 12%;    
-  }
+  } */
   .status-description {
     font-size: 6px;
   }
