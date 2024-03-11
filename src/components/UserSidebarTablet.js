@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { HouseFill, DashSquareFill, PhoneFill, PersonFill, ListCheck, ListTask } from 'react-bootstrap-icons';
+import { FaBookOpen, FaHistory, FaClipboardList, FaListAlt, FaPhoneSquareAlt  } from "react-icons/fa";
 
 
 function UserSidebarTablet(){
@@ -43,7 +44,7 @@ function UserSidebarTablet(){
                                 </div>
                                 <div className='user-dashboard-nav-tabs'>
                                     <Link exact to="/dashboard-contact-us"  className='user-dashboard-nav-links d-flex'>
-                                        <PhoneFill className='user-tablet-icons'/>Contact Us
+                                        <FaPhoneSquareAlt  className='user-tablet-icons'/>Contact Us
                                     </Link>
                                 </div>
                                 <div className='user-dashboard-nav-tabs'>
@@ -53,22 +54,22 @@ function UserSidebarTablet(){
                                 </div>
                                 <div className='user-dashboard-nav-tabs'>
                                     <Link exact to="/my-orders"  className='user-dashboard-nav-links d-flex'>
-                                        <ListCheck className='user-tablet-icons'/>Laundry Order 
+                                        <FaListAlt  className='user-tablet-icons'/>Laundry Order 
                                     </Link>
                                 </div>
                                 <div className='user-dashboard-nav-tabs'>
                                     <Link exact to="/ClothesSelection"  className='user-dashboard-nav-links d-flex'>
-                                        <ListTask className='user-tablet-icons'/>Create Order
+                                        <FaBookOpen className='user-tablet-icons'/>Create Order
                                     </Link> 
                                 </div>        
                                 <div className='user-dashboard-nav-tabs'>
                                     <Link exact to="/paymenthistory"  className='user-dashboard-nav-links d-flex'>
-                                        <ListTask className='user-tablet-icons'/>Payment History
+                                        <FaHistory  className='user-tablet-icons'/>Payment History
                                     </Link> 
                                 </div>      
                                 <div className='user-dashboard-nav-tabs'>
                                     <Link exact to="/shoporders"  className='user-dashboard-nav-links d-flex'>
-                                        <ListTask className='user-tablet-icons'/>Shop Orders 
+                                        <FaClipboardList  className='user-tablet-icons'/>Shop Orders 
                                     </Link> 
                                 </div>   
                             </Nav>
