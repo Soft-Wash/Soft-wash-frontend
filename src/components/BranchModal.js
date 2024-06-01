@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import { axiosInstance } from "../services/AxiosInstance";
+import axiosInstance from './../services/AxiosInstance';
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -33,7 +33,7 @@ const branchDetails=()=>{
 }
 
   useEffect(() => {
-    branchDetails()
+    // branchDetails()
   }, []);
 
   const saveBranch = () => {

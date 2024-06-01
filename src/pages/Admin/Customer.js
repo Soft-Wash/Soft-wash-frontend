@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect,useState } from "react"
 import AdminSidebar from "../../components/Admin/AdminSidebar"
-import { axiosInstance } from "../../services/AxiosInstance"
+import  axiosInstance  from "./../../services/AxiosInstance";
 import "../../styles/Admin/Customer.css"
 import { Link } from "react-router-dom"
 

@@ -10,45 +10,49 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
 import { BsBell } from "react-icons/bs";
-import { axiosInstance } from "../services/AxiosInstance";
-import { ToastContainer, toast } from "react-toastify";
+import axiosInstance from "./../services/AxiosInstance";
 import "react-toastify/dist/ReactToastify.css";
-
+import routes from "./../routes";
+import { useDispatch,useSelector } from 'react-redux';
+import {resetUser} from "./../utils/slicer/usersSice"
 
 function Navigation() {
-  const [userLoggedIn, setUserLoggedIn] = useState();
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const [userImage, setUserImage] = useState();
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const backend = "http://localhost:8003/uploads/";
+  const dispatch = useDispatch();
+  
 
   useEffect(() => {
-    const userToken = JSON.parse(localStorage.getItem("softwashLoginToken"));
-    setUserLoggedIn(userToken);
-    if (userToken) {
+    if (isAuthenticated) {
       userData();
     }
   }, []);
 
-  const handleLogout = () => {
-    const logOut = localStorage.clear();
-    if (logOut) {
-      toast.success("logout successful");
-      navigate("/");
-    }
-  };
-
   const userData = () => {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
-    axiosInstance.get(`/users/${userId?._id}`).then((resp) => {
-      setUserImage(resp.data);
-    }).catch((error)=>{
-    });
+    axiosInstance
+      .get(`/users/${userId?._id}`)
+      .then((resp) => {
+        setUserImage(resp.data);
+      })
+      .catch((error) => {});
   };
+
+  const homeRoute = routes.find((route) => route.name === "HOME");
+  const homeChildren = homeRoute
+    ? homeRoute.children.filter((child) =>
+        ["SERVICES", "PRICING", "ABOUT", "HOW IT WORK","SHOP"].includes(
+          child.name
+        )
+      )
+    : [];
+
+  const navigationRoutes = [{ name: "HOME", path: "/" }, ...homeChildren];
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
-      <ToastContainer position="top-center" />
       <Container fluid>
         <Navbar.Brand href="/" className="fw-bold">
           SOFT-WASH
@@ -60,39 +64,15 @@ function Navigation() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link>
-              <NavLink className="howitworks-link" to="/">
-                Home
-              </NavLink>
-            </Nav.Link>
-
-            <Nav.Link>
-              <NavLink className="howitworks-link" to="/ourservices">
-                Services
-              </NavLink>
-            </Nav.Link>
-            <Nav.Link>
-              <NavLink className="howitworks-link" to="/how-it-works">
-                How it works
-              </NavLink>
-            </Nav.Link>
-            <Nav.Link>
-              <NavLink className="howitworks-link" to="/about">
-                About
-              </NavLink>
-            </Nav.Link>
-            <Nav.Link>
-              <NavLink className="howitworks-link" to="/pricing">
-                Pricing
-              </NavLink>
-            </Nav.Link>
-            <Nav.Link>
-              <Link className="howitworks-link" to="/shop">
-                Shop
-              </Link>
-            </Nav.Link>
+            {navigationRoutes.map((route) => (
+              <Nav.Link key={route.path}>
+                <NavLink className="howitworks-link" to={route.path}>
+                  {route.name}
+                </NavLink>
+              </Nav.Link>
+            ))}
           </Nav>
-          {userLoggedIn ? (
+          {isAuthenticated ? (
             <div className="my-auto">
               <div className="d-flex">
                 <div
@@ -142,20 +122,15 @@ function Navigation() {
                         Dashboard
                       </Link>
                     </Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleLogout()}>
-                      Logout
-                    </Dropdown.Item>
+                    <Dropdown.Item        onClick={() => { dispatch(resetUser()) }}>Logout</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </div>
             </div>
           ) : (
-            <Button
-              variant="info text-white"
-              onClick={() => navigate("/UserRegister")}
-            >
-              <Nav.Link>Get Started</Nav.Link>
-            </Button>
+            <Link to="/login">
+              <Button variant="info text-white">Get Started</Button>
+            </Link>
           )}
         </Navbar.Collapse>
       </Container>

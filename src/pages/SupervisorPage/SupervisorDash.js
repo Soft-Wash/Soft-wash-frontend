@@ -14,7 +14,8 @@ import InventoryChart from "../../components/SupervisorComponents/InentoryChart"
 import SupervisorCarousel from "../../components/SupervisorComponents/SupervisorCarousel";
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
+
 import SupDashChart from "../../components/SupervisorComponents/SupDashChart";
 import SupNotification from "../../components/SupervisorComponents/SupNotification";
 import Loader from "../../components/Loader/Loader"

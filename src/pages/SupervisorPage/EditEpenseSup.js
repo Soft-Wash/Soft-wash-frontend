@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import AdminSidebar from "../../components/Admin/AdminSidebar";
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
 import "../../styles/Admin/EditExpense.css";
 import SupervisorSideBar from "../../components/SupervisorComponents/SupervisorSideBar";
 

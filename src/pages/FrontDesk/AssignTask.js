@@ -1,7 +1,7 @@
 import WorkFlowSideBar from "../../components/Admin/WorkFlowSideBar";
 import "../../styles/Admin/CreateTask.css";
 import { useState, useEffect } from "react";
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

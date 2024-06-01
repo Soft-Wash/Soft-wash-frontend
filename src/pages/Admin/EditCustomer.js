@@ -1,6 +1,6 @@
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 import "../../styles/Admin/EditCustomer.css"
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
 import {useEffect,useState} from "react"
 import { useParams } from "react-router-dom";
 

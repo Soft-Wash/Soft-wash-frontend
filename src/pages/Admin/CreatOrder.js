@@ -1,7 +1,7 @@
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 import "../../styles/Admin/CreateOrder.css";
 import { useEffect, useState } from "react";
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";

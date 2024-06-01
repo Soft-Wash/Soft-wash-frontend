@@ -8,26 +8,49 @@ import HeaderBanner from "../common/HeaderBanner";
 import Footer from "../common/Footer";
 import { useEffect, useState } from "react";
 import { FaChevronRight } from "react-icons/fa";
-import { axiosInstance } from "../services/AxiosInstance";
+import axiosInstance from "./../services/AxiosInstance";
 import axios from "axios";
 import Loader from "../components/Loader/Loader";
+import {getservices} from "./../utils/api/Services_api"
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {useDispatch} from "react-redux"
+import { addNotification } from "../utils/slicer/notificationSlice";
+
 
 function PricingPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [services, setServices] = useState();
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch()
 
-  const pricingContent = () => {
-    axiosInstance.get("/services/").then((resp) => {
-      console.log(resp.data);
-      setServices(resp.data);
-      setLoading(false)
-    }).catch((error)=>{
-      toast.error(error.message)
-    });
+  const pricingContent = async() => {
+    try {
+      const {status,data,message} = await  getservices()
+      console.log(data)
+      if(status){
+        setServices(data)
+      }else{
+        dispatch(addNotification({
+          type: "error",
+          title: "Operation Failed!",
+          description: message,
+        }))
+      }
+    } catch (error) {
+      dispatch(addNotification({
+        type: "error",
+        title: "Operation Failed!",
+        description: "failed to fetch service data",
+      }))
+    }
+
+    console.log(services)
+  
+
+
+
   };
   useEffect(() => {
     pricingContent();
@@ -53,10 +76,10 @@ function PricingPage() {
 
   return (
     <div>
-                  <ToastContainer position="top-center" />
-      {loading ? (
+      {/* <ToastContainer position="top-center" /> */}
+      {/* {loading ? (
         <Loader />
-      ) : (
+      ) : ( */}
         <>
           {" "}
           <Navigation />
@@ -156,7 +179,7 @@ function PricingPage() {
           </Container>
           <Footer />
         </>
-      )}
+      {/* // )} */}
     </div>
   );
 }

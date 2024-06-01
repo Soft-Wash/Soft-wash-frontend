@@ -1,6 +1,6 @@
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 import "../../styles/Admin/CreateLeave.css";
-import { axiosInstance } from "../../services/AxiosInstance";
+import axiosInstance from "./../../services/AxiosInstance";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from 'react-toastify';

@@ -1,4 +1,5 @@
-import { axiosInstance } from "./AxiosInstance";
+import  axiosInstance  from "./../services/AxiosInstance";
+import {login} from "./../utils/api/user_api"
 
 export async function handleLogin(payload){
   let data,error;

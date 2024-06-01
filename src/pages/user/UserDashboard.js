@@ -3,7 +3,7 @@ import { FaClipboardList, FaListAlt } from "react-icons/fa";
 import "../../styles/UserDashboard.css";
 import "../../styles/DashboardContact.css";
 import { useEffect } from "react";
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
 import { useState } from "react";
 import axios from "axios";
 import UserSidebarTablet from "../../components/UserSidebarTablet";
@@ -21,7 +21,7 @@ function UserDashboard() {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
 
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/order/${userId._id}/allorders`)
+      .get(`${process.env.REACT_APP_BASE_URL}/order/${userId?._id}/allorders`)
       .then((resp) => {
         setOrders(resp.data);
         setLoading(false)
@@ -35,7 +35,7 @@ function UserDashboard() {
     const userId = JSON.parse(localStorage.getItem("softwashLoginUser"));
     axios
       .get(`${process.env.REACT_APP_BASE_URL}/payments/all/userpayments`, {
-        params: { id: userId._id },
+        params: { id: userId?._id },
       })
       .then((resp) => {
         console.log(resp.data);

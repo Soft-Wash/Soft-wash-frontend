@@ -3,7 +3,7 @@ import "../../styles/Admin/AdminDashboard.css";
 import { FaClipboardList, FaListAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
 import axios from "axios";
 import { FaBell } from "react-icons/fa6";
 

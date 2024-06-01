@@ -21,7 +21,7 @@ import { FaFacebookSquare, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import Footer from "../../common/Footer";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { axiosInstance } from "../../services/AxiosInstance";
+import axiosInstance  from "./../../services/AxiosInstance";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

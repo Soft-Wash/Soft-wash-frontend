@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 import "../../styles/Admin/tableorder.css";
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";

@@ -1,7 +1,7 @@
 import "../../styles/Admin/CreateProduct.css";
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 import { useEffect, useState } from "react";
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

@@ -3,7 +3,7 @@ import { useState } from "react";
 import React from "react";
 import { useLocation } from "react-router-dom";
 import SupplierSideBar from "../../components/Supplier/SupplierSideBar";
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
 import "../../styles/Admin/NewExpenses.css";
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';

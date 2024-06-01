@@ -9,7 +9,7 @@ import ClothesSelectCounter from "./ClothesSelectCounter";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import ClothesSelectcart from "../../styles/ClothesSelectcart.css";
-import { axiosInstance } from "../../services/AxiosInstance";
+import axiosInstance from './../../services/AxiosInstance';
 import { useState } from "react";
 import { variableManager } from "../../context/VariablesContext";
 

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "../../components/OrdersPage/Sidebar";
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
 import UserSidebarTablet from "../UserSidebarTablet";
 import "../../styles/UserProfile.css"
 import { toast } from 'react-toastify';

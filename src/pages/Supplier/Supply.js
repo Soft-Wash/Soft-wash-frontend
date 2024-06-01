@@ -3,7 +3,7 @@ import "../../styles/Admin/Expenses.css";
 // import { Link, useHistory} from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "../../services/AxiosInstance";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 

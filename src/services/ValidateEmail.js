@@ -1,22 +1,17 @@
-import { axiosInstance } from "./AxiosInstance";
+import axiosInstance from "./AxiosInstance"; // Ensure the import matches the export
 
 export async function validateEmail(payload) {
-  if (!payload) return false;
-  let { data, error } = "";
+  if (!payload) return { data: null, error: "Payload is missing" };
+
   try {
-    await axiosInstance.post("/auth/validate-email", payload).then((resp) => {
-      data = resp.data.data;
-    });
-  } catch (err) {
-    error = err;
+    const response = await axiosInstance.post("/auth/validate-email", payload);
+    return { data: response.data.data, error: null };
+  } catch (error) {
+    return { data: null, error };
   }
-
-  return { data, error };
 }
 
-{
-  /*
+/*
 Use this to send verification code to any email.
- this updates the user's verification code
+This updates the user's verification code.
 */
-}

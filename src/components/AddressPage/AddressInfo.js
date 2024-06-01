@@ -7,7 +7,6 @@ import mapSample from "../../assets/AddressPage/map-sample.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-import { axiosInstance } from "../../services/AxiosInstance";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BsFillTrashFill } from "react-icons/bs";

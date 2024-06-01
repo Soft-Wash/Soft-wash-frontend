@@ -6,7 +6,7 @@ import { registerUser } from "../../services/register";
 import { variableManager } from "../../context/VariablesContext";
 // import { Loader } from "../../common/Loader";
 import axios from "axios";
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 
 export default function Signup() {

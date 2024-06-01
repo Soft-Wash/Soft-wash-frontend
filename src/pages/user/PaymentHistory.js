@@ -1,7 +1,7 @@
 import Sidebar from "../../components/OrdersPage/Sidebar";
 import "../../styles/PaymentHistory.css";
 import '../../styles/DashboardContact.css';
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import UserSidebarTablet from "../../components/UserSidebarTablet";

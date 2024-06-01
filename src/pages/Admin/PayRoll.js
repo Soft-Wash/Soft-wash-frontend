@@ -1,7 +1,7 @@
 import AdminSideBar from "../../components/Admin/AdminSidebar";
 import "../../styles/Admin/PayRoll.css";
 import { FaClipboardList, FaListAlt } from "react-icons/fa";
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";

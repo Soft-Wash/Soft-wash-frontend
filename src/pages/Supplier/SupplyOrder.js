@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SupplierSideBar from '../../components/Supplier/SupplierSideBar';
 import '../../styles/Supplierstyle/SupplyOrder.css';
 import Button from 'react-bootstrap/Button';
-import { axiosInstance } from '../../services/AxiosInstance';
+import  axiosInstance  from "./../../services/AxiosInstance";
 import { toast } from 'react-toastify';
 
 function SupplyOrder() {

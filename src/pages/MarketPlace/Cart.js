@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "../../styles/Cart.css";
 import Button from "react-bootstrap/Button";
 import Footer from "../../common/Footer";
-import { axiosInstance } from "../../services/AxiosInstance";
+import axiosInstance  from "./../../services/AxiosInstance";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";

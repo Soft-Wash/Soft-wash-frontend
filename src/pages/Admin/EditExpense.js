@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import AdminSidebar from "../../components/Admin/AdminSidebar";
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
 import "../../styles/Admin/EditExpense.css";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";

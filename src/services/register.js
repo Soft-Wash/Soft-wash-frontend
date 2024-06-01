@@ -1,4 +1,4 @@
-import {axiosInstance} from "./AxiosInstance"
+import  axiosInstance  from "./../services/AxiosInstance";
 
 export async function registerUser(payload) {
   let data,error;

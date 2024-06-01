@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import { axiosInstance } from "../../services/AxiosInstance";
+import axiosInstance from './../../services/AxiosInstance';
 import { useState } from "react";
 import { variableManager } from "../../context/VariablesContext";
 import ClothAccordian from "./ClothAccordian";

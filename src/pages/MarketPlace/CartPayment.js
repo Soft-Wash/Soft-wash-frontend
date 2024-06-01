@@ -11,8 +11,7 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { axiosInstance } from "../../services/AxiosInstance";
-
+import axiosInstance  from "./../../services/AxiosInstance";
 function CartPayment() {
   const [paymentMethod, setpaymentMethod] = useState(() => {
     const storedPayment = localStorage.getItem("paymentType");

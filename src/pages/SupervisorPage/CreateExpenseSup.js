@@ -1,6 +1,6 @@
 import { useState, useEffect} from "react";
 import AdminSidebar from "../../components/Admin/AdminSidebar";
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
 import "../../styles/Admin/NewExpenses.css";
 import { ToastContainer, toast } from 'react-toastify';
 import SupervisorSideBar from "../../components/SupervisorComponents/SupervisorSideBar";

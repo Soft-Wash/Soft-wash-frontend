@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { axiosInstance } from "../../services/AxiosInstance";
+import axiosInstance  from "./../../services/AxiosInstance";
 
 export default function OrderReceipt() {
   const options = { day: "numeric", month: "long" };

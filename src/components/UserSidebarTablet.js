@@ -6,6 +6,8 @@ import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { HouseFill, DashSquareFill, PhoneFill, PersonFill, ListCheck, ListTask } from 'react-bootstrap-icons';
+import {resetUser} from "./../utils/slicer/usersSice"
+import { useDispatch } from 'react-redux';
 
 
 function UserSidebarTablet(){

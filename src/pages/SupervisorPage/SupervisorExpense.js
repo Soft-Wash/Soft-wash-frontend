@@ -3,7 +3,8 @@ import "../../styles/Admin/Expenses.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
+
 import { ToastContainer, toast } from 'react-toastify';
 import SupervisorSideBar from "../../components/SupervisorComponents/SupervisorSideBar";
 

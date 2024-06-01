@@ -1,7 +1,7 @@
 import WorkFlowSideBar from "../../components/Admin/WorkFlowSideBar";
 import "../../styles/Admin/TaskFreeEmployee.css";
 import { useState, useEffect } from "react";
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
 
 function TaskFreeEmployees() {
   const [employee, setEmployee] = useState();

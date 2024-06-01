@@ -3,7 +3,6 @@ import Button from "react-bootstrap/Button";
 import Accordion from "react-bootstrap/Accordion";
 import { useState } from "react";
 import { useEffect } from "react";
-import { axiosInstance } from "../services/AxiosInstance";
 import axios from "axios";
 import MiniLoader from "../components/Loader/MiniLoader";
 import { toast } from 'react-toastify';

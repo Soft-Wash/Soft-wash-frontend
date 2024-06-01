@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react";
 import {Link} from "react-router-dom"
 import userImage from "../../assets/images/bovi.jpeg";
-import { axiosInstance } from "../../services/AxiosInstance";
+import axiosInstance from './../../services/AxiosInstance';
 import "../../styles/Admin/Leave.css"
 
 function RejectedLeave() {

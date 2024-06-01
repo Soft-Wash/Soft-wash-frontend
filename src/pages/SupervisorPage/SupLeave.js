@@ -7,7 +7,8 @@ import userImage from "../../assets/images/bovi.jpeg";
 import { useEffect, useState } from "react";
 import ApprovedLeave from "../../components/Admin/ApprovedLeave";
 import RejectedLeave from "../../components/Admin/RejectedLeave";
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
+
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

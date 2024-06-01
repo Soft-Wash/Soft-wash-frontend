@@ -2,7 +2,7 @@ import { Button } from "react-bootstrap";
 import "../../styles/Washman Styles/WashmanProfile.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
 import "../../styles/UserProfile.css";
 import AdminSidebar from "../../components/Admin/AdminSidebar";
 import { toast } from "react-toastify";

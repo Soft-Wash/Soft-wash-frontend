@@ -5,7 +5,7 @@ import "../../styles/DashboardContact.css";
 import Tab from "react-bootstrap/Tab";
 import OrderProp from "../../components/OrdersPage/OrderProp";
 import { useEffect } from "react";
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
 import { useState } from "react";
 import axios from "axios";
 import UserSidebarTablet from "../../components/UserSidebarTablet";

@@ -2,7 +2,7 @@ import SupplierSideBar from "../../components/Supplier/SupplierSideBar";
 import React from 'react';
 import "../../styles/Admin/AdminDashboard.css";
 import { FaClipboardList, FaListAlt } from "react-icons/fa";
-import { axiosInstance } from '../../services/AxiosInstance';
+import  axiosInstance  from "./../../services/AxiosInstance";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 

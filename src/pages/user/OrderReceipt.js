@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
 import Loader from "../../components/Loader/PaymentLoader";
 
 export default function OrderReceipt() {

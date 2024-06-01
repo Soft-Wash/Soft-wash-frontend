@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { axiosInstance } from "../../services/AxiosInstance";
+import  axiosInstance  from "./../../services/AxiosInstance";
 import { Line } from "react-chartjs-2";
 
 const SupDashChart = () => {

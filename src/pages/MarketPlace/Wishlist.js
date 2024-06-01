@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { axiosInstance } from "../../services/AxiosInstance";
+import axiosInstance  from "./../../services/AxiosInstance";
 import Loader from "../../components/Loader/Loader";
 
 function Wishlist() {

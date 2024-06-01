@@ -6,7 +6,7 @@ import BookingBanner from "../components/BookingBanner";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-import { axiosInstance } from "../services/AxiosInstance";
+import  axiosInstance  from "./../services/AxiosInstance";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { toast } from 'react-toastify';
