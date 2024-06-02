@@ -17,5 +17,5 @@ const makeRequest = async (method, endpoint, data, queryParams) => {
 };
 
 // export const loginsd = async (queryParams) => makeRequest('post', 'login', null, queryParams);
-export const getservices = async () => makeRequest('get', '',{}, );
+export const getservices = async () => makeRequest('get', '/');
 // Add more functions for other device endpoints

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import axiosInstance from './../services/AxiosInstance';
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,75 +9,84 @@ import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "./Loader/Loader";
 import "../styles/BranchModal.css";
+import { getBranch } from "./../utils/api/branch_api";
+import { useDispatch } from "react-redux";
+import { addNotification } from "../utils/slicer/notificationSlice";
+import { setOrderDetails } from "../utils/slicer/orderSlice";
 
-
-
-function BranchModal({isOpen,onClose,SaveBranch}){
-
+function BranchModal({ isOpen, onClose, SaveBranch }) {
   const userToken = JSON.parse(localStorage.getItem("softwashLoginToken"));
   const [branches, setbranches] = useState();
   const [branch_id, setbranch_id] = useState();
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false);
   const Navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  
-const branchDetails=()=>{
-  setLoading(true)
-  axiosInstance.get("/branch/").then((resp) => {
-    setbranches(resp.data);
-    setLoading(false)
-  }).catch((error)=>{
-    toast.error(error?.message)
-  })
-}
+  const branchDetails = async () => {
+    const { status, data, message } = await getBranch();
+    if (status) {
+      setbranches(data);
+    }
+  };
 
   useEffect(() => {
-    // branchDetails()
+    branchDetails()
   }, []);
 
   const saveBranch = () => {
     if (branch_id) {
-      SaveBranch(branch_id)
-    localStorage.setItem('branch_id',JSON.stringify(branch_id))
+      dispatch(setOrderDetails({branch_id}));
       Navigate("/ClothesSelection");
     } else {
       toast.error("please choose a branch");
     }
   };
 
-
-  return(
+  return (
     <div>
-                  <ToastContainer position="top-center" />
-   <Modal show={isOpen} onHide={onClose} position="top-center" className="ModContainer">
-    {loading? <Loader/> :    <>       <Modal.Header closeButton>
-            <Modal.Title>Select Branch</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <p>Select a branch close to your location</p>
-            <select name="" id="" onChange={(e) => setbranch_id(e.target.value)}>
-              <option value="" hidden>
-                Choose a branch
-              </option>
-              {branches &&
-                branches.map((item) => (
-                  <option key={item._id} value={item._id}>
-                    {item.name}
-                  </option>
-                ))}
-            </select>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="primary" onClick={saveBranch}>
-              Save Changes
-            </Button>
-          </Modal.Footer> </>}
-
-        </Modal>
-
+      <ToastContainer position="top-center" />
+      <Modal
+        show={isOpen}
+        onHide={onClose}
+        position="top-center"
+        className="ModContainer"
+      >
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            {" "}
+            <Modal.Header closeButton>
+              <Modal.Title>Select Branch</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <p>Select a branch close to your location</p>
+              <select
+                name=""
+                id=""
+                onChange={(e) => setbranch_id(e.target.value)}
+              >
+                <option value="" hidden>
+                  Choose a branch
+                </option>
+                {branches &&
+                  branches.map((item) => (
+                    <option key={item._id} value={item._id}>
+                      {item.name}
+                    </option>
+                  ))}
+              </select>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="primary" onClick={saveBranch}>
+                Save Changes
+              </Button>
+            </Modal.Footer>{" "}
+          </>
+        )}
+      </Modal>
     </div>
-  )
+  );
 }
-
 
 export default BranchModal;

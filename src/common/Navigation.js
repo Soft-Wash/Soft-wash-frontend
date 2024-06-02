@@ -13,8 +13,9 @@ import { BsBell } from "react-icons/bs";
 import axiosInstance from "./../services/AxiosInstance";
 import "react-toastify/dist/ReactToastify.css";
 import routes from "./../routes";
-import { useDispatch,useSelector } from 'react-redux';
-import {resetUser} from "./../utils/slicer/usersSice"
+import { useDispatch, useSelector } from "react-redux";
+import { resetUser } from "./../utils/slicer/usersSice";
+import { resetOrder } from "./../utils/slicer/orderSlice";
 
 function Navigation() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
@@ -22,7 +23,6 @@ function Navigation() {
   const navigate = useNavigate();
   const backend = "http://localhost:8003/uploads/";
   const dispatch = useDispatch();
-  
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -43,13 +43,18 @@ function Navigation() {
   const homeRoute = routes.find((route) => route.name === "HOME");
   const homeChildren = homeRoute
     ? homeRoute.children.filter((child) =>
-        ["SERVICES", "PRICING", "ABOUT", "HOW IT WORK","SHOP"].includes(
+        ["SERVICES", "PRICING", "ABOUT", "HOW IT WORK", "SHOP"].includes(
           child.name
         )
       )
     : [];
 
   const navigationRoutes = [{ name: "HOME", path: "/" }, ...homeChildren];
+
+  const logOut = () => {
+    dispatch(resetOrder());
+    dispatch(resetUser());
+  };
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -122,7 +127,13 @@ function Navigation() {
                         Dashboard
                       </Link>
                     </Dropdown.Item>
-                    <Dropdown.Item        onClick={() => { dispatch(resetUser()) }}>Logout</Dropdown.Item>
+                    <Dropdown.Item
+                      onClick={() => {
+                        logOut();
+                      }}
+                    >
+                      Logout
+                    </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </div>
